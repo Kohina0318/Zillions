@@ -5,11 +5,17 @@ import {
   DefaultTheme,
 } from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
-import {navigationRef} from '../../navigations/NavigationDrw/NavigationService'; 
+import {navigationRef} from '../../navigations/NavigationDrw/NavigationService';
 import {isDarkMode} from '../../components/Theme/ThemeDarkLightColor';
 import Login from '../../screens/auth/Login';
-import Splash from '../../screens/intro/Splash'
-import ViewPager from '../../screens/intro/ViewPager'
+import Splash from '../../screens/intro/Splash';
+import ViewPager from '../../screens/intro/ViewPager';
+import Dashboard from '../../screens/dashboard/Dashboard';
+import BottomNavigationStack from '../bottomNavigator/BottomNavigationStack';
+import Categories from '../../screens/category/Categories';
+import Cart from '../../screens/cart/Cart';
+import WishList from '../../screens/wishList/WishList';
+import Profile from '../../screens/profile/Profile';
 
 function MainNavigationStack(props) {
   const Stack = createStackNavigator();
@@ -29,9 +35,34 @@ function MainNavigationStack(props) {
           component={Login}
           options={{headerShown: false}}
         />
-          <Stack.Screen
+        <Stack.Screen
           name="ViewPager"
           component={ViewPager}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="Dashboard"
+          component={BottomNavigationStack}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="Categories"
+          component={Categories}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="Cart"
+          component={Cart}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="WishList"
+          component={WishList}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="Profile"
+          component={Profile}
           options={{headerShown: false}}
         />
       </Stack.Navigator>

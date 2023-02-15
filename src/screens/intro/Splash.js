@@ -18,7 +18,7 @@ export default function Splash(props) {
       //     });
           props.navigation.reset({
             index: 0,
-            routes: [{name: 'Login'}],
+            routes: [{name: 'Dashboard'}],
           });
       }, 1000)
    
