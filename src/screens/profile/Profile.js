@@ -3,6 +3,7 @@ import {View, Text, StatusBar, Appearance, Dimensions} from 'react-native';
 import {useSelector} from 'react-redux';
 import {MyThemeClass} from '../../components/Theme/ThemeDarkLightColor';
 import {useNavigation} from '@react-navigation/native';
+import Header from '../../components/shared/header/Header';
 const {width, height} = Dimensions.get('screen');
 
 export default function Profile(props) {
@@ -12,6 +13,7 @@ export default function Profile(props) {
   
   return (
     <>
+    <Header title="Profile"/>
       <View
         style={{
         //   backgroundColor: themecolor.THEMECOLOR,

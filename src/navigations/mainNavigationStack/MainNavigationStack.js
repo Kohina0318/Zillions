@@ -8,8 +8,9 @@ import {createStackNavigator} from '@react-navigation/stack';
 import {navigationRef} from '../../navigations/NavigationDrw/NavigationService';
 import {isDarkMode} from '../../components/Theme/ThemeDarkLightColor';
 import Login from '../../screens/auth/Login';
+import ViewPager from '../../screens/intro/ViewPager'
+import Header from '../../components/shared/header/Header';
 import Splash from '../../screens/intro/Splash';
-import ViewPager from '../../screens/intro/ViewPager';
 import Dashboard from '../../screens/dashboard/Dashboard';
 import BottomNavigationStack from '../bottomNavigator/BottomNavigationStack';
 import Categories from '../../screens/category/Categories';
@@ -38,6 +39,11 @@ function MainNavigationStack(props) {
         <Stack.Screen
           name="ViewPager"
           component={ViewPager}
+          options={{headerShown: false}}
+        />
+         <Stack.Screen
+          name="Header"
+          component={Header}
           options={{headerShown: false}}
         />
         <Stack.Screen

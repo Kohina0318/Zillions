@@ -25,7 +25,8 @@ export default function Login(props) {
         backgroundColor="transparent"
         barStyle={isDarkMode ? 'light-content' : 'dark-content'}
       />
-      <View style={{backgroundColor:themecolor.LOGINTHEMECOLOR, color:themecolor.TXTWHITE}}><Text> kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk</Text></View>
+      <View style={{backgroundColor:themecolor.LOGINTHEMECOLOR, color:themecolor.TXTWHITE}}>
+      </View>
     </>
   );
 }
