@@ -1,50 +1,78 @@
-import React,{useState,useEffect} from 'react'
-import {View,Text,Image,Dimensions} from 'react-native'
-import { Colors } from '../config/Colors';
-import { FontFamily } from '../config/FontFamily';
-import moment from 'moment';
-import { Avatar } from '@rneui/themed';
+import React, {Component} from 'react';
+import {FlatList, Image, ScrollView, StatusBar, StyleSheet, Text, View,Dimensions,TouchableOpacity} from 'react-native';
+import { MyThemeClass } from '../../Theme/ThemeDarkLightColor';
+import {useSelector} from 'react-redux';
+import Icon from 'react-native-vector-icons/Feather';
+import CIcon from 'react-native-vector-icons/MaterialCommunityIcons';
+import BadgeIcon from './BadgeIcon';
+import { styles } from './styles';
+const {width, height} = Dimensions.get('screen');
 
-const { width, height } = Dimensions.get('screen');
-export const Header = () => {
-  const [time,setTime]=useState(moment().format("hh:mm:ss"))
-  const [date,setDate]=useState(moment().format("LL"))
-  const [d,setd]=useState(moment().format("HH"))
-  useEffect(() => {
-      setInterval(() =>{ setTime(moment().format("hh:mm:ss")),  setd(moment().format("HH"))}, 1000);
+export default function Header(props){
+  const mode = useSelector(state => state.mode);
+  const themecolor = new MyThemeClass(mode).getThemeColor()
+
+  console.log(mode)
+
+        return (
+           <View style={{flex:1}}>
+           <StatusBar
+          translucent={true}
+          backgroundColor={'#44C062'}
+          barStyle={mode=='ligth'?"dark-content":"light-content"}
+        />
+         <View
+          style={{
+            backgroundColor: themecolor.LOGINTHEMECOLOR,
+            height: height,
+            width: width,
+          }}>
+          <View style={{marginTop:20,    flex: 1,
+        backgroundColor: themecolor.LOGINTHEMECOLOR,
+        flexDirection: 'column',}}>
+                    <View style={styles.toolBar}>
+      <View style={{flex: 1, flexDirection: 'row', alignItems: 'center'}}>
+        {props.icon ? (
+          <TouchableOpacity
+            activeOpacity={1}
+            style={styles.toggle}
+            onPress={props.onPress}>
+            <CIcon name={props.icon} size={24} color="#ffffff" />
+          </TouchableOpacity>
+        ) : null}
+        <Text style={styles.toolbarTitle}>{props.title}</Text>
+      </View>
+      <View
+        style={{
+          flex: 1,
+          flexDirection: 'row',
+          justifyContent: 'flex-end',
+          alignItems: 'center',
+          paddingRight: 10,
+        }}>
+        {props.children}
+      </View>
     
-    }, []);
-  return (
+                        <TouchableOpacity
+                            style={{marginRight: 10}}
+                            onPress={() => {
+                                this.setState({showSearch: true});
+                            }}>
+                            <Icon name="search" size={24} color="#ffffff"/>
+                        </TouchableOpacity>
 
-<View style={{height:height*0.5,width:width,marginTop:10,display:'flex',justifyContent:'center',alignItems:'center',flexDirection:'column'}}>
-<View style={{height:height*0.3,width:width,marginTop:10,display:'flex',justifyContent:'center',alignItems:'center',flexDirection:'column'}}>
-<View>
-  <Avatar
-    size={150}
-    rounded
-    source={require('../config/images/admin.jpeg')}
-  />
-  </View>
-  <View>
-  <Text style={{color:Colors.white,marginTop:15,alignItems:'center',fontSize:24,fontWeight:600,fontFamily:FontFamily.Serif}}>Harry Singh</Text> 
-  </View>
-  <View>
-  <Text style={{color:Colors.white,alignItems:'center',fontSize:18,fontWeight:300,fontFamily:FontFamily.Serif}}>0904CS1234</Text> 
-  </View>
-  </View>
-  <View style={{height:height*0.2,width:width,display:'flex',justifyContent:'center',alignItems:'center',flexDirection:'column'}}>
-<View>
-<Text style={{color:Colors.white,alignItems:'center',fontSize:24,fontWeight:600,fontFamily:FontFamily.Serif}}>{date}</Text>
-  </View>
-  <View>
-  { d>'11'?
-  <Text style={{color:Colors.white,alignItems:'center',marginTop:10,fontSize:32,fontWeight:'bold',fontFamily:FontFamily.Serif}}>{time} PM</Text> 
-  :
-  <Text style={{color:Colors.white,alignItems:'center',marginTop:10,fontSize:32,fontWeight:'bold',fontFamily:FontFamily.Serif}}>{time} AM</Text> 
-  }
-  </View>
-  </View>
-            </View>
-
-  )
+                        {/* <BadgeIcon
+                            icon="shopping-cart"
+                            count={0}
+                            onPress={() => {
+                                navigation.navigate('MyCart');
+                            }}
+                        /> */}
+                        </View>
+</View>
+</View>
+           </View>
+        );
+    
 }
+

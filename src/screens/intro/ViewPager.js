@@ -39,30 +39,30 @@ export default function ViewPager(props) {
     const mode = useSelector(state => state.mode);
     const Color = new MyThemeClass(mode).getThemeColor()
 
-  const renderItem = (item) => {
+  const renderItem = (data) => {
     return (
       <View style={{...styles.slide}}>
-        <ImageBackground source={item.image} style={styles.image}>
-          <Text style={styles.title}>{item.title}</Text>
-          <Text style={{...styles.text,color:Color.TXTWHITE}}>{item.text}</Text>
+        <ImageBackground source={data.item.image} style={styles.image}>
+          <Text style={styles.title}>{data.item.title}</Text>
+          <Text style={{...styles.text,color:Color.TXTWHITE}}>{data.item.text}</Text>
         </ImageBackground>
       </View>
     );
   };
   const onDone = () => {
-    props.navigation.replace('Login');
+    props.navigation.navigate('Login');
   };
   const renderNextButton = () => {
     return (
       <View>
-        <Text style={styles.next}>Next</Text>
+        <Text style={{...styles.next,color:Color.TXTWHITE}}>Next</Text>
       </View>
     );
   };
   const renderDoneButton = () => {
     return (
       <View>
-        <Text style={styles.done}>Done</Text>
+        <Text style={{...styles.done,color:Color.TXTBLACK}}>Done</Text>
       </View>
     );
   };
@@ -72,14 +72,14 @@ export default function ViewPager(props) {
         <StatusBar
           translucent={true}
           backgroundColor={'transparent'}
-        //   barStyle="light-content"
+          // barStyle={mode=='ligth'?"dark-content":"light-content"}
         />
         <AppIntroSlider
           renderItem={(item)=>renderItem(item)}
           data={slides}
           onDone={()=>onDone()}
-          dotStyle={{backgroundColor:Color.TXTWHITE}}
-          activeDotStyle={{backgroundColor:Color.TXTWHITE}}
+          dotStyle={{backgroundColor:Color.TXTGREY}}
+          activeDotStyle={{backgroundColor:Color.TXTBLACK}}
           renderDoneButton={()=>renderDoneButton()}
           renderNextButton={()=>renderNextButton()}
         />
