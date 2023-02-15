@@ -29,13 +29,12 @@ export const styles = StyleSheet.create({
   toolBar: {
     width: '100%',
     display: 'flex',
-    backgroundColor: "#44C062",
     fontSize: FontSize.h1,
     height: height*0.07,
     flexDirection: 'row',
-    color: Colors.white,
     alignItems: 'center',
     fontFamily: Fonts.primarySemiBold,
+      
   },
   title: {
     color: Colors.white,

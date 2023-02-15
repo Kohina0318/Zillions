@@ -50,7 +50,7 @@ export default function ViewPager(props) {
     );
   };
   const onDone = () => {
-    props.navigation.navigate('Login');
+    props.navigation.navigate('Dashboard');
   };
   const renderNextButton = () => {
     return (
@@ -72,7 +72,7 @@ export default function ViewPager(props) {
         <StatusBar
           translucent={true}
           backgroundColor={'transparent'}
-          // barStyle={mode=='ligth'?"dark-content":"light-content"}
+          barStyle={mode=='light' ? "dark-content":"light-content"}
         />
         <AppIntroSlider
           renderItem={(item)=>renderItem(item)}

@@ -10,7 +10,6 @@ import { useSelector } from 'react-redux';
 import { MyThemeClass } from '../../components/Theme/ThemeDarkLightColor';
 import { useNavigation } from '@react-navigation/native';
 const { width, height } = Dimensions.get('screen');
-import Header from '../../components/shared/header/Header';
 
 export default function Login(props) {
   const mode = useSelector(state => state.mode);
@@ -27,7 +26,6 @@ export default function Login(props) {
         barStyle={isDarkMode ? 'light-content' : 'dark-content'}
       />
       <View style={{backgroundColor:themecolor.LOGINTHEMECOLOR, color:themecolor.TXTWHITE}}>
-<Header title="Home" icon="menu"  onPress={() => navigation.openDrawer()}/>
       </View>
     </>
   );
