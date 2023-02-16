@@ -54,6 +54,7 @@ class MyThemeClass {
       BLUEWHITE: this.mode === 'dark' ? '#6495ED' : Colors.bluetheme,
       BLUEWHITETEXT: this.mode === 'dark' ? '#6495ED' : Colors.bluetheme,
       LOGINTHEMECOLOR: this.mode === 'dark' ? '#181818' : '#FFF',
+      LOGINTHEMECOLOR1: this.mode === 'dark' ? '#000' : '#FFF',
       HEADERTHEMECOLOR: this.mode === 'dark' ? '#0f3479' : Colors.bluetheme,
       INPUTTXT: this.mode === 'dark' ? '#0f3479' : Colors.black,
       LIGHTGREY: this.mode === 'dark' ? '#484848' : "#f5f5f5",
@@ -79,6 +80,7 @@ class MyThemeClass {
       TEXTGREEN: this.mode === 'dark' ?  '#20bf6b':  '#4cd137',
       STARCOLOR: this.mode === 'dark' ?  '#f39c12':  '#ffd32a',
      
+      BACKICON: this.mode === 'dark' ? '#FFF' : '#281E5D',
     }
 
   }

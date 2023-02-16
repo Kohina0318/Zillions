@@ -19,6 +19,7 @@ import FA5 from 'react-native-vector-icons/FontAwesome5';
 import Categories from '../../screens/category/Categories';
 import Profile from '../../screens/profile/Profile';
 import Order from '../../screens/order/Order'
+import WishList from '../../screens/wishList/WishList';
 
 const Tab = createBottomTabNavigator();
 const MyTransition = {
@@ -118,13 +119,39 @@ export default function BottomNavigationStack() {
                 <FA5
                   name="shopping-bag"
                   color={themecolor.HEADERTHEMECOLOR}
+                  size={21}
+                />
+                <View style={MainNavigatorstyle.tabbarbottomborder} />
+              </>
+            ) : (
+              <>
+                <FA5 name="shopping-bag" size={21} />
+              </>
+            ),
+          headerShown: false,
+        }}
+      />
+
+ <Tab.Screen
+        name="WishList"
+        component={WishList}
+        options={{
+          MyTransition,
+          tabBarLabel: ' ',
+          tabBarLabelStyle: {bottom: -5},
+          tabBarIcon: ({color, size, focused}) =>
+            focused ? (
+              <>
+                <MCI
+                  name="cards-heart"
+                  color={themecolor.HEADERTHEMECOLOR}
                   size={22}
                 />
                 <View style={MainNavigatorstyle.tabbarbottomborder} />
               </>
             ) : (
               <>
-                <FA5 name="shopping-bag" size={22} />
+                <MCI name="cards-heart" size={22} />
               </>
             ),
           headerShown: false,
@@ -144,13 +171,13 @@ export default function BottomNavigationStack() {
                 <FA
                   name="user-circle"
                   color={themecolor.HEADERTHEMECOLOR}
-                  size={23}
+                  size={22}
                 />
                 <View style={MainNavigatorstyle.tabbarbottomborder} />
               </>
             ) : (
               <>
-                <FA name="user-circle-o" size={23} />
+                <FA name="user-circle-o" size={22} />
               </>
             ),
           headerShown: false,

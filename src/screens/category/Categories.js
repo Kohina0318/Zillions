@@ -6,6 +6,7 @@ import {CategoryDataList} from '../../components/shared/FlateLists/CategoryDataL
 import {CategoryStyle} from '../../assets/css/CategoryStyle';
 import {getCategories} from '../../repository/CategoryRepository/AllProductCategoryRep';
 import { useToast } from 'react-native-toast-notifications';
+import Header from '../../components/shared/header/Header';
 
 const {width, height} = Dimensions.get('screen');
 
@@ -33,14 +34,14 @@ export default function Categories(props) {
   }, []);
 
   return (
-    <View style={{...CategoryStyle.bg, backgroundColor: themecolor.THEMECOLOR}}>
-      {/* <ScrollView showsVerticalScrollIndicator={false}> */}
+    <View style={{...CategoryStyle.bg, backgroundColor: themecolor.THEMECOLOR,}}>
+      {/* <Header title="Categories"/> */}
         <View
           style={{
             ...CategoryStyle.container,
           }}>
           
-          <View style={{marginTop: 10}} />
+          <View style={{marginTop: 20}} />
           {data.length >0 ?
             <CategoryDataList data={data} />
             :
@@ -48,7 +49,6 @@ export default function Categories(props) {
             }
           
         </View>
-      {/* </ScrollView> */}
     </View>
   );
 }

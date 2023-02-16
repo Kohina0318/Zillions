@@ -12,14 +12,15 @@ export default function Splash(props) {
   React.useEffect(()=>
    {
       setTimeout(async () => {
-      //     props.navigation.reset({
-      //       index: 0,
-      //       routes: [{name: 'ViewPager'}],
-      //     });
           props.navigation.reset({
             index: 0,
+            // routes: [{name: 'ViewPager'}],
             routes: [{name: 'Dashboard'}],
           });
+          // props.navigation.reset({
+          //   index: 0,
+          //   routes: [{name: 'Login'}],
+          // });
       }, 1000)
    
       return ()=>{

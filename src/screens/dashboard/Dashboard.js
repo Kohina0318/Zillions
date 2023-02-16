@@ -3,6 +3,7 @@ import {View, Text, StatusBar, Appearance, Dimensions} from 'react-native';
 import {useSelector} from 'react-redux';
 import {MyThemeClass} from '../../components/Theme/ThemeDarkLightColor';
 import {useNavigation} from '@react-navigation/native';
+import Header from '../../components/shared/header/Header';
 const {width, height} = Dimensions.get('screen');
 
 export default function Dashboard(props) {
@@ -11,7 +12,8 @@ export default function Dashboard(props) {
   const themecolor = new MyThemeClass(mode).getThemeColor();
   
   return (
-    <>
+    <View style={{backgroundColor:themecolor.THEMECOLOR}}>
+    <Header title="Home"/>
        <View
         style={{
         //   backgroundColor: themecolor.THEMECOLOR,
@@ -22,6 +24,6 @@ export default function Dashboard(props) {
         }}>
         <Text>Dashboard</Text>
       </View>
-    </>
+    </View>
   );
 }
