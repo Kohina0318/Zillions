@@ -15,10 +15,10 @@ import Dashboard from '../../screens/dashboard/Dashboard';
 import MCI from 'react-native-vector-icons/MaterialCommunityIcons';
 import MI from 'react-native-vector-icons/MaterialIcons';
 import FA from 'react-native-vector-icons/FontAwesome';
+import FA5 from 'react-native-vector-icons/FontAwesome5';
 import Categories from '../../screens/category/Categories';
-import Cart from '../../screens/cart/Cart';
-import WishList from '../../screens/wishList/WishList';
 import Profile from '../../screens/profile/Profile';
+import Order from '../../screens/order/Order'
 
 const Tab = createBottomTabNavigator();
 const MyTransition = {
@@ -38,7 +38,7 @@ export default function BottomNavigationStack() {
     <Tab.Navigator
       screenOptions={{
         tabBarStyle: {
-          height: 50,
+          height: 53,
           backgroundColor: themecolor.THEMECOLOR1,
           borderColor: themecolor.BOXBORDERCOLOR,
           keyboardHidesTabBar: true,
@@ -50,7 +50,7 @@ export default function BottomNavigationStack() {
           showLabel: false,
           fontFamily: FontFamily.PopinsMedium,
           headerShown: false,
-          top:8,
+          top: 8,
         },
       }}>
       <Tab.Screen
@@ -66,13 +66,13 @@ export default function BottomNavigationStack() {
                 <MCI
                   name="home"
                   color={themecolor.HEADERTHEMECOLOR}
-                  size={22}
+                  size={24}
                 />
                 <View style={MainNavigatorstyle.tabbarbottomborder} />
               </>
             ) : (
               <>
-                <MCI name="home" size={22} />
+                <MCI name="home" size={24} />
               </>
             ),
           headerShown: false,
@@ -92,13 +92,13 @@ export default function BottomNavigationStack() {
                 <MI
                   name="category"
                   color={themecolor.HEADERTHEMECOLOR}
-                  size={22}
+                  size={24}
                 />
                 <View style={MainNavigatorstyle.tabbarbottomborder} />
               </>
             ) : (
               <>
-                <MI name="category" size={22} />
+                <MI name="category" size={24} />
               </>
             ),
           headerShown: false,
@@ -106,8 +106,8 @@ export default function BottomNavigationStack() {
       />
 
       <Tab.Screen
-        name="Cart"
-        component={Cart}
+        name="Order"
+        component={Order}
         options={{
           MyTransition,
           tabBarLabel: ' ',
@@ -115,8 +115,8 @@ export default function BottomNavigationStack() {
           tabBarIcon: ({color, size, focused}) =>
             focused ? (
               <>
-                <MCI
-                  name="cart"
+                <FA5
+                  name="shopping-bag"
                   color={themecolor.HEADERTHEMECOLOR}
                   size={22}
                 />
@@ -124,33 +124,7 @@ export default function BottomNavigationStack() {
               </>
             ) : (
               <>
-                <MCI name="cart" size={22} />
-              </>
-            ),
-          headerShown: false,
-        }}
-      />
-
-      <Tab.Screen
-        name="Wishlist"
-        component={WishList}
-        options={{
-          MyTransition,
-          tabBarLabel: ' ',
-          tabBarLabelStyle: {bottom: -5},
-          tabBarIcon: ({color, size, focused}) =>
-            focused ? (
-              <>
-                <MCI
-                  name="cards-heart"
-                  color={themecolor.HEADERTHEMECOLOR}
-                  size={22}
-                />
-                <View style={MainNavigatorstyle.tabbarbottomborder} />
-              </>
-            ) : (
-              <>
-                <MCI name="cards-heart" size={22} />
+                <FA5 name="shopping-bag" size={22} />
               </>
             ),
           headerShown: false,
@@ -170,19 +144,18 @@ export default function BottomNavigationStack() {
                 <FA
                   name="user-circle"
                   color={themecolor.HEADERTHEMECOLOR}
-                  size={20}
+                  size={23}
                 />
                 <View style={MainNavigatorstyle.tabbarbottomborder} />
               </>
             ) : (
               <>
-                <FA name="user-circle-o" size={20} />
+                <FA name="user-circle-o" size={23} />
               </>
             ),
           headerShown: false,
         }}
       />
-
-      </Tab.Navigator>
+    </Tab.Navigator>
   );
 }
