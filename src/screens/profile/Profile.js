@@ -12,9 +12,9 @@ export default function Profile(props) {
   const themecolor = new MyThemeClass(mode).getThemeColor();
   
   return (
-    <>
+    <View style={{backgroundColor:themecolor.THEMECOLOR}}>
     <Header title="Profile"/>
-      <View
+       <View
         style={{
         //   backgroundColor: themecolor.THEMECOLOR,
           color: themecolor.TXTWHITE,
@@ -24,6 +24,6 @@ export default function Profile(props) {
         }}>
         <Text>Profile</Text>
       </View>
-    </>
+    </View>
   );
 }

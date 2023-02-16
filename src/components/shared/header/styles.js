@@ -3,7 +3,7 @@ import { Colors } from '../../../assets/config/Colors';
 import { FontFamily as Fonts } from '../../../assets/fonts/FontFamily';
 import { FontSize } from '../../../assets/fonts/Fonts';
 
-const {width, height} = Dimensions.get('screen');
+const {width, height} = Dimensions.get('window');
 export const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -16,10 +16,12 @@ export const styles = StyleSheet.create({
   },
   toolbarTitle: {
     fontSize: 20,
-    color: Colors.white,
+    // color: Colors.white,
     fontWeight: '700',
-
-    marginRight: 20,
+    // marginRight: 20,
+    alignSelf:'center',
+    justifyContent:'center',
+    // backgroundColor:'yellow'
   },
   androidButtonText: {
     color: 'blue',
@@ -27,14 +29,15 @@ export const styles = StyleSheet.create({
   },
 
   toolBar: {
-    width: '100%',
+    width: width,
     display: 'flex',
     fontSize: FontSize.h1,
     height: height*0.07,
     flexDirection: 'row',
     alignItems: 'center',
     fontFamily: Fonts.primarySemiBold,
-      
+    justifyContent:'space-evenly',
+    backgroundColor:'green'
   },
   title: {
     color: Colors.white,

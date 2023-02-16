@@ -14,8 +14,8 @@ export default function Splash(props) {
       setTimeout(async () => {
           props.navigation.reset({
             index: 0,
-            routes: [{name: 'ViewPager'}],
-            // routes: [{name: 'Dashboard'}],
+            // routes: [{name: 'ViewPager'}],
+            routes: [{name: 'Dashboard'}],
           });
           // props.navigation.reset({
           //   index: 0,
