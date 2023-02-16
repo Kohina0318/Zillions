@@ -20,6 +20,7 @@ function BadgeIcon(props) {
         width: 40,
         justifyContent: 'center',
         alignContent: 'center',
+        marginRight:5,
       }}>
       <View style={styles.badgeContainer}>
         {props.icon ? (
