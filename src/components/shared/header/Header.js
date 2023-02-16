@@ -12,7 +12,7 @@ import {useSelector} from 'react-redux';
 import Icon from 'react-native-vector-icons/Feather';
 import CIcon from 'react-native-vector-icons/MaterialIcons';
 import BadgeIcon from './BadgeIcon';
-import {styles} from './styles';
+import {styles} from '../../../assets/css/HeaderStyle';
 const {width, height} = Dimensions.get('screen');
 
 export default function Header(props) {
@@ -20,10 +20,10 @@ export default function Header(props) {
   const themecolor = new MyThemeClass(mode).getThemeColor();
 
   return (
-    <View style={{flex: 1}}>
+    <View>
       <StatusBar
         translucent={true}
-        backgroundColor={'transparent'}
+        backgroundColor={ themecolor.LOGINTHEMECOLOR1}
         barStyle={mode == 'light' ? 'dark-content' : 'light-content'}
       />
       <View
@@ -103,7 +103,7 @@ export default function Header(props) {
               width: width * 0.2,
               flexDirection: 'row',
               alignSelf: 'center',
-              marginRight: 10,
+              // marginRight: 10,
             }}>
             <TouchableOpacity
               style={{marginRight: 15, top: 9}}

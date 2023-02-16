@@ -73,7 +73,7 @@ export default function BottomNavigationStack() {
               </>
             ) : (
               <>
-                <MCI name="home" size={24} />
+                <MCI name="home" size={24} color={themecolor.TXTGREY}/>
               </>
             ),
           headerShown: false,
@@ -99,7 +99,7 @@ export default function BottomNavigationStack() {
               </>
             ) : (
               <>
-                <MI name="category" size={24} />
+                <MI name="category" size={24} color={themecolor.TXTGREY}/>
               </>
             ),
           headerShown: false,
@@ -125,7 +125,7 @@ export default function BottomNavigationStack() {
               </>
             ) : (
               <>
-                <FA5 name="shopping-bag" size={21} />
+                <FA5 name="shopping-bag" size={21} color={themecolor.TXTGREY}/>
               </>
             ),
           headerShown: false,
@@ -151,7 +151,7 @@ export default function BottomNavigationStack() {
               </>
             ) : (
               <>
-                <MCI name="cards-heart" size={22} />
+                <MCI name="cards-heart" size={22} color={themecolor.TXTGREY}/>
               </>
             ),
           headerShown: false,
@@ -177,7 +177,7 @@ export default function BottomNavigationStack() {
               </>
             ) : (
               <>
-                <FA name="user-circle-o" size={22} />
+                <FA name="user-circle-o" size={22} color={themecolor.TXTGREY}/>
               </>
             ),
           headerShown: false,
