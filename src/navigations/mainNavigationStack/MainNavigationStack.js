@@ -19,6 +19,7 @@ import WishList from '../../screens/wishList/WishList';
 import Profile from '../../screens/profile/Profile';
 import Order from '../../screens/order/Order';
 import Products from '../../screens/category/Products';
+import SubCategories from '../../screens/category/SubCategories';
 
 function MainNavigationStack(props) {
   const Stack = createStackNavigator();
@@ -56,6 +57,11 @@ function MainNavigationStack(props) {
         <Stack.Screen
           name="Categories"
           component={Categories}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="SubCategories"
+          component={SubCategories}
           options={{headerShown: false}}
         />
         <Stack.Screen

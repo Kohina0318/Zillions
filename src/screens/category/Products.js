@@ -1,76 +1,40 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {View, Text, StatusBar, Appearance, Dimensions} from 'react-native';
 import {useSelector} from 'react-redux';
 import {MyThemeClass} from '../../components/Theme/ThemeDarkLightColor';
 import {ProductStyle} from '../../assets/css/ProductStyle';
 import {ProductDataList} from '../../components/shared/FlateLists/ProductDataList';
 import {ScrollView} from 'react-native-gesture-handler';
+import {getCategoryByProduct} from '../../repository/CategoryRepository/AllProductCategoryRep';
+import {useToast} from 'react-native-toast-notifications';
 
 const {width, height} = Dimensions.get('screen');
 
 export default function Products(props) {
+  const toast = useToast();
   const mode = useSelector(state => state.mode);
   const themecolor = new MyThemeClass(mode).getThemeColor();
+  const [data, setData] = useState([]);
 
-  const data = [
-    {
-      id: 1,
-      title: 'Makita Angle Grinder M9509B',
-      ptr: '400',
-      mrp: '600',
-      rate: '2',
-      discount: '10',
-    },
-    {
-      id: 2,
-      title: 'Makita Portable Cut-off M2401B High performance and durability',
-      ptr: '300',
-      mrp: '700',
-      rate: '3',
-      discount: '30',
-    },
-    {
-      id: 3,
-      title:
-        'Makita Angle Grinder M9506B High performance and durability at less expense',
-      ptr: '499',
-      mrp: '599',
-      rate: '2.5',
-      discount: '10',
-    },
-    {
-      id: 4,
-      title: 'Makita Angle Grinder M9512B Continuous rating Input : 720W',
-      ptr: '200',
-      mrp: '350',
-      rate: '4.5',
-      discount: '5',
-    },
-    {
-      id: 5,
-      title: 'Makita Angle Grinder M9509B',
-      ptr: '599',
-      mrp: '1000',
-      rate: '5',
-      discount: '50',
-    },
-    {
-      id: 6,
-      title: 'Makita Angle Grinder M9509B',
-      ptr: '599',
-      mrp: '1000',
-      rate: '5',
-      discount: '50',
-    },
-    {
-      id: 7,
-      title: 'Makita Angle Grinder M9509B',
-      ptr: '599',
-      mrp: '1000',
-      rate: '5',
-      discount: '50',
-    },
-  ];
+  useEffect(async () => {
+    try {
+      var res = await getCategoryByProduct(props.route.params.subCategoryId);
+      console.log(
+        'data getCategoryByProduct api in.....product page-->',
+        res.data,
+      );
+      setData(res.data);
+    } catch (e) {
+      console.log('errrror in..categories page-->', e);
+      toast.show('Something went wrong!, Try again later.', {
+        type: 'danger',
+        placement: 'bottom',
+        duration: 3000,
+        offset: 30,
+        animationType: 'slide-in',
+      });
+    }
+  }, []);
 
   return (
     <View style={{...ProductStyle.bg, backgroundColor: themecolor.THEMECOLOR}}>
@@ -79,10 +43,17 @@ export default function Products(props) {
           ...ProductStyle.container,
         }}>
         <View style={{marginTop: 10}}>
-          <ScrollView  showsVerticalScrollIndicator={false}>
-            <ProductDataList data={data} />
-            <View style={{marginVertical: 20}} />
-          </ScrollView>
+          {data.length > 0 ? (
+            <ScrollView showsVerticalScrollIndicator={false}>
+              <ProductDataList data={data} />
+              <View style={{marginVertical: 20}} />
+            </ScrollView>
+          ) : (
+            <View
+              style={{alignItems: 'center', flex: 1, justifyContent: 'center'}}>
+              <Text>No data found!</Text>
+            </View>
+          )}
         </View>
       </View>
     </View>

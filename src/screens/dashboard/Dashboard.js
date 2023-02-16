@@ -16,14 +16,18 @@ export default function Dashboard(props) {
     <Header title="Home"/>
        <View
         style={{
-        //   backgroundColor: themecolor.THEMECOLOR,
-          color: themecolor.TXTWHITE,
-          justifyContent: 'center',
-          height: height,
-          alignSelf: 'center',
-        }}>
-        <Text>Dashboard</Text>
+          // justifyContent: 'center',
+          // height: height,
+          // alignSelf: 'center',
+          flex:1,
+          marginTop:100
+        }} />
+      
+
+      <View style={{width:width*0.95,backgroundColor:"red",justifyContent:'center',alignSelf:'center'}}>
+      <Text>Dashboard</Text>
       </View>
+
     </View>
   );
 }
