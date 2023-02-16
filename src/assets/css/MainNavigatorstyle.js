@@ -55,7 +55,7 @@ const MainNavigatorstyle = StyleSheet.create({
     tabbarbottomborder: {
         backgroundColor: Colors.bluetheme,
         height: 5,
-        width: 50,
+        width: 55,
         bottom: -7,
         position: 'absolute',
         borderTopLeftRadius: 20,
@@ -64,7 +64,7 @@ const MainNavigatorstyle = StyleSheet.create({
     tab1: {
         fontSize: 11,
         fontFamily: FontFamily.PopinsMedium,
-        // bottom: 8,
+        bottom: 8,
     },
     tab2: {
         backgroundColor: '#4343ef',

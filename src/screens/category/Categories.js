@@ -1,39 +1,54 @@
-import React, {useState} from 'react';
-import {View, Text, StatusBar, Appearance, Dimensions} from 'react-native';
+import React, {useEffect, useState} from 'react';
+import {View, Text, StatusBar, Appearance, Dimensions,ScrollView} from 'react-native';
 import {useSelector} from 'react-redux';
 import {MyThemeClass} from '../../components/Theme/ThemeDarkLightColor';
-import {useNavigation} from '@react-navigation/native';
-import { CategoryDataList } from '../../components/shared/FlateLists/CategoryDataList';
+import {CategoryDataList} from '../../components/shared/FlateLists/CategoryDataList';
+import {CategoryStyle} from '../../assets/css/CategoryStyle';
+import {getCategories} from '../../repository/CategoryRepository/AllProductCategoryRep';
+import { useToast } from 'react-native-toast-notifications';
+import Header from '../../components/shared/header/Header';
+
 const {width, height} = Dimensions.get('screen');
 
 export default function Categories(props) {
-
+  const toast = useToast();
   const mode = useSelector(state => state.mode);
   const themecolor = new MyThemeClass(mode).getThemeColor();
+  const [data, setData] = useState([]);
 
-  const data=[
-    {
-        id:1,
-        name:"kkkkkkkkk"
-    },
-    {
-        id:2,
-        name: "ddrtyh"
+  useEffect(async () => {
+    try {
+      var res = await getCategories();
+      console.log('data....kohina...-->', res.data);
+        setData(res.data);
+    } catch (e) {
+      console.log('errrror in..categories page-->', e);
+      toast.show('Something went wrong!, Try again later.', {
+        type: 'danger',
+        placement: 'bottom',
+        duration: 3000,
+        offset: 30,
+        animationType: 'slide-in',
+      });
     }
-  ]
- 
+  }, []);
+
   return (
-    <>
-      <View
-        style={{
-          color: themecolor.TXTWHITE,
-          justifyContent: 'center',
-          height: height,
-          alignSelf: 'center',
-        }}>
-        <Text>Categories</Text>
-        <CategoryDataList data={data} />
-      </View>
-    </>
+    <View style={{...CategoryStyle.bg, backgroundColor: themecolor.THEMECOLOR,}}>
+      {/* <Header title="Categories"/> */}
+        <View
+          style={{
+            ...CategoryStyle.container,
+          }}>
+          
+          <View style={{marginTop: 20}} />
+          {data.length >0 ?
+            <CategoryDataList data={data} />
+            :
+            <Text>No data found!</Text>
+            }
+          
+        </View>
+    </View>
   );
 }

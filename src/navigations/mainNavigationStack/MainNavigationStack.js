@@ -17,6 +17,8 @@ import Categories from '../../screens/category/Categories';
 import Cart from '../../screens/cart/Cart';
 import WishList from '../../screens/wishList/WishList';
 import Profile from '../../screens/profile/Profile';
+import Order from '../../screens/order/Order';
+import Products from '../../screens/category/Products';
 
 function MainNavigationStack(props) {
   const Stack = createStackNavigator();
@@ -57,6 +59,11 @@ function MainNavigationStack(props) {
           options={{headerShown: false}}
         />
         <Stack.Screen
+          name="Products"
+          component={Products}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
           name="Cart"
           component={Cart}
           options={{headerShown: false}}
@@ -69,6 +76,11 @@ function MainNavigationStack(props) {
         <Stack.Screen
           name="Profile"
           component={Profile}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="Order"
+          component={Order}
           options={{headerShown: false}}
         />
       </Stack.Navigator>

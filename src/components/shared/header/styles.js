@@ -29,10 +29,10 @@ export const styles = StyleSheet.create({
   },
 
   toolBar: {
-    width: width,
+    width: width *0.99,
     display: 'flex',
     fontSize: FontSize.h1,
-    height: height*0.07,
+    height: height*0.09,
     flexDirection: 'row',
     alignItems: 'center',
     fontFamily: Fonts.primarySemiBold,

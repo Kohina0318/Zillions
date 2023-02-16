@@ -75,6 +75,11 @@ class MyThemeClass {
       AV: this.mode === 'dark' ? '#FFF' : '#9E9E9E',
       AV2: this.mode === 'dark' ? '#FFF' : '#252525',
       LOADER: this.mode === 'dark' ? 'rgba(60, 62, 62, .8)' : 'rgba(245, 245, 245, 0.9)',
+      LABEL: this.mode === 'dark' ?  '#FFF': '#0f3479',
+      TEXTRED: this.mode === 'dark' ?  '#eb2f06':   '#ff3838',
+      TEXTGREEN: this.mode === 'dark' ?  '#20bf6b':  '#4cd137',
+      STARCOLOR: this.mode === 'dark' ?  '#f39c12':  '#ffd32a',
+     
       BACKICON: this.mode === 'dark' ? '#FFF' : '#281E5D',
     }
 

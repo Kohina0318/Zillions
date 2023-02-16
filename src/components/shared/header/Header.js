@@ -23,7 +23,7 @@ export default function Header(props) {
     <View style={{flex: 1}}>
       <StatusBar
         translucent={true}
-        backgroundColor={themecolor.LOGINTHEMECOLOR1}
+        backgroundColor={'transparent'}
         barStyle={mode == 'light' ? 'dark-content' : 'light-content'}
       />
       <View
@@ -31,47 +31,55 @@ export default function Header(props) {
           marginTop: 20,
           flex: 1,
           backgroundColor: themecolor.LOGINTHEMECOLOR1,
-          flexDirection: 'column'
+          flexDirection: 'column',
         }}>
         <View
           style={{
             ...styles.toolBar,
             backgroundColor: themecolor.LOGINTHEMECOLOR1,
           }}>
-          <View  style={{width:width*0.1,flexDirection:'row',alignSelf:'center'}}>
-          {props.backIcon?  
-          <TouchableOpacity
-           activeOpacity={1}
-            style={styles.toggle}
-            onPress={() => {
-              this.setState({showSearch: true});
+          <View
+            style={{
+              width: width * 0.1,
+              flexDirection: 'row',
+              alignSelf: 'center',
             }}>
-            <CIcon name="keyboard-backspace" size={26} color={themecolor.BACKICON} />
-          </TouchableOpacity>:
-          <TouchableOpacity
-            activeOpacity={1}
-            style={styles.toggle}
-            onPress={props.onPress}>
-            <Icon name="menu" size={24} color={themecolor.TXTWHITE} />
-          </TouchableOpacity>
-          }
+            {props.backIcon ? (
+              <TouchableOpacity
+                activeOpacity={1}
+                style={styles.toggle}
+                onPress={() => {
+                  this.setState({showSearch: true});
+                }}>
+                <CIcon
+                  name="keyboard-backspace"
+                  size={26}
+                  color={themecolor.BACKICON}
+                />
+              </TouchableOpacity>
+            ) : (
+              <TouchableOpacity
+                activeOpacity={1}
+                style={styles.toggle}
+                onPress={props.onPress}>
+                <Icon name="menu" size={24} color={themecolor.TXTWHITE} />
+              </TouchableOpacity>
+            )}
           </View>
           <View
             style={{
               flex: 1,
               // flexDirection: 'row',
               alignItems: 'center',
-              width:width*0.2,
+              width: width * 0.2,
               padding: 10,
-              justifyContent:'center',
+              justifyContent: 'center',
               // backgroundColor:"red"
             }}>
-            
-           
             {props.title == 'Home' ? (
               <Image
                 source={require('../../../assets/images/logo.png')}
-                style={{width: 130, height: 30,backgroundColor:'yellow'}}
+                style={{width: 130, height: 30, backgroundColor: 'yellow'}}
               />
             ) : (
               <Text
@@ -90,21 +98,27 @@ export default function Header(props) {
             }}>
             {props.children}
           </View> */}
-<View style={{width:width*0.2,flexDirection:'row',alignSelf:'center'}}>
-          <TouchableOpacity
-            style={{marginRight: 15,top: 9,}}
-            onPress={() => {
-              this.setState({showSearch: true});
+          <View
+            style={{
+              width: width * 0.2,
+              flexDirection: 'row',
+              alignSelf: 'center',
+              marginRight: 10,
             }}>
-            <Icon name="search" size={24} color={themecolor.TXTWHITE} />
-          </TouchableOpacity>
-          <BadgeIcon
-            icon="shopping-cart"
-            count={1}
-            onPress={() => {
-              navigation.navigate('MyCart');
-            }}
-          />
+            <TouchableOpacity
+              style={{marginRight: 15, top: 9}}
+              onPress={() => {
+                this.setState({showSearch: true});
+              }}>
+              <Icon name="search" size={24} color={themecolor.TXTWHITE} />
+            </TouchableOpacity>
+            <BadgeIcon
+              icon="shopping-cart"
+              count={1}
+              onPress={() => {
+                navigation.navigate('MyCart');
+              }}
+            />
           </View>
         </View>
       </View>
