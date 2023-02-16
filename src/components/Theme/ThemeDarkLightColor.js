@@ -54,6 +54,7 @@ class MyThemeClass {
       BLUEWHITE: this.mode === 'dark' ? '#6495ED' : Colors.bluetheme,
       BLUEWHITETEXT: this.mode === 'dark' ? '#6495ED' : Colors.bluetheme,
       LOGINTHEMECOLOR: this.mode === 'dark' ? '#181818' : '#FFF',
+      LOGINTHEMECOLOR1: this.mode === 'dark' ? '#000' : '#FFF',
       HEADERTHEMECOLOR: this.mode === 'dark' ? '#0f3479' : Colors.bluetheme,
       INPUTTXT: this.mode === 'dark' ? '#0f3479' : Colors.black,
       LIGHTGREY: this.mode === 'dark' ? '#484848' : "#f5f5f5",
@@ -73,7 +74,8 @@ class MyThemeClass {
       CHECK: this.mode === 'dark' ? '#0f3479' : Colors.bluetheme1,
       AV: this.mode === 'dark' ? '#FFF' : '#9E9E9E',
       AV2: this.mode === 'dark' ? '#FFF' : '#252525',
-      LOADER: this.mode === 'dark' ? 'rgba(60, 62, 62, .8)' : 'rgba(245, 245, 245, 0.9)'
+      LOADER: this.mode === 'dark' ? 'rgba(60, 62, 62, .8)' : 'rgba(245, 245, 245, 0.9)',
+      BACKICON: this.mode === 'dark' ? '#FFF' : '#281E5D',
     }
 
   }
