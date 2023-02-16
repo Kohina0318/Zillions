@@ -1,7 +1,7 @@
 import {StyleSheet,Dimensions} from 'react-native';
-import { Colors } from '../../../assets/config/Colors';
-import { FontFamily as Fonts } from '../../../assets/fonts/FontFamily';
-import { FontSize } from '../../../assets/fonts/Fonts';
+import { Colors } from '../config/Colors';
+import { FontFamily as Fonts } from '../fonts/FontFamily';
+import { FontSize } from '../fonts/Fonts';
 
 const {width, height} = Dimensions.get('window');
 export const styles = StyleSheet.create({
@@ -29,7 +29,7 @@ export const styles = StyleSheet.create({
   },
 
   toolBar: {
-    width: width *0.99,
+    width: width,
     display: 'flex',
     fontSize: FontSize.h1,
     height: height*0.09,
