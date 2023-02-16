@@ -2,15 +2,15 @@ import React, {useEffect, useState} from 'react';
 import {View, Text, StatusBar, Appearance, Dimensions,ScrollView} from 'react-native';
 import {useSelector} from 'react-redux';
 import {MyThemeClass} from '../../components/Theme/ThemeDarkLightColor';
-import {CategoryDataList} from '../../components/shared/FlateLists/CategoryDataList';
 import {CategoryStyle} from '../../assets/css/CategoryStyle';
-import {getCategories} from '../../repository/CategoryRepository/AllProductCategoryRep';
+import {getSubCategories} from '../../repository/CategoryRepository/AllProductCategoryRep';
 import { useToast } from 'react-native-toast-notifications';
 import Header from '../../components/shared/header/Header';
+import { SubCategoryDataList } from '../../components/shared/FlateLists/SubCategoryDataList';
 
 const {width, height} = Dimensions.get('screen');
 
-export default function Categories(props) {
+export default function SubCategories(props) {
   const toast = useToast();
   const mode = useSelector(state => state.mode);
   const themecolor = new MyThemeClass(mode).getThemeColor();
@@ -18,11 +18,11 @@ export default function Categories(props) {
 
   useEffect(async () => {
     try {
-      var res = await getCategories();
-      console.log('data....getCategories...-->', res.data);
+      var res = await getSubCategories(props.route.params.categoryId);
+      console.log('data....getSubCategories...-->', res.data);
         setData(res.data);
     } catch (e) {
-      console.log('errrror in..categories page-->', e);
+      console.log('errrror in..getSubCategories page-->', e);
       toast.show('Something went wrong!, Try again later.', {
         type: 'danger',
         placement: 'bottom',
@@ -43,7 +43,7 @@ export default function Categories(props) {
           
           <View style={{marginTop: 20}} />
           {data.length > 0 ?
-            <CategoryDataList data={data} />
+            <SubCategoryDataList data={data} />
             :
             <View style={{alignItems:"center",flex:1,justifyContent:"center"}}>
             <Text>No data found!</Text>

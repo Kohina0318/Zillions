@@ -16,7 +16,7 @@ import { useNavigation } from '@react-navigation/native';
 
 const {width} = Dimensions.get('screen');
 
-function CategoryDataFlateList({item, themecolor}) {
+function SubCategoryDataFlateList({item, themecolor}) {
 
   const navigation = useNavigation();
 
@@ -28,7 +28,7 @@ function CategoryDataFlateList({item, themecolor}) {
           backgroundColor: themecolor.BOXBORDERCOLOR,
           borderColor: themecolor.BOXBORDERCOLOR1,
         }}
-        onPress={() => navigation.navigate('SubCategories',{categoryId:item.category_id,categoryName:item.category_name})}
+        onPress={() => navigation.navigate('Products',{subCategoryId:item.sub_category_id,subCategoryName:item.sub_category_name})}
         >
         <View style={{...CategoryStyle.innerImage}}>
           <Image
@@ -42,7 +42,7 @@ function CategoryDataFlateList({item, themecolor}) {
         </View>
         <View style={{...CategoryStyle.margleft15}}>
           <Text style={{...CategoryStyle.txt, colors: themecolor.TXTWHITE}}>
-            {item.category_name}
+            {item.sub_category_name}
           </Text>
         </View>
 
@@ -58,7 +58,7 @@ function CategoryDataFlateList({item, themecolor}) {
   );
 }
 
-export function CategoryDataList(props) {
+export function SubCategoryDataList(props) {
   const mode = useSelector(state => state.mode);
   const themecolor = new MyThemeClass(mode).getThemeColor();
 
@@ -66,7 +66,7 @@ export function CategoryDataList(props) {
     <FlatList
       data={props.data}
       renderItem={({item}) => (
-        <CategoryDataFlateList item={item} themecolor={themecolor} />
+        <SubCategoryDataFlateList item={item} themecolor={themecolor} />
       )}
       showsVerticalScrollIndicator={false}
       scrollEnabled={true}

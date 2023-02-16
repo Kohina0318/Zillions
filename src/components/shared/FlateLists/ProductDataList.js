@@ -23,18 +23,18 @@ function ProductDataFlateList({item, themecolor}) {
 
   return (
     <>
-      <View
+      <TouchableOpacity activeOpacity={0.8}
         style={{
           ...ProductStyle.datalistView,
-          backgroundColor: themecolor.BOXTHEMECOLOR,
+          backgroundColor: themecolor.BOXBORDERCOLOR,
           borderColor: themecolor.BOXBORDERCOLOR1,
         }}>
+        
         <View style={{...ProductStyle.innerImage}}>
           <Image
-            // source={{uri: imageTemp}}
-            source={require('../../../assets/images/hammerIcon.jpg')}
+            source={{uri: item.front_image}}
             style={{
-              width: width * 0.42,
+              width: width * 0.38,
               height: '100%',
             }}
             resizeMode="stretch"
@@ -45,31 +45,27 @@ function ProductDataFlateList({item, themecolor}) {
             ...ProductStyle.inner,
           }}>
           <View>
-            <TextTicker
-              style={ProductStyle.txt}
-              // duration={10000}
-              loop
-              bounce
-              repeatSpacer={50}
-              marqueeDelay={5000}>
+            <Text
+              style={{...ProductStyle.txt, color: themecolor.TXTWHITE}}
+              numberOfLines={2}>
               {item.title}
-            </TextTicker>
+            </Text>
           </View>
 
-          <View style={{margin:2}}>
+          <View style={{margin:2,width: width * 0.25}}>
             <StarRating
               disabled={false}
               maxStars={5}
-              rating={item.rate}
+              rating={item.rating_num}
               selectedStar={rating => onStarRatingPress(rating)}
-              starSize={17}
+              starSize={14}
               fullStarColor={themecolor.STARCOLOR}
             />
           </View>
 
-          <View style={{flexDirection: 'row',}}>
+          <View style={{flexDirection: 'row',width: width * 0.4}}>
             <Text style={{...ProductStyle.txt1, color: themecolor.TEXTGREEN}}>
-              ₹{item.ptr}
+              ₹{item.purchase_price}
               {'  '}
             </Text>
             <Text
@@ -77,15 +73,15 @@ function ProductDataFlateList({item, themecolor}) {
                 ...ProductStyle.txtLine,
                 color: themecolor.TXTGREY,
                }}>
-              ₹{item.mrp}
+              ₹{item.sale_price}
             </Text>
             <Text style={{...ProductStyle.txt1, color: themecolor.TEXTRED}}>
-              {'  ( '}
-              {item.discount}%{' ) '}
+              {'  ('}
+              {item.discount}%{') '} 
             </Text>
           </View>
         </View>
-      </View>
+      </TouchableOpacity>
     </>
   );
 }

@@ -8,14 +8,15 @@ const ProductStyle = StyleSheet.create({
   bg: {flex: 1},
   datalistView: {
     width: width * 0.44,
-    height: height *0.32,
+    height: height *0.36,
     margin: 5,
     padding: 10,
     borderRadius: 5,
     alignSelf: 'center',
     alignItems: 'center',
     marginBottom: 1,
-    borderWidth:0.5
+    borderWidth:0.5,
+    justifyContent:"center"
   },
   container: {
     justifyContent: 'center',
@@ -28,7 +29,7 @@ const ProductStyle = StyleSheet.create({
     alignSelf: 'center',
     alignItems: 'center',
   },
-  inner: {padding: 5, width: width * 0.4},
+  inner: {padding: 5, width: width * 0.38},
     txt:
     {
         color: Colors.bluetheme,

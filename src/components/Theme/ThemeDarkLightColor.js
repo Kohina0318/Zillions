@@ -39,7 +39,7 @@ class MyThemeClass {
       THEMECOLOR: this.mode === 'dark' ? '#181818' : '#f5f5f5',
       THEMECOLOR1: this.mode === 'dark' ? '#181818' : '#FFF',
       BOXTHEMECOLOR: this.mode === 'dark' ? '#3c3e44' : '#FFF',
-      BOXBORDERCOLOR: this.mode === 'dark' ? 'rgba(60, 62, 68, .5)' : '#f5f6f7',
+      BOXBORDERCOLOR: this.mode === 'dark' ? 'rgba(60, 62, 68, .5)' : '#fff',
       BOXBORDERCOLOR1: this.mode === 'dark' ? 'rgba(60, 62, 68, .5)' : '#E9E9E9',
       THEMEBLACK: this.mode === 'dark' ? '#121B24' : '#252525',
       THEMEDARKGREEN: this.mode === 'dark' ? '#2F3F4D' : '#407F2C',
