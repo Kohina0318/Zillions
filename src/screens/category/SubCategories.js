@@ -1,12 +1,19 @@
 import React, {useEffect, useState} from 'react';
-import {View, Text, StatusBar, Appearance, Dimensions,ScrollView} from 'react-native';
+import {
+  View,
+  Text,
+  StatusBar,
+  Appearance,
+  Dimensions,
+  ScrollView,
+} from 'react-native';
 import {useSelector} from 'react-redux';
 import {MyThemeClass} from '../../components/Theme/ThemeDarkLightColor';
 import {CategoryStyle} from '../../assets/css/CategoryStyle';
 import {getSubCategories} from '../../repository/CategoryRepository/AllProductCategoryRep';
-import { useToast } from 'react-native-toast-notifications';
+import {useToast} from 'react-native-toast-notifications';
 import Header from '../../components/shared/header/Header';
-import { SubCategoryDataList } from '../../components/shared/FlateLists/SubCategoryDataList';
+import {SubCategoryDataList} from '../../components/shared/FlateLists/SubCategoryDataList';
 
 const {width, height} = Dimensions.get('screen');
 
@@ -20,7 +27,7 @@ export default function SubCategories(props) {
     try {
       var res = await getSubCategories(props.route.params.categoryId);
       console.log('data....getSubCategories...-->', res.data);
-        setData(res.data);
+      setData(res.data);
     } catch (e) {
       console.log('errrror in..getSubCategories page-->', e);
       toast.show('Something went wrong!, Try again later.', {
@@ -34,23 +41,23 @@ export default function SubCategories(props) {
   }, []);
 
   return (
-    <View style={{...CategoryStyle.bg, backgroundColor: themecolor.THEMECOLOR,}}>
-      {/* <Header title="Categories"/> */}
-        <View
-          style={{
-            ...CategoryStyle.container,
-          }}>
-          
-          <View style={{marginTop: 20}} />
-          {data.length > 0 ?
-            <SubCategoryDataList data={data} />
-            :
-            <View style={{alignItems:"center",flex:1,justifyContent:"center"}}>
+    <View style={{...CategoryStyle.bg, backgroundColor: themecolor.THEMECOLOR}}>
+      <Header title={props.route.params.categoryName} backIcon={true} />
+
+      <View
+        style={{
+          ...CategoryStyle.container,
+        }}>
+        {data.length > 0 ? (
+          <SubCategoryDataList data={data} />
+        ) : (
+          <View
+            style={{alignItems: 'center', flex: 1, justifyContent: 'center'}}>
             <Text>No data found!</Text>
-            </View>
-            }
-          
-        </View>
+          </View>
+        )}
+        <View style={{marginVertical: 20}} />
+      </View>
     </View>
   );
 }

@@ -79,7 +79,6 @@ class MyThemeClass {
       TEXTRED: this.mode === 'dark' ?  '#eb2f06':   '#ff3838',
       TEXTGREEN: this.mode === 'dark' ?  '#20bf6b':  '#4cd137',
       STARCOLOR: this.mode === 'dark' ?  '#f39c12':  '#ffd32a',
-     
       BACKICON: this.mode === 'dark' ? '#FFF' : '#281E5D',
     }
 

@@ -9,7 +9,7 @@ import {
 } from 'react-native';
 import {MyThemeClass} from '../../Theme/ThemeDarkLightColor';
 import {useSelector} from 'react-redux';
-import Icon from 'react-native-vector-icons/Feather';
+import Icon from 'react-native-vector-icons/Ionicons';
 import CIcon from 'react-native-vector-icons/MaterialIcons';
 import BadgeIcon from './BadgeIcon';
 import {styles} from '../../../assets/css/HeaderStyle';
@@ -20,37 +20,24 @@ export default function Header(props) {
   const themecolor = new MyThemeClass(mode).getThemeColor();
 
   return (
-    <View>
-      <StatusBar
-        translucent={true}
-        backgroundColor={ themecolor.LOGINTHEMECOLOR1}
-        barStyle={mode == 'light' ? 'dark-content' : 'light-content'}
-      />
-      <View
-        style={{
-          marginTop: 20,
-          flex: 1,
-          backgroundColor: themecolor.LOGINTHEMECOLOR1,
-          flexDirection: 'column',
-        }}>
+    <View
+      style={{
+        ...styles.mainView,
+        backgroundColor: themecolor.LOGINTHEMECOLOR1,
+        borderBottomColor:themecolor.BOXBORDERCOLOR1
+      }}>
+     
+      <View style={{...styles.mainViewContainer}}>
         <View
-          style={{
-            ...styles.toolBar,
-            backgroundColor: themecolor.LOGINTHEMECOLOR1,
-          }}>
-          <View
-            style={{
-              width: width * 0.1,
-              flexDirection: 'row',
-              alignSelf: 'center',
-            }}>
-            {props.backIcon ? (
+          style={{...styles.headerInnerView}}>
+
+          <View style={{width: width * 0.1,}}>
+          {props.backIcon ? (
               <TouchableOpacity
                 activeOpacity={1}
                 style={styles.toggle}
-                onPress={() => {
-                  this.setState({showSearch: true});
-                }}>
+                // onPress={() => }
+                >
                 <CIcon
                   name="keyboard-backspace"
                   size={26}
@@ -60,65 +47,51 @@ export default function Header(props) {
             ) : (
               <TouchableOpacity
                 activeOpacity={1}
-                style={styles.toggle}
-                onPress={props.onPress}>
-                <Icon name="menu" size={24} color={themecolor.TXTWHITE} />
+                // onPress={() => navigation.dispatch(DrawerActions.openDrawer())}
+                >
+                <Icon name="menu-sharp" size={26} color={themecolor.TXTWHITE} />
               </TouchableOpacity>
             )}
           </View>
-          <View
-            style={{
-              flex: 1,
-              // flexDirection: 'row',
-              alignItems: 'center',
-              width: width * 0.2,
-              padding: 10,
-              justifyContent: 'center',
-              // backgroundColor:"red"
-            }}>
+
+          <View style={{...styles.iconTitle}}>
             {props.title == 'Home' ? (
               <Image
                 source={require('../../../assets/images/logo.png')}
-                style={{width: 130, height: 30, backgroundColor: 'yellow'}}
+                style={{width: 130, height: 30}}
               />
             ) : (
               <Text
-                style={{...styles.toolbarTitle, color: themecolor.TXTWHITE}}>
+                style={{...styles.toolbarTitle, color: themecolor.TXTWHITE}}
+                numberOfLines={1}>
                 {props.title}
               </Text>
             )}
           </View>
-          {/* <View
-            style={{
-              flex: 1,
-              flexDirection: 'row',
-              justifyContent: 'flex-end',
-              alignItems: 'center',
-              paddingRight: 10,
-            }}>
-            {props.children}
-          </View> */}
+
           <View
-            style={{
-              width: width * 0.2,
-              flexDirection: 'row',
-              alignSelf: 'center',
-              // marginRight: 10,
-            }}>
-            <TouchableOpacity
-              style={{marginRight: 15, top: 9}}
-              onPress={() => {
-                this.setState({showSearch: true});
-              }}>
-              <Icon name="search" size={24} color={themecolor.TXTWHITE} />
-            </TouchableOpacity>
-            <BadgeIcon
-              icon="shopping-cart"
-              count={1}
-              onPress={() => {
-                navigation.navigate('MyCart');
-              }}
-            />
+            style={{...styles.iconView}}>
+            <View style={{width: width * 0.1}}>
+              <TouchableOpacity
+                activeOpacity={0.5}
+                onPress={() => {
+                  this.setState({showSearch: true});
+                }}>
+                <Icon name="search" size={22} color={themecolor.TXTWHITE} />
+              </TouchableOpacity>
+            </View>
+
+            <View style={{width: width * 0.1}}>
+              <TouchableOpacity activeOpacity={0.5}>
+                <BadgeIcon
+                  icon="shopping-cart"
+                  count={1}
+                  onPress={() => {
+                    navigation.navigate('MyCart');
+                  }}
+                />
+              </TouchableOpacity>
+            </View>
           </View>
         </View>
       </View>
