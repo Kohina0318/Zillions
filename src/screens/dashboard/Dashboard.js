@@ -10,34 +10,35 @@ import { getCategories } from '../../repository/CategoryRepository/AllProductCat
 import CarouselFile from '../../components/shared/Carousel/CarouselFile';
 const { width, height } = Dimensions.get('screen');
 
-const data=[
-  {
-    title:"Hello",
-    body:"bhxabcbdnndvndvmvnm",
-    image:'https://www.zillionsbuyer.com/uploads/product_image/product_821_1_thumb.jpg'
+// const data=[
+//   {
+//     title:"Hello",
+//     body:"bhxabcbdnndvndvmvnm",
+//     image:'https://www.zillionsbuyer.com/uploads/product_image/product_821_1_thumb.jpg'
 
-  },
-  {
-    title:"hiii",
-    body:"bhxabcbdnndvndvmvnm",
-    image:'https://www.zillionsbuyer.com/uploads/product_image/product_821_1_thumb.jpg'
-  },
-  {
-    title:"Hyyyyy",
-    body:"bhxabcbdnndvndvmvnm",
-    image:'https://www.zillionsbuyer.com/uploads/product_image/product_821_1_thumb.jpg'
-  },
+//   },
+//   {
+//     title:"hiii",
+//     body:"bhxabcbdnndvndvmvnm",
+//     image:'https://www.zillionsbuyer.com/uploads/product_image/product_821_1_thumb.jpg'
+//   },
+//   {
+//     title:"Hyyyyy",
+//     body:"bhxabcbdnndvndvmvnm",
+//     image:'https://www.zillionsbuyer.com/uploads/product_image/product_821_1_thumb.jpg'
+//   },
   
-]
+// ]
 
 export default function Dashboard(props) { 
   const toast = useToast()
   const mode = useSelector(state => state.mode);
   const themecolor = new MyThemeClass(mode).getThemeColor();
+  const [carouselData,setCarouselData]=useState([])
 
   const handleCategories = async () => {
     try {
-      var res = getCategories();
+      var res = await getCategories();
       console.log('handleCategories......in dashboard page', res);
     } 
     catch (e) {
@@ -53,8 +54,9 @@ export default function Dashboard(props) {
   };
   const handleCarousel = async () => {
     try {
-      var res = getMainSlider();
-      console.log('handleCarousel......in dashboard page', res);
+      var res = await getMainSlider();
+      console.log('handleCarousel......in dashboard page', res.data);
+      setCarouselData(res.data)
     } 
     catch (e) {
       console.log('errrror in..handleCarousel page-->', e);
@@ -69,8 +71,9 @@ export default function Dashboard(props) {
   };
   const handleBrands = async () => {
     try {
-      var res = getBrands()
-      console.log('handleBrands......in dashboard page', res);
+      var res = await getBrands()
+      console.log('handleBrands......in dashboard page', res.data);
+      // setData(res.data)
     } 
     catch (e) {
       console.log('errrror in..handleBrands page-->', e);
@@ -101,9 +104,9 @@ export default function Dashboard(props) {
       <ScrollView showsVerticalScrollIndicator={false}>
       <View
         style={{...styles.container,backgroundColor:themecolor.LOGINTHEMECOLOR1}}>
-          <CarouselFile data={data}/>
+          <CarouselFile data={carouselData}/>
       </View>
-      <View style={{...styles.container,backgroundColor:themecolor.LOGINTHEMECOLOR1}} >
+      <View>
 
       </View>
       </ScrollView>

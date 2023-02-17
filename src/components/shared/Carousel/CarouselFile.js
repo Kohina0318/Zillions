@@ -11,13 +11,13 @@ export default function CarouselFile(props) {
     const mode = useSelector(state => state.mode);
   const themecolor = new MyThemeClass(mode).getThemeColor();
 
-
+console.log("props>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>",props)
   const [largeImage, setLargeImage] = React.useState(0);
 
   const renderItem = (item, index) => {
     return (
       <View style={styles.container1} key={index}>
-        <Image source={{uri: item.image}} style={styles.image} />
+        <Image resizeMode='contain' source={{uri: item.banner}} style={styles.image} />
       </View>
     );
   };
