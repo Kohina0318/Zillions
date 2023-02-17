@@ -44,6 +44,37 @@ const styles = StyleSheet.create({
     width:width,
     height:height*0.2
   },
+  brandsContainer: {
+    width:width * 0.9,
+  },
+    CardText: {
+      fontSize: FontSize.labelText2,
+      fontFamily: FontFamily.PopinsMedium,
+      color: Colors.black,
+      alignSelf: 'center',
+    },
+    ViewAllButton: {
+      backgroundColor: Colors.bluetheme,
+      borderRadius: 30,
+      height: 20,
+      alignItems: 'center',
+      justifyContent: 'center',
+      paddingHorizontal: 15,
+    },
+    ViewAllButtonIcon: {
+      color: Colors.white,
+      fontSize: FontSize.smallText,
+    },
+    ViewHeading:{
+      width: width * 0.92, alignSelf: 'center'
+    },
+    ViewInnerHeading:{
+      flexDirection: 'row',
+      width: '100%',
+      justifyContent: 'space-between',
+      position: 'relative',
+    
+    }
 
 });
 
