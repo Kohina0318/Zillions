@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import {View, Text, StatusBar, Appearance, Dimensions} from 'react-native';
+import {View, Text, StatusBar, Appearance, Dimensions,ScrollView} from 'react-native';
 import {useSelector} from 'react-redux';
 import {MyThemeClass} from '../../components/Theme/ThemeDarkLightColor';
 import Header from '../../components/shared/header/Header';
@@ -7,7 +7,28 @@ import {styles} from '../../assets/css/DashboardStyle';
 import {getBrands, getMainSlider} from '../../repository/DashboardRepository/AllDashboardRep';
 import { useToast } from 'react-native-toast-notifications';
 import { getCategories } from '../../repository/CategoryRepository/AllProductCategoryRep';
-const {width, height} = Dimensions.get('screen');
+import CarouselFile from '../../components/shared/Carousel/CarouselFile';
+const { width, height } = Dimensions.get('screen');
+
+const data=[
+  {
+    title:"Hello",
+    body:"bhxabcbdnndvndvmvnm",
+    image:'https://www.zillionsbuyer.com/uploads/product_image/product_821_1_thumb.jpg'
+
+  },
+  {
+    title:"hiii",
+    body:"bhxabcbdnndvndvmvnm",
+    image:'https://www.zillionsbuyer.com/uploads/product_image/product_821_1_thumb.jpg'
+  },
+  {
+    title:"Hyyyyy",
+    body:"bhxabcbdnndvndvmvnm",
+    image:'https://www.zillionsbuyer.com/uploads/product_image/product_821_1_thumb.jpg'
+  },
+  
+]
 
 export default function Dashboard(props) { 
   const toast = useToast()
@@ -77,10 +98,15 @@ export default function Dashboard(props) {
         barStyle={mode === 'dark' ? 'light-content' : 'dark-content'}
       />
       <Header title="Home" />
-
-      <View style={{...styles.container}}>
-        <Text>Dashboard</Text>
+      <ScrollView showsVerticalScrollIndicator={false}>
+      <View
+        style={{...styles.container,backgroundColor:themecolor.LOGINTHEMECOLOR1}}>
+          <CarouselFile data={data}/>
       </View>
+      <View style={{...styles.container,backgroundColor:themecolor.LOGINTHEMECOLOR1}} >
+
+      </View>
+      </ScrollView>
     </View>
   );
 }
