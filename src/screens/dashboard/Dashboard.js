@@ -8,6 +8,8 @@ import {getBrands, getMainSlider} from '../../repository/DashboardRepository/All
 import { useToast } from 'react-native-toast-notifications';
 import { getCategories } from '../../repository/CategoryRepository/AllProductCategoryRep';
 import CarouselFile from '../../components/shared/Carousel/CarouselFile';
+import {Avatar} from '@rneui/themed';
+import { DashboardCategoryDataList } from '../../components/shared/FlateLists/DashboardCategoryFlatList';
 const { width, height } = Dimensions.get('screen');
 
 // const data=[
@@ -35,11 +37,13 @@ export default function Dashboard(props) {
   const mode = useSelector(state => state.mode);
   const themecolor = new MyThemeClass(mode).getThemeColor();
   const [carouselData,setCarouselData]=useState([])
+  const [categories,setCategories]=useState([])
 
   const handleCategories = async () => {
     try {
       var res = await getCategories();
       console.log('handleCategories......in dashboard page', res);
+      setCategories(res.data)
     } 
     catch (e) {
       console.log('errrror in..handleCategories page-->', e);
@@ -102,13 +106,14 @@ export default function Dashboard(props) {
       />
       <Header title="Home" />
       <ScrollView showsVerticalScrollIndicator={false}>
+      <View style={{width:width,height:height*0.13}}>
+      <DashboardCategoryDataList data={categories}/>
+      </View>
       <View
         style={{...styles.container,backgroundColor:themecolor.LOGINTHEMECOLOR1}}>
           <CarouselFile data={carouselData}/>
       </View>
-      <View>
-
-      </View>
+      
       </ScrollView>
     </View>
   );
