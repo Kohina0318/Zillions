@@ -1,9 +1,5 @@
 export const data=[
     {
-      name:'Tracking',
-      linkStatus:false,
-    },
-    {
         name:'Login',
         linkStatus:false,
     },
@@ -19,14 +15,6 @@ export const data=[
         name:'Track Order',
         linkStatus:false,
     },
-    {
-        name:'Vendor Login',
-        linkStatus:false,
-      },
-      {
-        name:'Vendor SignUp',
-        linkStatus:false,
-      },
       {
         name:'Blog',
         linkStatus:true,
@@ -61,5 +49,9 @@ export const data=[
         name:'Sitemap',
         linkStatus:true,
         link:'https://www.zillionsbuyer.com/#'
+      },
+      {
+        name:'Log Out',
+        linkStatus:false,
       },
   ]
