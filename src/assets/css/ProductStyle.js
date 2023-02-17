@@ -21,6 +21,7 @@ const ProductStyle = StyleSheet.create({
   container: {
     justifyContent: 'center',
     alignSelf: 'center',
+    marginTop:5
   },
   innerImage: {
     height: height * 0.2,

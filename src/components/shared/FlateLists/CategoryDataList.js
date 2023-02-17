@@ -62,7 +62,7 @@ export function CategoryDataList(props) {
   const mode = useSelector(state => state.mode);
   const themecolor = new MyThemeClass(mode).getThemeColor();
 
-  return (
+  return ( 
     <FlatList
       data={props.data}
       renderItem={({item}) => (
