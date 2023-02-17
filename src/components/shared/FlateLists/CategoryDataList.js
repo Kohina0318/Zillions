@@ -41,7 +41,7 @@ function CategoryDataFlateList({item, themecolor}) {
           />
         </View>
         <View style={{...CategoryStyle.margleft15}}>
-          <Text style={{...CategoryStyle.txt, colors: themecolor.TXTWHITE}}>
+          <Text style={{...CategoryStyle.txt, color: themecolor.TXTWHITE}}>
             {item.category_name}
           </Text>
         </View>
