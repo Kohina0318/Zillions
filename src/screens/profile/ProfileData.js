@@ -62,4 +62,8 @@ export const data=[
         linkStatus:true,
         link:'https://www.zillionsbuyer.com/#'
       },
+      {
+        name:'Log Out',
+        linkStatus:false,
+      },
   ]
