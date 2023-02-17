@@ -32,22 +32,22 @@ const getSubCategories = async ( cId) => {
     console.log('error in getSubCategories api...in AllproductCategoryRep ', err);
   }
 };
-const getCategoryByProduct = async (sId) => {
+const getSubCategoryByProduct = async (sId) => {
   try {
     const response = await fetch(
-        `https://www.zillionsbuyer.com/categorie-by-product/${sId}`,
+        `https://www.zillionsbuyer.com/product-list?speciality=sub_category&id=${sId}`,
       {
         method: 'GET',
         headers: {'Content-Type': 'application/json;charset=utf-8'},
       },
     );
     const result = await response.json();
-    console.log('getCategoryByProduct api data....in AllproductCategoryRep', result);
+    console.log('getSubCategoryByProduct api data....in AllproductCategoryRep', result);
       return result;
   } catch (err) {
-    console.log('error in getCategoryByProduct...in AllproductCategoryRep ', err);
+    console.log('error in getSubCategoryByProduct...in AllproductCategoryRep ', err);
   }
 };
 
 
-export {getCategories,getCategoryByProduct,getSubCategories};
+export {getCategories,getSubCategoryByProduct,getSubCategories};

@@ -7,6 +7,7 @@ import {
   Dimensions,
   TouchableOpacity,
 } from 'react-native';
+import { DrawerActions, useNavigation } from '@react-navigation/native';
 import {MyThemeClass} from '../../Theme/ThemeDarkLightColor';
 import {useSelector} from 'react-redux';
 import Icon from 'react-native-vector-icons/Ionicons';
@@ -16,6 +17,7 @@ import {styles} from '../../../assets/css/HeaderStyle';
 const {width, height} = Dimensions.get('screen');
 
 export default function Header(props) {
+  const navigation = useNavigation();
   const mode = useSelector(state => state.mode);
   const themecolor = new MyThemeClass(mode).getThemeColor();
 
@@ -34,7 +36,7 @@ export default function Header(props) {
           <View style={{width: width * 0.1,}}>
           {props.backIcon ? (
               <TouchableOpacity
-                activeOpacity={1}
+                activeOpacity={0.5}
                 style={styles.toggle}
                 // onPress={() => }
                 >
@@ -46,8 +48,8 @@ export default function Header(props) {
               </TouchableOpacity>
             ) : (
               <TouchableOpacity
-                activeOpacity={1}
-                // onPress={() => navigation.dispatch(DrawerActions.openDrawer())}
+                activeOpacity={0.5}
+                onPress={() => navigation.dispatch(DrawerActions.openDrawer())}
                 >
                 <Icon name="menu-sharp" size={26} color={themecolor.TXTWHITE} />
               </TouchableOpacity>
@@ -74,9 +76,10 @@ export default function Header(props) {
             <View style={{width: width * 0.1}}>
               <TouchableOpacity
                 activeOpacity={0.5}
-                onPress={() => {
-                  this.setState({showSearch: true});
-                }}>
+                // onPress={() => {
+                //   this.setState({showSearch: true});
+                // }}
+                >
                 <Icon name="search" size={22} color={themecolor.TXTWHITE} />
               </TouchableOpacity>
             </View>

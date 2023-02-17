@@ -43,6 +43,13 @@ const MainNavigatorstyle = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'flex-start',
         alignContent: 'center',
+        paddingHorizontal: 10,
+        paddingVertical: 12,
+    },
+    viewstyle1: {
+        flexDirection: 'row',
+        justifyContent: 'flex-start',
+        alignContent: 'center',
         paddingHorizontal: 16,
         paddingVertical: 12,
     },
@@ -79,13 +86,11 @@ const MainNavigatorstyle = StyleSheet.create({
     userinfo1: {
         alignSelf: 'center',
         width: '100%',
-        height: height *0.945
+        height: height *0.945,
     },
     userimg: {
-        width: width * 0.55,
-        height: 90,
+        width: "70%",
         resizeMode: 'contain',
-        alignSelf: 'center',
     },
     view1: {
         flexDirection: 'row',
@@ -112,6 +117,16 @@ const MainNavigatorstyle = StyleSheet.create({
         color: Colors.bluetheme,
         textAlign: 'center',
         fontSize: 13,
+      },
+      DrawerContentSView:{
+        borderTopRightRadius: 10,
+        borderBottomRightRadius: 10,
+        overflow: 'hidden',
+        width: width * 0.65,
+        borderWidth: 1,
+      },
+      ImageRView:{
+        left:5, justifyContent:"center",alignItems:'center'
       }
 
 })

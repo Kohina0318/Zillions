@@ -8,17 +8,15 @@ import {
   Dimensions,
 } from 'react-native';
 import {Colors} from '../../../assets/config/Colors';
-import {ProductStyle} from '../../../assets/css/ProductStyle';
+import {styles} from '../../../assets/css/WishListStyle';
 import {MyThemeClass} from '../../Theme/ThemeDarkLightColor';
 import {useSelector} from 'react-redux';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import {useNavigation} from '@react-navigation/native';
-import TextTicker from 'react-native-text-ticker';
-import StarRating from 'react-native-star-rating';
 
 const {width, height} = Dimensions.get('screen');
 
-function ProductDataFlateList({item, themecolor}) {
+function WishListDataFlateList({item, themecolor}) {
   const navigation = useNavigation();
 
   return (
@@ -26,11 +24,11 @@ function ProductDataFlateList({item, themecolor}) {
       <TouchableOpacity
         activeOpacity={0.8}
         style={{
-          ...ProductStyle.datalistView,
+          ...styles.datalistView,
           backgroundColor: themecolor.BOXBORDERCOLOR,
           borderColor: themecolor.BOXBORDERCOLOR1,
         }}>
-        <View style={{...ProductStyle.innerImage}}>
+        <View style={{...styles.innerImage}}>
           <Image
             source={{uri: item.front_image}}
             style={{
@@ -42,43 +40,46 @@ function ProductDataFlateList({item, themecolor}) {
         </View>
         <View
           style={{
-            ...ProductStyle.inner,
+            ...styles.inner,
           }}>
           <View>
             <Text
-              style={{...ProductStyle.txt, color: themecolor.TXTWHITE}}
+              style={{...styles.txt, color: themecolor.TXTWHITE}}
               numberOfLines={2}>
               {item.title}
             </Text>
           </View>
 
-          <View style={{margin: 2, width: width * 0.25}}>
-            <StarRating
-              disabled={false}
-              maxStars={5}
-              rating={item.rating_num}
-              selectedStar={rating => onStarRatingPress(rating)}
-              starSize={14}
-              fullStarColor={themecolor.STARCOLOR}
-            />
-          </View>
-
           <View style={{flexDirection: 'row', width: '100%'}}>
-            <Text style={{...ProductStyle.txt1, color: themecolor.TEXTGREEN}}>
+            <Text style={{...styles.txt1, color: themecolor.TEXTGREEN}}>
               ₹ {item.purchase_price}
               {'  '}
               <Text
                 style={{
-                  ...ProductStyle.txtLine,
+                  ...styles.txtLine,
                   color: themecolor.TXTGREY,
                 }}>
                 ₹ {item.sale_price}
               </Text>
-              <Text style={{...ProductStyle.txt1, color: themecolor.TEXTRED}}>
+              <Text style={{...styles.txt1, color: themecolor.TEXTRED}}>
                 {'  ('}
                 {item.discount}%{')'}
               </Text>
             </Text>
+          </View>
+
+          <View style={{marginTop:3}}>
+            <TouchableOpacity
+            // onPress={() => setshowCompetitionModal(true)}
+            >
+              <View
+                style={{
+                  ...styles.AddButton,
+                  backgroundColor: themecolor.HEADERTHEMECOLOR,
+                }}>
+                <Text style={styles.AddButtonIcon}>Add to cart</Text>
+              </View>
+            </TouchableOpacity>
           </View>
         </View>
       </TouchableOpacity>
@@ -86,7 +87,7 @@ function ProductDataFlateList({item, themecolor}) {
   );
 }
 
-export function ProductDataList(props) {
+export function WishListDataList(props) {
   const mode = useSelector(state => state.mode);
   const themecolor = new MyThemeClass(mode).getThemeColor();
 
@@ -94,7 +95,7 @@ export function ProductDataList(props) {
     <FlatList
       data={props.data}
       renderItem={({item}) => (
-        <ProductDataFlateList item={item} themecolor={themecolor} />
+        <WishListDataFlateList item={item} themecolor={themecolor} />
       )}
       horizontal={true}
       contentContainerStyle={{

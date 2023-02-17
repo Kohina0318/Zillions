@@ -20,6 +20,7 @@ import Profile from '../../screens/profile/Profile';
 import Order from '../../screens/order/Order';
 import Products from '../../screens/category/Products';
 import SubCategories from '../../screens/category/SubCategories';
+import DrawerNavigation from '../drawer/DrawerNavigation';
 
 function MainNavigationStack(props) {
   const Stack = createStackNavigator();
@@ -51,7 +52,7 @@ function MainNavigationStack(props) {
         />
         <Stack.Screen
           name="Dashboard"
-          component={BottomNavigationStack}
+          component={DrawerNavigation}
           options={{headerShown: false}}
         />
         <Stack.Screen
