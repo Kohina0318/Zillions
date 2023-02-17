@@ -18,7 +18,7 @@ import FA from 'react-native-vector-icons/FontAwesome';
 import FA5 from 'react-native-vector-icons/FontAwesome5';
 import Categories from '../../screens/category/Categories';
 import Profile from '../../screens/profile/Profile';
-import Order from '../../screens/order/Order'
+import Order from '../../screens/order/Order';
 import WishList from '../../screens/wishList/WishList';
 
 const Tab = createBottomTabNavigator();
@@ -73,7 +73,7 @@ export default function BottomNavigationStack() {
               </>
             ) : (
               <>
-                <MCI name="home" size={24} color={themecolor.TXTGREY}/>
+                <MCI name="home" size={24} color={themecolor.TXTGREY} />
               </>
             ),
           headerShown: false,
@@ -81,7 +81,7 @@ export default function BottomNavigationStack() {
       />
 
       <Tab.Screen
-        name="Category"
+        name="Categories"
         component={Categories}
         options={{
           MyTransition,
@@ -99,7 +99,7 @@ export default function BottomNavigationStack() {
               </>
             ) : (
               <>
-                <MI name="category" size={24} color={themecolor.TXTGREY}/>
+                <MI name="category" size={24} color={themecolor.TXTGREY} />
               </>
             ),
           headerShown: false,
@@ -125,14 +125,14 @@ export default function BottomNavigationStack() {
               </>
             ) : (
               <>
-                <FA5 name="shopping-bag" size={21} color={themecolor.TXTGREY}/>
+                <FA5 name="shopping-bag" size={21} color={themecolor.TXTGREY} />
               </>
             ),
           headerShown: false,
         }}
       />
 
- <Tab.Screen
+      <Tab.Screen
         name="WishList"
         component={WishList}
         options={{
@@ -151,7 +151,7 @@ export default function BottomNavigationStack() {
               </>
             ) : (
               <>
-                <MCI name="cards-heart" size={22} color={themecolor.TXTGREY}/>
+                <MCI name="cards-heart" size={22} color={themecolor.TXTGREY} />
               </>
             ),
           headerShown: false,
@@ -177,7 +177,7 @@ export default function BottomNavigationStack() {
               </>
             ) : (
               <>
-                <FA name="user-circle-o" size={22} color={themecolor.TXTGREY}/>
+                <FA name="user-circle-o" size={22} color={themecolor.TXTGREY} />
               </>
             ),
           headerShown: false,

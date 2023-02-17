@@ -8,7 +8,7 @@ const ProductStyle = StyleSheet.create({
   bg: {flex: 1},
   datalistView: {
     width: width * 0.44,
-    height: height *0.36,
+    height: height *0.38,
     margin: 5,
     padding: 10,
     borderRadius: 5,

@@ -5,7 +5,7 @@ import {MyThemeClass} from '../../components/Theme/ThemeDarkLightColor';
 import {ProductStyle} from '../../assets/css/ProductStyle';
 import {ProductDataList} from '../../components/shared/FlateLists/ProductDataList';
 import {ScrollView} from 'react-native-gesture-handler';
-import {getCategoryByProduct} from '../../repository/CategoryRepository/AllProductCategoryRep';
+import {getSubCategoryByProduct} from '../../repository/CategoryRepository/AllProductCategoryRep';
 import {useToast} from 'react-native-toast-notifications';
 import Header from '../../components/shared/header/Header';
 
@@ -19,14 +19,14 @@ export default function Products(props) {
 
   useEffect(async () => {
     try {
-      var res = await getCategoryByProduct(props.route.params.subCategoryId);
+      var res = await getSubCategoryByProduct(props.route.params.subCategoryId);
       console.log(
-        'data getCategoryByProduct api in.....product page-->',
+        'data getSubCategoryByProduct api in.....product page-->',
         res.data,
       );
       setData(res.data);
     } catch (e) {
-      console.log('errrror in..categories page-->', e);
+      console.log('errrror in..getSubCategoryByProduct page-->', e);
       toast.show('Something went wrong!, Try again later.', {
         type: 'danger',
         placement: 'bottom',
