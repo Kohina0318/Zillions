@@ -7,6 +7,7 @@ import {ProductDataList} from '../../components/shared/FlateLists/ProductDataLis
 import {ScrollView} from 'react-native-gesture-handler';
 import {getCategoryByProduct} from '../../repository/CategoryRepository/AllProductCategoryRep';
 import {useToast} from 'react-native-toast-notifications';
+import Header from '../../components/shared/header/Header';
 
 const {width, height} = Dimensions.get('screen');
 
@@ -38,23 +39,23 @@ export default function Products(props) {
 
   return (
     <View style={{...ProductStyle.bg, backgroundColor: themecolor.THEMECOLOR}}>
+      <Header title={props.route.params.subCategoryName} backIcon={true} />
+
       <View
         style={{
           ...ProductStyle.container,
         }}>
-        <View style={{marginTop: 10}}>
-          {data.length > 0 ? (
-            <ScrollView showsVerticalScrollIndicator={false}>
-              <ProductDataList data={data} />
-              <View style={{marginVertical: 20}} />
-            </ScrollView>
-          ) : (
-            <View
-              style={{alignItems: 'center', flex: 1, justifyContent: 'center'}}>
-              <Text>No data found!</Text>
-            </View>
-          )}
-        </View>
+        {data.length > 0 ? (
+          <ScrollView showsVerticalScrollIndicator={false}>
+            <ProductDataList data={data} />
+          </ScrollView>
+        ) : (
+          <View
+            style={{alignItems: 'center', flex: 1, justifyContent: 'center'}}>
+            <Text>No data found!</Text>
+          </View>
+        )}
+        <View style={{marginVertical: 20}} />
       </View>
     </View>
   );

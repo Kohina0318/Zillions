@@ -35,22 +35,22 @@ export default function Categories(props) {
 
   return (
     <View style={{...CategoryStyle.bg, backgroundColor: themecolor.THEMECOLOR,}}>
-      {/* <Header title="Categories"/> */}
+      <Header title="Categories" />
         <View
           style={{
             ...CategoryStyle.container,
           }}>
           
-          <View style={{marginTop: 20}} />
           {data.length > 0 ?
             <CategoryDataList data={data} />
             :
             <View style={{alignItems:"center",flex:1,justifyContent:"center"}}>
             <Text>No data found!</Text>
             </View>
-            }
-          
-        </View>
+            }    
+            <View  style={{marginVertical:45}}/>
+        </View>     
+        
     </View>
   );
 }

@@ -16,15 +16,15 @@ function BadgeIcon(props) {
       onPress={props.onPress}
       style={{
         display: 'flex',
-        height: 45,
-        width: 40,
+        height: 42,
+        width: 35,
         justifyContent: 'center',
         alignContent: 'center',
-        marginRight:5,
+        marginRight:2,
       }}>
       <View style={styles.badgeContainer}>
         {props.icon ? (
-          <Icon name={props.icon} size={24} color={themecolor.TXTWHITE} />
+          <Icon name={props.icon} size={22} color={themecolor.TXTWHITE} />
         ) : null}
         {props.count && props.count > 0 ? (
           <View style={{...styles.badge,backgroundColor:themecolor.TXTBLACK}}>
@@ -56,7 +56,7 @@ const styles = StyleSheet.create({
     // color: Color.black,
   },
   badgeText: {
-    fontSize: 10,
+    fontSize: 9,
   },
 });
 
