@@ -9,7 +9,7 @@ const styles = StyleSheet.create({
   container: {
     width:width,
     marginTop:5,
-    height:height*0.32
+    height:height*0.31
   },
   container1: {
     width: width,

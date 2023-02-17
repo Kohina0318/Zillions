@@ -19,6 +19,9 @@ import {
 import {useToast} from 'react-native-toast-notifications';
 import {getCategories} from '../../repository/CategoryRepository/AllProductCategoryRep';
 import CarouselFile from '../../components/shared/Carousel/CarouselFile';
+import {Avatar} from '@rneui/themed';
+import {DashboardCategoryDataList} from '../../components/shared/FlateLists/DashboardCategoryFlatList';
+import DashboardHeading from '../../components/shared/DashboardHeading/DashboardHeading';
 const {width, height} = Dimensions.get('screen');
 
 export default function Dashboard(props) {
@@ -26,11 +29,13 @@ export default function Dashboard(props) {
   const mode = useSelector(state => state.mode);
   const themecolor = new MyThemeClass(mode).getThemeColor();
   const [carouselData, setCarouselData] = useState([]);
+  const [categories, setCategories] = useState([]);
 
   const handleCategories = async () => {
     try {
       var res = await getCategories();
       console.log('handleCategories......in dashboard page', res);
+      setCategories(res.data);
     } catch (e) {
       console.log('errrror in..handleCategories page-->', e);
       toast.show('Something went wrong!, Try again later.', {
@@ -90,6 +95,17 @@ export default function Dashboard(props) {
       />
       <Header title="Home" />
       <ScrollView showsVerticalScrollIndicator={false}>
+        
+      <View style={{marginVertical: 5}} />
+
+        <View style={{...styles.ViewHeading}}>
+          <DashboardHeading title="Categories" />
+        </View>
+          <View style={{width: width, height: height * 0.13,}}>
+            <DashboardCategoryDataList data={categories} />
+          </View>
+
+
         <View
           style={{
             ...styles.container,
@@ -101,26 +117,8 @@ export default function Dashboard(props) {
         <View style={{marginVertical: 9}} />
 
         <View style={{...styles.ViewHeading}}>
-          <View
-            style={{...styles.ViewInnerHeading}}>
-            <View>
-              <Text style={{...styles.CardText, color: themecolor.TXTWHITE}}>
-                Target vs Achievement
-              </Text>
-            </View>
-
-              <TouchableOpacity>
-                <View
-                  style={{
-                    ...styles.ViewAllButton,
-                    backgroundColor: themecolor.HEADERTHEMECOLOR,
-                  }}>
-                  <Text style={styles.ViewAllButtonIcon}>View all</Text>
-                </View>
-              </TouchableOpacity>
-          </View>
-         
-         </View>
+          <DashboardHeading title="Target vs Achievement" />
+        </View>
       </ScrollView>
     </View>
   );

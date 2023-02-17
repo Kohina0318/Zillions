@@ -11,7 +11,6 @@ export default function CarouselFile(props) {
     const mode = useSelector(state => state.mode);
   const themecolor = new MyThemeClass(mode).getThemeColor();
 
-console.log("props>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>",props)
   const [largeImage, setLargeImage] = React.useState(0);
 
   const renderItem = (item, index) => {
