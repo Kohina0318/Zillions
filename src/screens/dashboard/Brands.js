@@ -13,7 +13,6 @@ import {useToast} from 'react-native-toast-notifications';
 import Header from '../../components/shared/header/Header';
 import {getBrands} from '../../repository/DashboardRepository/AllDashboardRep';
 import {styles} from '../../assets/css/BrandsStyle';
-import { AllBrandsDataList } from '../../components/shared/FlateLists/BrandsFlateList/AllBrandsDataList';
 import { BrandDataList } from '../../components/shared/FlateLists/DashboardFlatList/BrandFlatList';
 
 const {width, height} = Dimensions.get('screen');
@@ -47,7 +46,7 @@ export default function Brands(props) {
 
   return (
     <View style={{...styles.bg, backgroundColor: themecolor.THEMECOLOR}}>
-      <Header title="Brands" />
+      <Header title="Brands" backIcon={true} />
       <View
         style={{
           ...styles.container,

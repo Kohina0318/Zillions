@@ -80,7 +80,6 @@ export default function Dashboard(props) {
       var res = await getBrands();
       console.log('handleBrands......in dashboard page', res.data);
       setBrands(res.data);
-      alert(res.data.length)
     } catch (e) {
       console.log('errrror in..handleBrands page-->', e);
       toast.show('Something went wrong!, Try again later.', {
@@ -112,7 +111,7 @@ export default function Dashboard(props) {
 
   const handleBestSelling = async () => {
     try {
-      var res = await getProductList('latest');
+      var res = await getProductList('deal');
       console.log('handleBestSelling......in dashboard page', res.data);
       setBestSellingData(res.data);
     } catch (e) {
@@ -207,12 +206,10 @@ export default function Dashboard(props) {
             title="Brands"
             onPress={() => navigation.navigate('Brands')}
           />
-          <View style={{width: width, height: height * 0.2}}>
+          <View style={{width: width, height: height * 0.15}}>
             <BrandDataList data={brands} />
           </View>
         </View>
-
-        <View style={{marginVertical: 9}} />
 
         <View style={{...styles.ViewHeading}}>
           <DashboardHeading
