@@ -16,7 +16,6 @@ import { data } from './ProfileData';
 import {Avatar} from '@rneui/themed';
 import { ProfileStyle } from '../../assets/css/ProfileStyle';
 import FontAwesome from 'react-native-vector-icons/FontAwesome'
-
 const {width, height} = Dimensions.get('screen');
 
 export default function Profile(props) {
@@ -37,9 +36,12 @@ export default function Profile(props) {
           backgroundColor: themecolor.BOXTHEMECOLOR,
           borderColor: themecolor.BOXBORDERCOLOR1,
         }}>
-        <View style={{...ProfileStyle.innerImage}}>
+        <View>
+          Hiii
+        </View>
+        {/* <View style={{...ProfileStyle.innerImage}}> */}
         {/* {props.photo == '' || props.photo == null ? ( */}
-              <Avatar
+              {/* <Avatar
                 size={50}
                 rounded
                 avatarStyle={{
@@ -48,7 +50,7 @@ export default function Profile(props) {
                   borderStyle: 'solid',
                 }}
                 source={require('../../assets/images/admin.png')}
-              />
+              /> */}
             {/* ) : (
               <Avatar
                 size={150}
@@ -61,8 +63,8 @@ export default function Profile(props) {
                 source={{uri: props.photo}}
               />
             )} */}
-        </View>
-        <View style={{...ProfileStyle.margleft15}}>
+        {/* </View> */}
+        {/* <View style={{...ProfileStyle.margleft15}}>
           <Text style={{...ProfileStyle.txt2, color: themecolor.TXTWHITE}}>
            Admin
           </Text>
@@ -75,7 +77,7 @@ export default function Profile(props) {
             >
             <FontAwesome name='angle-right' size={30} color="blue" />
           </TouchableOpacity>
-        </View>
+        </View> */}
       </View>
    
       <View

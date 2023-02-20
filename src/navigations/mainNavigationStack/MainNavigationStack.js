@@ -27,6 +27,7 @@ import RecentlyViewed from '../../screens/dashboard/RecentlyViewed';
 import MostViewed from '../../screens/dashboard/MostViewed';
 import Brands from '../../screens/dashboard/Brands';
 
+
 function MainNavigationStack(props) {
   const Stack = createStackNavigator();
 

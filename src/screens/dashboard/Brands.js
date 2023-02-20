@@ -13,7 +13,7 @@ import {useToast} from 'react-native-toast-notifications';
 import Header from '../../components/shared/header/Header';
 import {getBrands} from '../../repository/DashboardRepository/AllDashboardRep';
 import {styles} from '../../assets/css/BrandsStyle';
-import { BrandDataList } from '../../components/shared/FlateLists/DashboardFlatList/BrandFlatList';
+import { BrandInDataList } from '../../components/shared/FlateLists/DashboardFlatList/BrandFlatList';
 
 const {width, height} = Dimensions.get('screen');
 
@@ -53,7 +53,7 @@ export default function Brands(props) {
         }}>
 
          {brandsData.length > 0 ?
-            <BrandDataList data={brandsData} />
+            <BrandInDataList data={brandsData} />
             :
             <View style={{alignItems:"center",flex:1,justifyContent:"center"}}>
             <Text>No data found!</Text>
