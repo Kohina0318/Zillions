@@ -16,6 +16,7 @@ import {styles} from '../../assets/css/DashboardStyle';
 import {
   getBrands,
   getMainSlider,
+  getProductList,
 } from '../../repository/DashboardRepository/AllDashboardRep';
 import {useToast} from 'react-native-toast-notifications';
 import {getCategories} from '../../repository/CategoryRepository/AllProductCategoryRep';
@@ -23,7 +24,7 @@ import CarouselFile from '../../components/shared/Carousel/CarouselFile';
 import {Avatar} from '@rneui/themed';
 import {DashboardCategoryDataList} from '../../components/shared/FlateLists/DashboardFlatList/DashboardCategoryFlatList';
 import DashboardHeading from '../../components/shared/DashboardHeading/DashboardHeading';
-import { BrandDataList } from '../../components/shared/FlateLists/DashboardFlatList/BrandFlatList';
+import {BrandDataList} from '../../components/shared/FlateLists/DashboardFlatList/BrandFlatList';
 const {width, height} = Dimensions.get('screen');
 
 export default function Dashboard(props) {
@@ -32,7 +33,10 @@ export default function Dashboard(props) {
   const themecolor = new MyThemeClass(mode).getThemeColor();
   const [carouselData, setCarouselData] = useState([]);
   const [categories, setCategories] = useState([]);
-  const [brands,setBrands]=useState([])
+  const [latestProductsData, setLatestProductsData] = useState([]);
+  const [recentlyViewedData, setRecentlyViewedData] = useState([]);
+  const [mostViewedData, setMostViewedData] = useState([]);
+  const [brands, setBrands] = useState([]);
 
   const handleCategories = async () => {
     try {
@@ -66,13 +70,65 @@ export default function Dashboard(props) {
       });
     }
   };
+
   const handleBrands = async () => {
     try {
       var res = await getBrands();
       console.log('handleBrands......in dashboard page', res.data);
-      setBrands(res.data)
+      setBrands(res.data);
     } catch (e) {
       console.log('errrror in..handleBrands page-->', e);
+      toast.show('Something went wrong!, Try again later.', {
+        type: 'danger',
+        placement: 'bottom',
+        duration: 3000,
+        offset: 30,
+        animationType: 'slide-in',
+      });
+    }
+  };
+
+  const handleLatestProducts = async () => {
+    try {
+      var res = await getProductList('latest');
+      console.log('handleLatestProducts......in dashboard page', res.data);
+      setLatestProductsData(res.data);
+    } catch (e) {
+      console.log('errrror in..handleLatestProducts page-->', e);
+      toast.show('Something went wrong!, Try again later.', {
+        type: 'danger',
+        placement: 'bottom',
+        duration: 3000,
+        offset: 30,
+        animationType: 'slide-in',
+      });
+    }
+  };
+
+  const handleRecentlyViewed = async () => {
+    try {
+      var res = await getProductList('recently_viewed');
+      console.log('handleRecentlyViewed......in dashboard page', res.data);
+      setRecentlyViewedData(res.data);
+    } catch (e) {
+      console.log('errrror in..handleRecentlyViewed page-->', e);
+      toast.show('Something went wrong!, Try again later.', {
+        type: 'danger',
+        placement: 'bottom',
+        duration: 3000,
+        offset: 30,
+        animationType: 'slide-in',
+      });
+    }
+  };
+
+  const handleMostViewed = async () => {
+    try {
+      var res = await getProductList('most_viewed');
+      console.log('handleMostViewed......in dashboard page', res.data);
+      setMostViewedData(res.data);
+    } catch (e) {
+      console.log('errrror in..handleMostViewed page-->', e);
       toast.show('Something went wrong!, Try again later.', {
         type: 'danger',
         placement: 'bottom',
@@ -87,6 +143,9 @@ export default function Dashboard(props) {
     handleCategories();
     handleCarousel();
     handleBrands();
+    handleLatestProducts();
+    handleRecentlyViewed();
+    handleMostViewed();
   }, []);
 
   return (
@@ -98,16 +157,14 @@ export default function Dashboard(props) {
       />
       <Header title="Home" />
       <ScrollView showsVerticalScrollIndicator={false}>
-        
-      <View style={{marginVertical: 5}} />
+        <View style={{marginVertical: 5}} />
 
         <View style={{...styles.ViewHeading}}>
           <DashboardHeading title="Categories" />
         </View>
-          <View style={{width: width, height: height * 0.13,}}>
-            <DashboardCategoryDataList data={categories} />
-          </View>
-
+        <View style={{width: width, height: height * 0.13}}>
+          <DashboardCategoryDataList data={categories} />
+        </View>
 
         <View
           style={{
@@ -123,10 +180,35 @@ export default function Dashboard(props) {
           <DashboardHeading title="Brands" />
         </View>
 
-        <View style={{width: width, height: height * 0.2,}}>
-        <BrandDataList data={brands} />
-          </View>
+        <View style={{marginVertical: 9}} />
 
+        <View style={{width: width, height: height * 0.2}}>
+          <BrandDataList data={brands} />
+        </View>
+
+        <View style={{marginVertical: 9}} />
+
+        <View style={{...styles.ViewHeading}}>
+          <DashboardHeading title="Latest Featured Products" />
+        </View>
+
+        <View style={{marginVertical: 9}} />
+
+        <View style={{...styles.ViewHeading}}>
+          <DashboardHeading title="Best Selling" />
+        </View>
+
+        <View style={{marginVertical: 9}} />
+
+        <View style={{...styles.ViewHeading}}>
+          <DashboardHeading title="Recently Viewed" />
+        </View>
+
+        <View style={{marginVertical: 9}} />
+        
+        <View style={{...styles.ViewHeading}}>
+          <DashboardHeading title="Most Viewed" />
+        </View>
       </ScrollView>
     </View>
   );
