@@ -32,10 +32,10 @@ const getMainSlider = async () => {
     }
   };
 
-const getProductList = async (spec) => {
+const getProductList = async (spec,limit) => {
     try {
       const response = await fetch(
-          `https://www.zillionsbuyer.com/product-list?speciality=${spec}`,
+          `https://www.zillionsbuyer.com/product-list?speciality=${spec}&limit=${limit}`,
         {
           method: 'GET',
           headers: {'Content-Type': 'application/json;charset=utf-8'},

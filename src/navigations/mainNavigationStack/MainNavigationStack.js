@@ -26,6 +26,7 @@ import BestSelling from '../../screens/dashboard/BestSelling';
 import RecentlyViewed from '../../screens/dashboard/RecentlyViewed';
 import MostViewed from '../../screens/dashboard/MostViewed';
 import Brands from '../../screens/dashboard/Brands';
+import ProductDetail from '../../screens/category/ProductDetail';
 
 function MainNavigationStack(props) {
   const Stack = createStackNavigator();
@@ -73,6 +74,11 @@ function MainNavigationStack(props) {
         <Stack.Screen
           name="Products"
           component={Products}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="ProductDetail"
+          component={ProductDetail}
           options={{headerShown: false}}
         />
         <Stack.Screen
