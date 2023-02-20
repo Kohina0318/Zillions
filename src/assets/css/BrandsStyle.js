@@ -7,15 +7,16 @@ const {width, height} = Dimensions.get('window');
 const styles = StyleSheet.create({
   bg: {flex: 1},
   datalistView: {
-    width: width * 0.9,
-    height: 170,
-    marginTop: 6,
-    padding: 13,
-    borderRadius: 15,
+    width: width * 0.4,
+    height: height *0.18,
+    margin: 12,
+    padding: 10,
+    borderRadius: 5,
     alignSelf: 'center',
     alignItems: 'center',
-    borderWidth: 1,
     marginBottom: 1,
+    borderWidth:0.5,
+    justifyContent:"center"
   },
   container: {
       justifyContent: 'center',
@@ -23,15 +24,30 @@ const styles = StyleSheet.create({
       marginTop:5
   },
   innerImage: {
+    height: height * 0.13,
+    overflow: 'hidden',
     justifyContent: 'center',
     alignSelf: 'center',
     alignItems: 'center',
   },
-  txt: {
-    fontSize: 15,
-    fontFamily: FontFamily.Popinssemibold,
-    color: '#121327',
+  inner: {padding: 5, width: width * 0.35},
+  txt:
+    {
+        color: Colors.bluetheme,
+        fontFamily: FontFamily.PopinsMedium,
+        fontSize: FontSize.labelText5,
+        alignSelf:'center'
+    },
+  txt1: {
+    fontFamily: FontFamily.PopinsRegular,
+    fontSize: 9,
+    padding: 2,
+    borderRadius:60,
+    color:Colors.white,
+    right:3
   },
+  iconview: {flexDirection: 'row', alignItems: 'center'},
+  margleft15: {marginLeft: 15, width: width * 0.55, },
   
 });
 
