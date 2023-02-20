@@ -10,7 +10,7 @@ import {
 } from 'react-native';
 import {useSelector} from 'react-redux';
 import {MyThemeClass} from '../../components/Theme/ThemeDarkLightColor';
-import { ProfileDataList } from '../../components/shared/FlateLists/ProfileDataFlatList';
+import { ProfileDataList } from '../../components/shared/FlateLists/Profile/ProfileDataFlatList';
 import Header from '../../components/shared/header/Header';
 import { data } from './ProfileData';
 import {Avatar} from '@rneui/themed';
@@ -24,7 +24,7 @@ export default function Profile(props) {
   const themecolor = new MyThemeClass(mode).getThemeColor();
 
   return (
-    <View style={{backgroundColor: themecolor.THEMECOLOR,}}>
+    <View style={{backgroundColor: themecolor.THEMECOLOR,flex:1}}>
       <View style={{height: height * 0.1}}>
         <Header title="Profile" />
       </View>

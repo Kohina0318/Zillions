@@ -8,8 +8,8 @@ import {
   Dimensions,
 } from 'react-native';
 import {Colors} from '../../../assets/config/Colors';
-import {CategoryStyle} from '../../../assets/css/CategoryStyle';
-import {MyThemeClass} from '../../Theme/ThemeDarkLightColor';
+import { CategoryStyle } from '../../../../assets/css/CategoryStyle';
+import { MyThemeClass } from '../../../Theme/ThemeDarkLightColor';
 import {useSelector} from 'react-redux';
 import FontAwesome from 'react-native-vector-icons/FontAwesome'
 import { useNavigation } from '@react-navigation/native';

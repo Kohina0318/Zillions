@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 import {View, Text, StatusBar, Appearance, Dimensions,ScrollView} from 'react-native';
 import {useSelector} from 'react-redux';
 import {MyThemeClass} from '../../components/Theme/ThemeDarkLightColor';
-import {CategoryDataList} from '../../components/shared/FlateLists/CategoryDataList';
+import {CategoryDataList} from '../../components/shared/FlateLists/CategoryFlatList/CategoryDataList';
 import {CategoryStyle} from '../../assets/css/CategoryStyle';
 import {getCategories} from '../../repository/CategoryRepository/AllProductCategoryRep';
 import { useToast } from 'react-native-toast-notifications';

@@ -13,7 +13,7 @@ import {CategoryStyle} from '../../assets/css/CategoryStyle';
 import {getSubCategories} from '../../repository/CategoryRepository/AllProductCategoryRep';
 import {useToast} from 'react-native-toast-notifications';
 import Header from '../../components/shared/header/Header';
-import {SubCategoryDataList} from '../../components/shared/FlateLists/SubCategoryDataList';
+import {SubCategoryDataList} from '../../components/shared/FlateLists/CategoryFlatList/SubCategoryDataList';
 
 const {width, height} = Dimensions.get('screen');
 

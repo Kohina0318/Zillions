@@ -3,7 +3,7 @@ import {View, Text, StatusBar, Appearance, Dimensions} from 'react-native';
 import {useSelector} from 'react-redux';
 import {MyThemeClass} from '../../components/Theme/ThemeDarkLightColor';
 import {ProductStyle} from '../../assets/css/ProductStyle';
-import {ProductDataList} from '../../components/shared/FlateLists/ProductDataList';
+import {ProductDataList} from '../../components/shared/FlateLists/CategoryFlatList/ProductDataList';
 import {ScrollView} from 'react-native-gesture-handler';
 import {getSubCategoryByProduct} from '../../repository/CategoryRepository/AllProductCategoryRep';
 import {useToast} from 'react-native-toast-notifications';

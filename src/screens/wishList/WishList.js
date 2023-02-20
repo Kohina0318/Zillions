@@ -5,7 +5,7 @@ import {MyThemeClass} from '../../components/Theme/ThemeDarkLightColor';
 import {useNavigation} from '@react-navigation/native';
 import Header from '../../components/shared/header/Header';
 import { styles } from '../../assets/css/WishListStyle';
-import { WishListDataList } from '../../components/shared/FlateLists/WishListDataList';
+import { WishListDataList } from '../../components/shared/FlateLists/WishlistFlatList/WishListDataList';
 const {width, height} = Dimensions.get('screen');
 
 export default function WishList(props) {
