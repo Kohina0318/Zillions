@@ -46,6 +46,7 @@ class MyThemeClass {
       THEMEWHITE: this.mode === 'dark' ? '#121B24' : '#FFFFFF',
       TXTGREETING: this.mode === 'dark' ? '#898989' : 'rgba(0, 0, 0, .5)',
       TXTWHITE: this.mode === 'dark' ? '#FFF' : '#000',
+      TXTWHITE1: this.mode === 'dark' ? '#000' : '#FFF',
       TXTTHEME: this.mode === 'dark' ? '#676C69' : '#25A31D',
       TXTGREY: this.mode === 'dark' ? '#676C69' : '#9E9E9E',
       TXTDARKGREY: this.mode === 'dark' ? '#505050' : '#9E9E9E',
@@ -58,6 +59,7 @@ class MyThemeClass {
       HEADERTHEMECOLOR: this.mode === 'dark' ? '#0f3479' : Colors.bluetheme,
       INPUTTXT: this.mode === 'dark' ? '#0f3479' : Colors.black,
       LIGHTGREY: this.mode === 'dark' ? '#484848' : "#f5f5f5",
+      TXTGREYS: this.mode === 'dark' ? '#dcdde1' : '#84817a',
       // FOOTER: this.mode === 'dark' ? '#0f3479' : '#f5f5f5',
       FOOTER: this.mode === 'dark' ? '#3c3e44' : '#f5f5f5',
       BORDER: this.mode === 'dark' ? '#000' : '#e2e2e2',
@@ -80,6 +82,7 @@ class MyThemeClass {
       TEXTGREEN: this.mode === 'dark' ?  '#20bf6b':  '#4cd137',
       STARCOLOR: this.mode === 'dark' ?  '#f39c12':  '#ffd32a',
       BACKICON: this.mode === 'dark' ? '#FFF' : '#281E5D',
+      OTPBOXCOLOR: this.mode === 'dark' ? '#3c3e44' : Colors.Textinputbg,
     }
 
   }
