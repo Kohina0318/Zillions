@@ -5,28 +5,26 @@ import {MyThemeClass} from '../../components/Theme/ThemeDarkLightColor';
 import {ProductStyle} from '../../assets/css/ProductStyle';
 import {ProductDataList} from '../../components/shared/FlateLists/CategoryFlatList/ProductDataList';
 import {ScrollView} from 'react-native-gesture-handler';
-import {getSubCategoryByProduct} from '../../repository/CategoryRepository/AllProductCategoryRep';
 import {useToast} from 'react-native-toast-notifications';
 import Header from '../../components/shared/header/Header';
+import { getProductList } from '../../repository/DashboardRepository/AllDashboardRep';
 
 const {width, height} = Dimensions.get('screen');
 
-export default function Products(props) {
+export default function LatestFeaturedProducts(props) {
+
   const toast = useToast();
   const mode = useSelector(state => state.mode);
   const themecolor = new MyThemeClass(mode).getThemeColor();
-  const [data, setData] = useState([]);
-
-  useEffect(async () => {
+  const [latestProductsData, setLatestProductsData] = useState([]);
+  
+  const handleLatestProducts = async () => {
     try {
-      var res = await getSubCategoryByProduct(props.route.params.subCategoryId);
-      console.log(
-        'data getSubCategoryByProduct api in.....product page-->',
-        res.data,
-      );
-      setData(res.data);
+      var res = await getProductList('latest');
+      console.log('handleLatestProducts......in LatestFeaturedProducts page', res.data);
+      setLatestProductsData(res.data);
     } catch (e) {
-      console.log('errrror in..getSubCategoryByProduct page-->', e);
+      console.log('errrror in..handleLatestProducts page LatestFeaturedProducts-->', e);
       toast.show('Something went wrong!, Try again later.', {
         type: 'danger',
         placement: 'bottom',
@@ -35,19 +33,23 @@ export default function Products(props) {
         animationType: 'slide-in',
       });
     }
-  }, []);
+  };
+
+  useEffect(()=>{
+    handleLatestProducts()
+  },[])
 
   return (
     <View style={{...ProductStyle.bg, backgroundColor: themecolor.THEMECOLOR}}>
-      <Header title={props.route.params.subCategoryName} backIcon={true} />
+      <Header title="Latest Featured Products" backIcon={true} />
 
       <View
         style={{
           ...ProductStyle.container,
         }}>
-        {data.length > 0 ? (
+        {latestProductsData.length > 0 ? (
           <ScrollView showsVerticalScrollIndicator={false}>
-            <ProductDataList data={data} />
+            <ProductDataList data={latestProductsData} />
           </ScrollView>
         ) : (
           <View

@@ -21,6 +21,11 @@ import Order from '../../screens/order/Order';
 import Products from '../../screens/category/Products';
 import SubCategories from '../../screens/category/SubCategories';
 import DrawerNavigation from '../drawer/DrawerNavigation';
+import LatestFeaturedProducts from '../../screens/dashboard/LatestFeaturedProducts';
+import BestSelling from '../../screens/dashboard/BestSelling';
+import RecentlyViewed from '../../screens/dashboard/RecentlyViewed';
+import MostViewed from '../../screens/dashboard/MostViewed';
+import Brands from '../../screens/dashboard/Brands';
 
 function MainNavigationStack(props) {
   const Stack = createStackNavigator();
@@ -68,6 +73,31 @@ function MainNavigationStack(props) {
         <Stack.Screen
           name="Products"
           component={Products}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="Brands"
+          component={Brands}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="LatestFeaturedProducts"
+          component={LatestFeaturedProducts}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="BestSelling"
+          component={BestSelling}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="RecentlyViewed"
+          component={RecentlyViewed}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="MostViewed"
+          component={MostViewed}
           options={{headerShown: false}}
         />
         <Stack.Screen

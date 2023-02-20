@@ -18,7 +18,7 @@ import StarRating from 'react-native-star-rating';
 
 const {width, height} = Dimensions.get('screen');
 
-function ProductDataFlateList({item, themecolor}) {
+function DashboardProductDataFlateList({item, themecolor}) {
   const navigation = useNavigation();
   return (
     <>
@@ -73,11 +73,7 @@ function ProductDataFlateList({item, themecolor}) {
                 }}>
                 ₹{item.sale_price}
               </Text>
-              <Text style={{...ProductStyle.txt1, color: themecolor.TEXTRED}}>
-                {'  ('}
-                {item.discount}%{')'}
-              </Text>
-            </Text>
+             </Text>
           </View>
         </View>
       </TouchableOpacity>
@@ -85,28 +81,20 @@ function ProductDataFlateList({item, themecolor}) {
   );
 }
 
-export function ProductDataList(props) {
+export function DashboardProductDataList(props) {
   const mode = useSelector(state => state.mode);
   const themecolor = new MyThemeClass(mode).getThemeColor();
 
-
   return (
-    <>
     <FlatList
       data={props.data}
       renderItem={({item}) => (
-        <ProductDataFlateList item={item} themecolor={themecolor} />
+        <DashboardProductDataFlateList item={item} themecolor={themecolor} />
       )}
       horizontal={true}
-      contentContainerStyle={{
-        flexDirection: 'row',
-        flexWrap: 'wrap',
-        width: width * 0.94,
-      }}
       showsVerticalScrollIndicator={false}
+      showsHorizontalScrollIndicator={false}
       scrollEnabled={true}
     />
-    <View style={{marginVertical: 20}} />
-    </>
   );
 }
