@@ -8,8 +8,8 @@ import {
   Dimensions,
 } from 'react-native';
 import {Colors} from '../../../assets/config/Colors';
-import {ProductStyle} from '../../../assets/css/ProductStyle';
-import {MyThemeClass} from '../../Theme/ThemeDarkLightColor';
+import { ProductStyle } from '../../../../assets/css/ProductStyle';
+import {MyThemeClass} from '../../../Theme/ThemeDarkLightColor';
 import {useSelector} from 'react-redux';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import {useNavigation} from '@react-navigation/native';
@@ -20,7 +20,6 @@ const {width, height} = Dimensions.get('screen');
 
 function ProductDataFlateList({item, themecolor}) {
   const navigation = useNavigation();
-
   return (
     <>
       <TouchableOpacity
