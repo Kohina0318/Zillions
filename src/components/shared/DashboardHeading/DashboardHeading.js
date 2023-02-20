@@ -21,7 +21,7 @@ export default function DashboardHeading(props){
           </Text>
         </View>
 
-        <TouchableOpacity activeOpacity={0.5} onPress={()=>props.onPress}>
+        <TouchableOpacity activeOpacity={0.5} onPress={props.onPress}>
           <View
             style={{
               ...styles.ViewAllButton,

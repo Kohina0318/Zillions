@@ -5,28 +5,26 @@ import {MyThemeClass} from '../../components/Theme/ThemeDarkLightColor';
 import {ProductStyle} from '../../assets/css/ProductStyle';
 import {ProductDataList} from '../../components/shared/FlateLists/CategoryFlatList/ProductDataList';
 import {ScrollView} from 'react-native-gesture-handler';
-import {getSubCategoryByProduct} from '../../repository/CategoryRepository/AllProductCategoryRep';
 import {useToast} from 'react-native-toast-notifications';
 import Header from '../../components/shared/header/Header';
+import { getProductList } from '../../repository/DashboardRepository/AllDashboardRep';
 
 const {width, height} = Dimensions.get('screen');
 
-export default function Products(props) {
+export default function BestSelling(props) {
+
   const toast = useToast();
   const mode = useSelector(state => state.mode);
   const themecolor = new MyThemeClass(mode).getThemeColor();
-  const [data, setData] = useState([]);
-
-  useEffect(async () => {
+  const [bestSellingData, setBestSellingData] = useState([]);
+ 
+  const handleBestSelling = async () => {
     try {
-      var res = await getSubCategoryByProduct(props.route.params.subCategoryId);
-      console.log(
-        'data getSubCategoryByProduct api in.....product page-->',
-        res.data,
-      );
-      setData(res.data);
+      var res = await getProductList('deal');
+      console.log('handleBestSelling......in BestSelling page', res.data);
+      setBestSellingData(res.data);
     } catch (e) {
-      console.log('errrror in..getSubCategoryByProduct page-->', e);
+      console.log('errrror in..handleBestSelling page BestSelling-->', e);
       toast.show('Something went wrong!, Try again later.', {
         type: 'danger',
         placement: 'bottom',
@@ -35,19 +33,23 @@ export default function Products(props) {
         animationType: 'slide-in',
       });
     }
-  }, []);
+  };
+
+  useEffect(()=>{
+    handleBestSelling()
+  },[])
 
   return (
     <View style={{...ProductStyle.bg, backgroundColor: themecolor.THEMECOLOR}}>
-      <Header title={props.route.params.subCategoryName} backIcon={true} />
+      <Header title="Best Selling" backIcon={true} />
 
       <View
         style={{
           ...ProductStyle.container,
         }}>
-        {data.length > 0 ? (
+        {bestSellingData.length > 0 ? (
           <ScrollView showsVerticalScrollIndicator={false}>
-            <ProductDataList data={data} />
+            <ProductDataList data={bestSellingData} />
           </ScrollView>
         ) : (
           <View

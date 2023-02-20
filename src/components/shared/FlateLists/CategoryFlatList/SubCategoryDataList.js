@@ -63,6 +63,7 @@ export function SubCategoryDataList(props) {
   const themecolor = new MyThemeClass(mode).getThemeColor();
 
   return (
+    <>
     <FlatList
       data={props.data}
       renderItem={({item}) => (
@@ -71,5 +72,7 @@ export function SubCategoryDataList(props) {
       showsVerticalScrollIndicator={false}
       scrollEnabled={true}
     />
+    <View style={{marginVertical: 20}} />
+    </>
   );
 }

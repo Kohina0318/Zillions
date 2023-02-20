@@ -23,11 +23,6 @@ function BrandDataFlatList({item, themecolor}) {
   return (
     <TouchableOpacity
       activeOpacity={0.8}
-    //   onPress={() =>
-    //     navigation.navigate('SubCategories', {
-    //       categoryId: item.category_id,
-    //       categoryName: item.category_name,
-    //     })}
       >
       {/* <View style={{width:width*0.35,height:height*0.13,backgroundColor:themecolor.LOGINTHEMECOLOR,margin:10,flexDirection:'column'}}>
       <View style={{width:width*0.3,height:'65%',justifyContent:'center',alignItems:'center',alignSelf:'center',margin:3,borderWidth:1,borderColor:'#000'}}>

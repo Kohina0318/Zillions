@@ -22,21 +22,25 @@ import {useToast} from 'react-native-toast-notifications';
 import {getCategories} from '../../repository/CategoryRepository/AllProductCategoryRep';
 import CarouselFile from '../../components/shared/Carousel/CarouselFile';
 import {Avatar} from '@rneui/themed';
+import {useNavigation} from '@react-navigation/native';
 import {DashboardCategoryDataList} from '../../components/shared/FlateLists/DashboardFlatList/DashboardCategoryFlatList';
 import DashboardHeading from '../../components/shared/DashboardHeading/DashboardHeading';
 import {BrandDataList} from '../../components/shared/FlateLists/DashboardFlatList/BrandFlatList';
+import {DashboardProductDataList} from '../../components/shared/FlateLists/DashboardFlatList/DashboardProductDataList';
 const {width, height} = Dimensions.get('screen');
 
 export default function Dashboard(props) {
   const toast = useToast();
+  const navigation = useNavigation();
   const mode = useSelector(state => state.mode);
   const themecolor = new MyThemeClass(mode).getThemeColor();
   const [carouselData, setCarouselData] = useState([]);
   const [categories, setCategories] = useState([]);
+  const [brands, setBrands] = useState([]);
   const [latestProductsData, setLatestProductsData] = useState([]);
+  const [bestSellingData, setBestSellingData] = useState([]);
   const [recentlyViewedData, setRecentlyViewedData] = useState([]);
   const [mostViewedData, setMostViewedData] = useState([]);
-  const [brands, setBrands] = useState([]);
 
   const handleCategories = async () => {
     try {
@@ -76,7 +80,6 @@ export default function Dashboard(props) {
       var res = await getBrands();
       console.log('handleBrands......in dashboard page', res.data);
       setBrands(res.data);
-      alert(res.data.length)
     } catch (e) {
       console.log('errrror in..handleBrands page-->', e);
       toast.show('Something went wrong!, Try again later.', {
@@ -96,6 +99,23 @@ export default function Dashboard(props) {
       setLatestProductsData(res.data);
     } catch (e) {
       console.log('errrror in..handleLatestProducts page-->', e);
+      toast.show('Something went wrong!, Try again later.', {
+        type: 'danger',
+        placement: 'bottom',
+        duration: 3000,
+        offset: 30,
+        animationType: 'slide-in',
+      });
+    }
+  };
+
+  const handleBestSelling = async () => {
+    try {
+      var res = await getProductList('deal');
+      console.log('handleBestSelling......in dashboard page', res.data);
+      setBestSellingData(res.data);
+    } catch (e) {
+      console.log('errrror in..handleBestSelling page-->', e);
       toast.show('Something went wrong!, Try again later.', {
         type: 'danger',
         placement: 'bottom',
@@ -145,6 +165,7 @@ export default function Dashboard(props) {
     handleCarousel();
     handleBrands();
     handleLatestProducts();
+    handleBestSelling();
     handleRecentlyViewed();
     handleMostViewed();
   }, []);
@@ -161,10 +182,13 @@ export default function Dashboard(props) {
         <View style={{marginVertical: 5}} />
 
         <View style={{...styles.ViewHeading}}>
-          <DashboardHeading title="Categories" />
-        </View>
-        <View style={{width: width, height: height * 0.13}}>
-          <DashboardCategoryDataList data={categories} />
+          <DashboardHeading
+            title="Categories"
+            onPress={() => navigation.navigate('Categories')}
+          />
+          <View style={{width: width, height: height * 0.13}}>
+            <DashboardCategoryDataList data={categories} />
+          </View>
         </View>
 
         <View
@@ -178,37 +202,51 @@ export default function Dashboard(props) {
         <View style={{marginVertical: 9}} />
 
         <View style={{...styles.ViewHeading}}>
-          <DashboardHeading title="Brands" />
+          <DashboardHeading
+            title="Brands"
+            onPress={() => navigation.navigate('Brands')}
+          />
+          <View style={{width: width, height: height * 0.15}}>
+            <BrandDataList data={brands} />
+          </View>
         </View>
 
-        <View style={{marginVertical: 9}} />
-
-        <View style={{width: width, height: height * 0.2}}>
-          <BrandDataList data={brands} />
+        <View style={{...styles.ViewHeading}}>
+          <DashboardHeading
+            title="Latest Featured Products"
+            onPress={() => navigation.navigate('LatestFeaturedProducts')}
+          />
+          <DashboardProductDataList data={latestProductsData} />
         </View>
 
         <View style={{marginVertical: 9}} />
 
         <View style={{...styles.ViewHeading}}>
-          <DashboardHeading title="Latest Featured Products" />
+          <DashboardHeading
+            title="Best Selling"
+            onPress={() => navigation.navigate('BestSelling')}
+          />
+          <DashboardProductDataList data={bestSellingData} />
         </View>
 
         <View style={{marginVertical: 9}} />
 
         <View style={{...styles.ViewHeading}}>
-          <DashboardHeading title="Best Selling" />
+          <DashboardHeading
+            title="Recently Viewed"
+            onPress={() => navigation.navigate('RecentlyViewed')}
+          />
+          <DashboardProductDataList data={recentlyViewedData} />
         </View>
 
         <View style={{marginVertical: 9}} />
 
         <View style={{...styles.ViewHeading}}>
-          <DashboardHeading title="Recently Viewed" />
-        </View>
-
-        <View style={{marginVertical: 9}} />
-        
-        <View style={{...styles.ViewHeading}}>
-          <DashboardHeading title="Most Viewed" />
+          <DashboardHeading
+            title="Most Viewed"
+            onPress={() => navigation.navigate('MostViewed')}
+          />
+          <DashboardProductDataList data={mostViewedData} />
         </View>
       </ScrollView>
     </View>
