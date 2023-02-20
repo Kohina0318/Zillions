@@ -15,6 +15,7 @@ import {styles} from '../../assets/css/DashboardStyle';
 import {
   getBrands,
   getMainSlider,
+  getProductList,
 } from '../../repository/DashboardRepository/AllDashboardRep';
 import {useToast} from 'react-native-toast-notifications';
 import {getCategories} from '../../repository/CategoryRepository/AllProductCategoryRep';
@@ -30,7 +31,10 @@ export default function Dashboard(props) {
   const themecolor = new MyThemeClass(mode).getThemeColor();
   const [carouselData, setCarouselData] = useState([]);
   const [categories, setCategories] = useState([]);
-
+  const [latestProductsData, setLatestProductsData] = useState([]);
+  const [recentlyViewedData, setRecentlyViewedData] = useState([]);
+  const [mostViewedData, setMostViewedData] = useState([]);
+ 
   const handleCategories = async () => {
     try {
       var res = await getCategories();
@@ -63,6 +67,7 @@ export default function Dashboard(props) {
       });
     }
   };
+
   const handleBrands = async () => {
     try {
       var res = await getBrands();
@@ -80,10 +85,64 @@ export default function Dashboard(props) {
     }
   };
 
+  const handleLatestProducts = async () => {
+    try {
+      var res = await getProductList("latest");
+      console.log('handleLatestProducts......in dashboard page', res.data);
+      setLatestProductsData(res.data)
+    } catch (e) {
+      console.log('errrror in..handleLatestProducts page-->', e);
+      toast.show('Something went wrong!, Try again later.', {
+        type: 'danger',
+        placement: 'bottom',
+        duration: 3000,
+        offset: 30,
+        animationType: 'slide-in',
+      });
+    }
+  };
+
+  const handleRecentlyViewed = async () => {
+    try {
+      var res = await getProductList("recently_viewed");
+      console.log('handleRecentlyViewed......in dashboard page', res.data);
+      setRecentlyViewedData(res.data)
+    } catch (e) {
+      console.log('errrror in..handleRecentlyViewed page-->', e);
+      toast.show('Something went wrong!, Try again later.', {
+        type: 'danger',
+        placement: 'bottom',
+        duration: 3000,
+        offset: 30,
+        animationType: 'slide-in',
+      });
+    }
+  };
+
+  const handleMostViewed = async () => {
+    try {
+      var res = await getProductList("most_viewed");
+      console.log('handleMostViewed......in dashboard page', res.data);
+      setMostViewedData(res.data)
+    } catch (e) {
+      console.log('errrror in..handleMostViewed page-->', e);
+      toast.show('Something went wrong!, Try again later.', {
+        type: 'danger',
+        placement: 'bottom',
+        duration: 3000,
+        offset: 30,
+        animationType: 'slide-in',
+      });
+    }
+  };
+
   useEffect(() => {
     handleCategories();
     handleCarousel();
     handleBrands();
+    handleLatestProducts();
+    handleRecentlyViewed();
+    handleMostViewed();
   }, []);
 
   return (
@@ -119,6 +178,25 @@ export default function Dashboard(props) {
         <View style={{...styles.ViewHeading}}>
           <DashboardHeading title="Target vs Achievement" />
         </View>
+
+        <View style={{marginVertical: 9}} />
+
+        <View style={{...styles.ViewHeading}}>
+          <DashboardHeading title="Latest Featured Products" />
+        </View>
+
+        <View style={{...styles.ViewHeading}}>
+          <DashboardHeading title="Best Selling" />
+        </View>
+
+        <View style={{...styles.ViewHeading}}>
+          <DashboardHeading title="Recently Viewed" />
+        </View>
+
+        <View style={{...styles.ViewHeading}}>
+          <DashboardHeading title="Most Viewed" />
+        </View>
+
       </ScrollView>
     </View>
   );
