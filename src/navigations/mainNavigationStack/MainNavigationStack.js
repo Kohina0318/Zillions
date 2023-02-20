@@ -26,7 +26,8 @@ import BestSelling from '../../screens/dashboard/BestSelling';
 import RecentlyViewed from '../../screens/dashboard/RecentlyViewed';
 import MostViewed from '../../screens/dashboard/MostViewed';
 import Brands from '../../screens/dashboard/Brands';
-
+import Register from '../../screens/auth/Register';
+import ForgotPassword from '../../screens/auth/ForgotPassword';
 
 function MainNavigationStack(props) {
   const Stack = createStackNavigator();
@@ -44,6 +45,16 @@ function MainNavigationStack(props) {
         <Stack.Screen
           name="Login"
           component={Login}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="Register"
+          component={Register}
+          options={{headerShown: false}}
+        />
+         <Stack.Screen
+          name="ForgotPassword"
+          component={ForgotPassword}
           options={{headerShown: false}}
         />
         <Stack.Screen

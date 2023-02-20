@@ -16,7 +16,7 @@ const ProfileStyle = StyleSheet.create({
     alignSelf: 'center',
     flexDirection: 'row',
     alignItems: 'center',
-    justifyContent:'space-between'
+    justifyContent: 'space-between',
   },
   container: {
     justifyContent: 'center',
@@ -29,8 +29,9 @@ const ProfileStyle = StyleSheet.create({
     alignItems: 'center',
   },
   margleft15: {
-    // marginLeft: 15, 
-    width: width * 0.55},
+    // marginLeft: 15,
+    width: width * 0.55,
+  },
   txt: {
     fontSize: 16,
     fontFamily: FontFamily.Popinssemibold,
@@ -49,20 +50,20 @@ const ProfileStyle = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'flex-end',
     alignItems: 'center',
-    right:5
+    right: 5,
   },
   datalistView1: {
     width: width * 0.9,
-    height: height*0.1,
+    height: height * 0.2,
     marginTop: 6,
     padding: 13,
     borderRadius: 15,
     alignSelf: 'center',
-    flexDirection: 'row',
+    flexDirection: 'column',
     alignItems: 'center',
     borderWidth: 1,
     marginBottom: 1,
-    justifyContent:'space-between'
+    justifyContent: 'center',
   },
   container: {
     justifyContent: 'center',
@@ -84,11 +85,38 @@ const ProfileStyle = StyleSheet.create({
     fontFamily: FontFamily.PopinsRegular,
     fontSize: 9,
     padding: 2,
-    borderRadius:60,
-    color:Colors.white,
-    right:3
+    borderRadius: 60,
+    color: Colors.white,
+    right: 3,
   },
- 
+  signInView: {justifyContent: 'center', alignItems: 'center'},
+
+  signInText: {
+    fontSize: 15,
+    textAlign: 'center',
+  },
+  buttonMainView: {display: 'flex', flexDirection: 'row', marginTop: 20},
+  buttonView1: {
+    width: width * 0.4,
+    height: height * 0.05,
+    borderWidth: 2,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginRight: 5,
+    borderRadius: 4,
+  },
+  buttonText1: {
+    fontSize: 13,
+    fontWeight: 'bold',
+  },
+  buttonView2: {
+    width: width * 0.4,
+    height: height * 0.05,
+    borderWidth: 2,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 4,
+  },
 });
 
 export {ProfileStyle};
