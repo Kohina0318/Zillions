@@ -29,10 +29,23 @@ function BrandDataFlatList({item, themecolor}) {
     //       categoryName: item.category_name,
     //     })}
       >
-      <View style={{width:width*0.2,height:height*0.15,backgroundColor:themecolor.LOGINTHEMECOLOR,margin:10,flexDirection:'column'}}>
-          <Image source={{uri:item.banner}} style={{width:70,height:100,alignSelf:'center',margin:3}}/>
-           <View>
+      {/* <View style={{width:width*0.35,height:height*0.13,backgroundColor:themecolor.LOGINTHEMECOLOR,margin:10,flexDirection:'column'}}>
+      <View style={{width:width*0.3,height:'65%',justifyContent:'center',alignItems:'center',alignSelf:'center',margin:3,borderWidth:1,borderColor:'#000'}}>
+          <Image source={{uri:item.banner}} resizeMode="contain" style={{width:150,height:'100%'}}/>
+          </View>
+           <View style={{width:width*0.35,height:height*0.04,justifyContent:'center',alignItems:'center'}}>
             <Text numberOfLines={1} style={{color:themecolor.TXTWHITE,margin:3,fontSize:11}}>
+              {item.brand_name}
+            </Text>
+           </View>
+        </View> */}
+
+        <View style={{width:width*0.27,height:height*0.13,margin:5,flexDirection:'column'}}>
+      <View style={{width:width*0.26,height:'65%',justifyContent:'center',alignItems:'center',alignSelf:'center',margin:3,borderWidth:4,borderColor:'#FFF',borderRadius:5,backgroundColor:'#FFF'}}>
+          <Image source={{uri:item.banner}} resizeMode="contain" style={{width:150,height:'60%'}}/>
+          </View>
+           <View style={{width:width*0.27,height:height*0.03,justifyContent:'center',alignItems:'center'}}>
+            <Text numberOfLines={1} style={{color:themecolor.TXTWHITE,fontSize:11,fontWeight:'bold'}}>
               {item.brand_name}
             </Text>
            </View>

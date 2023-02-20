@@ -76,6 +76,7 @@ export default function Dashboard(props) {
       var res = await getBrands();
       console.log('handleBrands......in dashboard page', res.data);
       setBrands(res.data);
+      alert(res.data.length)
     } catch (e) {
       console.log('errrror in..handleBrands page-->', e);
       toast.show('Something went wrong!, Try again later.', {
