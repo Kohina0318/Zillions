@@ -25,12 +25,11 @@ export default function Register(props) {
   const mode = useSelector(state => state.mode);
   const themecolor = new MyThemeClass(mode).getThemeColor()
   const navigation = useNavigation()
-  const [firstName,setFirstName]=useState('')
-  const [lastName,setLastName]=useState('')
-  const [userName,setUserName]=useState('')
+  const [name,setName]=useState('')
   const [email,setEmail]=useState('')
   const [mobileNo, setMobileNo] = useState('');
   const [password, setPassword] = useState('');
+  const [conPassword, setConPassword] = useState('');
   const [isPasswordSecure, setIsPasswordSecure] = useState(true);
 
   var toast=useToast();
@@ -164,31 +163,6 @@ export default function Register(props) {
               ...RegisterLoginStyles.container,
             }}>
 
-<View
-              style={{
-                backgroundColor: themecolor.OTPBOXCOLOR,
-                borderColor: themecolor.OTPBOXCOLOR,
-                ...RegisterLoginStyles.textInputView,
-              }}>
-              {/* <View> */}
-              <Icon name="account-circle" style={{marginLeft:5}} size={20} color={themecolor.TXTWHITE} />
-              <View style={{width:width*0.75}}>
-                <TextInput
-                  value={firstName}
-                  placeholderTextColor={themecolor.TXTGREYS}
-                  placeholder="Enter First Name *"
-                 autoCapitalize='words'
-                  onChangeText={text => setFirstName(text)}
-                  style={{
-                    color: themecolor.TXTWHITE,
-                    ...RegisterLoginStyles.textInput,
-                  }}
-                />
-              </View>
-            </View>
-
-            <View style={{...RegisterLoginStyles.MGv5}} />
-
             <View
               style={{
                 backgroundColor: themecolor.OTPBOXCOLOR,
@@ -198,35 +172,11 @@ export default function Register(props) {
               <Icon name="account-circle" style={{marginLeft:5}} size={20} color={themecolor.TXTWHITE} />
               <View style={{width:width*0.75}}>
                 <TextInput
-                  value={lastName}
+                  value={name}
                   placeholderTextColor={themecolor.TXTGREYS}
-                  placeholder="Enter Last Name*"
+                  placeholder="Enter Your Name*"
                  autoCapitalize='words'
-                  onChangeText={text => setLastName(text)}
-                  style={{
-                    color: themecolor.TXTWHITE,
-                    ...RegisterLoginStyles.textInput,
-                  }}
-                />
-              </View>
-            </View>
-
-            <View style={{...RegisterLoginStyles.MGv5}} />
-
-            <View
-              style={{
-                backgroundColor: themecolor.OTPBOXCOLOR,
-                borderColor: themecolor.OTPBOXCOLOR,
-                ...RegisterLoginStyles.textInputView,
-              }}>
-              <Icon name="account-circle" style={{marginLeft:5}} size={20} color={themecolor.TXTWHITE} />
-              <View style={{width:width*0.75}}>
-                <TextInput
-                  value={userName}
-                  placeholderTextColor={themecolor.TXTGREYS}
-                  placeholder="Enter User Name*"
-                 autoCapitalize='words'
-                  onChangeText={text => setUserName(text)}
+                  onChangeText={text => setName(text)}
                   style={{
                     color: themecolor.TXTWHITE,
                     ...RegisterLoginStyles.textInput,
@@ -304,6 +254,46 @@ export default function Register(props) {
                   secureTextEntry={isPasswordSecure}
                   enablesReturnKeyAutomatically
                   onChangeText={text => setPassword(text)}
+                  style={{
+                    color: themecolor.TXTWHITE,
+                    ...RegisterLoginStyles.textInputpswd,
+                  }}
+                />
+              </View>
+              <View style={{...RegisterLoginStyles.eyeButton}}>
+                <MaterialCommunityIcons
+                  onPress={() => {
+                    isPasswordSecure
+                      ? setIsPasswordSecure(false)
+                      : setIsPasswordSecure(true);
+                  }}
+                  name={isPasswordSecure ? 'eye-off' : 'eye'}
+                  size={20}
+                  color={themecolor.HEADERTHEMECOLOR}
+                />
+              </View>
+            </View>
+
+            <View style={{...RegisterLoginStyles.MGv5}} />
+
+            <View
+              style={{
+                ...RegisterLoginStyles.textInputView,
+                backgroundColor: themecolor.OTPBOXCOLOR,
+                borderColor: themecolor.OTPBOXCOLOR,
+              }}>
+               <Icon name="vpn-key" style={{marginLeft:5}} size={20} color={themecolor.TXTWHITE} />
+              <View style={{width:width*0.75}}>
+                <TextInput
+                  value={conPassword}
+                  placeholderTextColor={themecolor.TXTGREYS}
+                  placeholder="Confirm Password*"
+                  autoCapitalize="none"
+                  autoCorrect={false}
+                  textContentType="newPassword"
+                  secureTextEntry={isPasswordSecure}
+                  enablesReturnKeyAutomatically
+                  onChangeText={text => setConPassword(text)}
                   style={{
                     color: themecolor.TXTWHITE,
                     ...RegisterLoginStyles.textInputpswd,
