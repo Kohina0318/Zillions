@@ -125,7 +125,7 @@ export default function Login(props) {
                 ...RegisterLoginStyles.textInputView,
               }}>
               {/* <View> */}
-              <Icon name="email" style={{marginLeft:15}} size={16} color={themecolor.ADDTOCARTBUTTONCOLOR} />
+              <Icon name="email" style={{marginLeft:15}} size={16} color={themecolor.BACKICON} />
               <View style={{width:width*0.75}}>
                 <TextInput
                   value={email}
@@ -151,7 +151,7 @@ export default function Login(props) {
                 borderColor: themecolor.OTPBOXCOLOR,
               }}>
               {/* <View> */}
-              <Icon name="vpn-key" style={{marginLeft:15}} size={18} color={themecolor.ADDTOCARTBUTTONCOLOR} />
+              <Icon name="vpn-key" style={{marginLeft:15}} size={18} color={themecolor.BACKICON} />
               <View style={{width:width*0.7,}}>
                 <TextInput
                   value={password}
@@ -191,7 +191,7 @@ export default function Login(props) {
                 <Text
                   style={{
                     ...RegisterLoginStyles.forgotTxt,
-                    color: themecolor.HEADERTHEMECOLOR,
+                    color: themecolor.BACKICON,
                   }}>
                   Forgot Password?
                 </Text>
@@ -249,7 +249,7 @@ export default function Login(props) {
             }}>
             <Text
               style={{
-                color: themecolor.HEADERTHEMECOLOR,
+                color: themecolor.BACKICON,
                 fontSize: 12,
                 fontWeight: 'bold',
               }}>

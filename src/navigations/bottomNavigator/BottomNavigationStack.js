@@ -66,10 +66,10 @@ export default function BottomNavigationStack() {
               <>
                 <MCI
                   name="home"
-                  color={themecolor.ADDTOCARTBUTTONCOLOR}
+                  color={themecolor.BACKICON}
                   size={24}
                 />
-                <View style={MainNavigatorstyle.tabbarbottomborder} />
+                <View style={{...MainNavigatorstyle.tabbarbottomborder,  backgroundColor:themecolor.BACKICON,}} />
               </>
             ) : (
               <>
@@ -92,10 +92,10 @@ export default function BottomNavigationStack() {
               <>
                 <MI
                   name="category"
-                  color={themecolor.ADDTOCARTBUTTONCOLOR}
+                  color={themecolor.BACKICON}
                   size={24}
                 />
-                <View style={MainNavigatorstyle.tabbarbottomborder} />
+                <View style={{...MainNavigatorstyle.tabbarbottomborder,  backgroundColor:themecolor.BACKICON,}} />
               </>
             ) : (
               <>
@@ -118,10 +118,10 @@ export default function BottomNavigationStack() {
               <>
                 <FA5
                   name="shopping-bag"
-                  color={themecolor.ADDTOCARTBUTTONCOLOR}
+                  color={themecolor.BACKICON}
                   size={21}
                 />
-                <View style={MainNavigatorstyle.tabbarbottomborder} />
+                <View style={{...MainNavigatorstyle.tabbarbottomborder,  backgroundColor:themecolor.BACKICON,}} />
               </>
             ) : (
               <>
@@ -144,10 +144,10 @@ export default function BottomNavigationStack() {
               <>
                 <MCI
                   name="cards-heart"
-                  color={themecolor.ADDTOCARTBUTTONCOLOR}
+                  color={themecolor.BACKICON}
                   size={22}
                 />
-                <View style={MainNavigatorstyle.tabbarbottomborder} />
+                <View style={{...MainNavigatorstyle.tabbarbottomborder,  backgroundColor:themecolor.BACKICON,}} />
               </>
             ) : (
               <>
@@ -170,10 +170,10 @@ export default function BottomNavigationStack() {
               <>
                 <FA
                   name="user-circle"
-                  color={themecolor.ADDTOCARTBUTTONCOLOR}
+                  color={themecolor.BACKICON}
                   size={22}
                 />
-                <View style={MainNavigatorstyle.tabbarbottomborder} />
+                <View style={{...MainNavigatorstyle.tabbarbottomborder,  backgroundColor:themecolor.BACKICON,}} />
               </>
             ) : (
               <>
