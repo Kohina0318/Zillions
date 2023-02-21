@@ -8,18 +8,25 @@ import {
   Dimensions,
 } from 'react-native';
 import {Colors} from '../../../assets/config/Colors';
-import { ProductStyle } from '../../../../assets/css/ProductStyle';
+import {ProductStyle} from '../../../../assets/css/ProductStyle';
 import {MyThemeClass} from '../../../Theme/ThemeDarkLightColor';
 import {useSelector} from 'react-redux';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import {useNavigation} from '@react-navigation/native';
-import TextTicker from 'react-native-text-ticker';
 import StarRating from 'react-native-star-rating';
+import FAIcon from 'react-native-vector-icons/FontAwesome';
+
 
 const {width, height} = Dimensions.get('screen');
 
 function ProductDataFlateList({item, themecolor}) {
   const navigation = useNavigation();
+  const [showWishListed, setShowWishListed] = useState(true);
+
+  const handleWishListed = () => {
+    setShowWishListed(!showWishListed);
+  };
+
   return (
     <>
       <TouchableOpacity
@@ -28,8 +35,10 @@ function ProductDataFlateList({item, themecolor}) {
           ...ProductStyle.datalistView,
           backgroundColor: themecolor.BOXBORDERCOLOR,
           borderColor: themecolor.BOXBORDERCOLOR1,
-        }}>
-        <View style={{...ProductStyle.innerImage}}>
+        }}
+        onPress={() => navigation.navigate('ProductDetail',{productId:item.product_id,title:item.title})}
+        >
+        <View style={{...ProductStyle.innerImage, }}>
           <Image
             source={{uri: item.front_image}}
             style={{
@@ -39,6 +48,34 @@ function ProductDataFlateList({item, themecolor}) {
             resizeMode="stretch"
           />
         </View>
+
+        <View
+          style={{
+            justifyContent: 'flex-end',
+            marginTop: -30,
+            alignItems: 'flex-end',
+            alignSelf: 'flex-end',
+            padding: 5,
+          }}>
+          {showWishListed ? (
+            <TouchableOpacity
+              activeOpacity={0.5}
+              onPress={() => handleWishListed()}>
+              <FontAwesome
+                name="heart-o"
+                size={20}
+                color={themecolor.TEXTRED}
+              />
+            </TouchableOpacity>
+          ) : (
+            <TouchableOpacity
+              activeOpacity={0.5}
+              onPress={() => handleWishListed()}>
+              <FontAwesome name="heart" size={20} color={themecolor.TEXTRED} />
+            </TouchableOpacity>
+          )}
+        </View>
+
         <View
           style={{
             ...ProductStyle.inner,
@@ -64,14 +101,14 @@ function ProductDataFlateList({item, themecolor}) {
 
           <View style={{flexDirection: 'row', width: '100%'}}>
             <Text style={{...ProductStyle.txt1, color: themecolor.TEXTGREEN}}>
-              ₹{item.purchase_price}
+              <FAIcon name="rupee" size={12} />{item.purchase_price}
               {'  '}
               <Text
                 style={{
                   ...ProductStyle.txtLine,
                   color: themecolor.TXTGREY,
                 }}>
-                ₹{item.sale_price}
+                <FAIcon name="rupee" size={12} />{item.sale_price}
               </Text>
               <Text style={{...ProductStyle.txt1, color: themecolor.TEXTRED}}>
                 {'  ('}
@@ -89,24 +126,23 @@ export function ProductDataList(props) {
   const mode = useSelector(state => state.mode);
   const themecolor = new MyThemeClass(mode).getThemeColor();
 
-
   return (
     <>
-    <FlatList
-      data={props.data}
-      renderItem={({item}) => (
-        <ProductDataFlateList item={item} themecolor={themecolor} />
-      )}
-      horizontal={true}
-      contentContainerStyle={{
-        flexDirection: 'row',
-        flexWrap: 'wrap',
-        width: width * 0.94,
-      }}
-      showsVerticalScrollIndicator={false}
-      scrollEnabled={true}
-    />
-    <View style={{marginVertical: 20}} />
+      <FlatList
+        data={props.data}
+        renderItem={({item}) => (
+          <ProductDataFlateList item={item} themecolor={themecolor} />
+        )}
+        horizontal={true}
+        contentContainerStyle={{
+          flexDirection: 'row',
+          flexWrap: 'wrap',
+          width: width * 0.94,
+        }}
+        showsVerticalScrollIndicator={false}
+        scrollEnabled={true}
+      />
+      <View style={{marginVertical: 20}} />
     </>
   );
 }

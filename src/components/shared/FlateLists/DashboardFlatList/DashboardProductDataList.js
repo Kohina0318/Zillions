@@ -13,8 +13,9 @@ import {MyThemeClass} from '../../../Theme/ThemeDarkLightColor';
 import {useSelector} from 'react-redux';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import {useNavigation} from '@react-navigation/native';
-import TextTicker from 'react-native-text-ticker';
 import StarRating from 'react-native-star-rating';
+import FAIcon from 'react-native-vector-icons/FontAwesome';
+
 
 const {width, height} = Dimensions.get('screen');
 
@@ -28,7 +29,9 @@ function DashboardProductDataFlateList({item, themecolor}) {
           ...ProductStyle.datalistView,
           backgroundColor: themecolor.BOXBORDERCOLOR,
           borderColor: themecolor.BOXBORDERCOLOR1,
-        }}>
+        }}
+        onPress={() => navigation.navigate('ProductDetail',{productId:item.product_id,title:item.title})}
+        >
         <View style={{...ProductStyle.innerImage}}>
           <Image
             source={{uri: item.front_image}}
@@ -39,6 +42,7 @@ function DashboardProductDataFlateList({item, themecolor}) {
             resizeMode="stretch"
           />
         </View>
+        
         <View
           style={{
             ...ProductStyle.inner,
@@ -64,14 +68,14 @@ function DashboardProductDataFlateList({item, themecolor}) {
 
           <View style={{flexDirection: 'row', width: '100%'}}>
             <Text style={{...ProductStyle.txt1, color: themecolor.TEXTGREEN}}>
-              ₹{item.purchase_price}
+              <FAIcon name="rupee" size={12} />{item.purchase_price}
               {'  '}
               <Text
                 style={{
                   ...ProductStyle.txtLine,
                   color: themecolor.TXTGREY,
                 }}>
-                ₹{item.sale_price}
+                <FAIcon name="rupee" size={12} />{item.sale_price}
               </Text>
              </Text>
           </View>

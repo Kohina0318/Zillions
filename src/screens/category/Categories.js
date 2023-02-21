@@ -16,10 +16,10 @@ export default function Categories(props) {
   const themecolor = new MyThemeClass(mode).getThemeColor();
   const [data, setData] = useState([]);
 
-  useEffect(async () => {
+  const handleCategories= async()=>{
     try {
       var res = await getCategories();
-      console.log('data....getCategories...-->', res.data);
+      // console.log('data....getCategories...-->', res.data);
         setData(res.data);
     } catch (e) {
       console.log('errrror in..categories page-->', e);
@@ -31,6 +31,9 @@ export default function Categories(props) {
         animationType: 'slide-in',
       });
     }
+  }
+  useEffect(() => {
+    handleCategories()
   }, []);
 
   return (

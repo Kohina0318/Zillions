@@ -8,8 +8,8 @@ const styles = StyleSheet.create({
   bg: {flex: 1,},
   container: {
     width:width,
-    marginTop:5,
-    height:height*0.31
+    height:height*0.31,
+    marginBottom:8
   },
   container1: {
     width: width,
@@ -66,14 +66,14 @@ const styles = StyleSheet.create({
       fontSize: FontSize.smallText,
     },
     ViewHeading:{
-      width: width * 0.92, alignSelf: 'center'
+      width: width * 0.92, alignSelf: 'center', marginBottom:8
     },
     ViewInnerHeading:{
       flexDirection: 'row',
       width: '100%',
       justifyContent: 'space-between',
       position: 'relative',
-    
+      marginBottom:5
     }
 
 });

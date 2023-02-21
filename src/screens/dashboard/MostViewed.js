@@ -19,7 +19,7 @@ export default function MostViewed(props) {
 
   const handleMostViewed = async () => {
     try {
-      var res = await getProductList('most_viewed');
+      var res = await getProductList('most_viewed','20');
       console.log('handleMostViewed......in MostViewed page', res.data);
       setMostViewedData(res.data);
     } catch (e) {

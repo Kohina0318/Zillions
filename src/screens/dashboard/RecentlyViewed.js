@@ -19,7 +19,7 @@ export default function RecentlyViewed(props) {
  
   const handleRecentlyViewed = async () => {
     try {
-      var res = await getProductList('recently_viewed');
+      var res = await getProductList('recently_viewed','20');
       console.log('handleRecentlyViewed......in RecentlyViewed page', res.data);
       setRecentlyViewedData(res.data);
     } catch (e) {

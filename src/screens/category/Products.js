@@ -17,13 +17,13 @@ export default function Products(props) {
   const themecolor = new MyThemeClass(mode).getThemeColor();
   const [data, setData] = useState([]);
 
-  useEffect(async () => {
+  const handleSubCategoryByProduct= async() => {
     try {
       var res = await getSubCategoryByProduct(props.route.params.subCategoryId);
-      console.log(
-        'data getSubCategoryByProduct api in.....product page-->',
-        res.data,
-      );
+      // console.log(
+      //   'data getSubCategoryByProduct api in.....product page-->',
+      //   res.data,
+      // );
       setData(res.data);
     } catch (e) {
       console.log('errrror in..getSubCategoryByProduct page-->', e);
@@ -35,7 +35,12 @@ export default function Products(props) {
         animationType: 'slide-in',
       });
     }
+  }
+
+  useEffect(() => {
+    handleSubCategoryByProduct()
   }, []);
+
 
   return (
     <View style={{...ProductStyle.bg, backgroundColor: themecolor.THEMECOLOR}}>

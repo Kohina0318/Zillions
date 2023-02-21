@@ -94,7 +94,7 @@ export default function Dashboard(props) {
 
   const handleLatestProducts = async () => {
     try {
-      var res = await getProductList('latest');
+      var res = await getProductList('latest','5');
       // console.log('handleLatestProducts......in dashboard page', res.data);
       setLatestProductsData(res.data);
     } catch (e) {
@@ -111,7 +111,7 @@ export default function Dashboard(props) {
 
   const handleBestSelling = async () => {
     try {
-      var res = await getProductList('deal');
+      var res = await getProductList('deal','5');
       // console.log('handleBestSelling......in dashboard page', res.data);
       setBestSellingData(res.data);
     } catch (e) {
@@ -128,7 +128,7 @@ export default function Dashboard(props) {
 
   const handleRecentlyViewed = async () => {
     try {
-      var res = await getProductList('recently_viewed');
+      var res = await getProductList('recently_viewed','5');
       // console.log('handleRecentlyViewed......in dashboard page', res.data);
       setRecentlyViewedData(res.data);
     } catch (e) {
@@ -145,7 +145,7 @@ export default function Dashboard(props) {
 
   const handleMostViewed = async () => {
     try {
-      var res = await getProductList('most_viewed');
+      var res = await getProductList('most_viewed','5');
       // console.log('handleMostViewed......in dashboard page', res.data);
       setMostViewedData(res.data);
     } catch (e) {
@@ -178,76 +178,93 @@ export default function Dashboard(props) {
         barStyle={mode === 'dark' ? 'light-content' : 'dark-content'}
       />
       <Header title="Home" />
+
       <ScrollView showsVerticalScrollIndicator={false}>
         <View style={{marginVertical: 5}} />
 
-        <View style={{...styles.ViewHeading}}>
-          <DashboardHeading
-            title="Categories"
-            onPress={() => navigation.navigate('Categories')}
-          />
-          <View style={{width: width, height: height * 0.13}}>
+        {categories.length > 0 ? (
+          <View style={{...styles.ViewHeading}}>
+            <DashboardHeading
+              title="Categories"
+              onPress={() => navigation.navigate('Categories')}
+            />
             <DashboardCategoryDataList data={categories} />
           </View>
-        </View>
+        ) : (
+          <></>
+        )}
 
-        <View
-          style={{
-            ...styles.container,
-            backgroundColor: themecolor.LOGINTHEMECOLOR1,
-          }}>
-          <CarouselFile data={carouselData} />
-        </View>
+        {carouselData.length > 0 ? (
+          <View
+            style={{
+              ...styles.container,
+              backgroundColor: themecolor.LOGINTHEMECOLOR1,
+            }}>
+            <CarouselFile data={carouselData} />
+          </View>
+        ) : (
+          <></>
+        )}
 
-        <View style={{marginVertical: 9}} />
-
-        <View style={{...styles.ViewHeading}}>
-          <DashboardHeading
-            title="Brands"
-            onPress={() => navigation.navigate('Brands')}
-          />
-          <View style={{width: width, height: height * 0.15}}>
+        {brands.length > 0 ? (
+          <View style={{...styles.ViewHeading}}>
+            <DashboardHeading
+              title="Brands"
+              onPress={() => navigation.navigate('Brands')}
+            />
             <BrandDataList data={brands} />
           </View>
-        </View>
+        ) : (
+          <></>
+        )}
 
-        <View style={{...styles.ViewHeading}}>
-          <DashboardHeading
-            title="Latest Featured Products"
-            onPress={() => navigation.navigate('LatestFeaturedProducts')}
-          />
-          <DashboardProductDataList data={latestProductsData} />
-        </View>
+        {latestProductsData.length > 0 ? (
+          <View style={{...styles.ViewHeading}}>
+            <DashboardHeading
+              title="Latest Featured Products"
+              onPress={() => navigation.navigate('LatestFeaturedProducts')}
+            />
+            <DashboardProductDataList data={latestProductsData} />
+          </View>
+        ) : (
+          <></>
+        )}
 
-        <View style={{marginVertical: 9}} />
+        {bestSellingData.length > 0 ? (
+          <View style={{...styles.ViewHeading}}>
+            <DashboardHeading
+              title="Best Selling"
+              onPress={() => navigation.navigate('BestSelling')}
+            />
+            <DashboardProductDataList data={bestSellingData} />
+          </View>
+        ) : (
+          <></>
+        )}
 
-        <View style={{...styles.ViewHeading}}>
-          <DashboardHeading
-            title="Best Selling"
-            onPress={() => navigation.navigate('BestSelling')}
-          />
-          <DashboardProductDataList data={bestSellingData} />
-        </View>
+        {recentlyViewedData.length > 0 ? (
+          <View style={{...styles.ViewHeading}}>
+            <DashboardHeading
+              title="Recently Viewed"
+              onPress={() => navigation.navigate('RecentlyViewed')}
+            />
+            <DashboardProductDataList data={recentlyViewedData} />
+          </View>
+        ) : (
+          <></>
+        )}
 
-        <View style={{marginVertical: 9}} />
-
-        <View style={{...styles.ViewHeading}}>
-          <DashboardHeading
-            title="Recently Viewed"
-            onPress={() => navigation.navigate('RecentlyViewed')}
-          />
-          <DashboardProductDataList data={recentlyViewedData} />
-        </View>
-
-        <View style={{marginVertical: 9}} />
-
-        <View style={{...styles.ViewHeading}}>
-          <DashboardHeading
-            title="Most Viewed"
-            onPress={() => navigation.navigate('MostViewed')}
-          />
-          <DashboardProductDataList data={mostViewedData} />
-        </View>
+        {mostViewedData.length > 0 ? (
+          <View style={{...styles.ViewHeading}}>
+            <DashboardHeading
+              title="Most Viewed"
+              onPress={() => navigation.navigate('MostViewed')}
+            />
+            <DashboardProductDataList data={mostViewedData} />
+          </View>
+        ) : (
+          <></>
+        )}
       </ScrollView>
     </View>
   );

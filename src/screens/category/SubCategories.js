@@ -23,10 +23,10 @@ export default function SubCategories(props) {
   const themecolor = new MyThemeClass(mode).getThemeColor();
   const [data, setData] = useState([]);
 
-  useEffect(async () => {
+  const handleSubCategories= async() => {
     try {
       var res = await getSubCategories(props.route.params.categoryId);
-      console.log('data....getSubCategories...-->', res.data);
+      // console.log('data....getSubCategories...-->', res.data);
       setData(res.data);
     } catch (e) {
       console.log('errrror in..getSubCategories page-->', e);
@@ -38,6 +38,11 @@ export default function SubCategories(props) {
         animationType: 'slide-in',
       });
     }
+  }
+
+  
+  useEffect(() => {
+    handleSubCategories()
   }, []);
 
   return (
