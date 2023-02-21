@@ -13,7 +13,7 @@ import {MyThemeClass} from '../../components/Theme/ThemeDarkLightColor';
 import {useNavigation} from '@react-navigation/native';
 import RegisterLoginHeader from '../../components/shared/header/RegisterLoginHeader';
 import {RegisterLoginStyles} from '../../assets/css/RegisterLoginStyles';
-import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import Icon from 'react-native-vector-icons/MaterialIcons'
 import FullsizeButton from './FullsizeButton';
 
 const {width, height} = Dimensions.get('screen');
@@ -67,7 +67,8 @@ export default function ForgotPassword(props) {
                 borderColor: themecolor.OTPBOXCOLOR,
                 ...RegisterLoginStyles.textInputView,
               }}>
-              <View>
+              <Icon name="email" style={{marginLeft:5}} size={20} color={themecolor.TXTWHITE} />
+             <View style={{width:width*0.75}}>
                 <TextInput
                   value={email}
                   placeholderTextColor={themecolor.TXTGREYS}

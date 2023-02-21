@@ -16,6 +16,9 @@ import {RegisterLoginStyles} from '../../assets/css/RegisterLoginStyles';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import FullsizeButton from './FullsizeButton';
 import {useToast} from 'react-native-toast-notifications';
+import { postLogin } from '../../repository/AuthRepository/LoginRepository';
+import AsyncStorage from '@react-native-community/async-storage';
+import Icon from 'react-native-vector-icons/MaterialIcons'
 
 const {width, height} = Dimensions.get('screen');
 
@@ -23,8 +26,8 @@ export default function Login(props) {
   const mode = useSelector(state => state.mode);
   const themecolor = new MyThemeClass(mode).getThemeColor();
   const navigation = useNavigation();
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState('kunalsahu00125@gmail.com');
+  const [password, setPassword] = useState('123456');
   const [isPasswordSecure, setIsPasswordSecure] = useState(true);
 
   const isDarkMode = Appearance.getColorScheme() === 'dark';
@@ -57,20 +60,27 @@ export default function Login(props) {
         animationType: 'slide-in',
       });
     } else {
-      setLoader(true)
       try {
-        const res = await postLoginProcess(mobileNo, password);
+        let formdata=new FormData()
+        formdata.append('email',email)
+        formdata.append('password',password)
+        const res = await postLogin(formdata);
         console.log('Data......login api ....line 42..>>>', res);
 
-        if (res.status == 'true') {
+        if (res.status == true) {
           await AsyncStorage.setItem('@UserData', JSON.stringify(res.data));
-          await AsyncStorage.setItem('@token', res.data.token);
+          // await AsyncStorage.setItem('@token', res.data.token);
           props.navigation.navigate('Dashboard');
-          setLoader(false)
+          toast.show(res.msg, {
+            type: 'success',
+            placement: 'bottom',
+            duration: 3000,
+            offset: 30,
+            animationType: 'slide-in',
+          });
         } 
         else {
-          setLoader(false)
-          toast.show(res.message, {
+          toast.show(res.msg, {
             type: 'danger',
             placement: 'bottom',
             duration: 3000,
@@ -80,7 +90,6 @@ export default function Login(props) {
         }
       } catch (e) {
         console.log('catch in ....login page', e);
-        setLoader(false)
         toast.show('Something went wrong!, Try again later.', {
           type: 'danger',
           placement: 'bottom',
@@ -115,11 +124,13 @@ export default function Login(props) {
                 borderColor: themecolor.OTPBOXCOLOR,
                 ...RegisterLoginStyles.textInputView,
               }}>
-              <View>
+              {/* <View> */}
+              <Icon name="email" style={{marginLeft:5}} size={20} color={themecolor.TXTWHITE} />
+              <View style={{width:width*0.75}}>
                 <TextInput
                   value={email}
                   placeholderTextColor={themecolor.TXTGREYS}
-                  placeholder="Email Address or Username*"
+                  placeholder="Email Address*"
                   keyboardType="email-address"
                   inputMode="email"
                   onChangeText={text => setEmail(text)}
@@ -139,7 +150,9 @@ export default function Login(props) {
                 backgroundColor: themecolor.OTPBOXCOLOR,
                 borderColor: themecolor.OTPBOXCOLOR,
               }}>
-              <View>
+              {/* <View> */}
+              <Icon name="vpn-key" style={{marginLeft:5}} size={20} color={themecolor.TXTWHITE} />
+              <View style={{width:width*0.75}}>
                 <TextInput
                   value={password}
                   placeholderTextColor={themecolor.TXTGREYS}

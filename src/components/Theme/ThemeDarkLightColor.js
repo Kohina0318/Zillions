@@ -83,6 +83,7 @@ class MyThemeClass {
       STARCOLOR: this.mode === 'dark' ?  '#f39c12':  '#ffd32a',
       BACKICON: this.mode === 'dark' ? '#FFF' : '#281E5D',
       OTPBOXCOLOR: this.mode === 'dark' ? '#3c3e44' : Colors.Textinputbg,
+      BORDERCOLOR: this.mode === 'dark' ? "#281E5D" : "#fff",
     }
 
   }

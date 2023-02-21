@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useState,useRef} from 'react';
 import {
   View,
   Text,
@@ -27,6 +27,8 @@ import HalfSizeButton from '../../components/shared/button/halfSizeButton';
 import Feather from 'react-native-vector-icons/Feather';
 import RenderHtml from 'react-native-render-html';
 import {DashboardProductDataList} from '../../components/shared/FlateLists/DashboardFlatList/DashboardProductDataList';
+import RBSheet from 'react-native-raw-bottom-sheet';
+import EN from 'react-native-vector-icons/Entypo'
 
 const {width, height} = Dimensions.get('screen');
 
@@ -57,6 +59,7 @@ export default function ProductDetail(props) {
   const {widthDes} = useWindowDimensions();
 
   const toast = useToast();
+  const refRBSheet = useRef();
   const mode = useSelector(state => state.mode);
   const themecolor = new MyThemeClass(mode).getThemeColor();
 
@@ -299,7 +302,6 @@ export default function ProductDetail(props) {
                   color={themecolor.TXTWHITE}
                 />
               }
-              onPress={() => handleWishListed()}
               backgroundColor={themecolor.TXTWHITE1}
               color={themecolor.TXTWHITE}
               borderColor={themecolor.TXTWHITE}
@@ -312,9 +314,10 @@ export default function ProductDetail(props) {
               icon={
                 <MaterialIcons name="double-arrow" size={16} color={'#fff'} />
               }
+              onPress={()=>refRBSheet.current.open()}
               backgroundColor={'#281E5D'}
               color={'#fff'}
-              borderColor={'#fff'}
+              borderColor={themecolor.BORDERCOLOR}
             />
           </View>
           </>
@@ -329,13 +332,76 @@ export default function ProductDetail(props) {
                   color={"#fff"}
                 />
               }
-              onPress={() => handleWishListed()}
               backgroundColor={themecolor.TEXTRED}
               color={"#fff"}
               borderColor={themecolor.TEXTRED}
             />
           </View>
         )}
+
+          <RBSheet
+        ref={refRBSheet}
+        animationType={'slide'}
+        closeOnDragDown={true}
+        closeOnPressMask={true}
+        height={150}
+        customStyles={{
+          container: {
+            borderTopRightRadius: 20,
+            borderTopLeftRadius: 20,
+            borderBottomLeftRadius: 0,
+            backgroundColor: themecolor.RB2,
+          },
+          draggableIcon: {
+            display: 'none',
+          },
+        }}>
+        <View style={{...styles.view14}}>
+          <TouchableOpacity
+            activeOpacity={1}
+            onPress={() => refRBSheet.current.close()}>
+            <EN name="cross" color={themecolor.TXTWHITE} size={28} />
+          </TouchableOpacity>
+          <View>
+            <Text style={{...styles.RBText, color: themecolor.TXTWHITE}}>
+              Buy Now
+            </Text>
+          </View>
+          <View>
+            <View>
+              <TouchableOpacity activeOpacity={1} onPress={() => OnClick()}>
+                <Text
+                  style={{
+                    ...styles.RBText,
+                    ...styles.clrtheme,
+                    color: themecolor.TXTWHITE,
+                  }}>
+                  Done
+                </Text>
+              </TouchableOpacity>
+            </View>
+          </View>
+        </View>
+        <View style={{...styles.Borderline}} />
+        <View style={styles.view16}>
+          <View>
+            <Text
+              style={{
+                ...styles.CardText,
+                ...styles.align3,
+                ...styles.left1,
+                color: themecolor.TXTWHITE,
+                marginBottom: 10,
+              }}>
+             Please add quantity
+            </Text>
+          </View>
+          <View style={styles.view17}>
+            {/* <DatePickerRange onChange={value => handleChange(value)} /> */}
+          </View>
+          <View style={styles.marg} />
+        </View>
+      </RBSheet>
 
         </View>
       </TouchableOpacity>
