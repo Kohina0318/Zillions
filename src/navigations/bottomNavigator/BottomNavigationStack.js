@@ -66,7 +66,7 @@ export default function BottomNavigationStack() {
               <>
                 <MCI
                   name="home"
-                  color={themecolor.HEADERTHEMECOLOR}
+                  color={themecolor.ADDTOCARTBUTTONCOLOR}
                   size={24}
                 />
                 <View style={MainNavigatorstyle.tabbarbottomborder} />
@@ -92,7 +92,7 @@ export default function BottomNavigationStack() {
               <>
                 <MI
                   name="category"
-                  color={themecolor.HEADERTHEMECOLOR}
+                  color={themecolor.ADDTOCARTBUTTONCOLOR}
                   size={24}
                 />
                 <View style={MainNavigatorstyle.tabbarbottomborder} />
@@ -118,7 +118,7 @@ export default function BottomNavigationStack() {
               <>
                 <FA5
                   name="shopping-bag"
-                  color={themecolor.HEADERTHEMECOLOR}
+                  color={themecolor.ADDTOCARTBUTTONCOLOR}
                   size={21}
                 />
                 <View style={MainNavigatorstyle.tabbarbottomborder} />
@@ -144,7 +144,7 @@ export default function BottomNavigationStack() {
               <>
                 <MCI
                   name="cards-heart"
-                  color={themecolor.HEADERTHEMECOLOR}
+                  color={themecolor.ADDTOCARTBUTTONCOLOR}
                   size={22}
                 />
                 <View style={MainNavigatorstyle.tabbarbottomborder} />
@@ -170,7 +170,7 @@ export default function BottomNavigationStack() {
               <>
                 <FA
                   name="user-circle"
-                  color={themecolor.HEADERTHEMECOLOR}
+                  color={themecolor.ADDTOCARTBUTTONCOLOR}
                   size={22}
                 />
                 <View style={MainNavigatorstyle.tabbarbottomborder} />

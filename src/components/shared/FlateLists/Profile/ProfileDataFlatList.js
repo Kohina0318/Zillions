@@ -50,14 +50,14 @@ function ProfileDataFlateList({item, themecolor}) {
                 Linking.openURL(item.link)
               }
             >
-              <FontAwesome name="angle-right" size={30} color="blue" />
+              <FontAwesome name="angle-right" size={30} color={themecolor.ADDTOCARTBUTTONCOLOR} />
             </TouchableOpacity>
             :
             <TouchableOpacity
               style={{...ProfileStyle.iconview, borderRadius: 50, padding: 2}}
               // onPress={() => navigation.navigate('Products')}
             >
-              <FontAwesome name="angle-right" size={30} color="blue" />
+              <FontAwesome name="angle-right" size={30} color={themecolor.ADDTOCARTBUTTONCOLOR} />
             </TouchableOpacity>
           }
           </View>

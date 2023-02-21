@@ -11,7 +11,8 @@ import {Colors} from '../../../../assets/config/Colors';
 import {styles} from '../../../../assets/css/WishListStyle';
 import {MyThemeClass} from '../../../Theme/ThemeDarkLightColor';
 import {useSelector} from 'react-redux';
-import FontAwesome from 'react-native-vector-icons/FontAwesome';
+import Feather from 'react-native-vector-icons/Feather';
+import FAIcon from 'react-native-vector-icons/FontAwesome';
 import {useNavigation} from '@react-navigation/native';
 
 const {width, height} = Dimensions.get('screen');
@@ -27,7 +28,9 @@ function WishListDataFlateList({item, themecolor}) {
           ...styles.datalistView,
           backgroundColor: themecolor.BOXBORDERCOLOR,
           borderColor: themecolor.BOXBORDERCOLOR1,
-        }}>
+        }}
+        onPress={() => navigation.navigate('ProductDetail',{productId:item.product_id,title:item.title})}
+        >
         <View style={{...styles.innerImage}}>
           <Image
             source={{uri: item.front_image}}
@@ -52,14 +55,14 @@ function WishListDataFlateList({item, themecolor}) {
 
           <View style={{flexDirection: 'row', width: '100%'}}>
             <Text style={{...styles.txt1, color: themecolor.TEXTGREEN}}>
-              ₹ {item.purchase_price}
+              <FAIcon name="rupee" size={12} />{item.purchase_price}
               {'  '}
               <Text
                 style={{
                   ...styles.txtLine,
                   color: themecolor.TXTGREY,
                 }}>
-                ₹ {item.sale_price}
+                <FAIcon name="rupee" size={12} />{item.sale_price}
               </Text>
               <Text style={{...styles.txt1, color: themecolor.TEXTRED}}>
                 {'  ('}
@@ -75,9 +78,13 @@ function WishListDataFlateList({item, themecolor}) {
               <View
                 style={{
                   ...styles.AddButton,
-                  backgroundColor: themecolor.HEADERTHEMECOLOR,
+                  backgroundColor: themecolor.ADDTOCARTBUTTONCOLOR,
                 }}>
-                <Text style={styles.AddButtonIcon}>Add to cart</Text>
+               <Text style={styles.AddButtonIcon}>  <Feather
+                  name="shopping-cart"
+                  size={12}
+                  color={"#fff"}
+                />{" "} Add to cart</Text>
               </View>
             </TouchableOpacity>
           </View>

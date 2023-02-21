@@ -234,7 +234,7 @@ export default function DrawerContent(props) {
             }}
           />
            <View style={{marginVertical: 3}} />
-          <Text style={MainNavigatorstyle.view2txt}>App Version 1.0</Text>
+          <Text style={{...MainNavigatorstyle.view2txt,}}>App Version 1.0</Text>
           <View style={{marginVertical: 3}} />
         </View>
       </View>

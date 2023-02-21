@@ -60,7 +60,7 @@ const MainNavigatorstyle = StyleSheet.create({
         resizeMode: 'contain',
     },
     tabbarbottomborder: {
-        backgroundColor: Colors.bluetheme,
+        backgroundColor: "#281E5D",
         height: 5,
         width: 55,
         bottom: -7,

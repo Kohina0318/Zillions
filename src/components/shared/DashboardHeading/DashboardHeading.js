@@ -25,7 +25,7 @@ export default function DashboardHeading(props){
           <View
             style={{
               ...styles.ViewAllButton,
-              backgroundColor: themecolor.HEADERTHEMECOLOR,
+              backgroundColor: themecolor.ADDTOCARTBUTTONCOLOR,
             }}>
             <Text style={styles.ViewAllButtonIcon}>View all</Text>
           </View>

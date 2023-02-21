@@ -9,14 +9,14 @@ export const RegisterLoginStyles = StyleSheet.create({
     fontSize: 14,
     height: 45,
     fontFamily: FontFamily.PopinsRegular,
-    left: 15,
+    left: 5,
     width: width * 0.81,
   },
   textInput: {
     fontSize: 14,
     height: 45,
     fontFamily: FontFamily.PopinsRegular,
-    left: 15,
+    left: 5,
   },
   textInputView: {
     width: width * 0.9,
@@ -41,17 +41,18 @@ export const RegisterLoginStyles = StyleSheet.create({
     marginVertical: 15,
   },
   forgot: {
-    width: width,
-    height: height * 0.1,
-    justifyContent: 'center',
-    alignItems: 'center',
+    width: width *0.85,
+    height: height * 0.03,
+    justifyContent: 'flex-end',
+    alignItems: 'flex-end',
+
   },
   forgotTxt: {
-    fontSize: 14,
+    fontSize: 11,
     fontWeight: 'bold',
   },
   btn: {
-    width: width * 0.98,
+    width: width * 0.9,
     height: height * 0.05,
     borderWidth: 2,
     justifyContent: 'center',

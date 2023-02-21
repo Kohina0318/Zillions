@@ -1,20 +1,20 @@
-const getWishlist = async () => {
+const getOrderlist = async () => {
     try {
       const response = await fetch(
-          `https://www.zillionsbuyer.com/wishlist`,
+          `https://www.zillionsbuyer.com/orderlist`,
         {
           method: 'GET',
           headers: {'Content-Type': 'application/json;charset=utf-8'},
         },
       );
       const result = await response.json();
-      console.log('getwishlist api data....in WishListRepo', result);
+      console.log('getOrderlist api data....in OrderRepo', result);
         return result;
     } catch (err) {
-      console.log('error in getwishlist...in WishListRepo ', err);
+      console.log('error in getOrderlist...in OrderRepo ', err);
     }
   };
   
   
-  export {getWishlist};
+  export {getOrderlist};
   
