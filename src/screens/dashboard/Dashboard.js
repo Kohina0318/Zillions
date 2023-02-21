@@ -45,7 +45,7 @@ export default function Dashboard(props) {
   const handleCategories = async () => {
     try {
       var res = await getCategories();
-      console.log('handleCategories......in dashboard page', res);
+      // console.log('handleCategories......in dashboard page', res);
       setCategories(res.data);
     } catch (e) {
       console.log('errrror in..handleCategories page-->', e);
@@ -61,7 +61,7 @@ export default function Dashboard(props) {
   const handleCarousel = async () => {
     try {
       var res = await getMainSlider();
-      console.log('handleCarousel......in dashboard page', res.data);
+      // console.log('handleCarousel......in dashboard page', res.data);
       setCarouselData(res.data);
     } catch (e) {
       console.log('errrror in..handleCarousel page-->', e);
@@ -78,7 +78,7 @@ export default function Dashboard(props) {
   const handleBrands = async () => {
     try {
       var res = await getBrands();
-      console.log('handleBrands......in dashboard page', res.data);
+      // console.log('handleBrands......in dashboard page', res.data);
       setBrands(res.data);
     } catch (e) {
       console.log('errrror in..handleBrands page-->', e);
@@ -95,7 +95,7 @@ export default function Dashboard(props) {
   const handleLatestProducts = async () => {
     try {
       var res = await getProductList('latest','5');
-      console.log('handleLatestProducts......in dashboard page', res.data);
+      // console.log('handleLatestProducts......in dashboard page', res.data);
       setLatestProductsData(res.data);
     } catch (e) {
       console.log('errrror in..handleLatestProducts page-->', e);
@@ -112,7 +112,7 @@ export default function Dashboard(props) {
   const handleBestSelling = async () => {
     try {
       var res = await getProductList('deal','5');
-      console.log('handleBestSelling......in dashboard page', res.data);
+      // console.log('handleBestSelling......in dashboard page', res.data);
       setBestSellingData(res.data);
     } catch (e) {
       console.log('errrror in..handleBestSelling page-->', e);
@@ -129,7 +129,7 @@ export default function Dashboard(props) {
   const handleRecentlyViewed = async () => {
     try {
       var res = await getProductList('recently_viewed','5');
-      console.log('handleRecentlyViewed......in dashboard page', res.data);
+      // console.log('handleRecentlyViewed......in dashboard page', res.data);
       setRecentlyViewedData(res.data);
     } catch (e) {
       console.log('errrror in..handleRecentlyViewed page-->', e);
@@ -146,7 +146,7 @@ export default function Dashboard(props) {
   const handleMostViewed = async () => {
     try {
       var res = await getProductList('most_viewed','5');
-      console.log('handleMostViewed......in dashboard page', res.data);
+      // console.log('handleMostViewed......in dashboard page', res.data);
       setMostViewedData(res.data);
     } catch (e) {
       console.log('errrror in..handleMostViewed page-->', e);

@@ -8,12 +8,12 @@ import {
   Dimensions,
 } from 'react-native';
 import {Colors} from '../../../../assets/config/Colors';
-import {styles} from '../../../../../assets/css/DashboardStyle';
+import { styles } from '../../../../assets/css/BrandsStyle';
 import {MyThemeClass} from '../../../Theme/ThemeDarkLightColor';
 import {useSelector} from 'react-redux';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import {useNavigation} from '@react-navigation/native';
-import {Avatar} from '@rneui/themed';
+
 
 const {width,height} = Dimensions.get('screen');
 
@@ -66,3 +66,66 @@ export function BrandDataList(props) {
     />
   );
 }
+
+
+
+function BrandDataFlateList({item, themecolor}) {
+
+    const navigation = useNavigation();
+  
+    
+    return (
+        <TouchableOpacity
+        activeOpacity={0.8}
+        style={{
+          ...styles.datalistView,
+          backgroundColor: themecolor.BOXBORDERCOLOR,
+          borderColor: themecolor.BOXBORDERCOLOR1,
+        }}>
+        <View style={{...styles.innerImage}}>
+          <Image
+            source={{uri: item.banner}}
+            style={{
+              width: width * 0.26,
+              height: '70%',
+            }}
+            resizeMode="stretch"
+          />
+        </View>
+        <View
+          style={{
+            ...styles.inner,
+          }}>
+          <View>
+            <Text
+              style={{...styles.txt, color: themecolor.TXTWHITE}}
+              numberOfLines={2}>
+              {item.brand_name}
+            </Text>
+          </View>
+        </View>
+      </TouchableOpacity>
+    );
+  }
+  
+  export function BrandInDataList(props) {
+    const mode = useSelector(state => state.mode);
+    const themecolor = new MyThemeClass(mode).getThemeColor();
+  
+    return ( 
+      <FlatList
+        data={props.data}
+        renderItem={({item}) => (
+          <BrandDataFlateList item={item} themecolor={themecolor} />
+        )}
+        horizontal={true}
+      contentContainerStyle={{
+        flexDirection: 'row',
+        flexWrap: 'wrap',
+        width: width * 0.94,
+      }}
+      showsVerticalScrollIndicator={false}
+      scrollEnabled={true}
+      />
+    );
+  }
