@@ -67,7 +67,7 @@ export default function ForgotPassword(props) {
                 borderColor: themecolor.OTPBOXCOLOR,
                 ...RegisterLoginStyles.textInputView,
               }}>
-              <Icon name="email" style={{marginLeft:15}} size={16} color={themecolor.ADDTOCARTBUTTONCOLOR} />
+              <Icon name="email" style={{marginLeft:15}} size={16} color={themecolor.BACKICON} />
              <View style={{width:width*0.75}}>
                 <TextInput
                   value={email}

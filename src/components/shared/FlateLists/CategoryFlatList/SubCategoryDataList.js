@@ -51,7 +51,7 @@ function SubCategoryDataFlateList({item, themecolor}) {
           <View
             style={{...CategoryStyle.iconview, borderRadius: 50, padding: 2}}
             >
-            <FontAwesome name='angle-right' size={25} color={themecolor.ADDTOCARTBUTTONCOLOR} />
+            <FontAwesome name='angle-right' size={25} color={themecolor.BACKICON} />
           </View>
         </View>
       </TouchableOpacity>

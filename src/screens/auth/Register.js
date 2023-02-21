@@ -169,7 +169,7 @@ export default function Register(props) {
                 borderColor: themecolor.OTPBOXCOLOR,
                 ...RegisterLoginStyles.textInputView,
               }}>
-              <Icon name="account-circle" style={{marginLeft:15}} size={18}  color={themecolor.ADDTOCARTBUTTONCOLOR} />
+              <Icon name="account-circle" style={{marginLeft:15}} size={18}  color={themecolor.BACKICON} />
               <View style={{width:width*0.75}}>
                 <TextInput
                   value={name}
@@ -193,7 +193,7 @@ export default function Register(props) {
                 borderColor: themecolor.OTPBOXCOLOR,
                 ...RegisterLoginStyles.textInputView,
               }}>
-              <FA name="mobile" style={{marginLeft:15,marginRight:5}} size={22}  color={themecolor.ADDTOCARTBUTTONCOLOR} />
+              <FA name="mobile" style={{marginLeft:15,marginRight:5}} size={22}  color={themecolor.BACKICON} />
               <View style={{width:width*0.75}}>
                 <TextInput
                   value={mobileNo}
@@ -217,7 +217,7 @@ export default function Register(props) {
                 borderColor: themecolor.OTPBOXCOLOR,
                 ...RegisterLoginStyles.textInputView,
               }}>
-              <Icon name="email" style={{marginLeft:15}} size={16}  color={themecolor.ADDTOCARTBUTTONCOLOR} />
+              <Icon name="email" style={{marginLeft:15}} size={16}  color={themecolor.BACKICON} />
               <View style={{width:width*0.75}}>
                 <TextInput
                   value={email}
@@ -242,7 +242,7 @@ export default function Register(props) {
                 backgroundColor: themecolor.OTPBOXCOLOR,
                 borderColor: themecolor.OTPBOXCOLOR,
               }}>
-               <Icon name="vpn-key" style={{marginLeft:15}} size={18}  color={themecolor.ADDTOCARTBUTTONCOLOR} />
+               <Icon name="vpn-key" style={{marginLeft:15}} size={18}  color={themecolor.BACKICON} />
               <View style={{width:width*0.7}}>
                 <TextInput
                   value={password}
@@ -282,7 +282,7 @@ export default function Register(props) {
                 backgroundColor: themecolor.OTPBOXCOLOR,
                 borderColor: themecolor.OTPBOXCOLOR,
               }}>
-               <Icon name="vpn-key" style={{marginLeft:15}} size={18}  color={themecolor.ADDTOCARTBUTTONCOLOR} />
+               <Icon name="vpn-key" style={{marginLeft:15}} size={18}  color={themecolor.BACKICON} />
               <View style={{width:width*0.7}}>
                 <TextInput
                   value={conPassword}
@@ -323,7 +323,7 @@ export default function Register(props) {
           </View>
           <TouchableOpacity activeOpacity={0.5} onPress={()=>navigation.navigate('Login')}>
           <View style={{width:width,height:height*0.13,justifyContent:'center',alignItems:'center'}}>
-            <Text style={{color:themecolor.HEADERTHEMECOLOR,fontSize:12,fontWeight:'bold'}}>Already have an account?</Text>
+            <Text style={{color:themecolor.BACKICON,fontSize:12,fontWeight:'bold'}}>Already have an account?</Text>
           </View>
           </TouchableOpacity>
       </View>
