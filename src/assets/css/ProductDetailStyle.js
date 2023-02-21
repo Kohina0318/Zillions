@@ -48,6 +48,48 @@ const styles = StyleSheet.create({
   {
       width: width * 0.6,
   },
+  view14:
+  {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    padding: 15,
+  },
+  RBText: {
+    fontSize: FontSize.mainButton,
+    fontFamily: FontFamily.normal,
+    fontWeight:'bold'
+  },
+  clrtheme:
+  {
+    color: Colors.bluetheme
+  },
+  view16:
+  { justifyContent: 'center', alignSelf: 'center', flex: 1 },
+  CardText: {
+    fontSize: FontSize.labelText3,
+    fontFamily: FontFamily.PopinsMedium,
+    alignSelf: 'center',
+    fontWeight:'bold'
+  },
+  align3:
+  { alignSelf: 'flex-start' },
+  left1:
+  { left: 10 },
+  view17:
+  {
+    justifyContent: 'space-between',
+    backgroundColor: Colors.white,
+    flexDirection: 'row',
+  },
+  marg: { marginVertical: 10 },
+  Borderline: {
+    width: width,
+    justifyContent: 'center',
+    alignSelf: 'center',
+    borderWidth: 0.5,
+    borderColor: Colors.borderColor,
+  },
  
 });
 
