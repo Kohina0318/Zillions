@@ -119,7 +119,7 @@ export default function Login(props) {
                 <TextInput
                   value={email}
                   placeholderTextColor={themecolor.TXTGREYS}
-                  placeholder="Email Address or Username*"
+                  placeholder="Email Address*"
                   keyboardType="email-address"
                   inputMode="email"
                   onChangeText={text => setEmail(text)}
