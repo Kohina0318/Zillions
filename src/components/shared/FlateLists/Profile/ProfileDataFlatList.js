@@ -14,6 +14,7 @@ import {MyThemeClass} from '../../../Theme/ThemeDarkLightColor';
 import {useSelector} from 'react-redux';
 import FontAwesome from 'react-native-vector-icons/FontAwesome'
 import { useNavigation } from '@react-navigation/native';
+import Icon from 'react-native-vector-icons/MaterialIcons'
 
 const {width} = Dimensions.get('screen');
 
@@ -29,10 +30,15 @@ function ProfileDataFlateList({item, themecolor}) {
             ...ProfileStyle.datalistView,
             borderBottomColor: themecolor.BOXBORDERCOLOR1,
           }}>
-          <View style={{marginLeft: 10}}>
+          <View style={{marginLeft: 10,flexDirection:'row'}}>
+          <View style={{marginRight:10,alignSelf:'center'}}>
+<Icon size={22} color={themecolor.TXTWHITE} name={item.icon}/>
+          </View>
+          <View>
             <Text style={{...ProfileStyle.txt, color: themecolor.TXTWHITE}}>
             {item.name}
             </Text>
+            </View>
           </View>
 
           <View style={{...ProfileStyle.iconStyle}}>
