@@ -21,7 +21,7 @@ export default FullsizeButton = props => {
 
   const styles = StyleSheet.create({
     bigButton: {
-      backgroundColor:themecolor.TXTWHITE,
+      backgroundColor:themecolor.ADDTOCARTBUTTONCOLOR,
       width: width*0.9,
       alignSelf: 'center',
       alignItems: 'center',

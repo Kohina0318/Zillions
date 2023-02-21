@@ -318,7 +318,7 @@ export default function ProductDetail(props) {
                 <MaterialIcons name="double-arrow" size={16} color={'#fff'} />
               }
               onPress={()=>refRBSheet.current.open()}
-              backgroundColor={'#281E5D'}
+              backgroundColor={themecolor.ADDTOCARTBUTTONCOLOR}
               color={'#fff'}
               borderColor={themecolor.BORDERCOLOR}
             />

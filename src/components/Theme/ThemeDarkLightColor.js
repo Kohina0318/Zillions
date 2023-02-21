@@ -84,6 +84,7 @@ class MyThemeClass {
       BACKICON: this.mode === 'dark' ? '#FFF' : '#281E5D',
       OTPBOXCOLOR: this.mode === 'dark' ? '#3c3e44' : Colors.Textinputbg,
       BORDERCOLOR: this.mode === 'dark' ? "#281E5D" : "#fff",
+      ADDTOCARTBUTTONCOLOR:  this.mode === 'dark' ? "#281E5D" : "#281E5D",
     }
 
   }

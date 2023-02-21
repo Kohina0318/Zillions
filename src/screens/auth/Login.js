@@ -125,7 +125,7 @@ export default function Login(props) {
                 ...RegisterLoginStyles.textInputView,
               }}>
               {/* <View> */}
-              <Icon name="email" style={{marginLeft:5}} size={20} color={themecolor.TXTWHITE} />
+              <Icon name="email" style={{marginLeft:15}} size={16} color={themecolor.ADDTOCARTBUTTONCOLOR} />
               <View style={{width:width*0.75}}>
                 <TextInput
                   value={email}
@@ -151,8 +151,8 @@ export default function Login(props) {
                 borderColor: themecolor.OTPBOXCOLOR,
               }}>
               {/* <View> */}
-              <Icon name="vpn-key" style={{marginLeft:5}} size={20} color={themecolor.TXTWHITE} />
-              <View style={{width:width*0.75}}>
+              <Icon name="vpn-key" style={{marginLeft:15}} size={18} color={themecolor.ADDTOCARTBUTTONCOLOR} />
+              <View style={{width:width*0.7,}}>
                 <TextInput
                   value={password}
                   placeholderTextColor={themecolor.TXTGREYS}
@@ -177,8 +177,8 @@ export default function Login(props) {
                       : setIsPasswordSecure(true);
                   }}
                   name={isPasswordSecure ? 'eye-off' : 'eye'}
-                  size={20}
-                  color={themecolor.HEADERTHEMECOLOR}
+                  size={16}
+                  color={themecolor.ADDTOCARTBUTTONCOLOR}
                 />
               </View>
             </View>
@@ -191,7 +191,7 @@ export default function Login(props) {
                 <Text
                   style={{
                     ...RegisterLoginStyles.forgotTxt,
-                    color: themecolor.TXTWHITE,
+                    color: themecolor.HEADERTHEMECOLOR,
                   }}>
                   Forgot Password?
                 </Text>
@@ -208,27 +208,27 @@ export default function Login(props) {
             }}>
             <View
               style={{
-                borderWidth: 1,
+                borderWidth: 0.3,
                 borderColor: themecolor.TXTGREY,
-                width: width * 0.43,
+                width: width * 0.3,
               }}
             />
             <View
               style={{
-                width: width * 0.1,
+                width: width * 0.07,
                 justifyContent: 'center',
                 alignItems: 'center',
               }}>
-              <Text style={{color: themecolor.TXTGREY, fontSize: 12}}>
+              <Text style={{color: themecolor.TXTGREY, fontSize: 11}}>
                 {' '}
-                Or{' '}
+                OR{' '}
               </Text>
             </View>
             <View
               style={{
-                borderWidth: 1,
+                borderWidth: 0.3,
                 borderColor: themecolor.TXTGREY,
-                width: width * 0.43,
+                width: width * 0.3,
               }}
             />
           </View>
@@ -249,11 +249,11 @@ export default function Login(props) {
             }}>
             <Text
               style={{
-                color: themecolor.TXTWHITE,
-                fontSize: 14,
+                color: themecolor.HEADERTHEMECOLOR,
+                fontSize: 12,
                 fontWeight: 'bold',
               }}>
-              Already have an account?
+              Haven't any account?
             </Text>
           </View>
           <TouchableOpacity

@@ -39,12 +39,12 @@ const styles = StyleSheet.create({
   txt1: {
     fontFamily: FontFamily.Popinssemibold,
     color: Colors.black,
-    fontSize: FontSize.labelText2,
+    fontSize: FontSize.labelText3,
   },
   txtLine: {
     fontFamily: FontFamily.Popinssemibold,
     color: Colors.black,
-    fontSize: FontSize.labelText2,
+    fontSize: FontSize.labelText3,
     textDecorationLine: 'line-through',
     textDecorationStyle: 'solid',
   },
@@ -53,17 +53,11 @@ const styles = StyleSheet.create({
     fontSize: 10,
     color: Colors.black,
   },
-
-  txt: {
-    fontSize: 15,
-    fontFamily: FontFamily.Popinssemibold,
-    color: '#121327',
-  },
   iconview: {flexDirection: 'row', alignItems: 'center'},
   AddButton: {
     backgroundColor: Colors.bluetheme,
     borderRadius: 5,
-    height: 25,
+    height: 27,
     alignItems: 'center',
     justifyContent: 'center',
     paddingHorizontal: 8,
@@ -71,7 +65,7 @@ const styles = StyleSheet.create({
   AddButtonIcon: {
     color: Colors.white,
     fontFamily: FontFamily.Popinssemibold,
-    fontSize: FontSize.labelText2,
+    fontSize: FontSize.labelText3,
   },
 });
 

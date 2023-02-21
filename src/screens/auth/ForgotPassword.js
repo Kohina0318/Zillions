@@ -48,11 +48,11 @@ export default function ForgotPassword(props) {
 
 <View
               style={{
-               alignSelf:'center',justifyContent:'center',width:width*0.9,height:height*0.05,marginBottom:10
+               alignSelf:'center',justifyContent:'center',width:width*0.9,height:height*0.04,marginBottom:5
               }}>
               <View>
               <Text
-              style={{   fontSize: 15, color: themecolor.TXTWHITE,textAlign:'left'}}>
+              style={{   fontSize: 12, color: themecolor.TXTWHITE,textAlign:'left'}}>
               {' '}
               Enter your account email address and we'll send instructions on how to reset your password.
             </Text>
@@ -67,7 +67,7 @@ export default function ForgotPassword(props) {
                 borderColor: themecolor.OTPBOXCOLOR,
                 ...RegisterLoginStyles.textInputView,
               }}>
-              <Icon name="email" style={{marginLeft:5}} size={20} color={themecolor.TXTWHITE} />
+              <Icon name="email" style={{marginLeft:15}} size={16} color={themecolor.ADDTOCARTBUTTONCOLOR} />
              <View style={{width:width*0.75}}>
                 <TextInput
                   value={email}
