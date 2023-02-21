@@ -33,13 +33,16 @@ const styles = StyleSheet.create({
       position: 'absolute',
       bottom: 0,
       height: 60,
-      justifyContent: 'center'
+      justifyContent: 'center',
+      alignSelf:'center'
   },
   mainView:
   {
       flexDirection: 'row',
       justifyContent: 'space-between',
-      padding: 10
+      alignSelf:'center',
+      alignContent:'center',
+      width: width *0.94,
   },
   innerView:
   {

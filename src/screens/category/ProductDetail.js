@@ -19,6 +19,10 @@ import {Colors} from '../../assets/config/Colors';
 import StarRating from 'react-native-star-rating';
 import FAIcon from 'react-native-vector-icons/FontAwesome';
 import {getProductView} from '../../repository/CategoryRepository/AllProductCategoryRep';
+import FontAwesome from 'react-native-vector-icons/FontAwesome';
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+import HalfSizeButton from '../../components/shared/button/halfSizeButton';
+import Feather from 'react-native-vector-icons/Feather';
 
 const {width, height} = Dimensions.get('screen');
 
@@ -29,8 +33,12 @@ export default function ProductDetail(props) {
 
   const [productDetailData, setProductDetailData] = React.useState('');
   const [allImages, setAllImages] = React.useState([]);
-
   const [largeImage, setLargeImage] = React.useState(0);
+  const [showWishListed, setShowWishListed] = useState(true);
+
+  const handleWishListed = () => {
+    setShowWishListed(!showWishListed);
+  };
 
   const handleProductView = async () => {
     try {
@@ -103,9 +111,9 @@ export default function ProductDetail(props) {
                 {productDetailData.title}
               </Text>
 
-              <View  style={{marginTop: 10}}/>
+              <View style={{marginTop: 10}} />
 
-              <View style={{ width: width * 0.4}}>
+              <View style={{width: width * 0.4}}>
                 <StarRating
                   disabled={false}
                   maxStars={5}
@@ -116,53 +124,112 @@ export default function ProductDetail(props) {
                 />
               </View>
 
-              <View  style={{marginTop: 10}}/>
+              <View style={{marginTop: 10}} />
 
-                <View
-                  style={{
-                    ...styles.FLEXDIREC1,
-                  }}>
-                  <Text
-                    style={{...styles.RateText, color: themecolor.TXTWHITE}}>
-                    MRP :{' '}
-                  
+              <View
+                style={{
+                  ...styles.FLEXDIREC1,
+                }}>
+                <Text style={{...styles.RateText, color: themecolor.TXTWHITE}}>
+                  MRP :{' '}
                   <Text
                     style={{
                       ...styles.RateTextBig,
                       color: 'grey',
                       textDecorationLine: 'line-through',
                     }}>
-                    <FAIcon name="rupee" size={12} />{" "}
-                    {productDetailData.sale_price}  
+                    <FAIcon name="rupee" size={12} />{' '}
+                    {productDetailData.sale_price}
                   </Text>
                   <Text style={{...styles.RateTextBig, color: Colors.green1}}>
-                    {"  "}
-                    <FAIcon name="rupee" size={12} />{" "}
-                    {productDetailData.purchase_price} 
+                    {'  '}
+                    <FAIcon name="rupee" size={12} />{' '}
+                    {productDetailData.purchase_price}
                   </Text>
-                  <Text style={{...styles.RateTextBig, color: themecolor.TEXTRED}}>
+                  <Text
+                    style={{...styles.RateTextBig, color: themecolor.TEXTRED}}>
                     {'  ('}
                     {productDetailData.discount}%{')'}
                   </Text>
-                  </Text>
-                </View>
-            
+                </Text>
+              </View>
             </View>
           </View>
         </View>
       </ScrollView>
 
-      <TouchableOpacity style={{ ...styles.touchview, backgroundColor: themecolor.LOGINTHEMECOLOR }}>
-                    <View style={styles.mainView}>
-                        <View style={styles.innerView}>
-                            <Text >
-                                Place Order
-                            </Text>
-                        </View>
-                        
-                    </View>
+      <TouchableOpacity
+        style={{
+          ...styles.touchview,
+          backgroundColor: themecolor.LOGINTHEMECOLOR,
+        }}>
+        <View style={{...styles.mainView}}>
+          <View style={{width: '49%'}}>
+            {/* {showWishListed ? (
+              <HalfSizeButton
+                title="Wishlist"
+                icon={
+                  <FontAwesome
+                    name="heart-o"
+                    size={17}
+                    color={themecolor.TEXTRED}
+                  />
+                }
+                onPress={()=>handleWishListed()}
+                backgroundColor={themecolor.LOGINTHEMECOLOR}
+                color={themecolor.TEXTRED}
+                borderColor={themecolor.TEXTRED}
+              />
+            ) : (
+              <HalfSizeButton
+                title="Wishlist"
+                icon={
+                  <FontAwesome
+                    name="heart"
+                    size={17}
+                    color={themecolor.TEXTRED}
+                  />
+                }
+                onPress={()=>handleWishListed()}
+                backgroundColor={themecolor.LOGINTHEMECOLOR}
+                color={themecolor.TEXTRED}
+                borderColor={themecolor.TEXTRED}
+              />
+            )} */}
+             <HalfSizeButton
+                title="Add to cart"
+                icon={ 
+                  <Feather
+                  name="shopping-cart"
+                  size={16}
+                  color={themecolor.TXTWHITE}
+                />
+                }
+                onPress={()=>handleWishListed()}
+                backgroundColor={themecolor.TXTWHITE1}
+                color={themecolor.TXTWHITE}
+                borderColor={themecolor.TXTWHITE}
+              />
+          </View>
 
-                </TouchableOpacity>
+          <View style={{width: '49%'}}>
+            <HalfSizeButton
+              title="Buy now"
+              icon={
+                <MaterialIcons
+                  name="double-arrow"
+                  size={16}
+                  color={"#fff"}
+                />
+              }
+              backgroundColor={"#281E5D"}
+              color={"#fff"}
+              borderColor={"#fff"}
+            />
+          </View>
+
+        </View>
+      </TouchableOpacity>
     </View>
   );
 }
