@@ -110,7 +110,6 @@ export default function ProductDetail(props) {
       </View>
     );
   }
-
   return (
     <View style={{...styles.bg, backgroundColor: themecolor.THEMECOLOR}}>
       <Header title={props.route.params.title} backIcon={true} />
@@ -249,10 +248,14 @@ export default function ProductDetail(props) {
 
               <View style={{}}>
                 <RenderHtml
-                  // contentWidth={widthDes}
-                  source={{html: `${description}`}}
+                  contentWidth={widthDes}
+                  source={{html:description}}
+                  enableExperimentalMarginCollapsing={true}
+                  enableExperimentalBRCollapsing={true}
+                  enableExperimentalGhostLinesPrevention={true}
                 />
               </View>
+              <View style={{marginTop: 20}} />
             </View>
           </View>
 
