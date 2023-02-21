@@ -16,6 +16,8 @@ import { RegisterLoginStyles} from '../../assets/css/RegisterLoginStyles';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import FullsizeButton from './FullsizeButton';
 import {useToast} from 'react-native-toast-notifications';
+import Icon from 'react-native-vector-icons/MaterialIcons';
+import FA from 'react-native-vector-icons/FontAwesome'
 
 const { width, height } = Dimensions.get('screen');
 
@@ -168,7 +170,9 @@ export default function Register(props) {
                 borderColor: themecolor.OTPBOXCOLOR,
                 ...RegisterLoginStyles.textInputView,
               }}>
-              <View>
+              {/* <View> */}
+              <Icon name="account-circle" style={{marginLeft:5}} size={20} color={themecolor.TXTWHITE} />
+              <View style={{width:width*0.75}}>
                 <TextInput
                   value={firstName}
                   placeholderTextColor={themecolor.TXTGREYS}
@@ -191,7 +195,8 @@ export default function Register(props) {
                 borderColor: themecolor.OTPBOXCOLOR,
                 ...RegisterLoginStyles.textInputView,
               }}>
-              <View>
+              <Icon name="account-circle" style={{marginLeft:5}} size={20} color={themecolor.TXTWHITE} />
+              <View style={{width:width*0.75}}>
                 <TextInput
                   value={lastName}
                   placeholderTextColor={themecolor.TXTGREYS}
@@ -214,7 +219,8 @@ export default function Register(props) {
                 borderColor: themecolor.OTPBOXCOLOR,
                 ...RegisterLoginStyles.textInputView,
               }}>
-              <View>
+              <Icon name="account-circle" style={{marginLeft:5}} size={20} color={themecolor.TXTWHITE} />
+              <View style={{width:width*0.75}}>
                 <TextInput
                   value={userName}
                   placeholderTextColor={themecolor.TXTGREYS}
@@ -237,7 +243,8 @@ export default function Register(props) {
                 borderColor: themecolor.OTPBOXCOLOR,
                 ...RegisterLoginStyles.textInputView,
               }}>
-              <View>
+              <FA name="mobile" style={{marginLeft:5}} size={20} color={themecolor.TXTWHITE} />
+              <View style={{width:width*0.75}}>
                 <TextInput
                   value={mobileNo}
                   placeholderTextColor={themecolor.TXTGREYS}
@@ -260,7 +267,8 @@ export default function Register(props) {
                 borderColor: themecolor.OTPBOXCOLOR,
                 ...RegisterLoginStyles.textInputView,
               }}>
-              <View>
+              <Icon name="email" style={{marginLeft:5}} size={20} color={themecolor.TXTWHITE} />
+              <View style={{width:width*0.75}}>
                 <TextInput
                   value={email}
                   placeholderTextColor={themecolor.TXTGREYS}
@@ -284,7 +292,8 @@ export default function Register(props) {
                 backgroundColor: themecolor.OTPBOXCOLOR,
                 borderColor: themecolor.OTPBOXCOLOR,
               }}>
-              <View>
+               <Icon name="vpn-key" style={{marginLeft:5}} size={20} color={themecolor.TXTWHITE} />
+              <View style={{width:width*0.75}}>
                 <TextInput
                   value={password}
                   placeholderTextColor={themecolor.TXTGREYS}
