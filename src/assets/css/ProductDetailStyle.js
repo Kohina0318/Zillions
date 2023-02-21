@@ -15,7 +15,7 @@ const styles = StyleSheet.create({
     color: Colors.black,
     fontFamily: FontFamily.PopinsMedium,
   },
-  FLEXDIREC1: { flexDirection: 'row' },
+  FLEXDIREC1: {flexDirection: 'row'},
   RateText: {
     fontSize: FontSize.labelText2,
     color: Colors.black,
@@ -26,30 +26,45 @@ const styles = StyleSheet.create({
     color: Colors.black,
     fontFamily: FontFamily.PopinsMedium,
   },
-  touchview:
-  {
-      backgroundColor: "#fff",
-      width: width,
-      position: 'absolute',
-      bottom: 0,
-      height: 60,
-      justifyContent: 'center',
-      alignSelf:'center'
+  touchview: {
+    backgroundColor: '#fff',
+    width: width,
+    position: 'absolute',
+    bottom: 0,
+    height: 60,
+    justifyContent: 'center',
+    alignSelf: 'center',
+    borderTopWidth: 0.5,
   },
-  mainView:
-  {
-      flexDirection: 'row',
-      justifyContent: 'space-between',
-      alignSelf:'center',
-      alignContent:'center',
-      width: width *0.94,
+  mainView: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignSelf: 'center',
+    alignContent: 'center',
+    width: width * 0.94,
   },
-  innerView:
-  {
-      width: width * 0.6,
+  innerView: {
+    width: width * 0.6,
   },
-  view14:
-  {
+  otherProductHeading: {
+    fontSize: FontSize.labelText2,
+    fontFamily: FontFamily.PopinsMedium,
+    color: Colors.black,
+    marginBottom: 5,
+  },
+  ViewAllButton: {
+    backgroundColor: Colors.bluetheme,
+    borderRadius: 30,
+    height: 24,
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingHorizontal: 15,
+  },
+  ViewAllButtonIcon: {
+    color: Colors.white,
+    fontSize: FontSize.smallText,
+  },
+  view14: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
@@ -58,31 +73,26 @@ const styles = StyleSheet.create({
   RBText: {
     fontSize: FontSize.mainButton,
     fontFamily: FontFamily.normal,
-    fontWeight:'bold'
+    fontWeight: 'bold',
   },
-  clrtheme:
-  {
-    color: Colors.bluetheme
+  clrtheme: {
+    color: Colors.bluetheme,
   },
-  view16:
-  { justifyContent: 'center', alignSelf: 'center', flex: 1 },
+  view16: {justifyContent: 'center', alignSelf: 'center', flex: 1},
   CardText: {
     fontSize: FontSize.labelText3,
     fontFamily: FontFamily.PopinsMedium,
     alignSelf: 'center',
-    fontWeight:'bold'
+    fontWeight: 'bold',
   },
-  align3:
-  { alignSelf: 'flex-start' },
-  left1:
-  { left: 10 },
-  view17:
-  {
+  align3: {alignSelf: 'flex-start'},
+  left1: {left: 10},
+  view17: {
     justifyContent: 'space-between',
     backgroundColor: Colors.white,
     flexDirection: 'row',
   },
-  marg: { marginVertical: 10 },
+  marg: {marginVertical: 10},
   Borderline: {
     width: width,
     justifyContent: 'center',
@@ -90,7 +100,6 @@ const styles = StyleSheet.create({
     borderWidth: 0.5,
     borderColor: Colors.borderColor,
   },
- 
 });
 
 export {styles};

@@ -8,7 +8,7 @@ const ProductStyle = StyleSheet.create({
   bg: {flex: 1},
   datalistView: {
     width: width * 0.44,
-    height: height *0.38,
+    height: height *0.37,
     margin: 5,
     padding: 10,
     borderRadius: 5,
@@ -41,13 +41,13 @@ const ProductStyle = StyleSheet.create({
     {
         fontFamily: FontFamily.Popinssemibold,
         color: Colors.black,
-        fontSize: FontSize.labelText2
+        fontSize: FontSize.labelText3
     },
     txtLine:
     {
         fontFamily: FontFamily.Popinssemibold,
         color: Colors.black,
-        fontSize: FontSize.labelText2,
+        fontSize: FontSize.labelText3,
         textDecorationLine: 'line-through',
         textDecorationStyle: 'solid',
     },
@@ -57,12 +57,6 @@ const ProductStyle = StyleSheet.create({
         fontSize: 10,
         color: Colors.black
     },
-    
-  txt: {
-    fontSize: 15,
-    fontFamily: FontFamily.Popinssemibold,
-    color: '#121327',
-  },
   iconview: {flexDirection: 'row', alignItems: 'center'},
 });
 
