@@ -34,7 +34,9 @@ const styles = StyleSheet.create({
       bottom: 0,
       height: 60,
       justifyContent: 'center',
-      alignSelf:'center'
+      alignSelf:'center',
+      borderTopWidth:0.5,
+
   },
   mainView:
   {
@@ -47,6 +49,24 @@ const styles = StyleSheet.create({
   innerView:
   {
       width: width * 0.6,
+  },
+  otherProductHeading:{
+    fontSize: FontSize.labelText2,
+      fontFamily: FontFamily.PopinsMedium,
+      color: Colors.black,
+      marginBottom:5,
+  },
+  ViewAllButton: {
+    backgroundColor: Colors.bluetheme,
+    borderRadius: 30,
+    height: 24,
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingHorizontal: 15,
+  },
+  ViewAllButtonIcon: {
+    color: Colors.white,
+    fontSize: FontSize.smallText,
   },
  
 });
