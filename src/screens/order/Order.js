@@ -6,6 +6,7 @@ import {
   Appearance,
   Dimensions,
   TextInput,
+  BackHandler
 } from 'react-native';
 import {useSelector} from 'react-redux';
 import {MyThemeClass} from '../../components/Theme/ThemeDarkLightColor';
@@ -18,23 +19,28 @@ import { getOrderlist } from '../../repository/OrderRepository/OrderRepo';
 
 const {width, height} = Dimensions.get('screen');
 
-const data1 = [
-  {
-    id: 1,
-    name: 'kojjkkkk',
-  },
-  {
-    id: 2,
-    name: 'tiwari',
-  },
-];
-
 export default function Order(props) {
   const mode = useSelector(state => state.mode);
   const themecolor = new MyThemeClass(mode).getThemeColor();
 
   const [data,setData]= useState([])
   const [dataFilter,setDataFilter]= useState([])
+
+  function handleBackButtonClick() {
+    props.navigation.goBack();
+    return true;
+  }
+
+  React.useEffect(() => {
+    BackHandler.addEventListener('hardwareBackPress', handleBackButtonClick);
+    return () => {
+      BackHandler.removeEventListener(
+        'hardwareBackPress',
+        handleBackButtonClick,
+      );
+    };
+  }, []);
+
 
   const handleOrderlist= async() => {
     try {
@@ -70,7 +76,7 @@ export default function Order(props) {
 
   return (
     <View style={{...styles.bg, backgroundColor: themecolor.THEMECOLOR}}>
-      <Header title="Order" />
+      <Header title="Order" backIcon={true}  onPressBack={() => handleBackButtonClick()} />
 
       <View style={{...styles.container}}>
         

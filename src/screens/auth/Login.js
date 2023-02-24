@@ -274,7 +274,7 @@ export default function Login(props) {
             <View
               style={{
                 ...RegisterLoginStyles.btn,
-                backgroundColor: themecolor.BACKICON,
+                backgroundColor: "#fff",
                 borderColor: themecolor.ADDTOCARTBUTTONCOLOR,
               }}>
               <Text
