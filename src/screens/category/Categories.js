@@ -47,19 +47,21 @@ export default function Categories(props) {
  
   useFocusEffect(
     React.useCallback(() => {
+    setLoader(true);
     handleCategories();
-  }, [ props]),
+  }, [props]),
   );
 
 
   return (
     <View style={{...CategoryStyle.bg, backgroundColor: themecolor.THEMECOLOR}}>
+      
+      <Header title="Categories" />
+          
       {loader ? (
         <LoadingFullScreen style={{flex: 1}} />
       ) : (
-        <>
-          <Header title="Categories" />
-          <View
+        <><View
             style={{
               ...CategoryStyle.container,
             }}>

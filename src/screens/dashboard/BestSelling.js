@@ -8,16 +8,12 @@ import {ScrollView} from 'react-native-gesture-handler';
 import {useToast} from 'react-native-toast-notifications';
 import Header from '../../components/shared/header/Header';
 import { getProductList } from '../../repository/DashboardRepository/AllDashboardRep';
+import LoadingFullScreen from '../../components/shared/Loader/LoadingFullScreen';
 
 const {width, height} = Dimensions.get('screen');
 
 export default function BestSelling(props) {
-
-  const toast = useToast();
-  const mode = useSelector(state => state.mode);
-  const themecolor = new MyThemeClass(mode).getThemeColor();
-  const [bestSellingData, setBestSellingData] = useState([]);
- 
+  
   function handleBackButtonClick() {
     props.navigation.goBack();
     return true;
@@ -33,13 +29,21 @@ export default function BestSelling(props) {
     };
   }, []);
 
+  const toast = useToast();
+  const mode = useSelector(state => state.mode);
+  const themecolor = new MyThemeClass(mode).getThemeColor();
+  
+  const [loader, setLoader] = useState(true);
+  const [bestSellingData, setBestSellingData] = useState([]);
+ 
   const handleBestSelling = async () => {
     try {
       var res = await getProductList('deal','20');
-      console.log('handleBestSelling......in BestSelling page', res.data);
       setBestSellingData(res.data);
+      setLoader(false);
     } catch (e) {
       console.log('errrror in..handleBestSelling page BestSelling-->', e);
+      setLoader(false);
       toast.show('Something went wrong!, Try again later.', {
         type: 'danger',
         placement: 'bottom',
@@ -57,7 +61,9 @@ export default function BestSelling(props) {
   return (
     <View style={{...ProductStyle.bg, backgroundColor: themecolor.THEMECOLOR}}>
       <Header title="Best Selling" backIcon={true} onPressBack={() => handleBackButtonClick()}/>
-
+      {loader ? (
+        <LoadingFullScreen style={{flex: 1}} />
+      ) : (
       <View
         style={{
           ...ProductStyle.container,
@@ -74,6 +80,7 @@ export default function BestSelling(props) {
         )}
         <View style={{marginVertical: 40}} />
       </View>
+      )}
     </View>
   );
 }

@@ -15,15 +15,11 @@ import {ScrollView} from 'react-native-gesture-handler';
 import {getSubCategoryByProduct} from '../../repository/CategoryRepository/AllProductCategoryRep';
 import {useToast} from 'react-native-toast-notifications';
 import Header from '../../components/shared/header/Header';
+import LoadingFullScreen from '../../components/shared/Loader/LoadingFullScreen';
 
 const {width, height} = Dimensions.get('screen');
 
 export default function Products(props) {
-  const toast = useToast();
-  const mode = useSelector(state => state.mode);
-  const themecolor = new MyThemeClass(mode).getThemeColor();
-  const [data, setData] = useState([]);
-
   function handleBackButtonClick() {
     props.navigation.goBack();
     return true;
@@ -39,12 +35,21 @@ export default function Products(props) {
     };
   }, []);
 
+  const toast = useToast();
+  const mode = useSelector(state => state.mode);
+  const themecolor = new MyThemeClass(mode).getThemeColor();
+
+  const [loader, setLoader] = useState(true);
+  const [data, setData] = useState([]);
+
   const handleSubCategoryByProduct = async () => {
     try {
       var res = await getSubCategoryByProduct(props.route.params.subCategoryId);
       setData(res.data);
+      setLoader(false);
     } catch (e) {
       console.log('errrror in..getSubCategoryByProduct page-->', e);
+      setLoader(false);
       toast.show('Something went wrong!, Try again later.', {
         type: 'danger',
         placement: 'bottom',
@@ -66,23 +71,26 @@ export default function Products(props) {
         backIcon={true}
         onPressBack={() => handleBackButtonClick()}
       />
-
-      <View
-        style={{
-          ...ProductStyle.container,
-        }}>
-        {data.length > 0 ? (
-          <ScrollView showsVerticalScrollIndicator={false}>
-            <ProductDataList data={data} />
-          </ScrollView>
-        ) : (
-          <View
-            style={{alignItems: 'center', flex: 1, justifyContent: 'center'}}>
-            <Text>No data found!</Text>
-          </View>
-        )}
-        <View style={{marginVertical: 40}} />
-      </View>
+      {loader ? (
+        <LoadingFullScreen style={{flex: 1}} />
+      ) : (
+        <View
+          style={{
+            ...ProductStyle.container,
+          }}>
+          {data.length > 0 ? (
+            <ScrollView showsVerticalScrollIndicator={false}>
+              <ProductDataList data={data} />
+            </ScrollView>
+          ) : (
+            <View
+              style={{alignItems: 'center', flex: 1, justifyContent: 'center'}}>
+              <Text>No data found!</Text>
+            </View>
+          )}
+          <View style={{marginVertical: 40}} />
+        </View>
+      )}
     </View>
   );
 }

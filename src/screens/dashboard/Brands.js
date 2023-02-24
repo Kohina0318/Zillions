@@ -31,7 +31,6 @@ export default function Brands(props) {
   const handleBrands = async () => {
     try {
       var res = await getBrands();
-      console.log('handleBrands......in dashboard page', res.data);
       setBrandsData(res.data);
       setLoader(false);
     } catch (e) {
@@ -49,18 +48,20 @@ export default function Brands(props) {
 
   useFocusEffect(
     React.useCallback(() => {
+      setLoader(true);
       handleBrands();
     }, [props]),
   );
 
   return (
     <View style={{...styles.bg, backgroundColor: themecolor.THEMECOLOR}}>
+      
+      <Header title="Brands" />
+          
       {loader ? (
         <LoadingFullScreen style={{flex: 1}} />
       ) : (
-        <>
-          <Header title="Brands" />
-          <View
+        <><View
             style={{
               ...styles.container,
             }}>
