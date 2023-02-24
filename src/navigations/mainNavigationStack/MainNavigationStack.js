@@ -30,6 +30,7 @@ import ProductDetail from '../../screens/category/ProductDetail';
 import Register from '../../screens/auth/Register';
 import ForgotPassword from '../../screens/auth/ForgotPassword';
 import OrderDetails from '../../screens/order/OrderDetails';
+import Address from '../../screens/mangeAddress/Address';
 
 function MainNavigationStack(props) {
   const Stack = createStackNavigator();
@@ -142,6 +143,11 @@ function MainNavigationStack(props) {
         <Stack.Screen
           name="OrderDetails"
           component={OrderDetails}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="Address"
+          component={Address}
           options={{headerShown: false}}
         />
       </Stack.Navigator>

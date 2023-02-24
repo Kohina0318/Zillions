@@ -12,7 +12,7 @@ export const data = [
   {
     name: 'Manage Address',
     icon: <EP name="location" size={20} />,
-    onpress: ""
+    onpress: "Address"
   },
   {
     name: 'My Wishlist',
