@@ -40,7 +40,7 @@ export default function BottomNavigationStack() {
     <Tab.Navigator
       screenOptions={{
         tabBarStyle: {
-          height: 53,
+          height: 51,
           backgroundColor: themecolor.THEMECOLOR1,
           borderColor: themecolor.BOXBORDERCOLOR,
           keyboardHidesTabBar: true,
@@ -52,7 +52,7 @@ export default function BottomNavigationStack() {
           showLabel: false,
           fontFamily: FontFamily.PopinsMedium,
           headerShown: false,
-          top: 8,
+          
         },
       }}>
       <Tab.Screen

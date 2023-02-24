@@ -104,7 +104,7 @@ export default function Profile(props) {
                           ...ProfileStyle.WellText,
                           color: themecolor.BACKICON,
                         }}>
-                        Welcome to {UserData[0].username}..
+                        Welcome {UserData[0].username}..
                       </Text>
                     </View>
                   </View>
@@ -197,13 +197,13 @@ export default function Profile(props) {
                   onPress={() => handleLogout()}
                   style={{
                     ...ProfileStyle.buttonView3,
-                    backgroundColor: "#fff",
-                    borderColor: themecolor.ADDTOCARTBUTTONCOLOR,
+                    backgroundColor:themecolor.ADDTOCARTBUTTONCOLOR,
+                    borderColor: themecolor.BOXBORDERCOLOR1,
                   }}>
                   <Text
                     style={{
                       ...ProfileStyle.buttonText1,
-                      color: themecolor.ADDTOCARTBUTTONCOLOR,
+                      color:'#FFF',
                     }}>
                     Logout
                   </Text>
