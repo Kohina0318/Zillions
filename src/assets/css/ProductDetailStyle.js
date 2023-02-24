@@ -9,6 +9,7 @@ const styles = StyleSheet.create({
   container: {
     justifyContent: 'center',
     alignSelf: 'center',
+    width: width*0.94,
   },
   HeadText: {
     fontSize: FontSize.labelText4,

@@ -12,13 +12,12 @@ import {DrawerContentScrollView} from '@react-navigation/drawer';
 import {DrawerActions, useNavigation} from '@react-navigation/native';
 import {Image as ImageR} from 'react-native';
 import {navigate} from '../NavigationDrw/NavigationService';
-import {Colors} from '../../assets/config/Colors';
 import {useSelector} from 'react-redux';
 import {MyThemeClass} from '../../components/Theme/ThemeDarkLightColor';
-import MI from 'react-native-vector-icons/MaterialIcons';
 import AD from 'react-native-vector-icons/AntDesign';
+import MCI from 'react-native-vector-icons/MaterialCommunityIcons';
 import FA from 'react-native-vector-icons/FontAwesome';
-import FA5 from 'react-native-vector-icons/FontAwesome5';
+import AsyncStorage from '@react-native-community/async-storage';
 
 const {width} = Dimensions.get('window');
 
@@ -26,6 +25,19 @@ export default function DrawerContent(props) {
   const navigation = useNavigation();
   const mode = useSelector(state => state.mode);
   const themecolor = new MyThemeClass(mode).getThemeColor();
+
+  const [UserData, setUserData] = useState([]);
+
+  useEffect(async () => {
+    try {
+      var UserData = await AsyncStorage.getItem('@UserData');
+      var data = JSON.parse(UserData);
+      if (data == null || data == '' || data == undefined) {
+      } else {
+        setUserData(data);
+      }
+    } catch (e) {}
+  }, []);
 
   return (
     <DrawerContentScrollView
@@ -38,7 +50,7 @@ export default function DrawerContent(props) {
       <View style={MainNavigatorstyle.userinfo1}>
         <View style={{...MainNavigatorstyle.ImageRView}}>
           <ImageR
-            style={{...MainNavigatorstyle.userimg,}}
+            style={{...MainNavigatorstyle.userimg}}
             source={require('../../assets/images/logo.png')}
           />
         </View>
@@ -52,7 +64,7 @@ export default function DrawerContent(props) {
             borderColor: themecolor.BOXBORDERCOLOR1,
           }}
         />
-        <View style={{marginVertical: 10}} />
+        <View style={{marginVertical: 7}} />
 
         <ScrollView showsVerticalScrollIndicator={false}>
           <TouchableOpacity
@@ -68,8 +80,6 @@ export default function DrawerContent(props) {
             </Text>
           </TouchableOpacity>
 
-          <View style={{marginVertical: 5}} />
-
           <TouchableOpacity
             onPress={() => navigate('Categories')}
             style={MainNavigatorstyle.viewstyle1}>
@@ -83,7 +93,18 @@ export default function DrawerContent(props) {
             </Text>
           </TouchableOpacity>
 
-          <View style={{marginVertical: 5}} />
+          <TouchableOpacity
+            onPress={() => navigate('Brands')}
+            style={MainNavigatorstyle.viewstyle1}>
+            <MCI name="tag-outline" size={18} color={themecolor.BACKICON} />
+            <Text
+              style={{
+                ...MainNavigatorstyle.labelstylecss,
+                color: themecolor.TXTWHITE,
+              }}>
+              Brands
+            </Text>
+          </TouchableOpacity>
 
           <TouchableOpacity
             onPress={() => navigate('Profile')}
@@ -98,20 +119,22 @@ export default function DrawerContent(props) {
             </Text>
           </TouchableOpacity>
 
-          <View style={{marginVertical: 5}} />
-
-          <TouchableOpacity
-            // onPress={() => navigate('Dashboard')}
-            style={MainNavigatorstyle.viewstyle1}>
-            <AD name="logout" size={18} color={themecolor.BACKICON} />
-            <Text
-              style={{
-                ...MainNavigatorstyle.labelstylecss,
-                color: themecolor.TXTWHITE,
-              }}>
-              Logout
-            </Text>
-          </TouchableOpacity>
+          {UserData.length > 0 ? (
+            <TouchableOpacity
+              // onPress={() => navigate('Dashboard')}
+              style={MainNavigatorstyle.viewstyle1}>
+              <AD name="logout" size={18} color={themecolor.BACKICON} />
+              <Text
+                style={{
+                  ...MainNavigatorstyle.labelstylecss,
+                  color: themecolor.TXTWHITE,
+                }}>
+                Logout
+              </Text>
+            </TouchableOpacity>
+          ) : (
+            <></>
+          )}
         </ScrollView>
 
         <View
@@ -233,8 +256,8 @@ export default function DrawerContent(props) {
               borderColor: themecolor.BOXBORDERCOLOR1,
             }}
           />
-           <View style={{marginVertical: 3}} />
-          <Text style={{...MainNavigatorstyle.view2txt,}}>App Version 1.0</Text>
+          <View style={{marginVertical: 3}} />
+          <Text style={{...MainNavigatorstyle.view2txt}}>App Version 1.0</Text>
           <View style={{marginVertical: 3}} />
         </View>
       </View>

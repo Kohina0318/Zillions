@@ -7,6 +7,7 @@ import {
   Dimensions,
   TextInput,
   TouchableOpacity,
+  BackHandler
 } from 'react-native';
 import {useSelector} from 'react-redux';
 import {MyThemeClass} from '../../components/Theme/ThemeDarkLightColor';
@@ -23,16 +24,32 @@ import Icon from 'react-native-vector-icons/MaterialIcons'
 const {width, height} = Dimensions.get('screen');
 
 export default function Login(props) {
+  var toast=useToast();
   const mode = useSelector(state => state.mode);
   const themecolor = new MyThemeClass(mode).getThemeColor();
   const navigation = useNavigation();
-  const [email, setEmail] = useState('kunalsahu00125@gmail.com');
-  const [password, setPassword] = useState('123456');
+  const [showmodal, setShowmodal] = useState(false);
+
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   const [isPasswordSecure, setIsPasswordSecure] = useState(true);
 
   const isDarkMode = Appearance.getColorScheme() === 'dark';
 
-  var toast=useToast();
+  function handleBackButtonClick() {
+    props.navigation.goBack();
+    return true;
+  }
+
+  React.useEffect(() => {
+    BackHandler.addEventListener('hardwareBackPress', handleBackButtonClick);
+    return () => {
+      BackHandler.removeEventListener(
+        'hardwareBackPress',
+        handleBackButtonClick,
+      );
+    };
+  }, []);
 
   const handleLogin = async () => {
     if (email == '') {
@@ -64,20 +81,14 @@ export default function Login(props) {
         let formdata=new FormData()
         formdata.append('email',email)
         formdata.append('password',password)
+
         const res = await postLogin(formdata);
         console.log('Data......login api ....line 42..>>>', res);
 
         if (res.status == true) {
           await AsyncStorage.setItem('@UserData', JSON.stringify(res.data));
-          // await AsyncStorage.setItem('@token', res.data.token);
-          props.navigation.navigate('Dashboard');
-          toast.show(res.msg, {
-            type: 'success',
-            placement: 'bottom',
-            duration: 3000,
-            offset: 30,
-            animationType: 'slide-in',
-          });
+          setShowmodal(!showmodal)
+          
         } 
         else {
           toast.show(res.msg, {
@@ -110,7 +121,7 @@ export default function Login(props) {
       />
       <View style={{backgroundColor: themecolor.LOGINTHEMECOLOR, flex: 1}}>
         <View style={{height: height * 0.1}}>
-          <RegisterLoginHeader title="Sign In" />
+          <RegisterLoginHeader title="Sign In"  onPressBack={() => handleBackButtonClick()}/>
         </View>
         <View style={{...RegisterLoginStyles.MGv5}} />
         <View style={{width: width, height: height * 0.68}}>
@@ -152,7 +163,7 @@ export default function Login(props) {
               }}>
               {/* <View> */}
               <Icon name="vpn-key" style={{marginLeft:15}} size={18} color={themecolor.BACKICON} />
-              <View style={{width:width*0.7,}}>
+              <View style={{width:width*0.72,}}>
                 <TextInput
                   value={password}
                   placeholderTextColor={themecolor.TXTGREYS}
@@ -263,13 +274,13 @@ export default function Login(props) {
               style={{
                 ...RegisterLoginStyles.btn,
                 backgroundColor: themecolor.LOGINTHEMECOLOR1,
-                borderColor: themecolor.TXTWHITE,
+                borderColor: themecolor.ADDTOCARTBUTTONCOLOR,
               }}>
               <Text
                 style={{
                   fontSize: 13,
                   fontWeight: 'bold',
-                  color: themecolor.TXTWHITE,
+                  color: themecolor.ADDTOCARTBUTTONCOLOR,
                 }}>
                 Register
               </Text>
@@ -277,6 +288,15 @@ export default function Login(props) {
           </TouchableOpacity>
         </View>
       </View>
+
+      {showmodal && (
+        <VerifyModel
+          setShowmodal={setShowmodal}
+          title={'Sign In Successfully.'}
+          navigateTo={'Profile'}
+          navigateFrom="Login"
+        />
+      )}
     </>
   );
 }

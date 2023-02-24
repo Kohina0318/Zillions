@@ -94,7 +94,7 @@ export default function Dashboard(props) {
 
   const handleLatestProducts = async () => {
     try {
-      var res = await getProductList('latest','5');
+      var res = await getProductList('featured','5');
       // console.log('handleLatestProducts......in dashboard page', res.data);
       setLatestProductsData(res.data);
     } catch (e) {

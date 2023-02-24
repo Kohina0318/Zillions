@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {View, Text, StatusBar, Appearance, Dimensions} from 'react-native';
+import {View, Text, StatusBar, Appearance, Dimensions,BackHandler} from 'react-native';
 import {useSelector} from 'react-redux';
 import {MyThemeClass} from '../../components/Theme/ThemeDarkLightColor';
 import {ProductStyle} from '../../assets/css/ProductStyle';
@@ -16,6 +16,21 @@ export default function MostViewed(props) {
   const mode = useSelector(state => state.mode);
   const themecolor = new MyThemeClass(mode).getThemeColor();
   const [mostViewedData, setMostViewedData] = useState([]);
+
+  function handleBackButtonClick() {
+    props.navigation.goBack();
+    return true;
+  }
+
+  React.useEffect(() => {
+    BackHandler.addEventListener('hardwareBackPress', handleBackButtonClick);
+    return () => {
+      BackHandler.removeEventListener(
+        'hardwareBackPress',
+        handleBackButtonClick,
+      );
+    };
+  }, []);
 
   const handleMostViewed = async () => {
     try {
@@ -40,7 +55,7 @@ export default function MostViewed(props) {
 
   return (
     <View style={{...ProductStyle.bg, backgroundColor: themecolor.THEMECOLOR}}>
-      <Header title="Most Viewed" backIcon={true} />
+      <Header title="Most Viewed" backIcon={true} onPressBack={() => handleBackButtonClick()}/>
 
       <View
         style={{

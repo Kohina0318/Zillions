@@ -12,14 +12,15 @@ import {FontFamily} from '../../assets/fonts/FontFamily';
 import {MyThemeClass} from '../../components/Theme/ThemeDarkLightColor';
 import {MainNavigatorstyle} from '../../assets/css/MainNavigatorstyle';
 import Dashboard from '../../screens/dashboard/Dashboard';
-import MCI from 'react-native-vector-icons/MaterialCommunityIcons';
-import MI from 'react-native-vector-icons/MaterialIcons';
 import FA from 'react-native-vector-icons/FontAwesome';
-import FA5 from 'react-native-vector-icons/FontAwesome5';
 import Categories from '../../screens/category/Categories';
 import Profile from '../../screens/profile/Profile';
-import Order from '../../screens/order/Order';
 import WishList from '../../screens/wishList/WishList';
+import AD from 'react-native-vector-icons/AntDesign';
+import SLI from 'react-native-vector-icons/SimpleLineIcons';
+import MCI from 'react-native-vector-icons/MaterialCommunityIcons';
+import Brands from '../../screens/dashboard/Brands';
+import AsyncStorage from '@react-native-community/async-storage';
 
 const Tab = createBottomTabNavigator();
 const MyTransition = {
@@ -34,7 +35,7 @@ const MyTransition = {
 export default function BottomNavigationStack() {
   const mode = useSelector(state => state.mode);
   const themecolor = new MyThemeClass(mode).getThemeColor();
-
+   
   return (
     <Tab.Navigator
       screenOptions={{
@@ -64,16 +65,17 @@ export default function BottomNavigationStack() {
           tabBarIcon: ({color, size, focused}) =>
             focused ? (
               <>
-                <MCI
-                  name="home"
-                  color={themecolor.BACKICON}
-                  size={24}
+                <AD name="home" color={themecolor.BACKICON} size={24} />
+                <View
+                  style={{
+                    ...MainNavigatorstyle.tabbarbottomborder,
+                    backgroundColor: themecolor.BACKICON,
+                  }}
                 />
-                <View style={{...MainNavigatorstyle.tabbarbottomborder,  backgroundColor:themecolor.BACKICON,}} />
               </>
             ) : (
               <>
-                <MCI name="home" size={24} color={themecolor.TXTGREY} />
+                <AD name="home" size={24} color={themecolor.TXTGREY} />
               </>
             ),
           headerShown: false,
@@ -90,42 +92,17 @@ export default function BottomNavigationStack() {
           tabBarIcon: ({color, size, focused}) =>
             focused ? (
               <>
-                <MI
-                  name="category"
-                  color={themecolor.BACKICON}
-                  size={24}
+                <AD name="appstore-o" color={themecolor.BACKICON} size={22} />
+                <View
+                  style={{
+                    ...MainNavigatorstyle.tabbarbottomborder,
+                    backgroundColor: themecolor.BACKICON,
+                  }}
                 />
-                <View style={{...MainNavigatorstyle.tabbarbottomborder,  backgroundColor:themecolor.BACKICON,}} />
               </>
             ) : (
               <>
-                <MI name="category" size={24} color={themecolor.TXTGREY} />
-              </>
-            ),
-          headerShown: false,
-        }}
-      />
-
-      <Tab.Screen
-        name="Order"
-        component={Order}
-        options={{
-          MyTransition,
-          tabBarLabel: ' ',
-          tabBarLabelStyle: {bottom: -5},
-          tabBarIcon: ({color, size, focused}) =>
-            focused ? (
-              <>
-                <FA5
-                  name="shopping-bag"
-                  color={themecolor.BACKICON}
-                  size={21}
-                />
-                <View style={{...MainNavigatorstyle.tabbarbottomborder,  backgroundColor:themecolor.BACKICON,}} />
-              </>
-            ) : (
-              <>
-                <FA5 name="shopping-bag" size={21} color={themecolor.TXTGREY} />
+                <AD name="appstore-o" size={22} color={themecolor.TXTGREY} />
               </>
             ),
           headerShown: false,
@@ -142,16 +119,44 @@ export default function BottomNavigationStack() {
           tabBarIcon: ({color, size, focused}) =>
             focused ? (
               <>
-                <MCI
-                  name="cards-heart"
-                  color={themecolor.BACKICON}
-                  size={22}
+                <FA name="heart-o" size={23} color={themecolor.BACKICON} />
+                <View
+                  style={{
+                    ...MainNavigatorstyle.tabbarbottomborder,
+                    backgroundColor: themecolor.BACKICON,
+                  }}
                 />
-                <View style={{...MainNavigatorstyle.tabbarbottomborder,  backgroundColor:themecolor.BACKICON,}} />
               </>
             ) : (
               <>
-                <MCI name="cards-heart" size={22} color={themecolor.TXTGREY} />
+                <FA name="heart-o" size={23} color={themecolor.TXTGREY} />
+              </>
+            ),
+          headerShown: false,
+        }}
+      />
+
+      <Tab.Screen
+        name="Brands"
+        component={Brands}
+        options={{
+          MyTransition,
+          tabBarLabel: ' ',
+          tabBarLabelStyle: {bottom: -5},
+          tabBarIcon: ({color, size, focused}) =>
+            focused ? (
+              <>
+                <MCI name="tag-outline" color={themecolor.BACKICON} size={24} />
+                <View
+                  style={{
+                    ...MainNavigatorstyle.tabbarbottomborder,
+                    backgroundColor: themecolor.BACKICON,
+                  }}
+                />
+              </>
+            ) : (
+              <>
+                <MCI name="tag-outline" size={24} color={themecolor.TXTGREY} />
               </>
             ),
           headerShown: false,
@@ -168,16 +173,17 @@ export default function BottomNavigationStack() {
           tabBarIcon: ({color, size, focused}) =>
             focused ? (
               <>
-                <FA
-                  name="user-circle"
-                  color={themecolor.BACKICON}
-                  size={22}
+                <FA name="user-o" color={themecolor.BACKICON} size={22} />
+                <View
+                  style={{
+                    ...MainNavigatorstyle.tabbarbottomborder,
+                    backgroundColor: themecolor.BACKICON,
+                  }}
                 />
-                <View style={{...MainNavigatorstyle.tabbarbottomborder,  backgroundColor:themecolor.BACKICON,}} />
               </>
             ) : (
               <>
-                <FA name="user-circle-o" size={22} color={themecolor.TXTGREY} />
+                <FA name="user-o" size={22} color={themecolor.TXTGREY} />
               </>
             ),
           headerShown: false,

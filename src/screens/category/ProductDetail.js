@@ -1,4 +1,4 @@
-import React, {useEffect, useState,useRef} from 'react';
+import React, {useEffect, useState, useRef} from 'react';
 import {
   View,
   Text,
@@ -8,6 +8,7 @@ import {
   Image,
   TouchableOpacity,
   useWindowDimensions,
+  BackHandler,
 } from 'react-native';
 import {useSelector} from 'react-redux';
 import {MyThemeClass} from '../../components/Theme/ThemeDarkLightColor';
@@ -20,7 +21,10 @@ import {Colors} from '../../assets/config/Colors';
 import StarRating from 'react-native-star-rating';
 import FAIcon from 'react-native-vector-icons/FontAwesome';
 import MCIcon from 'react-native-vector-icons/MaterialCommunityIcons';
-import {getProductView} from '../../repository/CategoryRepository/AllProductCategoryRep';
+import {
+  getProductRealedProducts,
+  getProductView,
+} from '../../repository/CategoryRepository/AllProductCategoryRep';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import HalfSizeButton from '../../components/shared/button/halfSizeButton';
@@ -28,33 +32,10 @@ import Feather from 'react-native-vector-icons/Feather';
 import RenderHtml from 'react-native-render-html';
 import {DashboardProductDataList} from '../../components/shared/FlateLists/DashboardFlatList/DashboardProductDataList';
 import RBSheet from 'react-native-raw-bottom-sheet';
-import EN from 'react-native-vector-icons/Entypo'
+import EN from 'react-native-vector-icons/Entypo';
 
 const {width, height} = Dimensions.get('screen');
 
-const data = [
-  {
-    id: 1,
-    title: 'kkhdhchuduhi',
-    purchase_price: '789',
-    sale_price: '300',
-    rating_num: 2,
-  },
-  {
-    id: 2,
-    title: 'ihkhggg',
-    purchase_price: '999',
-    sale_price: '400',
-    rating_num: 4,
-  },
-  {
-    id: 3,
-    title: 'dtyhhhdhchuduhi',
-    purchase_price: '509',
-    sale_price: '200',
-    rating_num: 0,
-  },
-];
 export default function ProductDetail(props) {
   const {widthDes} = useWindowDimensions();
 
@@ -64,10 +45,27 @@ export default function ProductDetail(props) {
   const themecolor = new MyThemeClass(mode).getThemeColor();
 
   const [productDetailData, setProductDetailData] = React.useState('');
+  const [productId, setProductId] = React.useState('');
   const [description, setDescription] = React.useState('');
   const [allImages, setAllImages] = React.useState([]);
   const [largeImage, setLargeImage] = React.useState(0);
+  const [relatedProductData, setRelatedProductData] = useState([]);
   const [showWishListed, setShowWishListed] = useState(true);
+
+  function handleBackButtonClick() {
+    props.navigation.goBack();
+    return true;
+  }
+
+  React.useEffect(() => {
+    BackHandler.addEventListener('hardwareBackPress', handleBackButtonClick);
+    return () => {
+      BackHandler.removeEventListener(
+        'hardwareBackPress',
+        handleBackButtonClick,
+      );
+    };
+  }, []);
 
   const handleWishListed = () => {
     setShowWishListed(!showWishListed);
@@ -81,6 +79,7 @@ export default function ProductDetail(props) {
         res.data,
       );
       setProductDetailData(res.data);
+      setProductId(res.data.product_id);
       setDescription(res.data.description);
       setAllImages(res.data.all_image);
     } catch (e) {
@@ -95,15 +94,32 @@ export default function ProductDetail(props) {
     }
   };
 
+  const handleRelatedProduct = async () => {
+    try {
+      var res = await getProductRealedProducts('most_viewed', '20', productId);
+      setRelatedProductData(res.data);
+    } catch (e) {
+      console.log('errrror in..handleRelatedProduct page-->', e);
+      toast.show('Something went wrong!, Try again later.', {
+        type: 'danger',
+        placement: 'bottom',
+        duration: 3000,
+        offset: 30,
+        animationType: 'slide-in',
+      });
+    }
+  };
+
   useEffect(() => {
     handleProductView();
+    handleRelatedProduct();
   }, []);
 
   function renderimage(image, index) {
     return (
       <View key={index}>
         <Image
-          style={{width: width, height: height * 0.3}}
+          style={{width: width * 0.88, height: height * 0.3}}
           source={{uri: image}}
           resizeMode={'contain'}
         />
@@ -112,7 +128,13 @@ export default function ProductDetail(props) {
   }
   return (
     <View style={{...styles.bg, backgroundColor: themecolor.THEMECOLOR}}>
-      <Header title={props.route.params.title} backIcon={true} />
+      <Header
+        title={props.route.params.title}
+        backIcon={true}
+        onPressBack={() => handleBackButtonClick()}
+      />
+
+      <View style={{marginTop: 10}} />
 
       <ScrollView showsVerticalScrollIndicator={false}>
         <View
@@ -122,25 +144,29 @@ export default function ProductDetail(props) {
           <View
             style={{
               backgroundColor: themecolor.BOXTHEMECOLOR,
-              borderWidth: 1,
+              borderWidth: 0.5,
               borderColor: themecolor.BOXBORDERCOLOR1,
-              width: width,
+              borderRadius: 5,
+              padding: 10,
             }}>
-            <Carousel
-              autoplay={false}
-              index={largeImage}
-              pageSize={(width, height)}>
-              {allImages.map((image, index) => renderimage(image, index))}
-            </Carousel>
+            <View style={{width: '100%', height: height * 0.33}}>
+              <Carousel
+                autoplay={false}
+                index={largeImage}
+                // pageSize={(width, height)}
+              >
+                {allImages.map((image, index) => renderimage(image, index))}
+              </Carousel>
+            </View>
 
             <View
               style={{
                 alignSelf: 'center',
                 justifyContent: 'flex-start',
-                width: width * 0.9,
+                padding: 10,
               }}>
-              <View style={{flexDirection: 'row', width: width * 0.9}}>
-                <View style={{width: width * 0.8}}>
+              <View style={{flexDirection: 'row', width: '100%'}}>
+                <View style={{width: width * 0.7}}>
                   <Text
                     style={{...styles.HeadText, color: themecolor.TXTWHITE}}>
                     {productDetailData.title}
@@ -249,7 +275,7 @@ export default function ProductDetail(props) {
               <View style={{}}>
                 <RenderHtml
                   contentWidth={widthDes}
-                  source={{html:description}}
+                  source={{html: description}}
                   enableExperimentalMarginCollapsing={true}
                   enableExperimentalBRCollapsing={true}
                   enableExperimentalGhostLinesPrevention={true}
@@ -261,23 +287,27 @@ export default function ProductDetail(props) {
 
           <View style={{marginTop: 10}} />
 
-          <View
-            style={{
-              alignSelf: 'center',
-              justifyContent: 'flex-start',
-              width: width * 0.9,
-            }}>
-            <Text
+          {relatedProductData.length > 0 ? (
+            <View
               style={{
-                ...styles.otherProductHeading,
-                color: themecolor.TXTWHITE,
+                alignSelf: 'center',
+                justifyContent: 'flex-start',
+                width: width * 0.94,
               }}>
-              Related Products
-            </Text>
-            <View>
-              <DashboardProductDataList data={data} />
+              <Text
+                style={{
+                  ...styles.otherProductHeading,
+                  color: themecolor.TXTWHITE,
+                }}>
+                Related Products
+              </Text>
+              <View>
+                <DashboardProductDataList data={relatedProductData} />
+              </View>
             </View>
-          </View>
+          ) : (
+            <></>
+          )}
 
           <View style={{marginTop: 10}} />
         </View>
@@ -292,120 +322,116 @@ export default function ProductDetail(props) {
           backgroundColor: themecolor.LOGINTHEMECOLOR,
         }}>
         <View style={{...styles.mainView}}>
-          
-        {productDetailData.current_stock > 0 ? (
-          <>
-          <View style={{width: '49%'}}>
-            <HalfSizeButton
-              title="Add to cart"
-              icon={
-                <Feather
-                  name="shopping-cart"
-                  size={16}
+          {productDetailData.current_stock > 0 ? (
+            <>
+              <View style={{width: '49%'}}>
+                <HalfSizeButton
+                  title="Add to cart"
+                  icon={
+                    <Feather
+                      name="shopping-cart"
+                      size={16}
+                      color={themecolor.TXTWHITE}
+                    />
+                  }
+                  backgroundColor={themecolor.TXTWHITE1}
                   color={themecolor.TXTWHITE}
+                  borderColor={themecolor.TXTWHITE}
                 />
-              }
-              backgroundColor={themecolor.TXTWHITE1}
-              color={themecolor.TXTWHITE}
-              borderColor={themecolor.TXTWHITE}
-            />
-          </View>
+              </View>
 
-          <View style={{width: '49%'}}>
-            <HalfSizeButton
-              title="Buy now"
-              icon={
-                <MaterialIcons name="double-arrow" size={16} color={'#fff'} />
-              }
-              onPress={()=>refRBSheet.current.open()}
-              backgroundColor={themecolor.ADDTOCARTBUTTONCOLOR}
-              color={'#fff'}
-              borderColor={themecolor.BORDERCOLOR}
-            />
-          </View>
-          </>
-        ):(
-          <View style={{width: '100%'}}>
-            <HalfSizeButton
-              title="Out of Stock"
-              icon={
-                <MCIcon
-                  name="cart-off"
-                  size={16}
-                  color={"#fff"}
+              <View style={{width: '49%'}}>
+                <HalfSizeButton
+                  title="Buy now"
+                  icon={
+                    <MaterialIcons
+                      name="double-arrow"
+                      size={16}
+                      color={'#fff'}
+                    />
+                  }
+                  onPress={() => refRBSheet.current.open()}
+                  backgroundColor={themecolor.ADDTOCARTBUTTONCOLOR}
+                  color={'#fff'}
+                  borderColor={themecolor.BORDERCOLOR}
                 />
-              }
-              backgroundColor={themecolor.TEXTRED}
-              color={"#fff"}
-              borderColor={themecolor.TEXTRED}
-            />
-          </View>
-        )}
+              </View>
+            </>
+          ) : (
+            <View style={{width: '100%'}}>
+              <HalfSizeButton
+                title="Out of Stock"
+                icon={<MCIcon name="cart-off" size={16} color={'#fff'} />}
+                backgroundColor={themecolor.TEXTRED}
+                color={'#fff'}
+                borderColor={themecolor.TEXTRED}
+              />
+            </View>
+          )}
 
           <RBSheet
-        ref={refRBSheet}
-        animationType={'slide'}
-        closeOnDragDown={true}
-        closeOnPressMask={true}
-        height={150}
-        customStyles={{
-          container: {
-            borderTopRightRadius: 20,
-            borderTopLeftRadius: 20,
-            borderBottomLeftRadius: 0,
-            backgroundColor: themecolor.RB2,
-          },
-          draggableIcon: {
-            display: 'none',
-          },
-        }}>
-        <View style={{...styles.view14}}>
-          <TouchableOpacity
-            activeOpacity={1}
-            onPress={() => refRBSheet.current.close()}>
-            <EN name="cross" color={themecolor.TXTWHITE} size={28} />
-          </TouchableOpacity>
-          <View>
-            <Text style={{...styles.RBText, color: themecolor.TXTWHITE}}>
-              Buy Now
-            </Text>
-          </View>
-          <View>
-            <View>
-              <TouchableOpacity activeOpacity={1} onPress={() => OnClick()}>
+            ref={refRBSheet}
+            animationType={'slide'}
+            closeOnDragDown={true}
+            closeOnPressMask={true}
+            height={150}
+            customStyles={{
+              container: {
+                borderTopRightRadius: 20,
+                borderTopLeftRadius: 20,
+                borderBottomLeftRadius: 0,
+                backgroundColor: themecolor.RB2,
+              },
+              draggableIcon: {
+                display: 'none',
+              },
+            }}>
+            <View style={{...styles.view14}}>
+              <TouchableOpacity
+                activeOpacity={1}
+                onPress={() => refRBSheet.current.close()}>
+                <EN name="cross" color={themecolor.TXTWHITE} size={28} />
+              </TouchableOpacity>
+              <View>
+                <Text style={{...styles.RBText, color: themecolor.TXTWHITE}}>
+                  Buy Now
+                </Text>
+              </View>
+              <View>
+                <View>
+                  <TouchableOpacity activeOpacity={1} onPress={() => OnClick()}>
+                    <Text
+                      style={{
+                        ...styles.RBText,
+                        ...styles.clrtheme,
+                        color: themecolor.TXTWHITE,
+                      }}>
+                      Done
+                    </Text>
+                  </TouchableOpacity>
+                </View>
+              </View>
+            </View>
+            <View style={{...styles.Borderline}} />
+            <View style={styles.view16}>
+              <View>
                 <Text
                   style={{
-                    ...styles.RBText,
-                    ...styles.clrtheme,
+                    ...styles.CardText,
+                    ...styles.align3,
+                    ...styles.left1,
                     color: themecolor.TXTWHITE,
+                    marginBottom: 10,
                   }}>
-                  Done
+                  Please add quantity
                 </Text>
-              </TouchableOpacity>
+              </View>
+              <View style={styles.view17}>
+                {/* <DatePickerRange onChange={value => handleChange(value)} /> */}
+              </View>
+              <View style={styles.marg} />
             </View>
-          </View>
-        </View>
-        <View style={{...styles.Borderline}} />
-        <View style={styles.view16}>
-          <View>
-            <Text
-              style={{
-                ...styles.CardText,
-                ...styles.align3,
-                ...styles.left1,
-                color: themecolor.TXTWHITE,
-                marginBottom: 10,
-              }}>
-             Please add quantity
-            </Text>
-          </View>
-          <View style={styles.view17}>
-            {/* <DatePickerRange onChange={value => handleChange(value)} /> */}
-          </View>
-          <View style={styles.marg} />
-        </View>
-      </RBSheet>
-
+          </RBSheet>
         </View>
       </TouchableOpacity>
     </View>

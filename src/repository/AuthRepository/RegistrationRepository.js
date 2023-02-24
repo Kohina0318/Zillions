@@ -1,11 +1,11 @@
 const postRegistration = async (formdata) => {
     try {
       const response = await fetch(
-          `https://www.zillionsbuyer.com/home/registration/add_info/`,
+          "https://www.zillionsbuyer.com/registration/add_info",
         {
           method: 'POST',
           headers: {'Content-Type':'multipart/form-data'},
-           body:formdata
+          body:formdata
         },
       );
       const result = await response.json();

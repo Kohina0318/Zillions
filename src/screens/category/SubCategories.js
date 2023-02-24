@@ -6,6 +6,7 @@ import {
   Appearance,
   Dimensions,
   ScrollView,
+  BackHandler
 } from 'react-native';
 import {useSelector} from 'react-redux';
 import {MyThemeClass} from '../../components/Theme/ThemeDarkLightColor';
@@ -23,10 +24,24 @@ export default function SubCategories(props) {
   const themecolor = new MyThemeClass(mode).getThemeColor();
   const [data, setData] = useState([]);
 
+  function handleBackButtonClick() {
+    props.navigation.goBack();
+    return true;
+  }
+
+  React.useEffect(() => {
+    BackHandler.addEventListener('hardwareBackPress', handleBackButtonClick);
+    return () => {
+      BackHandler.removeEventListener(
+        'hardwareBackPress',
+        handleBackButtonClick,
+      );
+    };
+  }, []);
+
   const handleSubCategories= async() => {
     try {
       var res = await getSubCategories(props.route.params.categoryId);
-      // console.log('data....getSubCategories...-->', res.data);
       setData(res.data);
     } catch (e) {
       console.log('errrror in..getSubCategories page-->', e);
@@ -40,14 +55,13 @@ export default function SubCategories(props) {
     }
   }
 
-  
   useEffect(() => {
     handleSubCategories()
   }, []);
 
   return (
     <View style={{...CategoryStyle.bg, backgroundColor: themecolor.THEMECOLOR}}>
-      <Header title={props.route.params.categoryName} backIcon={true} />
+      <Header title={props.route.params.categoryName} backIcon={true}  onPressBack={() => handleBackButtonClick()}/>
 
       <View
         style={{

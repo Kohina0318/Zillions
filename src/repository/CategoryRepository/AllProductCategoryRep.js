@@ -65,5 +65,23 @@ const getProductView = async (pId) => {
   }
 };
 
+const getProductRealedProducts = async (spec,limit,pId) => {
+  try {
+    const response = await fetch(
+        `https://www.zillionsbuyer.com/product-list?speciality=${spec}&limit=${limit}&id=${pId}`,
+      {
+        method: 'GET',
+        headers: {'Content-Type': 'application/json;charset=utf-8'},
+      },
+    );
+    const result = await response.json();
+    console.log('getProductRealedProducts api data....in AllProductCategoryRep', result);
+      return result;
+  } catch (err) {
+    console.log('error in getProductRealedProducts...in AllProductCategoryRep ', err);
+  }
+};
 
-export {getCategories,getSubCategoryByProduct,getSubCategories,getProductView};
+
+
+export {getCategories,getSubCategoryByProduct,getSubCategories,getProductView,getProductRealedProducts};
