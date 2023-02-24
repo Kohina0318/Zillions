@@ -138,7 +138,7 @@ export default function Profile(props) {
                       <View
                         style={{
                           ...ProfileStyle.buttonView1,
-                          backgroundColor: themecolor.LOGINTHEMECOLOR1,
+                          backgroundColor: "#fff",
                           borderColor: themecolor.ADDTOCARTBUTTONCOLOR,
                         }}>
                         <Text
@@ -191,7 +191,7 @@ export default function Profile(props) {
                   onPress={() => handleLogout()}
                   style={{
                     ...ProfileStyle.buttonView3,
-                    backgroundColor: themecolor.LOGINTHEMECOLOR1,
+                    backgroundColor: "#fff",
                     borderColor: themecolor.ADDTOCARTBUTTONCOLOR,
                   }}>
                   <Text

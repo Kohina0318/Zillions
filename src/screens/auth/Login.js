@@ -19,7 +19,8 @@ import FullsizeButton from './FullsizeButton';
 import {useToast} from 'react-native-toast-notifications';
 import { postLogin } from '../../repository/AuthRepository/LoginRepository';
 import AsyncStorage from '@react-native-community/async-storage';
-import Icon from 'react-native-vector-icons/MaterialIcons'
+import Icon from 'react-native-vector-icons/MaterialIcons';
+import VerifyModel from '../../components/shared/Model/VerifyModel';
 
 const {width, height} = Dimensions.get('screen');
 
@@ -273,7 +274,7 @@ export default function Login(props) {
             <View
               style={{
                 ...RegisterLoginStyles.btn,
-                backgroundColor: themecolor.LOGINTHEMECOLOR1,
+                backgroundColor: "#fff",
                 borderColor: themecolor.ADDTOCARTBUTTONCOLOR,
               }}>
               <Text
@@ -293,7 +294,7 @@ export default function Login(props) {
         <VerifyModel
           setShowmodal={setShowmodal}
           title={'Sign In Successfully.'}
-          navigateTo={'Profile'}
+          navigateTo='Dashboard'
           navigateFrom="Login"
         />
       )}
