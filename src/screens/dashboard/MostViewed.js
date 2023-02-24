@@ -8,14 +8,10 @@ import {ScrollView} from 'react-native-gesture-handler';
 import {useToast} from 'react-native-toast-notifications';
 import Header from '../../components/shared/header/Header';
 import { getProductList } from '../../repository/DashboardRepository/AllDashboardRep';
+import LoadingFullScreen from '../../components/shared/Loader/LoadingFullScreen';
 const {width, height} = Dimensions.get('screen');
 
 export default function MostViewed(props) {
-
-  const toast = useToast();
-  const mode = useSelector(state => state.mode);
-  const themecolor = new MyThemeClass(mode).getThemeColor();
-  const [mostViewedData, setMostViewedData] = useState([]);
 
   function handleBackButtonClick() {
     props.navigation.goBack();
@@ -32,13 +28,22 @@ export default function MostViewed(props) {
     };
   }, []);
 
+  const toast = useToast();
+  const mode = useSelector(state => state.mode);
+  const themecolor = new MyThemeClass(mode).getThemeColor();
+  
+  const [loader, setLoader] = useState(true);
+  const [mostViewedData, setMostViewedData] = useState([]);
+
   const handleMostViewed = async () => {
     try {
       var res = await getProductList('most_viewed','20');
       console.log('handleMostViewed......in MostViewed page', res.data);
       setMostViewedData(res.data);
+      setLoader(false);
     } catch (e) {
       console.log('errrror in..handleMostViewed page MostViewed-->', e);
+      setLoader(false);
       toast.show('Something went wrong!, Try again later.', {
         type: 'danger',
         placement: 'bottom',
@@ -56,7 +61,9 @@ export default function MostViewed(props) {
   return (
     <View style={{...ProductStyle.bg, backgroundColor: themecolor.THEMECOLOR}}>
       <Header title="Most Viewed" backIcon={true} onPressBack={() => handleBackButtonClick()}/>
-
+      {loader ? (
+        <LoadingFullScreen style={{flex: 1}} />
+      ) : (
       <View
         style={{
           ...ProductStyle.container,
@@ -73,6 +80,7 @@ export default function MostViewed(props) {
         )}
         <View style={{marginVertical: 40}} />
       </View>
+      )}
     </View>
   );
 }

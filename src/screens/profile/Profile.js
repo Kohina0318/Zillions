@@ -28,6 +28,7 @@ export default function Profile(props) {
   const themecolor = new MyThemeClass(mode).getThemeColor();
 
   const [loader, setLoader] = useState(true);
+  const [refresh, setRefresh] = useState(false);
   const [UserData, setUserData] = useState([]);
 
   const handleUserData= async () => {
@@ -35,6 +36,7 @@ export default function Profile(props) {
       var UserData = await AsyncStorage.getItem('@UserData');
       var data = JSON.parse(UserData);
       if (data == null || data == '' || data == undefined) {
+        setUserData([])
         setLoader(false);
       } else {
         setUserData(data);
@@ -47,23 +49,27 @@ export default function Profile(props) {
 
   useFocusEffect(
     React.useCallback(() => {
+      setLoader(true);
       handleUserData();
-    }, [props]),
+    }, [refresh,props]),
   );
 
 
   const handleLogout = async () => {
-    await AsyncStorage.removeItem('@UserData');
+    const daat =await AsyncStorage.removeItem('@UserData');
+    setRefresh(!refresh) 
   };
 
   return (
     <View style={{backgroundColor: themecolor.THEMECOLOR, flex: 1}}>
+      
+      <Header title="Profile" />
+
       {loader ? (
         <LoadingFullScreen style={{flex: 1}} />
       ) : (
         <>
-          <Header title="Profile" />
-
+          
           <View style={{marginTop: 10}} />
 
           <ScrollView showsVerticalScrollIndicator={false}>

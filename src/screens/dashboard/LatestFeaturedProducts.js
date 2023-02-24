@@ -8,16 +8,12 @@ import {ScrollView} from 'react-native-gesture-handler';
 import {useToast} from 'react-native-toast-notifications';
 import Header from '../../components/shared/header/Header';
 import { getProductList } from '../../repository/DashboardRepository/AllDashboardRep';
+import LoadingFullScreen from '../../components/shared/Loader/LoadingFullScreen';
 
 const {width, height} = Dimensions.get('screen');
 
 export default function LatestFeaturedProducts(props) {
 
-  const toast = useToast();
-  const mode = useSelector(state => state.mode);
-  const themecolor = new MyThemeClass(mode).getThemeColor();
-  const [latestProductsData, setLatestProductsData] = useState([]);
-  
   function handleBackButtonClick() {
     props.navigation.goBack();
     return true;
@@ -33,13 +29,22 @@ export default function LatestFeaturedProducts(props) {
     };
   }, []);
 
+  const toast = useToast();
+  const mode = useSelector(state => state.mode);
+  const themecolor = new MyThemeClass(mode).getThemeColor();
+  
+  const [loader, setLoader] = useState(true);
+  const [latestProductsData, setLatestProductsData] = useState([]);
+  
   const handleLatestProducts = async () => {
     try {
       var res = await getProductList('latest','20');
       console.log('handleLatestProducts......in LatestFeaturedProducts page', res.data);
       setLatestProductsData(res.data);
+      setLoader(false);
     } catch (e) {
       console.log('errrror in..handleLatestProducts page LatestFeaturedProducts-->', e);
+      setLoader(false);
       toast.show('Something went wrong!, Try again later.', {
         type: 'danger',
         placement: 'bottom',
@@ -57,7 +62,9 @@ export default function LatestFeaturedProducts(props) {
   return (
     <View style={{...ProductStyle.bg, backgroundColor: themecolor.THEMECOLOR}}>
       <Header title="Latest Featured Products" backIcon={true} onPressBack={() => handleBackButtonClick()}/>
-
+      {loader ? (
+        <LoadingFullScreen style={{flex: 1}} />
+      ) : (
       <View
         style={{
           ...ProductStyle.container,
@@ -74,6 +81,7 @@ export default function LatestFeaturedProducts(props) {
         )}
         <View style={{marginVertical: 40}} />
       </View>
+      )}
     </View>
   );
 }

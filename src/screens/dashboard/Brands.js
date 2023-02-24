@@ -49,18 +49,20 @@ export default function Brands(props) {
 
   useFocusEffect(
     React.useCallback(() => {
+      setLoader(true);
       handleBrands();
     }, [props]),
   );
 
   return (
     <View style={{...styles.bg, backgroundColor: themecolor.THEMECOLOR}}>
+      
+      <Header title="Brands" />
+          
       {loader ? (
         <LoadingFullScreen style={{flex: 1}} />
       ) : (
-        <>
-          <Header title="Brands" />
-          <View
+        <><View
             style={{
               ...styles.container,
             }}>

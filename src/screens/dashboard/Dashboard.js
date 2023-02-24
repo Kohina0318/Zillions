@@ -168,6 +168,7 @@ export default function Dashboard(props) {
 
   useFocusEffect(
     React.useCallback(() => {
+      setLoader(true);
       handleCategories();
       handleCarousel();
       handleBrands();
@@ -178,9 +179,9 @@ export default function Dashboard(props) {
     }, [refresh, props]),
   );
 
-  useEffect(() => {
-    setRefresh(!refresh);
-  }, []);
+  // useEffect(() => {
+  //   setRefresh(!refresh);
+  // }, []);
 
   return (
     <View style={{...styles.bg, backgroundColor: themecolor.THEMECOLOR}}>
@@ -190,12 +191,12 @@ export default function Dashboard(props) {
         barStyle={mode === 'dark' ? 'light-content' : 'dark-content'}
       />
 
+      <Header title="Home" />
+
       {loader ? (
         <LoadingFullScreen style={{flex: 1}} />
       ) : (
         <>
-          <Header title="Home" />
-
           <ScrollView showsVerticalScrollIndicator={false}>
             <View style={{marginVertical: 5}} />
 

@@ -44,18 +44,19 @@ export default function WishList(props) {
 
   useFocusEffect(
     React.useCallback(() => {
+      setLoader(true);
       handleWishlist();
     }, [props]),
   );
 
   return (
     <View style={{...styles.bg, backgroundColor: themecolor.THEMECOLOR}}>
+      <Header title="Wishlist" />
+
       {loader ? (
         <LoadingFullScreen style={{flex: 1}} />
       ) : (
-        <>
-          <Header title="Wishlist" />
-
+        <> 
           <View style={{...styles.container}}>
             {data.length > 0 ? (
               <ScrollView showsVerticalScrollIndicator={false}>

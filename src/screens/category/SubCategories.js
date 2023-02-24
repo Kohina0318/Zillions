@@ -15,14 +15,11 @@ import {getSubCategories} from '../../repository/CategoryRepository/AllProductCa
 import {useToast} from 'react-native-toast-notifications';
 import Header from '../../components/shared/header/Header';
 import {SubCategoryDataList} from '../../components/shared/FlateLists/CategoryFlatList/SubCategoryDataList';
+import LoadingFullScreen from '../../components/shared/Loader/LoadingFullScreen';
 
 const {width, height} = Dimensions.get('screen');
 
 export default function SubCategories(props) {
-  const toast = useToast();
-  const mode = useSelector(state => state.mode);
-  const themecolor = new MyThemeClass(mode).getThemeColor();
-  const [data, setData] = useState([]);
 
   function handleBackButtonClick() {
     props.navigation.goBack();
@@ -39,12 +36,21 @@ export default function SubCategories(props) {
     };
   }, []);
 
+  const toast = useToast();
+  const mode = useSelector(state => state.mode);
+  const themecolor = new MyThemeClass(mode).getThemeColor();
+  
+  const [loader, setLoader] = useState(true);
+  const [data, setData] = useState([]);
+ 
   const handleSubCategories= async() => {
     try {
       var res = await getSubCategories(props.route.params.categoryId);
       setData(res.data);
+      setLoader(false)
     } catch (e) {
       console.log('errrror in..getSubCategories page-->', e);
+      setLoader(false)
       toast.show('Something went wrong!, Try again later.', {
         type: 'danger',
         placement: 'bottom',
@@ -62,7 +68,9 @@ export default function SubCategories(props) {
   return (
     <View style={{...CategoryStyle.bg, backgroundColor: themecolor.THEMECOLOR}}>
       <Header title={props.route.params.categoryName} backIcon={true}  onPressBack={() => handleBackButtonClick()}/>
-
+      {loader ? (
+        <LoadingFullScreen style={{flex: 1}} />
+      ) : (
       <View
         style={{
           ...CategoryStyle.container,
@@ -77,6 +85,7 @@ export default function SubCategories(props) {
         )}
         <View style={{marginVertical: 20}} />
       </View>
+      )}
     </View>
   );
 }
