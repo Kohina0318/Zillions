@@ -57,6 +57,6 @@ export const RegisterLoginStyles = StyleSheet.create({
     borderWidth: 2,
     justifyContent: 'center',
     alignItems: 'center',
-    borderRadius: 4,
+    borderRadius: 10,
   },
 });
