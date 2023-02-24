@@ -22,11 +22,12 @@ import {useToast} from 'react-native-toast-notifications';
 import {getCategories} from '../../repository/CategoryRepository/AllProductCategoryRep';
 import CarouselFile from '../../components/shared/Carousel/CarouselFile';
 import {Avatar} from '@rneui/themed';
-import {useNavigation} from '@react-navigation/native';
+import {useFocusEffect, useNavigation} from '@react-navigation/native';
 import {DashboardCategoryDataList} from '../../components/shared/FlateLists/DashboardFlatList/DashboardCategoryFlatList';
 import DashboardHeading from '../../components/shared/DashboardHeading/DashboardHeading';
 import {BrandDataList} from '../../components/shared/FlateLists/DashboardFlatList/BrandFlatList';
 import {DashboardProductDataList} from '../../components/shared/FlateLists/DashboardFlatList/DashboardProductDataList';
+import LoadingFullScreen from '../../components/shared/Loader/LoadingFullScreen';
 const {width, height} = Dimensions.get('screen');
 
 export default function Dashboard(props) {
@@ -34,6 +35,9 @@ export default function Dashboard(props) {
   const navigation = useNavigation();
   const mode = useSelector(state => state.mode);
   const themecolor = new MyThemeClass(mode).getThemeColor();
+
+  const [refresh, setRefresh] = useState(false);
+  const [loader, setLoader] = useState(true);
   const [carouselData, setCarouselData] = useState([]);
   const [categories, setCategories] = useState([]);
   const [brands, setBrands] = useState([]);
@@ -94,7 +98,7 @@ export default function Dashboard(props) {
 
   const handleLatestProducts = async () => {
     try {
-      var res = await getProductList('featured','5');
+      var res = await getProductList('featured', '5');
       // console.log('handleLatestProducts......in dashboard page', res.data);
       setLatestProductsData(res.data);
     } catch (e) {
@@ -111,7 +115,7 @@ export default function Dashboard(props) {
 
   const handleBestSelling = async () => {
     try {
-      var res = await getProductList('deal','5');
+      var res = await getProductList('deal', '5');
       // console.log('handleBestSelling......in dashboard page', res.data);
       setBestSellingData(res.data);
     } catch (e) {
@@ -128,7 +132,7 @@ export default function Dashboard(props) {
 
   const handleRecentlyViewed = async () => {
     try {
-      var res = await getProductList('recently_viewed','5');
+      var res = await getProductList('recently_viewed', '5');
       // console.log('handleRecentlyViewed......in dashboard page', res.data);
       setRecentlyViewedData(res.data);
     } catch (e) {
@@ -145,11 +149,13 @@ export default function Dashboard(props) {
 
   const handleMostViewed = async () => {
     try {
-      var res = await getProductList('most_viewed','5');
+      var res = await getProductList('most_viewed', '5');
       // console.log('handleMostViewed......in dashboard page', res.data);
       setMostViewedData(res.data);
+      setLoader(false);
     } catch (e) {
       console.log('errrror in..handleMostViewed page-->', e);
+      setLoader(false);
       toast.show('Something went wrong!, Try again later.', {
         type: 'danger',
         placement: 'bottom',
@@ -160,14 +166,20 @@ export default function Dashboard(props) {
     }
   };
 
+  useFocusEffect(
+    React.useCallback(() => {
+      handleCategories();
+      handleCarousel();
+      handleBrands();
+      handleLatestProducts();
+      handleBestSelling();
+      handleRecentlyViewed();
+      handleMostViewed();
+    }, [refresh, props]),
+  );
+
   useEffect(() => {
-    handleCategories();
-    handleCarousel();
-    handleBrands();
-    handleLatestProducts();
-    handleBestSelling();
-    handleRecentlyViewed();
-    handleMostViewed();
+    setRefresh(!refresh);
   }, []);
 
   return (
@@ -177,95 +189,102 @@ export default function Dashboard(props) {
         backgroundColor="transparent"
         barStyle={mode === 'dark' ? 'light-content' : 'dark-content'}
       />
-      <Header title="Home" />
 
-      <ScrollView showsVerticalScrollIndicator={false}>
-        <View style={{marginVertical: 5}} />
+      {loader ? (
+        <LoadingFullScreen style={{flex: 1}} />
+      ) : (
+        <>
+          <Header title="Home" />
 
-        {categories.length > 0 ? (
-          <View style={{...styles.ViewHeading}}>
-            <DashboardHeading
-              title="Categories"
-              onPress={() => navigation.navigate('Categories')}
-            />
-            <DashboardCategoryDataList data={categories} />
-          </View>
-        ) : (
-          <></>
-        )}
+          <ScrollView showsVerticalScrollIndicator={false}>
+            <View style={{marginVertical: 5}} />
 
-        {carouselData.length > 0 ? (
-          <View
-            style={{
-              ...styles.container,
-              backgroundColor: themecolor.LOGINTHEMECOLOR1,
-            }}>
-            <CarouselFile data={carouselData} />
-          </View>
-        ) : (
-          <></>
-        )}
+            {categories.length > 0 ? (
+              <View style={{...styles.ViewHeading}}>
+                <DashboardHeading
+                  title="Categories"
+                  onPress={() => navigation.navigate('Categories')}
+                />
+                <DashboardCategoryDataList data={categories} />
+              </View>
+            ) : (
+              <></>
+            )}
 
-        {brands.length > 0 ? (
-          <View style={{...styles.ViewHeading}}>
-            <DashboardHeading
-              title="Brands"
-              onPress={() => navigation.navigate('Brands')}
-            />
-            <BrandDataList data={brands} />
-          </View>
-        ) : (
-          <></>
-        )}
+            {carouselData.length > 0 ? (
+              <View
+                style={{
+                  ...styles.container,
+                  backgroundColor: themecolor.LOGINTHEMECOLOR1,
+                }}>
+                <CarouselFile data={carouselData} />
+              </View>
+            ) : (
+              <></>
+            )}
 
-        {latestProductsData.length > 0 ? (
-          <View style={{...styles.ViewHeading}}>
-            <DashboardHeading
-              title="Latest Featured Products"
-              onPress={() => navigation.navigate('LatestFeaturedProducts')}
-            />
-            <DashboardProductDataList data={latestProductsData} />
-          </View>
-        ) : (
-          <></>
-        )}
+            {brands.length > 0 ? (
+              <View style={{...styles.ViewHeading}}>
+                <DashboardHeading
+                  title="Brands"
+                  onPress={() => navigation.navigate('Brands')}
+                />
+                <BrandDataList data={brands} />
+              </View>
+            ) : (
+              <></>
+            )}
 
-        {bestSellingData.length > 0 ? (
-          <View style={{...styles.ViewHeading}}>
-            <DashboardHeading
-              title="Best Selling"
-              onPress={() => navigation.navigate('BestSelling')}
-            />
-            <DashboardProductDataList data={bestSellingData} />
-          </View>
-        ) : (
-          <></>
-        )}
+            {latestProductsData.length > 0 ? (
+              <View style={{...styles.ViewHeading}}>
+                <DashboardHeading
+                  title="Latest Featured Products"
+                  onPress={() => navigation.navigate('LatestFeaturedProducts')}
+                />
+                <DashboardProductDataList data={latestProductsData} />
+              </View>
+            ) : (
+              <></>
+            )}
 
-        {recentlyViewedData.length > 0 ? (
-          <View style={{...styles.ViewHeading}}>
-            <DashboardHeading
-              title="Recently Viewed"
-              onPress={() => navigation.navigate('RecentlyViewed')}
-            />
-            <DashboardProductDataList data={recentlyViewedData} />
-          </View>
-        ) : (
-          <></>
-        )}
+            {bestSellingData.length > 0 ? (
+              <View style={{...styles.ViewHeading}}>
+                <DashboardHeading
+                  title="Best Selling"
+                  onPress={() => navigation.navigate('BestSelling')}
+                />
+                <DashboardProductDataList data={bestSellingData} />
+              </View>
+            ) : (
+              <></>
+            )}
 
-        {mostViewedData.length > 0 ? (
-          <View style={{...styles.ViewHeading}}>
-            <DashboardHeading
-              title="Most Viewed"
-              onPress={() => navigation.navigate('MostViewed')}
-            />
-            <DashboardProductDataList data={mostViewedData} />
-          </View>
-        ) : (
-          <></>
-        )}
-      </ScrollView>
+            {recentlyViewedData.length > 0 ? (
+              <View style={{...styles.ViewHeading}}>
+                <DashboardHeading
+                  title="Recently Viewed"
+                  onPress={() => navigation.navigate('RecentlyViewed')}
+                />
+                <DashboardProductDataList data={recentlyViewedData} />
+              </View>
+            ) : (
+              <></>
+            )}
+
+            {mostViewedData.length > 0 ? (
+              <View style={{...styles.ViewHeading}}>
+                <DashboardHeading
+                  title="Most Viewed"
+                  onPress={() => navigation.navigate('MostViewed')}
+                />
+                <DashboardProductDataList data={mostViewedData} />
+              </View>
+            ) : (
+              <></>
+            )}
+          </ScrollView>
+        </>
+      )}
     </View>
   );
 }

@@ -1,27 +1,37 @@
-import React, {useState,useEffect} from 'react';
-import {View, Text, StatusBar, Appearance, Dimensions,ScrollView} from 'react-native';
+import React, {useState, useEffect} from 'react';
+import {
+  View,
+  Text,
+  StatusBar,
+  Appearance,
+  Dimensions,
+  ScrollView,
+} from 'react-native';
 import {useSelector} from 'react-redux';
 import {MyThemeClass} from '../../components/Theme/ThemeDarkLightColor';
-import {useNavigation} from '@react-navigation/native';
 import Header from '../../components/shared/header/Header';
-import { styles } from '../../assets/css/WishListStyle';
-import { WishListDataList } from '../../components/shared/FlateLists/WishlistFlatList/WishListDataList';
-import { getWishlist } from '../../repository/WishListRepository/WishListRepo';
+import {styles} from '../../assets/css/WishListStyle';
+import {WishListDataList} from '../../components/shared/FlateLists/WishlistFlatList/WishListDataList';
+import {getWishlist} from '../../repository/WishListRepository/WishListRepo';
+import {useFocusEffect, } from '@react-navigation/native';
+import LoadingFullScreen from '../../components/shared/Loader/LoadingFullScreen';
 const {width, height} = Dimensions.get('screen');
 
 export default function WishList(props) {
-    
   const mode = useSelector(state => state.mode);
   const themecolor = new MyThemeClass(mode).getThemeColor();
 
+  const [loader, setLoader] = useState(true);
   const [data, setData] = useState([]);
 
-  const handleWishlist= async() => {
+  const handleWishlist = async () => {
     try {
       var res = await getWishlist();
       setData(res.data);
+      setLoader(false);
     } catch (e) {
       console.log('errrror in..handleWishlist page wishlist-->', e);
+      setLoader(false);
       toast.show('Something went wrong!, Try again later.', {
         type: 'danger',
         placement: 'bottom',
@@ -30,32 +40,41 @@ export default function WishList(props) {
         animationType: 'slide-in',
       });
     }
-  }
+  };
 
-  useEffect(() => {
-    handleWishlist()
-  }, []);
+  useFocusEffect(
+    React.useCallback(() => {
+      handleWishlist();
+    }, [props]),
+  );
 
-  
   return (
-    <View style={{...styles.bg, backgroundColor: themecolor.THEMECOLOR,}}>
-    <Header title="Wishlist" />
- 
-      <View
-        style={{...styles.container}}>
-           {data.length > 0 ? (
-          <ScrollView showsVerticalScrollIndicator={false}>
-            <WishListDataList data={data} />
-          </ScrollView>
-        ) : (
-          <View
-            style={{alignItems: 'center', flex: 1, justifyContent: 'center'}}>
-            <Text>No data found!</Text>
+    <View style={{...styles.bg, backgroundColor: themecolor.THEMECOLOR}}>
+      {loader ? (
+        <LoadingFullScreen style={{flex: 1}} />
+      ) : (
+        <>
+          <Header title="Wishlist" />
+
+          <View style={{...styles.container}}>
+            {data.length > 0 ? (
+              <ScrollView showsVerticalScrollIndicator={false}>
+                <WishListDataList data={data} />
+              </ScrollView>
+            ) : (
+              <View
+                style={{
+                  alignItems: 'center',
+                  flex: 1,
+                  justifyContent: 'center',
+                }}>
+                <Text>No data found!</Text>
+              </View>
+            )}
+            <View style={{marginVertical: 20}} />
           </View>
-        )}
-        <View style={{marginVertical: 20}} />
-     
-      </View>
+        </>
+      )}
     </View>
   );
 }
