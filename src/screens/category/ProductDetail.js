@@ -57,6 +57,7 @@ export default function ProductDetail(props) {
     return true;
   }
 
+ 
   React.useEffect(() => {
     BackHandler.addEventListener('hardwareBackPress', handleBackButtonClick);
     return () => {
@@ -78,6 +79,7 @@ export default function ProductDetail(props) {
         'data handleProductView api in.....product DEtail  page-->',
         res.data,
       );
+      console.log('res data>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>',res.data)
       setProductDetailData(res.data);
       setProductId(res.data.product_id);
       setDescription(res.data.description);
