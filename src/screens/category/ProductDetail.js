@@ -33,6 +33,7 @@ import RenderHtml from 'react-native-render-html';
 import {DashboardProductDataList} from '../../components/shared/FlateLists/DashboardFlatList/DashboardProductDataList';
 import RBSheet from 'react-native-raw-bottom-sheet';
 import EN from 'react-native-vector-icons/Entypo';
+import { Tab,TabView } from '@rneui/themed';
 
 const {width, height} = Dimensions.get('screen');
 
@@ -43,7 +44,7 @@ export default function ProductDetail(props) {
   const refRBSheet = useRef();
   const mode = useSelector(state => state.mode);
   const themecolor = new MyThemeClass(mode).getThemeColor();
-
+  const [index, setIndex] = React.useState(0);
   const [productDetailData, setProductDetailData] = React.useState('');
   const [productId, setProductId] = React.useState('');
   const [description, setDescription] = React.useState('');
@@ -273,8 +274,44 @@ export default function ProductDetail(props) {
               </View>
 
               <View style={{marginTop: 10}} />
+              {/* <Tab
+      value={index}
+      onChange={(e) => setIndex(e)}
+      indicatorStyle={{
+        backgroundColor: 'white',
+        height: 3,
+      }}
+      variant="primary"
+    >
+      <Tab.Item
+        title="Recent"
+        titleStyle={{ fontSize: 12 }}
+        icon={{ name: 'timer', type: 'ionicon', color: 'white' }}
+      />
+      <Tab.Item
+        title="favorite"
+        titleStyle={{ fontSize: 12 }}
+        icon={{ name: 'heart', type: 'ionicon', color: 'white' }}
+      />
+      <Tab.Item
+        title="cart"
+        titleStyle={{ fontSize: 12 }}
+        icon={{ name: 'cart', type: 'ionicon', color: 'white' }}
+      />
+    </Tab>
 
-              <View style={{}}>
+    <TabView value={index} onChange={setIndex} animationType="spring">
+      <TabView.Item style={{ backgroundColor: 'red', width: '100%' }}>
+        <Text h1>Recent</Text>
+      </TabView.Item>
+      <TabView.Item style={{ backgroundColor: 'blue', width: '100%' }}>
+        <Text h1>Favorite</Text>
+      </TabView.Item>
+      <TabView.Item style={{ backgroundColor: 'green', width: '100%' }}>
+        <Text h1>Cart</Text>
+      </TabView.Item>
+    </TabView> */}
+              <View>
                 <RenderHtml
                   contentWidth={widthDes}
                   source={{html: description}}
