@@ -36,7 +36,6 @@ export default function Dashboard(props) {
   const mode = useSelector(state => state.mode);
   const themecolor = new MyThemeClass(mode).getThemeColor();
 
-  const [refresh, setRefresh] = useState(false);
   const [loader, setLoader] = useState(true);
   const [carouselData, setCarouselData] = useState([]);
   const [categories, setCategories] = useState([]);
@@ -170,12 +169,8 @@ export default function Dashboard(props) {
       handleBestSelling();
       handleRecentlyViewed();
       handleMostViewed();
-    }, [refresh, props]),
+    }, [props]),
   );
-
-  // useEffect(() => {
-  //   setRefresh(!refresh);
-  // }, []);
 
   return (
     <View style={{...styles.bg, backgroundColor: themecolor.THEMECOLOR}}>
