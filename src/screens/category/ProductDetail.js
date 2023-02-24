@@ -33,32 +33,17 @@ import RenderHtml from 'react-native-render-html';
 import {DashboardProductDataList} from '../../components/shared/FlateLists/DashboardFlatList/DashboardProductDataList';
 import RBSheet from 'react-native-raw-bottom-sheet';
 import EN from 'react-native-vector-icons/Entypo';
-import { Tab,TabView } from '@rneui/themed';
+import {Tab, TabView} from '@rneui/themed';
+import LoadingFullScreen from '../../components/shared/Loader/LoadingFullScreen';
 
 const {width, height} = Dimensions.get('screen');
 
 export default function ProductDetail(props) {
-  const {widthDes} = useWindowDimensions();
-
-  const toast = useToast();
-  const refRBSheet = useRef();
-  const mode = useSelector(state => state.mode);
-  const themecolor = new MyThemeClass(mode).getThemeColor();
-  const [index, setIndex] = React.useState(0);
-  const [productDetailData, setProductDetailData] = React.useState('');
-  const [productId, setProductId] = React.useState('');
-  const [description, setDescription] = React.useState('');
-  const [allImages, setAllImages] = React.useState([]);
-  const [largeImage, setLargeImage] = React.useState(0);
-  const [relatedProductData, setRelatedProductData] = useState([]);
-  const [showWishListed, setShowWishListed] = useState(true);
-
   function handleBackButtonClick() {
     props.navigation.goBack();
     return true;
   }
 
- 
   React.useEffect(() => {
     BackHandler.addEventListener('hardwareBackPress', handleBackButtonClick);
     return () => {
@@ -68,6 +53,22 @@ export default function ProductDetail(props) {
       );
     };
   }, []);
+
+  const {widthDes} = useWindowDimensions();
+  const toast = useToast();
+  const refRBSheet = useRef();
+  const mode = useSelector(state => state.mode);
+  const themecolor = new MyThemeClass(mode).getThemeColor();
+
+  const [loader, setLoader] = useState(true);
+  const [index, setIndex] = React.useState(0);
+  const [productDetailData, setProductDetailData] = React.useState('');
+  const [productId, setProductId] = React.useState('');
+  const [description, setDescription] = React.useState('');
+  const [allImages, setAllImages] = React.useState([]);
+  const [largeImage, setLargeImage] = React.useState(0);
+  const [relatedProductData, setRelatedProductData] = useState([]);
+  const [showWishListed, setShowWishListed] = useState(true);
 
   const handleWishListed = () => {
     setShowWishListed(!showWishListed);
@@ -80,7 +81,7 @@ export default function ProductDetail(props) {
         'data handleProductView api in.....product DEtail  page-->',
         res.data,
       );
-      console.log('res data>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>',res.data)
+      console.log('res data>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>', res.data);
       setProductDetailData(res.data);
       setProductId(res.data.product_id);
       setDescription(res.data.description);
@@ -101,8 +102,10 @@ export default function ProductDetail(props) {
     try {
       var res = await getProductRealedProducts('most_viewed', '20', productId);
       setRelatedProductData(res.data);
+      setLoader(false);
     } catch (e) {
       console.log('errrror in..handleRelatedProduct page-->', e);
+      setLoader(false);
       toast.show('Something went wrong!, Try again later.', {
         type: 'danger',
         placement: 'bottom',
@@ -136,145 +139,158 @@ export default function ProductDetail(props) {
         backIcon={true}
         onPressBack={() => handleBackButtonClick()}
       />
+      {loader ? (
+        <LoadingFullScreen style={{flex: 1}} />
+      ) : (
+        <>
+          <View style={{marginTop: 10}} />
 
-      <View style={{marginTop: 10}} />
-
-      <ScrollView showsVerticalScrollIndicator={false}>
-        <View
-          style={{
-            ...styles.container,
-          }}>
-          <View
-            style={{
-              backgroundColor: themecolor.BOXTHEMECOLOR,
-              borderWidth: 0.5,
-              borderColor: themecolor.BOXBORDERCOLOR1,
-              borderRadius: 5,
-              padding: 10,
-            }}>
-            <View style={{width: '100%', height: height * 0.33}}>
-              <Carousel
-                autoplay={false}
-                index={largeImage}
-                // pageSize={(width, height)}
-              >
-                {allImages.map((image, index) => renderimage(image, index))}
-              </Carousel>
-            </View>
-
+          <ScrollView showsVerticalScrollIndicator={false}>
             <View
               style={{
-                alignSelf: 'center',
-                justifyContent: 'flex-start',
-                padding: 10,
+                ...styles.container,
               }}>
-              <View style={{flexDirection: 'row', width: '100%'}}>
-                <View style={{width: width * 0.7}}>
-                  <Text
-                    style={{...styles.HeadText, color: themecolor.TXTWHITE}}>
-                    {productDetailData.title}
-                  </Text>
+              <View
+                style={{
+                  backgroundColor: themecolor.BOXTHEMECOLOR,
+                  borderWidth: 0.5,
+                  borderColor: themecolor.BOXBORDERCOLOR1,
+                  borderRadius: 5,
+                  padding: 10,
+                }}>
+                <View style={{width: '100%', height: height * 0.33}}>
+                  <Carousel
+                    autoplay={false}
+                    index={largeImage}
+                    // pageSize={(width, height)}
+                  >
+                    {allImages.map((image, index) => renderimage(image, index))}
+                  </Carousel>
                 </View>
 
                 <View
                   style={{
-                    width: width * 0.1,
-                    justifyContent: 'center',
-                    alignItems: 'center',
+                    alignSelf: 'center',
+                    justifyContent: 'flex-start',
+                    padding: 10,
                   }}>
-                  {showWishListed ? (
-                    <TouchableOpacity
-                      activeOpacity={0.5}
-                      onPress={() => handleWishListed()}
-                      style={{padding: 7, borderRadius: 20}}>
-                      <FontAwesome
-                        name="heart-o"
-                        size={22}
-                        color={themecolor.TEXTRED}
-                      />
-                    </TouchableOpacity>
-                  ) : (
-                    <TouchableOpacity
-                      activeOpacity={0.5}
-                      onPress={() => handleWishListed()}
-                      style={{padding: 7, borderRadius: 20}}>
-                      <FontAwesome
-                        name="heart"
-                        size={22}
-                        color={themecolor.TEXTRED}
-                      />
-                    </TouchableOpacity>
-                  )}
-                </View>
-              </View>
+                  <View style={{flexDirection: 'row', width: '100%'}}>
+                    <View style={{width: width * 0.7}}>
+                      <Text
+                        style={{
+                          ...styles.HeadText,
+                          color: themecolor.TXTWHITE,
+                        }}>
+                        {productDetailData.title}
+                      </Text>
+                    </View>
 
-              <View style={{marginTop: 10}} />
+                    <View
+                      style={{
+                        width: width * 0.1,
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                      }}>
+                      {showWishListed ? (
+                        <TouchableOpacity
+                          activeOpacity={0.5}
+                          onPress={() => handleWishListed()}
+                          style={{padding: 7, borderRadius: 20}}>
+                          <FontAwesome
+                            name="heart-o"
+                            size={22}
+                            color={themecolor.TEXTRED}
+                          />
+                        </TouchableOpacity>
+                      ) : (
+                        <TouchableOpacity
+                          activeOpacity={0.5}
+                          onPress={() => handleWishListed()}
+                          style={{padding: 7, borderRadius: 20}}>
+                          <FontAwesome
+                            name="heart"
+                            size={22}
+                            color={themecolor.TEXTRED}
+                          />
+                        </TouchableOpacity>
+                      )}
+                    </View>
+                  </View>
 
-              <View style={{width: width * 0.4}}>
-                <StarRating
-                  disabled={false}
-                  maxStars={5}
-                  rating={productDetailData.rating_num}
-                  selectedStar={rating => onStarRatingPress(rating)}
-                  starSize={16}
-                  fullStarColor={themecolor.STARCOLOR}
-                />
-              </View>
+                  <View style={{marginTop: 10}} />
 
-              <View style={{marginTop: 10}} />
+                  <View style={{width: width * 0.4}}>
+                    <StarRating
+                      disabled={false}
+                      maxStars={5}
+                      rating={productDetailData.rating_num}
+                      selectedStar={rating => onStarRatingPress(rating)}
+                      starSize={16}
+                      fullStarColor={themecolor.STARCOLOR}
+                    />
+                  </View>
 
-              <View
-                style={{
-                  ...styles.FLEXDIREC1,
-                }}>
-                <Text style={{...styles.RateText, color: themecolor.TXTWHITE}}>
-                  MRP :{' '}
-                  <Text
-                    style={{
-                      ...styles.RateTextBig,
-                      color: 'grey',
-                      textDecorationLine: 'line-through',
-                    }}>
-                    <FAIcon name="rupee" size={12} />{' '}
-                    {productDetailData.sale_price}
-                  </Text>
-                  <Text style={{...styles.RateTextBig, color: Colors.green1}}>
-                    {'  '}
-                    <FAIcon name="rupee" size={12} />{' '}
-                    {productDetailData.purchase_price}
-                  </Text>
-                  <Text
-                    style={{...styles.RateTextBig, color: themecolor.TEXTRED}}>
-                    {'  ('}
-                    {productDetailData.discount}%{')'}
-                  </Text>
-                </Text>
-              </View>
+                  <View style={{marginTop: 10}} />
 
-              <View style={{marginTop: 10}} />
-
-              <View style={{width: width * 0.3}}>
-                {productDetailData.current_stock > 0 ? (
                   <View
                     style={{
-                      ...styles.ViewAllButton,
-                      backgroundColor: themecolor.TEXTGREEN,
+                      ...styles.FLEXDIREC1,
                     }}>
-                    <Text style={styles.ViewAllButtonIcon}>Available</Text>
+                    <Text
+                      style={{...styles.RateText, color: themecolor.TXTWHITE}}>
+                      MRP :{' '}
+                      <Text
+                        style={{
+                          ...styles.RateTextBig,
+                          color: 'grey',
+                          textDecorationLine: 'line-through',
+                        }}>
+                        <FAIcon name="rupee" size={12} />{' '}
+                        {productDetailData.sale_price}
+                      </Text>
+                      <Text
+                        style={{...styles.RateTextBig, color: Colors.green1}}>
+                        {'  '}
+                        <FAIcon name="rupee" size={12} />{' '}
+                        {productDetailData.purchase_price}
+                      </Text>
+                      <Text
+                        style={{
+                          ...styles.RateTextBig,
+                          color: themecolor.TEXTRED,
+                        }}>
+                        {'  ('}
+                        {productDetailData.discount}%{')'}
+                      </Text>
+                    </Text>
                   </View>
-                ) : (
-                  <View
-                    style={{
-                      ...styles.ViewAllButton,
-                      backgroundColor: themecolor.TEXTRED,
-                    }}>
-                    <Text style={styles.ViewAllButtonIcon}>Out of Stock</Text>
-                  </View>
-                )}
-              </View>
 
-              <View style={{marginTop: 10}} />
-              {/* <Tab
+                  <View style={{marginTop: 10}} />
+
+                  <View style={{width: width * 0.3}}>
+                    {productDetailData.current_stock > 0 ? (
+                      <View
+                        style={{
+                          ...styles.ViewAllButton,
+                          backgroundColor: themecolor.TEXTGREEN,
+                        }}>
+                        <Text style={styles.ViewAllButtonIcon}>Available</Text>
+                      </View>
+                    ) : (
+                      <View
+                        style={{
+                          ...styles.ViewAllButton,
+                          backgroundColor: themecolor.TEXTRED,
+                        }}>
+                        <Text style={styles.ViewAllButtonIcon}>
+                          Out of Stock
+                        </Text>
+                      </View>
+                    )}
+                  </View>
+
+                  <View style={{marginTop: 10}} />
+                  {/* <Tab
       value={index}
       onChange={(e) => setIndex(e)}
       indicatorStyle={{
@@ -311,168 +327,173 @@ export default function ProductDetail(props) {
         <Text h1>Cart</Text>
       </TabView.Item>
     </TabView> */}
-              <View>
-                <RenderHtml
-                  contentWidth={widthDes}
-                  source={{html: description}}
-                  enableExperimentalMarginCollapsing={true}
-                  enableExperimentalBRCollapsing={true}
-                  enableExperimentalGhostLinesPrevention={true}
-                />
-              </View>
-              <View style={{marginTop: 20}} />
-            </View>
-          </View>
-
-          <View style={{marginTop: 10}} />
-
-          {relatedProductData.length > 0 ? (
-            <View
-              style={{
-                alignSelf: 'center',
-                justifyContent: 'flex-start',
-                width: width * 0.94,
-              }}>
-              <Text
-                style={{
-                  ...styles.otherProductHeading,
-                  color: themecolor.TXTWHITE,
-                }}>
-                Related Products
-              </Text>
-              <View>
-                <DashboardProductDataList data={relatedProductData} />
-              </View>
-            </View>
-          ) : (
-            <></>
-          )}
-
-          <View style={{marginTop: 10}} />
-        </View>
-      </ScrollView>
-
-      <View style={{marginVertical: 32}} />
-
-      <TouchableOpacity
-        style={{
-          ...styles.touchview,
-          borderTopColor: themecolor.BOXBORDERCOLOR1,
-          backgroundColor: themecolor.LOGINTHEMECOLOR,
-        }}>
-        <View style={{...styles.mainView}}>
-          {productDetailData.current_stock > 0 ? (
-            <>
-              <View style={{width: '49%'}}>
-                <HalfSizeButton
-                  title="Add to cart"
-                  icon={
-                    <Feather
-                      name="shopping-cart"
-                      size={16}
-                      color={themecolor.TXTWHITE}
+                  <View>
+                    <RenderHtml
+                      contentWidth={widthDes}
+                      source={{html: description}}
+                      enableExperimentalMarginCollapsing={true}
+                      enableExperimentalBRCollapsing={true}
+                      enableExperimentalGhostLinesPrevention={true}
                     />
-                  }
-                  backgroundColor={themecolor.TXTWHITE1}
-                  color={themecolor.TXTWHITE}
-                  borderColor={themecolor.TXTWHITE}
-                />
-              </View>
-
-              <View style={{width: '49%'}}>
-                <HalfSizeButton
-                  title="Buy now"
-                  icon={
-                    <MaterialIcons
-                      name="double-arrow"
-                      size={16}
-                      color={'#fff'}
-                    />
-                  }
-                  onPress={() => refRBSheet.current.open()}
-                  backgroundColor={themecolor.ADDTOCARTBUTTONCOLOR}
-                  color={'#fff'}
-                  borderColor={themecolor.BORDERCOLOR}
-                />
-              </View>
-            </>
-          ) : (
-            <View style={{width: '100%'}}>
-              <HalfSizeButton
-                title="Out of Stock"
-                icon={<MCIcon name="cart-off" size={16} color={'#fff'} />}
-                backgroundColor={themecolor.TEXTRED}
-                color={'#fff'}
-                borderColor={themecolor.TEXTRED}
-              />
-            </View>
-          )}
-
-          <RBSheet
-            ref={refRBSheet}
-            animationType={'slide'}
-            closeOnDragDown={true}
-            closeOnPressMask={true}
-            height={150}
-            customStyles={{
-              container: {
-                borderTopRightRadius: 20,
-                borderTopLeftRadius: 20,
-                borderBottomLeftRadius: 0,
-                backgroundColor: themecolor.RB2,
-              },
-              draggableIcon: {
-                display: 'none',
-              },
-            }}>
-            <View style={{...styles.view14}}>
-              <TouchableOpacity
-                activeOpacity={1}
-                onPress={() => refRBSheet.current.close()}>
-                <EN name="cross" color={themecolor.TXTWHITE} size={28} />
-              </TouchableOpacity>
-              <View>
-                <Text style={{...styles.RBText, color: themecolor.TXTWHITE}}>
-                  Buy Now
-                </Text>
-              </View>
-              <View>
-                <View>
-                  <TouchableOpacity activeOpacity={1} onPress={() => OnClick()}>
-                    <Text
-                      style={{
-                        ...styles.RBText,
-                        ...styles.clrtheme,
-                        color: themecolor.TXTWHITE,
-                      }}>
-                      Done
-                    </Text>
-                  </TouchableOpacity>
+                  </View>
+                  <View style={{marginTop: 20}} />
                 </View>
               </View>
-            </View>
-            <View style={{...styles.Borderline}} />
-            <View style={styles.view16}>
-              <View>
-                <Text
+
+              <View style={{marginTop: 10}} />
+
+              {relatedProductData.length > 0 ? (
+                <View
                   style={{
-                    ...styles.CardText,
-                    ...styles.align3,
-                    ...styles.left1,
-                    color: themecolor.TXTWHITE,
-                    marginBottom: 10,
+                    alignSelf: 'center',
+                    justifyContent: 'flex-start',
+                    width: width * 0.94,
                   }}>
-                  Please add quantity
-                </Text>
-              </View>
-              <View style={styles.view17}>
-                {/* <DatePickerRange onChange={value => handleChange(value)} /> */}
-              </View>
-              <View style={styles.marg} />
+                  <Text
+                    style={{
+                      ...styles.otherProductHeading,
+                      color: themecolor.TXTWHITE,
+                    }}>
+                    Related Products
+                  </Text>
+                  <View>
+                    <DashboardProductDataList data={relatedProductData} />
+                  </View>
+                </View>
+              ) : (
+                <></>
+              )}
+
+              <View style={{marginTop: 10}} />
             </View>
-          </RBSheet>
-        </View>
-      </TouchableOpacity>
+          </ScrollView>
+
+          <View style={{marginVertical: 32}} />
+
+          <TouchableOpacity
+            style={{
+              ...styles.touchview,
+              borderTopColor: themecolor.BOXBORDERCOLOR1,
+              backgroundColor: themecolor.LOGINTHEMECOLOR,
+            }}>
+            <View style={{...styles.mainView}}>
+              {productDetailData.current_stock > 0 ? (
+                <>
+                  <View style={{width: '49%'}}>
+                    <HalfSizeButton
+                      title="Add to cart"
+                      icon={
+                        <Feather
+                          name="shopping-cart"
+                          size={16}
+                          color={themecolor.TXTWHITE}
+                        />
+                      }
+                      backgroundColor={themecolor.TXTWHITE1}
+                      color={themecolor.TXTWHITE}
+                      borderColor={themecolor.TXTWHITE}
+                    />
+                  </View>
+
+                  <View style={{width: '49%'}}>
+                    <HalfSizeButton
+                      title="Buy now"
+                      icon={
+                        <MaterialIcons
+                          name="double-arrow"
+                          size={16}
+                          color={'#fff'}
+                        />
+                      }
+                      onPress={() => refRBSheet.current.open()}
+                      backgroundColor={themecolor.ADDTOCARTBUTTONCOLOR}
+                      color={'#fff'}
+                      borderColor={themecolor.BORDERCOLOR}
+                    />
+                  </View>
+                </>
+              ) : (
+                <View style={{width: '100%'}}>
+                  <HalfSizeButton
+                    title="Out of Stock"
+                    icon={<MCIcon name="cart-off" size={16} color={'#fff'} />}
+                    backgroundColor={themecolor.TEXTRED}
+                    color={'#fff'}
+                    borderColor={themecolor.TEXTRED}
+                  />
+                </View>
+              )}
+
+              <RBSheet
+                ref={refRBSheet}
+                animationType={'slide'}
+                closeOnDragDown={true}
+                closeOnPressMask={true}
+                height={150}
+                customStyles={{
+                  container: {
+                    borderTopRightRadius: 20,
+                    borderTopLeftRadius: 20,
+                    borderBottomLeftRadius: 0,
+                    backgroundColor: themecolor.RB2,
+                  },
+                  draggableIcon: {
+                    display: 'none',
+                  },
+                }}>
+                <View style={{...styles.view14}}>
+                  <TouchableOpacity
+                    activeOpacity={1}
+                    onPress={() => refRBSheet.current.close()}>
+                    <EN name="cross" color={themecolor.TXTWHITE} size={28} />
+                  </TouchableOpacity>
+                  <View>
+                    <Text
+                      style={{...styles.RBText, color: themecolor.TXTWHITE}}>
+                      Buy Now
+                    </Text>
+                  </View>
+                  <View>
+                    <View>
+                      <TouchableOpacity
+                        activeOpacity={1}
+                        onPress={() => OnClick()}>
+                        <Text
+                          style={{
+                            ...styles.RBText,
+                            ...styles.clrtheme,
+                            color: themecolor.TXTWHITE,
+                          }}>
+                          Done
+                        </Text>
+                      </TouchableOpacity>
+                    </View>
+                  </View>
+                </View>
+                <View style={{...styles.Borderline}} />
+                <View style={styles.view16}>
+                  <View>
+                    <Text
+                      style={{
+                        ...styles.CardText,
+                        ...styles.align3,
+                        ...styles.left1,
+                        color: themecolor.TXTWHITE,
+                        marginBottom: 10,
+                      }}>
+                      Please add quantity
+                    </Text>
+                  </View>
+                  <View style={styles.view17}>
+                    {/* <DatePickerRange onChange={value => handleChange(value)} /> */}
+                  </View>
+                  <View style={styles.marg} />
+                </View>
+              </RBSheet>
+            </View>
+          </TouchableOpacity>
+        </>
+      )}
     </View>
   );
 }

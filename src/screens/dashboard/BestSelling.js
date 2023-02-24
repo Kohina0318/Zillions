@@ -39,7 +39,6 @@ export default function BestSelling(props) {
   const handleBestSelling = async () => {
     try {
       var res = await getProductList('deal','20');
-      console.log('handleBestSelling......in BestSelling page', res.data);
       setBestSellingData(res.data);
       setLoader(false);
     } catch (e) {

@@ -31,7 +31,6 @@ export default function Brands(props) {
   const handleBrands = async () => {
     try {
       var res = await getBrands();
-      console.log('handleBrands......in dashboard page', res.data);
       setBrandsData(res.data);
       setLoader(false);
     } catch (e) {

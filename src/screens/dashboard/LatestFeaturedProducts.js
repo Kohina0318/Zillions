@@ -39,7 +39,6 @@ export default function LatestFeaturedProducts(props) {
   const handleLatestProducts = async () => {
     try {
       var res = await getProductList('latest','20');
-      console.log('handleLatestProducts......in LatestFeaturedProducts page', res.data);
       setLatestProductsData(res.data);
       setLoader(false);
     } catch (e) {
