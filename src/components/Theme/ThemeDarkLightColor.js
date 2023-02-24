@@ -41,6 +41,7 @@ class MyThemeClass {
       BOXTHEMECOLOR: this.mode === 'dark' ? '#3c3e44' : '#FFF',
       BOXBORDERCOLOR: this.mode === 'dark' ? 'rgba(60, 62, 68, .5)' : '#fff',
       BOXBORDERCOLOR1: this.mode === 'dark' ? 'rgba(60, 62, 68, .5)' : '#E9E9E9',
+      BOXBORDERCOLOR2: this.mode === 'dark' ? 'rgba(60, 62, 68, .5)' : '#281E5D',
       THEMEBLACK: this.mode === 'dark' ? '#121B24' : '#252525',
       THEMEDARKGREEN: this.mode === 'dark' ? '#2F3F4D' : '#407F2C',
       THEMEWHITE: this.mode === 'dark' ? '#121B24' : '#FFFFFF',

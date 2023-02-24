@@ -61,9 +61,9 @@ const MainNavigatorstyle = StyleSheet.create({
     },
     tabbarbottomborder: {
         backgroundColor: "#281E5D",
-        height: 5,
+        height: 6,
         width: 55,
-        bottom: -7,
+        bottom: -14,
         position: 'absolute',
         borderTopLeftRadius: 20,
         borderTopRightRadius: 20,

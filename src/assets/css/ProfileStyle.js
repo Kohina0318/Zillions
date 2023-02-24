@@ -131,7 +131,7 @@ const ProfileStyle = StyleSheet.create({
   buttonView3: {
     width: width * 0.93,
     height: height * 0.05,
-    borderWidth: 2,
+    borderWidth: 1,
     justifyContent: 'center',
     alignItems: 'center',
     borderRadius: 5,
@@ -158,7 +158,7 @@ const ProfileStyle = StyleSheet.create({
     width: width * 0.56,
     justifyContent: 'flex-start',
     alignItems: 'flex-start',
-    left: 5,
+    left: 10,
   },
   avater: {
     borderWidth: 5,

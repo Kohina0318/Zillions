@@ -11,7 +11,7 @@ export default function LoadingFullScreen(props) {
     return (
         <>
           <View style={{ alignItems: 'center', justifyContent: 'center', alignSelf: 'center', flex: 1, backgroundColor:themecolor.THEMECOLOR  , width:'100%'}}>
-              <ActivityIndicator size="large" color={themecolor.ADDTOCARTBUTTONCOLOR} />
+              <ActivityIndicator size="large" color={themecolor.BACKICON} />
           </View>
         </>
       );
