@@ -1,5 +1,12 @@
 import React, {useEffect, useState} from 'react';
-import {View, Text, StatusBar, Appearance, Dimensions} from 'react-native';
+import {
+  View,
+  Text,
+  StatusBar,
+  Appearance,
+  Dimensions,
+  BackHandler,
+} from 'react-native';
 import {useSelector} from 'react-redux';
 import {MyThemeClass} from '../../components/Theme/ThemeDarkLightColor';
 import {ProductStyle} from '../../assets/css/ProductStyle';
@@ -17,13 +24,24 @@ export default function Products(props) {
   const themecolor = new MyThemeClass(mode).getThemeColor();
   const [data, setData] = useState([]);
 
-  const handleSubCategoryByProduct= async() => {
+  function handleBackButtonClick() {
+    props.navigation.goBack();
+    return true;
+  }
+
+  React.useEffect(() => {
+    BackHandler.addEventListener('hardwareBackPress', handleBackButtonClick);
+    return () => {
+      BackHandler.removeEventListener(
+        'hardwareBackPress',
+        handleBackButtonClick,
+      );
+    };
+  }, []);
+
+  const handleSubCategoryByProduct = async () => {
     try {
       var res = await getSubCategoryByProduct(props.route.params.subCategoryId);
-      // console.log(
-      //   'data getSubCategoryByProduct api in.....product page-->',
-      //   res.data,
-      // );
       setData(res.data);
     } catch (e) {
       console.log('errrror in..getSubCategoryByProduct page-->', e);
@@ -35,16 +53,19 @@ export default function Products(props) {
         animationType: 'slide-in',
       });
     }
-  }
+  };
 
   useEffect(() => {
-    handleSubCategoryByProduct()
+    handleSubCategoryByProduct();
   }, []);
-
 
   return (
     <View style={{...ProductStyle.bg, backgroundColor: themecolor.THEMECOLOR}}>
-      <Header title={props.route.params.subCategoryName} backIcon={true} />
+      <Header
+        title={props.route.params.subCategoryName}
+        backIcon={true}
+        onPressBack={() => handleBackButtonClick()}
+      />
 
       <View
         style={{

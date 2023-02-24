@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, {useState} from 'react';
 import {
   View,
   Text,
@@ -6,65 +6,67 @@ import {
   Appearance,
   Dimensions,
   TextInput,
-  TouchableOpacity
+  TouchableOpacity,
+  BackHandler
 } from 'react-native';
-import { useSelector } from 'react-redux';
-import { MyThemeClass } from '../../components/Theme/ThemeDarkLightColor';
-import { useNavigation } from '@react-navigation/native';
+import {useSelector} from 'react-redux';
+import {MyThemeClass} from '../../components/Theme/ThemeDarkLightColor';
+import {useNavigation} from '@react-navigation/native';
 import RegisterLoginHeader from '../../components/shared/header/RegisterLoginHeader';
-import { RegisterLoginStyles} from '../../assets/css/RegisterLoginStyles';
+import {RegisterLoginStyles} from '../../assets/css/RegisterLoginStyles';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import FullsizeButton from './FullsizeButton';
 import {useToast} from 'react-native-toast-notifications';
 import Icon from 'react-native-vector-icons/MaterialIcons';
-import FA from 'react-native-vector-icons/FontAwesome'
+import FA from 'react-native-vector-icons/FontAwesome';
+import {postRegistration} from '../../repository/AuthRepository/RegistrationRepository';
+import VerifyModel from '../../components/shared/Model/VerifyModel';
 
-const { width, height } = Dimensions.get('screen');
+const {width, height} = Dimensions.get('screen');
 
 export default function Register(props) {
   const mode = useSelector(state => state.mode);
-  const themecolor = new MyThemeClass(mode).getThemeColor()
-  const navigation = useNavigation()
-  const [name,setName]=useState('')
-  const [email,setEmail]=useState('')
+  const themecolor = new MyThemeClass(mode).getThemeColor();
+  const navigation = useNavigation();
+  const [showmodal, setShowmodal] = useState(false);
+
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
   const [mobileNo, setMobileNo] = useState('');
   const [password, setPassword] = useState('');
   const [conPassword, setConPassword] = useState('');
   const [isPasswordSecure, setIsPasswordSecure] = useState(true);
 
-  var toast=useToast();
+  var toast = useToast();
 
   const isDarkMode = Appearance.getColorScheme() === 'dark';
 
+  function handleBackButtonClick() {
+    props.navigation.goBack();
+    return true;
+  }
+
+  React.useEffect(() => {
+    BackHandler.addEventListener('hardwareBackPress', handleBackButtonClick);
+    return () => {
+      BackHandler.removeEventListener(
+        'hardwareBackPress',
+        handleBackButtonClick,
+      );
+    };
+  }, []);
+
+
   const handleRegister = async () => {
-    if (firstName == '') {
-        toast.show('First Name is required!', {
-          type: 'warning',
-          placement: 'bottom',
-          duration: 3000,
-          offset: 30,
-          animationType: 'slide-in',
-        });
-      } 
-      else if (lastName == '') {
-        toast.show('Last Name is required!', {
-          type: 'warning',
-          placement: 'bottom',
-          duration: 3000,
-          offset: 30,
-          animationType: 'slide-in',
-        });
-      }
-      else if (userName == '') {
-        toast.show('Username is required!', {
-          type: 'warning',
-          placement: 'bottom',
-          duration: 3000,
-          offset: 30,
-          animationType: 'slide-in',
-        });
-      } 
-   else if (mobileNo == '') {
+    if (name == '') {
+      toast.show('Name is required!', {
+        type: 'warning',
+        placement: 'bottom',
+        duration: 3000,
+        offset: 30,
+        animationType: 'slide-in',
+      });
+    } else if (mobileNo == '') {
       toast.show('Mobile number is required!', {
         type: 'warning',
         placement: 'bottom',
@@ -80,26 +82,23 @@ export default function Register(props) {
         offset: 30,
         animationType: 'slide-in',
       });
-    } 
-      else if ( !email.includes('@')|| !email.includes('gmail.com')) {
-        toast.show('Please enter valid email address!', {
-          type: 'warning',
-          placement: 'bottom',
-          duration: 3000,
-          offset: 30,
-          animationType: 'slide-in',
-        });
-      } 
-      else if ( email == '') {
-        toast.show('Email is required!', {
-          type: 'warning',
-          placement: 'bottom',
-          duration: 3000,
-          offset: 30,
-          animationType: 'slide-in',
-        });
-      } 
-       else if (password == '') {
+    } else if (email == '') {
+      toast.show('Email is required!', {
+        type: 'warning',
+        placement: 'bottom',
+        duration: 3000,
+        offset: 30,
+        animationType: 'slide-in',
+      });
+    } else if (!email.includes('@') || !email.includes('gmail.com')) {
+      toast.show('Please enter valid email address!', {
+        type: 'warning',
+        placement: 'bottom',
+        duration: 3000,
+        offset: 30,
+        animationType: 'slide-in',
+      });
+    } else if (password == '') {
       toast.show('Password is required!', {
         type: 'warning',
         placement: 'bottom',
@@ -107,23 +106,32 @@ export default function Register(props) {
         offset: 30,
         animationType: 'slide-in',
       });
-    } 
-   
-    else {
-    
+    } else if (conPassword == '') {
+      toast.show('Confirm Password is required!', {
+        type: 'warning',
+        placement: 'bottom',
+        duration: 3000,
+        offset: 30,
+        animationType: 'slide-in',
+      });
+    } else {
       try {
-        const res = await postLoginProcess(mobileNo, password);
-        console.log('Data......login api ....line 42..>>>', res);
 
-        if (res.status == 'true') {
-          await AsyncStorage.setItem('@UserData', JSON.stringify(res.data));
-          await AsyncStorage.setItem('@token', res.data.token);
-          props.navigation.navigate('Dashboard');
+        let formdata=new FormData()
+        formdata.append('username',name)
+        formdata.append('phone',mobileNo)
+        formdata.append('email',email)
+        formdata.append('password1',password)
+        formdata.append('password2',conPassword)
+
+        const res = await postRegistration(formdata);
+        console.log('handleRegister  data....line no 100..>>>', res);
+
+        if (res.status == true) {
+          setShowmodal(!showmodal)
           
-        } 
-        else {
-        
-          toast.show(res.message, {
+        } else {
+          toast.show(res.msg, {
             type: 'danger',
             placement: 'bottom',
             duration: 3000,
@@ -133,7 +141,6 @@ export default function Register(props) {
         }
       } catch (e) {
         console.log('catch in ....login page', e);
-    
         toast.show('Something went wrong!, Try again later.', {
           type: 'danger',
           placement: 'bottom',
@@ -152,30 +159,34 @@ export default function Register(props) {
         backgroundColor="transparent"
         barStyle={isDarkMode ? 'light-content' : 'dark-content'}
       />
-      <View style={{backgroundColor:themecolor.LOGINTHEMECOLOR,flex:1}}>
-      <View style={{height: height * 0.1}}>
-      <RegisterLoginHeader title="Register"/>
-      </View>
-      <View style={{...RegisterLoginStyles.MGv5}} />
-      <View style={{width:width,height:height}}>
-      <View
+      <View style={{backgroundColor: themecolor.LOGINTHEMECOLOR, flex: 1}}>
+        <View style={{height: height * 0.1}}>
+          <RegisterLoginHeader title="Register" onPressBack={() => handleBackButtonClick()} />
+        </View>
+        <View style={{...RegisterLoginStyles.MGv5}} />
+        <View style={{width: width, height: height}}>
+          <View
             style={{
               ...RegisterLoginStyles.container,
             }}>
-
             <View
               style={{
                 backgroundColor: themecolor.OTPBOXCOLOR,
                 borderColor: themecolor.OTPBOXCOLOR,
                 ...RegisterLoginStyles.textInputView,
               }}>
-              <Icon name="account-circle" style={{marginLeft:15}} size={18}  color={themecolor.BACKICON} />
-              <View style={{width:width*0.75}}>
+              <Icon
+                name="account-circle"
+                style={{marginLeft: 15}}
+                size={18}
+                color={themecolor.BACKICON}
+              />
+              <View style={{width: width * 0.75}}>
                 <TextInput
                   value={name}
                   placeholderTextColor={themecolor.TXTGREYS}
                   placeholder="Enter Your Name*"
-                 autoCapitalize='words'
+                  autoCapitalize="words"
                   onChangeText={text => setName(text)}
                   style={{
                     color: themecolor.TXTWHITE,
@@ -193,8 +204,13 @@ export default function Register(props) {
                 borderColor: themecolor.OTPBOXCOLOR,
                 ...RegisterLoginStyles.textInputView,
               }}>
-              <FA name="mobile" style={{marginLeft:15,marginRight:5}} size={22}  color={themecolor.BACKICON} />
-              <View style={{width:width*0.75}}>
+              <FA
+                name="mobile"
+                style={{marginLeft: 15, marginRight: 5}}
+                size={22}
+                color={themecolor.BACKICON}
+              />
+              <View style={{width: width * 0.75}}>
                 <TextInput
                   value={mobileNo}
                   placeholderTextColor={themecolor.TXTGREYS}
@@ -217,14 +233,19 @@ export default function Register(props) {
                 borderColor: themecolor.OTPBOXCOLOR,
                 ...RegisterLoginStyles.textInputView,
               }}>
-              <Icon name="email" style={{marginLeft:15}} size={16}  color={themecolor.BACKICON} />
-              <View style={{width:width*0.75}}>
+              <Icon
+                name="email"
+                style={{marginLeft: 15}}
+                size={16}
+                color={themecolor.BACKICON}
+              />
+              <View style={{width: width * 0.75}}>
                 <TextInput
                   value={email}
                   placeholderTextColor={themecolor.TXTGREYS}
                   placeholder="Enter Email Address*"
                   keyboardType="email-address"
-                  inputMode='email'
+                  inputMode="email"
                   onChangeText={text => setEmail(text)}
                   style={{
                     color: themecolor.TXTWHITE,
@@ -242,8 +263,13 @@ export default function Register(props) {
                 backgroundColor: themecolor.OTPBOXCOLOR,
                 borderColor: themecolor.OTPBOXCOLOR,
               }}>
-               <Icon name="vpn-key" style={{marginLeft:15}} size={18}  color={themecolor.BACKICON} />
-              <View style={{width:width*0.7}}>
+              <Icon
+                name="vpn-key"
+                style={{marginLeft: 15}}
+                size={18}
+                color={themecolor.BACKICON}
+              />
+              <View style={{width: width * 0.72}}>
                 <TextInput
                   value={password}
                   placeholderTextColor={themecolor.TXTGREYS}
@@ -282,8 +308,13 @@ export default function Register(props) {
                 backgroundColor: themecolor.OTPBOXCOLOR,
                 borderColor: themecolor.OTPBOXCOLOR,
               }}>
-               <Icon name="vpn-key" style={{marginLeft:15}} size={18}  color={themecolor.BACKICON} />
-              <View style={{width:width*0.7}}>
+              <Icon
+                name="vpn-key"
+                style={{marginLeft: 15}}
+                size={18}
+                color={themecolor.BACKICON}
+              />
+              <View style={{width: width * 0.72}}>
                 <TextInput
                   value={conPassword}
                   placeholderTextColor={themecolor.TXTGREYS}
@@ -314,21 +345,48 @@ export default function Register(props) {
               </View>
             </View>
 
-            <View style={{...RegisterLoginStyles.MGv15, marginBottom: height * 0.23}}>
+            <View
+              style={{
+                ...RegisterLoginStyles.MGv15,
+                marginBottom: height * 0.23,
+              }}>
               <FullsizeButton
                 title="Register"
-                onPress={()=>handleRegister()}
+                onPress={() => handleRegister()}
               />
             </View>
           </View>
-          <TouchableOpacity activeOpacity={0.5} onPress={()=>navigation.navigate('Login')}>
-          <View style={{width:width,height:height*0.13,justifyContent:'center',alignItems:'center'}}>
-            <Text style={{color:themecolor.BACKICON,fontSize:12,fontWeight:'bold'}}>Already have an account?</Text>
-          </View>
+          <TouchableOpacity
+            activeOpacity={0.5}
+            onPress={() => navigation.navigate('Login')}>
+            <View
+              style={{
+                width: width,
+                height: height * 0.13,
+                justifyContent: 'center',
+                alignItems: 'center',
+              }}>
+              <Text
+                style={{
+                  color: themecolor.BACKICON,
+                  fontSize: 12,
+                  fontWeight: 'bold',
+                }}>
+                Already have an account?
+              </Text>
+            </View>
           </TouchableOpacity>
+        </View>
       </View>
-     
-      </View>
+
+      {showmodal && (
+        <VerifyModel
+          setShowmodal={setShowmodal}
+          title={'Registration Successfully.'}
+          navigateTo={'Login'}
+          navigateFrom="Register"
+        />
+      )}
     </>
   );
 }

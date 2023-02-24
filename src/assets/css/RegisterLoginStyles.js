@@ -10,7 +10,7 @@ export const RegisterLoginStyles = StyleSheet.create({
     height: 45,
     fontFamily: FontFamily.PopinsRegular,
     left: 5,
-    width: width * 0.81,
+    width: width * 0.68,
   },
   textInput: {
     fontSize: 14,

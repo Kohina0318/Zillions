@@ -6,6 +6,7 @@ import {
   Appearance,
   Dimensions,
   ScrollView,
+  BackHandler,
 } from 'react-native';
 import {useSelector} from 'react-redux';
 import {MyThemeClass} from '../../components/Theme/ThemeDarkLightColor';
@@ -13,7 +14,9 @@ import {useToast} from 'react-native-toast-notifications';
 import Header from '../../components/shared/header/Header';
 import {getBrands} from '../../repository/DashboardRepository/AllDashboardRep';
 import {styles} from '../../assets/css/BrandsStyle';
-import { BrandInDataList } from '../../components/shared/FlateLists/DashboardFlatList/BrandFlatList';
+import {
+  BrandDataList,
+} from '../../components/shared/FlateLists/DashboardFlatList/BrandFlatList';
 
 const {width, height} = Dimensions.get('screen');
 
@@ -46,20 +49,31 @@ export default function Brands(props) {
 
   return (
     <View style={{...styles.bg, backgroundColor: themecolor.THEMECOLOR}}>
-      <Header title="Brands" backIcon={true} />
+      <Header
+        title="Brands" />
       <View
         style={{
           ...styles.container,
         }}>
-
-         {brandsData.length > 0 ?
-            <BrandInDataList data={brandsData} />
-            :
-            <View style={{alignItems:"center",flex:1,justifyContent:"center"}}>
+          
+        {brandsData.length > 0 ? (
+          <ScrollView showsVerticalScrollIndicator={false}>
+          <BrandDataList
+            data={brandsData}
+            contentContainerStyle={{
+              flexDirection: 'row',
+              flexWrap: 'wrap',
+              width: width * 0.94,
+            }}
+          />
+        </ScrollView>
+        ) : (
+          <View
+            style={{alignItems: 'center', flex: 1, justifyContent: 'center'}}>
             <Text>No data found!</Text>
-            </View>
-            }    
-            <View  style={{marginVertical:20}}/>
+          </View>
+        )}
+        <View style={{marginVertical: 45}} />
       </View>
     </View>
   );

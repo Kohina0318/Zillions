@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {View, Text, StatusBar, Appearance, Dimensions} from 'react-native';
+import {View, Text, StatusBar, Appearance, Dimensions,BackHandler} from 'react-native';
 import {useSelector} from 'react-redux';
 import {MyThemeClass} from '../../components/Theme/ThemeDarkLightColor';
 import {ProductStyle} from '../../assets/css/ProductStyle';
@@ -16,7 +16,22 @@ export default function RecentlyViewed(props) {
   const mode = useSelector(state => state.mode);
   const themecolor = new MyThemeClass(mode).getThemeColor();
   const [recentlyViewedData, setRecentlyViewedData] = useState([]);
- 
+
+  function handleBackButtonClick() {
+    props.navigation.goBack();
+    return true;
+  }
+
+  React.useEffect(() => {
+    BackHandler.addEventListener('hardwareBackPress', handleBackButtonClick);
+    return () => {
+      BackHandler.removeEventListener(
+        'hardwareBackPress',
+        handleBackButtonClick,
+      );
+    };
+  }, []);
+
   const handleRecentlyViewed = async () => {
     try {
       var res = await getProductList('recently_viewed','20');
@@ -40,7 +55,7 @@ export default function RecentlyViewed(props) {
 
   return (
     <View style={{...ProductStyle.bg, backgroundColor: themecolor.THEMECOLOR}}>
-      <Header title="Recently Viewed" backIcon={true} />
+      <Header title="Recently Viewed" backIcon={true} onPressBack={() => handleBackButtonClick()}/>
 
       <View
         style={{

@@ -38,7 +38,7 @@ export default function RegisterLoginHeader(props) {
               <TouchableOpacity
                 activeOpacity={0.5}
                 style={styles.toggle1}
-                // onPress={() => }
+                onPress={props.onPressBack}
                 >
                 <CIcon
                   name="keyboard-backspace"

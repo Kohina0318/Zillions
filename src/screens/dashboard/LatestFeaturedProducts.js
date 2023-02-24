@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {View, Text, StatusBar, Appearance, Dimensions} from 'react-native';
+import {View, Text, StatusBar, Appearance, Dimensions,BackHandler} from 'react-native';
 import {useSelector} from 'react-redux';
 import {MyThemeClass} from '../../components/Theme/ThemeDarkLightColor';
 import {ProductStyle} from '../../assets/css/ProductStyle';
@@ -18,6 +18,21 @@ export default function LatestFeaturedProducts(props) {
   const themecolor = new MyThemeClass(mode).getThemeColor();
   const [latestProductsData, setLatestProductsData] = useState([]);
   
+  function handleBackButtonClick() {
+    props.navigation.goBack();
+    return true;
+  }
+
+  React.useEffect(() => {
+    BackHandler.addEventListener('hardwareBackPress', handleBackButtonClick);
+    return () => {
+      BackHandler.removeEventListener(
+        'hardwareBackPress',
+        handleBackButtonClick,
+      );
+    };
+  }, []);
+
   const handleLatestProducts = async () => {
     try {
       var res = await getProductList('latest','20');
@@ -41,7 +56,7 @@ export default function LatestFeaturedProducts(props) {
 
   return (
     <View style={{...ProductStyle.bg, backgroundColor: themecolor.THEMECOLOR}}>
-      <Header title="Latest Featured Products" backIcon={true} />
+      <Header title="Latest Featured Products" backIcon={true} onPressBack={() => handleBackButtonClick()}/>
 
       <View
         style={{

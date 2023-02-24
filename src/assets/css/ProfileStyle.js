@@ -8,10 +8,8 @@ const ProfileStyle = StyleSheet.create({
   bg: {flex: 1},
   datalistView: {
     width: width * 0.9,
-    height: 60,
     marginTop: 6,
     padding: 10,
-    borderBottomWidth: 2,
     borderRadius: 3,
     alignSelf: 'center',
     flexDirection: 'row',
@@ -33,7 +31,7 @@ const ProfileStyle = StyleSheet.create({
     width: width * 0.55,
   },
   txt: {
-    fontSize: 16,
+    fontSize: FontSize.labelText2,
     fontFamily: FontFamily.Popinssemibold,
   },
   iconview: {flexDirection: 'row', alignItems: 'center'},
@@ -53,15 +51,24 @@ const ProfileStyle = StyleSheet.create({
     right: 5,
   },
   datalistView1: {
-    width: width * 0.9,
-    height: height * 0.2,
+    width: width * 0.94,
     marginTop: 6,
     padding: 13,
-    borderRadius: 15,
+    borderRadius: 7,
     alignSelf: 'center',
     flexDirection: 'column',
     alignItems: 'center',
     borderWidth: 1,
+    marginBottom: 1,
+    justifyContent: 'center',
+  },
+  datalistView2: {
+    width: width * 0.94,
+    padding: 13,
+    borderRadius: 7,
+    alignSelf: 'center',
+    flexDirection: 'column',
+    alignItems: 'center',
     marginBottom: 1,
     justifyContent: 'center',
   },
@@ -95,6 +102,10 @@ const ProfileStyle = StyleSheet.create({
     fontSize: 15,
     textAlign: 'center',
   },
+  WellText: {
+    fontFamily: FontFamily.abhinabolditalic,
+    fontSize: FontSize.labelText4
+  },
   buttonMainView: {display: 'flex', flexDirection: 'row', marginTop: 20},
   buttonView1: {
     width: width * 0.4,
@@ -103,7 +114,7 @@ const ProfileStyle = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     marginRight: 5,
-    borderRadius: 4,
+    borderRadius: 8,
   },
   buttonText1: {
     fontSize: 13,
@@ -115,7 +126,49 @@ const ProfileStyle = StyleSheet.create({
     borderWidth: 2,
     justifyContent: 'center',
     alignItems: 'center',
-    borderRadius: 4,
+    borderRadius: 8,
+  },
+  buttonView3: {
+    width: width * 0.93,
+    height: height * 0.05,
+    borderWidth: 2,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 5,
+  },
+  appVerView: {
+    width: width * 0.93,
+    height: height * 0.1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 5,
+  },
+  appverText: {
+    fontSize: FontSize.labelText3,
+    fontWeight: FontFamily.PopinsMedium,
+  },
+  arrowIconView: {
+    width: width * 0.08,
+    left: 5,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 20,
+  },
+  welcomView: {
+    width: width * 0.56,
+    justifyContent: 'flex-start',
+    alignItems: 'flex-start',
+    left: 5,
+  },
+  avater: {
+    borderWidth: 5,
+    borderColor: 'white',
+    borderStyle: 'solid',
+  },
+  profileDataView: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 });
 

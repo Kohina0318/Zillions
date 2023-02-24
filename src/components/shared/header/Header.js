@@ -14,7 +14,7 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import CIcon from 'react-native-vector-icons/MaterialIcons';
 import BadgeIcon from './BadgeIcon';
 import {styles} from '../../../assets/css/HeaderStyle';
-const {width, height} = Dimensions.get('screen');
+const {width, height} = Dimensions.get('screen');  
 
 export default function Header(props) {
   const navigation = useNavigation();
@@ -38,12 +38,12 @@ export default function Header(props) {
               <TouchableOpacity
                 activeOpacity={0.5}
                 style={styles.toggle}
-                // onPress={() => }
+                onPress={props.onPressBack}
                 >
                 <CIcon
                   name="keyboard-backspace"
                   size={26}
-                  color={themecolor.BACKICON}
+                  color={themecolor.TXTWHITE}
                 />
               </TouchableOpacity>
             ) : (

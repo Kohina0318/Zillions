@@ -47,12 +47,13 @@ export const styles = StyleSheet.create({
   },
 
   toggle: {
-    padding: 10,
+    borderRadius:20
   },
   mainView: {
     width: '100%',
     borderBottomRightRadius: 15,
     borderBottomLeftRadius: 15,
+    borderBottomWidth:1
   },
   mainViewContainer: {
     justifyContent: 'center',
