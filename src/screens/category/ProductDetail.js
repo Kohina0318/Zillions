@@ -54,7 +54,7 @@ export default function ProductDetail(props) {
     };
   }, []);
 
-  const {widthDes} = useWindowDimensions();
+  const {widthDes} = useWindowDimensions().width;
   const toast = useToast();
   const refRBSheet = useRef();
   const mode = useSelector(state => state.mode);
@@ -69,23 +69,49 @@ export default function ProductDetail(props) {
   const [largeImage, setLargeImage] = React.useState(0);
   const [relatedProductData, setRelatedProductData] = useState([]);
   const [showWishListed, setShowWishListed] = useState(true);
+  const [shipment,setShipment]=useState('')
 
   const handleWishListed = () => {
     setShowWishListed(!showWishListed);
   };
 
+  const tagsStyles={
+    p:{
+      // backgroundColor:'grey',
+      color:themecolor.TXTWHITE
+    },
+  }
+
+  
+  const tagStyles={
+    p:{
+      // backgroundColor:'grey',
+      color:themecolor.TXTWHITE,
+      textAlign:'left'
+    },
+    ul:{
+      color:themecolor.TXTWHITE,
+      // textAlign:'left'
+    },
+    li:{
+      color:themecolor.TXTWHITE,
+      textAlign:'left'
+    },
+    // body:{
+    //   height:'auto'
+    // }
+  }
+
   const handleProductView = async () => {
     try {
       var res = await getProductView(props.route.params.productId);
-      console.log(
-        'data handleProductView api in.....product DEtail  page-->',
-        res.data,
-      );
       console.log('res data>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>', res.data);
       setProductDetailData(res.data);
       setProductId(res.data.product_id);
       setDescription(res.data.description);
+      setShipment(res.data.shipment_info)
       setAllImages(res.data.all_image);
+      setLoader(false)
     } catch (e) {
       console.log('errrror in..handleProductView page-->', e);
       toast.show('Something went wrong!, Try again later.', {
@@ -102,7 +128,6 @@ export default function ProductDetail(props) {
     try {
       var res = await getProductRealedProducts('most_viewed', '20', productId);
       setRelatedProductData(res.data);
-      setLoader(false);
     } catch (e) {
       console.log('errrror in..handleRelatedProduct page-->', e);
       setLoader(false);
@@ -290,52 +315,59 @@ export default function ProductDetail(props) {
                   </View>
 
                   <View style={{marginTop: 10}} />
-                  {/* <Tab
+                  <View style={{width:width*0.9,alignItems:'center',justifyContent:'center'}}>
+                   <Tab
       value={index}
       onChange={(e) => setIndex(e)}
       indicatorStyle={{
         backgroundColor: 'white',
-        height: 3,
+        // height: 3,
       }}
-      variant="primary"
     >
       <Tab.Item
         title="Recent"
-        titleStyle={{ fontSize: 12 }}
-        icon={{ name: 'timer', type: 'ionicon', color: 'white' }}
+        titleStyle={{ fontSize: 14,color:themecolor.BACKICON }}
       />
       <Tab.Item
-        title="favorite"
-        titleStyle={{ fontSize: 12 }}
-        icon={{ name: 'heart', type: 'ionicon', color: 'white' }}
+        title="Shipping Info"
+        titleStyle={{ fontSize: 14,color:themecolor.BACKICON }}
       />
       <Tab.Item
-        title="cart"
-        titleStyle={{ fontSize: 12 }}
-        icon={{ name: 'cart', type: 'ionicon', color: 'white' }}
+        title="Reviews"
+        titleStyle={{ fontSize: 14,color:themecolor.BACKICON }}
       />
     </Tab>
 
-    <TabView value={index} onChange={setIndex} animationType="spring">
-      <TabView.Item style={{ backgroundColor: 'red', width: '100%' }}>
-        <Text h1>Recent</Text>
-      </TabView.Item>
-      <TabView.Item style={{ backgroundColor: 'blue', width: '100%' }}>
-        <Text h1>Favorite</Text>
-      </TabView.Item>
-      <TabView.Item style={{ backgroundColor: 'green', width: '100%' }}>
-        <Text h1>Cart</Text>
-      </TabView.Item>
-    </TabView> */}
-                  <View>
+    <TabView containerStyle={{width:width,justifyContent:'center'}} tabItemContainerStyle={{width:width*0.7,justifyContent:'center'}} value={index} onChange={setIndex} animationType="spring">
+      <TabView.Item>
                     <RenderHtml
                       contentWidth={widthDes}
                       source={{html: description}}
                       enableExperimentalMarginCollapsing={true}
                       enableExperimentalBRCollapsing={true}
                       enableExperimentalGhostLinesPrevention={true}
+                      defaultViewProps={{width:width*0.8,justifyContent:'center'}}
+                      tagsStyles={tagStyles}
                     />
-                  </View>
+      </TabView.Item>
+      <TabView.Item>
+      <RenderHtml
+                      contentWidth={widthDes}
+                      source={{html:shipment}}
+                      enableExperimentalMarginCollapsing={true}
+                      enableExperimentalBRCollapsing={true}
+                      enableExperimentalGhostLinesPrevention={true}
+                      enableCSSInlineProcessing={false}
+                      defaultViewProps={{width:width*0.9}}
+                      tagsStyles={tagsStyles}
+                      // ignoredStyles={{backgroundColor}}
+                    />
+      </TabView.Item>
+      <TabView.Item>
+        <Text h1>Cart</Text>
+      </TabView.Item>
+    </TabView>
+    </View>  
                   <View style={{marginTop: 20}} />
                 </View>
               </View>
