@@ -9,6 +9,7 @@ import {
   TouchableOpacity,
   useWindowDimensions,
   BackHandler,
+  Pressable
 } from 'react-native';
 import {useSelector} from 'react-redux';
 import {MyThemeClass} from '../../components/Theme/ThemeDarkLightColor';
@@ -35,6 +36,8 @@ import RBSheet from 'react-native-raw-bottom-sheet';
 import EN from 'react-native-vector-icons/Entypo';
 import {Tab, TabView} from '@rneui/themed';
 import LoadingFullScreen from '../../components/shared/Loader/LoadingFullScreen';
+import ImageZoom from 'react-native-image-pan-zoom';
+import { Modal } from 'react-native';
 
 const {width, height} = Dimensions.get('screen');
 
@@ -54,7 +57,7 @@ export default function ProductDetail(props) {
     };
   }, []);
 
-  const {widthDes} = useWindowDimensions();
+  const {widthDes} = useWindowDimensions().width;
   const toast = useToast();
   const refRBSheet = useRef();
   const mode = useSelector(state => state.mode);
@@ -69,23 +72,51 @@ export default function ProductDetail(props) {
   const [largeImage, setLargeImage] = React.useState(0);
   const [relatedProductData, setRelatedProductData] = useState([]);
   const [showWishListed, setShowWishListed] = useState(true);
+  const [shipment,setShipment]=useState('')
+  const [modalVisible, setModalVisible] = useState(false);
+  const [image,setImage]=useState('')
 
   const handleWishListed = () => {
     setShowWishListed(!showWishListed);
   };
 
+  const tagsStyles={
+    p:{
+      // backgroundColor:'grey',
+      color:themecolor.TXTWHITE
+    },
+  }
+
+  
+  const tagStyles={
+    p:{
+      // backgroundColor:'grey',
+      color:themecolor.TXTWHITE,
+      textAlign:'left'
+    },
+    ul:{
+      color:themecolor.TXTWHITE,
+      // textAlign:'left'
+    },
+    li:{
+      color:themecolor.TXTWHITE,
+      textAlign:'left'
+    },
+    // body:{
+    //   height:'auto'
+    // }
+  }
+
   const handleProductView = async () => {
     try {
       var res = await getProductView(props.route.params.productId);
-      console.log(
-        'data handleProductView api in.....product DEtail  page-->',
-        res.data,
-      );
       console.log('res data>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>', res.data);
       setProductDetailData(res.data);
       setProductId(res.data.product_id);
       setDescription(res.data.description);
+      setShipment(res.data.shipment_info)
       setAllImages(res.data.all_image);
+      setLoader(false)
     } catch (e) {
       console.log('errrror in..handleProductView page-->', e);
       toast.show('Something went wrong!, Try again later.', {
@@ -102,7 +133,6 @@ export default function ProductDetail(props) {
     try {
       var res = await getProductRealedProducts('most_viewed', '20', productId);
       setRelatedProductData(res.data);
-      setLoader(false);
     } catch (e) {
       console.log('errrror in..handleRelatedProduct page-->', e);
       setLoader(false);
@@ -121,8 +151,10 @@ export default function ProductDetail(props) {
     handleRelatedProduct();
   }, []);
 
+
   function renderimage(image, index) {
     return (
+      <TouchableOpacity activeOpacity={0.5} onPressIn={()=>{setImage(image),setModalVisible(true)}}>
       <View key={index}>
         <Image
           style={{width: width * 0.88, height: height * 0.3}}
@@ -130,6 +162,7 @@ export default function ProductDetail(props) {
           resizeMode={'contain'}
         />
       </View>
+      </TouchableOpacity>
     );
   }
   return (
@@ -149,6 +182,7 @@ export default function ProductDetail(props) {
             <View
               style={{
                 ...styles.container,
+              
               }}>
               <View
                 style={{
@@ -157,8 +191,9 @@ export default function ProductDetail(props) {
                   borderColor: themecolor.BOXBORDERCOLOR1,
                   borderRadius: 5,
                   padding: 10,
+                  
                 }}>
-                <View style={{width: '100%', height: height * 0.33}}>
+                <View style={{width: '100%'}}>
                   <Carousel
                     autoplay={false}
                     index={largeImage}
@@ -267,7 +302,7 @@ export default function ProductDetail(props) {
 
                   <View style={{marginTop: 10}} />
 
-                  <View style={{width: width * 0.3}}>
+                  {/* <View style={{width: width * 0.3}}>
                     {productDetailData.current_stock > 0 ? (
                       <View
                         style={{
@@ -287,57 +322,64 @@ export default function ProductDetail(props) {
                         </Text>
                       </View>
                     )}
-                  </View>
+                  </View> */}
 
-                  <View style={{marginTop: 10}} />
-                  {/* <Tab
+                  {/* <View style={{marginTop: 10}} /> */}
+             
+                </View>
+                <View style={{width:width*0.9,alignItems:'center',justifyContent:'center'}}>
+                   <Tab
       value={index}
       onChange={(e) => setIndex(e)}
       indicatorStyle={{
-        backgroundColor: 'white',
+        backgroundColor:themecolor.BACKICON,
         height: 3,
       }}
-      variant="primary"
+      // style={{height:height*0.07}}
     >
       <Tab.Item
-        title="Recent"
-        titleStyle={{ fontSize: 12 }}
-        icon={{ name: 'timer', type: 'ionicon', color: 'white' }}
+        title="Description"
+        titleStyle={{ fontSize: 12,color:themecolor.BACKICON }}
       />
       <Tab.Item
-        title="favorite"
-        titleStyle={{ fontSize: 12 }}
-        icon={{ name: 'heart', type: 'ionicon', color: 'white' }}
+        title="Shipping Info"
+        titleStyle={{ fontSize: 12,color:themecolor.BACKICON }}
       />
       <Tab.Item
-        title="cart"
-        titleStyle={{ fontSize: 12 }}
-        icon={{ name: 'cart', type: 'ionicon', color: 'white' }}
+        title="Reviews"
+        titleStyle={{ fontSize: 12,color:themecolor.BACKICON }}
       />
     </Tab>
-
-    <TabView value={index} onChange={setIndex} animationType="spring">
-      <TabView.Item style={{ backgroundColor: 'red', width: '100%' }}>
-        <Text h1>Recent</Text>
-      </TabView.Item>
-      <TabView.Item style={{ backgroundColor: 'blue', width: '100%' }}>
-        <Text h1>Favorite</Text>
-      </TabView.Item>
-      <TabView.Item style={{ backgroundColor: 'green', width: '100%' }}>
-        <Text h1>Cart</Text>
-      </TabView.Item>
-    </TabView> */}
-                  <View>
+    <TabView containerStyle={{width:width,justifyContent:'center'}} tabItemContainerStyle={{justifyContent:'center'}} value={index} onChange={setIndex} animationType="spring">
+      <TabView.Item>
                     <RenderHtml
                       contentWidth={widthDes}
                       source={{html: description}}
                       enableExperimentalMarginCollapsing={true}
                       enableExperimentalBRCollapsing={true}
                       enableExperimentalGhostLinesPrevention={true}
+                      defaultViewProps={{width:width*0.8}}
+                      tagsStyles={tagStyles}
                     />
-                  </View>
-                  <View style={{marginTop: 20}} />
-                </View>
+      </TabView.Item>
+      <TabView.Item>
+      <RenderHtml
+                      contentWidth={widthDes}
+                      source={{html:shipment}}
+                      enableExperimentalMarginCollapsing={true}
+                      enableExperimentalBRCollapsing={true}
+                      enableExperimentalGhostLinesPrevention={true}
+                      enableCSSInlineProcessing={false}
+                      defaultViewProps={{width:width*0.9}}
+                      tagsStyles={tagsStyles}
+                      // ignoredStyles={{backgroundColor}}
+                    />
+      </TabView.Item>
+      <TabView.Item>
+        <Text h1>Cart</Text>
+      </TabView.Item>
+    </TabView>
+    </View>  
               </View>
 
               <View style={{marginTop: 10}} />
@@ -492,6 +534,32 @@ export default function ProductDetail(props) {
               </RBSheet>
             </View>
           </TouchableOpacity>
+          <View style={styles.centeredView}>
+      <Modal
+        animationType="slide"
+        transparent={true}
+        visible={modalVisible}
+        onRequestClose={() => {
+          setModalVisible(!modalVisible);
+        }}>
+          <View style={styles.centeredView}>
+          <View style={styles.modalView}>
+      <ImageZoom
+       cropWidth={Dimensions.get('window').width}
+                       cropHeight={Dimensions.get('window').height}
+                       imageWidth={width*0.9}
+                       imageHeight={height*0.5}
+                       >
+        <Image
+          style={{width: width * 0.9, height: height * 0.5}}
+          source={{uri: image}}
+        />
+        </ImageZoom>
+        </View>
+       
+          </View>
+      </Modal>
+      </View>
         </>
       )}
     </View>
