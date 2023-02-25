@@ -6,13 +6,15 @@ import {
   Text,
   Image,
   Dimensions,
+  Alert
 } from 'react-native';
-import {Colors} from '../../../assets/config/Colors';
 import {styles} from '../../../../assets/css/AddressStyle';
 import {MyThemeClass} from '../../../Theme/ThemeDarkLightColor';
 import {useSelector} from 'react-redux';
 import {useNavigation} from '@react-navigation/native';
 import HalfSizeButton from '../../button/halfSizeButton';
+import {useToast} from 'react-native-toast-notifications';
+import { postDeleteAddress, postSetDefaultAddress } from '../../../../repository/AddressRepository/MangeAddressRepo';
 
 const {width} = Dimensions.get('screen');
 
@@ -26,7 +28,6 @@ function DefaultAddressDataFlateList({item, themecolor}) {
         backgroundColor: themecolor.BOXBORDERCOLOR,
         borderColor: themecolor.BOXBORDERCOLOR1,
       }}
-      // onPress={() => navigation.navigate('SubCategories',{categoryId:item.category_id,categoryName:item.category_name})}
     >
       <View style={{...styles.innerView}}>
         <Text style={{...styles.txt, color: themecolor.TXTWHITE}}>
@@ -60,30 +61,77 @@ function DefaultAddressDataFlateList({item, themecolor}) {
           </Text>
         </Text>
       </View>
-
-      <View style={{...styles.DataButton}}>
-          <View style={{width: '100%'}}>
-            <HalfSizeButton
-              title="Remove"
-              icon=" "
-              backgroundColor={"transparent"}
-              color={themecolor.TEXTRED}
-              borderColor={themecolor.TEXTRED}
-              fontSize={12}
-              height={ width * 0.08}
-            />
-          </View>
-         </View>
-     
+ 
     </View>
   ) : (
     <></>
   );
 }
 
-function OtherAddressDataFlateList({item, themecolor}) {
+function OtherAddressDataFlateList({item, themecolor, refresh, setRefresh}) {
+  const toast = useToast();
   const navigation = useNavigation();
 
+  const handleSetDefaultAddress = async (addId) => {
+    try {
+
+      let formdata = new FormData();
+      formdata.append('id', addId);
+      
+      var res = await postSetDefaultAddress(formdata);
+      toast.show(res.msg, {
+        type: 'success',
+        placement: 'bottom',
+        duration: 3000,
+        offset: 30,
+        animationType: 'slide-in',
+      });
+      setRefresh(!refresh)
+    } catch (e) {
+      console.log('errrror in..handleSetDefaultAddress page-->', e);
+      toast.show('Something went wrong!, Try again later.', {
+        type: 'danger',
+        placement: 'bottom',
+        duration: 3000,
+        offset: 30,
+        animationType: 'slide-in',
+      });
+    }
+  };
+
+  const confirmDeleteAddres =(id)=>{
+    Alert.alert('Delete Confirmation', 'Are you sure you want to delete this address?', [
+      {
+        text: 'No',
+        onPress: () => console.log('Cancel Pressed'),
+        style: 'cancel',
+      },
+      {text: 'Yes', onPress: () => handleDeleteAddress(id)},
+    ]);
+
+  }
+
+  const handleDeleteAddress = async (addId) => {
+    try {
+
+      let formdata = new FormData();
+      formdata.append('id', addId);
+      
+      var res = await postDeleteAddress(formdata);
+      setRefresh(!refresh)
+    } catch (e) {
+      console.log('errrror in..handleDeleteAddress page-->', e);
+      toast.show('Something went wrong!, Try again later.', {
+        type: 'danger',
+        placement: 'bottom',
+        duration: 3000,
+        offset: 30,
+        animationType: 'slide-in',
+      });
+    }
+  };
+
+ 
   return item.set_default == '0' ? (
     <View
       style={{
@@ -91,7 +139,6 @@ function OtherAddressDataFlateList({item, themecolor}) {
         backgroundColor: themecolor.BOXBORDERCOLOR,
         borderColor: themecolor.BOXBORDERCOLOR1,
       }}
-      // onPress={() => navigation.navigate('SubCategories',{categoryId:item.category_id,categoryName:item.category_name})}
     >
       <View style={{...styles.innerView}}>
         <Text style={{...styles.txt, color: themecolor.TXTWHITE}}>
@@ -137,6 +184,7 @@ function OtherAddressDataFlateList({item, themecolor}) {
               borderColor={themecolor.ADDTOCARTBUTTONCOLOR} 
               fontSize={12}
               height={ width * 0.08}
+              onPress={()=>handleSetDefaultAddress(item.id)}
             />
           </View>
           <View style={{width: '49%'}}>
@@ -148,6 +196,7 @@ function OtherAddressDataFlateList({item, themecolor}) {
               borderColor={themecolor.TEXTRED}
               fontSize={12}
               height={ width * 0.08}
+              onPress={()=>confirmDeleteAddres(item.id)}
             />
           </View>
          </View>
@@ -167,9 +216,9 @@ export function ManageAddressDataList(props) {
       data={props.data}
       renderItem={({item}) =>
         props.dafault == true ? (
-          <DefaultAddressDataFlateList item={item} themecolor={themecolor} />
+          <DefaultAddressDataFlateList item={item} themecolor={themecolor} refresh={props.refresh} setRefresh={props.setRefresh} />
         ) : (
-          <OtherAddressDataFlateList item={item} themecolor={themecolor} />
+          <OtherAddressDataFlateList item={item} themecolor={themecolor} refresh={props.refresh} setRefresh={props.setRefresh} />
         )
       }
       showsVerticalScrollIndicator={false}

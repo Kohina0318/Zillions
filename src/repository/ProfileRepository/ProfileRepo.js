@@ -1,7 +1,9 @@
+import { SERVER_URL } from "../SERVER_URL";
+
 const getProfileInfo = async () => {
   try {
     const response = await fetch(
-      `https://www.zillionsbuyer.com/profiles/info`,
+      `${await SERVER_URL()}/profiles/info`,
       {
         method: 'GET',
         headers: {'Content-Type': 'application/json;charset=utf-8'},
