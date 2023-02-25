@@ -180,8 +180,8 @@ function OtherAddressDataFlateList({item, themecolor, refresh, setRefresh}) {
               title="Set as default"
               icon=" "
               backgroundColor={"transparent"}
-              color={themecolor.ADDTOCARTBUTTONCOLOR}
-              borderColor={themecolor.ADDTOCARTBUTTONCOLOR} 
+              color={themecolor.BACKICON}
+              borderColor={themecolor.BACKICON} 
               fontSize={12}
               height={ width * 0.08}
               onPress={()=>handleSetDefaultAddress(item.id)}
