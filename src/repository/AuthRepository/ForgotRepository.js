@@ -1,6 +1,8 @@
+import { SERVER_URL } from "../SERVER_URL";
+
 const postforgotPassword = async formdata => {
   try {
-    const response = await fetch(`https://www.zillionsbuyer.com/login/forget`, {
+    const response = await fetch(`${await SERVER_URL()}/login/forget`, {
       method: 'POST',
       headers: {'Content-Type': 'multipart/form-data'},
       body: formdata,

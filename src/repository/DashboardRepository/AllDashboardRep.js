@@ -1,6 +1,8 @@
+import { SERVER_URL } from "../SERVER_URL";
+
 const getBrands = async () => {
   try {
-    const response = await fetch('https://www.zillionsbuyer.com/brands', {
+    const response = await fetch(`${await SERVER_URL()}/brands`, {
       method: 'GET',
       headers: {'Content-Type': 'application/json;charset=utf-8'},
     });
@@ -13,7 +15,7 @@ const getBrands = async () => {
 
 const getMainSlider = async () => {
   try {
-    const response = await fetch('https://www.zillionsbuyer.com/main-slider', {
+    const response = await fetch(`${await SERVER_URL()}/main-slider`, {
       method: 'GET',
       headers: {'Content-Type': 'application/json;charset=utf-8'},
     });
@@ -27,7 +29,7 @@ const getMainSlider = async () => {
 const getProductList = async (spec, limit) => {
   try {
     const response = await fetch(
-      `https://www.zillionsbuyer.com/product-list?speciality=${spec}&limit=${limit}`,
+      `${await SERVER_URL()}/product-list?speciality=${spec}&limit=${limit}`,
       {
         method: 'GET',
         headers: {'Content-Type': 'application/json;charset=utf-8'},
@@ -36,7 +38,7 @@ const getProductList = async (spec, limit) => {
     const result = await response.json();
     return result;
   } catch (err) {
-    console.log('error in getCategoryByProduct...in AllDashboardRep ', err);
+    console.log('error in getProductList...in AllDashboardRep ', err);
   }
 };
 

@@ -1,7 +1,9 @@
+import { SERVER_URL } from "../SERVER_URL";
+
 const postRegistration = async formdata => {
   try {
     const response = await fetch(
-      'https://www.zillionsbuyer.com/registration/add_info',
+      `${await SERVER_URL()}/registration/add_info`,
       {
         method: 'POST',
         headers: {'Content-Type': 'multipart/form-data'},

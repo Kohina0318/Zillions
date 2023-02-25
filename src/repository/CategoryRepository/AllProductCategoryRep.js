@@ -1,6 +1,8 @@
+import { SERVER_URL } from "../SERVER_URL";
+
 const getCategories = async () => {
   try {
-    const response = await fetch('https://www.zillionsbuyer.com/categories', {
+    const response = await fetch(`${await SERVER_URL()}/categories`, {
       method: 'GET',
       headers: {'Content-Type': 'application/json;charset=utf-8'},
     });
@@ -14,7 +16,7 @@ const getCategories = async () => {
 const getSubCategories = async cId => {
   try {
     const response = await fetch(
-      `https://www.zillionsbuyer.com/sub-categories/${cId}`,
+      `${await SERVER_URL()}/sub-categories/${cId}`,
       {
         method: 'GET',
         headers: {'Content-Type': 'application/json;charset=utf-8'},
@@ -32,7 +34,7 @@ const getSubCategories = async cId => {
 const getSubCategoryByProduct = async sId => {
   try {
     const response = await fetch(
-      `https://www.zillionsbuyer.com/product-list?speciality=sub_category&id=${sId}`,
+      `${await SERVER_URL()}/product-list?speciality=sub_category&id=${sId}`,
       {
         method: 'GET',
         headers: {'Content-Type': 'application/json;charset=utf-8'},
@@ -50,7 +52,7 @@ const getSubCategoryByProduct = async sId => {
 const getProductView = async pId => {
   try {
     const response = await fetch(
-      `https://www.zillionsbuyer.com/product-view/${pId}`,
+      `${await SERVER_URL()}/product-view/${pId}`,
       {
         method: 'GET',
         headers: {'Content-Type': 'application/json;charset=utf-8'},
@@ -66,7 +68,7 @@ const getProductView = async pId => {
 const getProductRealedProducts = async (spec, limit, pId) => {
   try {
     const response = await fetch(
-      `https://www.zillionsbuyer.com/product-list?speciality=${spec}&limit=${limit}&id=${pId}`,
+      `${await SERVER_URL()}/product-list?speciality=${spec}&limit=${limit}&id=${pId}`,
       {
         method: 'GET',
         headers: {'Content-Type': 'application/json;charset=utf-8'},

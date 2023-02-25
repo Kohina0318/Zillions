@@ -1,7 +1,9 @@
+import { SERVER_URL } from "../SERVER_URL";
+
 const postLogin = async formdata => {
   try {
     const response = await fetch(
-      `https://www.zillionsbuyer.com/login/do_login`,
+      `${await SERVER_URL()}/login/do_login`,
       {
         method: 'POST',
         headers: {'Content-Type': 'multipart/form-data'},

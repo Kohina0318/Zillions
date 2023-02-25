@@ -49,7 +49,6 @@ export default function Profile(props) {
 
   useFocusEffect(
     React.useCallback(() => {
-      setLoader(true);
       handleUserData();
     }, [refresh,props]),
   );

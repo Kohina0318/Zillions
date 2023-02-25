@@ -1,6 +1,8 @@
+import { SERVER_URL } from "../SERVER_URL";
+
 const getWishlist = async () => {
   try {
-    const response = await fetch(`https://www.zillionsbuyer.com/wishlist`, {
+    const response = await fetch(`${await SERVER_URL()}/wishlist`, {
       method: 'GET',
       headers: {'Content-Type': 'application/json;charset=utf-8'},
     });

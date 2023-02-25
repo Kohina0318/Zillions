@@ -54,7 +54,7 @@ export default function Login(props) {
 
   const handleLogin = async () => {
     if (email == '') {
-      toast.show('Mobile number is required!', {
+      toast.show('Email is required!', {
         type: 'warning',
         placement: 'bottom',
         duration: 3000,

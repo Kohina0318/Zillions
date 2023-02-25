@@ -18,7 +18,7 @@ export default function AddAddressModel(props) {
 
   return (
     <>
-      <Modal animationType="slide" transparent={true} visible={modalCart} >
+      <Modal animationType="slide" transparent={true} visible={modalCart}>
         <View
           style={{
             ...styles.model,
@@ -55,25 +55,6 @@ export default function AddAddressModel(props) {
                     color: themecolor.TXTWHITE,
                   }}
                   onChangeText={txt => props.setAddress(txt)}
-                />
-              </View>
-
-              <View style={{...styles.Mv5}} />
-
-              <View
-                style={{
-                  ...styles.modelTextView,
-                  borderColor: themecolor.BOXBORDERCOLOR1,
-                  backgroundColor: themecolor.BOXBORDERCOLOR,
-                }}>
-                <TextInput
-                  placeholder={'Status*'}
-                  placeholderTextColor={themecolor.TXTGREYS}
-                  style={{
-                    ...styles.modelTextInput,
-                    color: themecolor.TXTWHITE,
-                  }}
-                  onChangeText={txt => props.setState(txt)}
                 />
               </View>
 
@@ -126,6 +107,44 @@ export default function AddAddressModel(props) {
                   backgroundColor: themecolor.BOXBORDERCOLOR,
                 }}>
                 <TextInput
+                  placeholder={'State*'}
+                  placeholderTextColor={themecolor.TXTGREYS}
+                  style={{
+                    ...styles.modelTextInput,
+                    color: themecolor.TXTWHITE,
+                  }}
+                  onChangeText={txt => props.setState(txt)}
+                />
+              </View>
+
+              <View style={{...styles.Mv5}} />
+
+              <View
+                style={{
+                  ...styles.modelTextView,
+                  borderColor: themecolor.BOXBORDERCOLOR1,
+                  backgroundColor: themecolor.BOXBORDERCOLOR,
+                }}>
+                <TextInput
+                  placeholder={'Country*'}
+                  placeholderTextColor={themecolor.TXTGREYS}
+                  style={{
+                    ...styles.modelTextInput,
+                    color: themecolor.TXTWHITE,
+                  }}
+                  onChangeText={txt => props.setCountry(txt)}
+                />
+              </View>
+
+              <View style={{...styles.Mv5}} />
+
+              <View
+                style={{
+                  ...styles.modelTextView,
+                  borderColor: themecolor.BOXBORDERCOLOR1,
+                  backgroundColor: themecolor.BOXBORDERCOLOR,
+                }}>
+                <TextInput
                   placeholder={'Mobile No.*'}
                   keyboardType="numeric"
                   maxLength={10}
@@ -137,7 +156,6 @@ export default function AddAddressModel(props) {
                   onChangeText={txt => props.setMobileNo(txt)}
                 />
               </View>
-
             </View>
 
             <View style={{...styles.modelViewButton}}>
@@ -147,23 +165,23 @@ export default function AddAddressModel(props) {
                   backgroundColor={themecolor.ADDTOCARTBUTTONCOLOR}
                   color={'#fff'}
                   borderColor={themecolor.BOXBORDERCOLOR1}
-                  // onPress={() => }
+                  onPress={props.onPress}
                 />
               </View>
               <View style={{marginHorizontal: 6}} />
               <View style={{width: '48%'}}>
                 <HalfSizeButton
                   title="Cancel"
-                  backgroundColor={"transparent"}
-                  color={"gray"}
-                  borderColor={"transparent"}
+                  backgroundColor={'transparent'}
+                  color={'gray'}
+                  borderColor={'transparent'}
                   onPress={() => {
                     setModalCart(false);
                     props.setAddAddressModal(false);
                   }}
                 />
               </View>
-              </View>
+            </View>
 
             <View style={{marginVertical: 5}} />
           </View>
