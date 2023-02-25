@@ -23,25 +23,28 @@ const styles = StyleSheet.create({
     width: '100%',
   },
   datalistView: {
-    width: width * 0.9,
-    height: 70,
+    width: width * 0.93,
+    height: 'auto',
     marginTop: 6,
     padding: 15,
-    borderRadius: 15,
-    alignSelf: 'center',
-    flexDirection: 'row',
-    alignItems: 'center',
+    borderRadius: 10,
     borderWidth: 1,
     marginBottom: 1,
   },
-    innerView: { },
   txt: {
-    fontSize: FontSize.labelText3,
+    fontSize: FontSize.labelText2,
     fontFamily: FontFamily.Popinssemibold,
   },
   txt1: {
-    fontSize: FontSize.labelText2,
+    fontSize: FontSize.labelText,
     fontFamily: FontFamily.Popinssemibold,
+  },
+  headingTxt: {
+    fontSize: FontSize.labelText3,
+    fontFamily: FontFamily.Popinssemibold,
+  },
+  ViewHeading:{
+    width: width * 0.92, alignSelf: 'center', marginBottom:8
   },
   Mv5: {
     marginVertical: 5,
@@ -90,6 +93,14 @@ const styles = StyleSheet.create({
   },
   modelViewButton:{
     flexDirection: 'row', width: width * 0.8
+  },
+  DataButton:{
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignSelf: 'center',
+    alignContent: 'center',
+    width:"100%",
+    marginTop:5
   }
 });
 

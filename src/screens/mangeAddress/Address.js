@@ -83,17 +83,28 @@ export default function Address(props) {
         backIcon={true}
         onPressBack={() => handleBackButtonClick()}
       />
-      {loader ? (
-        <LoadingFullScreen style={{flex: 1}} />
-      ) : (
-        <View
-          style={{
-            ...styles.container,
-          }}>
-          <ManageAddressDataList data={data} />
-          <View style={{marginVertical: 20}} />
-        </View>
-      )}
+      <View
+        style={{
+          ...styles.container,
+        }}>
+        {loader ? (
+          <LoadingFullScreen style={{flex: 1}} />
+        ) : (
+          <ScrollView showsVerticalScrollIndicator={false}>
+            <View style={{...styles.ViewHeading}}>
+              <Text style={{...styles.headingTxt}}>Default Address </Text>
+              <ManageAddressDataList data={data} dafault={true} />
+            </View>
+
+            <View style={{...styles.ViewHeading}}>
+              <Text style={{...styles.headingTxt}}>Other Addresses </Text>
+              <ManageAddressDataList data={data} />
+            </View>
+            
+            <View style={{marginVertical: 70}} />
+          </ScrollView>
+        )}
+      </View>
 
       <View
         style={{
