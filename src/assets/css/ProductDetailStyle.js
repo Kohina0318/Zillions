@@ -16,6 +16,11 @@ const styles = StyleSheet.create({
     color: Colors.black,
     fontFamily: FontFamily.PopinsMedium,
   },
+  HeadText1: {
+    fontSize: FontSize.smallText,
+    color: Colors.black,
+    fontFamily: FontFamily.PopinsMedium,
+  },
   FLEXDIREC1: {flexDirection: 'row'},
   RateText: {
     fontSize: FontSize.labelText2,
@@ -24,6 +29,11 @@ const styles = StyleSheet.create({
   },
   RateTextBig: {
     fontSize: FontSize.labelText3,
+    color: Colors.black,
+    fontFamily: FontFamily.PopinsMedium,
+  },
+  RateTextBig1: {
+    fontSize: FontSize.labelText5,
     color: Colors.black,
     fontFamily: FontFamily.PopinsMedium,
   },
