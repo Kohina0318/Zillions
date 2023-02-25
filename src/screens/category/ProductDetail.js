@@ -9,7 +9,7 @@ import {
   TouchableOpacity,
   useWindowDimensions,
   BackHandler,
-  Pressable
+  Pressable,
 } from 'react-native';
 import {useSelector} from 'react-redux';
 import {MyThemeClass} from '../../components/Theme/ThemeDarkLightColor';
@@ -37,9 +37,10 @@ import EN from 'react-native-vector-icons/Entypo';
 import {Tab, TabView} from '@rneui/themed';
 import LoadingFullScreen from '../../components/shared/Loader/LoadingFullScreen';
 import ImageZoom from 'react-native-image-pan-zoom';
-import { Modal } from 'react-native';
+import {Modal} from 'react-native';
+import {TabData} from './TabData';
 
-const {width, height} = Dimensions.get('screen');
+const {width, height} = Dimensions.get('window');
 
 export default function ProductDetail(props) {
   function handleBackButtonClick() {
@@ -72,51 +73,58 @@ export default function ProductDetail(props) {
   const [largeImage, setLargeImage] = React.useState(0);
   const [relatedProductData, setRelatedProductData] = useState([]);
   const [showWishListed, setShowWishListed] = useState(true);
-  const [shipment,setShipment]=useState('')
+  const [shipment, setShipment] = useState('');
   const [modalVisible, setModalVisible] = useState(false);
-  const [image,setImage]=useState('')
+  const [image, setImage] = useState('');
+  const [soldBy,setSoldBy]=useState('')
+  const [brandName,setBrandName]=useState('')
+  const [categoryName,setCategoryName]=useState('')
+  const [subCategoryName,setSubCategoryName]=useState('')
 
   const handleWishListed = () => {
     setShowWishListed(!showWishListed);
   };
 
-  const tagsStyles={
-    p:{
+  const tagsStyles = {
+    p: {
       // backgroundColor:'grey',
-      color:themecolor.TXTWHITE
+      color: themecolor.TXTWHITE,
     },
-  }
+  };
 
-  
-  const tagStyles={
-    p:{
+  const tagStyles = {
+    p: {
       // backgroundColor:'grey',
-      color:themecolor.TXTWHITE,
-      textAlign:'left'
+      color: themecolor.TXTWHITE,
+      textAlign: 'left',
     },
-    ul:{
-      color:themecolor.TXTWHITE,
+    ul: {
+      color: themecolor.TXTWHITE,
       // textAlign:'left'
     },
-    li:{
-      color:themecolor.TXTWHITE,
-      textAlign:'left'
+    li: {
+      color: themecolor.TXTWHITE,
+      textAlign: 'left',
     },
     // body:{
     //   height:'auto'
     // }
-  }
+  };
 
   const handleProductView = async () => {
     try {
       var res = await getProductView(props.route.params.productId);
       console.log('res data>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>', res.data);
+      setBrandName(res.data.brand_name)
+      setCategoryName(res.data.category_name)
+      setSubCategoryName(res.data.sub_category_name)
+      setSoldBy(res.data.sold_by)
       setProductDetailData(res.data);
       setProductId(res.data.product_id);
       setDescription(res.data.description);
-      setShipment(res.data.shipment_info)
+      setShipment(res.data.shipment_info);
       setAllImages(res.data.all_image);
-      setLoader(false)
+      setLoader(false);
     } catch (e) {
       console.log('errrror in..handleProductView page-->', e);
       toast.show('Something went wrong!, Try again later.', {
@@ -151,17 +159,20 @@ export default function ProductDetail(props) {
     handleRelatedProduct();
   }, []);
 
-
   function renderimage(image, index) {
     return (
-      <TouchableOpacity activeOpacity={0.5} onPressIn={()=>{setImage(image),setModalVisible(true)}}>
-      <View key={index}>
-        <Image
-          style={{width: width * 0.88, height: height * 0.3}}
-          source={{uri: image}}
-          resizeMode={'contain'}
-        />
-      </View>
+      <TouchableOpacity
+        activeOpacity={0.5}
+        onPressIn={() => {
+          setImage(image), setModalVisible(true);
+        }}>
+        <View key={index}>
+          <Image
+            style={{width: width * 0.88, height: height * 0.3}}
+            source={{uri: image}}
+            resizeMode={'contain'}
+          />
+        </View>
       </TouchableOpacity>
     );
   }
@@ -182,7 +193,6 @@ export default function ProductDetail(props) {
             <View
               style={{
                 ...styles.container,
-              
               }}>
               <View
                 style={{
@@ -191,7 +201,6 @@ export default function ProductDetail(props) {
                   borderColor: themecolor.BOXBORDERCOLOR1,
                   borderRadius: 5,
                   padding: 10,
-                  
                 }}>
                 <View style={{width: '100%'}}>
                   <Carousel
@@ -210,7 +219,14 @@ export default function ProductDetail(props) {
                     padding: 10,
                   }}>
                   <View style={{flexDirection: 'row', width: '100%'}}>
-                    <View style={{width: width * 0.7}}>
+                    <View style={{width: width * 0.7,flexDirection:'column'}}>
+                    <Text
+                        style={{
+                          ...styles.HeadText1,
+                          color: 'grey',
+                        }}>
+                       {brandName}{'>>'}{categoryName}{'>>'}{subCategoryName}{'>>'}
+                      </Text>
                       <Text
                         style={{
                           ...styles.HeadText,
@@ -275,6 +291,12 @@ export default function ProductDetail(props) {
                       style={{...styles.RateText, color: themecolor.TXTWHITE}}>
                       MRP :{' '}
                       <Text
+                        style={{...styles.RateTextBig1, color: Colors.green1}}>
+                        {'  '}
+                        <FAIcon name="rupee" size={12} />{' '}
+                        {productDetailData.purchase_price}{' '}
+                      </Text>
+                      <Text
                         style={{
                           ...styles.RateTextBig,
                           color: 'grey',
@@ -282,12 +304,6 @@ export default function ProductDetail(props) {
                         }}>
                         <FAIcon name="rupee" size={12} />{' '}
                         {productDetailData.sale_price}
-                      </Text>
-                      <Text
-                        style={{...styles.RateTextBig, color: Colors.green1}}>
-                        {'  '}
-                        <FAIcon name="rupee" size={12} />{' '}
-                        {productDetailData.purchase_price}
                       </Text>
                       <Text
                         style={{
@@ -325,61 +341,68 @@ export default function ProductDetail(props) {
                   </View> */}
 
                   {/* <View style={{marginTop: 10}} /> */}
-             
                 </View>
-                <View style={{width:width*0.9,alignItems:'center',justifyContent:'center'}}>
-                   <Tab
-      value={index}
-      onChange={(e) => setIndex(e)}
-      indicatorStyle={{
-        backgroundColor:themecolor.BACKICON,
-        height: 3,
-      }}
-      // style={{height:height*0.07}}
-    >
-      <Tab.Item
-        title="Description"
-        titleStyle={{ fontSize: 12,color:themecolor.BACKICON }}
-      />
-      <Tab.Item
-        title="Shipping Info"
-        titleStyle={{ fontSize: 12,color:themecolor.BACKICON }}
-      />
-      <Tab.Item
-        title="Reviews"
-        titleStyle={{ fontSize: 12,color:themecolor.BACKICON }}
-      />
-    </Tab>
-    <TabView containerStyle={{width:width,justifyContent:'center'}} tabItemContainerStyle={{justifyContent:'center'}} value={index} onChange={setIndex} animationType="spring">
-      <TabView.Item>
-                    <RenderHtml
-                      contentWidth={widthDes}
-                      source={{html: description}}
-                      enableExperimentalMarginCollapsing={true}
-                      enableExperimentalBRCollapsing={true}
-                      enableExperimentalGhostLinesPrevention={true}
-                      defaultViewProps={{width:width*0.8}}
-                      tagsStyles={tagStyles}
-                    />
-      </TabView.Item>
-      <TabView.Item>
-      <RenderHtml
-                      contentWidth={widthDes}
-                      source={{html:shipment}}
-                      enableExperimentalMarginCollapsing={true}
-                      enableExperimentalBRCollapsing={true}
-                      enableExperimentalGhostLinesPrevention={true}
-                      enableCSSInlineProcessing={false}
-                      defaultViewProps={{width:width*0.9}}
-                      tagsStyles={tagsStyles}
-                      // ignoredStyles={{backgroundColor}}
-                    />
-      </TabView.Item>
-      <TabView.Item>
-        <Text h1>Cart</Text>
-      </TabView.Item>
-    </TabView>
-    </View>  
+              </View>
+
+              <View style={{marginTop: 10}} />
+
+              <View
+                style={{
+                  ...styles.container,
+                }}>
+                <View
+                  style={{
+                    backgroundColor: themecolor.BOXTHEMECOLOR,
+                    borderWidth: 0.5,
+                    borderColor: themecolor.BOXBORDERCOLOR1,
+                    borderRadius: 5,
+                    padding: 10,
+                  }}>
+                <View style={{width:width*0.9,margin:10,flexDirection:'column'}}>
+                  <Text style={{
+                          ...styles.HeadText,
+                          color: themecolor.TXTWHITE,
+                        }}>Sold By</Text>
+                         <Text style={{
+                          ...styles.HeadText,
+                          color: themecolor.TXTWHITE,
+                        }}>
+                          <RenderHtml
+                    contentWidth={widthDes}
+                    source={{html:soldBy}}
+                    enableCSSInlineProcessing={false}
+                  />
+                        </Text>
+                </View>
+                <View>
+
+                </View>
+                </View>
+              </View>
+
+              <View style={{marginTop: 10}} />
+
+              <View
+                style={{
+                  ...styles.container,
+                }}>
+                <View
+                  style={{
+                    backgroundColor: themecolor.BOXTHEMECOLOR,
+                    borderWidth: 0.5,
+                    borderColor: themecolor.BOXBORDERCOLOR1,
+                    borderRadius: 5,
+                    padding: 10,
+                  }}>
+                  <View
+                    style={{
+                      width: width * 0.9,
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                    }}>
+                    <TabData description={description} shipment={shipment} />
+                  </View>
+                </View>
               </View>
 
               <View style={{marginTop: 10}} />
@@ -535,31 +558,30 @@ export default function ProductDetail(props) {
             </View>
           </TouchableOpacity>
           <View style={styles.centeredView}>
-      <Modal
-        animationType="slide"
-        transparent={true}
-        visible={modalVisible}
-        onRequestClose={() => {
-          setModalVisible(!modalVisible);
-        }}>
-          <View style={styles.centeredView}>
-          <View style={styles.modalView}>
-      <ImageZoom
-       cropWidth={Dimensions.get('window').width}
-                       cropHeight={Dimensions.get('window').height}
-                       imageWidth={width*0.9}
-                       imageHeight={height*0.5}
-                       >
-        <Image
-          style={{width: width * 0.9, height: height * 0.5}}
-          source={{uri: image}}
-        />
-        </ImageZoom>
-        </View>
-       
+            <Modal
+              animationType="slide"
+              transparent={true}
+              visible={modalVisible}
+              onRequestClose={() => {
+                setModalVisible(!modalVisible);
+              }}>
+              <View style={styles.centeredView}>
+                <View style={styles.modalView}>
+                  <ImageZoom
+                    cropWidth={Dimensions.get('window').width}
+                    cropHeight={Dimensions.get('window').height}
+                    imageWidth={width * 0.9}
+                    imageHeight={height * 0.5}>
+                    <Image
+                      style={{width: width * 0.9, height: height * 0.5}}
+                      source={{uri: image}}
+                      resizeMode="contain"
+                    />
+                  </ImageZoom>
+                </View>
+              </View>
+            </Modal>
           </View>
-      </Modal>
-      </View>
         </>
       )}
     </View>
