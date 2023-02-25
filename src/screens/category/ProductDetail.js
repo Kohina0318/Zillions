@@ -9,6 +9,7 @@ import {
   TouchableOpacity,
   useWindowDimensions,
   BackHandler,
+  Pressable
 } from 'react-native';
 import {useSelector} from 'react-redux';
 import {MyThemeClass} from '../../components/Theme/ThemeDarkLightColor';
@@ -35,6 +36,8 @@ import RBSheet from 'react-native-raw-bottom-sheet';
 import EN from 'react-native-vector-icons/Entypo';
 import {Tab, TabView} from '@rneui/themed';
 import LoadingFullScreen from '../../components/shared/Loader/LoadingFullScreen';
+import ImageZoom from 'react-native-image-pan-zoom';
+import { Modal } from 'react-native';
 
 const {width, height} = Dimensions.get('screen');
 
@@ -70,6 +73,8 @@ export default function ProductDetail(props) {
   const [relatedProductData, setRelatedProductData] = useState([]);
   const [showWishListed, setShowWishListed] = useState(true);
   const [shipment,setShipment]=useState('')
+  const [modalVisible, setModalVisible] = useState(false);
+  const [image,setImage]=useState('')
 
   const handleWishListed = () => {
     setShowWishListed(!showWishListed);
@@ -146,8 +151,10 @@ export default function ProductDetail(props) {
     handleRelatedProduct();
   }, []);
 
+
   function renderimage(image, index) {
     return (
+      <TouchableOpacity activeOpacity={0.5} onPressIn={()=>{setImage(image),setModalVisible(true)}}>
       <View key={index}>
         <Image
           style={{width: width * 0.88, height: height * 0.3}}
@@ -155,6 +162,7 @@ export default function ProductDetail(props) {
           resizeMode={'contain'}
         />
       </View>
+      </TouchableOpacity>
     );
   }
   return (
@@ -174,6 +182,7 @@ export default function ProductDetail(props) {
             <View
               style={{
                 ...styles.container,
+              
               }}>
               <View
                 style={{
@@ -182,8 +191,9 @@ export default function ProductDetail(props) {
                   borderColor: themecolor.BOXBORDERCOLOR1,
                   borderRadius: 5,
                   padding: 10,
+                  
                 }}>
-                <View style={{width: '100%', height: height * 0.33}}>
+                <View style={{width: '100%'}}>
                   <Carousel
                     autoplay={false}
                     index={largeImage}
@@ -292,7 +302,7 @@ export default function ProductDetail(props) {
 
                   <View style={{marginTop: 10}} />
 
-                  <View style={{width: width * 0.3}}>
+                  {/* <View style={{width: width * 0.3}}>
                     {productDetailData.current_stock > 0 ? (
                       <View
                         style={{
@@ -312,33 +322,35 @@ export default function ProductDetail(props) {
                         </Text>
                       </View>
                     )}
-                  </View>
+                  </View> */}
 
-                  <View style={{marginTop: 10}} />
-                  <View style={{width:width*0.9,alignItems:'center',justifyContent:'center'}}>
+                  {/* <View style={{marginTop: 10}} /> */}
+             
+                </View>
+                <View style={{width:width*0.9,alignItems:'center',justifyContent:'center'}}>
                    <Tab
       value={index}
       onChange={(e) => setIndex(e)}
       indicatorStyle={{
-        backgroundColor: 'white',
-        // height: 3,
+        backgroundColor:themecolor.BACKICON,
+        height: 3,
       }}
+      // style={{height:height*0.07}}
     >
       <Tab.Item
-        title="Recent"
-        titleStyle={{ fontSize: 14,color:themecolor.BACKICON }}
+        title="Description"
+        titleStyle={{ fontSize: 12,color:themecolor.BACKICON }}
       />
       <Tab.Item
         title="Shipping Info"
-        titleStyle={{ fontSize: 14,color:themecolor.BACKICON }}
+        titleStyle={{ fontSize: 12,color:themecolor.BACKICON }}
       />
       <Tab.Item
         title="Reviews"
-        titleStyle={{ fontSize: 14,color:themecolor.BACKICON }}
+        titleStyle={{ fontSize: 12,color:themecolor.BACKICON }}
       />
     </Tab>
-
-    <TabView containerStyle={{width:width,justifyContent:'center'}} tabItemContainerStyle={{width:width*0.7,justifyContent:'center'}} value={index} onChange={setIndex} animationType="spring">
+    <TabView containerStyle={{width:width,justifyContent:'center'}} tabItemContainerStyle={{justifyContent:'center'}} value={index} onChange={setIndex} animationType="spring">
       <TabView.Item>
                     <RenderHtml
                       contentWidth={widthDes}
@@ -346,7 +358,7 @@ export default function ProductDetail(props) {
                       enableExperimentalMarginCollapsing={true}
                       enableExperimentalBRCollapsing={true}
                       enableExperimentalGhostLinesPrevention={true}
-                      defaultViewProps={{width:width*0.8,justifyContent:'center'}}
+                      defaultViewProps={{width:width*0.8}}
                       tagsStyles={tagStyles}
                     />
       </TabView.Item>
@@ -368,8 +380,6 @@ export default function ProductDetail(props) {
       </TabView.Item>
     </TabView>
     </View>  
-                  <View style={{marginTop: 20}} />
-                </View>
               </View>
 
               <View style={{marginTop: 10}} />
@@ -524,6 +534,32 @@ export default function ProductDetail(props) {
               </RBSheet>
             </View>
           </TouchableOpacity>
+          <View style={styles.centeredView}>
+      <Modal
+        animationType="slide"
+        transparent={true}
+        visible={modalVisible}
+        onRequestClose={() => {
+          setModalVisible(!modalVisible);
+        }}>
+          <View style={styles.centeredView}>
+          <View style={styles.modalView}>
+      <ImageZoom
+       cropWidth={Dimensions.get('window').width}
+                       cropHeight={Dimensions.get('window').height}
+                       imageWidth={width*0.9}
+                       imageHeight={height*0.5}
+                       >
+        <Image
+          style={{width: width * 0.9, height: height * 0.5}}
+          source={{uri: image}}
+        />
+        </ImageZoom>
+        </View>
+       
+          </View>
+      </Modal>
+      </View>
         </>
       )}
     </View>
