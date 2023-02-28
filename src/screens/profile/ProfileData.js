@@ -7,7 +7,7 @@ export const data = [
   {
     name: 'Edit Profile',
     icon: <FA name="edit" size={21} />,
-    onpress: ""
+    onpress: "EditProfile"
   },
   {
     name: 'Manage Address',
@@ -37,7 +37,7 @@ export const data = [
   {
     name: 'Support Ticket',
     icon: <FA name="file-text-o" size={19} />,
-    onpress: ""
+    onpress: "SupportTicket"
   },
 ];
 

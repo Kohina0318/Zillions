@@ -93,7 +93,6 @@ export const styles = StyleSheet.create({
     height: 70,
   },
   toggle1: {
-    padding: 10,
     justifyContent:'flex-start'
   },
 });

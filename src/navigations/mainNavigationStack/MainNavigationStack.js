@@ -31,6 +31,8 @@ import Register from '../../screens/auth/Register';
 import ForgotPassword from '../../screens/auth/ForgotPassword';
 import OrderDetails from '../../screens/order/OrderDetails';
 import Address from '../../screens/mangeAddress/Address';
+import EditProfile from '../../screens/profile/EditProfile';
+import SupportTicket from '../../screens/SupportTicket/SupportTicket';
 
 function MainNavigationStack(props) {
   const Stack = createStackNavigator();
@@ -148,6 +150,16 @@ function MainNavigationStack(props) {
         <Stack.Screen
           name="Address"
           component={Address}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="EditProfile"
+          component={EditProfile}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="SupportTicket"
+          component={SupportTicket}
           options={{headerShown: false}}
         />
       </Stack.Navigator>

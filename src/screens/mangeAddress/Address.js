@@ -24,6 +24,7 @@ import MIcon from 'react-native-vector-icons/Ionicons';
 import {ManageAddressDataList} from '../../components/shared/FlateLists/ManageAddressFlateList/ManageAddressDataList';
 import HalfSizeButton from '../../components/shared/button/halfSizeButton';
 import AddAddressModel from '../../components/shared/Model/AddAddressModel';
+import RegisterLoginHeader from '../../components/shared/header/RegisterLoginHeader';
 
 const {width, height} = Dimensions.get('screen');
 
@@ -174,9 +175,8 @@ export default function Address(props) {
 
   return (
     <View style={{...styles.bg, backgroundColor: themecolor.THEMECOLOR}}>
-      <Header
+      <RegisterLoginHeader
         title={'Address'}
-        backIcon={true}
         onPressBack={() => handleBackButtonClick()}
       />
       <View
@@ -206,7 +206,7 @@ export default function Address(props) {
               />
             </View>
 
-            <View style={{marginVertical: 70}} />
+            <View style={{marginVertical: 10}} />
           </ScrollView>
         )}
       </View>
@@ -215,7 +215,7 @@ export default function Address(props) {
         style={{
           ...styles.touchview,
         }}
-        onPress={() => setAddAddressModal(true)}>
+        >
         <View style={{...styles.mainView}}>
           <HalfSizeButton
             title="Add Address"
