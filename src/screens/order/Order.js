@@ -17,6 +17,7 @@ import {OrderDataList} from '../../components/shared/FlateLists/OrderFlateList/O
 import Search from '../../components/shared/search/Search';
 import {getOrderlist} from '../../repository/OrderRepository/OrderRepo';
 import LoadingFullScreen from '../../components/shared/Loader/LoadingFullScreen';
+import RegisterLoginHeader from '../../components/shared/header/RegisterLoginHeader';
 
 const {width, height} = Dimensions.get('screen');
 
@@ -78,7 +79,7 @@ export default function Order(props) {
 
   return (
     <View style={{...styles.bg, backgroundColor: themecolor.THEMECOLOR}}>
-      <Header
+      <RegisterLoginHeader
         title="Order"
         backIcon={true}
         onPressBack={() => handleBackButtonClick()}
