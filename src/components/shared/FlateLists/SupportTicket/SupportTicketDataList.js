@@ -31,7 +31,7 @@ function SupportTicketDataFlateList({item, themecolor}) {
         borderColor: themecolor.BOXBORDERCOLOR1,
       }}>
       <View style={{...styles.innerView}}>
-        <Text style={{...styles.txt, color: themecolor.ADDTOCARTBUTTONCOLOR}}>
+        <Text style={{...styles.txt, color: themecolor.BACKICON}}>
           Ticket No : {item.ticket_id}
         </Text>
         {item.view_status == 'ok' ? (

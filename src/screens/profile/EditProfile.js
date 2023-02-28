@@ -156,14 +156,14 @@ export default function EditProfile(props) {
               <View
                 style={{
                   ...ProfileStyle.editInnerView,
-                  backgroundColor: themecolor.THEMECOLOR1,
+                  backgroundColor: themecolor.BOXBORDERCOLOR,
                   borderColor: themecolor.BOXBORDERCOLOR1,
                 }}>
                 <View style={{...ProfileStyle.Mv5}} />
 
                 <View style={{...ProfileStyle.inputBoxHalf}}>
                   <View>
-                    <Text style={{...ProfileStyle.TextinputH}}>First Name</Text>
+                    <Text style={{...ProfileStyle.TextinputH,color:themecolor.TXTGREYS}}>First Name</Text>
                     <View
                       style={{
                         ...ProfileStyle.TextViewHalf,
@@ -186,7 +186,7 @@ export default function EditProfile(props) {
                   <View style={{...ProfileStyle.Mh5}} />
 
                   <View>
-                    <Text style={{...ProfileStyle.TextinputH}}>Last Name</Text>
+                    <Text style={{...ProfileStyle.TextinputH,color:themecolor.TXTGREYS}}>Last Name</Text>
                     <View
                       style={{
                         ...ProfileStyle.TextViewHalf,
@@ -210,7 +210,7 @@ export default function EditProfile(props) {
                 <View style={{...ProfileStyle.Mv5}} />
 
                 <View>
-                  <Text style={{...ProfileStyle.TextinputH}}>Email</Text>
+                  <Text style={{...ProfileStyle.TextinputH,color:themecolor.TXTGREYS}}>Email</Text>
                   <View
                     style={{
                       ...ProfileStyle.TextView,
@@ -233,7 +233,7 @@ export default function EditProfile(props) {
                 <View style={{...ProfileStyle.Mv5}} />
 
                 <View>
-                  <Text style={{...ProfileStyle.TextinputH}}>Mobile No.</Text>
+                  <Text style={{...ProfileStyle.TextinputH,color:themecolor.TXTGREYS}}>Mobile No.</Text>
                   <View
                     style={{
                       ...ProfileStyle.TextView,
@@ -265,13 +265,13 @@ export default function EditProfile(props) {
               <View
                 style={{
                   ...ProfileStyle.editInnerView,
-                  backgroundColor: themecolor.THEMECOLOR1,
+                  backgroundColor: themecolor.BOXBORDERCOLOR,
                   borderColor: themecolor.BOXBORDERCOLOR1,
                 }}>
                 <View style={{...ProfileStyle.Mv5}} />
 
                 <View>
-                  <Text style={{...ProfileStyle.TextinputH}}>Address</Text>
+                  <Text style={{...ProfileStyle.TextinputH,color:themecolor.TXTGREYS}}>Address</Text>
                   <View
                     style={{
                       ...ProfileStyle.TextView,
@@ -295,7 +295,7 @@ export default function EditProfile(props) {
 
                 <View style={{...ProfileStyle.inputBoxHalf}}>
                   <View>
-                    <Text style={{...ProfileStyle.TextinputH}}>City</Text>
+                    <Text style={{...ProfileStyle.TextinputH,color:themecolor.TXTGREYS}}>City</Text>
                     <View
                       style={{
                         ...ProfileStyle.TextViewHalf,
@@ -318,7 +318,7 @@ export default function EditProfile(props) {
                   <View style={{...ProfileStyle.Mh5}} />
 
                   <View>
-                    <Text style={{...ProfileStyle.TextinputH}}>Zip</Text>
+                    <Text style={{...ProfileStyle.TextinputH,color:themecolor.TXTGREYS}}>Zip</Text>
                     <View
                       style={{
                         ...ProfileStyle.TextViewHalf,
@@ -345,7 +345,7 @@ export default function EditProfile(props) {
 
                 <View style={{...ProfileStyle.inputBoxHalf}}>
                   <View>
-                    <Text style={{...ProfileStyle.TextinputH}}>State</Text>
+                    <Text style={{...ProfileStyle.TextinputH,color:themecolor.TXTGREYS}}>State</Text>
                     <View
                       style={{
                         ...ProfileStyle.TextViewHalf,
@@ -368,7 +368,7 @@ export default function EditProfile(props) {
                   <View style={{...ProfileStyle.Mh5}} />
 
                   <View>
-                    <Text style={{...ProfileStyle.TextinputH}}>Country</Text>
+                    <Text style={{...ProfileStyle.TextinputH,color:themecolor.TXTGREYS}}>Country</Text>
                     <View
                       style={{
                         ...ProfileStyle.TextViewHalf,
@@ -393,7 +393,7 @@ export default function EditProfile(props) {
 
                 <View style={{...ProfileStyle.inputBoxHalf}}>
                   <View>
-                    <Text style={{...ProfileStyle.TextinputH}}>Skype</Text>
+                    <Text style={{...ProfileStyle.TextinputH,color:themecolor.TXTGREYS}}>Skype</Text>
                     <View
                       style={{
                         ...ProfileStyle.TextViewHalf,
@@ -416,7 +416,7 @@ export default function EditProfile(props) {
                   <View style={{...ProfileStyle.Mh5}} />
 
                   <View>
-                    <Text style={{...ProfileStyle.TextinputH}}>Facebook</Text>
+                    <Text style={{...ProfileStyle.TextinputH,color:themecolor.TXTGREYS}}>Facebook</Text>
                     <View
                       style={{
                         ...ProfileStyle.TextViewHalf,
@@ -440,7 +440,7 @@ export default function EditProfile(props) {
                 <View style={{...ProfileStyle.Mv5}} />
 
                 <View>
-                  <Text style={{...ProfileStyle.TextinputH}}>Google Plus</Text>
+                  <Text style={{...ProfileStyle.TextinputH,color:themecolor.TXTGREYS}}>Google Plus</Text>
                   <View
                     style={{
                       ...ProfileStyle.TextView,
