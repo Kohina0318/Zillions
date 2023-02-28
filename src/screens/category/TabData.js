@@ -21,6 +21,10 @@ export const TabData = props => {
   const mode = useSelector(state => state.mode);
   const themecolor = new MyThemeClass(mode).getThemeColor();
 
+  React.useEffect(()=>{
+ setTimeout(()=>props,2000)
+  },[])
+
   const tagsStyles = {
     p: {
       // backgroundColor:'grey',

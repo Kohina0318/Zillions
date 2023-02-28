@@ -441,7 +441,8 @@ export default function ProductDetail(props) {
                       width: width * 0.9,
                       height:height*0.5,
                       alignItems: 'center',
-                      justifyContent: 'center',
+                      backgroundColor:'red'
+                      // justifyContent: 'center',
                     }}>
                     <TabData totalReview={totalReview} customerReview={customerReview} description={description} shipment={shipment} />
                   </View>
@@ -592,13 +593,12 @@ export default function ProductDetail(props) {
                      Sizes
                     </Text>
                   </View>
-                  <View style={{marginTop: 10}} />
 
 <View
   style={{
     ...styles.container,
   }}>
-  <View style={{width:width*0.9,margin:10,flexDirection:'column'}}>
+  <View style={{width:width*0.9,flexDirection:'column'}}>
          <ProductDetailSizeFlatList sizes={sizes} touch={true} sizesRate={sizesRate} />
   </View>
 </View>
