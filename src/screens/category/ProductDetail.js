@@ -599,10 +599,6 @@ export default function ProductDetail(props) {
     ...styles.container,
   }}>
   <View style={{width:width*0.9,margin:10,flexDirection:'column'}}>
-    <Text style={{
-            ...styles.HeadText,
-            color: themecolor.TXTWHITE,
-          }}>Sizes Available :- {' '}</Text>
          <ProductDetailSizeFlatList sizes={sizes} touch={true} sizesRate={sizesRate} />
   </View>
 </View>
