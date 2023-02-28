@@ -2,18 +2,16 @@ import React, {useEffect, useState, useRef} from 'react';
 import {
   View,
   Text,
-  StatusBar,
-  Appearance,
   Dimensions,
   Image,
   TouchableOpacity,
   useWindowDimensions,
   BackHandler,
-  Pressable,
+  ScrollView
 } from 'react-native';
 import {useSelector} from 'react-redux';
 import {MyThemeClass} from '../../components/Theme/ThemeDarkLightColor';
-import {ScrollView} from 'react-native-gesture-handler';
+// import {ScrollView} from 'react-native-gesture-handler';
 import {useToast} from 'react-native-toast-notifications';
 import Header from '../../components/shared/header/Header';
 import {styles} from '../../assets/css/ProductDetailStyle';
@@ -34,11 +32,11 @@ import RenderHtml from 'react-native-render-html';
 import {DashboardProductDataList} from '../../components/shared/FlateLists/DashboardFlatList/DashboardProductDataList';
 import RBSheet from 'react-native-raw-bottom-sheet';
 import EN from 'react-native-vector-icons/Entypo';
-import {Tab, TabView} from '@rneui/themed';
 import LoadingFullScreen from '../../components/shared/Loader/LoadingFullScreen';
 import ImageZoom from 'react-native-image-pan-zoom';
 import {Modal} from 'react-native';
 import {TabData} from './TabData';
+import { ProductDetailSizeFlatList } from '../../components/shared/FlateLists/CategoryFlatList/ProductDetailSizeFlatList';
 
 const {width, height} = Dimensions.get('window');
 
@@ -65,7 +63,6 @@ export default function ProductDetail(props) {
   const themecolor = new MyThemeClass(mode).getThemeColor();
 
   const [loader, setLoader] = useState(true);
-  const [index, setIndex] = React.useState(0);
   const [productDetailData, setProductDetailData] = React.useState('');
   const [productId, setProductId] = React.useState('');
   const [description, setDescription] = React.useState('');
@@ -80,35 +77,13 @@ export default function ProductDetail(props) {
   const [brandName,setBrandName]=useState('')
   const [categoryName,setCategoryName]=useState('')
   const [subCategoryName,setSubCategoryName]=useState('')
+  const [totalReview,setTotalReview]=useState('')
+  const [sizes,setSizes]=useState([])
+  const [customerReview,setCustomerReview]=useState([])
+  const [sizesRate,setSizesRate]=useState([])
 
   const handleWishListed = () => {
     setShowWishListed(!showWishListed);
-  };
-
-  const tagsStyles = {
-    p: {
-      // backgroundColor:'grey',
-      color: themecolor.TXTWHITE,
-    },
-  };
-
-  const tagStyles = {
-    p: {
-      // backgroundColor:'grey',
-      color: themecolor.TXTWHITE,
-      textAlign: 'left',
-    },
-    ul: {
-      color: themecolor.TXTWHITE,
-      // textAlign:'left'
-    },
-    li: {
-      color: themecolor.TXTWHITE,
-      textAlign: 'left',
-    },
-    // body:{
-    //   height:'auto'
-    // }
   };
 
   const handleProductView = async () => {
@@ -124,6 +99,10 @@ export default function ProductDetail(props) {
       setDescription(res.data.description);
       setShipment(res.data.shipment_info);
       setAllImages(res.data.all_image);
+      setTotalReview(res.data.total_reviews_avg);
+      setCustomerReview(res.data.customer_review)
+      setSizes(Object.keys(res.data.size))
+      setSizesRate(Object.values(res.data.size))
       setLoader(false);
     } catch (e) {
       console.log('errrror in..handleProductView page-->', e);
@@ -358,11 +337,11 @@ export default function ProductDetail(props) {
                     borderRadius: 5,
                     padding: 10,
                   }}>
-                <View style={{width:width*0.9,margin:10,flexDirection:'column'}}>
+                <View style={{width:width*0.9,margin:10,flexDirection:'row'}}>
                   <Text style={{
                           ...styles.HeadText,
                           color: themecolor.TXTWHITE,
-                        }}>Sold By</Text>
+                        }}>Sold By :- {' '}</Text>
                          <Text style={{
                           ...styles.HeadText,
                           color: themecolor.TXTWHITE,
@@ -374,11 +353,74 @@ export default function ProductDetail(props) {
                   />
                         </Text>
                 </View>
-                <View>
-
-                </View>
                 </View>
               </View>
+
+              <View style={{marginTop: 10}} />
+
+<View
+  style={{
+    ...styles.container,
+  }}>
+  <View
+    style={{
+      backgroundColor: themecolor.BOXTHEMECOLOR,
+      borderWidth: 0.5,
+      borderColor: themecolor.BOXBORDERCOLOR1,
+      borderRadius: 5,
+      padding: 10,
+    }}>
+  <View style={{width:width*0.9,margin:10,flexDirection:'column'}}>
+    <Text style={{
+            ...styles.HeadText,
+            color: themecolor.TXTWHITE,
+          }}>Sizes Available :- {' '}</Text>
+         <ProductDetailSizeFlatList sizes={sizes} touch={true} sizesRate={sizesRate} />
+  </View>
+  </View>
+</View>
+
+<View style={{marginTop: 10}} />
+
+<View
+  style={{
+    ...styles.container,
+  }}>
+  <View
+    style={{
+      backgroundColor: themecolor.BOXTHEMECOLOR,
+      borderWidth: 0.5,
+      borderColor: themecolor.BOXBORDERCOLOR1,
+      borderRadius: 5,
+      padding: 10,
+    }}>
+    <View style={{width:width*0.9,margin:10,flexDirection:'column'}}>
+  <View style={{width:width*0.9,marginLeft:10,marginRight:10,marginTop:10,marginBottom:5,flexDirection:'row'}}>
+    <Text style={{
+            ...styles.HeadText,
+            color: themecolor.TXTWHITE,
+          }}>Delivery Duration :- {' '}</Text>
+           <Text style={{
+            ...styles.HeadText,
+            color: themecolor.TXTWHITE,
+          }}>
+      * 8 to 10 Days
+          </Text>
+  </View>
+  <View style={{width:width*0.9,marginLeft:10,marginRight:10,marginTop:8,marginBottom:5,flexDirection:'row'}}>
+    <Text style={{
+            ...styles.HeadText,
+            color: themecolor.TXTWHITE,
+          }}>Payment Mode :- {' '}</Text>
+
+                <Image source={require("../../assets/images/Visa.png")} resizeMode='contain' style={{width:40,height:20,margin:2}}/>
+                <Image source={require("../../assets/images/Maestro.png")} resizeMode='cover' style={{width:40,height:20,margin:2}}/>
+                <Image source={require("../../assets/images/mastercard.png")} resizeMode='contain' style={{width:40,height:20,margin:2}}/>
+        
+  </View>
+  </View>
+  </View>
+</View>
 
               <View style={{marginTop: 10}} />
 
@@ -397,10 +439,11 @@ export default function ProductDetail(props) {
                   <View
                     style={{
                       width: width * 0.9,
+                      height:height*0.5,
                       alignItems: 'center',
                       justifyContent: 'center',
                     }}>
-                    <TabData description={description} shipment={shipment} />
+                    <TabData totalReview={totalReview} customerReview={customerReview} description={description} shipment={shipment} />
                   </View>
                 </View>
               </View>
@@ -494,7 +537,7 @@ export default function ProductDetail(props) {
                 animationType={'slide'}
                 closeOnDragDown={true}
                 closeOnPressMask={true}
-                height={150}
+                height={250}
                 customStyles={{
                   container: {
                     borderTopRightRadius: 20,
@@ -546,12 +589,23 @@ export default function ProductDetail(props) {
                         color: themecolor.TXTWHITE,
                         marginBottom: 10,
                       }}>
-                      Please add quantity
+                     Sizes
                     </Text>
                   </View>
-                  <View style={styles.view17}>
-                    {/* <DatePickerRange onChange={value => handleChange(value)} /> */}
-                  </View>
+                  <View style={{marginTop: 10}} />
+
+<View
+  style={{
+    ...styles.container,
+  }}>
+  <View style={{width:width*0.9,margin:10,flexDirection:'column'}}>
+    <Text style={{
+            ...styles.HeadText,
+            color: themecolor.TXTWHITE,
+          }}>Sizes Available :- {' '}</Text>
+         <ProductDetailSizeFlatList sizes={sizes} touch={true} sizesRate={sizesRate} />
+  </View>
+</View>
                   <View style={styles.marg} />
                 </View>
               </RBSheet>

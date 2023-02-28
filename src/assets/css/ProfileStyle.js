@@ -145,7 +145,7 @@ const ProfileStyle = StyleSheet.create({
   },
   appverText: {
     fontSize: FontSize.labelText3,
-    fontWeight: FontFamily.PopinsMedium,
+    fontFamily: FontFamily.PopinsMedium,
   },
   arrowIconView: {
     width: width * 0.08,
@@ -163,7 +163,7 @@ const ProfileStyle = StyleSheet.create({
   avater: {
     borderWidth: 5,
     borderColor: 'white',
-    borderStyle: 'solid',
+    // borderStyle: 'solid',
   },
   profileDataView: {
     flexDirection: 'row',

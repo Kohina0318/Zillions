@@ -9,7 +9,7 @@ const styles = StyleSheet.create({
   container: {
     justifyContent: 'center',
     alignSelf: 'center',
-    width: width*0.94,
+    width: width * 0.94,
   },
   HeadText: {
     fontSize: FontSize.labelText4,
@@ -20,6 +20,24 @@ const styles = StyleSheet.create({
     fontSize: FontSize.smallText,
     color: Colors.black,
     fontFamily: FontFamily.PopinsMedium,
+  },
+  HeadText2: {
+    fontSize: FontSize.labelText,
+    color: Colors.black,
+    fontFamily: FontFamily.PopinsMedium,
+    borderRadius: 80,
+    padding: 3,
+    margin: 5,
+    width: 50,
+    textAlign: 'center',
+  },
+  HeadText3: {
+    fontSize: FontSize.small,
+    fontFamily: FontFamily.PopinsMedium,
+    marginRight: 5,
+    marginLeft: 5,
+    width: 50,
+    textAlign: 'center',
   },
   FLEXDIREC1: {flexDirection: 'row'},
   RateText: {
@@ -136,7 +154,7 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     padding: 10,
     elevation: 2,
-  //  position:'absolute'
+    //  position:'absolute'
   },
   buttonOpen: {
     backgroundColor: '#F194FF',
@@ -152,6 +170,49 @@ const styles = StyleSheet.create({
   modalText: {
     marginBottom: 15,
     textAlign: 'center',
+  },
+  mainView1: {
+    flexDirection: 'row',
+    width: width * 0.9,
+    justifyContent: 'space-between',
+    marginTop: 5,
+  },
+  Review: {
+    width: width * 0.32,
+    height: height * 0.04,
+    borderRadius: 25,
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: 4,
+  },
+  TimeText: {
+    margin: 2,
+    fontSize: FontSize.small,
+    color: 'grey',
+  },
+  subView: {
+    flexDirection: 'row',
+    width: width * 0.85,
+    borderColor: 'grey',
+    borderWidth: 2,
+    padding: 10,
+    borderRadius: 5,
+  },
+  avatarView: {
+    flexDirection: 'column',
+    width: width * 0.3,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  avatarText: {
+    fontSize: FontSize.labelText4,
+    fontFamily: FontFamily.PopinsMedium,
+    margin: 5,
+  },
+  starView: {
+    width: width * 0.5,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 });
 
