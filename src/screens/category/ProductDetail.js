@@ -82,6 +82,8 @@ export default function ProductDetail(props) {
   const [sizes, setSizes] = useState([]);
   const [customerReview, setCustomerReview] = useState([]);
   const [sizesRate, setSizesRate] = useState([]);
+  const [slug,setSlug]=useState('')
+  const [unit,setUnit]=useState('')
 
   const handleWishListed = () => {
     setShowWishListed(!showWishListed);
@@ -103,6 +105,8 @@ export default function ProductDetail(props) {
       setTotalReview(res.data.total_reviews_avg);
       setCustomerReview(res.data.customer_review);
       setSizes(Object.keys(res.data.size));
+      setSlug(res.data.slug)
+      setUnit(res.data.unit)
       setSizesRate(Object.values(res.data.size));
       setLoader(false);
     } catch (e) {
@@ -261,7 +265,7 @@ export default function ProductDetail(props) {
                      
                         <TouchableOpacity
                           activeOpacity={0.5}
-                          onPress={() => Linking.openURL("whatsapp://send?text=Hii&phone=918446361881")}
+                          onPress={() => Linking.openURL(`whatsapp://send?text=${slug}&phone=918446361881`)}
                           style={{padding: 7, borderRadius: 20}}>
                           <Image
                         source={require('../../assets/images/whatsapp.png')}
@@ -299,7 +303,7 @@ export default function ProductDetail(props) {
                         style={{...styles.RateTextBig1, color: Colors.green1}}>
                         {'  '}
                         <FAIcon name="rupee" size={15} />
-                        {productDetailData.purchase_price}{' '}
+                        {productDetailData.purchase_price}/{unit} {' '}
                       </Text>
                       <Text
                         style={{
@@ -621,7 +625,7 @@ export default function ProductDetail(props) {
                 animationType={'slide'}
                 closeOnDragDown={true}
                 closeOnPressMask={true}
-                height={250}
+                height={300}
                 customStyles={{
                   container: {
                     borderTopRightRadius: 20,
@@ -687,6 +691,32 @@ export default function ProductDetail(props) {
                         touch={true}
                         sizesRate={sizesRate}
                       />
+                    </View>
+                  </View>
+                  <View style={styles.marg} />
+                </View>
+
+
+                <View style={styles.view16}>
+                  <View>
+                    <Text
+                      style={{
+                        ...styles.CardText,
+                        ...styles.align3,
+                        ...styles.left1,
+                        color: themecolor.TXTWHITE,
+                        marginBottom: 10,
+                      }}>
+                      Quantity
+                    </Text>
+                  </View>
+
+                  <View
+                    style={{
+                      ...styles.container,
+                    }}>
+                    <View style={{width: width * 0.9, flexDirection: 'column'}}>
+                     
                     </View>
                   </View>
                   <View style={styles.marg} />
