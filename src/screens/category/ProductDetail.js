@@ -8,6 +8,7 @@ import {
   useWindowDimensions,
   BackHandler,
   ScrollView,
+  Linking
 } from 'react-native';
 import {useSelector} from 'react-redux';
 import {MyThemeClass} from '../../components/Theme/ThemeDarkLightColor';
@@ -249,6 +250,26 @@ export default function ProductDetail(props) {
                           />
                         </TouchableOpacity>
                       )}
+                    </View>
+
+                    <View
+                      style={{
+                        width: width * 0.1,
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                      }}>
+                     
+                        <TouchableOpacity
+                          activeOpacity={0.5}
+                          onPress={() => Linking.openURL("whatsapp://send?text=Hii&phone=918446361881")}
+                          style={{padding: 7, borderRadius: 20}}>
+                          <Image
+                        source={require('../../assets/images/whatsapp.png')}
+                        resizeMode="contain"
+                        style={{width: 50, height: 25, margin: 2}}
+                      />
+                        </TouchableOpacity>
+                    
                     </View>
                   </View>
 
