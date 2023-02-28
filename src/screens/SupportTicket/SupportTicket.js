@@ -54,13 +54,30 @@ export default function SupportTicket(props) {
   const [data, setData] = useState([]);
 
   const handleCreateTicket = async () => {
+    if (subject == '') {
+      toast.show('Subject is required!', {
+        type: 'warning',
+        placement: 'bottom',
+        duration: 3000,
+        offset: 30,
+        animationType: 'slide-in',
+      });
+    } else if (message == '') {
+      toast.show('Message is required!', {
+        type: 'warning',
+        placement: 'bottom',
+        duration: 3000,
+        offset: 30,
+        animationType: 'slide-in',
+      });
+    }
+    else{
     try {
       let formdata = new FormData();
       formdata.append('sub', subject);
       formdata.append('reply', message);
 
       const res = await postCreateSupportTicket(formdata);
-      console.log('handleCreateTicket  data....line no 65..>>>', res);
       if (res.status == true) {
         setRefresh(!refresh);
         setCreateTicketModal(false)
@@ -90,13 +107,12 @@ export default function SupportTicket(props) {
         animationType: 'slide-in',
       });
     }
+  }
   };
 
   const handleAllMessages = async () => {
     try {
       const res = await getSupportTicket();
-      console.log('handleAllMessages  data....line no 99..>>>', res);
-
       if (res.status == true) {
         setData(res.data);
         setLoader(false)
@@ -142,7 +158,10 @@ export default function SupportTicket(props) {
           <LoadingFullScreen style={{flex: 1}} />
         ) : (
             data.length>0 ?
+            <>
           <SupportTicketDataList data={data}/>
+          <View style={{marginVertical: 10}} />
+          </>
           :
           <View
           style={{alignItems: 'center', flex: 1, justifyContent: 'center'}}>

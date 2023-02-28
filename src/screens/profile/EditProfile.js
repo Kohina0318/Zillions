@@ -19,6 +19,7 @@ import AsyncStorage from '@react-native-community/async-storage';
 import {ScrollView, State} from 'react-native-gesture-handler';
 import { postEditProfile } from '../../repository/ProfileRepository/EditProfileRepo';
 import VerifyModel from '../../components/shared/Model/VerifyModel';
+import { getProfileInfo } from '../../repository/ProfileRepository/ProfileRepo';
 const {width, height} = Dimensions.get('screen');
 
 export default function EditProfile(props) {
@@ -58,23 +59,22 @@ export default function EditProfile(props) {
 
   const handleUserData = async () => {
     try {
-      var UserData = await AsyncStorage.getItem('@UserData');
-      var data = JSON.parse(UserData);
-      if (data == null || data == '' || data == undefined) {
+      var res = await getProfileInfo();
+      if (res.status===true) {
+        setFirstName(res.data[0].username);
+        setLastName(res.data[0].surname);
+        setEmail(res.data[0].email);
+        setMobileNo(res.data[0].phone);
+        setAddress(res.data[0].address1);
+        setCity(res.data[0].city);
+        setZip(res.data[0].zip);
+        setstate(res.data[0].state);
+        setCountry(res.data[0].country);
+        setSkype(res.data[0].skype);
+        setFacebook(res.data[0].facebook);
+        setGooglePlus(res.data[0].google_plus);
         setLoader(false);
       } else {
-        setFirstName(data[0].username);
-        setLastName(data[0].surname);
-        setEmail(data[0].email);
-        setMobileNo(data[0].phone);
-        setAddress(data[0].address1);
-        setCity(data[0].city);
-        setZip(data[0].zip);
-        setstate(data[0].state);
-        setCountry(data[0].country);
-        setSkype(data[0].skype);
-        setFacebook(data[0].facebook);
-        setGooglePlus(data[0].google_plus);
         setLoader(false);
       }
     } catch (e) {
@@ -88,7 +88,6 @@ export default function EditProfile(props) {
 
   const handleEditProfile = async()=>{
     try {
-
         let formdata=new FormData()
         formdata.append('username',firstName)
         formdata.append('surname',lastName)
@@ -104,14 +103,8 @@ export default function EditProfile(props) {
         formdata.append('google_plus',googlePlus)
 
         const res = await postEditProfile(formdata);
-        console.log('handleEditProfile  data....line no 104..>>>', res);
-
         if (res.status == true) {
-            
-            alert("succes")
-       
-        setShowmodal(!showmodal)
-          
+         setShowmodal(!showmodal)   
         } else {
           toast.show(res.msg, {
             type: 'danger',
