@@ -44,6 +44,7 @@ const styles = StyleSheet.create({
     fontFamily: FontFamily.Popinssemibold,
     left:5
   },
+  innerView:{flexDirection: 'row', justifyContent: 'space-between'},
   dateTimeView:{flexDirection:"row",justifyContent:'space-between', width: width * 0.8,margin:5},
   txt1: {
     fontSize: FontSize.labelText,

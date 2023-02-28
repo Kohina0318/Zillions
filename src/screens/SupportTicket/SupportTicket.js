@@ -47,7 +47,6 @@ export default function SupportTicket(props) {
 
   const [loader, setLoader] = useState(true);
   const [refresh, setRefresh] = useState(false);
-  const [showmodal, setShowmodal] = useState(false);
   const [createTicketModal, setCreateTicketModal] = useState(false);
 
   const [subject, setSubject] = useState('');
@@ -57,16 +56,21 @@ export default function SupportTicket(props) {
   const handleCreateTicket = async () => {
     try {
       let formdata = new FormData();
-      formdata.append('', subject);
-      formdata.append('', message);
+      formdata.append('sub', subject);
+      formdata.append('reply', message);
 
       const res = await postCreateSupportTicket(formdata);
       console.log('handleCreateTicket  data....line no 65..>>>', res);
-
       if (res.status == true) {
-        alert('succes');
-        setShowmodal(!showmodal);
         setRefresh(!refresh);
+        setCreateTicketModal(false)
+        toast.show("Create Ticket Successfully.", {
+          type: 'success',
+          placement: 'bottom',
+          duration: 3000,
+          offset: 30,
+          animationType: 'slide-in',
+        });
       } else {
         toast.show(res.msg, {
           type: 'danger',
@@ -172,14 +176,6 @@ export default function SupportTicket(props) {
         />
       )}
 
-      {showmodal && (
-        <VerifyModel
-          setShowmodal={setShowmodal}
-          title={'Create Ticket Successfully.'}
-          navigateTo={'Dashboard'}
-          navigateFrom="SupportTicket"
-        />
-      )}
     </View>
   );
 }

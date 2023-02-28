@@ -3,7 +3,7 @@ import { SERVER_URL } from "../SERVER_URL";
 const postCreateSupportTicket = async formdata => {
   try {
     const response = await fetch(
-      `${await SERVER_URL()}/`,
+      `${await SERVER_URL()}/add-ticket`,
       {
         method: 'POST',
         headers: {'Content-Type': 'multipart/form-data'},
