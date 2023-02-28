@@ -183,12 +183,11 @@ const styles = StyleSheet.create({
     marginTop: 5,
   },
   Review: {
-    width: width * 0.32,
-    height: height * 0.04,
+    width: width * 0.33,
+    height: height * 0.036,
     borderRadius: 25,
     justifyContent: 'center',
     alignItems: 'center',
-    padding: 4,
   },
   TimeText: {
     margin: 2,
@@ -199,7 +198,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     width: width * 0.85,
     borderColor: 'grey',
-    borderWidth: 2,
+    borderWidth: 1,
     padding: 10,
     borderRadius: 5,
   },
@@ -210,7 +209,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   avatarText: {
-    fontSize: FontSize.labelText4,
+    fontSize: FontSize.labelText2,
     fontFamily: FontFamily.PopinsMedium,
     margin: 5,
   },
@@ -219,6 +218,38 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
+  tabStyle: {
+    borderWidth: 0,
+    borderColor: 'transparent',
+    borderRadius: 5,
+  },
+  activeTabStyle: {
+   },
+  tabviewstyle: {
+    width: width * 0.93,
+    alignSelf: 'center',
+    backgroundColor: 'red',
+    padding: 2,
+    borderRadius: 5,
+    borderColor: Colors.borderColor,
+    borderWidth: 1,
+  },
+  TabNewStyle: {
+    color: Colors.black,
+    fontFamily: FontFamily.PopinsMedium,
+    fontSize: 14,
+    // backgroundColor:'green'
+  },
+  activeTabs: {color: '#000', fontSize: 14, borderBottomWidth: 3,
+},
+NumericInputViewList:
+    {
+        width: width * 0.10,
+        justifyContent: 'flex-end',
+        alignItems: 'flex-end',
+        alignSelf: 'center',
+        // marginRight: 8,
+    },
 });
 
 export {styles};

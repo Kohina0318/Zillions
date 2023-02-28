@@ -6,10 +6,11 @@ import {MyThemeClass} from '../../components/Theme/ThemeDarkLightColor';
 import {Dimensions, Text, View, TouchableOpacity} from 'react-native';
 import {useWindowDimensions} from 'react-native';
 import {ScrollView} from 'react-native-gesture-handler';
-import { CustomerReviewFlatList } from '../../components/shared/FlateLists/CategoryFlatList/CustomerReviewFlatList';
-import { styles } from '../../assets/css/ProductDetailStyle';
+import {CustomerReviewFlatList} from '../../components/shared/FlateLists/CategoryFlatList/CustomerReviewFlatList';
+import {styles} from '../../assets/css/ProductDetailStyle';
 import StarRating from 'react-native-star-rating';
 import RatingModel from '../../components/shared/Model/RatingModel';
+import SegmentedControlTab from 'react-native-segmented-control-tab';
 
 const {width, height} = Dimensions.get('screen');
 
@@ -20,10 +21,6 @@ export const TabData = props => {
 
   const mode = useSelector(state => state.mode);
   const themecolor = new MyThemeClass(mode).getThemeColor();
-
-  React.useEffect(()=>{
- setTimeout(()=>props,2000)
-  },[])
 
   const tagsStyles = {
     p: {
@@ -57,55 +54,46 @@ export const TabData = props => {
     },
   };
 
+  const handleSingleIndexSelect = inx => {
+    setIndex(inx);
+  };
+
   return (
     <>
-      <ScrollView scrollEnabled={true} showsVerticalScrollIndicator={false}>
-        <Tab
-          value={index}
-          onChange={e => setIndex(e)}
-          indicatorStyle={{
-            backgroundColor: themecolor.BACKICON,
-            height: 3,
+        <SegmentedControlTab
+          values={['Description', 'Shipping Info', 'Review']}
+          selectedIndex={index}
+          tabStyle={{
+            ...styles.tabStyle,
           }}
-          // scrollable={true}
-          // style={{height:height*0.07}}
-        >
-          <Tab.Item
-            title="Description"
-            titleStyle={{fontSize: 12, color: themecolor.BACKICON}}
-          />
-          <Tab.Item
-            title="Shipping Info"
-            titleStyle={{fontSize: 12, color: themecolor.BACKICON}}
-          />
-          <Tab.Item
-            title="Reviews"
-            titleStyle={{fontSize: 12, color: themecolor.BACKICON}}
-          />
-        </Tab>
+          activeTabStyle={{
+            ...styles.activeTabStyle,
+            backgroundColor:'transparent',
+            color:themecolor.ADDTOCARTBUTTONCOLOR
+          }}
+          tabsContainerStyle={{
+            // height: 35,
+          }}
+          tabTextStyle={{
+            ...styles.TabNewStyle,
+          }}
+          activeTabTextStyle={{...styles.activeTabs,color:themecolor.ADDTOCARTBUTTONCOLOR, borderBottomColor: themecolor.ADDTOCARTBUTTONCOLOR,}}
+          onTabPress={handleSingleIndexSelect}
+        />
 
-        <TabView
-          containerStyle={{
-            width: width * 0.98,
-            height: height + 200,
-            justifyContent: 'center',
-          }}
-          value={index}
-          onChange={setIndex}
-          animationType="spring">
-          <TabView.Item style={{height: height}}>
-            <RenderHtml
-              contentWidth={widthDes}
-              source={{html: props.description}}
-              enableExperimentalMarginCollapsing={true}
-              enableExperimentalBRCollapsing={true}
-              enableExperimentalGhostLinesPrevention={true}
-              defaultViewProps={{width: width * 0.8}}
-              tagsStyles={tagStyles}
-            />
-          </TabView.Item>
-          <TabView.Item>
-            <RenderHtml
+        <View style={{marginBottom:5}}>
+          {index == 0 ?
+           <RenderHtml
+           contentWidth={widthDes}
+           source={{html: props.description}}
+           enableExperimentalMarginCollapsing={true}
+           enableExperimentalBRCollapsing={true}
+           enableExperimentalGhostLinesPrevention={true}
+           defaultViewProps={{width: width * 0.8}}
+           tagsStyles={tagStyles}
+         />:
+         index==1 ?
+         <RenderHtml
               contentWidth={widthDes}
               source={{html: props.shipment}}
               enableExperimentalMarginCollapsing={true}
@@ -116,64 +104,61 @@ export const TabData = props => {
               tagsStyles={tagsStyles}
               // ignoredStyles={{backgroundColor}}
             />
-          </TabView.Item>
-          <TabView.Item>
+            :
+            <View style={{flexDirection: 'column', width: width * 0.9}}>
+            <View
+              style={{
+                ...styles.mainView1,
+              }}>
+              <View>
+                <Text
+                  style={{
+                    color: themecolor.TXTWHITE,
+                    fontSize: 16,
+                    margin: 10,
+                  }}>
+                  Average User Rating :
+                </Text>
+                <View style={{width: width * 0.35, margin: 10}}>
+                  <StarRating
+                    disabled={true}
+                    maxStars={5}
+                    rating={props.totalReview}
+                    selectedStar={rating => onStarRatingPress(rating)}
+                    starSize={20}
+                    fullStarColor={themecolor.STARCOLOR}
+                  />
+                </View>
+              </View>
+              <View style={{margin: 10}}>
+                <TouchableOpacity activeOpacity={0.5} onPress={()=>setShowmodal(!showmodal)}>
+                  <View
+                    style={{
+                      backgroundColor: themecolor.ADDTOCARTBUTTONCOLOR,
+                      ...styles.Review,
+                    }}>
+                    <Text style={{color: '#FFF', textAlign: 'center',fontSize: 12,}}>
+                      Give Your Review
+                    </Text>
+                  </View>
+                </TouchableOpacity>
+              </View>
+            </View>
+        
+            <View>
+            <CustomerReviewFlatList data={props.customerReview}/>
+            </View> 
+          </View>           
+          }
 
-          <View style={{flexDirection: 'column', width: width * 0.9}}>
-    <View
-      style={{
-        ...styles.mainView1,
-      }}>
-      <View>
-        <Text
-          style={{
-            color: themecolor.TXTWHITE,
-            fontSize: 20,
-            margin: 10,
-          }}>
-          Average User Rating :
-        </Text>
-        <View style={{width: width * 0.4, margin: 10}}>
-          <StarRating
-            disabled={true}
-            maxStars={5}
-            rating={props.totalReview}
-            selectedStar={rating => onStarRatingPress(rating)}
-            starSize={20}
-            fullStarColor={themecolor.STARCOLOR}
-          />
         </View>
-      </View>
-      <View style={{margin: 10}}>
-        <TouchableOpacity activeOpacity={0.5} onPress={()=>setShowmodal(!showmodal)}>
-          <View
-            style={{
-              backgroundColor: themecolor.ADDTOCARTBUTTONCOLOR,
-              ...styles.Review,
-            }}>
-            <Text style={{color: '#FFF', textAlign: 'center'}}>
-              Give Your Review
-            </Text>
-          </View>
-        </TouchableOpacity>
-      </View>
-    </View>
-
-    <View>
-    <CustomerReviewFlatList data={props.customerReview}/>
-    </View>
-   
-  </View>           
-          </TabView.Item>
-        </TabView>
 
         {showmodal && (
-        <RatingModel
-          setShowmodal={setShowmodal}
-          title={'Enter Your Review'}
-        />
-      )}
-      </ScrollView>
+          <RatingModel
+            setShowmodal={setShowmodal}
+            title={'Enter Your Review'}
+          />
+        )}
     </>
   );
 };

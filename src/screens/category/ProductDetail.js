@@ -7,7 +7,7 @@ import {
   TouchableOpacity,
   useWindowDimensions,
   BackHandler,
-  ScrollView
+  ScrollView,
 } from 'react-native';
 import {useSelector} from 'react-redux';
 import {MyThemeClass} from '../../components/Theme/ThemeDarkLightColor';
@@ -36,7 +36,7 @@ import LoadingFullScreen from '../../components/shared/Loader/LoadingFullScreen'
 import ImageZoom from 'react-native-image-pan-zoom';
 import {Modal} from 'react-native';
 import {TabData} from './TabData';
-import { ProductDetailSizeFlatList } from '../../components/shared/FlateLists/CategoryFlatList/ProductDetailSizeFlatList';
+import {ProductDetailSizeFlatList} from '../../components/shared/FlateLists/CategoryFlatList/ProductDetailSizeFlatList';
 
 const {width, height} = Dimensions.get('window');
 
@@ -73,14 +73,14 @@ export default function ProductDetail(props) {
   const [shipment, setShipment] = useState('');
   const [modalVisible, setModalVisible] = useState(false);
   const [image, setImage] = useState('');
-  const [soldBy,setSoldBy]=useState('')
-  const [brandName,setBrandName]=useState('')
-  const [categoryName,setCategoryName]=useState('')
-  const [subCategoryName,setSubCategoryName]=useState('')
-  const [totalReview,setTotalReview]=useState('')
-  const [sizes,setSizes]=useState([])
-  const [customerReview,setCustomerReview]=useState([])
-  const [sizesRate,setSizesRate]=useState([])
+  const [soldBy, setSoldBy] = useState('');
+  const [brandName, setBrandName] = useState('');
+  const [categoryName, setCategoryName] = useState('');
+  const [subCategoryName, setSubCategoryName] = useState('');
+  const [totalReview, setTotalReview] = useState('');
+  const [sizes, setSizes] = useState([]);
+  const [customerReview, setCustomerReview] = useState([]);
+  const [sizesRate, setSizesRate] = useState([]);
 
   const handleWishListed = () => {
     setShowWishListed(!showWishListed);
@@ -90,19 +90,19 @@ export default function ProductDetail(props) {
     try {
       var res = await getProductView(props.route.params.productId);
       console.log('res data>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>', res.data);
-      setBrandName(res.data.brand_name)
-      setCategoryName(res.data.category_name)
-      setSubCategoryName(res.data.sub_category_name)
-      setSoldBy(res.data.sold_by)
+      setBrandName(res.data.brand_name);
+      setCategoryName(res.data.category_name);
+      setSubCategoryName(res.data.sub_category_name);
+      setSoldBy(res.data.sold_by);
       setProductDetailData(res.data);
       setProductId(res.data.product_id);
       setDescription(res.data.description);
       setShipment(res.data.shipment_info);
       setAllImages(res.data.all_image);
       setTotalReview(res.data.total_reviews_avg);
-      setCustomerReview(res.data.customer_review)
-      setSizes(Object.keys(res.data.size))
-      setSizesRate(Object.values(res.data.size))
+      setCustomerReview(res.data.customer_review);
+      setSizes(Object.keys(res.data.size));
+      setSizesRate(Object.values(res.data.size));
       setLoader(false);
     } catch (e) {
       console.log('errrror in..handleProductView page-->', e);
@@ -198,13 +198,18 @@ export default function ProductDetail(props) {
                     padding: 10,
                   }}>
                   <View style={{flexDirection: 'row', width: '100%'}}>
-                    <View style={{width: width * 0.7,flexDirection:'column'}}>
-                    <Text
+                    <View style={{width: width * 0.7, flexDirection: 'column'}}>
+                      <Text
                         style={{
                           ...styles.HeadText1,
                           color: 'grey',
                         }}>
-                       {brandName}{'>>'}{categoryName}{'>>'}{subCategoryName}{'>>'}
+                        {brandName}
+                        {'>>'}
+                        {categoryName}
+                        {'>>'}
+                        {subCategoryName}
+                        {'>>'}
                       </Text>
                       <Text
                         style={{
@@ -249,13 +254,13 @@ export default function ProductDetail(props) {
 
                   <View style={{marginTop: 10}} />
 
-                  <View style={{width: width * 0.4}}>
+                  <View style={{width: width * 0.35}}>
                     <StarRating
                       disabled={false}
                       maxStars={5}
                       rating={productDetailData.rating_num}
                       selectedStar={rating => onStarRatingPress(rating)}
-                      starSize={16}
+                      starSize={18}
                       fullStarColor={themecolor.STARCOLOR}
                     />
                   </View>
@@ -272,7 +277,7 @@ export default function ProductDetail(props) {
                       <Text
                         style={{...styles.RateTextBig1, color: Colors.green1}}>
                         {'  '}
-                        <FAIcon name="rupee" size={12} />{' '}
+                        <FAIcon name="rupee" size={15} />
                         {productDetailData.purchase_price}{' '}
                       </Text>
                       <Text
@@ -337,90 +342,33 @@ export default function ProductDetail(props) {
                     borderRadius: 5,
                     padding: 10,
                   }}>
-                <View style={{width:width*0.9,margin:10,flexDirection:'row'}}>
-                  <Text style={{
-                          ...styles.HeadText,
-                          color: themecolor.TXTWHITE,
-                        }}>Sold By :- {' '}</Text>
-                         <Text style={{
-                          ...styles.HeadText,
-                          color: themecolor.TXTWHITE,
-                        }}>
-                          <RenderHtml
-                    contentWidth={widthDes}
-                    source={{html:soldBy}}
-                    enableCSSInlineProcessing={false}
-                  />
-                        </Text>
-                </View>
+                  <View
+                    style={{
+                      width: width * 0.9,
+                      margin: 10,
+                      flexDirection: 'row',
+                    }}>
+                    <Text
+                      style={{
+                        ...styles.HeadText,
+                        color: themecolor.TXTWHITE,
+                      }}>
+                      Sold By :-{' '}
+                    </Text>
+                    <Text
+                      style={{
+                        ...styles.HeadText,
+                        color: themecolor.TXTWHITE,
+                      }}>
+                      <RenderHtml
+                        contentWidth={widthDes}
+                        source={{html: soldBy}}
+                        enableCSSInlineProcessing={false}
+                      />
+                    </Text>
+                  </View>
                 </View>
               </View>
-
-              <View style={{marginTop: 10}} />
-
-<View
-  style={{
-    ...styles.container,
-  }}>
-  <View
-    style={{
-      backgroundColor: themecolor.BOXTHEMECOLOR,
-      borderWidth: 0.5,
-      borderColor: themecolor.BOXBORDERCOLOR1,
-      borderRadius: 5,
-      padding: 10,
-    }}>
-  <View style={{width:width*0.9,margin:10,flexDirection:'column'}}>
-    <Text style={{
-            ...styles.HeadText,
-            color: themecolor.TXTWHITE,
-          }}>Sizes Available :- {' '}</Text>
-         <ProductDetailSizeFlatList sizes={sizes} touch={true} sizesRate={sizesRate} />
-  </View>
-  </View>
-</View>
-
-<View style={{marginTop: 10}} />
-
-<View
-  style={{
-    ...styles.container,
-  }}>
-  <View
-    style={{
-      backgroundColor: themecolor.BOXTHEMECOLOR,
-      borderWidth: 0.5,
-      borderColor: themecolor.BOXBORDERCOLOR1,
-      borderRadius: 5,
-      padding: 10,
-    }}>
-    <View style={{width:width*0.9,margin:10,flexDirection:'column'}}>
-  <View style={{width:width*0.9,marginLeft:10,marginRight:10,marginTop:10,marginBottom:5,flexDirection:'row'}}>
-    <Text style={{
-            ...styles.HeadText,
-            color: themecolor.TXTWHITE,
-          }}>Delivery Duration :- {' '}</Text>
-           <Text style={{
-            ...styles.HeadText,
-            color: themecolor.TXTWHITE,
-          }}>
-      * 8 to 10 Days
-          </Text>
-  </View>
-  <View style={{width:width*0.9,marginLeft:10,marginRight:10,marginTop:8,marginBottom:5,flexDirection:'row'}}>
-    <Text style={{
-            ...styles.HeadText,
-            color: themecolor.TXTWHITE,
-          }}>Payment Mode :- {' '}</Text>
-
-                <Image source={require("../../assets/images/Visa.png")} resizeMode='contain' style={{width:40,height:20,margin:2}}/>
-                <Image source={require("../../assets/images/Maestro.png")} resizeMode='cover' style={{width:40,height:20,margin:2}}/>
-                <Image source={require("../../assets/images/mastercard.png")} resizeMode='contain' style={{width:40,height:20,margin:2}}/>
-        
-  </View>
-  </View>
-  </View>
-</View>
 
               <View style={{marginTop: 10}} />
 
@@ -439,12 +387,126 @@ export default function ProductDetail(props) {
                   <View
                     style={{
                       width: width * 0.9,
-                      height:height*0.5,
-                      alignItems: 'center',
-                      backgroundColor:'red'
-                      // justifyContent: 'center',
+                      margin: 10,
+                      flexDirection: 'column',
                     }}>
-                    <TabData totalReview={totalReview} customerReview={customerReview} description={description} shipment={shipment} />
+                    <Text
+                      style={{
+                        ...styles.HeadText,
+                        color: themecolor.TXTWHITE,
+                      }}>
+                      Sizes Available :-{' '}
+                    </Text>
+                    <ProductDetailSizeFlatList
+                      sizes={sizes}
+                      touch={true}
+                      sizesRate={sizesRate}
+                    />
+                  </View>
+                </View>
+              </View>
+
+              <View style={{marginTop: 10}} />
+
+              <View
+                style={{
+                  ...styles.container,
+                }}>
+                <View
+                  style={{
+                    backgroundColor: themecolor.BOXTHEMECOLOR,
+                    borderWidth: 0.5,
+                    borderColor: themecolor.BOXBORDERCOLOR1,
+                    borderRadius: 5,
+                    padding: 10,
+                  }}>
+                  <View
+                    style={{
+                      width: width * 0.9,
+                      margin: 10,
+                      flexDirection: 'column',
+                    }}>
+                    <View
+                      style={{
+                        width: width * 0.9,
+                        marginLeft: 10,
+                        marginRight: 10,
+                        marginTop: 10,
+                        marginBottom: 5,
+                        flexDirection: 'row',
+                      }}>
+                      <Text
+                        style={{
+                          ...styles.HeadText,
+                          color: themecolor.TXTWHITE,
+                        }}>
+                        Delivery Duration :-{' '}
+                      </Text>
+                      <Text
+                        style={{
+                          ...styles.HeadText,
+                          color: themecolor.TXTWHITE,
+                        }}>
+                        * 8 to 10 Days
+                      </Text>
+                    </View>
+                    <View
+                      style={{
+                        width: width * 0.9,
+                        marginLeft: 10,
+                        marginRight: 10,
+                        marginTop: 8,
+                        marginBottom: 5,
+                        flexDirection: 'row',
+                      }}>
+                      <Text
+                        style={{
+                          ...styles.HeadText,
+                          color: themecolor.TXTWHITE,
+                        }}>
+                        Payment Mode :-{' '}
+                      </Text>
+
+                      <Image
+                        source={require('../../assets/images/Visa.png')}
+                        resizeMode="contain"
+                        style={{width: 40, height: 20, margin: 2}}
+                      />
+                      <Image
+                        source={require('../../assets/images/Maestro.png')}
+                        resizeMode="cover"
+                        style={{width: 40, height: 20, margin: 2}}
+                      />
+                      <Image
+                        source={require('../../assets/images/mastercard.png')}
+                        resizeMode="contain"
+                        style={{width: 40, height: 20, margin: 2}}
+                      />
+                    </View>
+                  </View>
+                </View>
+              </View>
+
+              <View style={{marginTop: 10}} />
+
+              <View
+                style={{
+                  ...styles.container,
+                }}>
+                <View
+                  style={{
+                    backgroundColor: themecolor.BOXTHEMECOLOR,
+                    borderWidth: 0.5,
+                    borderColor: themecolor.BOXBORDERCOLOR1,
+                    borderRadius: 5,
+                    padding: 5,
+                  }}>
+                  <View
+                    style={{
+                      alignItems: 'center',
+                      marginTop:5
+                    }}>
+                    <TabData totalReview={totalReview} customerReview={customerReview} description={description} shipment={shipment} /> 
                   </View>
                 </View>
               </View>
@@ -590,18 +652,22 @@ export default function ProductDetail(props) {
                         color: themecolor.TXTWHITE,
                         marginBottom: 10,
                       }}>
-                     Sizes
+                      Sizes
                     </Text>
                   </View>
 
-<View
-  style={{
-    ...styles.container,
-  }}>
-  <View style={{width:width*0.9,flexDirection:'column'}}>
-         <ProductDetailSizeFlatList sizes={sizes} touch={true} sizesRate={sizesRate} />
-  </View>
-</View>
+                  <View
+                    style={{
+                      ...styles.container,
+                    }}>
+                    <View style={{width: width * 0.9, flexDirection: 'column'}}>
+                      <ProductDetailSizeFlatList
+                        sizes={sizes}
+                        touch={true}
+                        sizesRate={sizesRate}
+                      />
+                    </View>
+                  </View>
                   <View style={styles.marg} />
                 </View>
               </RBSheet>
