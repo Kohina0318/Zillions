@@ -25,13 +25,13 @@ function CustomerReviewList({item, themecolor}) {
          {item.create_at}
         </Text>
 
-        <View style={{...styles.subView}}>
+        <View style={{...styles.subView,borderColor:themecolor.BOXBORDERCOLOR1}}>
           <View style={{...styles.avatarView}}>
             <Avatar
               size={40}
               rounded
               avatarStyle={{
-                borderWidth: 2,
+                borderWidth: 1.5,
                 borderColor: themecolor.TXTWHITE,
               }}
               source={require('../../../../assets/images/admin.png')}
@@ -51,7 +51,7 @@ function CustomerReviewList({item, themecolor}) {
                 maxStars={5}
                 rating={item.rating_no}
                 selectedStar={rating => onStarRatingPress(rating)}
-                starSize={20}
+                starSize={16}
                 fullStarColor={themecolor.STARCOLOR}
               />
             </View>
