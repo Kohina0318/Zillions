@@ -77,7 +77,7 @@ export default function Profile(props) {
                 <View
                   style={{
                     ...ProfileStyle.datalistView1,
-                    backgroundColor: themecolor.BOXTHEMECOLOR,
+                    backgroundColor: themecolor.BOXBORDERCOLOR,
                     borderColor: themecolor.BOXBORDERCOLOR1,
                   }}>
                   <View
@@ -112,7 +112,7 @@ export default function Profile(props) {
                 <View
                   style={{
                     ...ProfileStyle.datalistView1,
-                    backgroundColor: themecolor.BOXTHEMECOLOR,
+                    backgroundColor: themecolor.BOXBORDERCOLOR,
                     borderColor: themecolor.BOXBORDERCOLOR1,
                   }}>
                   <ProfileDataList data={data} />
@@ -123,7 +123,7 @@ export default function Profile(props) {
                 <View
                   style={{
                     ...ProfileStyle.datalistView1,
-                    backgroundColor: themecolor.BOXTHEMECOLOR,
+                    backgroundColor: themecolor.BOXBORDERCOLOR,
                     borderColor: themecolor.BOXBORDERCOLOR1,
                   }}>
                   <View style={ProfileStyle.signInView}>
@@ -179,7 +179,7 @@ export default function Profile(props) {
                 <View
                   style={{
                     ...ProfileStyle.datalistView1,
-                    backgroundColor: themecolor.BOXTHEMECOLOR,
+                    backgroundColor: themecolor.BOXBORDERCOLOR,
                     borderColor: themecolor.BOXBORDERCOLOR1,
                   }}>
                   <ProfileDataList data={data1} />
