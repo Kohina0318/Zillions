@@ -66,7 +66,7 @@ export default function SupportTicket(props) {
         setCreateTicketModal(false)
         toast.show("Create Ticket Successfully.", {
           type: 'success',
-          placement: 'bottom',
+          placement: 'bottom', 
           duration: 3000,
           offset: 30,
           animationType: 'slide-in',
