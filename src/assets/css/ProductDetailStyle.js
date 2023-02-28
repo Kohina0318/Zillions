@@ -7,9 +7,14 @@ const {width, height} = Dimensions.get('window');
 const styles = StyleSheet.create({
   bg: {flex: 1},
   container: {
-    justifyContent: 'center',
+    // justifyContent: 'center',
     alignSelf: 'center',
     width: width * 0.94,
+  },
+  container1: {
+    justifyContent: 'center',
+    alignSelf: 'center',
+    width: width * 0.9,
   },
   HeadText: {
     fontSize: FontSize.labelText4,
