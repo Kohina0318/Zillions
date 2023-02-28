@@ -25,7 +25,7 @@ function CustomerReviewList({item, themecolor}) {
          {item.create_at}
         </Text>
 
-        <View style={{...styles.subView,borderColor:themecolor.BOXBORDERCOLOR1}}>
+        <View style={{...styles.subView,borderColor:themecolor.TXTGREYS}}>
           <View style={{...styles.avatarView}}>
             <Avatar
               size={40}

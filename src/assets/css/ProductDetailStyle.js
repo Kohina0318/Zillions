@@ -222,8 +222,10 @@ const styles = StyleSheet.create({
     borderWidth: 0,
     borderColor: 'transparent',
     borderRadius: 5,
+    backgroundColor:'transparent',
   },
   activeTabStyle: {
+    backgroundColor:'transparent',
    },
   tabviewstyle: {
     width: width * 0.93,
@@ -237,8 +239,7 @@ const styles = StyleSheet.create({
   TabNewStyle: {
     color: Colors.black,
     fontFamily: FontFamily.PopinsMedium,
-    fontSize: 14,
-    // backgroundColor:'green'
+    fontSize: 15,
   },
   activeTabs: {color: '#000', fontSize: 14, borderBottomWidth: 3,
 },

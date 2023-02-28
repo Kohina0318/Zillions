@@ -60,7 +60,7 @@ class MyThemeClass {
       HEADERTHEMECOLOR: this.mode === 'dark' ? '#0f3479' : Colors.bluetheme,
       INPUTTXT: this.mode === 'dark' ? '#0f3479' : Colors.black,
       LIGHTGREY: this.mode === 'dark' ? '#84817a' : "#f5f5f5",
-      TXTGREYS: this.mode === 'dark' ? '#GREY' : '#84817a',
+      TXTGREYS: this.mode === 'dark' ? 'grey' : '#84817a',
       // FOOTER: this.mode === 'dark' ? '#0f3479' : '#f5f5f5',
       FOOTER: this.mode === 'dark' ? '#3c3e44' : '#f5f5f5',
       BORDER: this.mode === 'dark' ? '#000' : '#e2e2e2',
