@@ -16,10 +16,6 @@ const ProfileStyle = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'space-between',
   },
-  container: {
-    justifyContent: 'center',
-    alignSelf: 'center',
-  },
   innerImage: {
     borderRadius: 50,
     justifyContent: 'center',
@@ -75,6 +71,7 @@ const ProfileStyle = StyleSheet.create({
   container: {
     justifyContent: 'center',
     alignSelf: 'center',
+    marginTop: 5,
   },
   innerImage: {
     borderRadius: 50,
@@ -170,6 +167,69 @@ const ProfileStyle = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
+  headingTxt: {
+    fontSize: FontSize.labelText3,
+    fontFamily: FontFamily.Popinssemibold,
+  },
+  ViewHeading:{
+    width: width * 0.93, alignSelf: 'center', marginBottom:8
+  },
+  touchview: {
+    width: width * 0.94,
+    bottom: 0,
+    justifyContent: 'center',
+    alignSelf: 'center',
+  },
+  mainView: {
+    width: '100%',
+  },
+  editInnerView: {
+      width:"100%",
+      padding: 15,
+      alignItems: 'center', 
+      borderRadius: 5,
+      borderWidth: 0.4,  
+      marginTop:10 
+  },
+  TextView: {
+    height: 38,
+    borderRadius: 8,
+    borderWidth: 0.8,
+    overflow: 'hidden',
+    width: width * 0.83,
+  },
+  TextViewHalf: {
+    height: 38,
+    borderRadius: 8,
+    borderWidth: 0.8,
+    overflow: 'hidden',
+    width: width * 0.41,
+  },
+  TextInput:{
+    fontSize: FontSize.labelText,
+    fontFamily: FontFamily.PopinsMedium,
+    left: 8,
+    marginRight:10
+  },
+  TextinputH:{
+    fontSize: FontSize.smallText,
+    fontFamily: FontFamily.PopinsMedium,
+    left: 5,
+    bottom:4
+  },
+  Mv5: {
+    marginVertical: 5,
+  },
+  Mh5: {
+    marginHorizontal: 2,
+  },
+  inputBoxHalf:{
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  }
+  
+  
+  
 });
 
 export {ProfileStyle};

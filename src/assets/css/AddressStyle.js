@@ -5,20 +5,29 @@ import {FontFamily} from '../fonts/FontFamily';
 const {width, height} = Dimensions.get('window');
 
 const styles = StyleSheet.create({
-  bg: {flex: 1},
+  bg: {flex: 1,},
   container: {
     justifyContent: 'center',
     alignSelf: 'center',
     marginTop: 5,
+    height: height*0.8
   },
   touchview: {
     width: width * 0.94,
-    position: 'absolute',
+    height:height*0.06,
     bottom: 0,
-    height: 60,
     justifyContent: 'center',
     alignSelf: 'center',
   },
+  InnerView: {
+    width:"100%",
+    padding: 15,
+    alignItems: 'center', 
+    borderRadius: 8,
+    borderWidth: 0.5,  
+    marginTop:10 
+},
+
   mainView: {
     width: '100%',
   },
@@ -80,6 +89,13 @@ const styles = StyleSheet.create({
   },
   modelTextView: {
     height: 40,
+    borderRadius: 8,
+    borderWidth: 0.5,
+    overflow: 'hidden',
+    width: width * 0.8,
+  },
+  modelTextViewMsg: {
+    height: 'auto',
     borderRadius: 8,
     borderWidth: 0.5,
     overflow: 'hidden',

@@ -43,7 +43,7 @@ export default function RegisterLoginHeader(props) {
                 <CIcon
                   name="keyboard-backspace"
                   size={26}
-                  color={themecolor.BACKICON}
+                  color={themecolor.TXTWHITE}
                 />
               </TouchableOpacity>
           </View>
