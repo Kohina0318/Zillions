@@ -90,6 +90,7 @@ export default function Order(props) {
         <View style={{...styles.container}}>
           <Search title={'Search by sale code..'} filtering={filtering} />
 
+          <View style={{marginTop: 5}} />
           {data.length > 0 ? (
             <OrderDataList data={data} />
           ) : (

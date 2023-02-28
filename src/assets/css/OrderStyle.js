@@ -35,7 +35,7 @@ const styles = StyleSheet.create({
   container: {
     justifyContent: 'center',
     alignSelf: 'center',
-    marginTop: 5,
+    marginTop: 10,
   },
   innerImage: {
     justifyContent: 'center',
