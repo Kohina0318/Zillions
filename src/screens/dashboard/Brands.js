@@ -48,11 +48,12 @@ export default function Brands(props) {
 
   useFocusEffect(
     React.useCallback(() => {
-      setLoader(true);
+      // setLoader(true);
       handleBrands();
     }, [props]),
   );
 
+ 
   return (
     <View style={{...styles.bg, backgroundColor: themecolor.THEMECOLOR}}>
       

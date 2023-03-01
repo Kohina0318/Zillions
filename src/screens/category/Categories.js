@@ -47,11 +47,9 @@ export default function Categories(props) {
  
   useFocusEffect(
     React.useCallback(() => {
-    setLoader(true);
     handleCategories();
   }, [props]),
   );
-
 
   return (
     <View style={{...CategoryStyle.bg, backgroundColor: themecolor.THEMECOLOR}}>
@@ -77,7 +75,7 @@ export default function Categories(props) {
                 <Text>No data found!</Text>
               </View>
             )}
-            <View style={{marginVertical: 45}} />
+            <View style={{marginVertical: 50}} />
           </View>
         </>
       )}

@@ -161,7 +161,6 @@ export default function Dashboard(props) {
 
   useFocusEffect(
     React.useCallback(() => {
-      setLoader(true);
       handleCategories();
       handleCarousel();
       handleBrands();

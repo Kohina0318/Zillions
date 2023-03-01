@@ -63,20 +63,24 @@ export const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    padding: 15,
+    padding: 10,
     width: width,
     height: 70,
   },
   iconTitle: {
-    width: width * 0.6,
+    width: width * 0.697,
     justifyContent: 'space-between',
     alignItems: 'center',
   },
   iconView: {
-    width: width * 0.2,
+    width: width * 0.17,
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
+    alignSelf:"center",
+  },
+  iconText:{
+    width: width * 0.08, alignSelf:"center",borderRadius:15
   },
   iconTitle1: {
     width: width * 0.7,

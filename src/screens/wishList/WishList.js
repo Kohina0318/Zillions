@@ -22,6 +22,7 @@ export default function WishList(props) {
   const themecolor = new MyThemeClass(mode).getThemeColor();
 
   const [loader, setLoader] = useState(true);
+  const [refresh, setRefresh] = useState(false);
   const [data, setData] = useState([]);
 
   const handleWishlist = async () => {
@@ -44,9 +45,8 @@ export default function WishList(props) {
 
   useFocusEffect(
     React.useCallback(() => {
-      setLoader(true);
       handleWishlist();
-    }, [props]),
+    }, [refresh,props]),
   );
 
   return (
