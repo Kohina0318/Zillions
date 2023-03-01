@@ -83,7 +83,7 @@ export default function Brands(props) {
                   flex: 1,
                   justifyContent: 'center',
                 }}>
-                <Text>No data found!</Text>
+                <Text  allowFontScaling={false}>No data found!</Text>
               </View>
             )}
             <View style={{marginVertical: 45}} />

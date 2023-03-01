@@ -37,11 +37,11 @@ function ProfileDataFlateList({item, themecolor}) {
         <View style={{flexDirection: 'row'}}>
           {item.icon != null || item.icon != undefined ?
           <View style={{marginRight: 10, alignSelf: 'center'}}>
-            <Text style={{color: themecolor.BACKICON}}>{item.icon}</Text>
+            <Text allowFontScaling={false} style={{color: themecolor.BACKICON}}>{item.icon}</Text>
           </View>
             :<></>}
           <View>
-            <Text style={{...ProfileStyle.txt, color: themecolor.TXTWHITE}}>
+            <Text allowFontScaling={false} style={{...ProfileStyle.txt, color: themecolor.TXTWHITE}}>
               {item.name}
             </Text>
           </View>

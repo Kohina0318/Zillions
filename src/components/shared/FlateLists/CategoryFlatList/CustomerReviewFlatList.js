@@ -21,7 +21,7 @@ function CustomerReviewList({item, themecolor}) {
 
    <View style={{width: width * 0.9, marginTop: 10, margin: 5}}>
       <View>
-        <Text style={{...styles.TimeText}}>
+        <Text allowFontScaling={false} style={{...styles.TimeText}}>
          {item.create_at}
         </Text>
 
@@ -37,6 +37,7 @@ function CustomerReviewList({item, themecolor}) {
               source={require('../../../../assets/images/admin.png')}
             />
             <Text
+             allowFontScaling={false}
               style={{
                 ...styles.avatarText,
                 color: themecolor.TXTWHITE,

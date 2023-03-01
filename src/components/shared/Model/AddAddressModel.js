@@ -31,6 +31,7 @@ export default function AddAddressModel(props) {
             <View style={{...styles.modelInner}}>
               <View style={{...styles.modelHeader}}>
                 <Text
+                 allowFontScaling={false}
                   style={{
                     ...styles.modelHeading,
                     color: themecolor.TXTWHITE,
@@ -48,6 +49,7 @@ export default function AddAddressModel(props) {
                   backgroundColor: themecolor.BOXBORDERCOLOR,
                 }}>
                 <TextInput
+                 allowFontScaling={false}
                   placeholder={'Address*'}
                   placeholderTextColor={themecolor.TXTGREYS}
                   style={{
@@ -67,6 +69,7 @@ export default function AddAddressModel(props) {
                   backgroundColor: themecolor.BOXBORDERCOLOR,
                 }}>
                 <TextInput
+                 allowFontScaling={false}
                   placeholder={'City*'}
                   placeholderTextColor={themecolor.TXTGREYS}
                   style={{
@@ -86,6 +89,7 @@ export default function AddAddressModel(props) {
                   backgroundColor: themecolor.BOXBORDERCOLOR,
                 }}>
                 <TextInput
+                 allowFontScaling={false}
                   placeholder={'Postal Code*'}
                   placeholderTextColor={themecolor.TXTGREYS}
                   style={{
@@ -107,6 +111,7 @@ export default function AddAddressModel(props) {
                   backgroundColor: themecolor.BOXBORDERCOLOR,
                 }}>
                 <TextInput
+                 allowFontScaling={false}
                   placeholder={'State*'}
                   placeholderTextColor={themecolor.TXTGREYS}
                   style={{
@@ -126,6 +131,7 @@ export default function AddAddressModel(props) {
                   backgroundColor: themecolor.BOXBORDERCOLOR,
                 }}>
                 <TextInput
+                 allowFontScaling={false}
                   placeholder={'Country*'}
                   placeholderTextColor={themecolor.TXTGREYS}
                   style={{
@@ -145,6 +151,7 @@ export default function AddAddressModel(props) {
                   backgroundColor: themecolor.BOXBORDERCOLOR,
                 }}>
                 <TextInput
+                 allowFontScaling={false}
                   placeholder={'Mobile No.*'}
                   keyboardType="numeric"
                   maxLength={10}

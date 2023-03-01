@@ -205,7 +205,7 @@ export default function Dashboard(props) {
               <View
                 style={{
                   ...styles.container,
-                  backgroundColor: themecolor.LOGINTHEMECOLOR1,
+                  backgroundColor: themecolor.BOXBORDERCOLOR,
                 }}>
                 <CarouselFile data={carouselData} />
               </View>

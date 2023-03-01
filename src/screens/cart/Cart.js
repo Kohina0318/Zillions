@@ -20,7 +20,7 @@ export default function Cart(props) {
           height: height,
           alignSelf: 'center',
         }}>
-        <Text>Cart</Text>
+        <Text  allowFontScaling={false}>Cart</Text>
       </View>
     </>
   );

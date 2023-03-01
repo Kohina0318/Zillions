@@ -51,6 +51,7 @@ export default function RegisterLoginHeader(props) {
           <View style={{...styles.iconTitle1}}>
             
               <Text
+               allowFontScaling={false}
                 style={{...styles.toolbarTitle, color: themecolor.TXTWHITE}}
                 numberOfLines={1}>
                 {props.title}

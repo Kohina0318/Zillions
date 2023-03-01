@@ -126,6 +126,7 @@ export default function ForgotPassword(props) {
               }}>
               <View>
                 <Text
+                 allowFontScaling={false}
                   style={{
                     fontSize: 12,
                     color: themecolor.TXTWHITE,
@@ -154,6 +155,7 @@ export default function ForgotPassword(props) {
               />
               <View style={{width: width * 0.75}}>
                 <TextInput
+                 allowFontScaling={false}
                   value={email}
                   placeholderTextColor={themecolor.TXTGREYS}
                   placeholder="Email Address*"

@@ -28,7 +28,7 @@ function BadgeIcon(props) {
         ) : null}
         {props.count && props.count > 0 ? (
           <View style={{...styles.badge,backgroundColor:themecolor.TXTBLACK}}>
-            <Text style={{...styles.badgeText,color:themecolor.TXTBLACK=='#252525'?Color.white:Color.black,}}>{props.count}</Text>
+            <Text allowFontScaling={false} style={{...styles.badgeText,color:themecolor.TXTBLACK=='#252525'?Color.white:Color.black,}}>{props.count}</Text>
           </View>
         ) : null}
       </View>

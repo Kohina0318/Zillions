@@ -45,7 +45,7 @@ function CategoryDataFlatList({item, themecolor}) {
           }}
           source={{uri: item.banner}}
         />
-        <Text style={{color: themecolor.TXTWHITE,fontSize:11}} numberOfLines={1}>
+        <Text allowFontScaling={false} style={{color: themecolor.TXTWHITE,fontSize:11}} numberOfLines={1}>
           {item.category_name}
         </Text>
       </View>

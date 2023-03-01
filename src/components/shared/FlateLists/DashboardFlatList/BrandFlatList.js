@@ -55,6 +55,7 @@ function BrandDataFlatList({item, themecolor}) {
             alignItems: 'center',
           }}>
           <Text
+           allowFontScaling={false}
             numberOfLines={1}
             style={{
               color: themecolor.TXTWHITE,

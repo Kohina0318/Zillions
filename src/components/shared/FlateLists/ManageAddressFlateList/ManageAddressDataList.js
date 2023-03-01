@@ -30,32 +30,32 @@ function DefaultAddressDataFlateList({item, themecolor}) {
       }}
     >
       <View style={{...styles.innerView}}>
-        <Text style={{...styles.txt, color: themecolor.TXTWHITE}}>
-          <Text style={{...styles.txt, color: themecolor.TXTWHITE}}>
+        <Text allowFontScaling={false} style={{...styles.txt, color: themecolor.TXTWHITE}}>
+          <Text allowFontScaling={false} style={{...styles.txt, color: themecolor.TXTWHITE}}>
             {item.address}
           </Text>
         </Text>
-        <Text style={{...styles.txt, color: themecolor.TXTWHITE}}>
-          <Text style={{...styles.txt, color: themecolor.TXTWHITE}}>
+        <Text allowFontScaling={false} style={{...styles.txt, color: themecolor.TXTWHITE}}>
+          <Text allowFontScaling={false} style={{...styles.txt, color: themecolor.TXTWHITE}}>
             {item.city}
           </Text>
-          <Text style={{...styles.txt, color: themecolor.TXTWHITE}}>
+          <Text allowFontScaling={false} style={{...styles.txt, color: themecolor.TXTWHITE}}>
             {' - '}
             {item.postal_code}
           </Text>
         </Text>
-        <Text style={{...styles.txt, color: themecolor.TXTWHITE}}>
-          <Text style={{...styles.txt, color: themecolor.TXTWHITE}}>
+        <Text allowFontScaling={false} style={{...styles.txt, color: themecolor.TXTWHITE}}>
+          <Text allowFontScaling={false} style={{...styles.txt, color: themecolor.TXTWHITE}}>
             {item.state}
           </Text>
-          <Text style={{...styles.txt, color: themecolor.TXTWHITE}}>
+          <Text allowFontScaling={false} style={{...styles.txt, color: themecolor.TXTWHITE}}>
             {' , '}
             {item.country}
           </Text>
         </Text>
-        <Text style={{...styles.txt, color: themecolor.TXTWHITE}}>
+        <Text allowFontScaling={false} style={{...styles.txt, color: themecolor.TXTWHITE}}>
           Mobile No :
-          <Text style={{...styles.txt1, color: themecolor.TXTWHITE}}>
+          <Text allowFontScaling={false} style={{...styles.txt1, color: themecolor.TXTWHITE}}>
             {' '}
             {item.phone}
           </Text>
@@ -141,32 +141,32 @@ function OtherAddressDataFlateList({item, themecolor, refresh, setRefresh}) {
       }}
     >
       <View style={{...styles.innerView}}>
-        <Text style={{...styles.txt, color: themecolor.TXTWHITE}}>
-          <Text style={{...styles.txt, color: themecolor.TXTWHITE}}>
+        <Text allowFontScaling={false} style={{...styles.txt, color: themecolor.TXTWHITE}}>
+          <Text allowFontScaling={false} style={{...styles.txt, color: themecolor.TXTWHITE}}>
             {item.address}
           </Text>
         </Text>
-        <Text style={{...styles.txt, color: themecolor.TXTWHITE}}>
-          <Text style={{...styles.txt, color: themecolor.TXTWHITE}}>
+        <Text allowFontScaling={false} style={{...styles.txt, color: themecolor.TXTWHITE}}>
+          <Text allowFontScaling={false} style={{...styles.txt, color: themecolor.TXTWHITE}}>
             {item.city}
           </Text>
-          <Text style={{...styles.txt, color: themecolor.TXTWHITE}}>
+          <Text allowFontScaling={false} style={{...styles.txt, color: themecolor.TXTWHITE}}>
             {' - '}
             {item.postal_code}
           </Text>
         </Text>
-        <Text style={{...styles.txt, color: themecolor.TXTWHITE}}>
-          <Text style={{...styles.txt, color: themecolor.TXTWHITE}}>
+        <Text allowFontScaling={false} style={{...styles.txt, color: themecolor.TXTWHITE}}>
+          <Text allowFontScaling={false} style={{...styles.txt, color: themecolor.TXTWHITE}}>
             {item.state}
           </Text>
-          <Text style={{...styles.txt, color: themecolor.TXTWHITE}}>
+          <Text allowFontScaling={false} style={{...styles.txt, color: themecolor.TXTWHITE}}>
             {' , '}
             {item.country}
           </Text>
         </Text>
-        <Text style={{...styles.txt, color: themecolor.TXTWHITE}}>
+        <Text allowFontScaling={false} style={{...styles.txt, color: themecolor.TXTWHITE}}>
           Mobile No :
-          <Text style={{...styles.txt1, color: themecolor.TXTWHITE}}>
+          <Text allowFontScaling={false} style={{...styles.txt1, color: themecolor.TXTWHITE}}>
             {' '}
             {item.phone}
           </Text>

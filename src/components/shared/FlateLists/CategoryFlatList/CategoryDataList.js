@@ -41,13 +41,13 @@ function CategoryDataFlateList({item, themecolor}) {
           />
         </View>
         <View style={{...CategoryStyle.margleft15}}>
-          <Text style={{...CategoryStyle.txt, color: themecolor.TXTWHITE}}>
+          <Text allowFontScaling={false} style={{...CategoryStyle.txt, color: themecolor.TXTWHITE}}>
             {item.category_name}
           </Text>
         </View>
 
         <View style={{flexDirection: 'row', justifyContent:"center",alignItems:"center"}}>
-          <Text style={{...CategoryStyle.txt1,backgroundColor:themecolor.STARCOLOR}}> {item.no_of_product} </Text>
+          <Text allowFontScaling={false} style={{...CategoryStyle.txt1,backgroundColor:themecolor.STARCOLOR}}> {item.no_of_product} </Text>
           <View
             style={{...CategoryStyle.iconview, borderRadius: 50, padding: 2}}
             >

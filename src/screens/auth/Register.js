@@ -183,6 +183,7 @@ export default function Register(props) {
               />
               <View style={{width: width * 0.75}}>
                 <TextInput
+                 allowFontScaling={false}
                   value={name}
                   placeholderTextColor={themecolor.TXTGREYS}
                   placeholder="Enter Your Name*"
@@ -212,6 +213,7 @@ export default function Register(props) {
               />
               <View style={{width: width * 0.75}}>
                 <TextInput
+                 allowFontScaling={false}
                   value={mobileNo}
                   placeholderTextColor={themecolor.TXTGREYS}
                   placeholder="Enter Mobile number*"
@@ -241,6 +243,7 @@ export default function Register(props) {
               />
               <View style={{width: width * 0.75}}>
                 <TextInput
+                 allowFontScaling={false}
                   value={email}
                   placeholderTextColor={themecolor.TXTGREYS}
                   placeholder="Enter Email Address*"
@@ -271,6 +274,7 @@ export default function Register(props) {
               />
               <View style={{width: width * 0.72}}>
                 <TextInput
+                 allowFontScaling={false}
                   value={password}
                   placeholderTextColor={themecolor.TXTGREYS}
                   placeholder="Password*"
@@ -316,6 +320,7 @@ export default function Register(props) {
               />
               <View style={{width: width * 0.72}}>
                 <TextInput
+                 allowFontScaling={false}
                   value={conPassword}
                   placeholderTextColor={themecolor.TXTGREYS}
                   placeholder="Confirm Password*"
@@ -367,6 +372,7 @@ export default function Register(props) {
                 alignItems: 'center',
               }}>
               <Text
+               allowFontScaling={false}
                 style={{
                   color: themecolor.BACKICON,
                   fontSize: 12,

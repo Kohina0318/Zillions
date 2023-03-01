@@ -31,7 +31,7 @@ function OrderDataFlateList({item, themecolor}) {
       onPress={() => navigation.navigate('OrderDetails',{productDetails:item.product_details,saleCode:item.sale_code})}
     >
       <View style={{...styles.flexDirView}}>
-        <Text style={{...styles.txt, color: themecolor.TXTWHITE}}>
+        <Text allowFontScaling={false} style={{...styles.txt, color: themecolor.TXTWHITE}}>
           Delivered on feb 09 2022
         </Text>
       </View>
@@ -54,12 +54,12 @@ function OrderDataFlateList({item, themecolor}) {
         </View> */}
 
         <View >
-          <Text style={{...styles.txt1, color: themecolor.TXTWHITE}} numberOfLines={2}>
+          <Text allowFontScaling={false} style={{...styles.txt1, color: themecolor.TXTWHITE}} numberOfLines={2}>
             Sale Code :
           </Text>
         </View>
         <View style={{...styles.flexRow}}>
-          <Text style={{...styles.txt1, color: themecolor.ADDTOCARTBUTTONCOLOR}} numberOfLines={2}>
+          <Text allowFontScaling={false} style={{...styles.txt1, color: themecolor.ADDTOCARTBUTTONCOLOR}} numberOfLines={2}>
             #{item.sale_code}
           </Text>
         </View>
@@ -77,7 +77,7 @@ function OrderDataFlateList({item, themecolor}) {
 
       {/* <View style={{...styles.flexDirView, justifyContent: 'space-between'}}>
         <View>
-          <Text style={{...styles.txt1, color: themecolor.TXTGREYS}}>
+          <Text allowFontScaling={false} style={{...styles.txt1, color: themecolor.TXTGREYS}}>
             Rate this product now
           </Text>
         </View>
