@@ -1,20 +1,13 @@
 import React, {useEffect, useState} from 'react';
-import {
-  TouchableOpacity,
-  View,
-  FlatList,
-  Text,
-  Dimensions,
-} from 'react-native';
+import {TouchableOpacity, View, FlatList, Text, Dimensions} from 'react-native';
 import {MyThemeClass} from '../../../Theme/ThemeDarkLightColor';
 import {useSelector} from 'react-redux';
 import {useNavigation} from '@react-navigation/native';
 import {styles} from '../../../../assets/css/ProductDetailStyle';
 
-
 const {width, height} = Dimensions.get('screen');
 
-function ProductDetailSizeList({item, themecolor,touch}) {
+function ProductDetailSizeList({item, themecolor, touch}) {
   const navigation = useNavigation();
 
   return (
@@ -41,7 +34,7 @@ function ProductDetailSizeList({item, themecolor,touch}) {
           &#8377;{item.amount}
           </Text>
          </View>
-          </View>
+         </View>
       </TouchableOpacity>
     </>
   );
@@ -60,11 +53,6 @@ export function ProductDetailSizeFlatList(props) {
           <ProductDetailSizeList item={item} themecolor={themecolor} />
         )}
         horizontal={true}
-        // contentContainerStyle={{
-        //   flexDirection: 'row',
-        //   flexWrap: 'wrap',
-        //   width: width * 0.94,
-        // }}
         showsHorizontalScrollIndicator={false}
         showsVerticalScrollIndicator={false}
         scrollEnabled={true}

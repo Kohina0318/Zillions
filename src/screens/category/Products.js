@@ -12,7 +12,7 @@ import {MyThemeClass} from '../../components/Theme/ThemeDarkLightColor';
 import {ProductStyle} from '../../assets/css/ProductStyle';
 import {ProductDataList} from '../../components/shared/FlateLists/CategoryFlatList/ProductDataList';
 import {ScrollView} from 'react-native-gesture-handler';
-import {getSubCategoryByProduct} from '../../repository/CategoryRepository/AllProductCategoryRep';
+import {getByProduct} from '../../repository/CategoryRepository/AllProductCategoryRep';
 import {useToast} from 'react-native-toast-notifications';
 import Header from '../../components/shared/header/Header';
 import LoadingFullScreen from '../../components/shared/Loader/LoadingFullScreen';
@@ -42,13 +42,13 @@ export default function Products(props) {
   const [loader, setLoader] = useState(true);
   const [data, setData] = useState([]);
 
-  const handleSubCategoryByProduct = async () => {
+  const handleByProduct = async () => {
     try {
-      var res = await getSubCategoryByProduct(props.route.params.subCategoryId);
+      var res = await getByProduct(props.route.params.speciality,props.route.params.Id);
       setData(res.data);
       setLoader(false);
     } catch (e) {
-      console.log('errrror in..getSubCategoryByProduct page-->', e);
+      console.log('errrror in..handleByProduct page-->', e);
       setLoader(false);
       toast.show('Something went wrong!, Try again later.', {
         type: 'danger',
@@ -61,13 +61,13 @@ export default function Products(props) {
   };
 
   useEffect(() => {
-    handleSubCategoryByProduct();
+    handleByProduct();
   }, []);
 
   return (
     <View style={{...ProductStyle.bg, backgroundColor: themecolor.THEMECOLOR}}>
       <Header
-        title={props.route.params.subCategoryName}
+        title={props.route.params.Name}
         backIcon={true}
         onPressBack={() => handleBackButtonClick()}
       />

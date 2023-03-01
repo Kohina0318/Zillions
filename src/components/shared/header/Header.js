@@ -33,7 +33,7 @@ export default function Header(props) {
         <View
           style={{...styles.headerInnerView}}>
 
-          <View style={{width: width * 0.1,}}>
+          <View style={{width: width * 0.06,}}>
           {props.backIcon ? (
               <TouchableOpacity
                 activeOpacity={0.5}
@@ -56,7 +56,7 @@ export default function Header(props) {
             )}
           </View>
 
-          <View style={{...styles.iconTitle}}>
+          <View style={{...styles.iconTitle,}}>
             {props.title == 'Home' ? (
               <Image
                 source={require('../../../assets/images/logo.png')}
@@ -74,7 +74,7 @@ export default function Header(props) {
 
           <View
             style={{...styles.iconView}}>
-            <View style={{width: width * 0.1}}>
+            <View style={{...styles.iconText}}>
               <TouchableOpacity
                 activeOpacity={0.5}
                 // onPress={() => {
@@ -85,7 +85,7 @@ export default function Header(props) {
               </TouchableOpacity>
             </View>
 
-            <View style={{width: width * 0.1}}>
+            <View style={{...styles.iconText}}>
               <TouchableOpacity activeOpacity={0.5}>
                 <BadgeIcon
                   icon="shopping-cart"

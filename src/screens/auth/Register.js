@@ -7,7 +7,7 @@ import {
   Dimensions,
   TextInput,
   TouchableOpacity,
-  BackHandler
+  BackHandler,
 } from 'react-native';
 import {useSelector} from 'react-redux';
 import {MyThemeClass} from '../../components/Theme/ThemeDarkLightColor';
@@ -25,22 +25,6 @@ import VerifyModel from '../../components/shared/Model/VerifyModel';
 const {width, height} = Dimensions.get('screen');
 
 export default function Register(props) {
-  const mode = useSelector(state => state.mode);
-  const themecolor = new MyThemeClass(mode).getThemeColor();
-  const navigation = useNavigation();
-  const [showmodal, setShowmodal] = useState(false);
-
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [mobileNo, setMobileNo] = useState('');
-  const [password, setPassword] = useState('');
-  const [conPassword, setConPassword] = useState('');
-  const [isPasswordSecure, setIsPasswordSecure] = useState(true);
-
-  var toast = useToast();
-
-  const isDarkMode = Appearance.getColorScheme() === 'dark';
-
   function handleBackButtonClick() {
     props.navigation.goBack();
     return true;
@@ -56,17 +40,43 @@ export default function Register(props) {
     };
   }, []);
 
+  const mode = useSelector(state => state.mode);
+  const themecolor = new MyThemeClass(mode).getThemeColor();
+  const navigation = useNavigation();
+  const [showmodal, setShowmodal] = useState(false);
+
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
+  const [email, setEmail] = useState('');
+  const [mobileNo, setMobileNo] = useState('');
+  const [password, setPassword] = useState('');
+  const [conPassword, setConPassword] = useState('');
+  const [isPasswordSecure, setIsPasswordSecure] = useState(true);
+
+  var toast = useToast();
+
+  const isDarkMode = Appearance.getColorScheme() === 'dark';
 
   const handleRegister = async () => {
-    if (name == '') {
-      toast.show('Name is required!', {
+    if (firstName == '') {
+      toast.show('First Name is required!', {
         type: 'warning',
         placement: 'bottom',
         duration: 3000,
         offset: 30,
         animationType: 'slide-in',
       });
-    } else if (mobileNo == '') {
+    } 
+    else if (lastName == '') {
+      toast.show('Last Name is required!', {
+        type: 'warning',
+        placement: 'bottom',
+        duration: 3000,
+        offset: 30,
+        animationType: 'slide-in',
+      });
+    } 
+    else if (mobileNo == '') {
       toast.show('Mobile number is required!', {
         type: 'warning',
         placement: 'bottom',
@@ -116,20 +126,18 @@ export default function Register(props) {
       });
     } else {
       try {
-
-        let formdata=new FormData()
-        formdata.append('username',name)
-        formdata.append('phone',mobileNo)
-        formdata.append('email',email)
-        formdata.append('password1',password)
-        formdata.append('password2',conPassword)
+        let formdata = new FormData();
+        formdata.append('username', firstName);
+        formdata.append('surname', lastName);
+        formdata.append('phone', mobileNo);
+        formdata.append('email', email);
+        formdata.append('password1', password);
+        formdata.append('password2', conPassword);
 
         const res = await postRegistration(formdata);
-        console.log('handleRegister  data....line no 100..>>>', res);
 
         if (res.status == true) {
-          setShowmodal(!showmodal)
-          
+          setShowmodal(!showmodal);
         } else {
           toast.show(res.msg, {
             type: 'danger',
@@ -161,7 +169,10 @@ export default function Register(props) {
       />
       <View style={{backgroundColor: themecolor.LOGINTHEMECOLOR, flex: 1}}>
         <View style={{height: height * 0.1}}>
-          <RegisterLoginHeader title="Register" onPressBack={() => handleBackButtonClick()} />
+          <RegisterLoginHeader
+            title="Register"
+            onPressBack={() => handleBackButtonClick()}
+          />
         </View>
         <View style={{...RegisterLoginStyles.MGv5}} />
         <View style={{width: width, height: height}}>
@@ -170,30 +181,61 @@ export default function Register(props) {
               ...RegisterLoginStyles.container,
             }}>
             <View
-              style={{
-                backgroundColor: themecolor.OTPBOXCOLOR,
-                borderColor: themecolor.OTPBOXCOLOR,
-                ...RegisterLoginStyles.textInputView,
-              }}>
-              <Icon
-                name="account-circle"
-                style={{marginLeft: 15}}
-                size={18}
-                color={themecolor.BACKICON}
-              />
-              <View style={{width: width * 0.75}}>
-                <TextInput
-                 allowFontScaling={false}
-                  value={name}
-                  placeholderTextColor={themecolor.TXTGREYS}
-                  placeholder="Enter Your Name*"
-                  autoCapitalize="words"
-                  onChangeText={text => setName(text)}
-                  style={{
-                    color: themecolor.TXTWHITE,
-                    ...RegisterLoginStyles.textInput,
-                  }}
+              style={{...RegisterLoginStyles.textTwoInputView}}>
+              <View
+                style={{
+                  backgroundColor: themecolor.OTPBOXCOLOR,
+                  borderColor: themecolor.OTPBOXCOLOR,
+                  ...RegisterLoginStyles.textTwoInputView1,
+                }}>
+                <Icon
+                  name="account-circle"
+                  style={{marginLeft: 15}}
+                  size={18}
+                  color={themecolor.BACKICON}
                 />
+                <View style={{width: width * 0.31}}>
+                  <TextInput
+                    allowFontScaling={false}
+                    value={firstName}
+                    placeholderTextColor={themecolor.TXTGREYS}
+                    placeholder="First Name*"
+                    autoCapitalize="words"
+                    onChangeText={text => setFirstName(text)}
+                    style={{
+                      color: themecolor.TXTWHITE,
+                      ...RegisterLoginStyles.textInput,
+                    }}
+                  />
+                </View>
+              </View>
+
+              <View
+                style={{
+                  backgroundColor: themecolor.OTPBOXCOLOR,
+                  borderColor: themecolor.OTPBOXCOLOR,
+                  ...RegisterLoginStyles.textTwoInputView1,
+                }}>
+                <Icon
+                  name="account-circle"
+                  style={{marginLeft: 15}}
+                  size={18}
+                  color={themecolor.BACKICON}
+                />
+                <View style={{width: width * 0.31}}>
+                  <TextInput
+                    allowFontScaling={false}
+                    value={lastName}
+                    placeholderTextColor={themecolor.TXTGREYS}
+                    placeholder="Last Name*"
+                    autoCapitalize="words"
+                    onChangeText={text => setLastName(text)}
+                    style={{
+                      color: themecolor.TXTWHITE,
+                      ...RegisterLoginStyles.textInput,
+                    }}
+                  />
+                </View>
               </View>
             </View>
 
@@ -213,10 +255,10 @@ export default function Register(props) {
               />
               <View style={{width: width * 0.75}}>
                 <TextInput
-                 allowFontScaling={false}
+                  allowFontScaling={false}
                   value={mobileNo}
                   placeholderTextColor={themecolor.TXTGREYS}
-                  placeholder="Enter Mobile number*"
+                  placeholder="Mobile number*"
                   keyboardType="numeric"
                   maxLength={10}
                   onChangeText={text => setMobileNo(text)}
@@ -243,10 +285,10 @@ export default function Register(props) {
               />
               <View style={{width: width * 0.75}}>
                 <TextInput
-                 allowFontScaling={false}
+                  allowFontScaling={false}
                   value={email}
                   placeholderTextColor={themecolor.TXTGREYS}
-                  placeholder="Enter Email Address*"
+                  placeholder="Email Address*"
                   keyboardType="email-address"
                   inputMode="email"
                   onChangeText={text => setEmail(text)}
@@ -274,7 +316,7 @@ export default function Register(props) {
               />
               <View style={{width: width * 0.72}}>
                 <TextInput
-                 allowFontScaling={false}
+                  allowFontScaling={false}
                   value={password}
                   placeholderTextColor={themecolor.TXTGREYS}
                   placeholder="Password*"
@@ -320,7 +362,7 @@ export default function Register(props) {
               />
               <View style={{width: width * 0.72}}>
                 <TextInput
-                 allowFontScaling={false}
+                  allowFontScaling={false}
                   value={conPassword}
                   placeholderTextColor={themecolor.TXTGREYS}
                   placeholder="Confirm Password*"
@@ -372,7 +414,7 @@ export default function Register(props) {
                 alignItems: 'center',
               }}>
               <Text
-               allowFontScaling={false}
+                allowFontScaling={false}
                 style={{
                   color: themecolor.BACKICON,
                   fontSize: 12,

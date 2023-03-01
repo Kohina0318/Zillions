@@ -13,9 +13,7 @@ export default SuccessModel = props => {
 
   const handleClickOnDone = () => {
     setModalVisible(!modalVisible);
-    navigation.push(props.navigateTo, {
-      navigateFrom: props.navigateFrom,
-    });
+    navigation.navigate(props.navigateTo)
   };
 
   return (

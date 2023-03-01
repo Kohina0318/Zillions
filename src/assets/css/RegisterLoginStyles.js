@@ -27,6 +27,19 @@ export const RegisterLoginStyles = StyleSheet.create({
     alignSelf: 'center',
     borderWidth: 0.8,
   },
+  textTwoInputView: {
+    width: width * 0.9,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
+  textTwoInputView1: {
+    width: width * 0.44,
+    flexDirection: 'row',
+    borderRadius: 12,
+    alignItems: 'center',
+    alignSelf: 'center',
+    borderWidth: 0.8,
+  },
   container: {
     width: width * 0.9,
     justifyContent: 'center',

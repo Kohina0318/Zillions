@@ -84,8 +84,7 @@ export default function Login(props) {
         formdata.append('password',password)
 
         const res = await postLogin(formdata);
-        console.log('Data......login api ....line 42..>>>', res);
-
+        
         if (res.status == true) {
           await AsyncStorage.setItem('@UserData', JSON.stringify(res.data));
           setShowmodal(!showmodal)

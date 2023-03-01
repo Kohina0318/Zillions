@@ -20,7 +20,9 @@ function BrandDataFlatList({item, themecolor}) {
   const navigation = useNavigation();
 
   return (
-    <TouchableOpacity activeOpacity={0.8}>
+    <TouchableOpacity activeOpacity={0.8}
+    onPress={() => navigation.navigate('Products',{Id:item.brand_id,Name:item.brand_name,speciality:"brand"})}
+    >
       <View
         style={{
           width: width * 0.284,
