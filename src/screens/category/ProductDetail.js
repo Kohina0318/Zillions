@@ -38,6 +38,8 @@ import ImageZoom from 'react-native-image-pan-zoom';
 import {Modal} from 'react-native';
 import {TabData} from './TabData';
 import {ProductDetailSizeFlatList} from '../../components/shared/FlateLists/CategoryFlatList/ProductDetailSizeFlatList';
+import NumericInput from 'react-native-numeric-input'
+import { RBSheetData } from './RBSheetData';
 
 const {width, height} = Dimensions.get('window');
 
@@ -82,6 +84,8 @@ export default function ProductDetail(props) {
   const [sizes, setSizes] = useState([]);
   const [customerReview, setCustomerReview] = useState([]);
   const [sizesRate, setSizesRate] = useState([]);
+  const [slug,setSlug]=useState('')
+  const [unit,setUnit]=useState('')
 
   const handleWishListed = () => {
     setShowWishListed(!showWishListed);
@@ -90,6 +94,7 @@ export default function ProductDetail(props) {
   const handleProductView = async () => {
     try {
       var res = await getProductView(props.route.params.productId);
+      alert(props.route.params.productId)
       console.log('res data>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>', res.data);
       setBrandName(res.data.brand_name);
       setCategoryName(res.data.category_name);
@@ -103,6 +108,8 @@ export default function ProductDetail(props) {
       setTotalReview(res.data.total_reviews_avg);
       setCustomerReview(res.data.customer_review);
       setSizes(Object.keys(res.data.size));
+      setSlug(res.data.slug)
+      setUnit(res.data.unit)
       setSizesRate(Object.values(res.data.size));
       setLoader(false);
     } catch (e) {
@@ -261,7 +268,7 @@ export default function ProductDetail(props) {
                      
                         <TouchableOpacity
                           activeOpacity={0.5}
-                          onPress={() => Linking.openURL("whatsapp://send?text=Hii&phone=918446361881")}
+                          onPress={() => Linking.openURL(`whatsapp://send?text=${slug}&phone=918446361881`)}
                           style={{padding: 7, borderRadius: 20}}>
                           <Image
                         source={require('../../assets/images/whatsapp.png')}
@@ -299,7 +306,7 @@ export default function ProductDetail(props) {
                         style={{...styles.RateTextBig1, color: Colors.green1}}>
                         {'  '}
                         <FAIcon name="rupee" size={15} />
-                        {productDetailData.purchase_price}{' '}
+                        {productDetailData.purchase_price}/{unit} {' '}
                       </Text>
                       <Text
                         style={{
@@ -591,83 +598,12 @@ export default function ProductDetail(props) {
                   />
                 </View>
               )}
-
-              <RBSheet
-                ref={refRBSheet}
-                animationType={'slide'}
-                closeOnDragDown={true}
-                closeOnPressMask={true}
-                height={250}
-                customStyles={{
-                  container: {
-                    borderTopRightRadius: 20,
-                    borderTopLeftRadius: 20,
-                    borderBottomLeftRadius: 0,
-                    backgroundColor: themecolor.RB2,
-                  },
-                  draggableIcon: {
-                    display: 'none',
-                  },
-                }}>
-                <View style={{...styles.view14}}>
-                  <TouchableOpacity
-                    activeOpacity={1}
-                    onPress={() => refRBSheet.current.close()}>
-                    <EN name="cross" color={themecolor.TXTWHITE} size={28} />
-                  </TouchableOpacity>
-                  <View>
-                    <Text
-                      style={{...styles.RBText, color: themecolor.TXTWHITE}}>
-                      Buy Now
-                    </Text>
-                  </View>
-                  <View>
-                    <View>
-                      <TouchableOpacity
-                        activeOpacity={1}
-                        onPress={() => OnClick()}>
-                        <Text
-                          style={{
-                            ...styles.RBText,
-                            ...styles.clrtheme,
-                            color: themecolor.TXTWHITE,
-                          }}>
-                          Done
-                        </Text>
-                      </TouchableOpacity>
-                    </View>
-                  </View>
-                </View>
-                <View style={{...styles.Borderline}} />
-                <View style={styles.view16}>
-                  <View>
-                    <Text
-                      style={{
-                        ...styles.CardText,
-                        ...styles.align3,
-                        ...styles.left1,
-                        color: themecolor.TXTWHITE,
-                        marginBottom: 10,
-                      }}>
-                      Sizes
-                    </Text>
-                  </View>
-
-                  <View
-                    style={{
-                      ...styles.container,
-                    }}>
-                    <View style={{width: width * 0.9, flexDirection: 'column'}}>
-                      <ProductDetailSizeFlatList
-                        sizes={sizes}
-                        touch={true}
-                        sizesRate={sizesRate}
-                      />
-                    </View>
-                  </View>
-                  <View style={styles.marg} />
-                </View>
-              </RBSheet>
+          <RBSheetData
+            refRBSheet={refRBSheet}
+            sizes={sizes}
+            touch={true}
+            sizesRate={sizesRate}
+          />
             </View>
           </TouchableOpacity>
           <View style={styles.centeredView}>

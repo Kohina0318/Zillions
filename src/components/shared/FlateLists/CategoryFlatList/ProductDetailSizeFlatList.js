@@ -44,7 +44,7 @@ function ProductDetailSizeRateList({item, themecolor}) {
 
   return (
     <>
-          <View style={{width:width*0.15,marginBottom:5,flexDirection:'row',justifyContent:'center'}}>
+          <View style={{width:width*0.15,flexDirection:'row',justifyContent:'center'}}>
               <Text style={{
             ...styles.HeadText3,
             color:'grey',
