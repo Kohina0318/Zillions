@@ -41,10 +41,10 @@ class GetStartVideo extends React.Component {
           <View style={styles.footer}>
             <View style={styles.footerContent}>
               <View style={styles.bottomBig}>
-                <Text h1 medium style={[styles.text, styles.bottom]}>
+                <Text allowFontScaling={false} h1 medium style={[styles.text, styles.bottom]}>
                   User Experience
                 </Text>
-                <Text style={[styles.text, styles.textDescription]}>
+                <Text allowFontScaling={false} style={[styles.text, styles.textDescription]}>
                   Sign in to receive exclusive offers and Promotions
                 </Text>
               </View>

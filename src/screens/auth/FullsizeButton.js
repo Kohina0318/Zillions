@@ -36,6 +36,7 @@ export default FullsizeButton = props => {
       <TouchableOpacity onPress={props.onPress}>
         <View style={{...styles.bigButton}}>
           <Text
+           allowFontScaling={false}
             style={{
               color: '#fff',
               fontFamily: FontFamily.PopinsMedium,

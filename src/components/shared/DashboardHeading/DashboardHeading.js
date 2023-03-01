@@ -16,7 +16,7 @@ export default function DashboardHeading(props){
     return(
         <View style={{...styles.ViewInnerHeading}}>
         <View>
-          <Text style={{...styles.CardText, color: themecolor.TXTWHITE}}>
+          <Text allowFontScaling={false} style={{...styles.CardText, color: themecolor.TXTWHITE}}>
             {props.title}
           </Text>
         </View>
@@ -27,7 +27,7 @@ export default function DashboardHeading(props){
               ...styles.ViewAllButton,
               backgroundColor: themecolor.ADDTOCARTBUTTONCOLOR,
             }}>
-            <Text style={styles.ViewAllButtonIcon}>View all</Text>
+            <Text allowFontScaling={false} style={styles.ViewAllButtonIcon}>View all</Text>
           </View>
         </TouchableOpacity>
         

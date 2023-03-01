@@ -47,6 +47,7 @@ function WishListDataFlateList({item, themecolor}) {
           }}>
           <View>
             <Text
+             allowFontScaling={false}
               style={{...styles.txt, color: themecolor.TXTWHITE}}
               numberOfLines={2}>
               {item.title}
@@ -54,17 +55,18 @@ function WishListDataFlateList({item, themecolor}) {
           </View>
 
           <View style={{flexDirection: 'row', width: '100%'}}>
-            <Text style={{...styles.txt1, color: themecolor.TEXTGREEN}}>
+            <Text allowFontScaling={false} style={{...styles.txt1, color: themecolor.TEXTGREEN}}>
               <FAIcon name="rupee" size={12} />{item.purchase_price}
               {'  '}
               <Text
+               allowFontScaling={false}
                 style={{
                   ...styles.txtLine,
                   color: themecolor.TXTGREY,
                 }}>
                 <FAIcon name="rupee" size={12} />{item.sale_price}
               </Text>
-              <Text style={{...styles.txt1, color: themecolor.TEXTRED}}>
+              <Text allowFontScaling={false} style={{...styles.txt1, color: themecolor.TEXTRED}}>
                 {'  ('}
                 {item.discount}%{')'}
               </Text>
@@ -80,7 +82,7 @@ function WishListDataFlateList({item, themecolor}) {
                   ...styles.AddButton,
                   backgroundColor: themecolor.ADDTOCARTBUTTONCOLOR,
                 }}>
-               <Text style={styles.AddButtonIcon}>  <Feather
+               <Text allowFontScaling={false} style={styles.AddButtonIcon}>  <Feather
                   name="shopping-cart"
                   size={12}
                   color={"#fff"}

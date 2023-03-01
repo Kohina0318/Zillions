@@ -188,7 +188,7 @@ export default function Address(props) {
         ) : (
           <ScrollView showsVerticalScrollIndicator={false}>
             <View style={{...styles.ViewHeading}}>
-              <Text style={{...styles.headingTxt,color:themecolor.TXTGREYS}}>Default Address </Text>
+              <Text allowFontScaling={false} style={{...styles.headingTxt,color:themecolor.TXTGREYS}}>Default Address </Text>
               <ManageAddressDataList
                 data={data}
                 dafault={true}
@@ -198,7 +198,7 @@ export default function Address(props) {
             </View>
 
             <View style={{...styles.ViewHeading}}>
-              <Text style={{...styles.headingTxt,color:themecolor.TXTGREYS}}>Other Addresses </Text>
+              <Text allowFontScaling={false} style={{...styles.headingTxt,color:themecolor.TXTGREYS}}>Other Addresses </Text>
               <ManageAddressDataList
                 data={data}
                 refresh={refresh}

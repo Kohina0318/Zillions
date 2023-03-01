@@ -40,7 +40,7 @@ export const RBSheetData = props => {
             <EN name="cross" color={themecolor.TXTWHITE} size={28} />
           </TouchableOpacity>
           <View>
-            <Text style={{...styles.RBText, color: themecolor.TXTWHITE}}>
+            <Text allowFontScaling={false} style={{...styles.RBText, color: themecolor.TXTWHITE}}>
               Buy Now
             </Text>
           </View>
@@ -48,6 +48,7 @@ export const RBSheetData = props => {
             <View>
               <TouchableOpacity activeOpacity={1} onPress={() => OnClick()}>
                 <Text
+                 allowFontScaling={false}
                   style={{
                     ...styles.RBText,
                     ...styles.clrtheme,
@@ -62,6 +63,7 @@ export const RBSheetData = props => {
         <View style={{...styles.Borderline}} />
         <View style={{...styles.view16}}>
           <Text
+           allowFontScaling={false}
             style={{
               ...styles.CardText,
               ...styles.align3,
@@ -88,6 +90,7 @@ export const RBSheetData = props => {
           }}>
           <View>
             <Text
+             allowFontScaling={false}
               style={{
                 ...styles.CardText,
                 ...styles.align3,

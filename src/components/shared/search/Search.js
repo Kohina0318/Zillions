@@ -24,7 +24,7 @@ export default function Search(props) {
         backgroundColor: themecolor.BOXBORDERCOLOR,
         borderColor: themecolor.BOXBORDERCOLOR1,
       }}>
-      <Text style={{...styles.l15}}>
+      <Text allowFontScaling={false} style={{...styles.l15}}>
         <FIcon name="search" size={12} color={themecolor.AV2} />
       </Text>
       <TextInput

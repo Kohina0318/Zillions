@@ -47,7 +47,7 @@ export default function OrderDetails(props) {
       />
 
       <View style={{...styles.container}}>
-        <Text>OrderDetails</Text>
+        <Text allowFontScaling={false}>OrderDetails</Text>
 
         <View style={{marginVertical: 20}} />
       </View>

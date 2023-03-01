@@ -99,6 +99,7 @@ export default function Profile(props) {
                         ...ProfileStyle.welcomView,
                       }}>
                       <Text
+                       allowFontScaling={false}
                         style={{
                           ...ProfileStyle.WellText,
                           color: themecolor.BACKICON,
@@ -128,6 +129,7 @@ export default function Profile(props) {
                   }}>
                   <View style={ProfileStyle.signInView}>
                     <Text
+                     allowFontScaling={false}
                       style={{
                         ...ProfileStyle.signInText,
                         color: themecolor.TXTWHITE,
@@ -147,6 +149,7 @@ export default function Profile(props) {
                           borderColor: themecolor.ADDTOCARTBUTTONCOLOR,
                         }}>
                         <Text
+                         allowFontScaling={false}
                           style={{
                             ...ProfileStyle.buttonText1,
                             color: themecolor.ADDTOCARTBUTTONCOLOR,
@@ -165,6 +168,7 @@ export default function Profile(props) {
                           backgroundColor: themecolor.ADDTOCARTBUTTONCOLOR,
                         }}>
                         <Text
+                         allowFontScaling={false}
                           style={{
                             ...ProfileStyle.buttonText1,
                             color: '#fff',
@@ -200,6 +204,7 @@ export default function Profile(props) {
                     borderColor: themecolor.BOXBORDERCOLOR1,
                   }}>
                   <Text
+                   allowFontScaling={false}
                     style={{
                       ...ProfileStyle.buttonText1,
                       color:'#FFF',
@@ -213,6 +218,7 @@ export default function Profile(props) {
 
               <View style={{...ProfileStyle.appVerView}}>
                 <Text
+                 allowFontScaling={false}
                   style={{
                     ...ProfileStyle.appverText,
                     color: themecolor.HEADERTHEMECOLOR,

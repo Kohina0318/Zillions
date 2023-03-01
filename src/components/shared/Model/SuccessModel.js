@@ -32,7 +32,7 @@ export default SuccessModel = props => {
                 }}
                 source={require('../../../assets/images/successEmailSend.gif')}
               />
-              <Text style={{...styles.submittext, color: themecolor.TXTWHITE}}>
+              <Text allowFontScaling={false} style={{...styles.submittext, color: themecolor.TXTWHITE}}>
                 {props.title}
               </Text>
             </View>
@@ -47,7 +47,7 @@ export default SuccessModel = props => {
                     ...styles.ModelDoneButton,
                     backgroundColor: themecolor.ADDTOCARTBUTTONCOLOR,
                   }}>
-                  <Text style={{...styles.textStyleDone}}>Done</Text>
+                  <Text allowFontScaling={false} style={{...styles.textStyleDone}}>Done</Text>
                 </View>
               </TouchableOpacity>
             </View>

@@ -72,6 +72,7 @@ export default function DrawerContent(props) {
             style={MainNavigatorstyle.viewstyle1}>
             <AD name="home" size={20} color={themecolor.BACKICON} />
             <Text
+             allowFontScaling={false}
               style={{
                 ...MainNavigatorstyle.labelstylecss,
                 color: themecolor.TXTWHITE,
@@ -85,6 +86,7 @@ export default function DrawerContent(props) {
             style={MainNavigatorstyle.viewstyle1}>
             <AD name="appstore-o" size={18} color={themecolor.BACKICON} />
             <Text
+             allowFontScaling={false}
               style={{
                 ...MainNavigatorstyle.labelstylecss,
                 color: themecolor.TXTWHITE,
@@ -98,6 +100,7 @@ export default function DrawerContent(props) {
             style={MainNavigatorstyle.viewstyle1}>
             <MCI name="tag-outline" size={18} color={themecolor.BACKICON} />
             <Text
+             allowFontScaling={false}
               style={{
                 ...MainNavigatorstyle.labelstylecss,
                 color: themecolor.TXTWHITE,
@@ -111,6 +114,7 @@ export default function DrawerContent(props) {
             style={MainNavigatorstyle.viewstyle1}>
             <FA name="user-o" size={18} color={themecolor.BACKICON} />
             <Text
+             allowFontScaling={false}
               style={{
                 ...MainNavigatorstyle.labelstylecss,
                 color: themecolor.TXTWHITE,
@@ -125,6 +129,7 @@ export default function DrawerContent(props) {
               style={MainNavigatorstyle.viewstyle1}>
               <AD name="logout" size={18} color={themecolor.BACKICON} />
               <Text
+               allowFontScaling={false}
                 style={{
                   ...MainNavigatorstyle.labelstylecss,
                   color: themecolor.TXTWHITE,
@@ -150,6 +155,7 @@ export default function DrawerContent(props) {
           onPress={() => Linking.openURL('https://www.zillionsbuyer.com/blog/')}
           style={MainNavigatorstyle.viewstyle}>
           <Text
+           allowFontScaling={false}
             style={{
               ...MainNavigatorstyle.labelstylecss,
               color: themecolor.BACKICON,
@@ -164,6 +170,7 @@ export default function DrawerContent(props) {
           }
           style={MainNavigatorstyle.viewstyle}>
           <Text
+           allowFontScaling={false}
             style={{
               ...MainNavigatorstyle.labelstylecss,
               color: themecolor.BACKICON,
@@ -178,6 +185,7 @@ export default function DrawerContent(props) {
           }
           style={MainNavigatorstyle.viewstyle}>
           <Text
+           allowFontScaling={false}
             style={{
               ...MainNavigatorstyle.labelstylecss,
               color: themecolor.BACKICON,
@@ -194,6 +202,7 @@ export default function DrawerContent(props) {
           }
           style={MainNavigatorstyle.viewstyle}>
           <Text
+           allowFontScaling={false}
             style={{
               ...MainNavigatorstyle.labelstylecss,
               color: themecolor.BACKICON,
@@ -210,6 +219,7 @@ export default function DrawerContent(props) {
           }
           style={MainNavigatorstyle.viewstyle}>
           <Text
+           allowFontScaling={false}
             style={{
               ...MainNavigatorstyle.labelstylecss,
               color: themecolor.BACKICON,
@@ -226,6 +236,7 @@ export default function DrawerContent(props) {
           }
           style={MainNavigatorstyle.viewstyle}>
           <Text
+           allowFontScaling={false}
             style={{
               ...MainNavigatorstyle.labelstylecss,
               color: themecolor.BACKICON,
@@ -238,6 +249,7 @@ export default function DrawerContent(props) {
           onPress={() => Linking.openURL('https://www.zillionsbuyer.com/#')}
           style={MainNavigatorstyle.viewstyle}>
           <Text
+           allowFontScaling={false}
             style={{
               ...MainNavigatorstyle.labelstylecss,
               color: themecolor.BACKICON,
@@ -257,7 +269,7 @@ export default function DrawerContent(props) {
             }}
           />
           <View style={{marginVertical: 3}} />
-          <Text style={{...MainNavigatorstyle.view2txt}}>App Version 1.0</Text>
+          <Text allowFontScaling={false} style={{...MainNavigatorstyle.view2txt}}>App Version 1.0</Text>
           <View style={{marginVertical: 3}} />
         </View>
       </View>
