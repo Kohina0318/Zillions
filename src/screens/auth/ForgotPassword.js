@@ -71,8 +71,7 @@ export default function ForgotPassword(props) {
         formdata.append('email',email)
         
         const res = await postforgotPassword(formdata);
-        console.log('Data......forgot api ....line 42..>>>', res);
-
+       
         if (res.status == true) {
           setShowmodal(!showmodal)
         } 

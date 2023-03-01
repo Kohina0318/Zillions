@@ -28,7 +28,7 @@ function SubCategoryDataFlateList({item, themecolor}) {
           backgroundColor: themecolor.BOXBORDERCOLOR,
           borderColor: themecolor.BOXBORDERCOLOR1,
         }}
-        onPress={() => navigation.navigate('Products',{subCategoryId:item.sub_category_id,subCategoryName:item.sub_category_name})}
+        onPress={() => navigation.navigate('Products',{Id:item.sub_category_id,Name:item.sub_category_name,speciality:"sub_category"})}
         >
         <View style={{...CategoryStyle.innerImage}}>
           <Image

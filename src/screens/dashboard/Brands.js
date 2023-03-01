@@ -46,12 +46,17 @@ export default function Brands(props) {
     }
   };
 
-  useFocusEffect(
-    React.useCallback(() => {
-      setLoader(true);
-      handleBrands();
-    }, [props]),
-  );
+  // useFocusEffect(
+  //   React.useCallback(() => {
+  //     // setLoader(true);
+  //     handleBrands();
+  //   }, [props]),
+  // );
+
+  useEffect(()=>{
+    handleBrands();
+  },[])
+
 
   return (
     <View style={{...styles.bg, backgroundColor: themecolor.THEMECOLOR}}>

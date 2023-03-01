@@ -19,6 +19,7 @@ import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import AsyncStorage from '@react-native-community/async-storage';
 import {useFocusEffect, useNavigation} from '@react-navigation/native';
 import LoadingFullScreen from '../../components/shared/Loader/LoadingFullScreen';
+import { getProfileInfo } from '../../repository/ProfileRepository/ProfileRepo';
 
 const {width, height} = Dimensions.get('screen');
 
@@ -34,13 +35,22 @@ export default function Profile(props) {
   const handleUserData= async () => {
     try {
       var UserData = await AsyncStorage.getItem('@UserData');
-      var data = JSON.parse(UserData);
-      if (data == null || data == '' || data == undefined) {
+      var data1 = JSON.parse(UserData);
+      if (data1 == null || data1 == '' || data1 == undefined) {
         setUserData([])
         setLoader(false);
       } else {
-        setUserData(data);
-        setLoader(false);
+        try {
+          var res = await getProfileInfo();
+          if (res.status===true) {
+            setUserData(res.data);
+            setLoader(false);
+           } else {
+            setLoader(false);
+          }
+        } catch (e) {
+          setLoader(false);
+        }
       }
     } catch (e) {
       setLoader(false);
@@ -50,7 +60,7 @@ export default function Profile(props) {
   useFocusEffect(
     React.useCallback(() => {
       handleUserData();
-    }, [refresh,props]),
+    }, [refresh]),
   );
 
 
@@ -104,7 +114,7 @@ export default function Profile(props) {
                           ...ProfileStyle.WellText,
                           color: themecolor.BACKICON,
                         }}>
-                        Welcome {UserData[0].username}..
+                        Welcome {UserData[0].username} {UserData[0].surname}...
                       </Text>
                     </View>
                   </View>

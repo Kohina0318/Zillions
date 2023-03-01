@@ -159,18 +159,28 @@ export default function Dashboard(props) {
     }
   };
 
-  useFocusEffect(
-    React.useCallback(() => {
-      setLoader(true);
-      handleCategories();
-      handleCarousel();
-      handleBrands();
-      handleLatestProducts();
-      handleBestSelling();
-      handleRecentlyViewed();
-      handleMostViewed();
-    }, [props]),
-  );
+  // useFocusEffect(
+  //   React.useCallback(() => {
+  //     handleCategories();
+  //     handleCarousel();
+  //     handleBrands();
+  //     handleLatestProducts();
+  //     handleBestSelling();
+  //     handleRecentlyViewed();
+  //     handleMostViewed();
+  //   }, [props]),
+  // );
+
+  useEffect(()=>{
+    handleCategories();
+    handleCarousel();
+    handleBrands();
+    handleLatestProducts();
+    handleBestSelling();
+    handleRecentlyViewed();
+    handleMostViewed();
+  },[])
+
 
   return (
     <View style={{...styles.bg, backgroundColor: themecolor.THEMECOLOR}}>

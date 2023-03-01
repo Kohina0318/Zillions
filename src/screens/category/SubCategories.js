@@ -76,14 +76,15 @@ export default function SubCategories(props) {
           ...CategoryStyle.container,
         }}>
         {data.length > 0 ? (
+          <>
           <SubCategoryDataList data={data} />
+          <View style={{marginVertical: 30}} /></>
         ) : (
           <View
             style={{alignItems: 'center', flex: 1, justifyContent: 'center'}}>
             <Text  allowFontScaling={false}>No data found!</Text>
           </View>
         )}
-        <View style={{marginVertical: 20}} />
       </View>
       )}
     </View>
