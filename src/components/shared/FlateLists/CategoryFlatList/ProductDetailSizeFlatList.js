@@ -12,45 +12,34 @@ function ProductDetailSizeList({item, themecolor, touch}) {
 
   return (
     <>
-      <TouchableOpacity activeOpacity={0.8} disabled={touch}>
-        <View style={{width: width * 0.15, margin: 5, flexDirection: 'column'}}>
-          <View style={{width: width * 0.15, flexDirection: 'row'}}>
-            <Text
-              style={{
-                ...styles.HeadText2,
-                color: themecolor.TXTWHITE,
-                backgroundColor: themecolor.LIGHTGREY,
-              }}>
-              {' '}
-              {item}
-            </Text>
+      <TouchableOpacity
+        activeOpacity={0.8}
+        disabled={touch}
+        >
+     <View style={{width:width*0.15,margin:5,flexDirection:'column'}}>
+          <View style={{width:width*0.15,flexDirection:'row'}}>
+              <Text allowFontScaling={false} style={{
+            ...styles.HeadText2,
+            color: themecolor.TXTWHITE,
+            backgroundColor:themecolor.LIGHTGREY
+          }}> {item.size}
+          </Text>
+          
           </View>
-        </View>
+          <View style={{width:width*0.15,flexDirection:'row',justifyContent:'center'}}>
+              <Text allowFontScaling={false} style={{
+            ...styles.HeadText3,
+            color:'grey',
+          }}>
+          &#8377;{item.amount}
+          </Text>
+         </View>
+         </View>
       </TouchableOpacity>
     </>
   );
 }
 
-function ProductDetailSizeRateList({item, themecolor}) {
-  return (
-    <>
-      <View
-        style={{
-          width: width * 0.15,
-          flexDirection: 'row',
-          justifyContent: 'center',
-        }}>
-        <Text
-          style={{
-            ...styles.HeadText3,
-            color: 'grey',
-          }}>
-          &#8377;{item}
-        </Text>
-      </View>
-    </>
-  );
-}
 
 export function ProductDetailSizeFlatList(props) {
   const mode = useSelector(state => state.mode);
@@ -62,21 +51,6 @@ export function ProductDetailSizeFlatList(props) {
         data={props.sizes}
         renderItem={({item}) => (
           <ProductDetailSizeList item={item} themecolor={themecolor} />
-        )}
-        horizontal={true}
-        showsHorizontalScrollIndicator={false}
-        showsVerticalScrollIndicator={false}
-        scrollEnabled={true}
-      />
-
-      <FlatList
-        data={props.sizesRate}
-        renderItem={({item}) => (
-          <ProductDetailSizeRateList
-            item={item}
-            touch={props.touch}
-            themecolor={themecolor}
-          />
         )}
         horizontal={true}
         showsHorizontalScrollIndicator={false}

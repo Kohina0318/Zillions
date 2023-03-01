@@ -46,14 +46,18 @@ export default function Brands(props) {
     }
   };
 
-  useFocusEffect(
-    React.useCallback(() => {
-      // setLoader(true);
-      handleBrands();
-    }, [props]),
-  );
+  // useFocusEffect(
+  //   React.useCallback(() => {
+  //     // setLoader(true);
+  //     handleBrands();
+  //   }, [props]),
+  // );
 
- 
+  useEffect(()=>{
+    handleBrands();
+  },[])
+
+
   return (
     <View style={{...styles.bg, backgroundColor: themecolor.THEMECOLOR}}>
       
@@ -84,7 +88,7 @@ export default function Brands(props) {
                   flex: 1,
                   justifyContent: 'center',
                 }}>
-                <Text>No data found!</Text>
+                <Text  allowFontScaling={false}>No data found!</Text>
               </View>
             )}
             <View style={{marginVertical: 45}} />

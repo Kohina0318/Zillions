@@ -43,7 +43,7 @@ export default RatingModel = props => {
         <View style={{...styles.modalView, backgroundColor: themecolor.RB2}}>
           <View style={styles.ModalViewWidth}>
             <View style={styles.ModelVideoCenter}>
-              <Text style={{...styles.submittext, color: themecolor.TXTWHITE}}>
+              <Text allowFontScaling={false} style={{...styles.submittext, color: themecolor.TXTWHITE}}>
                 {props.title}
               </Text>
             </View>
@@ -71,7 +71,7 @@ export default RatingModel = props => {
                     ...styles.ModelDoneButton,
                     backgroundColor: themecolor.ADDTOCARTBUTTONCOLOR,
                   }}>
-                  <Text style={{...styles.textStyleDone}}>Close</Text>
+                  <Text allowFontScaling={false} style={{...styles.textStyleDone}}>Close</Text>
                 </View>
               </TouchableOpacity>
             </View>

@@ -46,8 +46,10 @@ export default function WishList(props) {
   useFocusEffect(
     React.useCallback(() => {
       handleWishlist();
-    }, [refresh,props]),
+    }, [refresh]),
   );
+
+  
 
   return (
     <View style={{...styles.bg, backgroundColor: themecolor.THEMECOLOR}}>
@@ -69,7 +71,7 @@ export default function WishList(props) {
                   flex: 1,
                   justifyContent: 'center',
                 }}>
-                <Text>No data found!</Text>
+                <Text allowFontScaling={false}>No data found!</Text>
               </View>
             )}
             <View style={{marginVertical: 20}} />

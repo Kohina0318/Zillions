@@ -165,7 +165,7 @@ export default function SupportTicket(props) {
           :
           <View
           style={{alignItems: 'center', flex: 1, justifyContent: 'center'}}>
-          <Text>No Ticket found!</Text>
+          <Text  allowFontScaling={false}>No Ticket found!</Text>
         </View>
         )}
       </View>

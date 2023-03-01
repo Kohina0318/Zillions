@@ -29,6 +29,7 @@ export default function CreateTicketModel(props) {
             <View style={{...styles.modelInner}}>
               <View style={{...styles.modelHeader}}>
                 <Text
+                 allowFontScaling={false}
                   style={{
                     ...styles.modelHeading,
                     color: themecolor.TXTWHITE,
@@ -46,6 +47,7 @@ export default function CreateTicketModel(props) {
                   backgroundColor: themecolor.BOXBORDERCOLOR,
                 }}>
                 <TextInput
+                 allowFontScaling={false}
                   placeholder={'Subect*'}
                   placeholderTextColor={themecolor.TXTGREYS}
                   style={{
@@ -65,6 +67,7 @@ export default function CreateTicketModel(props) {
                   backgroundColor: themecolor.BOXBORDERCOLOR,
                 }}>
                 <TextInput
+                 allowFontScaling={false}
                   placeholder={'Message*'}
                   placeholderTextColor={themecolor.TXTGREYS}
                   style={{

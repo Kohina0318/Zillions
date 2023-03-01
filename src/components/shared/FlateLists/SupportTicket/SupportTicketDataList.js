@@ -31,7 +31,7 @@ function SupportTicketDataFlateList({item, themecolor}) {
         borderColor: themecolor.BOXBORDERCOLOR1,
       }}>
       <View style={{...styles.innerView}}>
-        <Text style={{...styles.txt, color: themecolor.BACKICON}}>
+        <Text allowFontScaling={false} style={{...styles.txt, color: themecolor.BACKICON}}>
           Ticket No : {item.ticket_id}
         </Text>
         {item.view_status == 'ok' ? (
@@ -40,27 +40,27 @@ function SupportTicketDataFlateList({item, themecolor}) {
               ...styles.buttonView,
               backgroundColor: themecolor.ADDTOCARTBUTTONCOLOR,
             }}>
-            <Text style={{...styles.buttontxt}}>OPEN</Text>
+            <Text allowFontScaling={false} style={{...styles.buttontxt}}>OPEN</Text>
           </View>
         ) : (
           <View
             style={{...styles.buttonView, backgroundColor: themecolor.TEXTRED}}>
-            <Text style={{...styles.buttontxt}}>CLOSE</Text>
+            <Text allowFontScaling={false} style={{...styles.buttontxt}}>CLOSE</Text>
           </View>
         )}
       </View>
 
       <View style={{width: width * 0.8, marginTop: 5}}>
-        <Text style={{...styles.txt2, color: themecolor.TXTWHITE}}>
+        <Text allowFontScaling={false} style={{...styles.txt2, color: themecolor.TXTWHITE}}>
           {item.subject}
         </Text>
       </View>
 
       <View style={{...styles.dateTimeView}}>
         <View style={{}}>
-          <Text style={{...styles.txt1, color: themecolor.TXTWHITE}}>
+          <Text allowFontScaling={false} style={{...styles.txt1, color: themecolor.TXTWHITE}}>
             Date :
-            <Text style={{...styles.txt1, color: themecolor.TXTWHITE}}>
+            <Text allowFontScaling={false} style={{...styles.txt1, color: themecolor.TXTWHITE}}>
               {' '}
               {dateTime[0]}
             </Text>
@@ -68,9 +68,9 @@ function SupportTicketDataFlateList({item, themecolor}) {
         </View>
 
         <View style={{}}>
-          <Text style={{...styles.txt1, color: themecolor.TXTWHITE}}>
+          <Text allowFontScaling={false} style={{...styles.txt1, color: themecolor.TXTWHITE}}>
             Time :
-            <Text style={{...styles.txt1, color: themecolor.TXTWHITE}}>
+            <Text allowFontScaling={false} style={{...styles.txt1, color: themecolor.TXTWHITE}}>
               {' '}
               {dateTime[1]}
             </Text>

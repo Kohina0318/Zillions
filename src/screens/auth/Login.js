@@ -84,8 +84,7 @@ export default function Login(props) {
         formdata.append('password',password)
 
         const res = await postLogin(formdata);
-        console.log('Data......login api ....line 42..>>>', res);
-
+        
         if (res.status == true) {
           await AsyncStorage.setItem('@UserData', JSON.stringify(res.data));
           setShowmodal(!showmodal)
@@ -140,6 +139,7 @@ export default function Login(props) {
               <Icon name="email" style={{marginLeft:15}} size={16} color={themecolor.BACKICON} />
               <View style={{width:width*0.75}}>
                 <TextInput
+                 allowFontScaling={false}
                   value={email}
                   placeholderTextColor={themecolor.TXTGREYS}
                   placeholder="Email Address*"
@@ -166,6 +166,7 @@ export default function Login(props) {
               <Icon name="vpn-key" style={{marginLeft:15}} size={18} color={themecolor.BACKICON} />
               <View style={{width:width*0.72,}}>
                 <TextInput
+                 allowFontScaling={false}
                   value={password}
                   placeholderTextColor={themecolor.TXTGREYS}
                   placeholder="Password*"
@@ -201,6 +202,7 @@ export default function Login(props) {
             <TouchableOpacity activeOpacity={0.5} onPress={()=>navigation.navigate('ForgotPassword')}>
               <View style={RegisterLoginStyles.forgot}>
                 <Text
+                 allowFontScaling={false}
                   style={{
                     ...RegisterLoginStyles.forgotTxt,
                     color: themecolor.BACKICON,
@@ -231,7 +233,7 @@ export default function Login(props) {
                 justifyContent: 'center',
                 alignItems: 'center',
               }}>
-              <Text style={{color: themecolor.TXTGREY, fontSize: 11}}>
+              <Text allowFontScaling={false} style={{color: themecolor.TXTGREY, fontSize: 11}}>
                 {' '}
                 OR{' '}
               </Text>
@@ -260,6 +262,7 @@ export default function Login(props) {
               justifyContent: 'center',
             }}>
             <Text
+             allowFontScaling={false}
               style={{
                 color: themecolor.BACKICON,
                 fontSize: 12,
@@ -278,6 +281,7 @@ export default function Login(props) {
                 borderColor: themecolor.BOXBORDERCOLOR2,
               }}>
               <Text
+               allowFontScaling={false}
                 style={{
                   fontSize: 13,
                   fontWeight: 'bold',

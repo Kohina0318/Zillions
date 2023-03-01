@@ -159,17 +159,28 @@ export default function Dashboard(props) {
     }
   };
 
-  useFocusEffect(
-    React.useCallback(() => {
-      handleCategories();
-      handleCarousel();
-      handleBrands();
-      handleLatestProducts();
-      handleBestSelling();
-      handleRecentlyViewed();
-      handleMostViewed();
-    }, [props]),
-  );
+  // useFocusEffect(
+  //   React.useCallback(() => {
+  //     handleCategories();
+  //     handleCarousel();
+  //     handleBrands();
+  //     handleLatestProducts();
+  //     handleBestSelling();
+  //     handleRecentlyViewed();
+  //     handleMostViewed();
+  //   }, [props]),
+  // );
+
+  useEffect(()=>{
+    handleCategories();
+    handleCarousel();
+    handleBrands();
+    handleLatestProducts();
+    handleBestSelling();
+    handleRecentlyViewed();
+    handleMostViewed();
+  },[])
+
 
   return (
     <View style={{...styles.bg, backgroundColor: themecolor.THEMECOLOR}}>
@@ -204,7 +215,7 @@ export default function Dashboard(props) {
               <View
                 style={{
                   ...styles.container,
-                  backgroundColor: themecolor.LOGINTHEMECOLOR1,
+                  backgroundColor: themecolor.BOXBORDERCOLOR,
                 }}>
                 <CarouselFile data={carouselData} />
               </View>

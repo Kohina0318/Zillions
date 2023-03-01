@@ -38,7 +38,7 @@ export default function LatestFeaturedProducts(props) {
   
   const handleLatestProducts = async () => {
     try {
-      var res = await getProductList('latest','20');
+      var res = await getProductList('featured','20');
       setLatestProductsData(res.data);
       setLoader(false);
     } catch (e) {
@@ -75,7 +75,7 @@ export default function LatestFeaturedProducts(props) {
         ) : (
           <View
             style={{alignItems: 'center', flex: 1, justifyContent: 'center'}}>
-            <Text>No data found!</Text>
+            <Text allowFontScaling={false}>No data found!</Text>
           </View>
         )}
         <View style={{marginVertical: 40}} />

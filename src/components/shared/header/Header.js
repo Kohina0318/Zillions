@@ -64,8 +64,8 @@ export default function Header(props) {
               />
             ) : (
               <Text
-                style={{...styles.toolbarTitle, color: themecolor.TXTWHITE,}}
-                // allowFontScaling={false}
+               allowFontScaling={false}
+                style={{...styles.toolbarTitle, color: themecolor.TXTWHITE}}
                 numberOfLines={1}>
                 {props.title}
               </Text>

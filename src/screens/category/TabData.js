@@ -113,6 +113,7 @@ export const TabData = props => {
               }}>
               <View>
                 <Text
+                 allowFontScaling={false}
                   style={{
                     color: themecolor.TXTWHITE,
                     fontSize: 16,
@@ -138,7 +139,7 @@ export const TabData = props => {
                       backgroundColor: themecolor.ADDTOCARTBUTTONCOLOR,
                       ...styles.Review,
                     }}>
-                    <Text style={{color: '#FFF', textAlign: 'center',fontSize: 12,}}>
+                    <Text allowFontScaling={false} style={{color: '#FFF', textAlign: 'center',fontSize: 12,}}>
                       Give Your Review
                     </Text>
                   </View>

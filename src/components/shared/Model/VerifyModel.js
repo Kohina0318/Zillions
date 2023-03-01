@@ -14,9 +14,7 @@ export default VerifyModel = props => {
 
   const handleClickOnDone = () => {
     setModalVisible(!modalVisible);
-    navigation.push(props.navigateTo, {
-      navigateFrom: props.navigateFrom,
-    });
+    navigation.navigate(props.navigateTo)
   };
 
   return (
@@ -34,7 +32,7 @@ export default VerifyModel = props => {
                 rate={2.0}
                 ignoreSilentSwitch={'obey'}
               />
-              <Text style={{...styles.submittext, color: themecolor.TXTWHITE}}>
+              <Text allowFontScaling={false} style={{...styles.submittext, color: themecolor.TXTWHITE}}>
                 {props.title}
               </Text>
             </View>
@@ -49,7 +47,7 @@ export default VerifyModel = props => {
                     ...styles.ModelDoneButton,
                     backgroundColor: themecolor.ADDTOCARTBUTTONCOLOR,
                   }}>
-                  <Text style={{...styles.textStyleDone}}>Done</Text>
+                  <Text allowFontScaling={false} style={{...styles.textStyleDone}}>Done</Text>
                 </View>
               </TouchableOpacity>
             </View>

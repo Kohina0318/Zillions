@@ -84,7 +84,6 @@ export default function ProductDetail(props) {
   const [totalReview, setTotalReview] = useState('');
   const [sizes, setSizes] = useState([]);
   const [customerReview, setCustomerReview] = useState([]);
-  const [sizesRate, setSizesRate] = useState([]);
   const [slug,setSlug]=useState('')
   const [unit,setUnit]=useState('')
   const [featured,setFeatured]=useState('')
@@ -108,10 +107,9 @@ export default function ProductDetail(props) {
       setTotalReview(res.data.total_reviews_avg);
       setCustomerReview(res.data.customer_review);
       setFeatured(res.data.featured)
-      setSizes(Object.keys(res.data.size));
+      setSizes(res.data.size);
       setSlug(res.data.slug)
       setUnit(res.data.unit)
-      setSizesRate(Object.values(res.data.size));
       setLoader(false);
     } catch (e) {
       console.log('errrror in..handleProductView page-->', e);
@@ -223,6 +221,7 @@ export default function ProductDetail(props) {
                   <View style={{flexDirection: 'row', width: '100%'}}>
                     <View style={{width: width * 0.7, flexDirection: 'column'}}>
                       <Text
+                       allowFontScaling={false}
                         style={{
                           ...styles.HeadText1,
                           color: 'grey',
@@ -235,6 +234,7 @@ export default function ProductDetail(props) {
                         {'>>'}
                       </Text>
                       <Text
+                       allowFontScaling={false}
                         style={{
                           ...styles.HeadText,
                           color: themecolor.TXTWHITE,
@@ -315,15 +315,18 @@ export default function ProductDetail(props) {
                       ...styles.FLEXDIREC1,
                     }}>
                     <Text
+                     allowFontScaling={false}
                       style={{...styles.RateText, color: themecolor.TXTWHITE}}>
                       MRP :{' '}
                       <Text
+                       allowFontScaling={false}
                         style={{...styles.RateTextBig1, color: Colors.green1}}>
                         {'  '}
                         <FAIcon name="rupee" size={15} />
                         {productDetailData.purchase_price}/{unit} {' '}
                       </Text>
                       <Text
+                       allowFontScaling={false}
                         style={{
                           ...styles.RateTextBig,
                           color: 'grey',
@@ -333,6 +336,7 @@ export default function ProductDetail(props) {
                         {productDetailData.sale_price}
                       </Text>
                       <Text
+                       allowFontScaling={false}
                         style={{
                           ...styles.RateTextBig,
                           color: themecolor.TEXTRED,
@@ -368,6 +372,7 @@ export default function ProductDetail(props) {
                       flexDirection: 'row',
                     }}>
                     <Text
+                     allowFontScaling={false}
                       style={{
                         ...styles.HeadText,
                         color: themecolor.TXTWHITE,
@@ -375,6 +380,7 @@ export default function ProductDetail(props) {
                       Sold By :-{' '}
                     </Text>
                     <Text
+                     allowFontScaling={false}
                       style={{
                         ...styles.HeadText,
                         color: themecolor.TXTWHITE,
@@ -410,6 +416,7 @@ export default function ProductDetail(props) {
                       flexDirection: 'column',
                     }}>
                     <Text
+                     allowFontScaling={false}
                       style={{
                         ...styles.HeadText,
                         color: themecolor.TXTWHITE,
@@ -419,7 +426,6 @@ export default function ProductDetail(props) {
                     <ProductDetailSizeFlatList
                       sizes={sizes}
                       touch={true}
-                      sizesRate={sizesRate}
                     />
                   </View>
                 </View>
@@ -455,6 +461,7 @@ export default function ProductDetail(props) {
                         flexDirection: 'row',
                       }}>
                       <Text
+                       allowFontScaling={false}
                         style={{
                           ...styles.HeadText,
                           color: themecolor.TXTWHITE,
@@ -462,6 +469,7 @@ export default function ProductDetail(props) {
                         Delivery Duration :-{' '}
                       </Text>
                       <Text
+                       allowFontScaling={false}
                         style={{
                           ...styles.HeadText,
                           color: themecolor.TXTWHITE,
@@ -479,6 +487,7 @@ export default function ProductDetail(props) {
                         flexDirection: 'row',
                       }}>
                       <Text
+                       allowFontScaling={false}
                         style={{
                           ...styles.HeadText,
                           color: themecolor.TXTWHITE,
@@ -540,6 +549,7 @@ export default function ProductDetail(props) {
                     width: width * 0.94,
                   }}>
                   <Text
+                   allowFontScaling={false}
                     style={{
                       ...styles.otherProductHeading,
                       color: themecolor.TXTWHITE,
@@ -617,7 +627,6 @@ export default function ProductDetail(props) {
             refRBSheet={refRBSheet}
             sizes={sizes}
             touch={true}
-            sizesRate={sizesRate}
           />
             </View>
           </TouchableOpacity>

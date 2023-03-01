@@ -142,7 +142,7 @@ export default function EditProfile(props) {
         ) : (
           <ScrollView showsVerticalScrollIndicator={false}>
             <View style={{...ProfileStyle.ViewHeading}}>
-              <Text style={{...ProfileStyle.headingTxt,color:themecolor.TXTWHITE}}>
+              <Text allowFontScaling={false} style={{...ProfileStyle.headingTxt,color:themecolor.TXTWHITE}}>
                 Change Your Profile Information
               </Text>
 
@@ -156,7 +156,7 @@ export default function EditProfile(props) {
 
                 <View style={{...ProfileStyle.inputBoxHalf}}>
                   <View>
-                    <Text style={{...ProfileStyle.TextinputH,color:themecolor.TXTGREYS}}>First Name</Text>
+                    <Text allowFontScaling={false} style={{...ProfileStyle.TextinputH,color:themecolor.TXTGREYS}}>First Name</Text>
                     <View
                       style={{
                         ...ProfileStyle.TextViewHalf,
@@ -164,6 +164,7 @@ export default function EditProfile(props) {
                         backgroundColor: themecolor.BOXBORDERCOLOR,
                       }}>
                       <TextInput
+                       allowFontScaling={false}
                         value={firstName}
                         placeholder={'First Name*'}
                         placeholderTextColor={themecolor.TXTGREYS}
@@ -179,7 +180,7 @@ export default function EditProfile(props) {
                   <View style={{...ProfileStyle.Mh5}} />
 
                   <View>
-                    <Text style={{...ProfileStyle.TextinputH,color:themecolor.TXTGREYS}}>Last Name</Text>
+                    <Text allowFontScaling={false} style={{...ProfileStyle.TextinputH,color:themecolor.TXTGREYS}}>Last Name</Text>
                     <View
                       style={{
                         ...ProfileStyle.TextViewHalf,
@@ -187,6 +188,7 @@ export default function EditProfile(props) {
                         backgroundColor: themecolor.BOXBORDERCOLOR,
                       }}>
                       <TextInput
+                       allowFontScaling={false}
                         value={lastName}
                         placeholder={'Last Name*'}
                         placeholderTextColor={themecolor.TXTGREYS}
@@ -203,7 +205,7 @@ export default function EditProfile(props) {
                 <View style={{...ProfileStyle.Mv5}} />
 
                 <View>
-                  <Text style={{...ProfileStyle.TextinputH,color:themecolor.TXTGREYS}}>Email</Text>
+                  <Text allowFontScaling={false} style={{...ProfileStyle.TextinputH,color:themecolor.TXTGREYS}}>Email</Text>
                   <View
                     style={{
                       ...ProfileStyle.TextView,
@@ -211,6 +213,7 @@ export default function EditProfile(props) {
                       backgroundColor: themecolor.BOXBORDERCOLOR,
                     }}>
                     <TextInput
+                     allowFontScaling={false}
                       value={email}
                       placeholder={'Email*'}
                       placeholderTextColor={themecolor.TXTGREYS}
@@ -226,7 +229,7 @@ export default function EditProfile(props) {
                 <View style={{...ProfileStyle.Mv5}} />
 
                 <View>
-                  <Text style={{...ProfileStyle.TextinputH,color:themecolor.TXTGREYS}}>Mobile No.</Text>
+                  <Text allowFontScaling={false} style={{...ProfileStyle.TextinputH,color:themecolor.TXTGREYS}}>Mobile No.</Text>
                   <View
                     style={{
                       ...ProfileStyle.TextView,
@@ -234,6 +237,7 @@ export default function EditProfile(props) {
                       backgroundColor: themecolor.BOXBORDERCOLOR,
                     }}>
                     <TextInput
+                     allowFontScaling={false}
                       value={mobileNo}
                       placeholder={'Mobile No.*'}
                       keyboardType="numeric"
@@ -254,7 +258,7 @@ export default function EditProfile(props) {
             <View style={{...ProfileStyle.Mv5}} />
 
             <View style={{...ProfileStyle.ViewHeading}}>
-              <Text style={{...ProfileStyle.headingTxt,color:themecolor.TXTWHITE}}>Shipping info</Text>
+              <Text allowFontScaling={false} style={{...ProfileStyle.headingTxt,color:themecolor.TXTWHITE}}>Shipping info</Text>
               <View
                 style={{
                   ...ProfileStyle.editInnerView,
@@ -264,7 +268,7 @@ export default function EditProfile(props) {
                 <View style={{...ProfileStyle.Mv5}} />
 
                 <View>
-                  <Text style={{...ProfileStyle.TextinputH,color:themecolor.TXTGREYS}}>Address</Text>
+                  <Text allowFontScaling={false} style={{...ProfileStyle.TextinputH,color:themecolor.TXTGREYS}}>Address</Text>
                   <View
                     style={{
                       ...ProfileStyle.TextView,
@@ -272,6 +276,7 @@ export default function EditProfile(props) {
                       backgroundColor: themecolor.BOXBORDERCOLOR,
                     }}>
                     <TextInput
+                     allowFontScaling={false}
                       value={address}
                       placeholder={'Address*'}
                       placeholderTextColor={themecolor.TXTGREYS}
@@ -288,7 +293,7 @@ export default function EditProfile(props) {
 
                 <View style={{...ProfileStyle.inputBoxHalf}}>
                   <View>
-                    <Text style={{...ProfileStyle.TextinputH,color:themecolor.TXTGREYS}}>City</Text>
+                    <Text allowFontScaling={false} style={{...ProfileStyle.TextinputH,color:themecolor.TXTGREYS}}>City</Text>
                     <View
                       style={{
                         ...ProfileStyle.TextViewHalf,
@@ -296,6 +301,7 @@ export default function EditProfile(props) {
                         backgroundColor: themecolor.BOXBORDERCOLOR,
                       }}>
                       <TextInput
+                       allowFontScaling={false}
                         value={city}
                         placeholder={'City*'}
                         placeholderTextColor={themecolor.TXTGREYS}
@@ -311,7 +317,7 @@ export default function EditProfile(props) {
                   <View style={{...ProfileStyle.Mh5}} />
 
                   <View>
-                    <Text style={{...ProfileStyle.TextinputH,color:themecolor.TXTGREYS}}>Zip</Text>
+                    <Text allowFontScaling={false} style={{...ProfileStyle.TextinputH,color:themecolor.TXTGREYS}}>Zip</Text>
                     <View
                       style={{
                         ...ProfileStyle.TextViewHalf,
@@ -319,6 +325,7 @@ export default function EditProfile(props) {
                         backgroundColor: themecolor.BOXBORDERCOLOR,
                       }}>
                       <TextInput
+                       allowFontScaling={false}
                         value={zip}
                         placeholder={'Zip*'}
                         keyboardType="numeric"
@@ -338,7 +345,7 @@ export default function EditProfile(props) {
 
                 <View style={{...ProfileStyle.inputBoxHalf}}>
                   <View>
-                    <Text style={{...ProfileStyle.TextinputH,color:themecolor.TXTGREYS}}>State</Text>
+                    <Text allowFontScaling={false} style={{...ProfileStyle.TextinputH,color:themecolor.TXTGREYS}}>State</Text>
                     <View
                       style={{
                         ...ProfileStyle.TextViewHalf,
@@ -346,6 +353,7 @@ export default function EditProfile(props) {
                         backgroundColor: themecolor.BOXBORDERCOLOR,
                       }}>
                       <TextInput
+                       allowFontScaling={false}
                         value={state}
                         placeholder={'State*'}
                         placeholderTextColor={themecolor.TXTGREYS}
@@ -361,7 +369,7 @@ export default function EditProfile(props) {
                   <View style={{...ProfileStyle.Mh5}} />
 
                   <View>
-                    <Text style={{...ProfileStyle.TextinputH,color:themecolor.TXTGREYS}}>Country</Text>
+                    <Text allowFontScaling={false} style={{...ProfileStyle.TextinputH,color:themecolor.TXTGREYS}}>Country</Text>
                     <View
                       style={{
                         ...ProfileStyle.TextViewHalf,
@@ -369,6 +377,7 @@ export default function EditProfile(props) {
                         backgroundColor: themecolor.BOXBORDERCOLOR,
                       }}>
                       <TextInput
+                       allowFontScaling={false}
                         value={country}
                         placeholder={'Country*'}
                         placeholderTextColor={themecolor.TXTGREYS}
@@ -386,7 +395,7 @@ export default function EditProfile(props) {
 
                 <View style={{...ProfileStyle.inputBoxHalf}}>
                   <View>
-                    <Text style={{...ProfileStyle.TextinputH,color:themecolor.TXTGREYS}}>Skype</Text>
+                    <Text allowFontScaling={false} style={{...ProfileStyle.TextinputH,color:themecolor.TXTGREYS}}>Skype</Text>
                     <View
                       style={{
                         ...ProfileStyle.TextViewHalf,
@@ -394,6 +403,7 @@ export default function EditProfile(props) {
                         backgroundColor: themecolor.BOXBORDERCOLOR,
                       }}>
                       <TextInput
+                       allowFontScaling={false}
                         value={skype}
                         placeholder={'Skype*'}
                         placeholderTextColor={themecolor.TXTGREYS}
@@ -409,7 +419,7 @@ export default function EditProfile(props) {
                   <View style={{...ProfileStyle.Mh5}} />
 
                   <View>
-                    <Text style={{...ProfileStyle.TextinputH,color:themecolor.TXTGREYS}}>Facebook</Text>
+                    <Text allowFontScaling={false} style={{...ProfileStyle.TextinputH,color:themecolor.TXTGREYS}}>Facebook</Text>
                     <View
                       style={{
                         ...ProfileStyle.TextViewHalf,
@@ -417,6 +427,7 @@ export default function EditProfile(props) {
                         backgroundColor: themecolor.BOXBORDERCOLOR,
                       }}>
                       <TextInput
+                       allowFontScaling={false}
                         value={facebook}
                         placeholder={'Facebook*'}
                         placeholderTextColor={themecolor.TXTGREYS}
@@ -433,7 +444,7 @@ export default function EditProfile(props) {
                 <View style={{...ProfileStyle.Mv5}} />
 
                 <View>
-                  <Text style={{...ProfileStyle.TextinputH,color:themecolor.TXTGREYS}}>Google Plus</Text>
+                  <Text allowFontScaling={false} style={{...ProfileStyle.TextinputH,color:themecolor.TXTGREYS}}>Google Plus</Text>
                   <View
                     style={{
                       ...ProfileStyle.TextView,
@@ -441,6 +452,7 @@ export default function EditProfile(props) {
                       backgroundColor: themecolor.BOXBORDERCOLOR,
                     }}>
                     <TextInput
+                     allowFontScaling={false}
                       value={googlePlus}
                       placeholder={'Google Plus*'}
                       placeholderTextColor={themecolor.TXTGREYS}

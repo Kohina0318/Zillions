@@ -82,6 +82,7 @@ function ProductDataFlateList({item, themecolor}) {
           }}>
           <View>
             <Text
+              allowFontScaling={false}
               style={{...ProductStyle.txt, color: themecolor.TXTWHITE}}
               numberOfLines={2}>
               {item.title}
@@ -100,17 +101,18 @@ function ProductDataFlateList({item, themecolor}) {
           </View>
 
           <View style={{flexDirection: 'row', width: '100%'}}>
-            <Text style={{...ProductStyle.txt1, color: themecolor.TEXTGREEN}}>
+            <Text allowFontScaling={false} style={{...ProductStyle.txt1, color: themecolor.TEXTGREEN}}>
               <FAIcon name="rupee" size={12} />{item.purchase_price}
               {'  '}
               <Text
+               allowFontScaling={false}
                 style={{
                   ...ProductStyle.txtLine,
                   color: themecolor.TXTGREY,
                 }}>
                 <FAIcon name="rupee" size={12} />{item.sale_price}
               </Text>
-              <Text style={{...ProductStyle.txt1, color: themecolor.TEXTRED}}>
+              <Text allowFontScaling={false}  style={{...ProductStyle.txt1, color: themecolor.TEXTRED}}>
                 {'  ('}
                 {item.discount}%{')'}
               </Text>

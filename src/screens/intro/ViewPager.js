@@ -43,8 +43,8 @@ export default function ViewPager(props) {
     return (
       <View style={{...styles.slide}}>
         <ImageBackground source={data.item.image} style={styles.image}>
-          <Text style={styles.title}>{data.item.title}</Text>
-          <Text style={{...styles.text,color:Color.TXTWHITE}}>{data.item.text}</Text>
+          <Text allowFontScaling={false} style={styles.title}>{data.item.title}</Text>
+          <Text allowFontScaling={false} style={{...styles.text,color:Color.TXTWHITE}}>{data.item.text}</Text>
         </ImageBackground>
       </View>
     );
@@ -55,14 +55,14 @@ export default function ViewPager(props) {
   const renderNextButton = () => {
     return (
       <View>
-        <Text style={{...styles.next,color:Color.TXTWHITE}}>Next</Text>
+        <Text allowFontScaling={false} style={{...styles.next,color:Color.TXTWHITE}}>Next</Text>
       </View>
     );
   };
   const renderDoneButton = () => {
     return (
       <View>
-        <Text style={{...styles.done,color:Color.TXTBLACK}}>Done</Text>
+        <Text allowFontScaling={false} style={{...styles.done,color:Color.TXTBLACK}}>Done</Text>
       </View>
     );
   };
