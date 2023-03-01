@@ -250,6 +250,7 @@ NumericInputViewList:
         alignSelf: 'center',
         // marginRight: 8,
     },
+    
 });
 
 export {styles};
