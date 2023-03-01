@@ -21,7 +21,7 @@ export default function Search(props) {
     <View
       style={{
         ...styles.mainContainer,
-        backgroundColor: themecolor.BOXTHEMECOLOR,
+        backgroundColor: themecolor.BOXBORDERCOLOR,
         borderColor: themecolor.BOXBORDERCOLOR1,
       }}>
       <Text style={{...styles.l15}}>

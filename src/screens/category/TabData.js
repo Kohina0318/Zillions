@@ -68,16 +68,17 @@ export const TabData = props => {
           }}
           activeTabStyle={{
             ...styles.activeTabStyle,
-            backgroundColor:'transparent',
-            color:themecolor.ADDTOCARTBUTTONCOLOR
+            color:themecolor.BACKICON
           }}
           tabsContainerStyle={{
             // height: 35,
-          }}
+            backgroundColor: 'transparent',
+           }}
           tabTextStyle={{
             ...styles.TabNewStyle,
+            color:themecolor.TXTGREYS
           }}
-          activeTabTextStyle={{...styles.activeTabs,color:themecolor.ADDTOCARTBUTTONCOLOR, borderBottomColor: themecolor.ADDTOCARTBUTTONCOLOR,}}
+          activeTabTextStyle={{...styles.activeTabs,color:themecolor.BACKICON, borderBottomColor: themecolor.BACKICON,}}
           onTabPress={handleSingleIndexSelect}
         />
 

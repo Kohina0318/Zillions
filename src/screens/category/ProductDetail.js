@@ -183,7 +183,7 @@ export default function ProductDetail(props) {
               }}>
               <View
                 style={{
-                  backgroundColor: themecolor.BOXTHEMECOLOR,
+                  backgroundColor: themecolor.BOXBORDERCOLOR,
                   borderWidth: 0.5,
                   borderColor: themecolor.BOXBORDERCOLOR1,
                   borderRadius: 5,
@@ -329,30 +329,6 @@ export default function ProductDetail(props) {
                   </View>
 
                   <View style={{marginTop: 10}} />
-
-                  {/* <View style={{width: width * 0.3}}>
-                    {productDetailData.current_stock > 0 ? (
-                      <View
-                        style={{
-                          ...styles.ViewAllButton,
-                          backgroundColor: themecolor.TEXTGREEN,
-                        }}>
-                        <Text style={styles.ViewAllButtonIcon}>Available</Text>
-                      </View>
-                    ) : (
-                      <View
-                        style={{
-                          ...styles.ViewAllButton,
-                          backgroundColor: themecolor.TEXTRED,
-                        }}>
-                        <Text style={styles.ViewAllButtonIcon}>
-                          Out of Stock
-                        </Text>
-                      </View>
-                    )}
-                  </View> */}
-
-                  {/* <View style={{marginTop: 10}} /> */}
                 </View>
               </View>
 
@@ -364,7 +340,7 @@ export default function ProductDetail(props) {
                 }}>
                 <View
                   style={{
-                    backgroundColor: themecolor.BOXTHEMECOLOR,
+                    backgroundColor: themecolor.BOXBORDERCOLOR,
                     borderWidth: 0.5,
                     borderColor: themecolor.BOXBORDERCOLOR1,
                     borderRadius: 5,
@@ -406,7 +382,7 @@ export default function ProductDetail(props) {
                 }}>
                 <View
                   style={{
-                    backgroundColor: themecolor.BOXTHEMECOLOR,
+                    backgroundColor: themecolor.BOXBORDERCOLOR,
                     borderWidth: 0.5,
                     borderColor: themecolor.BOXBORDERCOLOR1,
                     borderRadius: 5,
@@ -442,7 +418,7 @@ export default function ProductDetail(props) {
                 }}>
                 <View
                   style={{
-                    backgroundColor: themecolor.BOXTHEMECOLOR,
+                    backgroundColor: themecolor.BOXBORDERCOLOR,
                     borderWidth: 0.5,
                     borderColor: themecolor.BOXBORDERCOLOR1,
                     borderRadius: 5,
@@ -523,7 +499,7 @@ export default function ProductDetail(props) {
                 }}>
                 <View
                   style={{
-                    backgroundColor: themecolor.BOXTHEMECOLOR,
+                    backgroundColor: themecolor.BOXBORDERCOLOR,
                     borderWidth: 0.5,
                     borderColor: themecolor.BOXBORDERCOLOR1,
                     borderRadius: 5,
