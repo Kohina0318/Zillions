@@ -8,7 +8,7 @@ import {
   useWindowDimensions,
   BackHandler,
   ScrollView,
-  Linking
+  Linking,
 } from 'react-native';
 import {useSelector} from 'react-redux';
 import {MyThemeClass} from '../../components/Theme/ThemeDarkLightColor';
@@ -38,9 +38,9 @@ import ImageZoom from 'react-native-image-pan-zoom';
 import {Modal} from 'react-native';
 import {TabData} from './TabData';
 import {ProductDetailSizeFlatList} from '../../components/shared/FlateLists/CategoryFlatList/ProductDetailSizeFlatList';
-import NumericInput from 'react-native-numeric-input'
-import { RBSheetData } from './RBSheetData';
-import { Ribbon } from './Ribbon';
+import NumericInput from 'react-native-numeric-input';
+import {RBSheetData} from './RBSheetData';
+import {Ribbon} from './Ribbon';
 
 const {width, height} = Dimensions.get('window');
 
@@ -84,9 +84,9 @@ export default function ProductDetail(props) {
   const [totalReview, setTotalReview] = useState('');
   const [sizes, setSizes] = useState([]);
   const [customerReview, setCustomerReview] = useState([]);
-  const [slug,setSlug]=useState('')
-  const [unit,setUnit]=useState('')
-  const [featured,setFeatured]=useState('')
+  const [slug, setSlug] = useState('');
+  const [unit, setUnit] = useState('');
+  const [featured, setFeatured] = useState('');
 
   const handleWishListed = () => {
     setShowWishListed(!showWishListed);
@@ -106,10 +106,10 @@ export default function ProductDetail(props) {
       setAllImages(res.data.all_image);
       setTotalReview(res.data.total_reviews_avg);
       setCustomerReview(res.data.customer_review);
-      setFeatured(res.data.featured)
+      setFeatured(res.data.featured);
       setSizes(res.data.size);
-      setSlug(res.data.slug)
-      setUnit(res.data.unit)
+      setSlug(res.data.slug);
+      setUnit(res.data.unit);
       setLoader(false);
     } catch (e) {
       console.log('errrror in..handleProductView page-->', e);
@@ -176,32 +176,25 @@ export default function ProductDetail(props) {
           <View style={{marginTop: 10}} />
 
           <ScrollView showsVerticalScrollIndicator={false}>
-
-          
             <View
               style={{
                 ...styles.container,
               }}>
-               
               <View
                 style={{
                   backgroundColor: themecolor.BOXBORDERCOLOR,
-                  borderWidth: 0.5,
                   borderColor: themecolor.BOXBORDERCOLOR1,
-                  borderRadius: 5,
-                  padding: 10,
+                  ...styles.subView1,
                 }}>
-{featured=='ok'?
-<View style={{ position: 'absolute', top: -10, right: -10 }}>
-          <Ribbon />
-        </View>
-        :
-        <></>
-}
-                  
+                {featured == 'ok' ? (
+                  <View style={{position: 'absolute', top: -10, right: -10}}>
+                    <Ribbon />
+                  </View>
+                ) : (
+                  <></>
+                )}
+
                 <View style={{width: '100%'}}>
-                
-               
                   <Carousel
                     autoplay={false}
                     index={largeImage}
@@ -209,19 +202,16 @@ export default function ProductDetail(props) {
                   >
                     {allImages.map((image, index) => renderimage(image, index))}
                   </Carousel>
-                
                 </View>
 
                 <View
                   style={{
-                    alignSelf: 'center',
-                    justifyContent: 'flex-start',
-                    padding: 10,
+                    ...styles.BRVIEW,
                   }}>
-                  <View style={{flexDirection: 'row', width: '100%'}}>
-                    <View style={{width: width * 0.7, flexDirection: 'column'}}>
+                  <View style={{...styles.BRSUBVIEW}}>
+                    <View style={{...styles.BRWID}}>
                       <Text
-                       allowFontScaling={false}
+                        allowFontScaling={false}
                         style={{
                           ...styles.HeadText1,
                           color: 'grey',
@@ -234,7 +224,7 @@ export default function ProductDetail(props) {
                         {'>>'}
                       </Text>
                       <Text
-                       allowFontScaling={false}
+                        allowFontScaling={false}
                         style={{
                           ...styles.HeadText,
                           color: themecolor.TXTWHITE,
@@ -245,9 +235,7 @@ export default function ProductDetail(props) {
 
                     <View
                       style={{
-                        width: width * 0.1,
-                        justifyContent: 'center',
-                        alignItems: 'center',
+                        ...styles.WID1,
                       }}>
                       {showWishListed ? (
                         <TouchableOpacity
@@ -276,22 +264,22 @@ export default function ProductDetail(props) {
 
                     <View
                       style={{
-                        width: width * 0.1,
-                        justifyContent: 'center',
-                        alignItems: 'center',
+                        ...styles.WID1,
                       }}>
-                     
-                        <TouchableOpacity
-                          activeOpacity={0.5}
-                          onPress={() => Linking.openURL(`whatsapp://send?text=${slug}&phone=918446361881`)}
-                          style={{padding: 7, borderRadius: 20}}>
-                          <Image
-                        source={require('../../assets/images/whatsapp.png')}
-                        resizeMode="contain"
-                        style={{width: 50, height: 25, margin: 2}}
-                      />
-                        </TouchableOpacity>
-                    
+                      <TouchableOpacity
+                        activeOpacity={0.5}
+                        onPress={() =>
+                          Linking.openURL(
+                            `whatsapp://send?text=${slug}&phone=918446361881`,
+                          )
+                        }
+                        style={{padding: 7, borderRadius: 20}}>
+                        <Image
+                          source={require('../../assets/images/whatsapp.png')}
+                          resizeMode="contain"
+                          style={{width: 50, height: 25, margin: 2}}
+                        />
+                      </TouchableOpacity>
                     </View>
                   </View>
 
@@ -315,18 +303,18 @@ export default function ProductDetail(props) {
                       ...styles.FLEXDIREC1,
                     }}>
                     <Text
-                     allowFontScaling={false}
+                      allowFontScaling={false}
                       style={{...styles.RateText, color: themecolor.TXTWHITE}}>
                       MRP :{' '}
                       <Text
-                       allowFontScaling={false}
+                        allowFontScaling={false}
                         style={{...styles.RateTextBig1, color: Colors.green1}}>
                         {'  '}
                         <FAIcon name="rupee" size={15} />
-                        {productDetailData.purchase_price}/{unit} {' '}
+                        {productDetailData.purchase_price}/{unit}{' '}
                       </Text>
                       <Text
-                       allowFontScaling={false}
+                        allowFontScaling={false}
                         style={{
                           ...styles.RateTextBig,
                           color: 'grey',
@@ -336,7 +324,7 @@ export default function ProductDetail(props) {
                         {productDetailData.sale_price}
                       </Text>
                       <Text
-                       allowFontScaling={false}
+                        allowFontScaling={false}
                         style={{
                           ...styles.RateTextBig,
                           color: themecolor.TEXTRED,
@@ -360,19 +348,15 @@ export default function ProductDetail(props) {
                 <View
                   style={{
                     backgroundColor: themecolor.BOXBORDERCOLOR,
-                    borderWidth: 0.5,
                     borderColor: themecolor.BOXBORDERCOLOR1,
-                    borderRadius: 5,
-                    padding: 10,
+                    ...styles.subView1,
                   }}>
                   <View
                     style={{
-                      width: width * 0.9,
-                      margin: 10,
-                      flexDirection: 'row',
+                      ...styles.WID9,
                     }}>
                     <Text
-                     allowFontScaling={false}
+                      allowFontScaling={false}
                       style={{
                         ...styles.HeadText,
                         color: themecolor.TXTWHITE,
@@ -380,7 +364,7 @@ export default function ProductDetail(props) {
                       Sold By :-{' '}
                     </Text>
                     <Text
-                     allowFontScaling={false}
+                      allowFontScaling={false}
                       style={{
                         ...styles.HeadText,
                         color: themecolor.TXTWHITE,
@@ -404,29 +388,22 @@ export default function ProductDetail(props) {
                 <View
                   style={{
                     backgroundColor: themecolor.BOXBORDERCOLOR,
-                    borderWidth: 0.5,
                     borderColor: themecolor.BOXBORDERCOLOR1,
-                    borderRadius: 5,
-                    padding: 10,
+                    ...styles.subView1,
                   }}>
                   <View
                     style={{
-                      width: width * 0.9,
-                      margin: 10,
-                      flexDirection: 'column',
+                      ...styles.WID,
                     }}>
                     <Text
-                     allowFontScaling={false}
+                      allowFontScaling={false}
                       style={{
                         ...styles.HeadText,
                         color: themecolor.TXTWHITE,
                       }}>
                       Sizes Available :-{' '}
                     </Text>
-                    <ProductDetailSizeFlatList
-                      sizes={sizes}
-                      touch={true}
-                    />
+                    <ProductDetailSizeFlatList sizes={sizes} touch={true} />
                   </View>
                 </View>
               </View>
@@ -440,28 +417,19 @@ export default function ProductDetail(props) {
                 <View
                   style={{
                     backgroundColor: themecolor.BOXBORDERCOLOR,
-                    borderWidth: 0.5,
                     borderColor: themecolor.BOXBORDERCOLOR1,
-                    borderRadius: 5,
-                    padding: 10,
+                    ...styles.subView1,
                   }}>
                   <View
                     style={{
-                      width: width * 0.9,
-                      margin: 10,
-                      flexDirection: 'column',
+                      ...styles.WID9,
                     }}>
                     <View
                       style={{
-                        width: width * 0.9,
-                        marginLeft: 10,
-                        marginRight: 10,
-                        marginTop: 10,
-                        marginBottom: 5,
-                        flexDirection: 'row',
+                        ...styles.DELVIEW,
                       }}>
                       <Text
-                       allowFontScaling={false}
+                        allowFontScaling={false}
                         style={{
                           ...styles.HeadText,
                           color: themecolor.TXTWHITE,
@@ -469,7 +437,7 @@ export default function ProductDetail(props) {
                         Delivery Duration :-{' '}
                       </Text>
                       <Text
-                       allowFontScaling={false}
+                        allowFontScaling={false}
                         style={{
                           ...styles.HeadText,
                           color: themecolor.TXTWHITE,
@@ -479,15 +447,10 @@ export default function ProductDetail(props) {
                     </View>
                     <View
                       style={{
-                        width: width * 0.9,
-                        marginLeft: 10,
-                        marginRight: 10,
-                        marginTop: 8,
-                        marginBottom: 5,
-                        flexDirection: 'row',
+                        ...styles.DELVIEW,
                       }}>
                       <Text
-                       allowFontScaling={false}
+                        allowFontScaling={false}
                         style={{
                           ...styles.HeadText,
                           color: themecolor.TXTWHITE,
@@ -524,17 +487,19 @@ export default function ProductDetail(props) {
                 <View
                   style={{
                     backgroundColor: themecolor.BOXBORDERCOLOR,
-                    borderWidth: 0.5,
                     borderColor: themecolor.BOXBORDERCOLOR1,
-                    borderRadius: 5,
-                    padding: 5,
+                    ...styles.subView1,
                   }}>
                   <View
                     style={{
-                      alignItems: 'center',
-                      marginTop:5
+                      ...styles.Tabsubview,
                     }}>
-                    <TabData totalReview={totalReview} customerReview={customerReview} description={description} shipment={shipment} /> 
+                    <TabData
+                      totalReview={totalReview}
+                      customerReview={customerReview}
+                      description={description}
+                      shipment={shipment}
+                    />
                   </View>
                 </View>
               </View>
@@ -549,7 +514,7 @@ export default function ProductDetail(props) {
                     width: width * 0.94,
                   }}>
                   <Text
-                   allowFontScaling={false}
+                    allowFontScaling={false}
                     style={{
                       ...styles.otherProductHeading,
                       color: themecolor.TXTWHITE,
@@ -623,11 +588,7 @@ export default function ProductDetail(props) {
                   />
                 </View>
               )}
-          <RBSheetData
-            refRBSheet={refRBSheet}
-            sizes={sizes}
-            touch={true}
-          />
+              <RBSheetData refRBSheet={refRBSheet} sizes={sizes} touch={true} />
             </View>
           </TouchableOpacity>
           <View style={styles.centeredView}>

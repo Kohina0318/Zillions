@@ -10,7 +10,7 @@ const styles = StyleSheet.create({
     // justifyContent: 'center',
     alignSelf: 'center',
     width: width * 0.94,
-    marginTop:5
+    marginTop: 10,
   },
   container1: {
     justifyContent: 'center',
@@ -28,21 +28,13 @@ const styles = StyleSheet.create({
     fontFamily: FontFamily.PopinsMedium,
   },
   HeadText2: {
-    fontSize: FontSize.labelText,
-    color: Colors.black,
+    fontSize: FontSize.labelText2,
     fontFamily: FontFamily.PopinsMedium,
-    borderRadius: 80,
-    padding: 3,
-    margin: 5,
-    width: 50,
     textAlign: 'center',
   },
   HeadText3: {
-    fontSize: FontSize.small,
+    fontSize: FontSize.smallText,
     fontFamily: FontFamily.PopinsMedium,
-    marginRight: 5,
-    marginLeft: 5,
-    width: 50,
     textAlign: 'center',
   },
   FLEXDIREC1: {flexDirection: 'row'},
@@ -223,11 +215,11 @@ const styles = StyleSheet.create({
     borderWidth: 0,
     borderColor: 'transparent',
     borderRadius: 5,
-    backgroundColor:'transparent',
+    backgroundColor: 'transparent',
   },
   activeTabStyle: {
-    backgroundColor:'transparent',
-   },
+    backgroundColor: 'transparent',
+  },
   tabviewstyle: {
     width: width * 0.93,
     alignSelf: 'center',
@@ -242,17 +234,69 @@ const styles = StyleSheet.create({
     fontFamily: FontFamily.PopinsMedium,
     fontSize: 15,
   },
-  activeTabs: {color: '#000', fontSize: 14, borderBottomWidth: 3,
-},
-NumericInputViewList:
-    {
-        width: width * 0.10,
-        justifyContent: 'flex-end',
-        alignItems: 'flex-end',
-        alignSelf: 'center',
-        // marginRight: 8,
-    },
-    
+  activeTabs: {color: '#000', fontSize: 14, borderBottomWidth: 3},
+  NumericInputViewList: {
+    width: width * 0.1,
+    justifyContent: 'flex-end',
+    alignItems: 'flex-end',
+    alignSelf: 'center',
+    // marginRight: 8,
+  },
+  SizeView: {
+    margin: 5,
+    padding: 10,
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 10,
+    borderWidth: 1,
+  },
+  flexDR: {
+    flexDirection: 'row',
+  },
+  subView1: {
+    borderRadius: 5,
+    padding: 10,
+    borderWidth: 0.5,
+  },
+  BRVIEW:{
+    alignSelf: 'center',
+    justifyContent: 'flex-start',
+    padding: 10,
+  },
+  BRSUBVIEW:{
+    flexDirection: 'row', width: '100%'
+  },
+  BRWID:{
+    width: width * 0.7, flexDirection: 'column'
+  },
+  WID1:{
+    width: width * 0.1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  WID9:{
+    width: width * 0.9,
+    margin: 10,
+    flexDirection: 'row',
+  },
+  WID:{
+    width: width * 0.85,
+    margin: 10,
+    flexDirection:'column',
+  },
+  DELVIEW:{
+    width: width * 0.9,
+    marginLeft: 10,
+    marginRight: 10,
+    marginTop: 10,
+    marginBottom: 5,
+    flexDirection: 'row',
+  },
+  Tabsubview:{
+    alignItems: 'center',
+    marginTop:5
+  }
 });
 
 export {styles};
