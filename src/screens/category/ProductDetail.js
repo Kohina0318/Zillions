@@ -40,6 +40,7 @@ import {TabData} from './TabData';
 import {ProductDetailSizeFlatList} from '../../components/shared/FlateLists/CategoryFlatList/ProductDetailSizeFlatList';
 import NumericInput from 'react-native-numeric-input'
 import { RBSheetData } from './RBSheetData';
+import { Ribbon } from './Ribbon';
 
 const {width, height} = Dimensions.get('window');
 
@@ -86,6 +87,7 @@ export default function ProductDetail(props) {
   const [sizesRate, setSizesRate] = useState([]);
   const [slug,setSlug]=useState('')
   const [unit,setUnit]=useState('')
+  const [featured,setFeatured]=useState('')
 
   const handleWishListed = () => {
     setShowWishListed(!showWishListed);
@@ -94,8 +96,6 @@ export default function ProductDetail(props) {
   const handleProductView = async () => {
     try {
       var res = await getProductView(props.route.params.productId);
-      alert(props.route.params.productId)
-      console.log('res data>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>', res.data);
       setBrandName(res.data.brand_name);
       setCategoryName(res.data.category_name);
       setSubCategoryName(res.data.sub_category_name);
@@ -107,6 +107,7 @@ export default function ProductDetail(props) {
       setAllImages(res.data.all_image);
       setTotalReview(res.data.total_reviews_avg);
       setCustomerReview(res.data.customer_review);
+      setFeatured(res.data.featured)
       setSizes(Object.keys(res.data.size));
       setSlug(res.data.slug)
       setUnit(res.data.unit)
@@ -177,10 +178,13 @@ export default function ProductDetail(props) {
           <View style={{marginTop: 10}} />
 
           <ScrollView showsVerticalScrollIndicator={false}>
+
+          
             <View
               style={{
                 ...styles.container,
               }}>
+               
               <View
                 style={{
                   backgroundColor: themecolor.BOXBORDERCOLOR,
@@ -189,7 +193,17 @@ export default function ProductDetail(props) {
                   borderRadius: 5,
                   padding: 10,
                 }}>
+{featured=='ok'?
+<View style={{ position: 'absolute', top: -10, right: -10 }}>
+          <Ribbon />
+        </View>
+        :
+        <></>
+}
+                  
                 <View style={{width: '100%'}}>
+                
+               
                   <Carousel
                     autoplay={false}
                     index={largeImage}
@@ -197,6 +211,7 @@ export default function ProductDetail(props) {
                   >
                     {allImages.map((image, index) => renderimage(image, index))}
                   </Carousel>
+                
                 </View>
 
                 <View
@@ -468,7 +483,7 @@ export default function ProductDetail(props) {
                           ...styles.HeadText,
                           color: themecolor.TXTWHITE,
                         }}>
-                        Payment Mode :-{' '}
+                        Secure Payment :-{' '}
                       </Text>
 
                       <Image

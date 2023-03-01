@@ -17,7 +17,7 @@ const {width, height} = Dimensions.get('screen');
 export const TabData = props => {
   const [index, setIndex] = React.useState(0);
   const [showmodal, setShowmodal] = useState(false);
-  const {widthDes} = useWindowDimensions().width;
+  const {width:contentWidth} = useWindowDimensions();
 
   const mode = useSelector(state => state.mode);
   const themecolor = new MyThemeClass(mode).getThemeColor();
@@ -85,7 +85,7 @@ export const TabData = props => {
         <View style={{marginBottom:5}}>
           {index == 0 ?
            <RenderHtml
-           contentWidth={widthDes}
+           contentWidth={contentWidth}
            source={{html: props.description}}
            enableExperimentalMarginCollapsing={true}
            enableExperimentalBRCollapsing={true}
@@ -95,7 +95,7 @@ export const TabData = props => {
          />:
          index==1 ?
          <RenderHtml
-              contentWidth={widthDes}
+              contentWidth={contentWidth}
               source={{html: props.shipment}}
               enableExperimentalMarginCollapsing={true}
               enableExperimentalBRCollapsing={true}
@@ -124,7 +124,7 @@ export const TabData = props => {
                   <StarRating
                     disabled={true}
                     maxStars={5}
-                    rating={props.totalReview}
+                    rating={parseInt(props.totalReview)}
                     selectedStar={rating => onStarRatingPress(rating)}
                     starSize={20}
                     fullStarColor={themecolor.STARCOLOR}
