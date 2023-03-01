@@ -59,7 +59,7 @@ function DashboardProductDataFlateList({item, themecolor}) {
             <StarRating
               disabled={false}
               maxStars={5}
-              rating={item.rating_num}
+              rating={parseInt(item.rating_num)}
               selectedStar={rating => onStarRatingPress(rating)}
               starSize={14}
               fullStarColor={themecolor.STARCOLOR}
