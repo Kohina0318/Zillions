@@ -31,10 +31,10 @@ const getSubCategories = async cId => {
     );
   }
 };
-const getSubCategoryByProduct = async sId => {
+const getByProduct = async(spec,Id)=> {
   try {
     const response = await fetch(
-      `${await SERVER_URL()}/product-list?speciality=sub_category&id=${sId}`,
+      `${await SERVER_URL()}/product-list?speciality=${spec}&id=${Id}`,
       {
         method: 'GET',
         headers: {'Content-Type': 'application/json;charset=utf-8'},
@@ -44,7 +44,7 @@ const getSubCategoryByProduct = async sId => {
     return result;
   } catch (err) {
     console.log(
-      'error in getSubCategoryByProduct...in AllproductCategoryRep ',
+      'error in getByProduct...in AllproductCategoryRep ',
       err,
     );
   }
@@ -86,7 +86,7 @@ const getProductRealedProducts = async (spec, limit, pId) => {
 
 export {
   getCategories,
-  getSubCategoryByProduct,
+  getByProduct,
   getSubCategories,
   getProductView,
   getProductRealedProducts,

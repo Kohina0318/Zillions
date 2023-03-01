@@ -101,8 +101,7 @@ function MainNavigationStack(props) {
           name="Brands"
           component={Brands}
           options={{headerShown: false}}
-        />
-        <Stack.Screen
+        /><Stack.Screen
           name="LatestFeaturedProducts"
           component={LatestFeaturedProducts}
           options={{headerShown: false}}
