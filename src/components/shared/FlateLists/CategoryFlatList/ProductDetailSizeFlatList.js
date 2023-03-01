@@ -12,34 +12,37 @@ function ProductDetailSizeList({item, themecolor, touch}) {
 
   return (
     <>
-      <TouchableOpacity
-        activeOpacity={0.8}
-        disabled={touch}
-        >
-     <View style={{width:width*0.15,margin:5,flexDirection:'column'}}>
-          <View style={{width:width*0.15,flexDirection:'row'}}>
-              <Text allowFontScaling={false} style={{
-            ...styles.HeadText2,
-            color: themecolor.TXTWHITE,
-            backgroundColor:themecolor.LIGHTGREY
-          }}> {item.size}
-          </Text>
-          
-          </View>
-          <View style={{width:width*0.15,flexDirection:'row',justifyContent:'center'}}>
-              <Text allowFontScaling={false} style={{
-            ...styles.HeadText3,
-            color:'grey',
+      <TouchableOpacity activeOpacity={0.8} disabled={touch}>
+        <View
+          style={{
+         ...styles.SizeView,
+            borderColor:themecolor.TXTGREYS,  
           }}>
-          &#8377;{item.amount}
-          </Text>
-         </View>
-         </View>
+          <View style={{...styles.flexDR}}>
+            <Text
+              allowFontScaling={false}
+              style={{
+                ...styles.HeadText2,
+                color: themecolor.TXTWHITE,
+              }}>
+              Size: {item.size}
+            </Text>
+          </View>
+          <View style={{...styles.flexDR}}>
+            <Text
+              allowFontScaling={false}
+              style={{
+                ...styles.HeadText3,
+                color: themecolor.TXTWHITE,
+              }}>
+              Price: &#8377;{item.amount}
+            </Text>
+          </View>
+        </View>
       </TouchableOpacity>
     </>
   );
 }
-
 
 export function ProductDetailSizeFlatList(props) {
   const mode = useSelector(state => state.mode);
