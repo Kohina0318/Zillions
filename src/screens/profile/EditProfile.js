@@ -15,7 +15,6 @@ import {ProfileStyle} from '../../assets/css/ProfileStyle';
 import RegisterLoginHeader from '../../components/shared/header/RegisterLoginHeader';
 import LoadingFullScreen from '../../components/shared/Loader/LoadingFullScreen';
 import HalfSizeButton from '../../components/shared/button/halfSizeButton';
-import AsyncStorage from '@react-native-community/async-storage';
 import {ScrollView, State} from 'react-native-gesture-handler';
 import { postEditProfile } from '../../repository/ProfileRepository/EditProfileRepo';
 import VerifyModel from '../../components/shared/Model/VerifyModel';

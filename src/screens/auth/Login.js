@@ -18,9 +18,9 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 import FullsizeButton from './FullsizeButton';
 import {useToast} from 'react-native-toast-notifications';
 import { postLogin } from '../../repository/AuthRepository/LoginRepository';
-import AsyncStorage from '@react-native-community/async-storage';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import VerifyModel from '../../components/shared/Model/VerifyModel';
+import { StoreDatatoAsync } from '../../repository/AsyncStorageServices';
 
 const {width, height} = Dimensions.get('screen');
 
@@ -84,11 +84,11 @@ export default function Login(props) {
         formdata.append('password',password)
 
         const res = await postLogin(formdata);
-        
+      
         if (res.status == true) {
-          await AsyncStorage.setItem('@UserData', JSON.stringify(res.data));
+          await StoreDatatoAsync('@UserData', JSON.stringify(res.data));
+          await StoreDatatoAsync('@Token', JSON.stringify(res.data[0].token));
           setShowmodal(!showmodal)
-          
         } 
         else {
           toast.show(res.msg, {

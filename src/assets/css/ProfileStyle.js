@@ -206,7 +206,7 @@ const ProfileStyle = StyleSheet.create({
     width: width * 0.41,
   },
   TextInput:{
-    fontSize: FontSize.labelText,
+    fontSize: FontSize.labelText3,
     fontFamily: FontFamily.PopinsMedium,
     left: 8,
     marginRight:10

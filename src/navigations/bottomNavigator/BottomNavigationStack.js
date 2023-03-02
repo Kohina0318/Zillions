@@ -1,7 +1,6 @@
 import * as React from 'react';
-import {View, Dimensions, TouchableOpacity} from 'react-native';
+import {View,} from 'react-native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import {Image as ImageR} from 'react-native';
 import {
   TransitionSpecs,
   HeaderStyleInterpolators,
@@ -17,10 +16,8 @@ import Categories from '../../screens/category/Categories';
 import Profile from '../../screens/profile/Profile';
 import WishList from '../../screens/wishList/WishList';
 import AD from 'react-native-vector-icons/AntDesign';
-import SLI from 'react-native-vector-icons/SimpleLineIcons';
 import MCI from 'react-native-vector-icons/MaterialCommunityIcons';
 import Brands from '../../screens/dashboard/Brands';
-import AsyncStorage from '@react-native-community/async-storage';
 
 const Tab = createBottomTabNavigator();
 const MyTransition = {
