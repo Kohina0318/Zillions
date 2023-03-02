@@ -105,11 +105,10 @@ const styles = StyleSheet.create({
   clrtheme: {
     color: Colors.bluetheme,
   },
-  view16: {justifyContent: 'center', alignSelf: 'center', flex: 1},
+  view16: {justifyContent: 'center',marginLeft:10,marginRight:10, flex: 1},
   CardText: {
     fontSize: FontSize.labelText3,
     fontFamily: FontFamily.PopinsMedium,
-    alignSelf: 'center',
     fontWeight: 'bold',
   },
   align3: {alignSelf: 'flex-start'},

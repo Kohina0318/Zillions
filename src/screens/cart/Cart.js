@@ -14,13 +14,13 @@ export default function Cart(props) {
     <>
       <View
         style={{
-        //   backgroundColor: themecolor.THEMECOLOR,
+          backgroundColor: themecolor.THEMECOLOR,
           color: themecolor.TXTWHITE,
           justifyContent: 'center',
           height: height,
           alignSelf: 'center',
         }}>
-        <Text  allowFontScaling={false}>Cart</Text>
+        <Text allowFontScaling={false}>Cart</Text>
       </View>
     </>
   );

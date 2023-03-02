@@ -7,16 +7,23 @@ import {styles} from '../../../../assets/css/ProductDetailStyle';
 
 const {width, height} = Dimensions.get('screen');
 
-function ProductDetailSizeList({item, themecolor, touch}) {
+function ProductDetailSizeList({index, touch, selected,onChange, item, themecolor, }) {
   const navigation = useNavigation();
 
+const handleClick=(index)=>{
+  onChange(index)
+}
+
+console.log('items.......',index, touch, selected, onChange, item, themecolor)
   return (
     <>
-      <TouchableOpacity activeOpacity={0.8} disabled={touch}>
+      <TouchableOpacity activeOpacity={0.8} disabled={touch}
+      onPress={()=>handleClick(index)}>
         <View
           style={{
          ...styles.SizeView,
-            borderColor:themecolor.TXTGREYS,  
+            borderColor:themecolor.TXTGREYS, 
+            backgroundColor:index==selected?themecolor.TXTGREYS:'transparent' 
           }}>
           <View style={{...styles.flexDR}}>
             <Text
@@ -47,13 +54,18 @@ function ProductDetailSizeList({item, themecolor, touch}) {
 export function ProductDetailSizeFlatList(props) {
   const mode = useSelector(state => state.mode);
   const themecolor = new MyThemeClass(mode).getThemeColor();
+  const [selected,setSelected]=React.useState(0)
+
+  const handleSelected=(item)=>{
+    setSelected(item)
+  }
 
   return (
     <>
       <FlatList
         data={props.sizes}
-        renderItem={({item}) => (
-          <ProductDetailSizeList item={item} themecolor={themecolor} />
+        renderItem={({item,index}) => (
+          <ProductDetailSizeList index={index} touch={props.touch} selected={selected} onChange={(value)=>handleSelected(value)} item={item} themecolor={themecolor} />
         )}
         horizontal={true}
         showsHorizontalScrollIndicator={false}
