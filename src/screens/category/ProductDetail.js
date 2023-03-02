@@ -87,6 +87,8 @@ export default function ProductDetail(props) {
   const [slug, setSlug] = useState('');
   const [unit, setUnit] = useState('');
   const [featured, setFeatured] = useState('');
+  const [title, setTitle] = useState('');
+  const [navigateTo, setNavigateTo] = useState('');
 
   const handleWishListed = () => {
     setShowWishListed(!showWishListed);
@@ -139,6 +141,20 @@ export default function ProductDetail(props) {
       });
     }
   };
+
+  const handleRB=(index)=>{
+if(index==1){
+  setTitle('Add To Cart')
+  setNavigateTo('Cart')
+}
+else
+{
+  setTitle('Buy Now')
+  setNavigateTo('Order')
+}
+
+refRBSheet.current.open()
+  }
 
   useEffect(() => {
     handleProductView();
@@ -554,6 +570,7 @@ export default function ProductDetail(props) {
                           color={themecolor.TXTWHITE}
                         />
                       }
+                      onPress={()=>handleRB(1)}
                       backgroundColor={themecolor.TXTWHITE1}
                       color={themecolor.TXTWHITE}
                       borderColor={themecolor.TXTWHITE}
@@ -570,7 +587,7 @@ export default function ProductDetail(props) {
                           color={'#fff'}
                         />
                       }
-                      onPress={() => refRBSheet.current.open()}
+                      onPress={() =>handleRB(2)}
                       backgroundColor={themecolor.ADDTOCARTBUTTONCOLOR}
                       color={'#fff'}
                       borderColor={themecolor.BORDERCOLOR}
@@ -588,7 +605,7 @@ export default function ProductDetail(props) {
                   />
                 </View>
               )}
-              <RBSheetData refRBSheet={refRBSheet} sizes={sizes} touch={true} />
+              <RBSheetData refRBSheet={refRBSheet} title={title} navigateTo={navigateTo} sizes={sizes} touch={false} />
             </View>
           </TouchableOpacity>
           <View style={styles.centeredView}>
