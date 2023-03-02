@@ -1,3 +1,4 @@
+import { getAppToken } from "../CommonRepository";
 import { SERVER_URL } from "../SERVER_URL";
 
 const getManageAddress = async () => {
@@ -6,7 +7,8 @@ const getManageAddress = async () => {
           `${await SERVER_URL()}/profiles/manage_address`,
         {
           method: 'GET',
-          headers: {'Content-Type': 'application/json;charset=utf-8'},
+          headers: {'Content-Type': 'application/json;charset=utf-8',
+          Authorization: `${await getAppToken()}`},
         },
       );
       const result = await response.json();
@@ -22,7 +24,8 @@ const getManageAddress = async () => {
         `${await SERVER_URL()}/save-address`,
         {
           method: 'POST',
-          headers: {'Content-Type': 'multipart/form-data'},
+          headers: {'Content-Type': 'multipart/form-data',
+          Authorization: `${await getAppToken()}`},
           body: formdata,
         },
       );
@@ -39,7 +42,8 @@ const getManageAddress = async () => {
         `${await SERVER_URL()}/delete-address`,
         {
           method: 'POST',
-          headers: {'Content-Type': 'multipart/form-data'},
+          headers: {'Content-Type': 'multipart/form-data',
+          Authorization: `${await getAppToken()}`},
           body: formdata,
         },
       );
@@ -56,7 +60,8 @@ const getManageAddress = async () => {
         `${await SERVER_URL()}/set-default-address`,
         {
           method: 'POST',
-          headers: {'Content-Type': 'multipart/form-data'},
+          headers: {'Content-Type': 'multipart/form-data',
+          Authorization: `${await getAppToken()}`},
           body: formdata,
         },
       );

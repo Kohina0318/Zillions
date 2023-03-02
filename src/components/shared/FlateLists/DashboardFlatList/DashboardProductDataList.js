@@ -36,7 +36,7 @@ function DashboardProductDataFlateList({item, themecolor}) {
           <Image
             source={{uri: item.front_image}}
             style={{
-              width: width * 0.38,
+              width: width * 0.4,
               height: '100%',
             }}
             resizeMode="stretch"

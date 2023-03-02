@@ -7,10 +7,10 @@ const {width, height} = Dimensions.get('window');
 const ProductStyle = StyleSheet.create({
   bg: {flex: 1},
   datalistView: {
-    width: width * 0.44,
-    height: height *0.37,
-    margin: 5,
-    padding: 10,
+    width: width * 0.46,
+    height: height *0.35,
+    margin: 2,
+    padding: 8,
     borderRadius: 5,
     alignSelf: 'center',
     alignItems: 'center',
@@ -30,7 +30,7 @@ const ProductStyle = StyleSheet.create({
     alignSelf: 'center',
     alignItems: 'center',
   },
-  inner: {padding: 5, width: width * 0.38},
+  inner: {padding: 2, width:"100%"},
     txt:
     {
         color: Colors.bluetheme,

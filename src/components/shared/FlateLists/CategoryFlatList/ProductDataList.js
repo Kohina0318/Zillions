@@ -15,34 +15,64 @@ import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import {useNavigation} from '@react-navigation/native';
 import StarRating from 'react-native-star-rating';
 import FAIcon from 'react-native-vector-icons/FontAwesome';
-
+import { useToast } from 'react-native-toast-notifications';
+import { postAddOrRemoveWishlist } from '../../../../repository/WishListRepository/WishListRepo';
 
 const {width, height} = Dimensions.get('screen');
 
 function ProductDataFlateList({item, themecolor}) {
-  const navigation = useNavigation();
+  const navigation = useNavigation();  
+  const toast = useToast();
   const [showWishListed, setShowWishListed] = useState(true);
 
-  const handleWishListed = () => {
-    setShowWishListed(!showWishListed);
+  const handleWishListed = async(any) => {
+    try {
+      var res = await postAddOrRemoveWishlist(any, item.product_id); 
+      alert(JSON.stringify(res));
+      if (res.status === true) {
+        setShowWishListed(!showWishListed);
+       } else {
+        toast.show(res.msg, {
+          type: 'warning',
+          placement: 'bottom',
+          duration: 3000,
+          offset: 30,
+          animationType: 'slide-in',
+        });
+      }
+    } catch (e) {
+      console.log('errrror in..handleRemove page wishlist-->', e);
+      toast.show('Something went wrong!, Try again later.', {
+        type: 'danger',
+        placement: 'bottom',
+        duration: 3000,
+        offset: 30,
+        animationType: 'slide-in',
+      });
+    }
   };
 
   return (
     <>
-      <TouchableOpacity
+      <View
         activeOpacity={0.8}
         style={{
           ...ProductStyle.datalistView,
           backgroundColor: themecolor.BOXBORDERCOLOR,
           borderColor: themecolor.BOXBORDERCOLOR1,
         }}
-        onPress={() => navigation.navigate('ProductDetail',{productId:item.product_id,title:item.title})}
+        // onPress={() =>
+        //   navigation.navigate('ProductDetail', {
+        //     productId: item.product_id,
+        //     title: item.title,
+        //   })
+        // }
         >
-        <View style={{...ProductStyle.innerImage, }}>
+        <View style={{...ProductStyle.innerImage}}>
           <Image
             source={{uri: item.front_image}}
             style={{
-              width: width * 0.38,
+              width: width * 0.4,
               height: '100%',
             }}
             resizeMode="stretch"
@@ -60,7 +90,7 @@ function ProductDataFlateList({item, themecolor}) {
           {showWishListed ? (
             <TouchableOpacity
               activeOpacity={0.5}
-              onPress={() => handleWishListed()}>
+              onPress={() => handleWishListed('add')}>
               <FontAwesome
                 name="heart-o"
                 size={20}
@@ -70,7 +100,7 @@ function ProductDataFlateList({item, themecolor}) {
           ) : (
             <TouchableOpacity
               activeOpacity={0.5}
-              onPress={() => handleWishListed()}>
+              onPress={() => handleWishListed('remove')}>
               <FontAwesome name="heart" size={20} color={themecolor.TEXTRED} />
             </TouchableOpacity>
           )}
@@ -101,25 +131,31 @@ function ProductDataFlateList({item, themecolor}) {
           </View>
 
           <View style={{flexDirection: 'row', width: '100%'}}>
-            <Text allowFontScaling={false} style={{...ProductStyle.txt1, color: themecolor.TEXTGREEN}}>
-              <FAIcon name="rupee" size={12} />{item.purchase_price}
+            <Text
+              allowFontScaling={false}
+              style={{...ProductStyle.txt1, color: themecolor.TEXTGREEN}}>
+              <FAIcon name="rupee" size={12} />
+              {item.purchase_price}
               {'  '}
               <Text
-               allowFontScaling={false}
+                allowFontScaling={false}
                 style={{
                   ...ProductStyle.txtLine,
                   color: themecolor.TXTGREY,
                 }}>
-                <FAIcon name="rupee" size={12} />{item.sale_price}
+                <FAIcon name="rupee" size={12} />
+                {item.sale_price}
               </Text>
-              <Text allowFontScaling={false}  style={{...ProductStyle.txt1, color: themecolor.TEXTRED}}>
+              <Text
+                allowFontScaling={false}
+                style={{...ProductStyle.txt1, color: themecolor.TEXTRED}}>
                 {'  ('}
                 {item.discount}%{')'}
               </Text>
             </Text>
           </View>
         </View>
-      </TouchableOpacity>
+      </View>
     </>
   );
 }
@@ -139,7 +175,7 @@ export function ProductDataList(props) {
         contentContainerStyle={{
           flexDirection: 'row',
           flexWrap: 'wrap',
-          width: width * 0.94,
+          width: width * 0.945,
         }}
         showsVerticalScrollIndicator={false}
         scrollEnabled={true}

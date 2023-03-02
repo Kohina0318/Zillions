@@ -14,28 +14,87 @@ import {useSelector} from 'react-redux';
 import Feather from 'react-native-vector-icons/Feather';
 import FAIcon from 'react-native-vector-icons/FontAwesome';
 import {useNavigation} from '@react-navigation/native';
+import HalfSizeButton from '../../button/halfSizeButton';
+import MCI from 'react-native-vector-icons/MaterialCommunityIcons';
+import {postAddOrRemoveWishlist} from '../../../../repository/WishListRepository/WishListRepo';
+import { useToast } from 'react-native-toast-notifications';
 
 const {width, height} = Dimensions.get('screen');
 
 function WishListDataFlateList({item, themecolor}) {
   const navigation = useNavigation();
+  const toast = useToast();
+
+  const handleRemove = async () => {
+    try {
+      var res = await postAddOrRemoveWishlist('remove', item.product_id); 
+      // alert(JSON.stringify(res));
+      if (res.status === true) {
+        toast.show(res.msg, {
+          type: 'success',
+          placement: 'bottom',
+          duration: 3000,
+          offset: 30,
+          animationType: 'slide-in',
+        });
+      } else {
+        toast.show(res.msg, {
+          type: 'warning',
+          placement: 'bottom',
+          duration: 3000,
+          offset: 30,
+          animationType: 'slide-in',
+        });
+      }
+    } catch (e) {
+      console.log('errrror in..handleRemove page wishlist-->', e);
+      toast.show('Something went wrong!, Try again later.', {
+        type: 'danger',
+        placement: 'bottom',
+        duration: 3000,
+        offset: 30,
+        animationType: 'slide-in',
+      });
+    }
+  };
 
   return (
     <>
-      <TouchableOpacity
+      <View
         activeOpacity={0.8}
         style={{
           ...styles.datalistView,
           backgroundColor: themecolor.BOXBORDERCOLOR,
           borderColor: themecolor.BOXBORDERCOLOR1,
         }}
-        onPress={() => navigation.navigate('ProductDetail',{productId:item.product_id,title:item.title})}
-        >
+        // onPress={() =>
+        //   navigation.navigate('ProductDetail', {
+        //     productId: item.product_id,
+        //     title: item.title,
+        //   })
+        // }
+      >
+        <View
+          style={{
+            width: '100%', zIndex:99999,
+            marginBottom: -27
+          }}>
+          <TouchableOpacity
+            activeOpacity={0.8}
+            style={{...styles.removeButton}}
+            onPress={() => handleRemove()}>
+            <MCI
+              name="close-circle-outline"
+              size={25}
+              color={themecolor.TEXTRED}
+            />
+          </TouchableOpacity>
+        </View>
         <View style={{...styles.innerImage}}>
           <Image
             source={{uri: item.front_image}}
             style={{
-              width: width * 0.38,
+              width: width * 0.4,
               height: '100%',
             }}
             resizeMode="stretch"
@@ -47,7 +106,7 @@ function WishListDataFlateList({item, themecolor}) {
           }}>
           <View>
             <Text
-             allowFontScaling={false}
+              allowFontScaling={false}
               style={{...styles.txt, color: themecolor.TXTWHITE}}
               numberOfLines={2}>
               {item.title}
@@ -55,43 +114,50 @@ function WishListDataFlateList({item, themecolor}) {
           </View>
 
           <View style={{flexDirection: 'row', width: '100%'}}>
-            <Text allowFontScaling={false} style={{...styles.txt1, color: themecolor.TEXTGREEN}}>
-              <FAIcon name="rupee" size={12} />{item.purchase_price}
+            <Text
+              allowFontScaling={false}
+              style={{...styles.txt1, color: themecolor.TEXTGREEN}}>
+              <FAIcon name="rupee" size={12} />
+              {item.purchase_price}
               {'  '}
               <Text
-               allowFontScaling={false}
+                allowFontScaling={false}
                 style={{
                   ...styles.txtLine,
                   color: themecolor.TXTGREY,
                 }}>
-                <FAIcon name="rupee" size={12} />{item.sale_price}
+                <FAIcon name="rupee" size={12} />
+                {item.sale_price}
               </Text>
-              <Text allowFontScaling={false} style={{...styles.txt1, color: themecolor.TEXTRED}}>
+              <Text
+                allowFontScaling={false}
+                style={{...styles.txt1, color: themecolor.TEXTRED}}>
                 {'  ('}
                 {item.discount}%{')'}
               </Text>
             </Text>
           </View>
 
-          <View style={{marginTop:3}}>
-            <TouchableOpacity
-            // onPress={() => setshowCompetitionModal(true)}
-            >
-              <View
-                style={{
-                  ...styles.AddButton,
-                  backgroundColor: themecolor.ADDTOCARTBUTTONCOLOR,
-                }}>
-               <Text allowFontScaling={false} style={styles.AddButtonIcon}>  <Feather
+          <View style={{marginTop: 3}}>
+            <HalfSizeButton
+              title="Add to Cart"
+              icon={
+                <Feather
                   name="shopping-cart"
                   size={12}
-                  color={"#fff"}
-                />{" "} Add to cart</Text>
-              </View>
-            </TouchableOpacity>
+                  color={themecolor.BACKICON}
+                />
+              }
+              backgroundColor={'transparent'}
+              color={themecolor.BACKICON}
+              borderColor={themecolor.BACKICON}
+              fontSize={12}
+              height={width * 0.08}
+              // onPress={() => handleSetDefaultAddress(item.id)}
+            />
           </View>
         </View>
-      </TouchableOpacity>
+      </View>
     </>
   );
 }
@@ -110,7 +176,7 @@ export function WishListDataList(props) {
       contentContainerStyle={{
         flexDirection: 'row',
         flexWrap: 'wrap',
-        width: width * 0.94,
+        width: width * 0.945,
       }}
       showsVerticalScrollIndicator={false}
       scrollEnabled={true}

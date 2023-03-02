@@ -1,3 +1,4 @@
+import { getAppToken } from "../CommonRepository";
 import { SERVER_URL } from "../SERVER_URL";
 
 const postCreateSupportTicket = async formdata => {
@@ -6,7 +7,8 @@ const postCreateSupportTicket = async formdata => {
       `${await SERVER_URL()}/add-ticket`,
       {
         method: 'POST',
-        headers: {'Content-Type': 'multipart/form-data'},
+        headers: {'Content-Type': 'multipart/form-data',
+        Authorization: `${await getAppToken()}`},
         body: formdata,
       },
     );
@@ -23,7 +25,8 @@ const getSupportTicket = async () => {
         `${await SERVER_URL()}/get-ticket`,
       {
         method: 'GET',
-        headers: {'Content-Type': 'application/json;charset=utf-8'},
+        headers: {'Content-Type': 'application/json;charset=utf-8',
+        Authorization: `${await getAppToken()}`},
       },
     );
     const result = await response.json();
