@@ -102,7 +102,7 @@ const styles = StyleSheet.create({
     width: width * 0.8,
   },
   modelTextInput:{
-    fontSize: FontSize.labelText,
+    fontSize: FontSize.labelText2,
     fontFamily: FontFamily.PopinsMedium,
     left: 8,
     marginRight:10

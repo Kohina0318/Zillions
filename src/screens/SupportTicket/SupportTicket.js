@@ -22,7 +22,8 @@ import {
 } from '../../repository/SupportTicketRepository/SupportTicketRepo';
 import VerifyModel from '../../components/shared/Model/VerifyModel';
 import CreateTicketModel from '../../components/shared/Model/CreateTicketModel';
-import { SupportTicketDataList } from '../../components/shared/FlateLists/SupportTicket/SupportTicketDataList';
+import {SupportTicketDataList} from '../../components/shared/FlateLists/SupportTicket/SupportTicketDataList';
+import NoDataMsg from '../../components/shared/NoData/NoDataMsg';
 const {width, height} = Dimensions.get('screen');
 
 export default function SupportTicket(props) {
@@ -70,26 +71,35 @@ export default function SupportTicket(props) {
         offset: 30,
         animationType: 'slide-in',
       });
-    }
-    else{
-    try {
-      let formdata = new FormData();
-      formdata.append('sub', subject);
-      formdata.append('reply', message);
+    } else {
+      try {
+        let formdata = new FormData();
+        formdata.append('sub', subject);
+        formdata.append('reply', message);
 
-      const res = await postCreateSupportTicket(formdata);
-      if (res.status == true) {
-        setRefresh(!refresh);
-        setCreateTicketModal(false)
-        toast.show("Create Ticket Successfully.", {
-          type: 'success',
-          placement: 'bottom', 
-          duration: 3000,
-          offset: 30,
-          animationType: 'slide-in',
-        });
-      } else {
-        toast.show(res.msg, {
+        const res = await postCreateSupportTicket(formdata);
+        if (res.status == true) {
+          setRefresh(!refresh);
+          setCreateTicketModal(false);
+          toast.show('Create Ticket Successfully.', {
+            type: 'success',
+            placement: 'bottom',
+            duration: 3000,
+            offset: 30,
+            animationType: 'slide-in',
+          });
+        } else {
+          toast.show(res.msg, {
+            type: 'warning',
+            placement: 'bottom',
+            duration: 3000,
+            offset: 30,
+            animationType: 'slide-in',
+          });
+        }
+      } catch (e) {
+        console.log('catch in .... create support Ticket page', e);
+        toast.show('Something went wrong!, Try again later.', {
           type: 'danger',
           placement: 'bottom',
           duration: 3000,
@@ -97,17 +107,7 @@ export default function SupportTicket(props) {
           animationType: 'slide-in',
         });
       }
-    } catch (e) {
-      console.log('catch in .... create support Ticket page', e);
-      toast.show('Something went wrong!, Try again later.', {
-        type: 'danger',
-        placement: 'bottom',
-        duration: 3000,
-        offset: 30,
-        animationType: 'slide-in',
-      });
     }
-  }
   };
 
   const handleAllMessages = async () => {
@@ -115,11 +115,11 @@ export default function SupportTicket(props) {
       const res = await getSupportTicket();
       if (res.status == true) {
         setData(res.data);
-        setLoader(false)
+        setLoader(false);
       } else {
-        setLoader(false)
+        setLoader(false);
         toast.show(res.msg, {
-          type: 'danger',
+          type: 'warning',
           placement: 'bottom',
           duration: 3000,
           offset: 30,
@@ -128,7 +128,7 @@ export default function SupportTicket(props) {
       }
     } catch (e) {
       console.log('catch in ....support Ticket table data page', e);
-      setLoader(false)
+      setLoader(false);
       toast.show('Something went wrong!, Try again later.', {
         type: 'danger',
         placement: 'bottom',
@@ -156,17 +156,12 @@ export default function SupportTicket(props) {
         }}>
         {loader ? (
           <LoadingFullScreen style={{flex: 1}} />
-        ) : (
-            data.length>0 ?
-            <>
-          <SupportTicketDataList data={data}/>
-          <View style={{marginVertical: 10}} />
+        ) : data.length > 0 ? (
+          <>
+            <SupportTicketDataList data={data} />
           </>
-          :
-          <View
-          style={{alignItems: 'center', flex: 1, justifyContent: 'center'}}>
-          <Text  allowFontScaling={false}>No Ticket found!</Text>
-        </View>
+        ) : (
+          <NoDataMsg  title="No Ticket Found! "/>
         )}
       </View>
 
@@ -179,7 +174,7 @@ export default function SupportTicket(props) {
             title="Create Ticket"
             icon={<Feather name="arrow-right-circle" size={15} />}
             backgroundColor={themecolor.ADDTOCARTBUTTONCOLOR}
-            color={"#fff"}
+            color={'#fff'}
             borderColor={themecolor.BOXBORDERCOLOR1}
             onPress={() => setCreateTicketModal(true)}
           />
@@ -188,13 +183,12 @@ export default function SupportTicket(props) {
 
       {createTicketModal && (
         <CreateTicketModel
-        setCreateTicketModal={setCreateTicketModal}
+          setCreateTicketModal={setCreateTicketModal}
           setSubject={setSubject}
           setMessage={setMessage}
           onPress={() => handleCreateTicket()}
         />
       )}
-
     </View>
   );
 }

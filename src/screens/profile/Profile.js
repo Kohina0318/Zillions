@@ -15,11 +15,11 @@ import Header from '../../components/shared/header/Header';
 import {data, data1} from './ProfileData';
 import {Avatar} from '@rneui/themed';
 import {ProfileStyle} from '../../assets/css/ProfileStyle';
-import FontAwesome from 'react-native-vector-icons/FontAwesome';
-import AsyncStorage from '@react-native-community/async-storage';
 import {useFocusEffect, useNavigation} from '@react-navigation/native';
 import LoadingFullScreen from '../../components/shared/Loader/LoadingFullScreen';
-import { getProfileInfo } from '../../repository/ProfileRepository/ProfileRepo';
+import {getProfileInfo} from '../../repository/ProfileRepository/ProfileRepo';
+import {getUserData} from '../../repository/CommonRepository';
+import { removeDatafromAsync } from '../../repository/AsyncStorageServices';
 
 const {width, height} = Dimensions.get('screen');
 
@@ -32,30 +32,25 @@ export default function Profile(props) {
   const [refresh, setRefresh] = useState(false);
   const [UserData, setUserData] = useState([]);
 
-  const handleUserData= async () => {
-    try {
-      var UserData = await AsyncStorage.getItem('@UserData');
-      var data1 = JSON.parse(UserData);
-      if (data1 == null || data1 == '' || data1 == undefined) {
-        setUserData([])
-        setLoader(false);
-      } else {
-        try {
-          var res = await getProfileInfo();
-          if (res.status===true) {
-            setUserData(res.data);
-            setLoader(false);
-           } else {
-            setLoader(false);
-          }
-        } catch (e) {
+  const handleUserData = async () => {
+    var userData = await getUserData();
+    if (userData == null || userData == '' || userData == undefined) {
+      setUserData([]);
+      setLoader(false);
+    } else {
+      try {
+        var res = await getProfileInfo();
+        if (res.status === true) {
+          setUserData(res.data);
+          setLoader(false);
+        } else {
           setLoader(false);
         }
+      } catch (e) {
+        setLoader(false);
       }
-    } catch (e) {
-      setLoader(false);
     }
-  }
+  };
 
   useFocusEffect(
     React.useCallback(() => {
@@ -63,22 +58,20 @@ export default function Profile(props) {
     }, [refresh]),
   );
 
-
   const handleLogout = async () => {
-    const daat =await AsyncStorage.removeItem('@UserData');
-    setRefresh(!refresh) 
+    await removeDatafromAsync('@UserData');
+    await removeDatafromAsync('@Token');
+    setRefresh(!refresh);
   };
 
   return (
     <View style={{backgroundColor: themecolor.THEMECOLOR, flex: 1}}>
-      
       <Header title="Profile" />
 
       {loader ? (
         <LoadingFullScreen style={{flex: 1}} />
       ) : (
         <>
-          
           <View style={{marginTop: 10}} />
 
           <ScrollView showsVerticalScrollIndicator={false}>
@@ -109,7 +102,7 @@ export default function Profile(props) {
                         ...ProfileStyle.welcomView,
                       }}>
                       <Text
-                       allowFontScaling={false}
+                        allowFontScaling={false}
                         style={{
                           ...ProfileStyle.WellText,
                           color: themecolor.BACKICON,
@@ -139,7 +132,7 @@ export default function Profile(props) {
                   }}>
                   <View style={ProfileStyle.signInView}>
                     <Text
-                     allowFontScaling={false}
+                      allowFontScaling={false}
                       style={{
                         ...ProfileStyle.signInText,
                         color: themecolor.TXTWHITE,
@@ -155,11 +148,11 @@ export default function Profile(props) {
                       <View
                         style={{
                           ...ProfileStyle.buttonView1,
-                          backgroundColor: "#fff",
+                          backgroundColor: '#fff',
                           borderColor: themecolor.ADDTOCARTBUTTONCOLOR,
                         }}>
                         <Text
-                         allowFontScaling={false}
+                          allowFontScaling={false}
                           style={{
                             ...ProfileStyle.buttonText1,
                             color: themecolor.ADDTOCARTBUTTONCOLOR,
@@ -178,7 +171,7 @@ export default function Profile(props) {
                           backgroundColor: themecolor.ADDTOCARTBUTTONCOLOR,
                         }}>
                         <Text
-                         allowFontScaling={false}
+                          allowFontScaling={false}
                           style={{
                             ...ProfileStyle.buttonText1,
                             color: '#fff',
@@ -210,14 +203,14 @@ export default function Profile(props) {
                   onPress={() => handleLogout()}
                   style={{
                     ...ProfileStyle.buttonView3,
-                    backgroundColor:themecolor.ADDTOCARTBUTTONCOLOR,
+                    backgroundColor: themecolor.ADDTOCARTBUTTONCOLOR,
                     borderColor: themecolor.BOXBORDERCOLOR1,
                   }}>
                   <Text
-                   allowFontScaling={false}
+                    allowFontScaling={false}
                     style={{
                       ...ProfileStyle.buttonText1,
-                      color:'#FFF',
+                      color: '#FFF',
                     }}>
                     Logout
                   </Text>
@@ -228,7 +221,7 @@ export default function Profile(props) {
 
               <View style={{...ProfileStyle.appVerView}}>
                 <Text
-                 allowFontScaling={false}
+                  allowFontScaling={false}
                   style={{
                     ...ProfileStyle.appverText,
                     color: themecolor.HEADERTHEMECOLOR,

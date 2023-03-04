@@ -16,6 +16,7 @@ import {useFocusEffect,} from '@react-navigation/native';
 import {useToast} from 'react-native-toast-notifications';
 import Header from '../../components/shared/header/Header';
 import LoadingFullScreen from '../../components/shared/Loader/LoadingFullScreen';
+import NoDataMsg from '../../components/shared/NoData/NoDataMsg';
 
 const {width, height} = Dimensions.get('screen');
 
@@ -70,14 +71,7 @@ export default function Categories(props) {
             {data.length > 0 ? (
               <CategoryDataList data={data} />
             ) : (
-              <View
-                style={{
-                  alignItems: 'center',
-                  flex: 1,
-                  justifyContent: 'center',
-                }}>
-                <Text allowFontScaling={false}>No data found!</Text>
-              </View>
+              <NoDataMsg  title="No Category Found! "/>
             )}
             <View style={{marginVertical: 50}} />
           </View>

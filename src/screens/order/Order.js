@@ -18,6 +18,8 @@ import Search from '../../components/shared/search/Search';
 import {getOrderlist} from '../../repository/OrderRepository/OrderRepo';
 import LoadingFullScreen from '../../components/shared/Loader/LoadingFullScreen';
 import RegisterLoginHeader from '../../components/shared/header/RegisterLoginHeader';
+import NoDataMsg from '../../components/shared/NoData/NoDataMsg';
+import { useToast } from 'react-native-toast-notifications';
 
 const {width, height} = Dimensions.get('screen');
 
@@ -37,6 +39,7 @@ export default function Order(props) {
     };
   }, []);
 
+  const toast = useToast();
   const mode = useSelector(state => state.mode);
   const themecolor = new MyThemeClass(mode).getThemeColor();
 
@@ -47,9 +50,20 @@ export default function Order(props) {
   const handleOrderlist = async () => {
     try {
       var res = await getOrderlist();
-      setData(res.data);
-      setDataFilter(res.data);
-      setLoader(false);
+      if (res.status === true) {
+        setData(res.data);
+        setDataFilter(res.data);
+        setLoader(false);
+      } else {
+        setLoader(false);
+        toast.show(res.msg, {
+          type: 'warning',
+          placement: 'bottom',
+          duration: 3000,
+          offset: 30,
+          animationType: 'slide-in',
+        });
+      }
     } catch (e) {
       console.log('errrror in..handleOrderlist page wishlist-->', e);
       setLoader(false);
@@ -94,10 +108,7 @@ export default function Order(props) {
           {data.length > 0 ? (
             <OrderDataList data={data} />
           ) : (
-            <View
-              style={{alignItems: 'center', flex: 1, justifyContent: 'center'}}>
-              <Text  allowFontScaling={false}>No data found!</Text>
-            </View>
+            <NoDataMsg title="No Order Found! " />
           )}
           <View style={{marginVertical: 45}} />
         </View>

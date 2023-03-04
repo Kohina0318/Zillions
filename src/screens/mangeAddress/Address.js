@@ -25,6 +25,7 @@ import {ManageAddressDataList} from '../../components/shared/FlateLists/ManageAd
 import HalfSizeButton from '../../components/shared/button/halfSizeButton';
 import AddAddressModel from '../../components/shared/Model/AddAddressModel';
 import RegisterLoginHeader from '../../components/shared/header/RegisterLoginHeader';
+import NoDataMsg from '../../components/shared/NoData/NoDataMsg';
 
 const {width, height} = Dimensions.get('screen');
 
@@ -63,8 +64,19 @@ export default function Address(props) {
   const handleManageAddress = async () => {
     try {
       var res = await getManageAddress();
-      setData(res.data);
-      setLoader(false);
+      if (res.status === true) {
+        setData(res.data);
+        setLoader(false);
+      } else {
+        setLoader(false);
+        toast.show(res.msg, {
+          type: 'warning',
+          placement: 'bottom',
+          duration: 3000,
+          offset: 30,
+          animationType: 'slide-in',
+        });
+      }
     } catch (e) {
       console.log('errrror in..getManageAddress page-->', e);
       setLoader(false);
@@ -146,15 +158,25 @@ export default function Address(props) {
         formdata.append('country', country);
 
         var res = await postAddAddress(formdata);
-        setAddAddressModal(false);
-        setRefresh(!refresh);
-        toast.show(res.msg, {
-          type: 'success',
-          placement: 'bottom',
-          duration: 3000,
-          offset: 30,
-          animationType: 'slide-in',
-        });
+        if (res.status === true) {
+          setAddAddressModal(false);
+          setRefresh(!refresh);
+          toast.show(res.msg, {
+            type: 'success',
+            placement: 'bottom',
+            duration: 3000,
+            offset: 30,
+            animationType: 'slide-in',
+          });
+        } else {
+          toast.show(res.msg, {
+            type: 'warning',
+            placement: 'bottom',
+            duration: 3000,
+            offset: 30,
+            animationType: 'slide-in',
+          });
+        }
       } catch (e) {
         console.log('errrror in..getManageAddress page in address-->', e);
         setLoader(false);
@@ -185,10 +207,14 @@ export default function Address(props) {
         }}>
         {loader ? (
           <LoadingFullScreen style={{flex: 1}} />
-        ) : (
+        ) : data.length > 0 ? (
           <ScrollView showsVerticalScrollIndicator={false}>
             <View style={{...styles.ViewHeading}}>
-              <Text allowFontScaling={false} style={{...styles.headingTxt,color:themecolor.TXTGREYS}}>Default Address </Text>
+              <Text
+                allowFontScaling={false}
+                style={{...styles.headingTxt, color: themecolor.TXTGREYS}}>
+                Default Address{' '}
+              </Text>
               <ManageAddressDataList
                 data={data}
                 dafault={true}
@@ -198,7 +224,11 @@ export default function Address(props) {
             </View>
 
             <View style={{...styles.ViewHeading}}>
-              <Text allowFontScaling={false} style={{...styles.headingTxt,color:themecolor.TXTGREYS}}>Other Addresses </Text>
+              <Text
+                allowFontScaling={false}
+                style={{...styles.headingTxt, color: themecolor.TXTGREYS}}>
+                Other Addresses{' '}
+              </Text>
               <ManageAddressDataList
                 data={data}
                 refresh={refresh}
@@ -208,14 +238,15 @@ export default function Address(props) {
 
             <View style={{marginVertical: 10}} />
           </ScrollView>
+        ) : (
+          <NoDataMsg  title="No Address Found! "/>
         )}
       </View>
 
       <View
         style={{
           ...styles.touchview,
-        }}
-        >
+        }}>
         <View style={{...styles.mainView}}>
           <HalfSizeButton
             title="Add Address"

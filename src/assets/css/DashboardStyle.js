@@ -66,7 +66,7 @@ const styles = StyleSheet.create({
       fontSize: FontSize.smallText,
     },
     ViewHeading:{
-      width: width * 0.92, alignSelf: 'center', marginBottom:8
+      width: width * 0.94, alignSelf: 'center', marginBottom:8
     },
     ViewInnerHeading:{
       flexDirection: 'row',

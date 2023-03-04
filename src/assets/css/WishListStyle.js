@@ -7,10 +7,10 @@ const {width, height} = Dimensions.get('window');
 const styles = StyleSheet.create({
   bg: {flex: 1},
   datalistView: {
-    width: width * 0.44,
-    height: height * 0.38,
-    margin: 5,
-    padding: 10,
+    width: width * 0.46,
+    height: height * 0.39,
+    margin: 2,
+    padding: 8,
     borderRadius: 5,
     alignSelf: 'center',
     alignItems: 'center',
@@ -23,6 +23,11 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     marginTop: 5,
   },
+  removeButton:{
+    borderRadius: 20,
+    justifyContent: 'flex-end',
+    alignSelf: 'flex-end',
+  },
   innerImage: {
     height: height * 0.2,
     overflow: 'hidden',
@@ -30,7 +35,7 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     alignItems: 'center',
   },
-  inner: {padding: 5, width: width * 0.38},
+  inner: {padding: 2, width:"100%"},
   txt: {
     color: Colors.bluetheme,
     fontFamily: FontFamily.PopinsMedium,
@@ -67,6 +72,14 @@ const styles = StyleSheet.create({
     fontFamily: FontFamily.Popinssemibold,
     fontSize: FontSize.labelText3,
   },
+  removeIconButton:{
+    zIndex: 99999,
+    marginBottom: -23, 
+    padding: 2,
+    borderRadius: 20,
+    justifyContent: "flex-end",
+    alignSelf: "flex-end"
+  }
 });
 
 export {styles};

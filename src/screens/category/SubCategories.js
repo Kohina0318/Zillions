@@ -16,6 +16,7 @@ import {useToast} from 'react-native-toast-notifications';
 import Header from '../../components/shared/header/Header';
 import {SubCategoryDataList} from '../../components/shared/FlateLists/CategoryFlatList/SubCategoryDataList';
 import LoadingFullScreen from '../../components/shared/Loader/LoadingFullScreen';
+import NoDataMsg from '../../components/shared/NoData/NoDataMsg';
 
 const {width, height} = Dimensions.get('screen');
 
@@ -80,10 +81,7 @@ export default function SubCategories(props) {
           <SubCategoryDataList data={data} />
           <View style={{marginVertical: 30}} /></>
         ) : (
-          <View
-            style={{alignItems: 'center', flex: 1, justifyContent: 'center'}}>
-            <Text  allowFontScaling={false}>No data found!</Text>
-          </View>
+          <NoDataMsg  title="No Subcategory Found! "/>
         )}
       </View>
       )}

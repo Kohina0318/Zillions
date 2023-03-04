@@ -15,7 +15,6 @@ import {ProfileStyle} from '../../assets/css/ProfileStyle';
 import RegisterLoginHeader from '../../components/shared/header/RegisterLoginHeader';
 import LoadingFullScreen from '../../components/shared/Loader/LoadingFullScreen';
 import HalfSizeButton from '../../components/shared/button/halfSizeButton';
-import AsyncStorage from '@react-native-community/async-storage';
 import {ScrollView, State} from 'react-native-gesture-handler';
 import { postEditProfile } from '../../repository/ProfileRepository/EditProfileRepo';
 import VerifyModel from '../../components/shared/Model/VerifyModel';
@@ -75,7 +74,14 @@ export default function EditProfile(props) {
         setGooglePlus(res.data[0].google_plus);
         setLoader(false);
       } else {
-        setLoader(false);
+        setLoader(false); 
+        toast.show(res.msg, {
+          type: 'warning',
+          placement: 'bottom',
+          duration: 3000,
+          offset: 30,
+          animationType: 'slide-in',
+        });
       }
     } catch (e) {
       setLoader(false);
@@ -107,7 +113,7 @@ export default function EditProfile(props) {
          setShowmodal(!showmodal)   
         } else {
           toast.show(res.msg, {
-            type: 'danger',
+            type: 'warning',
             placement: 'bottom',
             duration: 3000,
             offset: 30,

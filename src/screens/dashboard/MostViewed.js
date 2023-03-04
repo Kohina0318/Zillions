@@ -9,6 +9,7 @@ import {useToast} from 'react-native-toast-notifications';
 import Header from '../../components/shared/header/Header';
 import { getProductList } from '../../repository/DashboardRepository/AllDashboardRep';
 import LoadingFullScreen from '../../components/shared/Loader/LoadingFullScreen';
+import NoDataMsg from '../../components/shared/NoData/NoDataMsg';
 const {width, height} = Dimensions.get('screen');
 
 export default function MostViewed(props) {
@@ -68,16 +69,11 @@ export default function MostViewed(props) {
           ...ProductStyle.container,
         }}>
         {mostViewedData.length > 0 ? (
-          <ScrollView showsVerticalScrollIndicator={false}>
             <ProductDataList data={mostViewedData} />
-          </ScrollView>
         ) : (
-          <View
-            style={{alignItems: 'center', flex: 1, justifyContent: 'center'}}>
-            <Text  allowFontScaling={false}>No data found!</Text>
-          </View>
+          <NoDataMsg  title="No Product Found! "/>
         )}
-        <View style={{marginVertical: 40}} />
+        <View style={{marginVertical: 20}} />
       </View>
       )}
     </View>

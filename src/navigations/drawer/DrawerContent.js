@@ -17,7 +17,7 @@ import {MyThemeClass} from '../../components/Theme/ThemeDarkLightColor';
 import AD from 'react-native-vector-icons/AntDesign';
 import MCI from 'react-native-vector-icons/MaterialCommunityIcons';
 import FA from 'react-native-vector-icons/FontAwesome';
-import AsyncStorage from '@react-native-community/async-storage';
+import { getUserData } from '../../repository/CommonRepository';
 
 const {width} = Dimensions.get('window');
 
@@ -30,11 +30,10 @@ export default function DrawerContent(props) {
 
   useEffect(async () => {
     try {
-      var UserData = await AsyncStorage.getItem('@UserData');
-      var data = JSON.parse(UserData);
-      if (data == null || data == '' || data == undefined) {
+      var userData = await getUserData();
+      if (userData == null || userData == '' || userData == undefined) {
       } else {
-        setUserData(data);
+        setUserData(userData);
       }
     } catch (e) {}
   }, []);

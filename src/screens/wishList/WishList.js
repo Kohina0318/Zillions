@@ -6,6 +6,7 @@ import {
   Appearance,
   Dimensions,
   ScrollView,
+  Alert,
 } from 'react-native';
 import {useSelector} from 'react-redux';
 import {MyThemeClass} from '../../components/Theme/ThemeDarkLightColor';
@@ -13,23 +14,35 @@ import Header from '../../components/shared/header/Header';
 import {styles} from '../../assets/css/WishListStyle';
 import {WishListDataList} from '../../components/shared/FlateLists/WishlistFlatList/WishListDataList';
 import {getWishlist} from '../../repository/WishListRepository/WishListRepo';
-import {useFocusEffect, } from '@react-navigation/native';
+import {useFocusEffect} from '@react-navigation/native';
 import LoadingFullScreen from '../../components/shared/Loader/LoadingFullScreen';
+import NoDataMsg from '../../components/shared/NoData/NoDataMsg';
+import {useNavigation} from '@react-navigation/native';
+import { useToast } from 'react-native-toast-notifications';
 const {width, height} = Dimensions.get('screen');
 
 export default function WishList(props) {
+
+  const toast = useToast();
   const mode = useSelector(state => state.mode);
   const themecolor = new MyThemeClass(mode).getThemeColor();
 
+  const navigation = useNavigation();
   const [loader, setLoader] = useState(true);
   const [refresh, setRefresh] = useState(false);
   const [data, setData] = useState([]);
+  const [dataMsg, setDataMsg] = useState('');
 
   const handleWishlist = async () => {
     try {
       var res = await getWishlist();
-      setData(res.data);
-      setLoader(false);
+      if (res.status === true) {
+        setData(res.data);
+        setLoader(false);
+      } else {
+        setLoader(false);
+        setDataMsg(res.msg);
+      }
     } catch (e) {
       console.log('errrror in..handleWishlist page wishlist-->', e);
       setLoader(false);
@@ -46,10 +59,8 @@ export default function WishList(props) {
   useFocusEffect(
     React.useCallback(() => {
       handleWishlist();
-    }, [refresh]),
+    }, [refresh,props]),
   );
-
-  
 
   return (
     <View style={{...styles.bg, backgroundColor: themecolor.THEMECOLOR}}>
@@ -58,21 +69,14 @@ export default function WishList(props) {
       {loader ? (
         <LoadingFullScreen style={{flex: 1}} />
       ) : (
-        <> 
+        <>
           <View style={{...styles.container}}>
             {data.length > 0 ? (
-              <ScrollView showsVerticalScrollIndicator={false}>
-                <WishListDataList data={data} />
-              </ScrollView>
+                <WishListDataList data={data} setRefresh={setRefresh} refresh={refresh} />
+            ) : dataMsg != '' ? (
+              navigation.navigate('Login')
             ) : (
-              <View
-                style={{
-                  alignItems: 'center',
-                  flex: 1,
-                  justifyContent: 'center',
-                }}>
-                <Text allowFontScaling={false}>No data found!</Text>
-              </View>
+              <NoDataMsg title="No Product Found!" />
             )}
             <View style={{marginVertical: 20}} />
           </View>

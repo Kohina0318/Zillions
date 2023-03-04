@@ -17,6 +17,7 @@ import {styles} from '../../assets/css/BrandsStyle';
 import {useFocusEffect} from '@react-navigation/native';
 import LoadingFullScreen from '../../components/shared/Loader/LoadingFullScreen';
 import {BrandDataList} from '../../components/shared/FlateLists/DashboardFlatList/BrandFlatList';
+import NoDataMsg from '../../components/shared/NoData/NoDataMsg';
 
 const {width, height} = Dimensions.get('screen');
 
@@ -82,14 +83,7 @@ export default function Brands(props) {
                 />
               </ScrollView>
             ) : (
-              <View
-                style={{
-                  alignItems: 'center',
-                  flex: 1,
-                  justifyContent: 'center',
-                }}>
-                <Text  allowFontScaling={false}>No data found!</Text>
-              </View>
+               <NoDataMsg  title="No Brands Found! "/>
             )}
             <View style={{marginVertical: 45}} />
           </View>

@@ -16,6 +16,7 @@ import {getByProduct} from '../../repository/CategoryRepository/AllProductCatego
 import {useToast} from 'react-native-toast-notifications';
 import Header from '../../components/shared/header/Header';
 import LoadingFullScreen from '../../components/shared/Loader/LoadingFullScreen';
+import NoDataMsg from '../../components/shared/NoData/NoDataMsg';
 
 const {width, height} = Dimensions.get('screen');
 
@@ -79,14 +80,9 @@ export default function Products(props) {
             ...ProductStyle.container,
           }}>
           {data.length > 0 ? (
-            <ScrollView showsVerticalScrollIndicator={false}>
               <ProductDataList data={data} />
-            </ScrollView>
           ) : (
-            <View
-              style={{alignItems: 'center', flex: 1, justifyContent: 'center'}}>
-              <Text  allowFontScaling={false}>No data found!</Text>
-            </View>
+            <NoDataMsg  title="No Product Found! "/>
           )}
           <View style={{marginVertical: 40}} />
         </View>
