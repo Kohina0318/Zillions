@@ -87,6 +87,8 @@ export default function ProductDetail(props) {
   const [slug, setSlug] = useState('');
   const [unit, setUnit] = useState('');
   const [featured, setFeatured] = useState('');
+  const [title, setTitle] = useState('');
+  const [navigateTo, setNavigateTo] = useState('');
 
   const handleWishListed = () => {
     setShowWishListed(!showWishListed);
@@ -140,6 +142,20 @@ export default function ProductDetail(props) {
     }
   };
 
+  const handleRB=(index)=>{
+if(index==1){
+  setTitle('Add To Cart')
+  setNavigateTo('Cart')
+}
+else
+{
+  setTitle('Buy Now')
+  setNavigateTo('Order')
+}
+
+refRBSheet.current.open()
+  }
+
   useEffect(() => {
     handleProductView();
     handleRelatedProduct();
@@ -183,10 +199,8 @@ export default function ProductDetail(props) {
               <View
                 style={{
                   backgroundColor: themecolor.BOXBORDERCOLOR,
-                  borderWidth: 0.5,
                   borderColor: themecolor.BOXBORDERCOLOR1,
-                  borderRadius: 5,
-                  padding: 10,
+                  ...styles.subView1,
                 }}>
                 {featured == 'ok' ? (
                   <View style={{position: 'absolute', top: -10, right: -10}}>
@@ -208,12 +222,10 @@ export default function ProductDetail(props) {
 
                 <View
                   style={{
-                    alignSelf: 'center',
-                    justifyContent: 'flex-start',
-                    padding: 10,
+                    ...styles.BRVIEW,
                   }}>
-                  <View style={{flexDirection: 'row', width: '100%'}}>
-                    <View style={{width: width * 0.7, flexDirection: 'column'}}>
+                  <View style={{...styles.BRSUBVIEW}}>
+                    <View style={{...styles.BRWID}}>
                       <Text
                         allowFontScaling={false}
                         style={{
@@ -239,9 +251,7 @@ export default function ProductDetail(props) {
 
                     <View
                       style={{
-                        width: width * 0.1,
-                        justifyContent: 'center',
-                        alignItems: 'center',
+                        ...styles.WID1,
                       }}>
                       {showWishListed ? (
                         <TouchableOpacity
@@ -270,9 +280,7 @@ export default function ProductDetail(props) {
 
                     <View
                       style={{
-                        width: width * 0.1,
-                        justifyContent: 'center',
-                        alignItems: 'center',
+                        ...styles.WID1,
                       }}>
                       <TouchableOpacity
                         activeOpacity={0.5}
@@ -356,16 +364,12 @@ export default function ProductDetail(props) {
                 <View
                   style={{
                     backgroundColor: themecolor.BOXBORDERCOLOR,
-                    borderWidth: 0.5,
                     borderColor: themecolor.BOXBORDERCOLOR1,
-                    borderRadius: 5,
-                    padding: 10,
+                    ...styles.subView1,
                   }}>
                   <View
                     style={{
-                      width: width * 0.9,
-                      margin: 10,
-                      flexDirection: 'row',
+                      ...styles.WID9,
                     }}>
                     <Text
                       allowFontScaling={false}
@@ -400,16 +404,12 @@ export default function ProductDetail(props) {
                 <View
                   style={{
                     backgroundColor: themecolor.BOXBORDERCOLOR,
-                    borderWidth: 0.5,
                     borderColor: themecolor.BOXBORDERCOLOR1,
-                    borderRadius: 5,
-                    padding: 10,
+                    ...styles.subView1,
                   }}>
                   <View
                     style={{
-                      width: width * 0.9,
-                      margin: 10,
-                      flexDirection: 'column',
+                      ...styles.WID,
                     }}>
                     <Text
                       allowFontScaling={false}
@@ -433,25 +433,16 @@ export default function ProductDetail(props) {
                 <View
                   style={{
                     backgroundColor: themecolor.BOXBORDERCOLOR,
-                    borderWidth: 0.5,
                     borderColor: themecolor.BOXBORDERCOLOR1,
-                    borderRadius: 5,
-                    padding: 10,
+                    ...styles.subView1,
                   }}>
                   <View
                     style={{
-                      width: width * 0.9,
-                      margin: 10,
-                      flexDirection: 'column',
+                      ...styles.WID9,
                     }}>
                     <View
                       style={{
-                        width: width * 0.9,
-                        marginLeft: 10,
-                        marginRight: 10,
-                        marginTop: 10,
-                        marginBottom: 5,
-                        flexDirection: 'row',
+                        ...styles.DELVIEW,
                       }}>
                       <Text
                         allowFontScaling={false}
@@ -472,12 +463,7 @@ export default function ProductDetail(props) {
                     </View>
                     <View
                       style={{
-                        width: width * 0.9,
-                        marginLeft: 10,
-                        marginRight: 10,
-                        marginTop: 8,
-                        marginBottom: 5,
-                        flexDirection: 'row',
+                        ...styles.DELVIEW,
                       }}>
                       <Text
                         allowFontScaling={false}
@@ -517,15 +503,12 @@ export default function ProductDetail(props) {
                 <View
                   style={{
                     backgroundColor: themecolor.BOXBORDERCOLOR,
-                    borderWidth: 0.5,
                     borderColor: themecolor.BOXBORDERCOLOR1,
-                    borderRadius: 5,
-                    padding: 5,
+                    ...styles.subView1,
                   }}>
                   <View
                     style={{
-                      alignItems: 'center',
-                      marginTop: 5,
+                      ...styles.Tabsubview,
                     }}>
                     <TabData
                       totalReview={totalReview}
@@ -587,6 +570,7 @@ export default function ProductDetail(props) {
                           color={themecolor.TXTWHITE}
                         />
                       }
+                      onPress={()=>handleRB(1)}
                       backgroundColor={themecolor.TXTWHITE1}
                       color={themecolor.TXTWHITE}
                       borderColor={themecolor.TXTWHITE}
@@ -603,7 +587,7 @@ export default function ProductDetail(props) {
                           color={'#fff'}
                         />
                       }
-                      onPress={() => refRBSheet.current.open()}
+                      onPress={() =>handleRB(2)}
                       backgroundColor={themecolor.ADDTOCARTBUTTONCOLOR}
                       color={'#fff'}
                       borderColor={themecolor.BORDERCOLOR}
@@ -621,7 +605,7 @@ export default function ProductDetail(props) {
                   />
                 </View>
               )}
-              <RBSheetData refRBSheet={refRBSheet} sizes={sizes} touch={true} />
+              <RBSheetData refRBSheet={refRBSheet} title={title} navigateTo={navigateTo} sizes={sizes} touch={false} />
             </View>
           </TouchableOpacity>
           <View style={styles.centeredView}>

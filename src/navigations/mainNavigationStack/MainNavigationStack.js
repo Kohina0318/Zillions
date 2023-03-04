@@ -33,6 +33,7 @@ import OrderDetails from '../../screens/order/OrderDetails';
 import Address from '../../screens/mangeAddress/Address';
 import EditProfile from '../../screens/profile/EditProfile';
 import SupportTicket from '../../screens/SupportTicket/SupportTicket';
+import Search from '../../screens/Search/Search';
 
 function MainNavigationStack(props) {
   const Stack = createStackNavigator();
@@ -80,6 +81,11 @@ function MainNavigationStack(props) {
         <Stack.Screen
           name="Categories"
           component={Categories}
+          options={{headerShown: false}}
+        />
+           <Stack.Screen
+          name="Search"
+          component={Search}
           options={{headerShown: false}}
         />
         <Stack.Screen

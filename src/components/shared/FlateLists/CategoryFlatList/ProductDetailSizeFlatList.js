@@ -7,50 +7,65 @@ import {styles} from '../../../../assets/css/ProductDetailStyle';
 
 const {width, height} = Dimensions.get('screen');
 
-function ProductDetailSizeList({item, themecolor, touch}) {
+function ProductDetailSizeList({index, touch, selected,onChange, item, themecolor, }) {
   const navigation = useNavigation();
 
+const handleClick=(index)=>{
+  onChange(index)
+}
+
+console.log('items.......',index, touch, selected, onChange, item, themecolor)
   return (
     <>
-      <TouchableOpacity
-        activeOpacity={0.8}
-        disabled={touch}
-        >
-     <View style={{width:width*0.15,margin:5,flexDirection:'column'}}>
-          <View style={{width:width*0.15,flexDirection:'row'}}>
-              <Text allowFontScaling={false} style={{
-            ...styles.HeadText2,
-            color: themecolor.TXTWHITE,
-            backgroundColor:themecolor.LIGHTGREY
-          }}> {item.size}
-          </Text>
-          
-          </View>
-          <View style={{width:width*0.15,flexDirection:'row',justifyContent:'center'}}>
-              <Text allowFontScaling={false} style={{
-            ...styles.HeadText3,
-            color:'grey',
+      <TouchableOpacity activeOpacity={0.8} disabled={touch}
+      onPress={()=>handleClick(index)}>
+        <View
+          style={{
+         ...styles.SizeView,
+            borderColor:themecolor.LIGHTGREY, 
+            backgroundColor:index==selected?themecolor.LIGHTGREY:'transparent' 
           }}>
-          &#8377;{item.amount}
-          </Text>
-         </View>
-         </View>
+          <View style={{...styles.flexDR}}>
+            <Text
+              allowFontScaling={false}
+              style={{
+                ...styles.HeadText2,
+                color: themecolor.TXTWHITE,
+              }}>
+              Size: {item.size}
+            </Text>
+          </View>
+          <View style={{...styles.flexDR}}>
+            <Text
+              allowFontScaling={false}
+              style={{
+                ...styles.HeadText3,
+                color: themecolor.TXTWHITE,
+              }}>
+              Price: &#8377;{item.amount}
+            </Text>
+          </View>
+        </View>
       </TouchableOpacity>
     </>
   );
 }
 
-
 export function ProductDetailSizeFlatList(props) {
   const mode = useSelector(state => state.mode);
   const themecolor = new MyThemeClass(mode).getThemeColor();
+  const [selected,setSelected]=React.useState(0)
+
+  const handleSelected=(item)=>{
+    setSelected(item)
+  }
 
   return (
     <>
       <FlatList
         data={props.sizes}
-        renderItem={({item}) => (
-          <ProductDetailSizeList item={item} themecolor={themecolor} />
+        renderItem={({item,index}) => (
+          <ProductDetailSizeList index={index} touch={props.touch} selected={selected} onChange={(value)=>handleSelected(value)} item={item} themecolor={themecolor} />
         )}
         horizontal={true}
         showsHorizontalScrollIndicator={false}

@@ -74,15 +74,19 @@ export default function Header(props) {
 
           <View
             style={{...styles.iconView}}>
+           
             <View style={{...styles.iconText}}>
+            {props.search?<></>
+            :
               <TouchableOpacity
                 activeOpacity={0.5}
-                // onPress={() => {
-                //   this.setState({showSearch: true});
-                // }}
+                onPress={() => {
+                  navigation.navigate("Search");
+                }}
                 >
                 <Icon name="search" size={22} color={themecolor.TXTWHITE} />
               </TouchableOpacity>
+            }
             </View>
 
             <View style={{...styles.iconText}}>

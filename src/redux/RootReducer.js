@@ -2,6 +2,7 @@ import { createReducer } from '@reduxjs/toolkit'
 
 const initialState = {
   mode: 'light',
+  data:{}
   
 };
 
@@ -10,6 +11,16 @@ const RootReducer = createReducer(initialState, (builder) => {
     // console.log('THEME_CHANGE in redux...', action);
     state.mode = action.payload;
   })
+
+  
+  builder.addCase('ADD_DATA',(state,action)=>{
+    state.data[action.payload[0]] = action.payload[1];
+  })
+  
+    builder.addCase('DEL_DATA',(state,action)=>{
+     delete state.data[action.payload[0]]
+    })
+
   
   
 });

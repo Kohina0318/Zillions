@@ -33,7 +33,7 @@ const FontSize = {
   labelTextbig: 22,
   textInput: 15,
   buttonText: 16,
-  newButtonText: 17,
+  newButtonText: 18,
   mainButton: 15,
   VText:15,
   LabelText70:70,
