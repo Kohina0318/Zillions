@@ -22,8 +22,8 @@ console.log('items.......',index, touch, selected, onChange, item, themecolor)
         <View
           style={{
          ...styles.SizeView,
-            borderColor:themecolor.TXTGREYS, 
-            backgroundColor:index==selected?themecolor.TXTGREYS:'transparent' 
+            borderColor:themecolor.LIGHTGREY, 
+            backgroundColor:index==selected?themecolor.LIGHTGREY:'transparent' 
           }}>
           <View style={{...styles.flexDR}}>
             <Text

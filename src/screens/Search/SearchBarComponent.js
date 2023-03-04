@@ -14,6 +14,11 @@ export default function SearchBar(props) {
    setResult(text)
    props.onChange(text)
     }
+
+    const handleClear=()=>{
+        setResult('')
+        props.onPress1()
+    }
   
 
     return (
@@ -23,9 +28,9 @@ export default function SearchBar(props) {
             <Icon name={props.LeftIcon} size={18} color={themecolor.TXTWHITE} />
             </TouchableOpacity>
             </View>
-            <TextInput value={result} onChangeText={(text) => handleText(text)} style={{...styles.SearchTextInput,height:props.height,color:themecolor.TXTWHITE}} placeholderTextColor={themecolor.TXTGREYS} placeholder={props.placeholder} />
+            <TextInput onKeyPress={props.onKeyPress} onSubmitEditing={props.onSubmitEditing} value={result} onChangeText={(text) => handleText(text)} style={{...styles.SearchTextInput,height:props.height,color:themecolor.TXTWHITE}} placeholderTextColor={themecolor.TXTGREYS} placeholder={props.placeholder} />
             <View style={styles.Close}>
-            <TouchableOpacity onPress={()=>setResult('')}><Icon name={props.RightCloseIcon} size={20} color={themecolor.TXTWHITE} /></TouchableOpacity>
+            <TouchableOpacity onPress={()=>handleClear()}><Icon name={props.RightCloseIcon} size={20} color={themecolor.TXTWHITE} /></TouchableOpacity>
          </View>
         </View>
     )

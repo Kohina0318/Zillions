@@ -16,9 +16,7 @@ const {width, height} = Dimensions.get('screen');
 
 
 
-function FilterList({item, themecolor}) {
-  const [checked, setChecked] = useState(false);
-  const toggleCheckbox = () => setChecked(!checked);
+function FilterBrandList({item,index,selectedIndex,onChange1, themecolor}) {
   
   return (
     <>   
@@ -26,23 +24,34 @@ function FilterList({item, themecolor}) {
       <CheckBox
       center
       title={item.brand_name}
-      checked={checked}
-      onPress={() => setChecked(!checked)}
+      checked={selectedIndex==index?true:false}
+          onPress={() => onChange1(index)}
+      textStyle={{color:themecolor.TXTWHITE}}
+      checkedColor={themecolor.ADDTOCARTBUTTONCOLOR}
+      containerStyle={{backgroundColor:'transparent'}}
     />
       </View>
     </>
   );
 }
 
-export function FilterFlatList(props) {
+export function FilterBrandFlatList(props) {
   const mode = useSelector(state => state.mode);
   const themecolor = new MyThemeClass(mode).getThemeColor();
+
+  const [selectedIndex, setIndex] = React.useState(-1);
+
+  const onChange1=(value)=>{
+    setIndex(value)
+  }
+
+
   return (
     <>
       <FlatList
         data={props.data}
-        renderItem={({item}) => (
-          <FilterList item={item} themecolor={themecolor} />
+        renderItem={({item,index}) => (
+          <FilterBrandList item={item} index={index} selectedIndex={selectedIndex} onChange1={(value)=>onChange1(value)} themecolor={themecolor} />
         )}
         // horizontal={true}
         contentContainerStyle={{
@@ -53,7 +62,57 @@ export function FilterFlatList(props) {
         showsVerticalScrollIndicator={false}
         scrollEnabled={true}
       />
-      <View style={{marginVertical: 20}} />
+    </>
+  );
+}
+
+
+function FilterCategoryList({item,index,selectedIndex,onChange1, themecolor}) {
+  
+  return (
+    <>   
+      <View style={styles.checkboxContainer}>
+      <CheckBox
+      center
+      title={item.category_name}
+      checked={selectedIndex==index?true:false}
+          onPress={() => onChange1(index)}
+      textStyle={{color:themecolor.TXTWHITE}}
+      checkedColor={themecolor.ADDTOCARTBUTTONCOLOR}
+      containerStyle={{backgroundColor:'transparent'}}
+    />
+      </View>
+    </>
+  );
+}
+
+export function FilterCategoryFlatList(props) {
+  const mode = useSelector(state => state.mode);
+  const themecolor = new MyThemeClass(mode).getThemeColor();
+
+  const [selectedIndex, setIndex] = React.useState(-1);
+
+  const onChange1=(value)=>{
+    setIndex(value)
+  }
+
+
+  return (
+    <>
+      <FlatList
+        data={props.data}
+        renderItem={({item,index}) => (
+          <FilterCategoryList item={item} index={index} selectedIndex={selectedIndex} onChange1={(value)=>onChange1(value)} themecolor={themecolor} />
+        )}
+        // horizontal={true}
+        contentContainerStyle={{
+          flexDirection: 'row',
+          flexWrap: 'wrap',
+          width: width * 0.94,
+        }}
+        showsVerticalScrollIndicator={false}
+        scrollEnabled={true}
+      />
     </>
   );
 }

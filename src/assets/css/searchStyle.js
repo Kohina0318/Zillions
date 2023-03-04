@@ -56,7 +56,7 @@ const styles = StyleSheet.create({
     color: Colors.bluetheme1,
   },
   SearchMainView: {
-    flex:1,
+    flex: 1,
   },
   SearchSecondView: {
     flexDirection: 'row',
@@ -72,7 +72,6 @@ const styles = StyleSheet.create({
     marginTop: 10,
     borderRadius: 10,
     height: 40,
-
   },
   SearchIcon: {alignSelf: 'center', left: 10},
   SearchTextInput: {
@@ -83,30 +82,30 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     top: 2,
-    color:'#000'
+    color: '#000',
   },
   SizeView: {
-    margin:5,
+    margin: 5,
     paddingLeft: 12,
     paddingRight: 12,
-    paddingTop:5,
-    paddingBottom:5,
+    paddingTop: 5,
+    paddingBottom: 5,
     flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center',
     borderRadius: 20,
     borderWidth: 1,
-    marginTop:10,
+    marginTop: 10,
   },
   SizeView1: {
-    margin:5,
+    margin: 5,
     paddingLeft: 12,
     paddingRight: 12,
-    paddingTop:5,
-    paddingBottom:5,
+    paddingTop: 5,
+    paddingBottom: 5,
     justifyContent: 'center',
     alignItems: 'center',
-    marginTop:10,
+    marginTop: 10,
   },
   flexDR: {
     flexDirection: 'row',
@@ -118,35 +117,27 @@ const styles = StyleSheet.create({
   },
   view14: {
     flexDirection: 'row',
-    justifyContent:'flex-start',
+    justifyContent: 'flex-start',
     alignItems: 'center',
     padding: 15,
   },
   RBText: {
     fontSize: FontSize.newButtonText,
     fontFamily: FontFamily.PopinsMedium,
-    fontWeight:'700',
-    marginLeft:5
+    fontWeight: '700',
+    marginLeft: 5,
   },
   Borderline: {
     width: width,
     justifyContent: 'center',
     alignSelf: 'center',
-    borderWidth: 0.5,
+    borderWidth: 0.3,
     borderColor: Colors.borderColor,
   },
   checkboxContainer: {
     flexDirection: 'row',
-margin:5,
-    width:width*0.43,
-    backgroundColor:'green'
-  },
-  checkbox: {
-    alignSelf: 'center',
-    backgroundColor:'transparent'
-  },
-  label: {
-    margin: 8,
+    margin: 5,
+    width: width * 0.44,
   },
 });
 
