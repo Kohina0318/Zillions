@@ -2,7 +2,7 @@ import React, {useRef, useState} from 'react';
 import RBSheet from 'react-native-raw-bottom-sheet';
 import {View, Text, TouchableOpacity, Dimensions} from 'react-native';
 import NumericInput from 'react-native-numeric-input';
-import EN from 'react-native-vector-icons/Entypo';
+import EN from 'react-native-vector-icons/MaterialCommunityIcons';
 import {ProductDetailSizeFlatList} from '../../components/shared/FlateLists/CategoryFlatList/ProductDetailSizeFlatList';
 import {styles} from '../../assets/css/ProductDetailStyle';
 import {useSelector} from 'react-redux';
@@ -51,7 +51,7 @@ navigation.navigate(props.navigateTo)
           <TouchableOpacity
             activeOpacity={1}
             onPress={() => handleMin()}>
-            <EN name="cross" color={themecolor.TXTWHITE} size={28} />
+            <EN name="close" color={themecolor.TXTWHITE} size={22} />
           </TouchableOpacity>
           <View>
             <Text allowFontScaling={false} style={{...styles.RBText, color: themecolor.TXTWHITE}}>

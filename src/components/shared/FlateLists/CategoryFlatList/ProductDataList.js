@@ -135,7 +135,7 @@ export function ProductDataList(props) {
         renderItem={({item}) => (
           <ProductDataFlateList item={item} themecolor={themecolor} />
         )}
-        horizontal={true}
+        // horizontal={true}
         contentContainerStyle={{
           flexDirection: 'row',
           flexWrap: 'wrap',
