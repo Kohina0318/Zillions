@@ -5,8 +5,10 @@ const getWishlist = async () => {
   try {
     const response = await fetch(`${await SERVER_URL()}/wishlist`, {
       method: 'GET',
-      headers: {'Content-Type': 'application/json;charset=utf-8',
-      Authorization: `${await getAppToken()}`},
+      headers: {
+        'Content-Type': 'application/json;charset=utf-8',
+        Authorization: `${await getAppToken()}`
+      },
     });
     const result = await response.json();
     return result;
@@ -14,12 +16,16 @@ const getWishlist = async () => {
     console.log('error in getwishlist...in WishListRepo ', err);
   }
 };
-const postAddOrRemoveWishlist = async (any,pId) => {
+
+const postAddOrRemoveWishlist = async (any, pId) => {
+  console.log("hhhhhhhhhhhhhhhhhhhhhhhhhhhhhh", await getAppToken(), any, pId)
   try {
     const response = await fetch(`${await SERVER_URL()}/wishlist-user/${any}/${pId}`, {
       method: 'POST',
-      headers: {'Content-Type': 'application/json;charset=utf-8',
-      Authorization: `${await getAppToken()}`},
+      headers: {
+        'Content-Type': 'application/json;charset=utf-8',
+        Authorization: `${await getAppToken()}`
+      },
     });
     const result = await response.json();
     return result;
@@ -28,4 +34,4 @@ const postAddOrRemoveWishlist = async (any,pId) => {
   }
 };
 
-export {getWishlist,postAddOrRemoveWishlist};
+export { getWishlist, postAddOrRemoveWishlist };

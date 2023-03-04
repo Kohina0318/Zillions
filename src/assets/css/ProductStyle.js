@@ -8,7 +8,7 @@ const ProductStyle = StyleSheet.create({
   bg: {flex: 1},
   datalistView: {
     width: width * 0.46,
-    height: height *0.35,
+    height: height *0.36,
     margin: 2,
     padding: 8,
     borderRadius: 5,
@@ -58,6 +58,14 @@ const ProductStyle = StyleSheet.create({
         color: Colors.black
     },
   iconview: {flexDirection: 'row', alignItems: 'center'},
+  wishlistIconButton:{
+    justifyContent: 'flex-end',
+    marginTop: -32,
+    alignItems: 'flex-end',
+    alignSelf: 'flex-end',
+    padding: 5,
+    borderRadius:25,
+  }
 });
 
 export {ProductStyle};

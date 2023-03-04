@@ -69,9 +69,7 @@ export default function RecentlyViewed(props) {
           ...ProductStyle.container,
         }}>
         {recentlyViewedData.length > 0 ? (
-          <ScrollView showsVerticalScrollIndicator={false}>
             <ProductDataList data={recentlyViewedData} />
-          </ScrollView>
         ) : (
           <NoDataMsg  title="No Product Found! "/>
         )}

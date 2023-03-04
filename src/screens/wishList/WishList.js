@@ -59,7 +59,7 @@ export default function WishList(props) {
   useFocusEffect(
     React.useCallback(() => {
       handleWishlist();
-    }, [refresh]),
+    }, [refresh,props]),
   );
 
   return (
@@ -72,9 +72,7 @@ export default function WishList(props) {
         <>
           <View style={{...styles.container}}>
             {data.length > 0 ? (
-              <ScrollView showsVerticalScrollIndicator={false}>
-                <WishListDataList data={data} />
-              </ScrollView>
+                <WishListDataList data={data} setRefresh={setRefresh} refresh={refresh} />
             ) : dataMsg != '' ? (
               navigation.navigate('Login')
             ) : (

@@ -80,9 +80,7 @@ export default function Products(props) {
             ...ProductStyle.container,
           }}>
           {data.length > 0 ? (
-            <ScrollView showsVerticalScrollIndicator={false}>
               <ProductDataList data={data} />
-            </ScrollView>
           ) : (
             <NoDataMsg  title="No Product Found! "/>
           )}

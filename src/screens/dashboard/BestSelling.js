@@ -70,13 +70,11 @@ export default function BestSelling(props) {
           ...ProductStyle.container,
         }}>
         {bestSellingData.length > 0 ? (
-          <ScrollView showsVerticalScrollIndicator={false}>
             <ProductDataList data={bestSellingData} />
-          </ScrollView>
         ) : (
           <NoDataMsg  title="No Product Found! "/>
         )}
-        <View style={{marginVertical: 40}} />
+        <View style={{marginVertical: 20}} />
       </View>
       )}
     </View>

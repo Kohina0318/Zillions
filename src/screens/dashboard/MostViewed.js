@@ -69,13 +69,11 @@ export default function MostViewed(props) {
           ...ProductStyle.container,
         }}>
         {mostViewedData.length > 0 ? (
-          <ScrollView showsVerticalScrollIndicator={false}>
             <ProductDataList data={mostViewedData} />
-          </ScrollView>
         ) : (
           <NoDataMsg  title="No Product Found! "/>
         )}
-        <View style={{marginVertical: 40}} />
+        <View style={{marginVertical: 20}} />
       </View>
       )}
     </View>

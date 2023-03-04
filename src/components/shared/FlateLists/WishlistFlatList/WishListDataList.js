@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   TouchableOpacity,
   View,
@@ -7,29 +7,29 @@ import {
   Image,
   Dimensions,
 } from 'react-native';
-import {Colors} from '../../../../assets/config/Colors';
-import {styles} from '../../../../assets/css/WishListStyle';
-import {MyThemeClass} from '../../../Theme/ThemeDarkLightColor';
-import {useSelector} from 'react-redux';
+import { Colors } from '../../../../assets/config/Colors';
+import { styles } from '../../../../assets/css/WishListStyle';
+import { MyThemeClass } from '../../../Theme/ThemeDarkLightColor';
+import { useSelector } from 'react-redux';
 import Feather from 'react-native-vector-icons/Feather';
 import FAIcon from 'react-native-vector-icons/FontAwesome';
-import {useNavigation} from '@react-navigation/native';
+import { useNavigation } from '@react-navigation/native';
 import HalfSizeButton from '../../button/halfSizeButton';
 import MCI from 'react-native-vector-icons/MaterialCommunityIcons';
-import {postAddOrRemoveWishlist} from '../../../../repository/WishListRepository/WishListRepo';
+import { postAddOrRemoveWishlist } from '../../../../repository/WishListRepository/WishListRepo';
 import { useToast } from 'react-native-toast-notifications';
 
-const {width, height} = Dimensions.get('screen');
+const { width, height } = Dimensions.get('screen');
 
-function WishListDataFlateList({item, themecolor}) {
+function WishListDataFlateList({ item, themecolor, setRefresh, refresh }) {
   const navigation = useNavigation();
   const toast = useToast();
 
   const handleRemove = async () => {
     try {
-      var res = await postAddOrRemoveWishlist('remove', item.product_id); 
-      // alert(JSON.stringify(res));
-      if (res.status === true) {
+      var res = await postAddOrRemoveWishlist('remove', item.product_id);
+      if (res.status === 'true') {
+        setRefresh(!refresh)
         toast.show(res.msg, {
           type: 'success',
           placement: 'bottom',
@@ -61,27 +61,19 @@ function WishListDataFlateList({item, themecolor}) {
   return (
     <>
       <View
-        activeOpacity={0.8}
         style={{
           ...styles.datalistView,
           backgroundColor: themecolor.BOXBORDERCOLOR,
           borderColor: themecolor.BOXBORDERCOLOR1,
         }}
-        // onPress={() =>
-        //   navigation.navigate('ProductDetail', {
-        //     productId: item.product_id,
-        //     title: item.title,
-        //   })
-        // }
       >
         <View
           style={{
-            width: '100%', zIndex:99999,
-            marginBottom: -27
+            ...styles.removeIconButton
           }}>
           <TouchableOpacity
-            activeOpacity={0.8}
-            style={{...styles.removeButton}}
+            activeOpacity={0.1}
+            style={{ ...styles.removeButton }}
             onPress={() => handleRemove()}>
             <MCI
               name="close-circle-outline"
@@ -90,35 +82,50 @@ function WishListDataFlateList({item, themecolor}) {
             />
           </TouchableOpacity>
         </View>
-        <View style={{...styles.innerImage}}>
+
+        <TouchableOpacity style={{ ...styles.innerImage }}
+          activeOpacity={0.08}
+          onPress={() =>
+            navigation.navigate('ProductDetail', {
+              productId: item.product_id,
+              title: item.title,
+            })
+          }>
           <Image
-            source={{uri: item.front_image}}
+            source={{ uri: item.front_image }}
             style={{
               width: width * 0.4,
               height: '100%',
             }}
             resizeMode="stretch"
           />
-        </View>
-        <View
+        </TouchableOpacity>
+
+        <TouchableOpacity activeOpacity={0.08}
+          onPress={() =>
+            navigation.navigate('ProductDetail', {
+              productId: item.product_id,
+              title: item.title,
+            })
+          }
           style={{
             ...styles.inner,
           }}>
           <View>
             <Text
               allowFontScaling={false}
-              style={{...styles.txt, color: themecolor.TXTWHITE}}
+              style={{ ...styles.txt, color: themecolor.TXTWHITE }}
               numberOfLines={2}>
               {item.title}
             </Text>
           </View>
 
-          <View style={{flexDirection: 'row', width: '100%'}}>
+          <View style={{ flexDirection: 'row', width: '100%' }}>
             <Text
               allowFontScaling={false}
-              style={{...styles.txt1, color: themecolor.TEXTGREEN}}>
+              style={{ ...styles.txt1, color: themecolor.TEXTGREEN }}>
               <FAIcon name="rupee" size={12} />
-              {item.purchase_price}
+              {item.purchase_price} 
               {'  '}
               <Text
                 allowFontScaling={false}
@@ -131,14 +138,14 @@ function WishListDataFlateList({item, themecolor}) {
               </Text>
               <Text
                 allowFontScaling={false}
-                style={{...styles.txt1, color: themecolor.TEXTRED}}>
+                style={{ ...styles.txt1, color: themecolor.TEXTRED }}>
                 {'  ('}
                 {item.discount}%{')'}
               </Text>
             </Text>
           </View>
 
-          <View style={{marginTop: 3}}>
+          <View style={{ marginTop: 3 }}>
             <HalfSizeButton
               title="Add to Cart"
               icon={
@@ -153,10 +160,10 @@ function WishListDataFlateList({item, themecolor}) {
               borderColor={themecolor.BACKICON}
               fontSize={12}
               height={width * 0.08}
-              // onPress={() => handleSetDefaultAddress(item.id)}
+            // onPress={() => handleSetDefaultAddress(item.id)}
             />
           </View>
-        </View>
+        </TouchableOpacity>
       </View>
     </>
   );
@@ -169,10 +176,10 @@ export function WishListDataList(props) {
   return (
     <FlatList
       data={props.data}
-      renderItem={({item}) => (
-        <WishListDataFlateList item={item} themecolor={themecolor} />
+      renderItem={({ item }) => (
+        <WishListDataFlateList item={item} themecolor={themecolor} setRefresh={props.setRefresh} refresh={props.refresh} />
       )}
-      horizontal={true}
+      // horizontal={true}
       contentContainerStyle={{
         flexDirection: 'row',
         flexWrap: 'wrap',
