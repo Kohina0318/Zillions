@@ -21,12 +21,7 @@ import { Stepper } from '../Stepper/Stepper';
 
 const { width, height } = Dimensions.get('screen');
 
-const data = [
-  { id: 1 },
-  { id: 2 }
-]
-
-export default function Cart(props) {
+export default function Payment(props) {
   function handleBackButtonClick() {
     props.navigation.goBack();
     return true;
@@ -60,9 +55,9 @@ export default function Cart(props) {
       ) : (
         <View style={{ ...styles.container }}> 
         <View>
-        <Stepper item={"Cart"} themecolor={themecolor} props={props}/>
+        <Stepper item={"Payment"} themecolor={themecolor} props={props}/>
         </View>
-          <CartProductDataList data={data} />
+          
         </View>
       )}
 
@@ -85,7 +80,6 @@ export default function Cart(props) {
               backgroundColor={themecolor.ADDTOCARTBUTTONCOLOR}
               color={'#fff'}
               borderColor={themecolor.BORDERCOLOR}
-              onPress={()=>props.navigation.navigate('Payment')}
             />
           </View>
         </View>

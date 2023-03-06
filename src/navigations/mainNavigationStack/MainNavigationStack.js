@@ -34,7 +34,7 @@ import EditProfile from '../../screens/profile/EditProfile';
 import SupportTicket from '../../screens/SupportTicket/SupportTicket';
 import Search from '../../screens/Search/Search';
 import Cart from '../../screens/OrderProcess/Cart';
-
+import Payment from '../../screens/OrderProcess/Payment';
 
 function MainNavigationStack(props) {
   const Stack = createStackNavigator();
@@ -166,6 +166,11 @@ function MainNavigationStack(props) {
         <Stack.Screen
           name="Cart"
           component={Cart}
+          options={{headerShown: false}}
+        />
+         <Stack.Screen
+          name="Payment"
+          component={Payment}
           options={{headerShown: false}}
         />
       </Stack.Navigator>
