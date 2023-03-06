@@ -10,18 +10,22 @@ const styles = StyleSheet.create({
     width: width * 0.46,
     height: height * 0.39,
     margin: 2,
-    padding: 8,
     borderRadius: 5,
-    alignSelf: 'center',
     alignItems: 'center',
-    marginBottom: 1,
     borderWidth: 0.5,
-    justifyContent: 'center',
   },
   container: {
     justifyContent: 'center',
     alignSelf: 'center',
     marginTop: 5,
+  },
+  containerInn1:{
+    padding: 5,
+    alignSelf: 'center',
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginTop:-20,
+    height: height*0.32
   },
   removeButton:{
     borderRadius: 20,
@@ -74,8 +78,7 @@ const styles = StyleSheet.create({
   },
   removeIconButton:{
     zIndex: 99999,
-    marginBottom: -23, 
-    padding: 2,
+    padding: 5,
     borderRadius: 20,
     justifyContent: "flex-end",
     alignSelf: "flex-end"

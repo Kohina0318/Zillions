@@ -46,12 +46,6 @@ export default function Categories(props) {
     }
   };
  
-  // useFocusEffect(
-  //   React.useCallback(() => {
-  //   handleCategories();
-  // }, [props]),
-  // );
-
   useEffect(()=>{
     handleCategories();
   },[])

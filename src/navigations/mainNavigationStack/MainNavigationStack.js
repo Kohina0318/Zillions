@@ -14,7 +14,6 @@ import Splash from '../../screens/intro/Splash';
 import Dashboard from '../../screens/dashboard/Dashboard';
 import BottomNavigationStack from '../bottomNavigator/BottomNavigationStack';
 import Categories from '../../screens/category/Categories';
-import Cart from '../../screens/cart/Cart';
 import WishList from '../../screens/wishList/WishList';
 import Profile from '../../screens/profile/Profile';
 import Order from '../../screens/order/Order';
@@ -34,6 +33,8 @@ import Address from '../../screens/mangeAddress/Address';
 import EditProfile from '../../screens/profile/EditProfile';
 import SupportTicket from '../../screens/SupportTicket/SupportTicket';
 import Search from '../../screens/Search/Search';
+import Cart from '../../screens/OrderProcess/Cart';
+
 
 function MainNavigationStack(props) {
   const Stack = createStackNavigator();
@@ -128,11 +129,6 @@ function MainNavigationStack(props) {
           options={{headerShown: false}}
         />
         <Stack.Screen
-          name="Cart"
-          component={Cart}
-          options={{headerShown: false}}
-        />
-        <Stack.Screen
           name="WishList"
           component={WishList}
           options={{headerShown: false}}
@@ -165,6 +161,11 @@ function MainNavigationStack(props) {
         <Stack.Screen
           name="SupportTicket"
           component={SupportTicket}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="Cart"
+          component={Cart}
           options={{headerShown: false}}
         />
       </Stack.Navigator>
