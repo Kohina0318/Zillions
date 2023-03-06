@@ -6,7 +6,7 @@ import {
   Appearance,
   Dimensions,
   TextInput,
-  BackHandler,
+  BackHandler, ScrollView
 } from 'react-native';
 import { useSelector } from 'react-redux';
 import { MyThemeClass } from '../../components/Theme/ThemeDarkLightColor';
@@ -17,6 +17,7 @@ import { useToast } from 'react-native-toast-notifications';
 import { CartProductDataList } from '../../components/shared/FlateLists/OrderProcessFlateList/CartProductDataList';
 import HalfSizeButton from '../../components/shared/button/halfSizeButton';
 import FAIcon from 'react-native-vector-icons/FontAwesome';
+import OrderDeailsComp from '../../components/shared/OrderProcessComponents/OrderDeailsComp';
 import { Stepper } from '../Stepper/Stepper';
 
 const { width, height } = Dimensions.get('screen');
@@ -58,13 +59,27 @@ export default function Cart(props) {
       {loader ? (
         <LoadingFullScreen style={{ flex: 1 }} />
       ) : (
-        <View style={{ ...styles.container }}> 
-        <View>
-        <Stepper item={"Cart"} themecolor={themecolor} props={props}/>
-        </View>
+        <ScrollView >
+
+          <View style={{ ...styles.MVT }} />
+
+          <View>
+            <Stepper item={"Cart"} themecolor={themecolor} props={props} />
+          </View>
+
           <CartProductDataList data={data} />
-        </View>
+
+          <View style={{ ...styles.MVT }} />
+
+          <OrderDeailsComp />
+
+          <View style={{ ...styles.MVT }} />
+
+        </ScrollView>
       )}
+
+
+      <View style={{ marginVertical: 30 }} />
 
       <View
         style={{
@@ -73,19 +88,19 @@ export default function Cart(props) {
           backgroundColor: themecolor.LOGINTHEMECOLOR,
         }}>
         <View style={{ ...styles.mainView }}>
-          <View style={{ width: '40%', justifyContent:"center",alignItems:"center", }}>
-           <Text style={{ ...styles.txt1, color: themecolor.TXTWHITE }}>Total: </Text>
-           <Text style={{ ...styles.txt1, color: themecolor.TXTWHITE }}><FAIcon name="rupee" size={12} /> 10000</Text>
+          <View style={{ width: '40%', justifyContent: "center", alignItems: "center", }}>
+            <Text style={{ ...styles.txt1, color: themecolor.TXTWHITE }}>Total: </Text>
+            <Text style={{ ...styles.txt1, color: themecolor.TXTWHITE }}><FAIcon name="rupee" size={12} /> 10000</Text>
           </View>
 
-          <View style={{ width: '60%' ,}}>
+          <View style={{ width: '60%', }}>
             <HalfSizeButton
               title="Proceed to Payment"
               icon=""
               backgroundColor={themecolor.ADDTOCARTBUTTONCOLOR}
               color={'#fff'}
               borderColor={themecolor.BORDERCOLOR}
-              onPress={()=>props.navigation.navigate('Payment')}
+              onPress={() => props.navigation.navigate('Payment')}
             />
           </View>
         </View>

@@ -57,7 +57,7 @@ export const Stepper = ({ item, props, themecolor }) => {
   return (
     <>
     <View style={{ ...StepperStyle.CUSTOMERdvIEW, }}>
-    <TouchableOpacity activeOpacity={0.5} style={{ ...StepperStyle.CUSTOMERVIEWTO, backgroundColor: themecolor.BOXBORDERCOLOR1, borderColor: themecolor.BOXBORDERCOLOR1 }}>
+    <TouchableOpacity activeOpacity={0.5} style={{ ...StepperStyle.CUSTOMERVIEWTO, backgroundColor: themecolor.BOXBORDERCOLOR, borderColor: themecolor.BOXBORDERCOLOR1 }}>
       <View
         style={{
           width: width * 0.9,
