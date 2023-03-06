@@ -57,7 +57,7 @@ export default function Cart(props) {
       {loader ? (
         <LoadingFullScreen style={{ flex: 1 }} />
       ) : (
-        <View style={{ ...styles.container }}>
+        <View style={{ ...styles.container }}> 
           <CartProductDataList data={data} />
         </View>
       )}
