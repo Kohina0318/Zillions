@@ -608,6 +608,7 @@ refRBSheet.current.open()
               <RBSheetData refRBSheet={refRBSheet} title={title} navigateTo={navigateTo} sizes={sizes} touch={false} />
             </View>
           </TouchableOpacity>
+          
           <View style={styles.centeredView}>
             <Modal
               animationType="slide"

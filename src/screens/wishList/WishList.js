@@ -59,7 +59,7 @@ export default function WishList(props) {
   useFocusEffect(
     React.useCallback(() => {
       handleWishlist();
-    }, [refresh,props]),
+    }, [props,refresh]),
   );
 
   return (

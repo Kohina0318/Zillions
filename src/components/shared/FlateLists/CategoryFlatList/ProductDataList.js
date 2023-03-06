@@ -87,7 +87,7 @@ function ProductDataFlateList({ item, themecolor }) {
           }}>
           {showWishListed ? (
             <TouchableOpacity
-              activeOpacity={0.1}
+              activeOpacity={0.05}
               onPress={() => handleWishListed('add')}>
               <FontAwesome
                 name="heart-o"

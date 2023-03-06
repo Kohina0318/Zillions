@@ -25,7 +25,7 @@ export default halfSizeButton = props => {
       alignSelf: 'center',
       alignItems: 'center',
       justifyContent: 'center',
-      height:props.height ? props.height:  width * 0.1,
+      height:props.height ? props.height:  width * 0.11,
       borderRadius: 5,
       borderWidth: 0.6,
       borderColor: props.borderColor,

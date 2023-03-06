@@ -90,12 +90,14 @@ export default function Header(props) {
             </View>
 
             <View style={{...styles.iconText}}>
-              <TouchableOpacity activeOpacity={0.5}>
+              <TouchableOpacity activeOpacity={0.5} onPress={() => {
+                  navigation.navigate("Cart");
+                }}>
                 <BadgeIcon
                   icon="shopping-cart"
                   count={1}
                   onPress={() => {
-                    navigation.navigate('MyCart');
+                    navigation.navigate('Cart');
                   }}
                 />
               </TouchableOpacity>

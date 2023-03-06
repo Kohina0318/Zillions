@@ -28,7 +28,7 @@ function WishListDataFlateList({ item, themecolor, setRefresh, refresh }) {
   const handleRemove = async () => {
     try {
       var res = await postAddOrRemoveWishlist('remove', item.product_id);
-      if (res.status === 'true') {
+      if (res.status == true) {
         setRefresh(!refresh)
         toast.show(res.msg, {
           type: 'success',
@@ -69,10 +69,10 @@ function WishListDataFlateList({ item, themecolor, setRefresh, refresh }) {
       >
         <View
           style={{
-            ...styles.removeIconButton
+            ...styles.removeIconButton,
           }}>
           <TouchableOpacity
-            activeOpacity={0.1}
+            activeOpacity={0.05}
             style={{ ...styles.removeButton }}
             onPress={() => handleRemove()}>
             <MCI
@@ -83,87 +83,92 @@ function WishListDataFlateList({ item, themecolor, setRefresh, refresh }) {
           </TouchableOpacity>
         </View>
 
-        <TouchableOpacity style={{ ...styles.innerImage }}
-          activeOpacity={0.08}
+        <TouchableOpacity
+          activeOpacity={0.9}
           onPress={() =>
             navigation.navigate('ProductDetail', {
               productId: item.product_id,
               title: item.title,
             })
-          }>
-          <Image
-            source={{ uri: item.front_image }}
-            style={{
-              width: width * 0.4,
-              height: '100%',
-            }}
-            resizeMode="stretch"
-          />
-        </TouchableOpacity>
-
-        <TouchableOpacity activeOpacity={0.08}
-          onPress={() =>
-            navigation.navigate('ProductDetail', {
-              productId: item.product_id,
-              title: item.title,
-            })
-          }
-          style={{
-            ...styles.inner,
+          } style={{
+            ...styles.containerInn1
           }}>
-          <View>
-            <Text
-              allowFontScaling={false}
-              style={{ ...styles.txt, color: themecolor.TXTWHITE }}
-              numberOfLines={2}>
-              {item.title}
-            </Text>
-          </View>
-
-          <View style={{ flexDirection: 'row', width: '100%' }}>
-            <Text
-              allowFontScaling={false}
-              style={{ ...styles.txt1, color: themecolor.TEXTGREEN }}>
-              <FAIcon name="rupee" size={12} />
-              {item.purchase_price} 
-              {'  '}
-              <Text
-                allowFontScaling={false}
-                style={{
-                  ...styles.txtLine,
-                  color: themecolor.TXTGREY,
-                }}>
-                <FAIcon name="rupee" size={12} />
-                {item.sale_price}
-              </Text>
-              <Text
-                allowFontScaling={false}
-                style={{ ...styles.txt1, color: themecolor.TEXTRED }}>
-                {'  ('}
-                {item.discount}%{')'}
-              </Text>
-            </Text>
-          </View>
-
-          <View style={{ marginTop: 3 }}>
-            <HalfSizeButton
-              title="Add to Cart"
-              icon={
-                <Feather
-                  name="shopping-cart"
-                  size={12}
-                  color={themecolor.BACKICON}
-                />
-              }
-              backgroundColor={'transparent'}
-              color={themecolor.BACKICON}
-              borderColor={themecolor.BACKICON}
-              fontSize={12}
-              height={width * 0.08}
-            // onPress={() => handleSetDefaultAddress(item.id)}
+          <View style={{ ...styles.innerImage }}
+          >
+            <Image
+              source={{ uri: item.front_image }}
+              style={{
+                width: width * 0.36,
+                height: '100%',
+              }}
+              resizeMode="stretch"
             />
           </View>
+
+          <View
+            style={{
+              ...styles.inner,
+            }}>
+            <View>
+              <Text
+                allowFontScaling={false}
+                style={{ ...styles.txt, color: themecolor.TXTWHITE }}
+                numberOfLines={2}>
+                {item.title}
+              </Text>
+            </View>
+
+            <View style={{ flexDirection: 'row', width: '100%' }}>
+              <Text
+                allowFontScaling={false}
+                style={{ ...styles.txt1, color: themecolor.TEXTGREEN }}>
+                <FAIcon name="rupee" size={12} />
+                {item.purchase_price}
+                {'  '}
+                <Text
+                  allowFontScaling={false}
+                  style={{
+                    ...styles.txtLine,
+                    color: themecolor.TXTGREY,
+                  }}>
+                  <FAIcon name="rupee" size={12} />
+                  {item.sale_price}
+                </Text>
+                <Text
+                  allowFontScaling={false}
+                  style={{ ...styles.txt1, color: themecolor.TEXTRED }}>
+                  {'  ('}
+                  {item.discount}%{')'}
+                </Text>
+              </Text>
+            </View>
+          </View>
         </TouchableOpacity>
+
+        <View style={{
+          width: "100%",
+          borderWidth: 0.3,
+          borderColor: themecolor.BOXBORDERCOLOR1,
+        }} />
+
+        <View style={{ width: "100%" }}>
+          <HalfSizeButton
+            title="Add to Cart"
+            icon={
+              <Feather
+                name="shopping-cart"
+                size={14}
+                color={themecolor.BACKICON}
+              />
+            }
+            backgroundColor={'transparent'}
+            color={themecolor.BACKICON}
+            borderColor={'transparent'}
+            fontSize={14}
+            height={width * 0.08}
+          // onPress={() => handleSetDefaultAddress(item.id)}
+          />
+        </View>
       </View>
     </>
   );

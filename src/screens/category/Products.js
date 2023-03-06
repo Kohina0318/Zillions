@@ -84,7 +84,7 @@ export default function Products(props) {
           ) : (
             <NoDataMsg  title="No Product Found! "/>
           )}
-          <View style={{marginVertical: 40}} />
+          <View style={{marginVertical: 30}} />
         </View>
       )}
     </View>
