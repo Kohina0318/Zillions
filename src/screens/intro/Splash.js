@@ -15,7 +15,7 @@ export default function Splash(props) {
           props.navigation.reset({
             index: 0,
             // routes: [{name: 'ViewPager'}],
-            routes: [{name: 'Dashboard'}],
+            routes: [{name: 'Payment'}],
           });
           // props.navigation.reset({
           //   index: 0,

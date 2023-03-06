@@ -1,7 +1,7 @@
 import {StyleSheet, Dimensions} from 'react-native';
 import {Colors} from '../config/Colors';
-import { FontFamily } from '../../fonts/FontFamily';
-import { FontSize } from '../../fonts/Fonts';
+import {FontFamily} from '../../fonts/FontFamily';
+import {FontSize} from '../../fonts/Fonts';
 
 const {width, height} = Dimensions.get('window');
 
@@ -27,9 +27,9 @@ const styles = StyleSheet.create({
     borderRadius: 4,
     justifyContent: 'flex-start',
     alignSelf: 'flex-start',
-    backgroundColor:"red"
+    backgroundColor: 'red',
   },
-  margleft15: {marginLeft: 7, },
+  marginTop: {marginTop: 10},
   txt: {
     fontSize: FontSize.labelText5,
     fontFamily: FontFamily.Popinssemibold,
@@ -59,7 +59,60 @@ const styles = StyleSheet.create({
     alignContent: 'center',
     width: width * 0.94,
   },
-
+  borderLine: {
+    width: '70%',
+    borderWidth: 0.3,
+    alignSelf: 'center',
+    marginLeft: 5,
+  },
+  borderLine1: {
+    width: '95%',
+    borderWidth: 0.3,
+  },
+  PayModeTXT: {
+    fontSize: FontSize.labelText5,
+    fontFamily: FontFamily.Popinssemibold,
+    padding:5
+  },
+  MethodView: {
+    padding: 10,
+    borderRadius: 10,
+    width: width * 0.93,
+  },
+  FLEXR: {
+    width: width * 0.93,
+    flexDirection: 'row',
+    margin:5,
+    padding:5
+  },
+  FLEXR1: {
+    justifyContent:'center',width:width*0.8,marginLeft:30,
+    flexDirection: 'row',
+    margin:5,
+    padding:5,
+    alignItems:'center'
+  },
+  PayModeTXT1: {
+    fontSize: FontSize.labelText2,
+    fontFamily: FontFamily.Popinssemibold,
+  },
+  PayModeTXT2: {
+    fontSize: FontSize.textInput,
+    fontFamily: FontFamily.PopinsRegular,
+    marginBottom:5
+  },
+  ruppee:{
+    borderWidth:1,
+    paddingRight:10,
+    paddingLeft:10,
+    textAlign:'center',
+    alignSelf:'center',
+    fontSize:FontSize.labelText3,
+    marginRight:7,
+    marginLeft:7,
+    color: '#95C21B',
+    borderColor: '#95C21B',
+  }
 });
 
 export {styles};
