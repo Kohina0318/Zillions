@@ -28,7 +28,7 @@ export default function SearchBar(props) {
             <Icon name={props.LeftIcon} size={18} color={themecolor.TXTWHITE} />
             </TouchableOpacity>
             </View>
-            <TextInput onKeyPress={props.onKeyPress} onSubmitEditing={props.onSubmitEditing} value={result} onChangeText={(text) => handleText(text)} style={{...styles.SearchTextInput,height:props.height,color:themecolor.TXTWHITE}} placeholderTextColor={themecolor.TXTGREYS} placeholder={props.placeholder} />
+            <TextInput onSubmitEditing={props.onSubmitEditing} value={result} onChangeText={(text) => handleText(text)} style={{...styles.SearchTextInput,height:props.height,color:themecolor.TXTWHITE}} placeholderTextColor={themecolor.TXTGREYS} placeholder={props.placeholder} />
             <View style={styles.Close}>
             <TouchableOpacity onPress={()=>handleClear()}><Icon name={props.RightCloseIcon} size={20} color={themecolor.TXTWHITE} /></TouchableOpacity>
          </View>
