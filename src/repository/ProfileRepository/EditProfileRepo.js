@@ -8,7 +8,7 @@ const postEditProfile = async formdata => {
       {
         method: 'POST',
         headers: {'Content-Type': 'multipart/form-data',
-        Authorization: null},
+        Authorization: `${await getAppToken()}`},
         body: formdata,
       },
     );

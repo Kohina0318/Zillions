@@ -29,6 +29,7 @@ export const SortSlider = props => {
     setSize('');
     setSortBy('');
     setVendor('');
+    props.onClear('')
   };
 
   const handleClick = item => {
@@ -94,7 +95,7 @@ export const SortSlider = props => {
           </View>
         </View>
       </TouchableOpacity>
-      <TouchableOpacity activeOpacity={0.8} onPress={() => handleClick(2)}>
+      {/* <TouchableOpacity activeOpacity={0.8} onPress={() => handleClick(2)}>
         <View
           style={{
             ...styles.SizeView,
@@ -157,7 +158,7 @@ export const SortSlider = props => {
             />
           </View>
         </View>
-      </TouchableOpacity>
+      </TouchableOpacity> */}
       <TouchableOpacity activeOpacity={0.8} onPress={() => handleClick(4)}>
         <View
           style={{
@@ -187,7 +188,7 @@ export const SortSlider = props => {
           </View>
         </View>
       </TouchableOpacity>
-      <TouchableOpacity activeOpacity={0.8} onPress={() => handleClick(5)}>
+      {/* <TouchableOpacity activeOpacity={0.8} onPress={() => handleClick(5)}>
         <View
           style={{
             ...styles.SizeView,
@@ -246,7 +247,7 @@ export const SortSlider = props => {
             />
           </View>
         </View>
-      </TouchableOpacity>
+      </TouchableOpacity> */}
       {sortBy == 'SortBy' ||
       brand == 'Brand' ||
       category == 'Category' ||
