@@ -17,6 +17,7 @@ import { useToast } from 'react-native-toast-notifications';
 import { CartProductDataList } from '../../components/shared/FlateLists/OrderProcessFlateList/CartProductDataList';
 import HalfSizeButton from '../../components/shared/button/halfSizeButton';
 import FAIcon from 'react-native-vector-icons/FontAwesome';
+import OrderDeailsComp from '../../components/shared/OrderProcessComponents/OrderDeailsComp';
 
 const { width, height } = Dimensions.get('screen');
 
@@ -57,8 +58,13 @@ export default function Cart(props) {
       {loader ? (
         <LoadingFullScreen style={{ flex: 1 }} />
       ) : (
-        <View style={{ ...styles.container }}> 
+        <View > 
           <CartProductDataList data={data} />
+
+          <View style={{...styles.MVT}} />
+
+          <OrderDeailsComp /> 
+
         </View>
       )}
 

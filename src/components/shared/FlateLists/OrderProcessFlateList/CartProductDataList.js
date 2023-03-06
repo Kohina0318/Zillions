@@ -22,7 +22,7 @@ function CartProductDataFlateList({item, themecolor}) {
 
   
   return (
-      <TouchableOpacity activeOpacity={0.8}
+      <View activeOpacity={0.8}
         style={{
           ...styles.datalistView,
           backgroundColor: themecolor.BOXBORDERCOLOR,
@@ -30,8 +30,8 @@ function CartProductDataFlateList({item, themecolor}) {
         }}
         // onPress={() => navigation.navigate('SubCategories',{categoryId:item.category_id,categoryName:item.category_name})}
         >
-        <View style={{flexDirection:"row", width:"100%",}}>
-        <View style={{...styles.innerImage,}}>
+        <View style={{...styles.innerView}}>
+        <View style={{...styles.innerImage,backgroundColor:"red"}}>
           <Image
             source={{uri: item.banner}}
             style={{
@@ -41,13 +41,13 @@ function CartProductDataFlateList({item, themecolor}) {
             }}
           />
         </View>
-        <View style={{...styles.margleft15,width:"74%",backgroundColor:"yellow"}}>
+        <View style={{...styles.TxtViewinner}}>
 
-          <Text allowFontScaling={false} style={{...styles.txt, color: themecolor.TXTWHITE}}>
+          <Text allowFontScaling={false} numberOfLines={2} style={{...styles.txt, color: themecolor.TXTWHITE}}>
           kojhinn
           </Text>
 
-          <View style={{ flexDirection: 'row', width: '100%' }}>
+          <View style={{...styles.PriceTxtViewinner}}>
             <Text
               allowFontScaling={false}
               style={{ ...styles.txt1, color: themecolor.TXTWHITE }}>
@@ -65,7 +65,7 @@ function CartProductDataFlateList({item, themecolor}) {
               </Text>
               <Text
                 allowFontScaling={false}
-                style={{ ...styles.txt1, color: themecolor.TEXTRED }}>
+                style={{ ...styles.txt1, color: themecolor.TXTGREY }}>
                 {'  ('}
                 30%{')'}
               </Text>
@@ -73,15 +73,25 @@ function CartProductDataFlateList({item, themecolor}) {
           </View>
 
           <Text allowFontScaling={false} style={{...styles.txtSave, color: themecolor.TEXTGREEN}}>
-          You Save : <FAIcon name="rupee" size={12} /> 1000 
+          You Save: <FAIcon name="rupee" size={12} /> 1000 
           </Text>
          
         </View>
         </View>
+
+        <View  style={{...styles.MVT}}/>
         
-        <View style={{}} />
+        <View style={{ ...styles.borderLine,borderColor: themecolor.BOXBORDERCOLOR1,}} />
+
+        <View style={{...styles.innerView,   marginTop: 5}}>   
+          <View style={{...styles.removeView}} >
+            <TouchableOpacity activeOpacity={0.1} style={{...styles.removeToch}}>            
+            <Text style={{ ...styles.removeButton,color: themecolor.TEXTRED}}>Remove</Text>
+          </TouchableOpacity>
+          </View>
+        </View>
         
-      </TouchableOpacity>
+      </View>
   );
 }
 
