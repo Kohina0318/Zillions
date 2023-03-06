@@ -47,30 +47,37 @@ const dataPrice = [
   {
     id: 1,
     price: 'Rs.200 and Below',
+    priceSort:'0-200',
   },
   {
     id: 2,
     price: 'Rs.300 - Rs.499',
+    priceSort:'300-499',
   },
   {
     id: 3,
     price: 'Rs.500 - Rs.999',
+    priceSort:'500-999',
   },
   {
     id: 4,
     price: 'Rs.1000 - Rs.1499',
+    priceSort:'1000-1499',
   },
   {
     id: 5,
     price: 'Rs.1500 - Rs.1999',
+    priceSort:'1500-1999',
   },
   {
     id: 6,
     price: 'Rs.2000 - Rs.2999',
+    priceSort:'2000-2999',
   },
   {
     id: 7,
     price: 'Rs.3000 and above',
+    priceSort:'3000-1000000',
   },
 ];
 
@@ -128,9 +135,12 @@ export function OrderFlatList({onChange}) {
   );
 }
 
-function PriceList({item,index,selectedIndex,onChange1, themecolor}) {
+function PriceList({item,index,selectedIndex,onChange1, themecolor,onChange}) {
   const [checked, setChecked] = useState(false);
-
+  const handleChange=(item,index)=>{
+    onChange(item)
+    onChange1(index)
+  }
   return (
     <>
       <View key={item.id} style={{...styles.checkboxContainer,width: width *0.45}}>
@@ -138,7 +148,7 @@ function PriceList({item,index,selectedIndex,onChange1, themecolor}) {
           center
           title={item.price}
           checked={selectedIndex==index?true:false}
-          onPress={() => onChange1(index)}
+          onPress={() =>handleChange(item.priceSort,index) }
           textStyle={{color: themecolor.TXTWHITE}}
           checkedColor={themecolor.ADDTOCARTBUTTONCOLOR}
           containerStyle={{backgroundColor: 'transparent'}}
@@ -148,7 +158,7 @@ function PriceList({item,index,selectedIndex,onChange1, themecolor}) {
   );
 }
 
-export function PriceFlatList(props) {
+export function PriceFlatList({onChange}) {
   const mode = useSelector(state => state.mode);
   const themecolor = new MyThemeClass(mode).getThemeColor();
 
@@ -163,7 +173,7 @@ export function PriceFlatList(props) {
       <FlatList
         data={dataPrice}
         renderItem={({item,index}) => (
-          <PriceList item={item} index={index} selectedIndex={selectedIndex} onChange1={(value)=>onChange1(value)} themecolor={themecolor} />
+          <PriceList item={item} index={index} selectedIndex={selectedIndex} onChange1={(value)=>onChange1(value)} themecolor={themecolor} onChange={onChange} />
         )}
         // horizontal={true}
         contentContainerStyle={{

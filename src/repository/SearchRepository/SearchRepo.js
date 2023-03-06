@@ -1,14 +1,14 @@
 import { SERVER_URL } from "../SERVER_URL";
 
-const getSearchProducts = async (formdata) => {
-  console.log(formdata)
+const getSearchProducts = async (body) => {
+  console.log(body)
   try {
     const response = await fetch(
-      `${await SERVER_URL()}/search-products/click/0/0`,
+      `${await SERVER_URL()}/search-products/click/0`,
       {
         method: 'POST',
         headers: {'Content-Type': 'multipart/form-data'},
-        body:formdata,
+        body:body,
       },
     );
     const result = await response.json();

@@ -14,7 +14,6 @@ const handleClick=(index)=>{
   onChange(index)
 }
 
-console.log('items.......',index, touch, selected, onChange, item, themecolor)
   return (
     <>
       <TouchableOpacity activeOpacity={0.8} disabled={touch}
@@ -23,7 +22,7 @@ console.log('items.......',index, touch, selected, onChange, item, themecolor)
           style={{
          ...styles.SizeView,
             borderColor:themecolor.LIGHTGREY, 
-            backgroundColor:index==selected?themecolor.LIGHTGREY:'transparent' 
+            backgroundColor:index==selected?themecolor.GREY:'transparent' 
           }}>
           <View style={{...styles.flexDR}}>
             <Text

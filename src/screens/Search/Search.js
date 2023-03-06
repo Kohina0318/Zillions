@@ -47,6 +47,7 @@ export default function Search(props) {
   const [dataShown, setDataShown] = useState(false);
   const [productData,setProductData]=useState([])
   const [sortBy,setsortBy]=useState('')
+  const [priceSortBy,setPriceSortBy]=useState('')
   const toast = useToast();
 
   function handleBackButtonClick() {
@@ -85,19 +86,13 @@ export default function Search(props) {
           refRBSheet.current.close()
         }
         setLoading(true)
-        let formdata=new FormData()
-        // formdata.append('category',null)
-        // formdata.append('sub_category',null)
-        // formdata.append('brand',null)
-        // formdata.append('vendor',null)
-        // formdata.append('featured',null)
-        // formdata.append('range',null)
-        formdata.append('text',value)
-        // formdata.append('view_type','grid')
-        formdata.append('sort',sortBy)
+     var formData = new FormData()
+     formData.append("text",value)
+     formData.append("sort",sortBy)
+     formData.append("range",priceSortBy)
+     formData.append("brand",0)
 
-
-        var res = await getSearchProducts(formdata);
+        var res = await getSearchProducts(formData);
         if(res.status === true){
           setDataShown(true)
           setProductData(res.data.all_products)
@@ -120,10 +115,15 @@ export default function Search(props) {
   const handleGetvalue = value => {
     // console.log('handle get value>>>>>>>>>>>>>>>>>>>>>>.', value);
     setValue(value);
+    setDataShown(false)
   };
 
   const handleChangeSortBy=(value)=>{
     setsortBy(value)
+  }
+
+  const handleChangePriceSortBy=(value)=>{
+   setPriceSortBy(value)
   }
 
   const handleClear=()=>{
@@ -181,13 +181,21 @@ export default function Search(props) {
         refRBSheet.current.open();
       });
   };
+
+  const handleOnClear=()=>{
+    setsortBy('')
+    setPriceSortBy('')
+  }
+
+
   const handleMin = () => {
     refRBSheet.current.close();
   };
 
-  const handleKeyPress=()=>{
-    setDataShown(false)
-  }
+  // const handleKeyPress=()=>{
+  //   setDataShown(false)
+  //   setsortBy('')
+  // }
 
 
   return (
@@ -203,7 +211,7 @@ export default function Search(props) {
       <View style={styles.SearchMainView}>
         <View style={styles.SearchSecondView}>
           <SearchInput
-          onKeyPress={()=>handleKeyPress()}
+          // onKeyPress={()=>handleKeyPress()}
             onChange={value => handleGetvalue(value)}
             onPress={() => handleSearch()}
             onSubmitEditing={() => handleSearch()}
@@ -219,7 +227,7 @@ export default function Search(props) {
       dataShown? (
         <>
         <View style={{marginLeft: 10, flexDirection: 'row'}}>
-          <SortSlider onChange={value => handleData(value)} />
+          <SortSlider onClear={()=>handleOnClear()} onChange={value => handleData(value)} />
           {/* <FilterFlatList touch={false} onChange={(value)=>handleData(value)} data={data} index={index}/> */}
         </View>
       
@@ -277,7 +285,7 @@ export default function Search(props) {
       <OrderFlatList onChange={(value)=>handleChangeSortBy(value)}/>
       :
       item=="Price"?
-      <PriceFlatList />
+      <PriceFlatList onChange={(value)=>handleChangePriceSortBy(value)}/>
       :
       <></>
 
