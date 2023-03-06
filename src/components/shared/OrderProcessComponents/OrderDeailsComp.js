@@ -66,7 +66,7 @@ export default function OrderDeailsComp(props) {
           <Text style={{ ...styles.txt1, color: themecolor.TXTGREY }}>Delivery Fee</Text>
         </View>
         <View style={{ ...styles.orderDetialcompWidth1 }}>
-          <Text style={{ ...styles.txt1, color: themecolor.TXTGREYS }}>- <FAIcon name="rupee" size={12} />99</Text>
+          <Text style={{ ...styles.txt1, color: themecolor.TXTGREYS }}><FAIcon name="rupee" size={12} />99</Text>
         </View>
       </View>
       
