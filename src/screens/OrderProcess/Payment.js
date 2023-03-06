@@ -10,7 +10,7 @@ import {
 } from 'react-native';
 import { useSelector } from 'react-redux';
 import { MyThemeClass } from '../../components/Theme/ThemeDarkLightColor';
-import { styles } from '../../assets/css/OrderProcessStyle/CartStyle';
+import { styles } from '../../assets/css/OrderProcessStyle/PaymentStyle';
 import LoadingFullScreen from '../../components/shared/Loader/LoadingFullScreen';
 import RegisterLoginHeader from '../../components/shared/header/RegisterLoginHeader';
 import { useToast } from 'react-native-toast-notifications';
@@ -50,16 +50,18 @@ export default function Payment(props) {
         backIcon={true}
         onPressBack={() => handleBackButtonClick()}
       />
-      {loader ? (
+      {/* {loader ? (
         <LoadingFullScreen style={{ flex: 1 }} />
-      ) : (
+      ) : ( */}
         <View style={{ ...styles.container }}> 
         <View>
         <Stepper item={"Payment"} themecolor={themecolor} props={props}/>
         </View>
-          
+          <View>
+
+          </View>
         </View>
-      )}
+      {/* )} */}
 
       <View
         style={{
