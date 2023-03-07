@@ -2,10 +2,7 @@ import React, { useState, useEffect } from 'react';
 import {
   View,
   Text,
-  StatusBar,
-  Appearance,
   Dimensions,
-  TextInput,
   BackHandler, ScrollView
 } from 'react-native';
 import { useSelector } from 'react-redux';
@@ -102,19 +99,19 @@ export default function Cart(props) {
           backgroundColor: themecolor.LOGINTHEMECOLOR,
         }}>
         <View style={{ ...styles.mainView }}>
-          <View style={{ width: '40%', justifyContent: "center", }}>
-            <Text style={{ ...styles.txt, color: themecolor.TXTWHITE }}><FAIcon name="rupee" size={14} />10000</Text>
-            <Text style={{ ...styles.txtConvenienceFee, color: themecolor.ADDTOCARTBUTTONCOLOR }}>View Details</Text>
+          <View style={{ width: '40%', justifyContent: "center",}}>
+            <Text allowFontScaling={false} style={{ ...styles.txt, color: themecolor.TXTWHITE }}><FAIcon name="rupee" size={14} />10000</Text>
+            <Text allowFontScaling={false} style={{ ...styles.txtConvenienceFee, color: themecolor.ADDTOCARTBUTTONCOLOR }}>View Details</Text>
           </View>
 
           <View style={{ width: '60%', }}>
             <HalfSizeButton
-              title="Proceed to Payment"
+              title="Continue"
               icon=""
               backgroundColor={themecolor.ADDTOCARTBUTTONCOLOR}
               color={'#fff'}
               borderColor={themecolor.BORDERCOLOR}
-              onPress={() => props.navigation.navigate('Payment')}
+              onPress={() => props.navigation.navigate('CartAddress')}
             />
           </View>
         </View>

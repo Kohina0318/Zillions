@@ -32,7 +32,7 @@ import Feather from 'react-native-vector-icons/Feather';
 import RenderHtml from 'react-native-render-html';
 import { DashboardProductDataList } from '../../components/shared/FlateLists/DashboardFlatList/DashboardProductDataList';
 import RBSheet from 'react-native-raw-bottom-sheet';
-import EN from 'react-native-vector-icons/Entypo';
+import EN from 'react-native-vector-icons/AntDesign';
 import LoadingFullScreen from '../../components/shared/Loader/LoadingFullScreen';
 import ImageZoom from 'react-native-image-pan-zoom';
 import { Modal } from 'react-native';
@@ -153,7 +153,7 @@ export default function ProductDetail(props) {
   const handleRB = (index) => {
     if (index == 1) {
       setTitle('Add To Cart')
-      setNavigateTo(' ')
+      setNavigateTo('Cart')
       setIcon(<Feather
         name="shopping-cart"
         size={16}
@@ -164,10 +164,10 @@ export default function ProductDetail(props) {
       setTitle('Buy Now')
       setNavigateTo('Cart')
       setIcon(
-        <MaterialIcons
-          name="ios-arrow-forward-circle-sharp"
-          size={18}
-          color="#fff"
+        <EN
+          name="doubleright"
+          size={17}
+          color={'#fff'}
         />
       )
     }
@@ -203,7 +203,6 @@ export default function ProductDetail(props) {
       var res = await postAddOrRemoveWishlist(any, productId);
       if (res.status == true) {
         if (any == 'add') {
-          alert(any)
           setShowWishListed(1);
           toast.show(res.msg, {
             type: 'success',
@@ -213,7 +212,6 @@ export default function ProductDetail(props) {
             animationType: 'slide-in',
           });
         } else {
-          alert(any)
           setShowWishListed(0);
           toast.show(res.msg, {
             type: 'success',
@@ -222,7 +220,8 @@ export default function ProductDetail(props) {
             offset: 30,
             animationType: 'slide-in',
           });
-        } 
+        }
+
       } else {
         toast.show(res.msg, {
           type: 'warning',
@@ -243,13 +242,13 @@ export default function ProductDetail(props) {
       });
     }
   };
-  
+
 
   const handleAddCartProduct = async () => {
     try {
       var Size = `${purchasPrice}#${selectedSize}#1`
       var TotalPrice = purchasPrice * qty
-      
+
       let formdata = new FormData();
       formdata.append('qty', qty);
       formdata.append('sizeprice', Size);
@@ -257,7 +256,7 @@ export default function ProductDetail(props) {
 
       var res = await postAddCartProduct(productId, formdata)
       if (res.status == true) {
-         navigation.navigate(navigateTo)
+        navigation.navigate(navigateTo)
         toast.show(res.msg, {
           type: 'success',
           placement: 'bottom',
@@ -310,7 +309,7 @@ export default function ProductDetail(props) {
                   ...styles.subView1,
                 }}>
                 {featured == 'ok' ? (
-                  <View style={{ position: 'absolute', top: -10, right: -10, zIndex:99999 }}>
+                  <View style={{ position: 'absolute', top: -10, right: -10, zIndex: 99999 }}>
                     <Ribbon />
                   </View>
                 ) : (
@@ -360,7 +359,17 @@ export default function ProductDetail(props) {
                       style={{
                         ...styles.WID1,
                       }}>
-                      {showWishListed == 0 ? (
+                      {showWishListed == 1 ? (
+                        <TouchableOpacity
+                          activeOpacity={0.8}
+                          onPress={() => handleWishListed('remove')}
+                          style={{
+                            padding: 2,
+                            borderRadius: 25,
+                          }}>
+                          <FontAwesome name="heart" size={23} color={themecolor.TEXTRED} />
+                        </TouchableOpacity>
+                      ) : (
                         <TouchableOpacity
                           activeOpacity={0.1}
                           onPress={() => handleWishListed('add')}
@@ -373,16 +382,6 @@ export default function ProductDetail(props) {
                             size={23}
                             color={themecolor.TEXTRED}
                           />
-                        </TouchableOpacity>
-                      ) : (
-                         <TouchableOpacity
-                          activeOpacity={0.8}
-                          onPress={() => handleWishListed('remove')}
-                          style={{
-                            padding: 2,
-                            borderRadius: 25,
-                          }}>
-                          <FontAwesome name="heart" size={23} color={themecolor.TEXTRED} />
                         </TouchableOpacity>
                       )}
                     </View>
@@ -693,9 +692,9 @@ export default function ProductDetail(props) {
                     <HalfSizeButton
                       title="Buy now"
                       icon={
-                        <MaterialIcons
-                          name="ios-arrow-forward-circle-sharp"
-                          size={18}
+                        <EN
+                          name="doubleright"
+                          size={17}
                           color={'#fff'}
                         />
                       }

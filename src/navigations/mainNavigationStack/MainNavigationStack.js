@@ -35,6 +35,7 @@ import SupportTicket from '../../screens/SupportTicket/SupportTicket';
 import Search from '../../screens/Search/Search';
 import Cart from '../../screens/OrderProcess/Cart';
 import Payment from '../../screens/OrderProcess/Payment';
+import CartAddress from '../../screens/OrderProcess/CartAddress';
 
 function MainNavigationStack(props) {
   const Stack = createStackNavigator();
@@ -171,6 +172,11 @@ function MainNavigationStack(props) {
          <Stack.Screen
           name="Payment"
           component={Payment}
+          options={{headerShown: false}}
+        />
+           <Stack.Screen
+          name="CartAddress"
+          component={CartAddress}
           options={{headerShown: false}}
         />
       </Stack.Navigator>

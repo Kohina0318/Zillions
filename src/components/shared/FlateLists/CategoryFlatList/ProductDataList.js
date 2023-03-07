@@ -31,10 +31,7 @@ function ProductDataFlateList({ item, themecolor }) {
       var res = await postAddOrRemoveWishlist(any, item.product_id);
       if (res.status == true) {
         if(any=='add'){
-        setShowWishListed('true');
-        }else{
-          setShowWishListed('false');
-        }
+        setShowWishListed(1);
         toast.show(res.msg, {
           type: 'success',
           placement: 'bottom',
@@ -42,6 +39,16 @@ function ProductDataFlateList({ item, themecolor }) {
           offset: 30,
           animationType: 'slide-in',
         });
+        }else{
+          setShowWishListed(0);
+          toast.show(res.msg, {
+            type: 'success',
+            placement: 'bottom',
+            duration: 3000,
+            offset: 30,
+            animationType: 'slide-in',
+          });
+        }
       } else {
         toast.show(res.msg, {
           type: 'warning',
@@ -97,7 +104,7 @@ function ProductDataFlateList({ item, themecolor }) {
             ...ProductStyle.wishlistIconButton,
             backgroundColor: themecolor.BOXBORDERCOLOR
           }}>
-          {showWishListed == 'true' ? (
+          {showWishListed == 1 ? (
             <TouchableOpacity
               activeOpacity={0.8}
               onPress={() => handleWishListed('remove')}
