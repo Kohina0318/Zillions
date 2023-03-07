@@ -37,7 +37,6 @@ export default function WishList(props) {
     try {
       var res = await getWishlist();
       if (res.status === true) {
-        console.log("kkkkkkkkkkkkkkkkkkkkkkkkkdata wishlist",res.data)
         setData(res.data);
         setLoader(false);
       } else {
@@ -59,6 +58,7 @@ export default function WishList(props) {
 
   useFocusEffect(
     React.useCallback(() => {
+      setLoader(true);
       handleWishlist();
     }, [props,refresh]),
   );

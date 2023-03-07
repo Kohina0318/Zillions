@@ -234,6 +234,7 @@ export default function Search(props) {
 <View style={{marginBottom:50}}>
   <ProductDataList data={productData}/>
 </View>
+<View style={{ marginVertical: 31 }} />
 </>)
 :
 <></>

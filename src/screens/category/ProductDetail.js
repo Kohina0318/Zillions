@@ -96,7 +96,7 @@ export default function ProductDetail(props) {
   const [purchasPrice, setPurchasePrice]= useState("")
   const [qty, setQty] = useState(1)
   const [selectedSize, setSelectedSize] = useState("")
-  const [showWishListed, setShowWishListed] = useState('false');
+  const [showWishListed, setShowWishListed] = useState(0);
   
 
   const handleProductView = async () => {
@@ -203,10 +203,7 @@ export default function ProductDetail(props) {
       var res = await postAddOrRemoveWishlist(any, productId);
       if (res.status == true) {
         if(any=='add'){
-        setShowWishListed('true');
-        }else{
-          setShowWishListed('false');
-        }
+        setShowWishListed(1); 
         toast.show(res.msg, {
           type: 'success',
           placement: 'bottom',
@@ -214,6 +211,17 @@ export default function ProductDetail(props) {
           offset: 30,
           animationType: 'slide-in',
         });
+        }else{
+          setShowWishListed(0);
+          toast.show(res.msg, {
+            type: 'success',
+            placement: 'bottom',
+            duration: 3000,
+            offset: 30,
+            animationType: 'slide-in',
+          });
+        }
+       
       } else {
         toast.show(res.msg, {
           type: 'warning',
@@ -336,7 +344,7 @@ export default function ProductDetail(props) {
                       style={{
                         ...styles.WID1,
                       }}>
-                      {showWishListed == 'true' ? (
+                      {showWishListed == 1 ? (
                          <TouchableOpacity
                          activeOpacity={0.8}
                          onPress={() => handleWishListed('remove')} 
