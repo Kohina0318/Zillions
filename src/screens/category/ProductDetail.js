@@ -250,8 +250,9 @@ export default function ProductDetail(props) {
       formdata.append('totalprice ', TotalPrice);
 
       var res = await postAddCartProduct(productId, formdata)
+      console.log("Res>>>>>>>>>>>>>",res);
       if (res.status == true) {
-        navigation.navigate(navigateTo)
+        // navigation.navigate(navigateTo)
         toast.show(res.msg, {
           type: 'success',
           placement: 'bottom',
@@ -711,7 +712,7 @@ export default function ProductDetail(props) {
                   />
                 </View>
               )}
-              <RBSheetData refRBSheet={refRBSheet} title={title} sizes={sizes} touch={false} icon={icon} qty={qty} setQty={setQty} setSelectedSize={setSelectedSize} onPress={()=>handleAddCartProduct()} />
+              <RBSheetData refRBSheet={refRBSheet} title={title} sizes={sizes} touch={false} icon={icon} qty={qty} setQty={setQty} setSelectedSize={setSelectedSize} onPress={handleAddCartProduct()} />
             </View>
           </TouchableOpacity>
 
