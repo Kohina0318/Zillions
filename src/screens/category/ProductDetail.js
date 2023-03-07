@@ -32,7 +32,7 @@ import Feather from 'react-native-vector-icons/Feather';
 import RenderHtml from 'react-native-render-html';
 import { DashboardProductDataList } from '../../components/shared/FlateLists/DashboardFlatList/DashboardProductDataList';
 import RBSheet from 'react-native-raw-bottom-sheet';
-import EN from 'react-native-vector-icons/Entypo';
+import EN from 'react-native-vector-icons/AntDesign';
 import LoadingFullScreen from '../../components/shared/Loader/LoadingFullScreen';
 import ImageZoom from 'react-native-image-pan-zoom';
 import { Modal } from 'react-native';
@@ -164,11 +164,11 @@ export default function ProductDetail(props) {
       setTitle('Buy Now')
       setNavigateTo('Cart')
       setIcon(
-        <MaterialIcons
-          name="ios-arrow-forward-circle-sharp"
-          size={18}
-          color="#fff"
-        />
+        <EN
+        name="doubleright"
+        size={17}
+        color={'#fff'}
+      />
       )
     }
 
@@ -677,9 +677,9 @@ export default function ProductDetail(props) {
                     <HalfSizeButton
                       title="Buy now"
                       icon={
-                        <MaterialIcons
-                          name="ios-arrow-forward-circle-sharp"
-                          size={18}
+                        <EN
+                          name="doubleright"
+                          size={17}
                           color={'#fff'}
                         />
                       }
