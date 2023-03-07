@@ -112,7 +112,17 @@ const styles = StyleSheet.create({
     marginLeft:7,
     color: '#95C21B',
     borderColor: '#95C21B',
-  }
+  },
+  txt: {
+    fontSize: FontSize.labelText4,
+    fontFamily: FontFamily.Popinssemibold,
+    fontWeight: 'bold',
+  },
+  txtConvenienceFee: {
+    fontSize: FontSize.labelText2,
+    fontFamily: FontFamily.Popinssemibold,
+    fontWeight: 'bold',
+  },
 });
 
 export {styles};
