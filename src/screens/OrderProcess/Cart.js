@@ -59,7 +59,7 @@ export default function Cart(props) {
       {loader ? (
         <LoadingFullScreen style={{ flex: 1 }} />
       ) : (
-        <ScrollView >
+        <ScrollView showsVerticalScrollIndicator={false}>
 
           <View style={{ ...styles.MVT }} />
 
@@ -79,7 +79,7 @@ export default function Cart(props) {
       )}
 
 
-      <View style={{ marginVertical: 30 }} />
+      <View style={{ marginVertical: 31 }} />
 
       <View
         style={{
