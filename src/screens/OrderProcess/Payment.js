@@ -79,7 +79,7 @@ export default function Payment(props) {
               icon=""
               backgroundColor={themecolor.ADDTOCARTBUTTONCOLOR}
               color={'#fff'}
-              borderColor={themecolor.BORDERCOLOR}
+              borderColor={themecolor.ADDTOCARTBUTTONCOLOR}
             />
           </View>
         </View>

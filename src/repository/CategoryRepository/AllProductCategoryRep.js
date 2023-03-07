@@ -1,10 +1,11 @@
+import { getAppToken } from "../CommonRepository";
 import { SERVER_URL } from "../SERVER_URL";
 
 const getCategories = async () => {
   try {
     const response = await fetch(`${await SERVER_URL()}/categories`, {
       method: 'GET',
-      headers: {'Content-Type': 'application/json;charset=utf-8'},
+      headers: { 'Content-Type': 'application/json;charset=utf-8' },
     });
     const result = await response.json();
     return result;
@@ -19,7 +20,7 @@ const getSubCategories = async cId => {
       `${await SERVER_URL()}/sub-categories/${cId}`,
       {
         method: 'GET',
-        headers: {'Content-Type': 'application/json;charset=utf-8'},
+        headers: { 'Content-Type': 'application/json;charset=utf-8' },
       },
     );
     const result = await response.json();
@@ -31,13 +32,16 @@ const getSubCategories = async cId => {
     );
   }
 };
-const getByProduct = async(spec,Id)=> {
+const getByProduct = async (spec, Id) => {
   try {
     const response = await fetch(
       `${await SERVER_URL()}/product-list?speciality=${spec}&id=${Id}`,
       {
         method: 'GET',
-        headers: {'Content-Type': 'application/json;charset=utf-8'},
+        headers: {
+          'Content-Type': 'application/json;charset=utf-8',
+          Authorization: `${await getAppToken()}`
+        },
       },
     );
     const result = await response.json();
@@ -55,7 +59,10 @@ const getProductView = async pId => {
       `${await SERVER_URL()}/product-view/${pId}`,
       {
         method: 'GET',
-        headers: {'Content-Type': 'application/json;charset=utf-8'},
+        headers: {
+          'Content-Type': 'application/json;charset=utf-8',
+          Authorization: `${await getAppToken()}`
+        }
       },
     );
     const result = await response.json();
@@ -71,7 +78,7 @@ const getProductRealedProducts = async (spec, limit, pId) => {
       `${await SERVER_URL()}/product-list?speciality=${spec}&limit=${limit}&id=${pId}`,
       {
         method: 'GET',
-        headers: {'Content-Type': 'application/json;charset=utf-8'},
+        headers: { 'Content-Type': 'application/json;charset=utf-8' },
       },
     );
     const result = await response.json();

@@ -93,9 +93,13 @@ const styles = StyleSheet.create({
   },
   view14: {
     flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    padding: 15,
+    justifyContent: 'flex-start',
+    padding: 10,
+  },
+  RBText1: {
+    fontSize: FontSize.buttonText,
+    fontFamily: FontFamily.normal,
+    fontWeight: 'bold',
   },
   RBText: {
     fontSize: FontSize.mainButton,
@@ -105,7 +109,7 @@ const styles = StyleSheet.create({
   clrtheme: {
     color: Colors.bluetheme,
   },
-  view16: {justifyContent: 'center',marginLeft:10,marginRight:10, flex: 1},
+  view16: {justifyContent: 'center',marginLeft:10,marginRight:10, flex: 1,},
   CardText: {
     fontSize: FontSize.labelText3,
     fontFamily: FontFamily.PopinsMedium,
@@ -118,7 +122,7 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.white,
     flexDirection: 'row',
   },
-  marg: {marginVertical: 10},
+  marg: {marginVertical: 5},
   Borderline: {
     width: width,
     justifyContent: 'center',

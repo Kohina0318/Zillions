@@ -18,7 +18,6 @@ const getWishlist = async () => {
 };
 
 const postAddOrRemoveWishlist = async (any, pId) => {
-  console.log("hhhhhhhhhhhhhhhhhhhhhhhhhhhhhh", await getAppToken(), any, pId)
   try {
     const response = await fetch(`${await SERVER_URL()}/wishlist-user/${any}/${pId}`, {
       method: 'POST',

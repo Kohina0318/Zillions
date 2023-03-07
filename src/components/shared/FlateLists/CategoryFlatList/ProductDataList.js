@@ -17,19 +17,31 @@ import StarRating from 'react-native-star-rating';
 import FAIcon from 'react-native-vector-icons/FontAwesome';
 import { useToast } from 'react-native-toast-notifications';
 import { postAddOrRemoveWishlist } from '../../../../repository/WishListRepository/WishListRepo';
+import { Alert } from 'react-native/Libraries/Alert/Alert';
 
 const { width, height } = Dimensions.get('screen');
 
 function ProductDataFlateList({ item, themecolor }) {
   const navigation = useNavigation();
   const toast = useToast();
-  const [showWishListed, setShowWishListed] = useState(true);
+  const [showWishListed, setShowWishListed] = useState(item.wishlist);
 
   const handleWishListed = async (any) => {
     try {
       var res = await postAddOrRemoveWishlist(any, item.product_id);
       if (res.status == true) {
-        setShowWishListed(!showWishListed);
+        if(any=='add'){
+        setShowWishListed('true');
+        }else{
+          setShowWishListed('false');
+        }
+        toast.show(res.msg, {
+          type: 'success',
+          placement: 'bottom',
+          duration: 3000,
+          offset: 30,
+          animationType: 'slide-in',
+        });
       } else {
         toast.show(res.msg, {
           type: 'warning',
@@ -83,23 +95,31 @@ function ProductDataFlateList({ item, themecolor }) {
         <View
           style={{
             ...ProductStyle.wishlistIconButton,
-            backgroundColor:themecolor.BOXBORDERCOLOR
+            backgroundColor: themecolor.BOXBORDERCOLOR
           }}>
-          {showWishListed ? (
+          {showWishListed == 'true' ? (
             <TouchableOpacity
-              activeOpacity={0.05}
-              onPress={() => handleWishListed('add')}>
+              activeOpacity={0.8}
+              onPress={() => handleWishListed('remove')}
+              style={{
+                padding: 2,
+                borderRadius: 25,
+              }}>
+              <FontAwesome name="heart" size={23} color={themecolor.TEXTRED} />
+            </TouchableOpacity>
+          ) : (
+            <TouchableOpacity
+              activeOpacity={0.1}
+              onPress={() => handleWishListed('add')}
+              style={{
+                padding: 2,
+                borderRadius: 25,
+              }}>
               <FontAwesome
                 name="heart-o"
                 size={23}
                 color={themecolor.TEXTRED}
               />
-            </TouchableOpacity>
-          ) : (
-            <TouchableOpacity
-              activeOpacity={0.1}
-              onPress={() => handleWishListed('remove')}>
-              <FontAwesome name="heart" size={23} color={themecolor.TEXTRED} />
             </TouchableOpacity>
           )}
         </View>
@@ -149,7 +169,7 @@ function ProductDataFlateList({ item, themecolor }) {
                   color: themecolor.TXTGREY,
                 }}>
                 <FAIcon name="rupee" size={12} />
-                {item.sale_price} 
+                {item.sale_price}
               </Text>
               <Text
                 allowFontScaling={false}
