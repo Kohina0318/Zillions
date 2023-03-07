@@ -57,8 +57,8 @@ export const RBSheetData = props => {
 
         </View>
         <View style={{ ...styles.Borderline }} />
-        
-        <View  style={{marginTop:25}}/>
+
+        <View style={{ marginTop: 25 }} />
 
         <View style={{ ...styles.view16, }}>
           <Text
@@ -123,7 +123,10 @@ export const RBSheetData = props => {
             <HalfSizeButton
               title={props.title}
               icon={props.icon}
-              onPress={props.onPress}
+              onPress={() => {
+                props.onPress;
+                props.refRBSheet.current.close()
+              }}
               backgroundColor={themecolor.ADDTOCARTBUTTONCOLOR}
               color={"#fff"}
               borderColor={themecolor.ADDTOCARTBUTTONCOLOR}

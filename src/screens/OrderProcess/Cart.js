@@ -16,6 +16,7 @@ import HalfSizeButton from '../../components/shared/button/halfSizeButton';
 import FAIcon from 'react-native-vector-icons/FontAwesome';
 import OrderDeailsComp from '../../components/shared/OrderProcessComponents/OrderDeailsComp';
 import { Stepper } from '../Stepper/Stepper';
+import { getCartProductList } from '../../repository/OrderProcessRepository/CartListRepo';
 
 const { width, height } = Dimensions.get('screen');
 
@@ -45,6 +46,19 @@ export default function Cart(props) {
   const themecolor = new MyThemeClass(mode).getThemeColor();
 
   const [loader, setLoader] = useState(false);
+
+  const handleCartProductList = async () => {
+    try {
+      var res = await getCartProductList()
+      console.log("data......handleCartProductList...>",res)
+    } catch (e) {
+
+    }
+  }
+
+  useEffect(()=>{
+    handleCartProductList()
+  },[])
 
   return (
     <View style={{ ...styles.bg, backgroundColor: themecolor.THEMECOLOR }}>

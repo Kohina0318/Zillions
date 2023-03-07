@@ -93,11 +93,11 @@ export default function ProductDetail(props) {
   const [title, setTitle] = useState('');
   const [navigateTo, setNavigateTo] = useState('');
   const [icon, setIcon] = useState('')
-  const [purchasPrice, setPurchasePrice]= useState("")
+  const [purchasPrice, setPurchasePrice] = useState("")
   const [qty, setQty] = useState(1)
   const [selectedSize, setSelectedSize] = useState("")
   const [showWishListed, setShowWishListed] = useState(0);
-  
+
 
   const handleProductView = async () => {
     try {
@@ -165,10 +165,10 @@ export default function ProductDetail(props) {
       setNavigateTo('Cart')
       setIcon(
         <EN
-        name="doubleright"
-        size={17}
-        color={'#fff'}
-      />
+          name="doubleright"
+          size={17}
+          color={'#fff'}
+        />
       )
     }
 
@@ -202,16 +202,16 @@ export default function ProductDetail(props) {
     try {
       var res = await postAddOrRemoveWishlist(any, productId);
       if (res.status == true) {
-        if(any=='add'){
-        setShowWishListed(1); 
-        toast.show(res.msg, {
-          type: 'success',
-          placement: 'bottom',
-          duration: 3000,
-          offset: 30,
-          animationType: 'slide-in',
-        });
-        }else{
+        if (any == 'add') {
+          setShowWishListed(1);
+          toast.show(res.msg, {
+            type: 'success',
+            placement: 'bottom',
+            duration: 3000,
+            offset: 30,
+            animationType: 'slide-in',
+          });
+        } else {
           setShowWishListed(0);
           toast.show(res.msg, {
             type: 'success',
@@ -221,7 +221,7 @@ export default function ProductDetail(props) {
             animationType: 'slide-in',
           });
         }
-       
+
       } else {
         toast.show(res.msg, {
           type: 'warning',
@@ -247,17 +247,32 @@ export default function ProductDetail(props) {
   const handleAddCartProduct = async () => {
     try {
       var Size = `${purchasPrice}#${selectedSize}#1`
-      var TotalPrice = purchasPrice*qty 
-      console.log("from data .................",qty,Size,TotalPrice)
+      var TotalPrice = purchasPrice * qty
 
       let formdata = new FormData();
       formdata.append('qty', qty);
       formdata.append('sizeprice', Size);
       formdata.append('totalprice ', TotalPrice);
-      
-      // var res = await postAddCartProduct(productId,formdata)
-      // console.log("uhss.......handleAddCartProduct", res)
-      // navigation.navigate(navigateTo)
+
+      var res = await postAddCartProduct(productId, formdata)
+      if (res.status == true) {
+        navigation.navigate(navigateTo)
+        toast.show(res.msg, {
+          type: 'success',
+          placement: 'bottom',
+          duration: 3000,
+          offset: 30,
+          animationType: 'slide-in',
+        });
+      } else {
+        toast.show(res.msg, {
+          type: 'warning',
+          placement: 'bottom',
+          duration: 3000,
+          offset: 30,
+          animationType: 'slide-in',
+        });
+      }
     } catch (e) {
       toast.show('Something went wrong!, Try again later.', {
         type: 'danger',
@@ -294,7 +309,7 @@ export default function ProductDetail(props) {
                   ...styles.subView1,
                 }}>
                 {featured == 'ok' ? (
-                  <View style={{ position: 'absolute', top: -10, right: -10 }}>
+                  <View style={{ position: 'absolute', top: -10, right: -10, zIndex: 99999 }}>
                     <Ribbon />
                   </View>
                 ) : (
@@ -345,29 +360,29 @@ export default function ProductDetail(props) {
                         ...styles.WID1,
                       }}>
                       {showWishListed == 1 ? (
-                         <TouchableOpacity
-                         activeOpacity={0.8}
-                         onPress={() => handleWishListed('remove')} 
-                         style={{
-                           padding: 2,
-                           borderRadius: 25,
-                         }}>
-                         <FontAwesome name="heart" size={23} color={themecolor.TEXTRED} />
-                       </TouchableOpacity>
+                        <TouchableOpacity
+                          activeOpacity={0.8}
+                          onPress={() => handleWishListed('remove')}
+                          style={{
+                            padding: 2,
+                            borderRadius: 25,
+                          }}>
+                          <FontAwesome name="heart" size={23} color={themecolor.TEXTRED} />
+                        </TouchableOpacity>
                       ) : (
-                         <TouchableOpacity
-                         activeOpacity={0.1}
-                         onPress={() => handleWishListed('add')} 
-                         style={{
-                           padding: 2,
-                           borderRadius: 25,
-                         }}>
-                         <FontAwesome
-                           name="heart-o"
-                           size={23}
-                           color={themecolor.TEXTRED}
-                         />
-                       </TouchableOpacity>
+                        <TouchableOpacity
+                          activeOpacity={0.1}
+                          onPress={() => handleWishListed('add')}
+                          style={{
+                            padding: 2,
+                            borderRadius: 25,
+                          }}>
+                          <FontAwesome
+                            name="heart-o"
+                            size={23}
+                            color={themecolor.TEXTRED}
+                          />
+                        </TouchableOpacity>
                       )}
                     </View>
 
@@ -389,7 +404,7 @@ export default function ProductDetail(props) {
                         <Image
                           source={require('../../assets/images/whatsapp.png')}
                           resizeMode="contain"
-                          style={{ width: 50, height: 25,}}
+                          style={{ width: 50, height: 25, }}
                         />
                       </TouchableOpacity>
                     </View>
@@ -701,7 +716,7 @@ export default function ProductDetail(props) {
                   />
                 </View>
               )}
-              <RBSheetData refRBSheet={refRBSheet} title={title}  sizes={sizes} touch={false} icon={icon} qty={qty} setQty={setQty} setSelectedSize={setSelectedSize}  onPress={()=>handleAddCartProduct()}/>
+              <RBSheetData refRBSheet={refRBSheet} title={title} sizes={sizes} touch={false} icon={icon} qty={qty} setQty={setQty} setSelectedSize={setSelectedSize} onPress={handleAddCartProduct()} />
             </View>
           </TouchableOpacity>
 

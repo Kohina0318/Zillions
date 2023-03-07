@@ -60,20 +60,10 @@ export function ProductDetailSizeFlatList(props) {
     setSelected(item)
   }
 
-  const sizes = [
-    {
-      amount: "1000",
-      size: "30Sr"
-    },
-    {
-      amount: "2000",
-      size: "0Sr"
-    },]
-
   return (
     <>
       <FlatList
-        data={sizes}
+        data={props.sizes}
         renderItem={({ item, index }) => (
           <ProductDetailSizeList index={index} touch={props.touch} selected={selected} onChange={(value) => handleSelected(value)} item={item} themecolor={themecolor} setSelectedSize={props.setSelectedSize} />
         )}
