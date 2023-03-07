@@ -198,30 +198,25 @@ export default function ProductDetail(props) {
     );
   }
 
-  const handleWishListed = async (any) => {
+  const handleWishListed=async(any)=>{
     try {
       var res = await postAddOrRemoveWishlist(any, productId);
+      console.log(res.msg)
       if (res.status == true) {
-        if (any == 'add') {
+        if(any==1){
           setShowWishListed(1);
-          toast.show(res.msg, {
-            type: 'success',
-            placement: 'bottom',
-            duration: 3000,
-            offset: 30,
-            animationType: 'slide-in',
-          });
-        } else {
+        } 
+        else 
+        {
           setShowWishListed(0);
-          toast.show(res.msg, {
-            type: 'success',
-            placement: 'bottom',
-            duration: 3000,
-            offset: 30,
-            animationType: 'slide-in',
-          });
         }
-
+        toast.show(res.msg, {
+          type: 'success',
+          placement: 'bottom',
+          duration: 3000,
+          offset: 30,
+          animationType: 'slide-in',
+        });
       } else {
         toast.show(res.msg, {
           type: 'warning',
@@ -371,7 +366,7 @@ export default function ProductDetail(props) {
                         </TouchableOpacity>
                       ) : (
                         <TouchableOpacity
-                          activeOpacity={0.1}
+                          activeOpacity={0.8}
                           onPress={() => handleWishListed('add')}
                           style={{
                             padding: 2,
@@ -716,7 +711,7 @@ export default function ProductDetail(props) {
                   />
                 </View>
               )}
-              <RBSheetData refRBSheet={refRBSheet} title={title} sizes={sizes} touch={false} icon={icon} qty={qty} setQty={setQty} setSelectedSize={setSelectedSize} onPress={handleAddCartProduct()} />
+              <RBSheetData refRBSheet={refRBSheet} title={title} sizes={sizes} touch={false} icon={icon} qty={qty} setQty={setQty} setSelectedSize={setSelectedSize} onPress={()=>handleAddCartProduct()} />
             </View>
           </TouchableOpacity>
 
