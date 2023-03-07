@@ -1,10 +1,11 @@
+import { getAppToken } from "../CommonRepository";
 import { SERVER_URL } from "../SERVER_URL";
 
 const getBrands = async () => {
   try {
     const response = await fetch(`${await SERVER_URL()}/brands`, {
       method: 'GET',
-      headers: {'Content-Type': 'application/json;charset=utf-8'},
+      headers: { 'Content-Type': 'application/json;charset=utf-8' },
     });
     const result = await response.json();
     return result;
@@ -17,7 +18,7 @@ const getMainSlider = async () => {
   try {
     const response = await fetch(`${await SERVER_URL()}/main-slider`, {
       method: 'GET',
-      headers: {'Content-Type': 'application/json;charset=utf-8'},
+      headers: { 'Content-Type': 'application/json;charset=utf-8' },
     });
     const result = await response.json();
     return result;
@@ -32,7 +33,10 @@ const getProductList = async (spec, limit) => {
       `${await SERVER_URL()}/product-list?speciality=${spec}&limit=${limit}`,
       {
         method: 'GET',
-        headers: {'Content-Type': 'application/json;charset=utf-8'},
+        headers: {
+          'Content-Type': 'application/json;charset=utf-8',
+          Authorization: `${await getAppToken()}`
+        },
       },
     );
     const result = await response.json();
@@ -42,4 +46,4 @@ const getProductList = async (spec, limit) => {
   }
 };
 
-export {getProductList, getBrands, getMainSlider};
+export { getProductList, getBrands, getMainSlider };

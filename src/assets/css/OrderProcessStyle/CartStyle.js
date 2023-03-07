@@ -36,7 +36,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   txtConvenienceFee: {
-    fontSize: FontSize.labelText3,
+    fontSize: FontSize.labelText2,
     fontFamily: FontFamily.Popinssemibold,
     fontWeight: 'bold',
   },

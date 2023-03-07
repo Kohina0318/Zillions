@@ -37,6 +37,7 @@ export default function WishList(props) {
     try {
       var res = await getWishlist();
       if (res.status === true) {
+        console.log("kkkkkkkkkkkkkkkkkkkkkkkkkdata wishlist",res.data)
         setData(res.data);
         setLoader(false);
       } else {
@@ -78,7 +79,7 @@ export default function WishList(props) {
             ) : (
               <NoDataMsg title="No Product Found!" />
             )}
-            <View style={{marginVertical: 20}} />
+            <View style={{marginVertical: 48}} />
           </View>
         </>
       )}

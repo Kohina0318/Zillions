@@ -59,7 +59,7 @@ export default function Cart(props) {
       {loader ? (
         <LoadingFullScreen style={{ flex: 1 }} />
       ) : (
-        <ScrollView >
+        <ScrollView showsVerticalScrollIndicator={false}>
 
           <View style={{ ...styles.MVT }} />
 
@@ -79,7 +79,7 @@ export default function Cart(props) {
       )}
 
 
-      <View style={{ marginVertical: 30 }} />
+      <View style={{ marginVertical: 31 }} />
 
       <View
         style={{
@@ -88,9 +88,9 @@ export default function Cart(props) {
           backgroundColor: themecolor.LOGINTHEMECOLOR,
         }}>
         <View style={{ ...styles.mainView }}>
-          <View style={{ width: '40%', justifyContent: "center", alignItems: "center", }}>
-            <Text style={{ ...styles.txt1, color: themecolor.TXTWHITE }}>Total: </Text>
-            <Text style={{ ...styles.txt1, color: themecolor.TXTWHITE }}><FAIcon name="rupee" size={12} /> 10000</Text>
+          <View style={{ width: '40%', justifyContent: "center",}}>
+            <Text style={{ ...styles.txt, color: themecolor.TXTWHITE }}><FAIcon name="rupee" size={14} />10000</Text>
+            <Text style={{ ...styles.txtConvenienceFee, color: themecolor.ADDTOCARTBUTTONCOLOR }}>View Details</Text>
           </View>
 
           <View style={{ width: '60%', }}>
