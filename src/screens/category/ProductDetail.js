@@ -97,6 +97,7 @@ export default function ProductDetail(props) {
   const [qty, setQty] = useState(1)
   const [selectedSize, setSelectedSize] = useState("")
   const [showWishListed, setShowWishListed] = useState(0);
+  const [showGoToButton, setShowGoToButton] = useState(false);
 
 
   const handleProductView = async () => {
@@ -153,7 +154,7 @@ export default function ProductDetail(props) {
   const handleRB = (index) => {
     if (index == 1) {
       setTitle('Add To Cart')
-      setNavigateTo('Cart')
+      setNavigateTo('')
       setIcon(<Feather
         name="shopping-cart"
         size={16}
@@ -171,7 +172,6 @@ export default function ProductDetail(props) {
         />
       )
     }
-
     refRBSheet.current.open()
   }
 
@@ -198,16 +198,15 @@ export default function ProductDetail(props) {
     );
   }
 
-  const handleWishListed=async(any)=>{
+  const handleWishListed = async (any) => {
     try {
       var res = await postAddOrRemoveWishlist(any, productId);
       console.log(res.msg)
       if (res.status == true) {
-        if(any==1){
+        if (any == 1) {
           setShowWishListed(1);
-        } 
-        else 
-        {
+        }
+        else {
           setShowWishListed(0);
         }
         toast.show(res.msg, {
@@ -250,16 +249,19 @@ export default function ProductDetail(props) {
       formdata.append('totalprice ', TotalPrice);
 
       var res = await postAddCartProduct(productId, formdata)
-      console.log("Res>>>>>>>>>>>>>",res);
       if (res.status == true) {
-        // navigation.navigate(navigateTo)
-        toast.show(res.msg, {
-          type: 'success',
-          placement: 'bottom',
-          duration: 3000,
-          offset: 30,
-          animationType: 'slide-in',
-        });
+        if (title == 'Add To Cart') {
+          setShowGoToButton(true)
+          toast.show(res.msg, {
+            type: 'success',
+            placement: 'bottom',
+            duration: 3000,
+            offset: 30,
+            animationType: 'slide-in',
+          });
+        } else {
+          navigation.navigate(navigateTo)
+        }
       } else {
         toast.show(res.msg, {
           type: 'warning',
@@ -668,20 +670,37 @@ export default function ProductDetail(props) {
               {productDetailData.current_stock > 0 ? (
                 <>
                   <View style={{ width: '49%' }}>
-                    <HalfSizeButton
-                      title="Add to cart"
-                      icon={
-                        <Feather
-                          name="shopping-cart"
-                          size={16}
-                          color={themecolor.BACKICON}
-                        />
-                      }
-                      onPress={() => handleRB(1)}
-                      backgroundColor={'transparent'}
-                      color={themecolor.BACKICON}
-                      borderColor={themecolor.BACKICON}
-                    />
+                    {showGoToButton ?
+                      <HalfSizeButton
+                        title="Go to cart"
+                        icon={
+                          <Feather
+                            name="shopping-cart"
+                            size={16}
+                            color={themecolor.BACKICON}
+                          />
+                        }
+                        onPress={() => navigation.navigate("Cart")}
+                        backgroundColor={'transparent'}
+                        color={themecolor.BACKICON}
+                        borderColor={themecolor.BACKICON}
+                      />
+                      :
+                      <HalfSizeButton
+                        title="Add to cart"
+                        icon={
+                          <Feather
+                            name="shopping-cart"
+                            size={16}
+                            color={themecolor.BACKICON}
+                          />
+                        }
+                        onPress={() => handleRB(1)}
+                        backgroundColor={'transparent'}
+                        color={themecolor.BACKICON}
+                        borderColor={themecolor.BACKICON}
+                      />
+                    }
                   </View>
 
                   <View style={{ width: '49%' }}>

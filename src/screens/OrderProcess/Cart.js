@@ -20,10 +20,6 @@ import { getCartProductList } from '../../repository/OrderProcessRepository/Cart
 
 const { width, height } = Dimensions.get('screen');
 
-const data = [
-  { id: 1 },
-  { id: 2 }
-]
 
 export default function Cart(props) {
   function handleBackButtonClick() {
@@ -45,14 +41,27 @@ export default function Cart(props) {
   const mode = useSelector(state => state.mode);
   const themecolor = new MyThemeClass(mode).getThemeColor();
 
-  const [loader, setLoader] = useState(false);
+  const [loader, setLoader] = useState(true);
+  const [data, setData] = useState("");
+  const [cartProduct, setCartProduct] = useState([]);
 
   const handleCartProductList = async () => {
     try {
       var res = await getCartProductList()
-      console.log("data......handleCartProductList...>",res)
+      alert(JSON.stringify(res))
+      setData(res.data)
+      setCartProduct(Object.values(res.data.carted))
+      setLoader(false)
     } catch (e) {
-
+      setLoader(false)
+      console.log('errrror in..handleCartProductList page-->', e);
+      toast.show('Something went wrong!, Try again later.', {
+        type: 'danger',
+        placement: 'bottom',
+        duration: 3000,
+        offset: 30,
+        animationType: 'slide-in',
+      });
     }
   }
 
@@ -78,7 +87,7 @@ export default function Cart(props) {
             <Stepper item={"Cart"} themecolor={themecolor} props={props} />
           </View>
 
-          <CartProductDataList data={data} />
+          <CartProductDataList data={cartProduct} />
 
           <View style={{ ...styles.MVT }} />
 

@@ -5,7 +5,7 @@ import { SERVER_URL } from "../SERVER_URL";
   const getCartProductList = async () => {
     try {
       const response = await fetch(
-        `${await SERVER_URL()}/cart-product/whole_list/0/pp`,
+        `${await SERVER_URL()}/cart-product/added_list/0/pp`,
       {
         method: 'GET',
         headers: {'Content-Type': 'application/json;charset=utf-8',

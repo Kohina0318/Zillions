@@ -31,9 +31,9 @@ function CartProductDataFlateList({item, themecolor}) {
         // onPress={() => navigation.navigate('SubCategories',{categoryId:item.category_id,categoryName:item.category_name})}
         >
         <View style={{...styles.innerView}}>
-        <View style={{...styles.innerImage,backgroundColor:"red"}}>
+        <View style={{...styles.innerImage,}}>
           <Image
-            source={{uri: item.banner}}
+            source={{uri: item.image}}
             style={{
               width: 70,
               height: 70,
@@ -44,7 +44,7 @@ function CartProductDataFlateList({item, themecolor}) {
         <View style={{...styles.TxtViewinner}}>
 
           <Text allowFontScaling={false} numberOfLines={2} style={{...styles.txt, color: themecolor.TXTWHITE}}>
-          kojhinn
+          {item.name}
           </Text>
 
           <View style={{...styles.PriceTxtViewinner}}>
@@ -52,7 +52,7 @@ function CartProductDataFlateList({item, themecolor}) {
               allowFontScaling={false}
               style={{ ...styles.txt1, color: themecolor.TXTWHITE }}>
               <FAIcon name="rupee" size={12} />
-              100
+              {item.price}
               {'  '}
               <Text
                 allowFontScaling={false}
