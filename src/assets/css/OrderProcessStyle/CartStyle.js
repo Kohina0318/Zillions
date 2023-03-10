@@ -14,12 +14,22 @@ const styles = StyleSheet.create({
   },
   datalistView: {
     width: width * 0.93,
-    marginTop: 6,
+    marginTop: 3,
     padding: 13,
     borderRadius: 8,
     alignSelf: 'center',
     alignItems: 'center',
-    borderWidth: 1,
+    borderWidth: 0.5,
+    marginBottom: 1,
+  },
+  datalistView1: {
+    width: width * 0.94,
+    marginTop: 5,
+    padding: 13,
+    borderRadius: 8,
+    alignSelf: 'center',
+    alignItems: 'center',
+    borderWidth: 0.5,
     marginBottom: 1,
   },
   innerView: { flexDirection: "row", width: "100%" },
@@ -28,8 +38,12 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-start',
     alignSelf: 'flex-start',
   },
-  TxtViewinner: { marginLeft: 7, width: "74%",justifyContent:'center' },
-  PriceTxtViewinner: { flexDirection: 'row', width: '100%' },
+  TxtViewinner: { marginLeft: 7, width: "74%", justifyContent: 'center' },
+  PriceTxtViewinner: { flexDirection: 'row', width: '100%', marginTop:3 },
+  QtyView: {
+    borderWidth: 0.5, padding: 2, alignSelf: 'center',
+    alignItems: 'center', borderRadius: 5, paddingHorizontal: 7
+  },
   txt: {
     fontSize: FontSize.labelText4,
     fontFamily: FontFamily.Popinssemibold,
@@ -44,12 +58,17 @@ const styles = StyleSheet.create({
     fontSize: FontSize.labelText3,
     fontFamily: FontFamily.PopinsRegular,
   },
-  txtLine:{
-        fontFamily: FontFamily.PopinsRegular,
-        fontSize: FontSize.labelText3,
-        textDecorationLine: 'line-through',
-        textDecorationStyle: 'solid',
-    },
+  txtPrice: {
+    fontSize: FontSize.labelText3,
+    fontFamily: FontFamily.PopinsRegular,
+    fontWeight: 'bold',
+  },
+  txtLine: {
+    fontFamily: FontFamily.PopinsRegular,
+    fontSize: FontSize.labelText3,
+    textDecorationLine: 'line-through',
+    textDecorationStyle: 'solid',
+  },
   txtSave: {
     fontSize: FontSize.labelText4,
     fontFamily: FontFamily.Popinssemibold,
@@ -78,21 +97,26 @@ const styles = StyleSheet.create({
   MVT: {
     marginTop: 10
   },
-  removeView:{width: "100%" ,},
-  removeToch:{alignSelf:"flex-end",right:5,},
+  removeView: { width: "100%", },
+  removeToch: { alignSelf: "flex-end", right: 5, },
   removeButton: {
     fontFamily: FontFamily.PopinsMedium,
     fontSize: FontSize.labelText3,
     fontWeight: 'bold',
   },
-  mv5:{
-    marginTop:5
+  RemoveAllButton:{
+    width: width * 0.93,
+    alignItems: 'flex-end',
+    marginBottom: 1,
   },
-  orderDetialcompWidth:{
+  mv5: {
+    marginTop: 5
+  },
+  orderDetialcompWidth: {
     width: "45%",
   },
-  orderDetialcompWidth1:{
-    width: "55%",justifyContent:'flex-end', alignItems:'flex-end',
+  orderDetialcompWidth1: {
+    width: "55%", justifyContent: 'flex-end', alignItems: 'flex-end',
   }
 
 });

@@ -56,14 +56,16 @@ export const Stepper = ({ item, props, themecolor }) => {
 
   return (
     <>
-    <View style={{ ...StepperStyle.CUSTOMERdvIEW, }}>
-    <TouchableOpacity activeOpacity={0.5} style={{ ...StepperStyle.CUSTOMERVIEWTO, backgroundColor: themecolor.BOXBORDERCOLOR, borderColor: themecolor.BOXBORDERCOLOR1 }}>
+    <View  style={{ ...StepperStyle.CUSTOMERVIEWTO,
+          backgroundColor: themecolor.BOXBORDERCOLOR,
+          borderColor: themecolor.BOXBORDERCOLOR1, }}>
       <View
         style={{
-          width: width * 0.9,
+          width:"100%",
           justifyContent: 'center',
           alignSelf: 'center',
-          top: 10
+          top: 10,
+          alignSelf:"center"
         }}>
         <StepIndicator
           customStyles={customStyles}
@@ -74,11 +76,8 @@ export const Stepper = ({ item, props, themecolor }) => {
       </View>
       <View style={StepperStyle.NumberInputView}>
 
-
       </View>
-    </TouchableOpacity>
-  </View>
-  <View style={{ marginVertical: 1 }} />
+    </View>
   </>
   )
 }

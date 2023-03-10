@@ -731,7 +731,7 @@ export default function ProductDetail(props) {
                   />
                 </View>
               )}
-              <RBSheetData refRBSheet={refRBSheet} title={title} sizes={sizes} touch={false} icon={icon} qty={qty} setQty={setQty} setSelectedSize={setSelectedSize} onPress={handleAddCartProduct()} />
+              <RBSheetData refRBSheet={refRBSheet} title={title} sizes={sizes} touch={false} icon={icon} qty={qty} setQty={setQty} maxQty={productDetailData.current_stock} setSelectedSize={setSelectedSize} onPress={handleAddCartProduct} />
             </View>
           </TouchableOpacity>
 

@@ -23,7 +23,7 @@ export default function OrderDeailsComp(props) {
   return (
     <View
       style={{
-        ...styles.datalistView,
+        ...styles.datalistView1,
         backgroundColor: themecolor.BOXBORDERCOLOR,
         borderColor: themecolor.BOXBORDERCOLOR1,
       }}

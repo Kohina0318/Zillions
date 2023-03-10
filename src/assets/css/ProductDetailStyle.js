@@ -10,7 +10,7 @@ const styles = StyleSheet.create({
     // justifyContent: 'center',
     alignSelf: 'center',
     width: width * 0.94,
-    marginTop: 10,
+    marginTop: 6,
   },
   container1: {
     justifyContent: 'center',
@@ -271,7 +271,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row', width: '100%'
   },
   BRWID:{
-    width: width * 0.7, flexDirection: 'column'
+    width: width * 0.67, flexDirection: 'column',
   },
   WID1:{
     width: width * 0.1,

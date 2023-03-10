@@ -3,7 +3,8 @@ import {
   View,
   Text,
   Dimensions,
-  BackHandler, ScrollView
+  BackHandler, ScrollView,
+  TouchableOpacity
 } from 'react-native';
 import { useSelector } from 'react-redux';
 import { MyThemeClass } from '../../components/Theme/ThemeDarkLightColor';
@@ -48,7 +49,7 @@ export default function Cart(props) {
   const handleCartProductList = async () => {
     try {
       var res = await getCartProductList()
-      alert(JSON.stringify(res))
+      console.log("Kojhiiihnnnjaa....cart product..>>", res.data.carted)
       setData(res.data)
       setCartProduct(Object.values(res.data.carted))
       setLoader(false)
@@ -65,9 +66,9 @@ export default function Cart(props) {
     }
   }
 
-  useEffect(()=>{
+  useEffect(() => {
     handleCartProductList()
-  },[])
+  }, [])
 
   return (
     <View style={{ ...styles.bg, backgroundColor: themecolor.THEMECOLOR }}>
@@ -81,19 +82,24 @@ export default function Cart(props) {
       ) : (
         <ScrollView showsVerticalScrollIndicator={false}>
 
-          <View style={{ ...styles.MVT }} />
+          <View style={{ ...styles.mv5 }} />
 
           <View>
             <Stepper item={"Cart"} themecolor={themecolor} props={props} />
           </View>
 
+          <View style={{ ...styles.MVT }} />
+
+          <TouchableOpacity activeOpacity={0.8} style={{...styles.RemoveAllButton}}>
+            <Text style={{ ...styles.removeButton, color: themecolor.TEXTRED }}>Remove All</Text>
+          </TouchableOpacity>
           <CartProductDataList data={cartProduct} />
 
-          <View style={{ ...styles.MVT }} />
+          <View style={{ ...styles.mv5 }} />
 
           <OrderDeailsComp />
 
-          <View style={{ ...styles.MVT }} />
+          <View style={{ ...styles.mv5 }} />
 
         </ScrollView>
       )}
@@ -108,7 +114,7 @@ export default function Cart(props) {
           backgroundColor: themecolor.LOGINTHEMECOLOR,
         }}>
         <View style={{ ...styles.mainView }}>
-          <View style={{ width: '40%', justifyContent: "center",}}>
+          <View style={{ width: '40%', justifyContent: "center", }}>
             <Text allowFontScaling={false} style={{ ...styles.txt, color: themecolor.TXTWHITE }}><FAIcon name="rupee" size={14} />10000</Text>
             <Text allowFontScaling={false} style={{ ...styles.txtConvenienceFee, color: themecolor.ADDTOCARTBUTTONCOLOR }}>View Details</Text>
           </View>

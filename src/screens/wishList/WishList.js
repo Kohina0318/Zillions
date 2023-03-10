@@ -24,10 +24,11 @@ const {width, height} = Dimensions.get('screen');
 export default function WishList(props) {
 
   const toast = useToast();
+  const navigation = useNavigation();
+  
   const mode = useSelector(state => state.mode);
   const themecolor = new MyThemeClass(mode).getThemeColor();
-
-  const navigation = useNavigation();
+ 
   const [loader, setLoader] = useState(true);
   const [refresh, setRefresh] = useState(false);
   const [data, setData] = useState([]);
@@ -73,7 +74,7 @@ export default function WishList(props) {
         <>
           <View style={{...styles.container}}>
             {data.length > 0 ? (
-                <WishListDataList data={data} setRefresh={setRefresh} refresh={refresh} />
+                <WishListDataList data={data} setRefresh={setRefresh} refresh={refresh}  />
             ) : dataMsg != '' ? (
               navigation.navigate('Login')
             ) : (
@@ -81,6 +82,8 @@ export default function WishList(props) {
             )}
             <View style={{marginVertical: 48}} />
           </View>
+
+            
         </>
       )}
     </View>
