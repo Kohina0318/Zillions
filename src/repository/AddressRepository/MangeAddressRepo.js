@@ -18,6 +18,24 @@ const getManageAddress = async () => {
     }
   };
 
+  const getManageAddressPost = async (body) => {
+    try {
+      const response = await fetch(
+          `${await SERVER_URL()}/profiles/manage_address`,
+        {
+          method: 'POST',
+          headers: {'Content-Type': 'multipart/form-data',
+          Authorization: `${await getAppToken()}`},
+          body:body
+        },
+      );
+      const result = await response.json();
+        return result;
+    } catch (err) {
+      console.log('error in getManageAddress...in MangeAddressRepo ', err);
+    }
+  };
+
   const postAddAddress = async formdata => {
     try {
       const response = await fetch(
@@ -73,5 +91,5 @@ const getManageAddress = async () => {
   };
   
 
-  export {getManageAddress,postAddAddress,postDeleteAddress,postSetDefaultAddress};
+  export {getManageAddress,postAddAddress,postDeleteAddress,postSetDefaultAddress,getManageAddressPost};
   
