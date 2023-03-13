@@ -10,7 +10,6 @@ const styles = StyleSheet.create({
     // justifyContent: 'center',
     alignSelf: 'center',
     width: width * 0.94,
-    marginTop: 6,
   },
   container1: {
     justifyContent: 'center',
@@ -299,6 +298,9 @@ const styles = StyleSheet.create({
   Tabsubview:{
     alignItems: 'center',
     marginTop:5
+  },
+  MGT:{
+    marginTop: 10
   }
 });
 

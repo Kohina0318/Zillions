@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   View,
   Text,
@@ -8,41 +8,58 @@ import {
   ScrollView,
   Alert,
 } from 'react-native';
-import {useSelector} from 'react-redux';
-import {MyThemeClass} from '../../components/Theme/ThemeDarkLightColor';
+import { useSelector } from 'react-redux';
+import { MyThemeClass } from '../../components/Theme/ThemeDarkLightColor';
 import Header from '../../components/shared/header/Header';
-import {styles} from '../../assets/css/WishListStyle';
-import {WishListDataList} from '../../components/shared/FlateLists/WishlistFlatList/WishListDataList';
-import {getWishlist} from '../../repository/WishListRepository/WishListRepo';
-import {useFocusEffect} from '@react-navigation/native';
+import { styles } from '../../assets/css/WishListStyle';
+import { WishListDataList } from '../../components/shared/FlateLists/WishlistFlatList/WishListDataList';
+import { getWishlist } from '../../repository/WishListRepository/WishListRepo';
+import { useFocusEffect } from '@react-navigation/native';
 import LoadingFullScreen from '../../components/shared/Loader/LoadingFullScreen';
 import NoDataMsg from '../../components/shared/NoData/NoDataMsg';
-import {useNavigation} from '@react-navigation/native';
+import { useNavigation } from '@react-navigation/native';
 import { useToast } from 'react-native-toast-notifications';
-const {width, height} = Dimensions.get('screen');
+const { width, height } = Dimensions.get('screen');
 
 export default function WishList(props) {
 
   const toast = useToast();
   const navigation = useNavigation();
-  
+
   const mode = useSelector(state => state.mode);
   const themecolor = new MyThemeClass(mode).getThemeColor();
- 
+
   const [loader, setLoader] = useState(true);
   const [refresh, setRefresh] = useState(false);
   const [data, setData] = useState([]);
-  const [dataMsg, setDataMsg] = useState('');
-
+  
+ 
   const handleWishlist = async () => {
     try {
       var res = await getWishlist();
+      console.log("kkkkkkkkkkkkkkkkkkkkkkkkkkk...wisjjh",res.data[0])
       if (res.status === true) {
         setData(res.data);
         setLoader(false);
-      } else {
+      } 
+      else if (res.msg == "Invalid Authentication") {
         setLoader(false);
-        setDataMsg(res.msg);
+        setData([]);
+        Alert.alert(
+          'Login to continue',
+          'Are you want to Login?',
+          [
+            {
+              text: 'No',
+              onPress: () => console.log('Cancel Pressed'),
+              style: 'cancel',
+            },
+            {text: 'Yes', onPress: () => navigation.navigate('Login')},
+          ],
+        );
+      }
+      else {
+        setLoader(false);
       }
     } catch (e) {
       console.log('errrror in..handleWishlist page wishlist-->', e);
@@ -61,29 +78,27 @@ export default function WishList(props) {
     React.useCallback(() => {
       setLoader(true);
       handleWishlist();
-    }, [props,refresh]),
+    }, [props, refresh]),
   );
 
   return (
-    <View style={{...styles.bg, backgroundColor: themecolor.THEMECOLOR}}>
+    <View style={{ ...styles.bg, backgroundColor: themecolor.THEMECOLOR }}>
       <Header title="Wishlist" />
 
       {loader ? (
-        <LoadingFullScreen style={{flex: 1}} />
+        <LoadingFullScreen style={{ flex: 1 }} />
       ) : (
         <>
-          <View style={{...styles.container}}>
+          <View style={{ ...styles.container }}>
             {data.length > 0 ? (
-                <WishListDataList data={data} setRefresh={setRefresh} refresh={refresh}  />
-            ) : dataMsg != '' ? (
-              navigation.navigate('Login')
+              <WishListDataList data={data}  setRefresh={setRefresh} refresh={refresh} />
             ) : (
               <NoDataMsg title="No Product Found!" />
             )}
-            <View style={{marginVertical: 48}} />
+            <View style={{ marginVertical: 48 }} />
           </View>
 
-            
+
         </>
       )}
     </View>

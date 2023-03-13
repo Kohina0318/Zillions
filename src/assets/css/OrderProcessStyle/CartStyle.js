@@ -35,17 +35,21 @@ const styles = StyleSheet.create({
   innerView: { flexDirection: "row", width: "100%" },
   innerImage: {
     borderRadius: 4,
-    justifyContent: 'flex-start',
-    alignSelf: 'flex-start',
+    justifyContent: 'center',
+    alignSelf: 'center',
   },
   TxtViewinner: { marginLeft: 7, width: "74%", justifyContent: 'center' },
-  PriceTxtViewinner: { flexDirection: 'row', width: '100%', marginTop:3 },
+  PriceTxtViewinner: { flexDirection: 'row', width: '100%', marginTop:5 ,},
   QtyView: {
-    borderWidth: 0.5, padding: 2, alignSelf: 'center',
-    alignItems: 'center', borderRadius: 5, paddingHorizontal: 7
+    borderWidth: 0.5, padding: 2, borderRadius: 5, paddingHorizontal: 7, margin:2 ,
   },
   txt: {
     fontSize: FontSize.labelText4,
+    fontFamily: FontFamily.Popinssemibold,
+    fontWeight: 'bold',
+  },
+  emptyCarttxt: {
+    fontSize: FontSize.labelTextbig,
     fontFamily: FontFamily.Popinssemibold,
     fontWeight: 'bold',
   },
@@ -117,6 +121,21 @@ const styles = StyleSheet.create({
   },
   orderDetialcompWidth1: {
     width: "55%", justifyContent: 'flex-end', alignItems: 'flex-end',
+  },
+  emptyCartViewContainer:{
+    width: width * 0.9, justifyContent: "center", alignSelf: "center", alignItems: "center" 
+  },
+  EmptyCartInnerContainer:{
+    width: "70%", marginTop: -15, justifyContent: "center", alignSelf: "center", alignItems: "center"
+  },
+  emptyCartTouchButon:{
+    width: width * 0.35,
+    alignSelf: 'center',
+    alignItems: 'center',
+    justifyContent: 'center',
+    height: width * 0.11,
+    borderRadius: 20,
+    borderWidth: 0.6,
   }
 
 });

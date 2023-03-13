@@ -38,8 +38,8 @@ export default function Login(props) {
   const isDarkMode = Appearance.getColorScheme() === 'dark';
 
   function handleBackButtonClick() {
-    props.navigation.goBack();
-    return true;
+      props.navigation.goBack();
+      return true;
   }
 
   React.useEffect(() => {

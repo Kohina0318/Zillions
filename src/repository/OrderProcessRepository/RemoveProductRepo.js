@@ -2,10 +2,10 @@ import { getAppToken } from "../CommonRepository";
 import { SERVER_URL } from "../SERVER_URL";
 
 
-  const getCartProductList = async () => {
+  const getRemoveAllProducts = async () => {
     try {
       const response = await fetch(
-        `${await SERVER_URL()}/cart-product/added_list/0/pp`,
+        `${await SERVER_URL()}/cart-product/empty/0/pp`,
       {
         method: 'GET',
         headers: {'Content-Type': 'application/json;charset=utf-8',
@@ -15,14 +15,14 @@ import { SERVER_URL } from "../SERVER_URL";
       const result = await response.json();
       return result;
     } catch (err) {
-      console.log('error in getCartProductList...in CartListRepo ', err);
+      console.log('error in getRemoveAllProducts...in RemoveProductRepo ', err);
     }
   };
-
-  const getCartOrderDetails = async () => {
+  
+  const getRemoveProduct = async (rowId) => {
     try {
       const response = await fetch(
-        `${await SERVER_URL()}/cart-product/calcs/full/pp`,
+        `${await SERVER_URL()}/cart-product/remove_one/${rowId}/pp`,
       {
         method: 'GET',
         headers: {'Content-Type': 'application/json;charset=utf-8',
@@ -32,10 +32,10 @@ import { SERVER_URL } from "../SERVER_URL";
       const result = await response.json();
       return result;
     } catch (err) {
-      console.log('error in getCartOrderDetails...in CartListRepo ', err);
+      console.log('error in getRemoveProduct...in RemoveProductRepo ', err);
     }
   };
   
 
-  export {getCartProductList,getCartOrderDetails};
+  export {getRemoveAllProducts,getRemoveProduct};
   

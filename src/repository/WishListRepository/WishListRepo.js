@@ -26,7 +26,9 @@ const getWishlist = async () => {
         10,
         10,
       );
-      // navigateToClearStack('Login');
+      // navigateToClearStack('Login');  
+      return result;
+      
     } else {
       return result;
     }

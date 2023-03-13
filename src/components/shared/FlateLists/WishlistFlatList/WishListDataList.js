@@ -20,28 +20,21 @@ import { postAddOrRemoveWishlist } from '../../../../repository/WishListReposito
 import { useToast } from 'react-native-toast-notifications';
 import { RBSheetData } from '../../../../screens/category/RBSheetData';
 import { postAddCartProduct } from '../../../../repository/OrderProcessRepository/AddToCartRepo';
+import { set } from 'immer/dist/internal';
 
 const { width, height } = Dimensions.get('screen');
 
 
-function WishListDataFlateList({ item, themecolor, setRefresh, refresh }) {
+function WishListDataFlateList({ item, themecolor, setRefresh, refresh, }) {
 
   const toast = useToast();
   const refRBSheet = useRef();
   const navigation = useNavigation();
 
-  const [sizeData, setSizeData] = useState([
-    {
-      size: "SN2",
-      amount: "100"
-    },
-    {
-      size: "b28",
-      amount: "200"
-    },
-  ])
+  const [sizeData, setSizesData] = useState(JSON.parse(item.size));
   const [qty, setQty] = useState(1)
   const [selectedSize, setSelectedSize] = useState(sizeData[0].size)
+  const [selectedSizePrice, setSelectedSizePrice] = useState(sizeData[0].amount)
 
   const handleRemove = async () => {
     try {
@@ -76,19 +69,20 @@ function WishListDataFlateList({ item, themecolor, setRefresh, refresh }) {
     }
   };
 
+  
   const handleAddCartProduct = async () => {
     try {
-      var Size = `${item.purchase_price}#${selectedSize}#1`
-      var TotalPrice = item.purchase_price * qty
+      var Size = `${selectedSizePrice}#${selectedSize}#${qty}`
+      var TotalPrice = selectedSizePrice * qty
 
       let formdata = new FormData();
-      formdata.append('qty', qty);
-      formdata.append('sizeprice', Size);
-      formdata.append('totalprice ', TotalPrice);
+      formdata.append('qty[]', qty);
+      formdata.append('sizeprice[]', Size);
+      formdata.append('totalprice', TotalPrice);
 
       var res = await postAddCartProduct(item.product_id, formdata)
       if (res.status == true) {
-        setRefresh(!refresh)
+        handleRemove()
         toast.show(res.msg, {
           type: 'success',
           placement: 'bottom',
@@ -96,7 +90,6 @@ function WishListDataFlateList({ item, themecolor, setRefresh, refresh }) {
           offset: 30,
           animationType: 'slide-in',
         });
-
       } else {
         toast.show(res.msg, {
           type: 'warning',
@@ -116,6 +109,7 @@ function WishListDataFlateList({ item, themecolor, setRefresh, refresh }) {
       });
     }
   }
+
 
 
   return (
@@ -213,13 +207,13 @@ function WishListDataFlateList({ item, themecolor, setRefresh, refresh }) {
 
         <View style={{ width: "100%" }}>
 
-          {/* {item.current_stock > 0 ? */}
+          {item.current_stock > 0 ?
             <HalfSizeButton
               title="Move to Cart"
               icon={
                 <Feather
                   name="shopping-cart"
-                  size={14}
+                  size={16}
                   color={themecolor.BACKICON}
                 />
               }
@@ -230,26 +224,26 @@ function WishListDataFlateList({ item, themecolor, setRefresh, refresh }) {
               height={width * 0.08}
               onPress={() => refRBSheet.current.open()}
             />
-            {/* :
+            :
             <HalfSizeButton
               title="Out of Stock"
               icon={
-                <MCI name="cart-off" size={14} color={themecolor.TEXTRED} />
+                <MCI name="cart-off" size={16} color={themecolor.TEXTRED} />
               }
               backgroundColor={'transparent'}
               color={themecolor.TEXTRED}
               borderColor={'transparent'}
-              fontSize={14}
+              fontSize={16}
               height={width * 0.08}
             />
-          } */}
+          }
         </View>
       </View>
       <RBSheetData refRBSheet={refRBSheet} title={"Move to cart"} sizes={sizeData} touch={false} icon={<Feather
         name="shopping-cart"
         size={16}
         color="#fff"
-      />} qty={qty} setQty={setQty} maxQty={item.current_stock} setSelectedSize={setSelectedSize} onPress={handleAddCartProduct} />
+      />} qty={qty} setQty={setQty} maxQty={item.current_stock} setSelectedSize={setSelectedSize} onPress={handleAddCartProduct} setSelectedSizePrice={setSelectedSizePrice} />
 
     </>
   );

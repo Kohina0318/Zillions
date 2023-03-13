@@ -15,10 +15,12 @@ import FAIcon from 'react-native-vector-icons/FontAwesome';
 
 const { width, height } = Dimensions.get('screen');
 
-export default function OrderDeailsComp(props) {
+export default function OrderDetailsComp(props) {
 
   const mode = useSelector(state => state.mode);
   const themecolor = new MyThemeClass(mode).getThemeColor();
+
+  var CartDetailData = props.detailData
 
   return (
     <View
@@ -36,21 +38,30 @@ export default function OrderDeailsComp(props) {
 
       <View style={{ ...styles.innerView }}>
         <View style={{ ...styles.orderDetialcompWidth }}>
-          <Text style={{ ...styles.txt1, color: themecolor.TXTWHITE }}>Total Amount</Text>
+          <Text style={{ ...styles.txt1, color: themecolor.TXTWHITE }}>Subtotal Amount</Text>
         </View>
         <View style={{ ...styles.orderDetialcompWidth1, }}>
-          <Text style={{ ...styles.txt1, color: themecolor.TXTWHITE }}><FAIcon name="rupee" size={12} />2500.00</Text>
+          <Text style={{ ...styles.txt1, color: themecolor.TXTWHITE }}>{CartDetailData.total}</Text>
         </View>
       </View>
 
       <View style={{ ...styles.mv5 }} />
 
-      <View style={{ ...styles.innerView }}>
+      {/* <View style={{ ...styles.innerView }}>
         <View style={{ ...styles.orderDetialcompWidth }}>
           <Text style={{ ...styles.txt1, color: themecolor.TXTWHITE }}>Saving Amount</Text>
         </View>
         <View style={{ ...styles.orderDetialcompWidth1 }}>
           <Text style={{ ...styles.txt1, color: themecolor.TEXTGREEN }}>- <FAIcon name="rupee" size={12} />1500.00</Text>
+        </View>
+      </View> */}
+
+      <View style={{ ...styles.innerView }}>
+        <View style={{ ...styles.orderDetialcompWidth }}>
+          <Text style={{ ...styles.txt1, color: themecolor.TXTWHITE }}>Tax Amount</Text>
+        </View>
+        <View style={{ ...styles.orderDetialcompWidth1 }}>
+          <Text style={{ ...styles.txt1, color: themecolor.TXTWHITE }}>{CartDetailData.tax}</Text>
         </View>
       </View>
 
@@ -66,13 +77,17 @@ export default function OrderDeailsComp(props) {
           <Text style={{ ...styles.txt1, color: themecolor.TXTGREY }}>Delivery Fee</Text>
         </View>
         <View style={{ ...styles.orderDetialcompWidth1 }}>
-          <Text style={{ ...styles.txt1, color: themecolor.TXTGREYS }}><FAIcon name="rupee" size={12} />99</Text>
+          {CartDetailData.ship != " ₹0" ?
+            <Text style={{ ...styles.txt1, color: themecolor.TXTGREYS }}><FAIcon name="rupee" size={12} />99</Text>
+            :
+            <Text style={{ ...styles.txt1, color: themecolor.TEXTGREEN }}>FREE</Text>
+          }
         </View>
       </View>
-      
-      <View  style={{...styles.MVT}}/>
-        
-        <View style={{ ...styles.borderLine,borderColor: themecolor.BOXBORDERCOLOR1,}} />
+
+      <View style={{ ...styles.MVT }} />
+
+      <View style={{ ...styles.borderLine, borderColor: themecolor.BOXBORDERCOLOR1, }} />
 
       <View style={{ ...styles.mv5 }} />
 
@@ -81,7 +96,7 @@ export default function OrderDeailsComp(props) {
           <Text style={{ ...styles.txt, color: themecolor.TXTWHITE }}>Amount Payable</Text>
         </View>
         <View style={{ ...styles.orderDetialcompWidth1, }}>
-          <Text style={{ ...styles.txt, color: themecolor.TXTWHITE }}><FAIcon name="rupee" size={14} />1000</Text>
+          <Text style={{ ...styles.txt, color: themecolor.TXTWHITE }}>{CartDetailData.grand_total}</Text>
         </View>
       </View>
 

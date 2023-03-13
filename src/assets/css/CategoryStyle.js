@@ -7,15 +7,15 @@ const {width, height} = Dimensions.get('window');
 const CategoryStyle = StyleSheet.create({
   bg: {flex: 1},
   datalistView: {
-    width: width * 0.9,
+    width: width * 0.93,
     height: 70,
     marginTop: 6,
     padding: 13,
-    borderRadius: 15,
+    borderRadius: 7,
     alignSelf: 'center',
     flexDirection: 'row',
     alignItems: 'center',
-    borderWidth: 1,
+    borderWidth: 0.5,
     marginBottom: 1,
   },
   container: {
@@ -29,7 +29,7 @@ const CategoryStyle = StyleSheet.create({
     alignSelf: 'center',
     alignItems: 'center',
   },
-  margleft15: {marginLeft: 15, width: width * 0.55, },
+  margleft15: {marginLeft: 15, width: width * 0.58,  },
   txt: {
     fontSize: 15,
     fontFamily: FontFamily.Popinssemibold,
