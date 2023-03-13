@@ -101,9 +101,9 @@ function CartProductDataFlateList({ item, themecolor, refresh, setRefresh }) {
             {item.name}
           </Text>
 
-          <View style={{ ...styles.PriceTxtViewinner }}>
+          <View style={{ ...styles.PriceTxtViewinner}}>
 
-              <TouchableOpacity activeOpacity={0.5} style={{ ...styles.QtyView, borderColor: themecolor.TXTGREY, }}
+              <View style={{ ...styles.QtyView, borderColor: themecolor.TXTGREY, }}
               // onPress={() => refRBSheet.current.open()}
               >
                 <Text
@@ -112,9 +112,9 @@ function CartProductDataFlateList({ item, themecolor, refresh, setRefresh }) {
                     allowFontScaling={false}
                     style={{ ...styles.txtPrice, color: themecolor.TXTWHITE, }}> {size}{" "}
                   </Text>
-                  <AN name="down" />
+                  
                 </Text>
-              </TouchableOpacity>
+              </View>
            
               <TouchableOpacity activeOpacity={0.5} style={{ ...styles.QtyView, borderColor: themecolor.TXTGREY, left: 5 }}
               // onPress={() => refRBSheet.current.open()}

@@ -18,9 +18,10 @@ import FAIcon from 'react-native-vector-icons/FontAwesome';
 import OrderDetailsComp from '../../components/shared/OrderProcessComponents/OrderDetailsComp';
 import { Stepper } from '../Stepper/Stepper';
 import { getCartOrderDetails, getCartProductList } from '../../repository/OrderProcessRepository/CartListRepo';
-import {useFocusEffect, useNavigation } from '@react-navigation/native';
+import { useFocusEffect, useNavigation } from '@react-navigation/native';
 import EmptyCart from '../../components/shared/NoData/EmptyCart';
 import { getRemoveAllProducts } from '../../repository/OrderProcessRepository/RemoveProductRepo';
+import CartViewDetailsButton from '../../components/shared/button/CartViewDetailsButton';
 
 const { width, height } = Dimensions.get('screen');
 
@@ -49,7 +50,7 @@ export default function Cart(props) {
 
   const [loader, setLoader] = useState(true);
   const [refresh, setRefresh] = useState(false);
- 
+
   const [detailData, setDetailData] = useState("");
   const [cartProduct, setCartProduct] = useState([]);
 
@@ -59,7 +60,7 @@ export default function Cart(props) {
       if (res.status == true) {
         setDetailData(res.data)
       } else {
-        alert("in else part")
+        console.log('Status False in..handleCartOrderDetails page Cart-->');     
       }
     } catch (e) {
       console.log('errrror in..handleCartOrderDetails page-->', e);
@@ -159,10 +160,10 @@ export default function Cart(props) {
 
               <View style={{ ...styles.MVT }} />
 
-              <TouchableOpacity activeOpacity={0.5} style={{ ...styles.RemoveAllButton }} onPress={()=>handleRemoveAllProducts()}>
+              <TouchableOpacity activeOpacity={0.5} style={{ ...styles.RemoveAllButton }} onPress={() => handleRemoveAllProducts()}>
                 <Text style={{ ...styles.removeButton, color: themecolor.TEXTRED }}>Remove All</Text>
               </TouchableOpacity>
-              <CartProductDataList data={cartProduct} refresh={refresh} setRefresh={setRefresh}/>
+              <CartProductDataList data={cartProduct} refresh={refresh} setRefresh={setRefresh} />
 
               <View style={{ ...styles.mv5 }} />
 
@@ -173,34 +174,11 @@ export default function Cart(props) {
             </ScrollView>
             <View style={{ marginVertical: 31 }} />
 
-            <View
-              style={{
-                ...styles.touchview,
-                borderTopColor: themecolor.BOXBORDERCOLOR1,
-                backgroundColor: themecolor.LOGINTHEMECOLOR,
-              }}>
-              <View style={{ ...styles.mainView }}>
-                <View style={{ width: '40%', justifyContent: "center", }}>
-                  <Text allowFontScaling={false} style={{ ...styles.txt, color: themecolor.TXTWHITE }}>{detailData.grand_total}</Text>
-                  <Text allowFontScaling={false} style={{ ...styles.txtConvenienceFee, color: themecolor.ADDTOCARTBUTTONCOLOR }}>View Details</Text>
-                </View>
-
-                <View style={{ width: '60%', }}>
-                  <HalfSizeButton
-                    title="Continue"
-                    icon=""
-                    backgroundColor={themecolor.ADDTOCARTBUTTONCOLOR}
-                    color={'#fff'}
-                    borderColor={themecolor.BORDERCOLOR}
-                    onPress={() => props.navigation.navigate('CartAddress')}
-                  />
-                </View>
-              </View>
-            </View>
+            <CartViewDetailsButton amount={detailData.grand_total} buttonTitle={"Continue"} buttonOnPress={()=>props.navigation.navigate('CartAddress')} />
           </>
           :
           <View style={{ ...styles.container, marginTop: 120, }}>
-           <EmptyCart />
+            <EmptyCart />
           </View>
 
       )}
