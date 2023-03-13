@@ -20,9 +20,15 @@ export default VerifyModel = props => {
   return (
     <Modal animationType="slide" transparent={true} visible={modalVisible}>
       <View style={styles.centeredView}>
-        <View style={{...styles.modalView, backgroundColor: themecolor.RB2}}>
+        <View style={{...styles.modalView, backgroundColor: themecolor.TXTWHITE1}}>
           <View style={styles.ModalViewWidth}>
             <View style={styles.ModelVideoCenter}>
+            { mode=='dark'?
+            <Image
+              source={require('../../../assets/images/green-tick.gif')}
+              style={styles.backgroundVideo}
+              resizeMode={'contain'}
+            />:
               <Video
                 source={require('../../../assets/images/Videos/confirmation.mp4')}
                 style={styles.backgroundVideo}
@@ -31,7 +37,7 @@ export default VerifyModel = props => {
                 repeat={true}
                 rate={2.0}
                 ignoreSilentSwitch={'obey'}
-              />
+              />}
               <Text allowFontScaling={false} style={{...styles.submittext, color: themecolor.TXTWHITE}}>
                 {props.title}
               </Text>
@@ -45,9 +51,9 @@ export default VerifyModel = props => {
                 <View
                   style={{
                     ...styles.ModelDoneButton,
-                    backgroundColor: themecolor.ADDTOCARTBUTTONCOLOR,
+                    backgroundColor: themecolor.BACKICON,
                   }}>
-                  <Text allowFontScaling={false} style={{...styles.textStyleDone}}>Done</Text>
+                  <Text allowFontScaling={false} style={{...styles.textStyleDone,color:themecolor.TXTWHITE1}}>Done</Text>
                 </View>
               </TouchableOpacity>
             </View>
