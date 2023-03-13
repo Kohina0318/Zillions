@@ -19,6 +19,8 @@ import FAIcon from 'react-native-vector-icons/FontAwesome';
 import {Stepper} from '../Stepper/Stepper';
 import {CheckBox} from '@rneui/themed';
 import OrderDetailsComp from '../../components/shared/OrderProcessComponents/OrderDetailsComp';
+import { getCartOrderDetails } from '../../repository/OrderProcessRepository/CartListRepo';
+import CartViewDetailsButton from '../../components/shared/button/CartViewDetailsButton';
 
 const {width, height} = Dimensions.get('screen');
 
@@ -46,6 +48,35 @@ export default function Payment(props) {
   const [state, setState] = useState(false);
   const [online, setOnline] = useState(false);
   const [paymentMode, setPaymentMode] = useState('');
+  const [detailData, setDetailData] = useState("");
+
+  const handleCartOrderDetails = async () => {
+    try {
+      var res = await getCartOrderDetails()
+      if (res.status == true) {
+        setDetailData(res.data)
+        setLoader(false)
+      } else {
+        setLoader(false)
+        console.log('Status False in..handleCartOrderDetails page Payment-->');
+     
+      }
+    } catch (e) {
+      setLoader(false)
+      console.log('errrror in..handleCartOrderDetails page-->', e);
+      toast.show('Something went wrong!, Try again later.', {
+        type: 'danger',
+        placement: 'bottom',
+        duration: 3000,
+        offset: 30,
+        animationType: 'slide-in',
+      });
+    }
+  }
+
+  useEffect(()=>{
+    handleCartOrderDetails()
+  },[])
 
   const handlePayment = () => {
     if (paymentMode == '') {
@@ -83,9 +114,10 @@ export default function Payment(props) {
         backIcon={true}
         onPressBack={() => handleBackButtonClick()}
       />
-      {/* {loader ? (
+      {loader ? (
         <LoadingFullScreen style={{ flex: 1 }} />
-      ) : ( */}
+      ) : (
+        <>
       <ScrollView showsVerticalScrollIndicator={false}>
         <View style={{...styles.container}}>
           <View>
@@ -235,52 +267,21 @@ export default function Payment(props) {
               <></>
             )}
           </View>
+
           <View style={styles.marginTop} />
 
-          <OrderDetailsComp />
+          <OrderDetailsComp detailData={detailData} />
+          
+          <View style={styles.marginTop} />
           
         </View>
       </ScrollView>
-      {/* )} */}
 
       <View style={{marginVertical: 31}} />
 
-      <View
-        style={{
-          ...styles.touchview,
-          borderTopColor: themecolor.BOXBORDERCOLOR1,
-          backgroundColor: themecolor.LOGINTHEMECOLOR,
-        }}>
-        <View style={{...styles.mainView}}>
-          <View style={{width: '40%', justifyContent: 'center'}}>
-            <Text
-              allowFontScaling={false}
-              style={{...styles.txt, color: themecolor.TXTWHITE}}>
-              <FAIcon name="rupee" size={14} />
-              10000
-            </Text>
-            <Text
-              allowFontScaling={false}
-              style={{
-                ...styles.txtConvenienceFee,
-                color: themecolor.ADDTOCARTBUTTONCOLOR,
-              }}>
-              View Details
-            </Text>
-          </View>
-
-          <View style={{width: '60%'}}>
-            <HalfSizeButton
-              title="Buy Now"
-              icon=""
-              backgroundColor={themecolor.ADDTOCARTBUTTONCOLOR}
-              color={'#fff'}
-              borderColor={themecolor.BORDERCOLOR}
-              onPress={() => handlePayment()}
-            />
-          </View>
-        </View>
-      </View>
+      <CartViewDetailsButton amount={detailData.grand_total} buttonTitle={"Buy Now"} buttonOnPress={() =>() => handlePayment()} />
+      </>
+      )}
     </View>
   );
 }

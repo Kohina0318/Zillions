@@ -41,7 +41,7 @@ const styles = StyleSheet.create({
   TxtViewinner: { marginLeft: 7, width: "74%", justifyContent: 'center' },
   PriceTxtViewinner: { flexDirection: 'row', width: '100%', marginTop:5 ,},
   QtyView: {
-    borderWidth: 0.5, padding: 2, borderRadius: 5, paddingHorizontal: 7, margin:2 ,
+    borderWidth: 0.5, padding: 2, borderRadius: 5,  margin:2 ,
   },
   txt: {
     fontSize: FontSize.labelText4,

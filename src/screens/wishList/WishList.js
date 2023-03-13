@@ -37,7 +37,6 @@ export default function WishList(props) {
   const handleWishlist = async () => {
     try {
       var res = await getWishlist();
-      console.log("kkkkkkkkkkkkkkkkkkkkkkkkkkk...wisjjh",res.data[0])
       if (res.status === true) {
         setData(res.data);
         setLoader(false);
@@ -47,7 +46,7 @@ export default function WishList(props) {
         setData([]);
         Alert.alert(
           'Login to continue',
-          'Are you want to Login?',
+          'Do you want to Login?',
           [
             {
               text: 'No',

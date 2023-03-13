@@ -53,7 +53,7 @@ function ProductDataFlateList({ item, themecolor }) {
       else if (res.msg == "Invalid Authentication") {
         Alert.alert(
           'Login to continue',
-          'Are you want to Login?',
+          'Do you want to Login?',
           [
             {
               text: 'No',
