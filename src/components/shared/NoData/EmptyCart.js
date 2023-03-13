@@ -16,17 +16,18 @@ export default function EmptyCart(props) {
     return (
         <View style={{ ...styles.emptyCartViewContainer}}>
             <Image
-                source={require('../../../assets/images/empcart.png')}
+                source={require('../../../assets/images/emptyCart1.png')}
+                resizeMode="contain"
                 style={{ width: "100%", height: 250 }}
             />
             <View style={{ ...styles.EmptyCartInnerContainer }} >
                 <Text allowFontScaling={false} style={{
                     ...styles.txtSave,
-                    color: themecolor.TXTGREY,
-                }}>Look Like you haven't added anything </Text>
+                    color: themecolor.TXTGREYS,
+                }}>Look's like you haven't added anything </Text>
                 <Text allowFontScaling={false} style={{
                     ...styles.txtSave,
-                    color: themecolor.TXTGREY,
+                    color: themecolor.TXTGREYS,
                 }}>in your cart yet.</Text>
             </View>
             <View style={{ marginTop: 20 }}>
