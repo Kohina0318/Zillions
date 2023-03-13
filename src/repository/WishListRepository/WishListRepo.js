@@ -17,15 +17,15 @@ const getWishlist = async () => {
     const result = await response.json();
    
     if (result.token_status == 'false') {
-      await removeDatafromAsync('@UserData');
-      await removeDatafromAsync('@Token');
-      ToastAndroid.showWithGravityAndOffset(
-        `${'Token Expired'}`,
-        ToastAndroid.TOP,
-        ToastAndroid.LONG,
-        10,
-        10,
-      );
+      // await removeDatafromAsync('@UserData');
+      // await removeDatafromAsync('@Token');
+      // ToastAndroid.showWithGravityAndOffset(
+      //   `${'Token Expired'}`,
+      //   ToastAndroid.TOP,
+      //   ToastAndroid.LONG,
+      //   10,
+      //   10,
+      // );
       // navigateToClearStack('Login');  
       return result;
       

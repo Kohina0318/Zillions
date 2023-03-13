@@ -5,38 +5,99 @@ import {
   TouchableOpacity,
   ScrollView,
   Linking,
+  Alert
 } from 'react-native';
-import React, {useState, useEffect} from 'react';
-import {MainNavigatorstyle} from '../../assets/css/MainNavigatorstyle';
-import {DrawerContentScrollView} from '@react-navigation/drawer';
-import {DrawerActions, useNavigation} from '@react-navigation/native';
-import {Image as ImageR} from 'react-native';
-import {navigate} from '../NavigationDrw/NavigationService';
-import {useSelector} from 'react-redux';
-import {MyThemeClass} from '../../components/Theme/ThemeDarkLightColor';
+import React, { useState, useEffect } from 'react';
+import { MainNavigatorstyle } from '../../assets/css/MainNavigatorstyle';
+import { DrawerContentScrollView } from '@react-navigation/drawer';
+import { DrawerActions, useNavigation, useFocusEffect } from '@react-navigation/native';
+import { Image as ImageR } from 'react-native';
+import { navigate } from '../NavigationDrw/NavigationService';
+import { useSelector } from 'react-redux';
+import { MyThemeClass } from '../../components/Theme/ThemeDarkLightColor';
 import AD from 'react-native-vector-icons/AntDesign';
 import MCI from 'react-native-vector-icons/MaterialCommunityIcons';
 import FA from 'react-native-vector-icons/FontAwesome';
 import { getUserData } from '../../repository/CommonRepository';
+import { postLogout } from '../../repository/AuthRepository/LogoutRepository';
+import { removeDatafromAsync } from '../../repository/AsyncStorageServices';
+import { useToast } from 'react-native-toast-notifications';
 
-const {width} = Dimensions.get('window');
+const { width } = Dimensions.get('window');
 
 export default function DrawerContent(props) {
+  const toast = useToast();
   const navigation = useNavigation();
+
   const mode = useSelector(state => state.mode);
   const themecolor = new MyThemeClass(mode).getThemeColor();
 
+  const [refresh, setRefresh] = useState(false);
   const [UserData, setUserData] = useState([]);
 
-  useEffect(async () => {
-    try {
-      var userData = await getUserData();
-      if (userData == null || userData == '' || userData == undefined) {
-      } else {
-        setUserData(userData);
+  useEffect(() => {
+    async function temp() {
+      try {
+        var userData = await getUserData();
+        if (userData == null || userData == '' || userData == undefined) {
+          setUserData([])
+        } else {
+          setUserData(userData);
+        }
+      } catch (e) {
+        setUserData([])
       }
-    } catch (e) {}
-  }, []);
+    }
+    temp()
+  }, [props, refresh]);
+
+
+
+  const handleConfirmLogout = () => {
+    Alert.alert(
+      'Logout Confirmation',
+      'Are you sure you want to Logout?',
+      [
+        {
+          text: 'No',
+          onPress: () => console.log('Cancel Pressed'),
+          style: 'cancel',
+        },
+        { text: 'Yes', onPress: () => handleLogout() },
+      ],
+    );
+  };
+
+
+  const handleLogout = async () => {
+    try {
+      var res = await postLogout()
+
+      if (res.status == true) {
+        await removeDatafromAsync('@UserData');
+        await removeDatafromAsync('@Token');
+        setRefresh(!refresh)
+      }
+      else {
+        toast.show(res.msg, {
+          type: 'warning',
+          placement: 'bottom',
+          duration: 3000,
+          offset: 30,
+          animationType: 'slide-in',
+        });
+      }
+    } catch (e) {
+      toast.show('Something went wrong!, Try again later.', {
+        type: 'danger',
+        placement: 'bottom',
+        duration: 3000,
+        offset: 30,
+        animationType: 'slide-in',
+      });
+    }
+  };
+
 
   return (
     <DrawerContentScrollView
@@ -47,14 +108,14 @@ export default function DrawerContent(props) {
         borderColor: themecolor.BOXBORDERCOLOR1,
       }}>
       <View style={MainNavigatorstyle.userinfo1}>
-        <View style={{...MainNavigatorstyle.ImageRView}}>
+        <View style={{ ...MainNavigatorstyle.ImageRView }}>
           <ImageR
-            style={{...MainNavigatorstyle.userimg}}
+            style={{ ...MainNavigatorstyle.userimg }}
             source={require('../../assets/images/logo.png')}
           />
         </View>
 
-        <View style={{marginVertical: 2}} />
+        <View style={{ marginVertical: 2 }} />
 
         <View
           style={{
@@ -63,7 +124,7 @@ export default function DrawerContent(props) {
             borderColor: themecolor.BOXBORDERCOLOR1,
           }}
         />
-        <View style={{marginVertical: 7}} />
+        <View style={{ marginVertical: 7 }} />
 
         <ScrollView showsVerticalScrollIndicator={false}>
           <TouchableOpacity
@@ -71,7 +132,7 @@ export default function DrawerContent(props) {
             style={MainNavigatorstyle.viewstyle1}>
             <AD name="home" size={20} color={themecolor.BACKICON} />
             <Text
-             allowFontScaling={false}
+              allowFontScaling={false}
               style={{
                 ...MainNavigatorstyle.labelstylecss,
                 color: themecolor.TXTWHITE,
@@ -85,7 +146,7 @@ export default function DrawerContent(props) {
             style={MainNavigatorstyle.viewstyle1}>
             <AD name="appstore-o" size={18} color={themecolor.BACKICON} />
             <Text
-             allowFontScaling={false}
+              allowFontScaling={false}
               style={{
                 ...MainNavigatorstyle.labelstylecss,
                 color: themecolor.TXTWHITE,
@@ -99,7 +160,7 @@ export default function DrawerContent(props) {
             style={MainNavigatorstyle.viewstyle1}>
             <MCI name="tag-outline" size={18} color={themecolor.BACKICON} />
             <Text
-             allowFontScaling={false}
+              allowFontScaling={false}
               style={{
                 ...MainNavigatorstyle.labelstylecss,
                 color: themecolor.TXTWHITE,
@@ -113,7 +174,7 @@ export default function DrawerContent(props) {
             style={MainNavigatorstyle.viewstyle1}>
             <FA name="user-o" size={18} color={themecolor.BACKICON} />
             <Text
-             allowFontScaling={false}
+              allowFontScaling={false}
               style={{
                 ...MainNavigatorstyle.labelstylecss,
                 color: themecolor.TXTWHITE,
@@ -124,11 +185,14 @@ export default function DrawerContent(props) {
 
           {UserData.length > 0 ? (
             <TouchableOpacity
-              // onPress={() => navigate('Dashboard')}
+              onPress={() => {
+                handleConfirmLogout();
+                navigation.dispatch(DrawerActions.closeDrawer())
+              }}
               style={MainNavigatorstyle.viewstyle1}>
               <AD name="logout" size={18} color={themecolor.BACKICON} />
               <Text
-               allowFontScaling={false}
+                allowFontScaling={false}
                 style={{
                   ...MainNavigatorstyle.labelstylecss,
                   color: themecolor.TXTWHITE,
@@ -148,13 +212,13 @@ export default function DrawerContent(props) {
             borderColor: themecolor.BOXBORDERCOLOR1,
           }}
         />
-        <View style={{marginVertical: 7}} />
+        <View style={{ marginVertical: 7 }} />
 
         <TouchableOpacity
           onPress={() => Linking.openURL('https://www.zillionsbuyer.com/blog/')}
           style={MainNavigatorstyle.viewstyle}>
           <Text
-           allowFontScaling={false}
+            allowFontScaling={false}
             style={{
               ...MainNavigatorstyle.labelstylecss,
               color: themecolor.BACKICON,
@@ -169,7 +233,7 @@ export default function DrawerContent(props) {
           }
           style={MainNavigatorstyle.viewstyle}>
           <Text
-           allowFontScaling={false}
+            allowFontScaling={false}
             style={{
               ...MainNavigatorstyle.labelstylecss,
               color: themecolor.BACKICON,
@@ -184,7 +248,7 @@ export default function DrawerContent(props) {
           }
           style={MainNavigatorstyle.viewstyle}>
           <Text
-           allowFontScaling={false}
+            allowFontScaling={false}
             style={{
               ...MainNavigatorstyle.labelstylecss,
               color: themecolor.BACKICON,
@@ -201,7 +265,7 @@ export default function DrawerContent(props) {
           }
           style={MainNavigatorstyle.viewstyle}>
           <Text
-           allowFontScaling={false}
+            allowFontScaling={false}
             style={{
               ...MainNavigatorstyle.labelstylecss,
               color: themecolor.BACKICON,
@@ -218,7 +282,7 @@ export default function DrawerContent(props) {
           }
           style={MainNavigatorstyle.viewstyle}>
           <Text
-           allowFontScaling={false}
+            allowFontScaling={false}
             style={{
               ...MainNavigatorstyle.labelstylecss,
               color: themecolor.BACKICON,
@@ -235,7 +299,7 @@ export default function DrawerContent(props) {
           }
           style={MainNavigatorstyle.viewstyle}>
           <Text
-           allowFontScaling={false}
+            allowFontScaling={false}
             style={{
               ...MainNavigatorstyle.labelstylecss,
               color: themecolor.BACKICON,
@@ -248,7 +312,7 @@ export default function DrawerContent(props) {
           onPress={() => Linking.openURL('https://www.zillionsbuyer.com/#')}
           style={MainNavigatorstyle.viewstyle}>
           <Text
-           allowFontScaling={false}
+            allowFontScaling={false}
             style={{
               ...MainNavigatorstyle.labelstylecss,
               color: themecolor.BACKICON,
@@ -257,7 +321,7 @@ export default function DrawerContent(props) {
           </Text>
         </TouchableOpacity>
 
-        <View style={{marginVertical: 7}} />
+        <View style={{ marginVertical: 7 }} />
 
         <View style={MainNavigatorstyle.view2}>
           <View
@@ -267,9 +331,9 @@ export default function DrawerContent(props) {
               borderColor: themecolor.BOXBORDERCOLOR1,
             }}
           />
-          <View style={{marginVertical: 3}} />
-          <Text allowFontScaling={false} style={{...MainNavigatorstyle.view2txt}}>App Version 1.0</Text>
-          <View style={{marginVertical: 3}} />
+          <View style={{ marginVertical: 3 }} />
+          <Text allowFontScaling={false} style={{ ...MainNavigatorstyle.view2txt }}>App Version 1.0</Text>
+          <View style={{ marginVertical: 3 }} />
         </View>
       </View>
     </DrawerContentScrollView>

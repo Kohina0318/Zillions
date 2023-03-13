@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   TouchableOpacity,
   View,
@@ -7,17 +7,16 @@ import {
   Image,
   Dimensions,
 } from 'react-native';
-import {Colors} from '../../../assets/config/Colors';
-import {styles} from '../../../../assets/css/OrderStyle';
-import {MyThemeClass} from '../../../Theme/ThemeDarkLightColor';
-import {useSelector} from 'react-redux';
+import { Colors } from '../../../assets/config/Colors';
+import { styles } from '../../../../assets/css/OrderStyle';
+import { MyThemeClass } from '../../../Theme/ThemeDarkLightColor';
+import { useSelector } from 'react-redux';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
-import {useNavigation} from '@react-navigation/native';
-import StarRating from 'react-native-star-rating';
+import { useNavigation } from '@react-navigation/native';
 
-const {width} = Dimensions.get('screen');
+const { width } = Dimensions.get('screen');
 
-function OrderDataFlateList({item, themecolor}) {
+function OrderDataFlateList({ item, themecolor }) {
   const navigation = useNavigation();
 
   return (
@@ -28,43 +27,30 @@ function OrderDataFlateList({item, themecolor}) {
         backgroundColor: themecolor.BOXBORDERCOLOR,
         borderColor: themecolor.BOXBORDERCOLOR1,
       }}
-      onPress={() => navigation.navigate('OrderDetails',{productDetails:item.product_details,saleCode:item.sale_code})}
+      onPress={() => navigation.navigate('OrderDetails', { productDetails: item.product_details, saleCode: item.sale_code, SaleId: item.sale_id })}
     >
-      <View style={{...styles.flexDirView}}>
-        <Text allowFontScaling={false} style={{...styles.txt, color: themecolor.TXTWHITE}}>
+      <View style={{ ...styles.flexDirView }}>
+        <Text allowFontScaling={false} style={{ ...styles.txt, color: themecolor.TXTWHITE }}>
           Delivered on feb 09 2022
         </Text>
       </View>
 
-      <View style={{...styles.marTop}} />
+      <View style={{ ...styles.marTop }} />
 
-      <View style={{...styles.flexDirView1}}>
-
-        {/* <View style={{...styles.innerImage}}>
-          <Image
-            source={require('../../../../assets/images/logo.png')}
-            // source={{uri: item.banner}}
-            style={{
-              width: 50,
-              height: 50,
-              borderRadius: 50,
-            }}
-            resizeMode='contain'
-          />
-        </View> */}
+      <View style={{ ...styles.flexDirView1 }}>
 
         <View >
-          <Text allowFontScaling={false} style={{...styles.txt1, color: themecolor.TXTWHITE}} numberOfLines={2}>
+          <Text allowFontScaling={false} style={{ ...styles.txt1, color: themecolor.TXTWHITE }} numberOfLines={2}>
             Sale Code :
           </Text>
         </View>
-        <View style={{...styles.flexRow}}>
-          <Text allowFontScaling={false} style={{...styles.txt1, color: themecolor.ADDTOCARTBUTTONCOLOR}} numberOfLines={2}>
+        <View style={{ ...styles.flexRow }}>
+          <Text allowFontScaling={false} style={{ ...styles.txt1, color: themecolor.ADDTOCARTBUTTONCOLOR }} numberOfLines={2}>
             #{item.sale_code}
           </Text>
         </View>
 
-        <View style={{...styles.iconview}}>
+        <View style={{ ...styles.iconview }}>
           <FontAwesome
             name="angle-right"
             size={25}
@@ -72,27 +58,6 @@ function OrderDataFlateList({item, themecolor}) {
           />
         </View>
       </View>
-
-      {/* <View style={{...styles.marTop}} /> */}
-
-      {/* <View style={{...styles.flexDirView, justifyContent: 'space-between'}}>
-        <View>
-          <Text allowFontScaling={false} style={{...styles.txt1, color: themecolor.TXTGREYS}}>
-            Rate this product now
-          </Text>
-        </View>
-        <TouchableOpacity activeOpacity={0.8} style={{width:width*0.32}}>
-          <StarRating
-            disabled={false}
-            maxStars={5}
-            rating={0}
-            selectedStar={rating => onStarRatingPress(rating)}
-            starSize={18}
-            fullStarColor={themecolor.STARCOLOR}
-          />
-        </TouchableOpacity>
-      </View> */}
-
     </TouchableOpacity>
   );
 }
@@ -104,7 +69,7 @@ export function OrderDataList(props) {
   return (
     <FlatList
       data={props.data}
-      renderItem={({item}) => (
+      renderItem={({ item }) => (
         <OrderDataFlateList item={item} themecolor={themecolor} />
       )}
       showsVerticalScrollIndicator={false}
