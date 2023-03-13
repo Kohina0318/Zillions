@@ -16,6 +16,8 @@ import {useToast} from 'react-native-toast-notifications';
 import HalfSizeButton from '../../components/shared/button/halfSizeButton';
 import {Stepper} from '../Stepper/Stepper';
 import FAIcon from 'react-native-vector-icons/FontAwesome';
+import { getManageAddressPost } from '../../repository/AddressRepository/MangeAddressRepo';
+import { getUserData } from '../../repository/CommonRepository';
 
 const {width, height} = Dimensions.get('screen');
 
@@ -40,6 +42,62 @@ export default function CartAddress(props) {
   const themecolor = new MyThemeClass(mode).getThemeColor();
 
   const [loader, setLoader] = useState(false);
+  const [address,setAddress]=useState('')
+  const [city,setCity]=useState('')
+  const [phone,setPhone]=useState('')
+  const [postalCode,setPostalCode]=useState('')
+  const [state,setState]=useState('')
+  const [name,setName]=useState('')
+  const [surname,setSurname]=useState('')
+
+  const handleManageAddress = async () => {
+    try {
+      var userData = await getUserData();
+      console.log('userdata>>>>>>>>>>>>>>>>',userData)
+      setName(userData[0].username)
+      setSurname(userData[0].surname)
+
+      var body= new FormData()
+      body.append("type","default")
+      var res = await getManageAddressPost(body);
+      if (res.status === true) {
+        // setData(res.data);
+        console.log(res.data[0].address)
+        setAddress(res.data[0].address)
+        setCity(res.data[0].city)
+        setPhone(res.data[0].phone)
+        setPostalCode(res.data[0].postal_code)
+        setState(res.data[0].state)
+        setLoader(false);
+      } else {
+        setLoader(false);
+        toast.show(res.msg, {
+          type: 'warning',
+          placement: 'bottom',
+          duration: 3000,
+          offset: 30,
+          animationType: 'slide-in',
+        });
+      }
+    } catch (e) {
+      console.log('errrror in..getManageAddress page-->', e);
+      setLoader(false);
+      toast.show('Something went wrong!, Try again later.', {
+        type: 'danger',
+        placement: 'bottom',
+        duration: 3000,
+        offset: 30,
+        animationType: 'slide-in',
+      });
+    }
+  };
+
+
+  useEffect(() => {
+    setLoader(true)
+    handleManageAddress();
+  }, []);
+
 
   return (
     <View style={{...styles.bg, backgroundColor: themecolor.THEMECOLOR}}>
@@ -48,9 +106,9 @@ export default function CartAddress(props) {
         backIcon={true}
         onPressBack={() => handleBackButtonClick()}
       />
-      {/* {loader ? (
+      {loader ? (
         <LoadingFullScreen style={{ flex: 1 }} />
-      ) : ( */}
+      ) : (
       <ScrollView showsVerticalScrollIndicator={false}>
         <View style={{...styles.container}}>
           <View>
@@ -84,12 +142,12 @@ export default function CartAddress(props) {
               <Text
                 allowFontScaling={false}
                 style={{...styles.txtHead, color: themecolor.TXTWHITE}}>
-                Ayushi Kamthan
+                {name} {surname}
               </Text>
               <Text
                 allowFontScaling={false}
                 style={{...styles.txt2, color: themecolor.TXTWHITE}}>
-                Shinde ki Chawwani Gwalior , Madhya Pradesh , 474001
+                {address}, {city} , {state} , {postalCode}
               </Text>
               <Text
                 allowFontScaling={false}
@@ -99,14 +157,14 @@ export default function CartAddress(props) {
                   allowFontScaling={false}
                   style={{...styles.txt1, color: themecolor.TXTWHITE}}>
                   {' '}
-                  +91-9123456781
+                  +91-{phone}
                 </Text>
               </Text>
             </View>
           </View>
         </View>
       </ScrollView>
-      {/* )} */}
+      )}
 
       <View style={{marginVertical: 31}} />
 

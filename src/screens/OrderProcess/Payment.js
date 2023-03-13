@@ -271,7 +271,7 @@ export default function Payment(props) {
 
           <View style={{width: '60%'}}>
             <HalfSizeButton
-              title="Proceed To Payment"
+              title="Buy Now"
               icon=""
               backgroundColor={themecolor.ADDTOCARTBUTTONCOLOR}
               color={'#fff'}
