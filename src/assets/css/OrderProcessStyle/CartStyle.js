@@ -126,7 +126,7 @@ const styles = StyleSheet.create({
     width: width * 0.9, justifyContent: "center", alignSelf: "center", alignItems: "center" 
   },
   EmptyCartInnerContainer:{
-    width: "70%", marginTop: -15, justifyContent: "center", alignSelf: "center", alignItems: "center"
+    width: "90%", marginTop: 15, justifyContent: "center", alignSelf: "center", alignItems: "center"
   },
   emptyCartTouchButon:{
     width: width * 0.35,
