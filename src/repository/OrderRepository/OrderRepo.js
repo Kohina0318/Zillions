@@ -5,8 +5,10 @@ const getOrderlist = async () => {
   try {
     const response = await fetch(`${await SERVER_URL()}/orderlist`, {
       method: 'GET',
-      headers: {'Content-Type': 'application/json;charset=utf-8',
-      Authorization: `${await getAppToken()}`},
+      headers: {
+        'Content-Type': 'application/json;charset=utf-8',
+        Authorization: `${await getAppToken()}`
+      },
     });
     const result = await response.json();
     return result;
@@ -15,4 +17,23 @@ const getOrderlist = async () => {
   }
 };
 
-export {getOrderlist};
+const getOrderView = async (orId) => {
+  try {
+    const response = await fetch(`${await SERVER_URL()}/order-view/${orId}`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json;charset=utf-8',
+        Authorization: `${await getAppToken()}`
+      },
+    });
+    
+    const result = await response.json();
+    alert(result)
+    return result;
+  } catch (err) {
+    console.log('error in getOrderView...in OrderRepo ', err);
+  }
+}
+
+
+export { getOrderlist, getOrderView };

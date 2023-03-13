@@ -3,17 +3,14 @@ import RBSheet from 'react-native-raw-bottom-sheet';
 import { View, Text, TouchableOpacity, Dimensions } from 'react-native';
 import NumericInput from 'react-native-numeric-input';
 import EN from 'react-native-vector-icons/MaterialCommunityIcons';
-import { ProductDetailSizeFlatList } from '../../components/shared/FlateLists/CategoryFlatList/ProductDetailSizeFlatList';
-import { styles } from '../../assets/css/ProductDetailStyle';
+import { styles } from '../../../assets/css/ProductDetailStyle';
 import { useSelector } from 'react-redux';
-import { MyThemeClass } from '../../components/Theme/ThemeDarkLightColor';
-import FullsizeButton from '../auth/FullsizeButton';
-import { useNavigation } from '@react-navigation/native';
-import HalfSizeButton from '../../components/shared/button/halfSizeButton';
+import { MyThemeClass } from '../../Theme/ThemeDarkLightColor';
+import HalfSizeButton from '../button/halfSizeButton';
 
 const { width, height } = Dimensions.get('window');
 
-export const RBSheetData = props => {
+export const CartQtyRSSheet = props => {
   const mode = useSelector(state => state.mode);
   const themecolor = new MyThemeClass(mode).getThemeColor();
 
@@ -29,7 +26,7 @@ export const RBSheetData = props => {
         closeOnDragDown={true}
         closeOnPressMask={true}
         closeOnPressBack={false}               
-        height={260}
+        height={180}
         customStyles={{
           container: {
             borderTopRightRadius: 20,
@@ -51,37 +48,13 @@ export const RBSheetData = props => {
           </TouchableOpacity>
           <View style={{ padding: 3, left: 10 }}>
             <Text allowFontScaling={false} style={{ ...styles.RBText1, color: themecolor.TXTWHITE }}>
-              {props.title}
+              Update Quantity
             </Text>
           </View>
 
         </View>
-        <View style={{ ...styles.Borderline }} />
-
-        <View style={{ marginTop: 25 }} />
-
-        <View style={{ ...styles.view16, }}>
-          <Text
-            allowFontScaling={false}
-            style={{
-              ...styles.CardText,
-              ...styles.align3,
-              ...styles.left1,
-              color: themecolor.TXTWHITE,
-              marginBottom: 5,
-            }}>
-            Product Sizes :
-          </Text>
-          <View style={{ width: width * 0.94, flexDirection: 'column' }}>
-            <ProductDetailSizeFlatList
-              sizes={props.sizes}
-              touch={props.touch}
-              setSelectedSize={props.setSelectedSize}
-              setSelectedSizePrice={props.setSelectedSizePrice}
-            />
-          </View>
-        </View>
-
+        <View style={{ ...styles.Borderline }} /> 
+       
         <View
           style={{
             ...styles.view16,
@@ -123,7 +96,7 @@ export const RBSheetData = props => {
         <View style={{ width: width, marginBottom: 5, justifyContent: 'center', alignSelf: "center", alignItems: 'center' }}>
           <View style={{ width: "90%" }}>
             <HalfSizeButton
-              title={props.title}
+              title="Update"
               icon={props.icon}
               onPress={() => {
                 props.onPress();

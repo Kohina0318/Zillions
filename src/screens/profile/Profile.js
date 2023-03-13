@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   View,
   Text,
@@ -7,24 +7,30 @@ import {
   Dimensions,
   TouchableOpacity,
   ScrollView,
+  Alert
 } from 'react-native';
-import {useSelector} from 'react-redux';
-import {MyThemeClass} from '../../components/Theme/ThemeDarkLightColor';
-import {ProfileDataList} from '../../components/shared/FlateLists/Profile/ProfileDataFlatList';
+import { useSelector } from 'react-redux';
+import { MyThemeClass } from '../../components/Theme/ThemeDarkLightColor';
+import { ProfileDataList } from '../../components/shared/FlateLists/Profile/ProfileDataFlatList';
 import Header from '../../components/shared/header/Header';
-import {data, data1} from './ProfileData';
-import {Avatar} from '@rneui/themed';
-import {ProfileStyle} from '../../assets/css/ProfileStyle';
-import {useFocusEffect, useNavigation} from '@react-navigation/native';
+import { data, data1 } from './ProfileData';
+import { Avatar } from '@rneui/themed';
+import { ProfileStyle } from '../../assets/css/ProfileStyle';
+import { useFocusEffect, useNavigation } from '@react-navigation/native';
 import LoadingFullScreen from '../../components/shared/Loader/LoadingFullScreen';
-import {getProfileInfo} from '../../repository/ProfileRepository/ProfileRepo';
-import {getUserData} from '../../repository/CommonRepository';
+import { getProfileInfo } from '../../repository/ProfileRepository/ProfileRepo';
+import { getUserData } from '../../repository/CommonRepository';
 import { removeDatafromAsync } from '../../repository/AsyncStorageServices';
+import { postLogout } from '../../repository/AuthRepository/LogoutRepository';
+import { useToast } from 'react-native-toast-notifications';
 
-const {width, height} = Dimensions.get('screen');
+const { width, height } = Dimensions.get('screen');
 
 export default function Profile(props) {
-  var navigation = useNavigation();
+ 
+  const toast = useToast();
+  var navigation = useNavigation(); 
+ 
   const mode = useSelector(state => state.mode);
   const themecolor = new MyThemeClass(mode).getThemeColor();
 
@@ -54,25 +60,64 @@ export default function Profile(props) {
 
   useFocusEffect(
     React.useCallback(() => {
+      setLoader(true);
       handleUserData();
     }, [refresh]),
   );
 
+  const handleConfirmLogout = () => {
+    Alert.alert(
+      'Logout Confirmation',
+      'Are you sure you want to Logout?',
+      [
+        {
+          text: 'No',
+          onPress: () => console.log('Cancel Pressed'),
+          style: 'cancel',
+        },
+        { text: 'Yes', onPress: () => handleLogout() },
+      ],
+    );
+  };
+
+
   const handleLogout = async () => {
-    await removeDatafromAsync('@UserData');
-    await removeDatafromAsync('@Token');
-    setRefresh(!refresh);
+    try {
+      var res = await postLogout()
+      if (res.status == true) {
+        await removeDatafromAsync('@UserData');
+        await removeDatafromAsync('@Token');
+        setRefresh(!refresh);
+      }
+      else {
+        toast.show(res.msg, {
+          type: 'warning',
+          placement: 'bottom',
+          duration: 3000,
+          offset: 30,
+          animationType: 'slide-in',
+        });
+      }
+    } catch (e) {
+      toast.show('Something went wrong!, Try again later.', {
+        type: 'danger',
+        placement: 'bottom',
+        duration: 3000,
+        offset: 30,
+        animationType: 'slide-in',
+      });
+    }
   };
 
   return (
-    <View style={{backgroundColor: themecolor.THEMECOLOR, flex: 1}}>
+    <View style={{ backgroundColor: themecolor.THEMECOLOR, flex: 1 }}>
       <Header title="Profile" />
 
       {loader ? (
-        <LoadingFullScreen style={{flex: 1}} />
+        <LoadingFullScreen style={{ flex: 1 }} />
       ) : (
         <>
-          <View style={{marginTop: 10}} />
+          <View style={{ marginTop: 10 }} />
 
           <ScrollView showsVerticalScrollIndicator={false}>
             {UserData.length > 0 ? (
@@ -200,7 +245,7 @@ export default function Profile(props) {
               }}>
               {UserData.length > 0 ? (
                 <TouchableOpacity
-                  onPress={() => handleLogout()}
+                  onPress={() => handleConfirmLogout()}
                   style={{
                     ...ProfileStyle.buttonView3,
                     backgroundColor: themecolor.ADDTOCARTBUTTONCOLOR,
@@ -219,7 +264,7 @@ export default function Profile(props) {
                 <></>
               )}
 
-              <View style={{...ProfileStyle.appVerView}}>
+              <View style={{ ...ProfileStyle.appVerView }}>
                 <Text
                   allowFontScaling={false}
                   style={{

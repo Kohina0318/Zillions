@@ -18,7 +18,7 @@ import HalfSizeButton from '../../button/halfSizeButton';
 import MCI from 'react-native-vector-icons/MaterialCommunityIcons';
 import { postAddOrRemoveWishlist } from '../../../../repository/WishListRepository/WishListRepo';
 import { useToast } from 'react-native-toast-notifications';
-import { RBSheetData } from '../../../../screens/category/RBSheetData';
+import { RBSheetData } from '../../RBSheet/RBSheetData';
 import { postAddCartProduct } from '../../../../repository/OrderProcessRepository/AddToCartRepo';
 import { set } from 'immer/dist/internal';
 

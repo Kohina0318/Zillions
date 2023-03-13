@@ -8,7 +8,7 @@ import Svg, {
     Text,
     Line,
   } from 'react-native-svg';
-import { Colors } from '../../assets/config/Colors';
+import { Colors } from '../../../assets/config/Colors';
   
   
 export const Ribbon=()=>{

@@ -39,9 +39,9 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
   },
   TxtViewinner: { marginLeft: 7, width: "74%", justifyContent: 'center' },
-  PriceTxtViewinner: { flexDirection: 'row', width: '100%', marginTop:5 ,},
+  PriceTxtViewinner: { flexDirection: 'row', width: '100%', marginTop:5 ,alignItems:'flex-start',},
   QtyView: {
-    borderWidth: 0.5, padding: 2, borderRadius: 5,  margin:2 ,
+    borderWidth: 0.5, borderRadius: 5, padding:3 , justifyContent:"center",paddingRight:5, paddingLeft:5 , flexDirection:"row", margin:2
   },
   txt: {
     fontSize: FontSize.labelText4,
