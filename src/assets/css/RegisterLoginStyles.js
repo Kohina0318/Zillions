@@ -67,7 +67,7 @@ export const RegisterLoginStyles = StyleSheet.create({
   btn: {
     width: width * 0.9,
     height: height * 0.05,
-    borderWidth: 2,
+    borderWidth: 1,
     justifyContent: 'center',
     alignItems: 'center',
     borderRadius: 10,

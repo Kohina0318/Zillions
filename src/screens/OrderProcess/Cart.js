@@ -3,7 +3,8 @@ import {
   View,
   Text,
   Dimensions,
-  BackHandler, ScrollView
+  BackHandler, ScrollView,
+  TouchableOpacity, Image
 } from 'react-native';
 import { useSelector } from 'react-redux';
 import { MyThemeClass } from '../../components/Theme/ThemeDarkLightColor';
@@ -14,16 +15,15 @@ import { useToast } from 'react-native-toast-notifications';
 import { CartProductDataList } from '../../components/shared/FlateLists/OrderProcessFlateList/CartProductDataList';
 import HalfSizeButton from '../../components/shared/button/halfSizeButton';
 import FAIcon from 'react-native-vector-icons/FontAwesome';
-import OrderDeailsComp from '../../components/shared/OrderProcessComponents/OrderDeailsComp';
+import OrderDetailsComp from '../../components/shared/OrderProcessComponents/OrderDetailsComp';
 import { Stepper } from '../Stepper/Stepper';
-import { getCartProductList } from '../../repository/OrderProcessRepository/CartListRepo';
+import { getCartOrderDetails, getCartProductList } from '../../repository/OrderProcessRepository/CartListRepo';
+import {useFocusEffect, useNavigation } from '@react-navigation/native';
+import EmptyCart from '../../components/shared/NoData/EmptyCart';
+import { getRemoveAllProducts } from '../../repository/OrderProcessRepository/RemoveProductRepo';
 
 const { width, height } = Dimensions.get('screen');
 
-const data = [
-  { id: 1 },
-  { id: 2 }
-]
 
 export default function Cart(props) {
   function handleBackButtonClick() {
@@ -42,23 +42,100 @@ export default function Cart(props) {
   }, []);
 
   const toast = useToast();
+  const navigation = useNavigation();
+
   const mode = useSelector(state => state.mode);
   const themecolor = new MyThemeClass(mode).getThemeColor();
 
-  const [loader, setLoader] = useState(false);
+  const [loader, setLoader] = useState(true);
+  const [refresh, setRefresh] = useState(false);
+ 
+  const [detailData, setDetailData] = useState("");
+  const [cartProduct, setCartProduct] = useState([]);
+
+  const handleCartOrderDetails = async () => {
+    try {
+      var res = await getCartOrderDetails()
+      if (res.status == true) {
+        setDetailData(res.data)
+      } else {
+        alert("in else part")
+      }
+    } catch (e) {
+      console.log('errrror in..handleCartOrderDetails page-->', e);
+      toast.show('Something went wrong!, Try again later.', {
+        type: 'danger',
+        placement: 'bottom',
+        duration: 3000,
+        offset: 30,
+        animationType: 'slide-in',
+      });
+    }
+  }
 
   const handleCartProductList = async () => {
     try {
       var res = await getCartProductList()
-      console.log("data......handleCartProductList...>",res)
+      if (res.status == true) {
+        setCartProduct(Object.values(res.data.carted))
+        setLoader(false)
+      } else {
+        setLoader(false)
+        setCartProduct([])
+      }
     } catch (e) {
-
+      setLoader(false)
+      setCartProduct([])
+      console.log('errrror in..handleCartProductList page-->', e);
+      toast.show('Something went wrong!, Try again later.', {
+        type: 'danger',
+        placement: 'bottom',
+        duration: 3000,
+        offset: 30,
+        animationType: 'slide-in',
+      });
     }
   }
 
-  useEffect(()=>{
+  useEffect(() => {
+    handleCartOrderDetails()
     handleCartProductList()
-  },[])
+  }, [refresh])
+
+
+  const handleRemoveAllProducts = async () => {
+    try {
+      var res = await getRemoveAllProducts()
+      if (res.status == true) {
+        setRefresh(!refresh)
+        toast.show(res.msg, {
+          type: 'success',
+          placement: 'bottom',
+          duration: 3000,
+          offset: 30,
+          animationType: 'slide-in',
+        });
+      } else {
+        toast.show(res.msg, {
+          type: 'warning',
+          placement: 'bottom',
+          duration: 3000,
+          offset: 30,
+          animationType: 'slide-in',
+        });
+      }
+    } catch (e) {
+      console.log('errrror in..handleRemoveAllProducts page-->', e);
+      toast.show('Something went wrong!, Try again later.', {
+        type: 'danger',
+        placement: 'bottom',
+        duration: 3000,
+        offset: 30,
+        animationType: 'slide-in',
+      });
+    }
+  }
+
 
   return (
     <View style={{ ...styles.bg, backgroundColor: themecolor.THEMECOLOR }}>
@@ -70,52 +147,63 @@ export default function Cart(props) {
       {loader ? (
         <LoadingFullScreen style={{ flex: 1 }} />
       ) : (
-        <ScrollView showsVerticalScrollIndicator={false}>
+        cartProduct.length > 0 ?
+          <>
+            <ScrollView showsVerticalScrollIndicator={false}>
 
-          <View style={{ ...styles.MVT }} />
+              <View style={{ ...styles.mv5 }} />
 
-          <View>
-            <Stepper item={"Cart"} themecolor={themecolor} props={props} />
+              <View>
+                <Stepper item={"Cart"} themecolor={themecolor} props={props} />
+              </View>
+
+              <View style={{ ...styles.MVT }} />
+
+              <TouchableOpacity activeOpacity={0.5} style={{ ...styles.RemoveAllButton }} onPress={()=>handleRemoveAllProducts()}>
+                <Text style={{ ...styles.removeButton, color: themecolor.TEXTRED }}>Remove All</Text>
+              </TouchableOpacity>
+              <CartProductDataList data={cartProduct} refresh={refresh} setRefresh={setRefresh}/>
+
+              <View style={{ ...styles.mv5 }} />
+
+              <OrderDetailsComp detailData={detailData} />
+
+              <View style={{ ...styles.mv5 }} />
+
+            </ScrollView>
+            <View style={{ marginVertical: 31 }} />
+
+            <View
+              style={{
+                ...styles.touchview,
+                borderTopColor: themecolor.BOXBORDERCOLOR1,
+                backgroundColor: themecolor.LOGINTHEMECOLOR,
+              }}>
+              <View style={{ ...styles.mainView }}>
+                <View style={{ width: '40%', justifyContent: "center", }}>
+                  <Text allowFontScaling={false} style={{ ...styles.txt, color: themecolor.TXTWHITE }}>{detailData.grand_total}</Text>
+                  <Text allowFontScaling={false} style={{ ...styles.txtConvenienceFee, color: themecolor.ADDTOCARTBUTTONCOLOR }}>View Details</Text>
+                </View>
+
+                <View style={{ width: '60%', }}>
+                  <HalfSizeButton
+                    title="Continue"
+                    icon=""
+                    backgroundColor={themecolor.ADDTOCARTBUTTONCOLOR}
+                    color={'#fff'}
+                    borderColor={themecolor.BORDERCOLOR}
+                    onPress={() => props.navigation.navigate('CartAddress')}
+                  />
+                </View>
+              </View>
+            </View>
+          </>
+          :
+          <View style={{ ...styles.container, marginTop: 120, }}>
+           <EmptyCart />
           </View>
 
-          <CartProductDataList data={data} />
-
-          <View style={{ ...styles.MVT }} />
-
-          <OrderDeailsComp />
-
-          <View style={{ ...styles.MVT }} />
-
-        </ScrollView>
       )}
-
-
-      <View style={{ marginVertical: 31 }} />
-
-      <View
-        style={{
-          ...styles.touchview,
-          borderTopColor: themecolor.BOXBORDERCOLOR1,
-          backgroundColor: themecolor.LOGINTHEMECOLOR,
-        }}>
-        <View style={{ ...styles.mainView }}>
-          <View style={{ width: '40%', justifyContent: "center",}}>
-            <Text allowFontScaling={false} style={{ ...styles.txt, color: themecolor.TXTWHITE }}><FAIcon name="rupee" size={14} />10000</Text>
-            <Text allowFontScaling={false} style={{ ...styles.txtConvenienceFee, color: themecolor.ADDTOCARTBUTTONCOLOR }}>View Details</Text>
-          </View>
-
-          <View style={{ width: '60%', }}>
-            <HalfSizeButton
-              title="Continue"
-              icon=""
-              backgroundColor={themecolor.ADDTOCARTBUTTONCOLOR}
-              color={'#fff'}
-              borderColor={themecolor.BORDERCOLOR}
-              onPress={() => props.navigation.navigate('CartAddress')}
-            />
-          </View>
-        </View>
-      </View>
 
     </View>
   );

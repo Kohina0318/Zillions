@@ -7,18 +7,19 @@ import { styles } from '../../../../assets/css/ProductDetailStyle';
 
 const { width, height } = Dimensions.get('screen');
 
-function ProductDetailSizeList({ index, touch, selected, onChange, item, themecolor, setSelectedSize }) {
+function ProductDetailSizeList({ index, touch, selected, onChange, item, themecolor, setSelectedSize,setSelectedSizePrice }) {
   const navigation = useNavigation();
 
-  const handleClick = (index, size) => {
+  const handleClick = (index, size , amount) => {
     onChange(index)
     setSelectedSize(size)
+    setSelectedSizePrice(amount)
   }
-
+  
   return (
     <>
       <TouchableOpacity activeOpacity={0.8} disabled={touch}
-        onPress={() => handleClick(index, item.size)}>
+        onPress={() => handleClick(index, item.size , item.amount)}>
         <View
           style={{
             ...styles.SizeView,
@@ -65,7 +66,7 @@ export function ProductDetailSizeFlatList(props) {
       <FlatList
         data={props.sizes}
         renderItem={({ item, index }) => (
-          <ProductDetailSizeList index={index} touch={props.touch} selected={selected} onChange={(value) => handleSelected(value)} item={item} themecolor={themecolor} setSelectedSize={props.setSelectedSize} />
+          <ProductDetailSizeList index={index} touch={props.touch} selected={selected} onChange={(value) => handleSelected(value)} item={item} themecolor={themecolor} setSelectedSize={props.setSelectedSize} setSelectedSizePrice={props.setSelectedSizePrice} />
         )}
         horizontal={true}
         showsHorizontalScrollIndicator={false}

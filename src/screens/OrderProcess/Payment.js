@@ -18,7 +18,7 @@ import HalfSizeButton from '../../components/shared/button/halfSizeButton';
 import FAIcon from 'react-native-vector-icons/FontAwesome';
 import {Stepper} from '../Stepper/Stepper';
 import {CheckBox} from '@rneui/themed';
-import OrderDeailsComp from '../../components/shared/OrderProcessComponents/OrderDeailsComp';
+import OrderDetailsComp from '../../components/shared/OrderProcessComponents/OrderDetailsComp';
 
 const {width, height} = Dimensions.get('screen');
 
@@ -236,7 +236,9 @@ export default function Payment(props) {
             )}
           </View>
           <View style={styles.marginTop} />
-          <OrderDeailsComp />
+
+          <OrderDetailsComp />
+          
         </View>
       </ScrollView>
       {/* )} */}

@@ -9,6 +9,7 @@ import {
   BackHandler,
   ScrollView,
   Linking,
+  Alert
 } from 'react-native';
 import { useSelector } from 'react-redux';
 import { MyThemeClass } from '../../components/Theme/ThemeDarkLightColor';
@@ -93,10 +94,11 @@ export default function ProductDetail(props) {
   const [title, setTitle] = useState('');
   const [navigateTo, setNavigateTo] = useState('');
   const [icon, setIcon] = useState('')
-  const [purchasPrice, setPurchasePrice] = useState("")
   const [qty, setQty] = useState(1)
   const [selectedSize, setSelectedSize] = useState("")
+  const [selectedSizePrice, setSelectedSizePrice] = useState("")
   const [showWishListed, setShowWishListed] = useState(0);
+  const [showGoToButton, setShowGoToButton] = useState(false);
 
 
   const handleProductView = async () => {
@@ -109,7 +111,6 @@ export default function ProductDetail(props) {
       setProductDetailData(res.data);
       setProductId(res.data.product_id);
       setShowWishListed(res.data.wishlist)
-      setPurchasePrice(res.data.purchase_price)
       setDescription(res.data.description);
       setShipment(res.data.shipment_info);
       setAllImages(res.data.all_image);
@@ -118,6 +119,7 @@ export default function ProductDetail(props) {
       setFeatured(res.data.featured);
       setSizes(res.data.size);
       setSelectedSize(res.data.size[0].size)
+      setSelectedSizePrice(res.data.size[0].amount)
       setSlug(res.data.slug);
       setUnit(res.data.unit);
       setLoader(false);
@@ -153,7 +155,7 @@ export default function ProductDetail(props) {
   const handleRB = (index) => {
     if (index == 1) {
       setTitle('Add To Cart')
-      setNavigateTo('Cart')
+      setNavigateTo('')
       setIcon(<Feather
         name="shopping-cart"
         size={16}
@@ -171,7 +173,6 @@ export default function ProductDetail(props) {
         />
       )
     }
-
     refRBSheet.current.open()
   }
 
@@ -198,16 +199,15 @@ export default function ProductDetail(props) {
     );
   }
 
-  const handleWishListed=async(any)=>{
+  const handleWishListed = async (any) => {
     try {
       var res = await postAddOrRemoveWishlist(any, productId);
       console.log(res.msg)
       if (res.status == true) {
-        if(any==1){
+        if (any == 1) {
           setShowWishListed(1);
-        } 
-        else 
-        {
+        }
+        else {
           setShowWishListed(0);
         }
         toast.show(res.msg, {
@@ -217,7 +217,22 @@ export default function ProductDetail(props) {
           offset: 30,
           animationType: 'slide-in',
         });
-      } else {
+      }
+      else if (res.msg == "Invalid Authentication") {
+        Alert.alert(
+          'Login to continue',
+          'Are you want to Login?',
+          [
+            {
+              text: 'No',
+              onPress: () => console.log('Cancel Pressed'),
+              style: 'cancel',
+            },
+            {text: 'Yes', onPress: () => navigation.navigate('Login')},
+          ],
+        );
+      }
+       else {
         toast.show(res.msg, {
           type: 'warning',
           placement: 'bottom',
@@ -238,28 +253,30 @@ export default function ProductDetail(props) {
     }
   };
 
-
   const handleAddCartProduct = async () => {
     try {
-      var Size = `${purchasPrice}#${selectedSize}#1`
-      var TotalPrice = purchasPrice * qty
+      var Size = `${selectedSizePrice}#${selectedSize}#${qty}`
+      var TotalPrice = selectedSizePrice * qty
 
       let formdata = new FormData();
-      formdata.append('qty', qty);
-      formdata.append('sizeprice', Size);
-      formdata.append('totalprice ', TotalPrice);
+      formdata.append('qty[]', qty);
+      formdata.append('sizeprice[]', Size);
+      formdata.append('totalprice', TotalPrice);
 
       var res = await postAddCartProduct(productId, formdata)
-      console.log("Res>>>>>>>>>>>>>",res);
       if (res.status == true) {
-        // navigation.navigate(navigateTo)
-        toast.show(res.msg, {
-          type: 'success',
-          placement: 'bottom',
-          duration: 3000,
-          offset: 30,
-          animationType: 'slide-in',
-        });
+        if (title == 'Add To Cart') {
+          setShowGoToButton(true)
+          toast.show(res.msg, {
+            type: 'success',
+            placement: 'bottom',
+            duration: 3000,
+            offset: 30,
+            animationType: 'slide-in',
+          });
+        } else {
+          navigation.navigate(navigateTo)
+        }
       } else {
         toast.show(res.msg, {
           type: 'warning',
@@ -291,12 +308,13 @@ export default function ProductDetail(props) {
         <LoadingFullScreen style={{ flex: 1 }} />
       ) : (
         <>
-          <View style={{ marginTop: 10 }} />
+          <View style={{...styles.MGT}} />
 
           <ScrollView showsVerticalScrollIndicator={false}>
             <View
               style={{
                 ...styles.container,
+                marginTop:10
               }}>
               <View
                 style={{
@@ -406,7 +424,7 @@ export default function ProductDetail(props) {
                     </View>
                   </View>
 
-                  <View style={{ marginTop: 10 }} />
+                  <View style={{ ...styles.MGT }} />
 
                   <View style={{ width: width * 0.35 }}>
                     <StarRating
@@ -419,7 +437,7 @@ export default function ProductDetail(props) {
                     />
                   </View>
 
-                  <View style={{ marginTop: 10 }} />
+                  <View style={{ ...styles.MGT }} />
 
                   <View
                     style={{
@@ -458,11 +476,11 @@ export default function ProductDetail(props) {
                     </Text>
                   </View>
 
-                  <View style={{ marginTop: 10 }} />
+                  <View style={{ ...styles.MGT }} />
                 </View>
               </View>
 
-              <View style={{ marginTop: 10 }} />
+              <View style={{ ...styles.MGT }} />
 
               <View
                 style={{
@@ -502,7 +520,7 @@ export default function ProductDetail(props) {
                 </View>
               </View>
 
-              <View style={{ marginTop: 10 }} />
+              <View style={{ ...styles.MGT}} />
 
               <View
                 style={{
@@ -531,7 +549,7 @@ export default function ProductDetail(props) {
                 </View>
               </View>
 
-              <View style={{ marginTop: 10 }} />
+              <View style={{ ...styles.MGT }} />
 
               <View
                 style={{
@@ -601,7 +619,7 @@ export default function ProductDetail(props) {
                 </View>
               </View>
 
-              <View style={{ marginTop: 10 }} />
+              <View style={{...styles.MGT }} />
 
               <View
                 style={{
@@ -627,7 +645,7 @@ export default function ProductDetail(props) {
                 </View>
               </View>
 
-              <View style={{ marginTop: 10 }} />
+              <View style={{ ...styles.MGT }} />
 
               {relatedProductData.length > 0 ? (
                 <View
@@ -652,7 +670,7 @@ export default function ProductDetail(props) {
                 <></>
               )}
 
-              <View style={{ marginTop: 10 }} />
+              <View style={{ ...styles.MGT }} />
             </View>
           </ScrollView>
 
@@ -668,20 +686,37 @@ export default function ProductDetail(props) {
               {productDetailData.current_stock > 0 ? (
                 <>
                   <View style={{ width: '49%' }}>
-                    <HalfSizeButton
-                      title="Add to cart"
-                      icon={
-                        <Feather
-                          name="shopping-cart"
-                          size={16}
-                          color={themecolor.BACKICON}
-                        />
-                      }
-                      onPress={() => handleRB(1)}
-                      backgroundColor={'transparent'}
-                      color={themecolor.BACKICON}
-                      borderColor={themecolor.BACKICON}
-                    />
+                    {showGoToButton ?
+                      <HalfSizeButton
+                        title="Go to cart"
+                        icon={
+                          <Feather
+                            name="shopping-cart"
+                            size={16}
+                            color={themecolor.BACKICON}
+                          />
+                        }
+                        onPress={() => navigation.navigate("Cart")}
+                        backgroundColor={'transparent'}
+                        color={themecolor.BACKICON}
+                        borderColor={themecolor.BACKICON}
+                      />
+                      :
+                      <HalfSizeButton
+                        title="Add to cart"
+                        icon={
+                          <Feather
+                            name="shopping-cart"
+                            size={16}
+                            color={themecolor.BACKICON}
+                          />
+                        }
+                        onPress={() => handleRB(1)}
+                        backgroundColor={'transparent'}
+                        color={themecolor.BACKICON}
+                        borderColor={themecolor.BACKICON}
+                      />
+                    }
                   </View>
 
                   <View style={{ width: '49%' }}>
@@ -712,7 +747,7 @@ export default function ProductDetail(props) {
                   />
                 </View>
               )}
-              <RBSheetData refRBSheet={refRBSheet} title={title} sizes={sizes} touch={false} icon={icon} qty={qty} setQty={setQty} setSelectedSize={setSelectedSize} onPress={handleAddCartProduct()} />
+              <RBSheetData refRBSheet={refRBSheet} title={title} sizes={sizes} touch={false} icon={icon} qty={qty} setQty={setQty} maxQty={productDetailData.current_stock} setSelectedSize={setSelectedSize} setSelectedSizePrice={setSelectedSizePrice}  onPress={handleAddCartProduct} />
             </View>
           </TouchableOpacity>
 

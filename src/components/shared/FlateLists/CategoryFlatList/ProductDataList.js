@@ -6,6 +6,7 @@ import {
   Text,
   Image,
   Dimensions,
+  Alert
 } from 'react-native';
 import { Colors } from '../../../assets/config/Colors';
 import { ProductStyle } from '../../../../assets/css/ProductStyle';
@@ -17,7 +18,6 @@ import StarRating from 'react-native-star-rating';
 import FAIcon from 'react-native-vector-icons/FontAwesome';
 import { useToast } from 'react-native-toast-notifications';
 import { postAddOrRemoveWishlist } from '../../../../repository/WishListRepository/WishListRepo';
-import { Alert } from 'react-native/Libraries/Alert/Alert';
 
 const { width, height } = Dimensions.get('screen');
 
@@ -49,7 +49,22 @@ function ProductDataFlateList({ item, themecolor }) {
             animationType: 'slide-in',
           });
         }
-      } else {
+      }
+      else if (res.msg == "Invalid Authentication") {
+        Alert.alert(
+          'Login to continue',
+          'Are you want to Login?',
+          [
+            {
+              text: 'No',
+              onPress: () => console.log('Cancel Pressed'),
+              style: 'cancel',
+            },
+            {text: 'Yes', onPress: () => navigation.navigate('Login')},
+          ],
+        );
+      }
+       else {
         toast.show(res.msg, {
           type: 'warning',
           placement: 'bottom',

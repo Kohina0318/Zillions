@@ -39,7 +39,8 @@ function BrandDataFlatList({item, themecolor}) {
             alignSelf: 'center',
             margin: 3,
             borderWidth: 4,
-            borderColor: '#FFF',
+            borderColor: '#E9E9E9',
+            borderWidth:0.5,
             borderRadius: 5,
             backgroundColor: '#FFF',
           }}>

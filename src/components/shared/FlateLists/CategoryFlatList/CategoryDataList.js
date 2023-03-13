@@ -46,7 +46,7 @@ function CategoryDataFlateList({item, themecolor}) {
           </Text>
         </View>
 
-        <View style={{flexDirection: 'row', justifyContent:"center",alignItems:"center"}}>
+        <View style={{flexDirection: 'row', justifyContent:"center",alignItems:"center",left:5}}>
           <Text allowFontScaling={false} style={{...CategoryStyle.txt1,backgroundColor:themecolor.STARCOLOR}}> {item.no_of_product} </Text>
           <View
             style={{...CategoryStyle.iconview, borderRadius: 50, padding: 2}}

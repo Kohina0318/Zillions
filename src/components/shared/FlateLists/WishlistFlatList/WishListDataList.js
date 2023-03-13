@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import {
   TouchableOpacity,
   View,
@@ -18,12 +18,23 @@ import HalfSizeButton from '../../button/halfSizeButton';
 import MCI from 'react-native-vector-icons/MaterialCommunityIcons';
 import { postAddOrRemoveWishlist } from '../../../../repository/WishListRepository/WishListRepo';
 import { useToast } from 'react-native-toast-notifications';
+import { RBSheetData } from '../../../../screens/category/RBSheetData';
+import { postAddCartProduct } from '../../../../repository/OrderProcessRepository/AddToCartRepo';
+import { set } from 'immer/dist/internal';
 
 const { width, height } = Dimensions.get('screen');
 
-function WishListDataFlateList({ item, themecolor, setRefresh, refresh }) {
-  const navigation = useNavigation();
+
+function WishListDataFlateList({ item, themecolor, setRefresh, refresh, }) {
+
   const toast = useToast();
+  const refRBSheet = useRef();
+  const navigation = useNavigation();
+
+  const [sizeData, setSizesData] = useState(JSON.parse(item.size));
+  const [qty, setQty] = useState(1)
+  const [selectedSize, setSelectedSize] = useState(sizeData[0].size)
+  const [selectedSizePrice, setSelectedSizePrice] = useState(sizeData[0].amount)
 
   const handleRemove = async () => {
     try {
@@ -57,6 +68,49 @@ function WishListDataFlateList({ item, themecolor, setRefresh, refresh }) {
       });
     }
   };
+
+  
+  const handleAddCartProduct = async () => {
+    try {
+      var Size = `${selectedSizePrice}#${selectedSize}#${qty}`
+      var TotalPrice = selectedSizePrice * qty
+
+      let formdata = new FormData();
+      formdata.append('qty[]', qty);
+      formdata.append('sizeprice[]', Size);
+      formdata.append('totalprice', TotalPrice);
+
+      var res = await postAddCartProduct(item.product_id, formdata)
+      if (res.status == true) {
+        handleRemove()
+        toast.show(res.msg, {
+          type: 'success',
+          placement: 'bottom',
+          duration: 3000,
+          offset: 30,
+          animationType: 'slide-in',
+        });
+      } else {
+        toast.show(res.msg, {
+          type: 'warning',
+          placement: 'bottom',
+          duration: 3000,
+          offset: 30,
+          animationType: 'slide-in',
+        });
+      }
+    } catch (e) {
+      toast.show('Something went wrong!, Try again later.', {
+        type: 'danger',
+        placement: 'bottom',
+        duration: 3000,
+        offset: 30,
+        animationType: 'slide-in',
+      });
+    }
+  }
+
+
 
   return (
     <>
@@ -152,24 +206,45 @@ function WishListDataFlateList({ item, themecolor, setRefresh, refresh }) {
         }} />
 
         <View style={{ width: "100%" }}>
-          <HalfSizeButton
-            title="Add to Cart"
-            icon={
-              <Feather
-                name="shopping-cart"
-                size={14}
-                color={themecolor.BACKICON}
-              />
-            }
-            backgroundColor={'transparent'}
-            color={themecolor.BACKICON}
-            borderColor={'transparent'}
-            fontSize={14}
-            height={width * 0.08}
-          // onPress={() => handleSetDefaultAddress(item.id)}
-          />
+
+          {item.current_stock > 0 ?
+            <HalfSizeButton
+              title="Move to Cart"
+              icon={
+                <Feather
+                  name="shopping-cart"
+                  size={16}
+                  color={themecolor.BACKICON}
+                />
+              }
+              backgroundColor={'transparent'}
+              color={themecolor.BACKICON}
+              borderColor={'transparent'}
+              fontSize={14}
+              height={width * 0.08}
+              onPress={() => refRBSheet.current.open()}
+            />
+            :
+            <HalfSizeButton
+              title="Out of Stock"
+              icon={
+                <MCI name="cart-off" size={16} color={themecolor.TEXTRED} />
+              }
+              backgroundColor={'transparent'}
+              color={themecolor.TEXTRED}
+              borderColor={'transparent'}
+              fontSize={16}
+              height={width * 0.08}
+            />
+          }
         </View>
       </View>
+      <RBSheetData refRBSheet={refRBSheet} title={"Move to cart"} sizes={sizeData} touch={false} icon={<Feather
+        name="shopping-cart"
+        size={16}
+        color="#fff"
+      />} qty={qty} setQty={setQty} maxQty={item.current_stock} setSelectedSize={setSelectedSize} onPress={handleAddCartProduct} setSelectedSizePrice={setSelectedSizePrice} />
+
     </>
   );
 }

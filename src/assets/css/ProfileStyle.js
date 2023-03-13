@@ -54,7 +54,7 @@ const ProfileStyle = StyleSheet.create({
     alignSelf: 'center',
     flexDirection: 'column',
     alignItems: 'center',
-    borderWidth: 1,
+    borderWidth: 0.5,
     marginBottom: 1,
     justifyContent: 'center',
   },
@@ -107,7 +107,7 @@ const ProfileStyle = StyleSheet.create({
   buttonView1: {
     width: width * 0.4,
     height: height * 0.05,
-    borderWidth: 2,
+    borderWidth: 1,
     justifyContent: 'center',
     alignItems: 'center',
     marginRight: 5,
@@ -120,7 +120,7 @@ const ProfileStyle = StyleSheet.create({
   buttonView2: {
     width: width * 0.4,
     height: height * 0.05,
-    borderWidth: 2,
+    borderWidth: 1,
     justifyContent: 'center',
     alignItems: 'center',
     borderRadius: 8,

@@ -21,7 +21,6 @@ export const RBSheetData = props => {
     props.refRBSheet.current.close()
   }
 
-
   return (
     <>
       <RBSheet
@@ -29,6 +28,7 @@ export const RBSheetData = props => {
         animationType={'slide'}
         closeOnDragDown={true}
         closeOnPressMask={true}
+        closeOnPressBack={false}               
         height={260}
         customStyles={{
           container: {
@@ -77,6 +77,7 @@ export const RBSheetData = props => {
               sizes={props.sizes}
               touch={props.touch}
               setSelectedSize={props.setSelectedSize}
+              setSelectedSizePrice={props.setSelectedSizePrice}
             />
           </View>
         </View>
@@ -110,6 +111,7 @@ export const RBSheetData = props => {
               valueType="integer"
               rounded={true}
               minValue={1}
+              maxValue={props.maxQty}
               textColor={themecolor.TXTWHITE}
               iconStyle={{ color: themecolor.TXTWHITE }}
               rightButtonBackgroundColor={'transparent'}
@@ -124,7 +126,7 @@ export const RBSheetData = props => {
               title={props.title}
               icon={props.icon}
               onPress={() => {
-                props.onPress;
+                props.onPress();
                 props.refRBSheet.current.close()
               }}
               backgroundColor={themecolor.ADDTOCARTBUTTONCOLOR}

@@ -207,14 +207,14 @@ export default StyleSheet.create({
   FLEXDIREC1: { flexDirection: 'row' },
   CUSTOMERdvIEW: { justifyContent: 'center', alignSelf: 'center', alignContent: 'center', alignItems: 'center' },
   CUSTOMERVIEWTO: {
-    width: width * 0.93,
+    width: width * 0.94,
     // margin: 2,
     borderRadius: 10,
     borderWidth: 0.5,
     backgroundColor: Colors.white,
     borderColor: Colors.borderColor1,
     justifyContent:'center',
-    
+    alignSelf:"center"
   },
   TWOView: {
     flexDirection: 'row',
