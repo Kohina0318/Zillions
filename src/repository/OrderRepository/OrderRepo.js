@@ -28,7 +28,6 @@ const getOrderView = async (orId) => {
     });
     
     const result = await response.json();
-    alert(result)
     return result;
   } catch (err) {
     console.log('error in getOrderView...in OrderRepo ', err);

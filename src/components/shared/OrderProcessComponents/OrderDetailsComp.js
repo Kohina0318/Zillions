@@ -74,7 +74,7 @@ export default function OrderDetailsComp(props) {
 
       <View style={{ ...styles.innerView }}>
         <View style={{ ...styles.orderDetialcompWidth }}>
-          <Text style={{ ...styles.txt1, color: themecolor.TXTGREY }}>Delivery Fee</Text>
+          <Text style={{ ...styles.txt1, color: themecolor.TXTGREYS }}>Delivery Fee</Text>
         </View>
         <View style={{ ...styles.orderDetialcompWidth1 }}>
           {CartDetailData.ship != " ₹0" ?

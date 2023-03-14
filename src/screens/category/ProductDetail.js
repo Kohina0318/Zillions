@@ -676,7 +676,7 @@ export default function ProductDetail(props) {
 
           <View style={{ marginVertical: 32 }} />
 
-          <TouchableOpacity
+          <View
             style={{
               ...styles.touchview,
               borderTopColor: themecolor.BOXBORDERCOLOR1,
@@ -749,7 +749,7 @@ export default function ProductDetail(props) {
               )}
               <RBSheetData refRBSheet={refRBSheet} title={title} sizes={sizes} touch={false} icon={icon} qty={qty} setQty={setQty} maxQty={productDetailData.current_stock} setSelectedSize={setSelectedSize} setSelectedSizePrice={setSelectedSizePrice}  onPress={handleAddCartProduct} />
             </View>
-          </TouchableOpacity>
+          </View>
 
           <View style={styles.centeredView}>
             <Modal
