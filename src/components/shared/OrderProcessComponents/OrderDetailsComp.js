@@ -47,15 +47,6 @@ export default function OrderDetailsComp(props) {
 
       <View style={{ ...styles.mv5 }} />
 
-      {/* <View style={{ ...styles.innerView }}>
-        <View style={{ ...styles.orderDetialcompWidth }}>
-          <Text style={{ ...styles.txt1, color: themecolor.TXTWHITE }}>Saving Amount</Text>
-        </View>
-        <View style={{ ...styles.orderDetialcompWidth1 }}>
-          <Text style={{ ...styles.txt1, color: themecolor.TEXTGREEN }}>- <FAIcon name="rupee" size={12} />1500.00</Text>
-        </View>
-      </View> */}
-
       <View style={{ ...styles.innerView }}>
         <View style={{ ...styles.orderDetialcompWidth }}>
           <Text style={{ ...styles.txt1, color: themecolor.TXTWHITE }}>Tax Amount</Text>
@@ -99,7 +90,6 @@ export default function OrderDetailsComp(props) {
           <Text style={{ ...styles.txt, color: themecolor.TXTWHITE }}>{CartDetailData.grand_total}</Text>
         </View>
       </View>
-
 
     </View>
   )

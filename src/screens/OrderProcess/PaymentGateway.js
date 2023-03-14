@@ -1,10 +1,10 @@
+
+
 import React, { Component, useEffect, useState } from "react";
-// import { withStyles } from "@material-ui/core/styles";
-import { SERVER_URL as ServerURL } from "../../repository/SERVER_URL";
-import { View,Text } from "react-native";
-import RazorpayCheckout from 'react-native-razorpay';
-import Logo from '../../assets/images/logo.png'
 import { useSelector } from "react-redux";
+import { View, Text } from "react-native";
+import { SERVER_URL as ServerURL } from "../../repository/SERVER_URL";
+import RazorpayCheckout from 'react-native-razorpay'
 
 const styles = (theme) => ({
   root: {
@@ -36,61 +36,48 @@ const PaymentGateway = (props) => {
   let [loading, setLoading] = useState(true);
   let [color, setColor] = useState("#36D7B7");
 
-  // var user=useSelector(state=>state.data)
-  // var userData=Object.values(user)
-  
-  // var userDataRe= {
-  //   name: `${userData.username} ${userData.surname}`,
-  //   contact: userData.phone,
-  //   email: userData.email,
-  // }
-
-  // console.log("userdata>>>>>",userData)
-
   const options = {
-    key: "rzp_test_cdnNWMaIkNop2J",
-    amount: props.route.params.price*100, //  = INR 1
-    name: "ZillionBuyers.com",
-    currency: 'INR',
-    description: 'Pay Securely and Safely',
-    image:Logo,     
+    key: "rzp_test_GQ6XaPC6gMPNwH",
+    amount: props.route.params.price * 100, //  = INR 1
+    name: "Zillionbuyer.com",
+    // description: 'some description',
+    image:
+      `${ServerURL}/images/logo.jpg`,
     handler: function (response) {
       // handleRazorpay(response.razorpay_payment_id)
       // props.addnewrecord()
       alert(response.razorpay_payment_id);
-      
+
     },
     prefill: props.route.params.userData,
     notes: {
       address: "some address",
     },
     theme: {
-      color: "#F37254",
+      color: "blue",
       hide_topbar: false,
     },
   };
+  const gotoRazorpay = () => {
+    return (
 
- const gotoRazorpay=()=>{
-   return(
-     
-    <View style={{ display:'flex',justifyContent:'center',alignItems:'center',flexDirection:'column'}}>
+      <View style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'column' }}>
 
-    <View style={{fontSize:30,fontWeight:'bold',color:'GrayText',padding:20}}>
-    <Text>Redirecting to Razorpay pls wait........</Text></View>
+        <View style={{ fontSize: 30, fontWeight: 'bold', color: 'GrayText', padding: 20 }}>
+          <Text>Redirecting to Razorpay pls wait........</Text></View>
 
-    <View className="sweet-loading">
+        <View className="sweet-loading">
 
-  {/* <SyncLoader color={color} loading={loading} css={override} size={25} /> */}
-  {openPayModal()}
-</View>
-</View>
-   )
- }
+          {openPayModal()}
+        </View>
+      </View>
+    )
+  }
 
-  const openPayModal =async () => {
+  const openPayModal = async () => {
     RazorpayCheckout.open(options);
-    setLoading(!loading);
-    RazorpayCheckout.close(props.navigation.navigate('Dashboard'));
+    setLoading(!loading)
+
   }
 
   useEffect(() => {
@@ -101,15 +88,12 @@ const PaymentGateway = (props) => {
 
   }, []);
 
-//   const { classes } = props;
 
   return (
     <>
-  
-       {gotoRazorpay()}
-
+      {gotoRazorpay()}
     </>
   );
 };
 
-export default (PaymentGateway);
+export default PaymentGateway;

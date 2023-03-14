@@ -102,9 +102,7 @@ export default function Payment(props) {
         'contact': data.phone,
         'email': data.email,
       }
-      alert(JSON.stringify(userDataRe))
-      store.dispatch({type:'ADD_DATA',payload:[userData[0].phone,userData[0]]})
-     props.navigation.navigate('PaymentGateway',{price:detailData.grand_total, userData:userDataRe})
+     props.navigation.navigate('PaymentGateway',{price:"2000", userData:userDataRe})
     }
   };
 
