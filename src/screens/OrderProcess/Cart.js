@@ -78,7 +78,6 @@ export default function Cart(props) {
     try {
       var res = await getCartProductList()
       if (res.status == true) {
-        console.log("ugggggggggggggg",Object.values(res.data.carted) )
         setCartProduct(Object.values(res.data.carted))
         setLoader(false)
       } else {

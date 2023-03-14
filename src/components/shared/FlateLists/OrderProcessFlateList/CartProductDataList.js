@@ -28,14 +28,21 @@ function CartProductDataFlateList({ item, themecolor, refresh, setRefresh }) {
   const navigation = useNavigation();
 
   var optionData = JSON.parse(item.option)
-  var optionSizeValueData = JSON.stringify(optionData.size.value)
-  var data = optionSizeValueData.replace(/^["'](.+(?=["']$))["']$/, '$1');
-  var data1 = data.split("*");
+  var Size = ''
+  var qt = ''
 
-  var qt=parseInt(data1[1])
+  if (optionData.size != undefined || optionData.size != null) {
+    if (optionData.size.value != undefined || optionData.size.value != null) {
+      var optionSizeValueData = JSON.stringify(optionData.size.value)
+      var data = optionSizeValueData.replace(/^["'](.+(?=["']$))["']$/, '$1');
+      var data1 = data.split("*");
+      Size = data1[0]
+      qt = parseInt(data1[1])
+    }
+  }
   const [qty, setQty] = useState(qt)
 
-  
+
   const handleRemoveProduct = async () => {
     try {
       var res = await getRemoveProduct(item.rowid)
@@ -137,33 +144,35 @@ function CartProductDataFlateList({ item, themecolor, refresh, setRefresh }) {
             {item.name}
           </Text>
 
-          <View style={{ ...styles.PriceTxtViewinner, alignItems:'flex-start',}}>
+          <View style={{ ...styles.PriceTxtViewinner, alignItems: 'flex-start', }}>
+{Size != ''? 
+            <View style={{ ...styles.QtyView, borderColor: themecolor.TXTGREY, maxWidth: "67%" }} >
+              <Text
+                allowFontScaling={false} style={{ ...styles.txt1, color: themecolor.TXTWHITE, }}>Size:
+              </Text>
+              <Text
+                allowFontScaling={false} numberOfLines={1}
+                style={{ ...styles.txtPrice, color: themecolor.TXTWHITE, maxWidth: "85%", }}>{Size}
+              </Text>
+            </View>
+            :<></>}
 
-              <View style={{ ...styles.QtyView, borderColor: themecolor.TXTGREY,maxWidth:"67%"}} >
-                <Text
-                  allowFontScaling={false} style={{ ...styles.txt1, color: themecolor.TXTWHITE, }}>Size:
-                </Text>
-                <Text
-                    allowFontScaling={false} numberOfLines={1}
-                    style={{ ...styles.txtPrice, color: themecolor.TXTWHITE, maxWidth:"85%",}}>{data1[0]}
-                  </Text>
-              </View>
-
-            
-              <TouchableOpacity activeOpacity={0.5} 
-              style={{ ...styles.QtyView, borderColor: themecolor.TXTGREY, maxWidth:"32%",left:5}}
+{qt != '' ?
+            <TouchableOpacity activeOpacity={0.5}
+              style={{ ...styles.QtyView, borderColor: themecolor.TXTGREY, maxWidth: "32%", left: 5 }}
               onPress={() => refRBSheet.current.open()}
-              >
-                <Text allowFontScaling={false}
-                  style={{ ...styles.txt1, color: themecolor.TXTWHITE }}>Qty: 
-                </Text>
-                <Text
-                    allowFontScaling={false} numberOfLines={1}
-                    style={{ ...styles.txtPrice, color: themecolor.TXTWHITE, maxWidth:"85%", }}> 
-                    {item.qty >1 ? item.qty : data1[1]}
-                    {" "}<AN name="down" /></Text>
-                 
-              </TouchableOpacity>
+            >
+              <Text allowFontScaling={false}
+                style={{ ...styles.txt1, color: themecolor.TXTWHITE }}>Qty:
+              </Text>
+              <Text
+                allowFontScaling={false} numberOfLines={1}
+                style={{ ...styles.txtPrice, color: themecolor.TXTWHITE, maxWidth: "85%", }}>
+                {item.is_update > 0 ? item.qty : qt}
+                {" "}<AN name="down" /></Text>
+
+            </TouchableOpacity>
+            :<></>}
 
           </View>
 
@@ -195,7 +204,7 @@ function CartProductDataFlateList({ item, themecolor, refresh, setRefresh }) {
         </View>
       </View>
 
-      <CartQtyRSSheet refRBSheet={refRBSheet}  setQty={setQty} qty={qty} onPress={handleProductQuantityUpdate} />
+      <CartQtyRSSheet refRBSheet={refRBSheet} setQty={setQty} qty={qty} onPress={handleProductQuantityUpdate} />
 
     </View>
   );
@@ -209,7 +218,7 @@ export function CartProductDataList(props) {
     <FlatList
       data={props.data}
       renderItem={({ item }) => (
-        <CartProductDataFlateList item={item} themecolor={themecolor} refresh={props.refresh} setRefresh={props.setRefresh}  />
+        <CartProductDataFlateList item={item} themecolor={themecolor} refresh={props.refresh} setRefresh={props.setRefresh} />
       )}
       showsVerticalScrollIndicator={false}
       scrollEnabled={true}
