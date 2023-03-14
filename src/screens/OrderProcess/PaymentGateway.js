@@ -36,16 +36,16 @@ const PaymentGateway = (props) => {
   let [loading, setLoading] = useState(true);
   let [color, setColor] = useState("#36D7B7");
 
-  var user=useSelector(state=>state.data)
-  var userData=Object.values(user)
+  // var user=useSelector(state=>state.data)
+  // var userData=Object.values(user)
   
-  var userDataRe= {
-    name: `${userData.username} ${userData.surname}`,
-    contact: userData.phone,
-    email: userData.email,
-  }
+  // var userDataRe= {
+  //   name: `${userData.username} ${userData.surname}`,
+  //   contact: userData.phone,
+  //   email: userData.email,
+  // }
 
-  console.log("userdata>>>>>",userData)
+  // console.log("userdata>>>>>",userData)
 
   const options = {
     key: "rzp_test_cdnNWMaIkNop2J",
@@ -60,7 +60,7 @@ const PaymentGateway = (props) => {
       alert(response.razorpay_payment_id);
       
     },
-    prefill: userDataRe,
+    prefill: props.route.params.userData,
     notes: {
       address: "some address",
     },

@@ -96,8 +96,15 @@ export default function Payment(props) {
     }
     if (paymentMode == 'Online') {
       var userData = await getUserData();
+      var data =userData[0]
+      var userDataRe= {
+        'name': data.username,
+        'contact': data.phone,
+        'email': data.email,
+      }
+      alert(JSON.stringify(userDataRe))
       store.dispatch({type:'ADD_DATA',payload:[userData[0].phone,userData[0]]})
-     props.navigation.navigate('PaymentGateway',{price:detailData.grand_total})
+     props.navigation.navigate('PaymentGateway',{price:detailData.grand_total, userData:userDataRe})
     }
   };
 
