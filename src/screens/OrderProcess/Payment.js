@@ -21,6 +21,8 @@ import {CheckBox} from '@rneui/themed';
 import OrderDetailsComp from '../../components/shared/OrderProcessComponents/OrderDetailsComp';
 import { getCartOrderDetails } from '../../repository/OrderProcessRepository/CartListRepo';
 import CartViewDetailsButton from '../../components/shared/button/CartViewDetailsButton';
+import { getUserData } from '../../repository/CommonRepository';
+import { store } from '../../../App';
 
 const {width, height} = Dimensions.get('screen');
 
@@ -49,6 +51,7 @@ export default function Payment(props) {
   const [online, setOnline] = useState(false);
   const [paymentMode, setPaymentMode] = useState('');
   const [detailData, setDetailData] = useState("");
+  const [data, setData] = useState([]);
 
   const handleCartOrderDetails = async () => {
     try {
@@ -78,7 +81,7 @@ export default function Payment(props) {
     handleCartOrderDetails()
   },[])
 
-  const handlePayment = () => {
+  const handlePayment = async() => {
     if (paymentMode == '') {
       toast.show('Please select payment mode!', {
         type: 'warning',
@@ -92,7 +95,9 @@ export default function Payment(props) {
       alert('Success in Cash On Delivery');
     }
     if (paymentMode == 'Online') {
-      alert('Online Payment');
+      var userData = await getUserData();
+      store.dispatch({type:'ADD_DATA',payload:[userData[0].phone,userData[0]]})
+     props.navigation.navigate('PaymentGateway',{price:detailData.grand_total})
     }
   };
 
@@ -101,7 +106,7 @@ export default function Payment(props) {
     setPaymentMode('Cash On Delivery');
     setOnline(false);
   };
-  const handleOnline = () => {
+  const handleOnline = async() => {
     setOnline(!online);
     setState(false);
     setPaymentMode('Online');
@@ -279,7 +284,7 @@ export default function Payment(props) {
 
       <View style={{marginVertical: 31}} />
 
-      <CartViewDetailsButton amount={detailData.grand_total} buttonTitle={"Buy Now"} buttonOnPress={() =>() => handlePayment()} />
+      <CartViewDetailsButton amount={detailData.grand_total} buttonTitle={"Buy Now"} buttonOnPress={() => handlePayment()} />
       </>
       )}
     </View>
