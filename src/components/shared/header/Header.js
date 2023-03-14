@@ -21,6 +21,10 @@ export default function Header(props) {
   const mode = useSelector(state => state.mode);
   const themecolor = new MyThemeClass(mode).getThemeColor();
 
+  var cart=useSelector(state=>state.cart)
+  var cartLen=Object.keys(cart).length
+
+
   return (
     <View
       style={{
@@ -95,7 +99,7 @@ export default function Header(props) {
                 }}>
                 <BadgeIcon
                   icon="shopping-cart"
-                  count={1}
+                  count={cartLen}
                   onPress={() => {
                     navigation.navigate('Cart');
                   }}
