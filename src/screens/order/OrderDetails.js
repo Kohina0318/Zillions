@@ -54,12 +54,12 @@ export default function OrderDetails(props) {
   const [productDetailData, setProductDetailData] = useState([])
   const [shippingAddress, setShippingAddress] = useState({})
 
-  var dateSet= ''
+  var dateSet = ''
 
   if (Object.values(data).length > 0) {
     if (data.sale_datetime != undefined || data.sale_datetime != null) {
-      dateSet= moment(data.sale_datetime * 1000).format('ll')
-   }
+      dateSet = moment(data.sale_datetime * 1000).format('ll')
+    }
   }
 
 
@@ -135,12 +135,7 @@ export default function OrderDetails(props) {
 
                 <View style={{ ...styles.width35p, }}>
                   <Text allowFontScaling={false} style={{ ...styles.txt, color: themecolor.TXTGREYS }}>
-                  {
-                    dateSet!=''
-                    ?
-                    dateSet:
-                    ''
-                  }
+                    {dateSet != ''? dateSet : ''}
                   </Text>
                 </View>
               </View>
@@ -236,11 +231,15 @@ export default function OrderDetails(props) {
                   </Text>
                 </Text>
               </View>
+              
+              <View style={{ ...styles.marTop }} />
+              
             </View>
 
 
 
           </ScrollView>
+
           <View style={{ marginVertical: 31 }} />
 
           <View
