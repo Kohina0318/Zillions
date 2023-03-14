@@ -40,13 +40,12 @@ function OrderDataFlateList({ item, themecolor }) {
       <View style={{ ...styles.flexDirView1 }}>
 
         <View >
-          <Text allowFontScaling={false} style={{ ...styles.txt1, color: themecolor.TXTWHITE }} numberOfLines={2}>
-            Sale Code :
+          <Text allowFontScaling={false} style={{ ...styles.txtBold, color: themecolor.TXTWHITE }} numberOfLines={2}>
+            Order Id :
           </Text>
         </View>
         <View style={{ ...styles.flexRow }}>
-          <Text allowFontScaling={false} style={{ ...styles.txt1, color: themecolor.ADDTOCARTBUTTONCOLOR }} numberOfLines={2}>
-            #{item.sale_code}
+          <Text allowFontScaling={false} style={{ ...styles.txt1, color: themecolor.BACKICON }} numberOfLines={2}>#{item.sale_code}
           </Text>
         </View>
 

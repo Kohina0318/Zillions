@@ -16,6 +16,7 @@ export const CartQtyRSSheet = props => {
 
   const handleMin = () => {
     props.refRBSheet.current.close()
+
   }
 
   return (
@@ -75,7 +76,7 @@ export const CartQtyRSSheet = props => {
             <NumericInput
               value={props.qty}
               onChange={value => props.setQty(value)}
-              onLimitReached={() => handleMin()}
+              // onLimitReached={() => handleMin()}
               totalWidth={100}
               totalHeight={30}
               iconSize={25}

@@ -1,13 +1,13 @@
-import {StyleSheet, Dimensions} from 'react-native';
-import {FontSize} from '../fonts/Fonts';
-import {Colors} from '../config/Colors';
-import {FontFamily} from '../fonts/FontFamily';
-const {width, height} = Dimensions.get('window');
+import { StyleSheet, Dimensions } from 'react-native';
+import { FontSize } from '../fonts/Fonts';
+import { Colors } from '../config/Colors';
+import { FontFamily } from '../fonts/FontFamily';
+const { width, height } = Dimensions.get('window');
 
 const styles = StyleSheet.create({
-  bg: {flex: 1},
+  bg: { flex: 1 },
   datalistView: {
-    width: width * 0.93,
+    width: width * 0.94,
     height: "auto",
     marginTop: 5,
     padding: 15,
@@ -15,6 +15,16 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     alignItems: 'center',
     borderWidth: 1,
+    marginBottom: 1,
+  },
+  datalistView1: {
+    width: width * 0.93,
+    marginTop: 3,
+    padding: 13,
+    borderRadius: 8,
+    alignSelf: 'center',
+    alignItems: 'center',
+    borderWidth: 0.5,
     marginBottom: 1,
   },
   flexDirView: {
@@ -27,8 +37,19 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignSelf: 'center',
     alignItems: 'center',
-    width: '90%',
+    width: '100%',
   },
+  flexDirView2: {
+    flexDirection: 'row',
+    alignSelf: 'center',
+    alignItems: 'center',
+    width: '100%',
+    justifyContent: "space-between"
+  },
+  innerView: { flexDirection: "row", width: "100%" },
+  TxtViewinner: { marginLeft: 7, width: "74%", justifyContent: 'center' },
+  PriceTxtViewinner: { flexDirection: 'row', width: '100%', marginTop:5 ,alignItems:'flex-start',},
+
   marTop: {
     marginTop: 5,
   },
@@ -43,12 +64,17 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     borderRadius: 5,
   },
-  flexRow: {marginLeft: 10, width: width * 0.55},
-  flexRow1: {width:"50%"},
+  flexRow: { marginLeft: 10, width: width * 0.55 },
+  flexRow1: { width: "50%" },
   txt: {
-    fontSize: FontSize.labelText3,
+    fontSize: FontSize.labelText4,
     fontFamily: FontFamily.Popinssemibold,
-    color: '#121327',
+    fontWeight: "bold"
+  },
+  txtBig: {
+    fontSize: FontSize.labelText5,
+    fontFamily: FontFamily.Popinssemibold,
+    fontWeight: "bold"
   },
   iconview: {
     flexDirection: 'row',
@@ -57,17 +83,59 @@ const styles = StyleSheet.create({
     borderRadius: 50,
     padding: 5,
   },
-
+  txtBold: {
+    fontSize: FontSize.labelText3,
+    fontFamily: FontFamily.Popinssemibold,
+    fontWeight: 'bold',
+  },
   txt1: {
     fontFamily: FontFamily.PopinsRegular,
-    fontSize: FontSize.labelText2,
+    fontSize: FontSize.labelText3,
     color: Colors.white,
-   },
+  },
   txt2: {
     fontFamily: FontFamily.PopinsRegular,
     fontSize: FontSize.labelText,
     color: Colors.white,
   },
+  borderLine: {
+    width: "100%",
+    borderWidth: 0.3,
+  },
+  mgT10: {
+    marginTop: 10
+  },
+  width65p: {
+    width: "65%"
+  },
+  width35p: {
+    width: "35%", justifyContent: "flex-end", alignItems: "flex-end", alignSelf: "flex-end"
+  },
+  removeView: { width: "100%", },
+  removeToch: { alignSelf: "flex-end", right: 5, },
+  removeButton: {
+    fontFamily: FontFamily.PopinsMedium,
+    fontSize: FontSize.labelText3,
+    fontWeight: 'bold',
+  },
+
+  touchview: {
+    backgroundColor: '#fff',
+    width: width,
+    position: 'absolute',
+    bottom: 0,
+    height: 60,
+    justifyContent: 'center',
+    alignSelf: 'center',
+    borderTopWidth: 0.5,
+  },
+  mainView: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignSelf: 'center',
+    alignContent: 'center',
+    width: width * 0.94,
+  },
 });
 
-export {styles};
+export { styles };
