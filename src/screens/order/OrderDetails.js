@@ -55,7 +55,6 @@ export default function OrderDetails(props) {
   const [productDetailData, setProductDetailData] = useState([])
   const [shippingAddress, setShippingAddress] = useState({})
 
-
   const handleOrderView = async () => {
     try {
       var res = await getOrderView(props.route.params.SaleId);
@@ -100,7 +99,7 @@ export default function OrderDetails(props) {
     <View style={{ ...styles.bg, backgroundColor: themecolor.THEMECOLOR }}>
 
       <RegisterLoginHeader
-        title={`Order: #${props.route.params.saleCode}`}
+        title={`Order Id : ${props.route.params.saleCode}`}
         backIcon={true}
         onPressBack={() => handleBackButtonClick()}
       />
@@ -111,25 +110,30 @@ export default function OrderDetails(props) {
         <>
           <ScrollView showsVerticalScrollIndicator={false}>
 
-            <View style={{ ...styles.marTop }} />
-
-            <OrderHistoryTotalAmountComp data={data} />
+            {Object.values(data).length > 0 ?
+              <>
+                <View style={{ ...styles.marTop }} />
+                <OrderHistoryTotalAmountComp data={data} />
+              </> : <></>}
 
             {productDetailData.length > 0 ?
               <>
                 <View style={{ ...styles.mgT10 }} />
-
                 <OrderDetailProductDataList data={productDetailData} />
               </>
               : <></>}
 
-            <View style={{ ...styles.mgT10 }} />
+            {Object.values(data).length > 0 ?
+              <>
+                <View style={{ ...styles.mgT10 }} />
+                <OrderHistoryDetailComp detailData={data} />
+              </> : <></>}
 
-            <OrderHistoryDetailComp detailData={data} />
-
-            <View style={{ ...styles.mgT10 }} />
-
-            <OrderHistoryAddressComp data={shippingAddress} />
+            {Object.values(shippingAddress).length > 0 ?
+              <>
+                <View style={{ ...styles.mgT10 }} />
+                <OrderHistoryAddressComp data={shippingAddress} />
+              </> : <></>}
 
             <View style={{ ...styles.marTop }} />
 
@@ -146,12 +150,12 @@ export default function OrderDetails(props) {
             <View style={{ ...styles.mainView }}>
               <View style={{ width: '100%' }}>
                 <HalfSizeButton
-                  title="Cancel Order"
+                  title="Continue Shopping"
                   icon={" "}
-                  // onPress={() => navigation.navigate("Dashboard")}
+                  onPress={() => navigation.navigate("Dashboard")}
                   backgroundColor={'transparent'}
-                  color={themecolor.TEXTRED}
-                  borderColor={themecolor.TEXTRED}
+                  color={themecolor.BACKICON}
+                  borderColor={themecolor.BACKICON}
                 />
               </View>
             </View>

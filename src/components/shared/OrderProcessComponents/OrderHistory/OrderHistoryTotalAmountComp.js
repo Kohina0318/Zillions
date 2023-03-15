@@ -28,6 +28,12 @@ export default function OrderHistoryTotalAmountComp(props) {
         }
     }
 
+    var paymentStatus=[]
+    if(data.payment_status != undefined || data.payment_status != null ||data.payment_status != ''){
+    paymentStatus= JSON.parse(data.payment_status)
+    }
+
+
     return (
         <View
             style={{
@@ -37,26 +43,57 @@ export default function OrderHistoryTotalAmountComp(props) {
             }}
         >
             <View style={{ ...styles.flexDirView2, }}>
-                <View style={{ ...styles.width65p }}>
+                <View style={{ ...styles.headingWidth70p }}>
                     <Text allowFontScaling={false} style={{ ...styles.txtBig, color: themecolor.TXTWHITE }}>
-                        Total Amount : <FAIcon name="rupee" size={15} />{data.grand_total}
+                        Total Amount : <FAIcon name="rupee" size={15} /> {parseInt(data.grand_total)}
                     </Text>
                 </View>
 
-                <View style={{ ...styles.width35p, }}>
+                <View style={{ ...styles.headingWidth30p, }}>
                     <Text allowFontScaling={false} style={{ ...styles.txt, color: themecolor.TXTGREYS }}>
                         {dateSet != '' ? dateSet : ''}
                     </Text>
                 </View>
             </View>
 
-            <View style={{ ...styles.flexDirView1, padding: 3 }}>
-                <Text allowFontScaling={false} style={{ ...styles.txt1, color: themecolor.TXTWHITE }}>
-                    Paid by {data.payment_type == "cash_on_delivery" ? "Cash on delivery" : data.payment_type}
-                </Text>
+            <View style={{ ...styles.mgT10 }} />
+
+            {paymentStatus.length > 0 ?
+                <View style={{ ...styles.flexDirView1, }}>
+                    <View style={{ ...styles.width35p,}}>
+                        <Text allowFontScaling={false} style={{ ...styles.txt1, color: themecolor.TXTWHITE }}>
+                            Payment Status
+                        </Text>
+                    </View>
+
+                    <View style={{ ...styles.width65p,}}>
+                        <Text allowFontScaling={false} style={{ ...styles.txt1, color: themecolor.TXTWHITE }}>
+                            {paymentStatus[0].status}
+                        </Text>
+                    </View>
+                </View>
+         : <></>} 
+
+
+            <View style={{ ...styles.marTop }} />
+
+            <View style={{ ...styles.flexDirView1, }}>
+                <View style={{ ...styles.width35p,}}>
+                    <Text allowFontScaling={false} style={{ ...styles.txt1, color: themecolor.TXTWHITE }}>
+                        Payment Method
+                    </Text>
+                </View>
+
+                <View style={{ ...styles.width65p,}}>
+                    <Text allowFontScaling={false} style={{ ...styles.txt1, color: themecolor.TXTWHITE }}>
+                        {data.payment_type == "cash_on_delivery" ? "Cash on delivery" : data.payment_type}
+                    </Text>
+                </View>
             </View>
 
-            <View style={{ ...styles.mgT10 }} />
+
+
+            <View style={{ ...styles.marTop }} />
 
             <View style={{ ...styles.mgT10 }} />
 
@@ -65,13 +102,13 @@ export default function OrderHistoryTotalAmountComp(props) {
             <View style={{ ...styles.mgT10 }} />
 
             <View style={{ ...styles.flexDirView1, }}>
-                <TouchableOpacity activeOpacity={0.5} style={{ ...styles.width65p, }}>
+                <TouchableOpacity activeOpacity={0.5} style={{ ...styles.width35p, }}>
                     <Text allowFontScaling={false} style={{ ...styles.txt, color: themecolor.BACKICON }}>
                         Delivery Address
                     </Text>
                 </TouchableOpacity>
 
-                <TouchableOpacity activeOpacity={0.5} style={{ ...styles.width35p, }}>
+                <TouchableOpacity activeOpacity={0.5} style={{ ...styles.width65p, }}>
                     <Text allowFontScaling={false} style={{ ...styles.txt, color: themecolor.BACKICON }}>
                         Order Details
                     </Text>

@@ -79,7 +79,6 @@ export default function CartAddress(props) {
   const handleManageAddress = async () => {
     try {
       var userData = await getUserData();
-      console.log('userdata>>>>>>>>>>>>>>>>', userData)
       setName(userData[0].username)
       setSurname(userData[0].surname)
 
@@ -87,8 +86,6 @@ export default function CartAddress(props) {
       body.append("type", "default")
       var res = await getManageAddressPost(body);
       if (res.status === true) {
-        // setData(res.data);
-        console.log(res.data[0].address)
         setAddress(res.data[0].address)
         setCity(res.data[0].city)
         setPhone(res.data[0].phone)
