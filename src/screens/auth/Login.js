@@ -86,6 +86,7 @@ export default function Login(props) {
         const res = await postLogin(formdata);
       
         if (res.status == true) {
+          console.log("data on login>>>>",res.data)
           await StoreDatatoAsync('@UserData', JSON.stringify(res.data));
           await StoreDatatoAsync('@Token', JSON.stringify(res.data[0].token));
           setShowmodal(!showmodal)

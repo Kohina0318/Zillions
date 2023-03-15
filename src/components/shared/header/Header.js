@@ -43,8 +43,6 @@ const fetchData=async(cartLen)=>{
     data.map((item)=>{
       store.dispatch({type:'ADD_CART',payload:[item.id,item]})
     })
-    console.log("cartLen>>>>>>>",cartLen)
-    console.log("data>>>>>>>>>",data)
 }
   
 
