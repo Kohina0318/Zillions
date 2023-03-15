@@ -5,6 +5,7 @@ import { useSelector } from "react-redux";
 import { View, Text } from "react-native";
 import { SERVER_URL as ServerURL } from "../../repository/SERVER_URL";
 import RazorpayCheckout from 'react-native-razorpay'
+import Logo from '../../assets/images/logo.png'
 
 const styles = (theme) => ({
   root: {
@@ -37,12 +38,11 @@ const PaymentGateway = (props) => {
   let [color, setColor] = useState("#36D7B7");
 
   const options = {
-    key: "rzp_test_GQ6XaPC6gMPNwH",
+    key: "rzp_test_cdnNWMaIkNop2J",
     amount: props.route.params.price * 100, //  = INR 1
     name: "Zillionbuyer.com",
     // description: 'some description',
-    image:
-      `${ServerURL}/images/logo.jpg`,
+    image:Logo,
     handler: function (response) {
       // handleRazorpay(response.razorpay_payment_id)
       // props.addnewrecord()

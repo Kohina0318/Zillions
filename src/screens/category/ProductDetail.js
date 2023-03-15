@@ -45,6 +45,8 @@ import { Ribbon } from '../../components/shared/Ribbon/Ribbon';
 import { postAddCartProduct } from '../../repository/OrderProcessRepository/AddToCartRepo';
 import { postAddOrRemoveWishlist } from '../../repository/WishListRepository/WishListRepo';
 import { useNavigation } from '@react-navigation/native';
+import { store } from '../../../App';
+import { StoreDatatoAsync } from '../../repository/AsyncStorageServices';
 
 const { width, height } = Dimensions.get('window');
 
@@ -253,6 +255,7 @@ export default function ProductDetail(props) {
     }
   };
 
+
   const handleAddCartProduct = async () => {
     try {
       var Size = `${selectedSizePrice}#${selectedSize}#${qty}`
@@ -266,6 +269,7 @@ export default function ProductDetail(props) {
       var res = await postAddCartProduct(productId, formdata)
       if (res.status == true) {
         if (title == 'Add To Cart') {
+          store.dispatch({type:'ADD_CART',payload:[productId,{productId:productId,data:formdata}]})
           setShowGoToButton(true)
           toast.show(res.msg, {
             type: 'success',

@@ -17,6 +17,5 @@ const getAppToken = async () => {
       console.log('erro in getUserData', e);
     }
   };
-  
 
 export {getAppToken,getUserData};
