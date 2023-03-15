@@ -10,6 +10,7 @@ import { useSelector } from 'react-redux';
 import { MyThemeClass } from '../../Theme/ThemeDarkLightColor';
 import { styles } from '../../../assets/css/CartCss/CartStyle';
 import HalfSizeButton from './halfSizeButton';
+import FAIcon from 'react-native-vector-icons/FontAwesome';
 
 const { width, height } = Dimensions.get('screen');
 
@@ -28,7 +29,7 @@ export default function CartViewDetailsButton(props) {
         }}>
         <View style={{ ...styles.mainView }}>
           <View style={{ width: '40%', justifyContent: "center", }}>
-            <Text allowFontScaling={false} style={{ ...styles.txt, color: themecolor.TXTWHITE }}>{props.amount}</Text>
+            <Text allowFontScaling={false} style={{ ...styles.txt, color: themecolor.TXTWHITE }}><FAIcon name="rupee" size={14} /> {parseInt(props.amount)}</Text>
             <Text allowFontScaling={false} style={{ ...styles.txtConvenienceFee, color: themecolor.ADDTOCARTBUTTONCOLOR }}>View Details</Text>
           </View>
 

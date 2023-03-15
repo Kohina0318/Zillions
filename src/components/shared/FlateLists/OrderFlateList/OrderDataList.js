@@ -19,6 +19,10 @@ const { width } = Dimensions.get('screen');
 function OrderDataFlateList({ item, themecolor }) {
   const navigation = useNavigation();
 
+  var productDetails = Object.values(item.product_details)
+  var image = ''
+  image = productDetails[0].image
+
   return (
     <TouchableOpacity
       activeOpacity={0.8}
@@ -27,25 +31,40 @@ function OrderDataFlateList({ item, themecolor }) {
         backgroundColor: themecolor.BOXBORDERCOLOR,
         borderColor: themecolor.BOXBORDERCOLOR1,
       }}
-      onPress={() => navigation.navigate('OrderDetails', { productDetails: item.product_details, saleCode: item.sale_code, SaleId: item.sale_id })}
+      onPress={() => navigation.navigate('OrderDetails', { saleCode: item.sale_code, SaleId: item.sale_id })}
     >
       <View style={{ ...styles.flexDirView }}>
         <Text allowFontScaling={false} style={{ ...styles.txt, color: themecolor.TXTWHITE }}>
-          Delivered on feb 09 2022
+        Order Id : {item.sale_code}
         </Text>
       </View>
 
-      <View style={{ ...styles.marTop }} />
+      <View style={{ ...styles.mgT10 }} />
 
       <View style={{ ...styles.flexDirView1 }}>
-
-        <View >
-          <Text allowFontScaling={false} style={{ ...styles.txtBold, color: themecolor.TXTWHITE }} numberOfLines={2}>
-            Order Id :
-          </Text>
+        <View style={{ ...styles.innerImage, }}>
+          <Image
+            source={{ uri: image }}
+            style={{
+              width: 70,
+              height: 70,
+              borderRadius: 4,
+              resizeMode: 'contain'
+            }}
+          />
         </View>
+
         <View style={{ ...styles.flexRow }}>
-          <Text allowFontScaling={false} style={{ ...styles.txt1, color: themecolor.BACKICON }} numberOfLines={2}>#{item.sale_code}
+          <Text allowFontScaling={false} style={{ ...styles.txt, color: themecolor.TXTWHITE }} >
+            Confirmed
+          </Text>
+
+          <Text allowFontScaling={false} style={{ ...styles.txt1, color: themecolor.TXTWHITE }}>
+            Estimated Delivery {item.order_date}
+          </Text>
+
+          <Text allowFontScaling={false} style={{ ...styles.txt1, color: themecolor.TXTWHITE }}>
+            {item.payment_type == "cash_on_delivery" ? "Cash on delivery" : item.payment_type}
           </Text>
         </View>
 
@@ -57,6 +76,10 @@ function OrderDataFlateList({ item, themecolor }) {
           />
         </View>
       </View>
+
+      
+      <View style={{ ...styles.marTop }} />
+
     </TouchableOpacity>
   );
 }

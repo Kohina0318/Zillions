@@ -21,7 +21,7 @@ export default function OrderHistoryAddressComp(props) {
     return (
         <View
             style={{
-                ...styles.datalistView1,
+                ...styles.datalistView,
                 backgroundColor: themecolor.BOXBORDERCOLOR,
                 borderColor: themecolor.BOXBORDERCOLOR1,
             }}>

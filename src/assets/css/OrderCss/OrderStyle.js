@@ -14,7 +14,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     alignSelf: 'center',
     alignItems: 'center',
-    borderWidth: 1,
+    borderWidth: 0.5,
     marginBottom: 1,
   },
   datalistView1: {
@@ -25,7 +25,7 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     alignItems: 'center',
     borderWidth: 0.5,
-    marginBottom: 1,
+    marginBottom: 2,
   },
   flexDirView: {
     flexDirection: 'row',
@@ -49,7 +49,11 @@ const styles = StyleSheet.create({
   innerView: { flexDirection: "row", width: "100%" },
   TxtViewinner: { marginLeft: 7, width: "74%", justifyContent: 'center' },
   PriceTxtViewinner: { flexDirection: 'row', width: '100%', marginTop:5 ,alignItems:'flex-start',},
-
+  innerImage: {
+    borderRadius: 4,
+    justifyContent: 'center',
+    alignSelf: 'center',
+  },
   marTop: {
     marginTop: 5,
   },
@@ -64,7 +68,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     borderRadius: 5,
   },
-  flexRow: { marginLeft: 10, width: width * 0.55 },
+  flexRow: { marginLeft: 10, width: width * 0.6,},
   flexRow1: { width: "50%" },
   txt: {
     fontSize: FontSize.labelText4,
@@ -105,11 +109,17 @@ const styles = StyleSheet.create({
   mgT10: {
     marginTop: 10
   },
-  width65p: {
-    width: "65%"
+  headingWidth70p: {
+    width: "70%",  
+  },
+  headingWidth30p: {
+    width: "30%", justifyContent: "flex-end", alignItems: "flex-end", alignSelf: "flex-end",  
   },
   width35p: {
-    width: "35%", justifyContent: "flex-end", alignItems: "flex-end", alignSelf: "flex-end"
+    width: "35%", 
+  },
+  width65p: {
+    width: "65%", justifyContent: "flex-end", alignItems: "flex-end", alignSelf: "flex-end", 
   },
   removeView: { width: "100%", },
   removeToch: { alignSelf: "flex-end", right: 5, },

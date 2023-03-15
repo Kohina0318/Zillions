@@ -49,7 +49,7 @@ function CartProductDataFlateList({ item, themecolor, refresh, setRefresh }) {
 
       var res = await getRemoveProduct(item.rowid)
       if (res.status == true) {
-        store.dispatch({type:'DEL_CART',payload:[item.id]})
+        store.dispatch({ type: 'DEL_CART', payload: [item.id] })
         setRefresh(!refresh)
         toast.show(res.msg, {
           type: 'success',
@@ -148,34 +148,34 @@ function CartProductDataFlateList({ item, themecolor, refresh, setRefresh }) {
           </Text>
 
           <View style={{ ...styles.PriceTxtViewinner, alignItems: 'flex-start', }}>
-{Size != ''? 
-            <View style={{ ...styles.QtyView, borderColor: themecolor.TXTGREY, maxWidth: "67%" }} >
-              <Text
-                allowFontScaling={false} style={{ ...styles.txt1, color: themecolor.TXTWHITE, }}>Size:
-              </Text>
-              <Text
-                allowFontScaling={false} numberOfLines={1}
-                style={{ ...styles.txtPrice, color: themecolor.TXTWHITE, maxWidth: "85%", }}>{Size}
-              </Text>
-            </View>
-            :<></>}
+            {Size != '' ?
+              <View style={{ ...styles.QtyView, borderColor: themecolor.TXTGREY, maxWidth: "67%" }} >
+                <Text
+                  allowFontScaling={false} style={{ ...styles.txt1, color: themecolor.TXTWHITE, }}>Size:
+                </Text>
+                <Text
+                  allowFontScaling={false} numberOfLines={1}
+                  style={{ ...styles.txtPrice, color: themecolor.TXTWHITE, maxWidth: "85%", }}>{Size}
+                </Text>
+              </View>
+              : <></>}
 
-{qt != '' ?
-            <TouchableOpacity activeOpacity={0.5}
-              style={{ ...styles.QtyView, borderColor: themecolor.TXTGREY, maxWidth: "32%", left: 5 }}
-              onPress={() => refRBSheet.current.open()}
-            >
-              <Text allowFontScaling={false}
-                style={{ ...styles.txt1, color: themecolor.TXTWHITE }}>Qty:
-              </Text>
-              <Text
-                allowFontScaling={false} numberOfLines={1}
-                style={{ ...styles.txtPrice, color: themecolor.TXTWHITE, maxWidth: "85%", }}>
-                {item.is_update > 0 ? item.qty : qt}
-                {" "}<AN name="down" /></Text>
+            {qt != '' ?
+              <TouchableOpacity activeOpacity={0.5}
+                style={{ ...styles.QtyView, borderColor: themecolor.TXTGREY, maxWidth: "32%", left: 5 }}
+                onPress={() => refRBSheet.current.open()}
+              >
+                <Text allowFontScaling={false}
+                  style={{ ...styles.txt1, color: themecolor.TXTWHITE }}>Qty:
+                </Text>
+                <Text
+                  allowFontScaling={false} numberOfLines={1}
+                  style={{ ...styles.txtPrice, color: themecolor.TXTWHITE, maxWidth: "85%", }}>
+                  {item.is_update > 0 ? item.qty : qt}
+                  {" "}<AN name="down" /></Text>
 
-            </TouchableOpacity>
-            :<></>}
+              </TouchableOpacity>
+              : <></>}
 
           </View>
 
@@ -187,7 +187,7 @@ function CartProductDataFlateList({ item, themecolor, refresh, setRefresh }) {
                 allowFontScaling={false}
                 style={{ ...styles.txtPrice, color: themecolor.TXTWHITE }}>
                 <FAIcon name="rupee" size={13} />
-                {" "}{item.subtotal}
+                {" "}{parseInt(item.subtotal)}
               </Text>
             </Text>
           </View>

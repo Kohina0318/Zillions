@@ -20,7 +20,7 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     alignItems: 'center',
     borderWidth: 0.5,
-    marginBottom: 1,
+    marginBottom: 2,
   },
   datalistView1: {
     width: width * 0.94,

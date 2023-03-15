@@ -81,7 +81,7 @@ function OrderDetailProductDataFlateList({ item, themecolor, refresh, setRefresh
                 style={{ ...styles.txt1, color: themecolor.TXTWHITE }}>Size :{" "}
                 <Text
                   allowFontScaling={false}
-                  style={{ ...styles.txt1, color: themecolor.TXTWHITE }}>
+                  style={{ ...styles.txtBold, color: themecolor.TXTWHITE }}>
                   {Size}
                 </Text>
               </Text>
@@ -98,7 +98,7 @@ function OrderDetailProductDataFlateList({ item, themecolor, refresh, setRefresh
                 allowFontScaling={false}
                 style={{ ...styles.txtBold, color: themecolor.TXTWHITE }}>
                 <FAIcon name="rupee" size={13} />
-                {" "}{item.subtotal}
+                {" "}{parseInt(item.subtotal)}
               </Text>
             </Text>
           </View>

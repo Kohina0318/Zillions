@@ -41,7 +41,7 @@ export default function OrderDetailsComp(props) {
           <Text style={{ ...styles.txt1, color: themecolor.TXTWHITE }}>Subtotal Amount</Text>
         </View>
         <View style={{ ...styles.orderDetialcompWidth1, }}>
-          <Text style={{ ...styles.txt1, color: themecolor.TXTWHITE }}>{CartDetailData.total}</Text>
+          <Text style={{ ...styles.txt1, color: themecolor.TXTWHITE }}><FAIcon name="rupee" size={13} /> {parseInt(CartDetailData.total)}</Text>
         </View>
       </View>
 
@@ -52,7 +52,7 @@ export default function OrderDetailsComp(props) {
           <Text style={{ ...styles.txt1, color: themecolor.TXTWHITE }}>Tax Amount</Text>
         </View>
         <View style={{ ...styles.orderDetialcompWidth1 }}>
-          <Text style={{ ...styles.txt1, color: themecolor.TXTWHITE }}>{CartDetailData.tax}</Text>
+          <Text style={{ ...styles.txt1, color: themecolor.TXTWHITE }}> <FAIcon name="rupee" size={13} /> {parseInt(CartDetailData.tax)}</Text>
         </View>
       </View>
 
@@ -68,8 +68,8 @@ export default function OrderDetailsComp(props) {
           <Text style={{ ...styles.txt1, color: themecolor.TXTGREYS }}>Delivery Fee</Text>
         </View>
         <View style={{ ...styles.orderDetialcompWidth1 }}>
-          {CartDetailData.ship != " ₹0" ?
-            <Text style={{ ...styles.txt1, color: themecolor.TXTGREYS }}><FAIcon name="rupee" size={12} />{CartDetailData.ship}</Text>
+          {CartDetailData.ship != "0" ?
+            <Text style={{ ...styles.txt1, color: themecolor.TXTGREYS }}><FAIcon name="rupee" size={12} /> {parseInt(CartDetailData.ship)}</Text>
             :
             <Text style={{ ...styles.txt1, color: themecolor.TEXTGREEN }}>FREE</Text>
           }
@@ -87,7 +87,7 @@ export default function OrderDetailsComp(props) {
           <Text style={{ ...styles.txt, color: themecolor.TXTWHITE }}>Amount Payable</Text>
         </View>
         <View style={{ ...styles.orderDetialcompWidth1, }}>
-          <Text style={{ ...styles.txt, color: themecolor.TXTWHITE }}>{CartDetailData.grand_total}</Text>
+          <Text style={{ ...styles.txt, color: themecolor.TXTWHITE }}> <FAIcon name="rupee" size={14} /> {parseInt(CartDetailData.grand_total)}</Text>
         </View>
       </View>
 
