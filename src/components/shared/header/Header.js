@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, {Component,useEffect} from 'react';
 import {
   Image,
   StatusBar,
@@ -14,6 +14,7 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import CIcon from 'react-native-vector-icons/MaterialIcons';
 import BadgeIcon from './BadgeIcon';
 import {styles} from '../../../assets/css/HeaderStyle';
+import { getCartData } from '../../../repository/CommonRepository';
 const {width, height} = Dimensions.get('screen');  
 
 export default function Header(props) {
@@ -23,7 +24,6 @@ export default function Header(props) {
 
   var cart=useSelector(state=>state.cart)
   var cartLen=Object.keys(cart).length
-
 
   return (
     <View

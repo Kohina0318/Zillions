@@ -46,6 +46,7 @@ import { postAddCartProduct } from '../../repository/OrderProcessRepository/AddT
 import { postAddOrRemoveWishlist } from '../../repository/WishListRepository/WishListRepo';
 import { useNavigation } from '@react-navigation/native';
 import { store } from '../../../App';
+import { StoreDatatoAsync } from '../../repository/AsyncStorageServices';
 
 const { width, height } = Dimensions.get('window');
 
@@ -253,6 +254,7 @@ export default function ProductDetail(props) {
       });
     }
   };
+
 
   const handleAddCartProduct = async () => {
     try {
