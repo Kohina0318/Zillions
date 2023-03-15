@@ -9,7 +9,7 @@ import {
 import {useSelector} from 'react-redux';
 import {MyThemeClass} from '../../components/Theme/ThemeDarkLightColor';
 import {useNavigation} from '@react-navigation/native';
-import {styles} from '../../assets/css/searchStyle';
+import {styles} from '../../assets/css/SearchCss/searchStyle';
 import SearchInput from './SearchBarComponent';
 import {useToast} from 'react-native-toast-notifications';
 import {FilterFlatList} from '../../components/shared/FlateLists/SearchFlatList/FilterFlatList';

@@ -9,7 +9,7 @@ import {
 } from 'react-native';
 import {useSelector} from 'react-redux';
 import {MyThemeClass} from '../../components/Theme/ThemeDarkLightColor';
-import {ProductStyle} from '../../assets/css/ProductStyle';
+import {ProductStyle} from '../../assets/css/CategoryCss/ProductStyle'
 import {ProductDataList} from '../../components/shared/FlateLists/CategoryFlatList/ProductDataList';
 import {ScrollView} from 'react-native-gesture-handler';
 import {getByProduct} from '../../repository/CategoryRepository/AllProductCategoryRep';

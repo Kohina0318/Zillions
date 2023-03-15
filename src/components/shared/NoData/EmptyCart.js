@@ -2,7 +2,7 @@ import React from 'react';
 import { View, Text,Dimensions,Image,TouchableOpacity } from 'react-native';
 import { useSelector } from 'react-redux';
 import { MyThemeClass } from '../../Theme/ThemeDarkLightColor';
-import { styles } from '../../../assets/css/OrderProcessStyle/CartStyle';
+import { styles } from '../../../assets/css/CartCss/CartStyle';
 import { useNavigation } from '@react-navigation/native';
 
 const { width, height } = Dimensions.get('screen');

@@ -8,7 +8,7 @@ import {
   Dimensions,
 } from 'react-native';
 import {Colors} from '../../../assets/config/Colors';
-import { ProductStyle } from '../../../../assets/css/ProductStyle';
+import { ProductStyle } from '../../../../assets/css/CategoryCss/ProductStyle';
 import {MyThemeClass} from '../../../Theme/ThemeDarkLightColor';
 import {useSelector} from 'react-redux';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';

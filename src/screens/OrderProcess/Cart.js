@@ -8,14 +8,14 @@ import {
 } from 'react-native';
 import { useSelector } from 'react-redux';
 import { MyThemeClass } from '../../components/Theme/ThemeDarkLightColor';
-import { styles } from '../../assets/css/OrderProcessStyle/CartStyle';
+import { styles } from '../../assets/css/CartCss/CartStyle';
 import LoadingFullScreen from '../../components/shared/Loader/LoadingFullScreen';
 import RegisterLoginHeader from '../../components/shared/header/RegisterLoginHeader';
 import { useToast } from 'react-native-toast-notifications';
 import { CartProductDataList } from '../../components/shared/FlateLists/OrderProcessFlateList/CartProductDataList';
 import HalfSizeButton from '../../components/shared/button/halfSizeButton';
 import FAIcon from 'react-native-vector-icons/FontAwesome';
-import OrderDetailsComp from '../../components/shared/OrderProcessComponents/OrderDetailsComp';
+import OrderDetailsComp from '../../components/shared/OrderProcessComponents/Cart/OrderDetailsComp';
 import { Stepper } from '../Stepper/Stepper';
 import { getCartOrderDetails, getCartProductList } from '../../repository/OrderProcessRepository/CartListRepo';
 import { useFocusEffect, useNavigation } from '@react-navigation/native';

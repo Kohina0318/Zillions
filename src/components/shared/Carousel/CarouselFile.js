@@ -1,6 +1,6 @@
 import React from 'react';
 import {View,Dimensions,Image} from 'react-native';
-import {styles} from '../../../assets/css/DashboardStyle';
+import {styles} from '../../../assets/css/DashBoardCss/DashboardStyle';
 import Carousel from 'react-native-banner-carousel';
 import {useSelector} from 'react-redux';
 import { MyThemeClass } from '../../Theme/ThemeDarkLightColor';

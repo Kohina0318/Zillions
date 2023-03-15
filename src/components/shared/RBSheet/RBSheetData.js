@@ -4,7 +4,7 @@ import { View, Text, TouchableOpacity, Dimensions } from 'react-native';
 import NumericInput from 'react-native-numeric-input';
 import EN from 'react-native-vector-icons/MaterialCommunityIcons';
 import { ProductDetailSizeFlatList } from '../FlateLists/CategoryFlatList/ProductDetailSizeFlatList';
-import { styles } from '../../../assets/css/ProductDetailStyle';
+import { styles } from '../../../assets/css/CategoryCss/ProductDetailStyle';
 import { useSelector } from 'react-redux';
 import { MyThemeClass } from '../../Theme/ThemeDarkLightColor';
 import FullsizeButton from '../../../screens/auth/FullsizeButton';

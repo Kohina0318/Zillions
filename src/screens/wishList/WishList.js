@@ -11,7 +11,7 @@ import {
 import { useSelector } from 'react-redux';
 import { MyThemeClass } from '../../components/Theme/ThemeDarkLightColor';
 import Header from '../../components/shared/header/Header';
-import { styles } from '../../assets/css/WishListStyle';
+import { styles } from '../../assets/css/WishListCss/WishListStyle';
 import { WishListDataList } from '../../components/shared/FlateLists/WishlistFlatList/WishListDataList';
 import { getWishlist } from '../../repository/WishListRepository/WishListRepo';
 import { useFocusEffect } from '@react-navigation/native';

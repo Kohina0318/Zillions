@@ -7,7 +7,7 @@ import {
   Image,
   Dimensions,
 } from 'react-native';
-import { styles } from '../../../../assets/css/ProductDetailStyle';
+import { styles } from '../../../../assets/css/CategoryCss/ProductDetailStyle';
 import { MyThemeClass } from '../../../Theme/ThemeDarkLightColor';
 import {useSelector} from 'react-redux';
 import { Avatar } from '@rneui/themed';

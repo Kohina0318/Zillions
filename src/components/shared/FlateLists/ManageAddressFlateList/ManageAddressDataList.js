@@ -8,7 +8,7 @@ import {
   Dimensions,
   Alert,
 } from 'react-native';
-import {styles} from '../../../../assets/css/AddressStyle';
+import {styles} from '../../../../assets/css/ProfileCss/AddressStyle';
 import {MyThemeClass} from '../../../Theme/ThemeDarkLightColor';
 import {useSelector} from 'react-redux';
 import {useNavigation} from '@react-navigation/native';
@@ -71,9 +71,12 @@ function DefaultAddressDataFlateList({item, themecolor}) {
             {item.country}
           </Text>
         </Text>
+        
+        <View  style={{...styles.mgT5}}/>
+
         <Text
           allowFontScaling={false}
-          style={{...styles.txt, color: themecolor.TXTWHITE}}>
+          style={{...styles.txtbold, color: themecolor.TXTWHITE}}>
           Mobile No :
           <Text
             allowFontScaling={false}
@@ -220,9 +223,12 @@ function OtherAddressDataFlateList({item, themecolor, refresh, setRefresh}) {
             {item.country}
           </Text>
         </Text>
+
+        <View  style={{...styles.mgT5}}/>
+
         <Text
           allowFontScaling={false}
-          style={{...styles.txt, color: themecolor.TXTWHITE}}>
+          style={{...styles.txtbold, color: themecolor.TXTWHITE}}>
           Mobile No :
           <Text
             allowFontScaling={false}
@@ -232,6 +238,8 @@ function OtherAddressDataFlateList({item, themecolor, refresh, setRefresh}) {
           </Text>
         </Text>
       </View>
+      
+      <View  style={{...styles.mgT5}}/>
 
       <View style={{...styles.DataButton}}>
         <View style={{width: '49%'}}>
@@ -241,8 +249,8 @@ function OtherAddressDataFlateList({item, themecolor, refresh, setRefresh}) {
             backgroundColor={'transparent'}
             color={themecolor.BACKICON}
             borderColor={themecolor.BACKICON}
-            fontSize={12}
-            height={width * 0.08}
+            fontSize={13}
+            height={width * 0.09}
             onPress={() => handleSetDefaultAddress(item.id)}
           />
         </View>
@@ -253,8 +261,8 @@ function OtherAddressDataFlateList({item, themecolor, refresh, setRefresh}) {
             backgroundColor={'transparent'}
             color={themecolor.TEXTRED}
             borderColor={themecolor.TEXTRED}
-            fontSize={12}
-            height={width * 0.08}
+            fontSize={13}
+            height={width * 0.09}
             onPress={() => confirmDeleteAddres(item.id)}
           />
         </View>

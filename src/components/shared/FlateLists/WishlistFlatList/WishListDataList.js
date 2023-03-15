@@ -8,7 +8,7 @@ import {
   Dimensions,
 } from 'react-native';
 import { Colors } from '../../../../assets/config/Colors';
-import { styles } from '../../../../assets/css/WishListStyle';
+import { styles } from '../../../../assets/css/WishListCss/WishListStyle';
 import { MyThemeClass } from '../../../Theme/ThemeDarkLightColor';
 import { useSelector } from 'react-redux';
 import Feather from 'react-native-vector-icons/Feather';

@@ -13,7 +13,7 @@ import {useSelector} from 'react-redux';
 import Icon from 'react-native-vector-icons/Ionicons';
 import CIcon from 'react-native-vector-icons/MaterialIcons';
 import BadgeIcon from './BadgeIcon';
-import {styles} from '../../../assets/css/HeaderStyle';
+import {styles} from '../../../assets/css/HeaderCss/HeaderStyle'
 import { getCartData } from '../../../repository/CommonRepository';
 const {width, height} = Dimensions.get('screen');  
 

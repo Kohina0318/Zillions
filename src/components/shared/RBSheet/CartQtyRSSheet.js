@@ -3,7 +3,7 @@ import RBSheet from 'react-native-raw-bottom-sheet';
 import { View, Text, TouchableOpacity, Dimensions } from 'react-native';
 import NumericInput from 'react-native-numeric-input';
 import EN from 'react-native-vector-icons/MaterialCommunityIcons';
-import { styles } from '../../../assets/css/ProductDetailStyle';
+import { styles } from '../../../assets/css/CategoryCss/ProductDetailStyle';
 import { useSelector } from 'react-redux';
 import { MyThemeClass } from '../../Theme/ThemeDarkLightColor';
 import HalfSizeButton from '../button/halfSizeButton';

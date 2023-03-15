@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import {View, Text, Modal, Dimensions, TextInput} from 'react-native';
 import {MyThemeClass} from '../../Theme/ThemeDarkLightColor';
 import {useSelector} from 'react-redux';
-import {styles} from '../../../assets/css/AddressStyle';
+import {styles} from '../../../assets/css/ProfileCss/AddressStyle';
 import HalfSizeButton from '../button/halfSizeButton';
 import Feather from 'react-native-vector-icons/Feather';
 

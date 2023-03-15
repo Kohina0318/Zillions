@@ -1,7 +1,7 @@
 import { StyleSheet, Dimensions } from 'react-native';
-import { FontFamily } from '../../assets/fonts/FontFamily';
-import { FontSize } from '../../assets/fonts/Fonts';
-import { Colors } from '../../assets/config/Colors';
+import { FontFamily } from '../../fonts/FontFamily';
+import { FontSize } from '../../fonts/Fonts';
+import { Colors } from '../../config/Colors';
 const { width, height } = Dimensions.get('screen');
 
 export default StyleSheet.create({

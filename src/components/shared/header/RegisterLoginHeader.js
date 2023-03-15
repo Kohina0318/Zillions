@@ -11,7 +11,7 @@ import { useSelector } from 'react-redux';
 import { MyThemeClass } from '../../Theme/ThemeDarkLightColor';
 import { useNavigation } from '@react-navigation/native';
 import CIcon from 'react-native-vector-icons/MaterialIcons';
-import {styles} from '../../../assets/css/HeaderStyle';
+import {styles} from '../../../assets/css/HeaderCss/HeaderStyle';
 const { width, height } = Dimensions.get('screen');
 
 export default function RegisterLoginHeader(props) {

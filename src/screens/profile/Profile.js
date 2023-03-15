@@ -15,7 +15,7 @@ import { ProfileDataList } from '../../components/shared/FlateLists/Profile/Prof
 import Header from '../../components/shared/header/Header';
 import { data, data1 } from './ProfileData';
 import { Avatar } from '@rneui/themed';
-import { ProfileStyle } from '../../assets/css/ProfileStyle';
+import { ProfileStyle } from '../../assets/css/ProfileCss/ProfileStyle';
 import { useFocusEffect, useNavigation } from '@react-navigation/native';
 import LoadingFullScreen from '../../components/shared/Loader/LoadingFullScreen';
 import { getProfileInfo } from '../../repository/ProfileRepository/ProfileRepo';

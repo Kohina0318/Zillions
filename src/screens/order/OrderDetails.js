@@ -11,7 +11,7 @@ import {
 } from 'react-native';
 import { useSelector } from 'react-redux';
 import { MyThemeClass } from '../../components/Theme/ThemeDarkLightColor';
-import { styles } from '../../assets/css/OrderStyle';
+import { styles } from '../../assets/css/OrderCss/OrderStyle';
 import { getOrderView } from '../../repository/OrderRepository/OrderRepo';
 import { useToast } from 'react-native-toast-notifications';
 import RegisterLoginHeader from '../../components/shared/header/RegisterLoginHeader';
@@ -20,8 +20,9 @@ import FAIcon from 'react-native-vector-icons/FontAwesome';
 import { OrderDetailProductDataList } from '../../components/shared/FlateLists/OrderFlateList/OrderDetailProductDataList';
 import HalfSizeButton from '../../components/shared/button/halfSizeButton';
 import { useNavigation } from '@react-navigation/native';
-import OrderDetailsComp from '../../components/shared/OrderProcessComponents/OrderDetailsComp';
-import moment from 'moment';
+import OrderHistoryDetailComp from '../../components/shared/OrderProcessComponents/OrderHistory/OrderHistoryDetailComp';
+import OrderHistoryTotalAmountComp from '../../components/shared/OrderProcessComponents/OrderHistory/OrderHistoryTotalAmountComp';
+import OrderHistoryAddressComp from '../../components/shared/OrderProcessComponents/OrderHistory/OrderHistoryAddressComp';
 
 
 const { width, height } = Dimensions.get('screen');
@@ -54,18 +55,11 @@ export default function OrderDetails(props) {
   const [productDetailData, setProductDetailData] = useState([])
   const [shippingAddress, setShippingAddress] = useState({})
 
-  var dateSet = ''
-
-  if (Object.values(data).length > 0) {
-    if (data.sale_datetime != undefined || data.sale_datetime != null) {
-      dateSet = moment(data.sale_datetime * 1000).format('ll')
-    }
-  }
-
 
   const handleOrderView = async () => {
     try {
       var res = await getOrderView(props.route.params.SaleId);
+      console.log("handleOrderView.....", res.data)
       if (res.status === true) {
         setData(res.data);
         setProductDetailData(Object.values(JSON.parse(res.data.product_details)))
@@ -119,124 +113,25 @@ export default function OrderDetails(props) {
 
             <View style={{ ...styles.marTop }} />
 
-            <View
-              style={{
-                ...styles.datalistView,
-                backgroundColor: themecolor.BOXBORDERCOLOR,
-                borderColor: themecolor.BOXBORDERCOLOR1,
-              }}
-            >
-              <View style={{ ...styles.flexDirView2, }}>
-                <View style={{ ...styles.width65p }}>
-                  <Text allowFontScaling={false} style={{ ...styles.txtBig, color: themecolor.TXTWHITE }}>
-                    Total Amount : <FAIcon name="rupee" size={15} />{data.grand_total}
-                  </Text>
-                </View>
+            <OrderHistoryTotalAmountComp data={data} />
 
-                <View style={{ ...styles.width35p, }}>
-                  <Text allowFontScaling={false} style={{ ...styles.txt, color: themecolor.TXTGREYS }}>
-                    {dateSet != ''? dateSet : ''}
-                  </Text>
-                </View>
-              </View>
+            {productDetailData.length > 0 ?
+              <>
+                <View style={{ ...styles.mgT10 }} />
 
-              <View style={{ ...styles.flexDirView1, padding: 3 }}>
-                <Text allowFontScaling={false} style={{ ...styles.txt1, color: themecolor.TXTWHITE }}>
-                  Paid by {data.payment_type == "cash_on_delivery" ? "Cash on delivery" : shippingAddress.payment_type}
-                </Text>
-              </View>
-
-              <View style={{ ...styles.mgT10 }} />
-
-              <View style={{ ...styles.mgT10 }} />
-
-              <View style={{ ...styles.borderLine, borderColor: themecolor.BOXBORDERCOLOR1, }} />
-
-              <View style={{ ...styles.mgT10 }} />
-
-              <View style={{ ...styles.flexDirView1, }}>
-                <TouchableOpacity activeOpacity={0.5} style={{ ...styles.width65p, }}>
-                  <Text allowFontScaling={false} style={{ ...styles.txt, color: themecolor.BACKICON }}>
-                    Delivery Address
-                  </Text>
-                </TouchableOpacity>
-
-                <TouchableOpacity activeOpacity={0.5} style={{ ...styles.width35p, }}>
-                  <Text allowFontScaling={false} style={{ ...styles.txt, color: themecolor.BACKICON }}>
-                    Order Details
-                  </Text>
-                </TouchableOpacity>
-
-              </View>
-
-
-            </View>
+                <OrderDetailProductDataList data={productDetailData} />
+              </>
+              : <></>}
 
             <View style={{ ...styles.mgT10 }} />
 
-            <OrderDetailProductDataList data={productDetailData} />
+            <OrderHistoryDetailComp detailData={data} />
 
             <View style={{ ...styles.mgT10 }} />
 
-            <OrderDetailsComp detailData={data} />
+            <OrderHistoryAddressComp data={shippingAddress} />
 
-            <View style={{ ...styles.mgT10 }} />
-
-            <View
-              style={{
-                ...styles.datalistView1,
-                backgroundColor: themecolor.BOXBORDERCOLOR,
-                borderColor: themecolor.BOXBORDERCOLOR1,
-              }}>
-
-              <View style={{ ...styles.innerView }}>
-                <Text
-                  allowFontScaling={false}
-                  style={{ ...styles.txtBig, color: themecolor.TXTWHITE }}>
-                  Deliver to
-                </Text>
-              </View>
-
-              <View style={{ ...styles.marTop }} />
-
-              <View style={{ ...styles.innerView }}>
-                <Text
-                  allowFontScaling={false}
-                  style={{ ...styles.txt, color: themecolor.TXTGREYS }}>
-                  {shippingAddress.firstname} {shippingAddress.lastname}
-                </Text>
-              </View>
-
-              <View style={{ ...styles.innerView }}>
-                <Text
-                  allowFontScaling={false}
-                  style={{ ...styles.txt1, color: themecolor.TXTWHITE }}>
-                  {shippingAddress.address}, {shippingAddress.city} , {shippingAddress.state} , {shippingAddress.postal_code}
-                </Text>
-
-              </View>
-
-              <View style={{ ...styles.marTop }} />
-
-              <View style={{ ...styles.innerView }}>
-                <Text
-                  allowFontScaling={false}
-                  style={{ ...styles.txt1, color: themecolor.TXTWHITE }}>
-                  Mobile No :
-                  <Text
-                    allowFontScaling={false}
-                    style={{ ...styles.txt1, color: themecolor.TXTWHITE }}>
-                    {' '}
-                    +91-{shippingAddress.phone}
-                  </Text>
-                </Text>
-              </View>
-              
-              <View style={{ ...styles.marTop }} />
-              
-            </View>
-
-
+            <View style={{ ...styles.marTop }} />
 
           </ScrollView>
 

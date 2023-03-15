@@ -3,7 +3,7 @@ import { Text, View,TouchableOpacity,Dimensions } from 'react-native'
 import StepIndicator from 'react-native-step-indicator';
 import { FontFamily } from '../../assets/fonts/FontFamily';
 import { Colors } from '../../assets/config/Colors';
-import StepperStyle from '../../assets/css/StepperStyle';
+import StepperStyle from '../../assets/css/SearchCss/StepperStyle';
 
 const { width, height } = Dimensions.get('screen');
 

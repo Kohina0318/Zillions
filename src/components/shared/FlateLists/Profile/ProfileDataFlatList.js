@@ -9,7 +9,7 @@ import {
   Linking,
 } from 'react-native';
 import {Colors} from '../../../../assets/config/Colors';
-import {ProfileStyle} from '../../../../assets/css/ProfileStyle';
+import {ProfileStyle} from '../../../../assets/css/ProfileCss/ProfileStyle';
 import {MyThemeClass} from '../../../Theme/ThemeDarkLightColor';
 import {useSelector} from 'react-redux';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';

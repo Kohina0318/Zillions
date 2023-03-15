@@ -8,7 +8,6 @@ import {
   Dimensions,
 } from 'react-native';
 import {Colors} from '../../../../assets/config/Colors';
-import {styles} from '../../../../../assets/css/DashboardStyle';
 import {MyThemeClass} from '../../../Theme/ThemeDarkLightColor';
 import {useSelector} from 'react-redux';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';

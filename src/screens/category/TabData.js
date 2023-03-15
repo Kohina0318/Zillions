@@ -7,7 +7,7 @@ import { Dimensions, Text, View, TouchableOpacity } from 'react-native';
 import { useWindowDimensions } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
 import { CustomerReviewFlatList } from '../../components/shared/FlateLists/CategoryFlatList/CustomerReviewFlatList';
-import { styles } from '../../assets/css/ProductDetailStyle';
+import { styles } from '../../assets/css/CategoryCss/ProductDetailStyle';
 import StarRating from 'react-native-star-rating';
 import RatingModel from '../../components/shared/Model/RatingModel';
 import SegmentedControlTab from 'react-native-segmented-control-tab';

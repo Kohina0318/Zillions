@@ -8,7 +8,7 @@ import {
 } from 'react-native';
 import { useSelector } from 'react-redux';
 import { MyThemeClass } from '../../Theme/ThemeDarkLightColor';
-import { styles } from '../../../assets/css/OrderProcessStyle/CartStyle';
+import { styles } from '../../../assets/css/CartCss/CartStyle';
 import HalfSizeButton from './halfSizeButton';
 
 const { width, height } = Dimensions.get('screen');

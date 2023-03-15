@@ -10,7 +10,7 @@ import {
 } from 'react-native';
 import {useSelector} from 'react-redux';
 import {MyThemeClass} from '../../components/Theme/ThemeDarkLightColor';
-import {CategoryStyle} from '../../assets/css/CategoryStyle';
+import {CategoryStyle} from '../../assets/css/CategoryCss/CategoryStyle'
 import {getSubCategories} from '../../repository/CategoryRepository/AllProductCategoryRep';
 import {useToast} from 'react-native-toast-notifications';
 import Header from '../../components/shared/header/Header';

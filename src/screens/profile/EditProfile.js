@@ -11,7 +11,7 @@ import {useSelector} from 'react-redux';
 import {MyThemeClass} from '../../components/Theme/ThemeDarkLightColor';
 import {useToast} from 'react-native-toast-notifications';
 import Header from '../../components/shared/header/Header';
-import {ProfileStyle} from '../../assets/css/ProfileStyle';
+import {ProfileStyle} from '../../assets/css/ProfileCss/ProfileStyle';
 import RegisterLoginHeader from '../../components/shared/header/RegisterLoginHeader';
 import LoadingFullScreen from '../../components/shared/Loader/LoadingFullScreen';
 import HalfSizeButton from '../../components/shared/button/halfSizeButton';
