@@ -4,7 +4,7 @@ import {
   Text,
   Dimensions,
   BackHandler, ScrollView,
-  TouchableOpacity, Image
+  TouchableOpacity, Alert
 } from 'react-native';
 import { useSelector } from 'react-redux';
 import { MyThemeClass } from '../../components/Theme/ThemeDarkLightColor';
@@ -23,6 +23,7 @@ import EmptyCart from '../../components/shared/NoData/EmptyCart';
 import { getRemoveAllProducts } from '../../repository/OrderProcessRepository/RemoveProductRepo';
 import CartViewDetailsButton from '../../components/shared/button/CartViewDetailsButton';
 import { store } from '../../../App';
+import { getUserData } from '../../repository/CommonRepository';
 
 const { width, height } = Dimensions.get('screen');
 
@@ -145,6 +146,27 @@ export default function Cart(props) {
     }
   }
 
+  const handleContinue=async()=>{
+    var userData = await getUserData();
+    if(userData==null){
+      Alert.alert(
+        'Login to continue',
+        'Do you want to Login?',
+        [
+          {
+            text: 'No',
+            onPress: () => console.log('Cancel Pressed'),
+            style: 'cancel',
+          },
+          {text: 'Yes', onPress: () => navigation.navigate('Login')},
+        ],
+      );
+    }
+    else{
+      props.navigation.navigate('CartAddress')
+    }
+  }
+
 
   return (
     <View style={{ ...styles.bg, backgroundColor: themecolor.THEMECOLOR }}>
@@ -182,7 +204,7 @@ export default function Cart(props) {
             </ScrollView>
             <View style={{ marginVertical: 31 }} />
 
-            <CartViewDetailsButton amount={detailData.grand_total} buttonTitle={"Continue"} buttonOnPress={()=>props.navigation.navigate('CartAddress')} />
+            <CartViewDetailsButton amount={detailData.grand_total} buttonTitle={"Continue"} buttonOnPress={()=>handleContinue()} />
           </>
           :
           <View style={{ ...styles.container, marginTop: 120, }}>

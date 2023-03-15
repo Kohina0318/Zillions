@@ -139,6 +139,19 @@ const styles = StyleSheet.create({
     margin: 5,
     width: width * 0.44,
   },
+  noDataView: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    flex: 1,
+  },
+  noDataText: {
+    fontSize: FontSize.labelText3,
+    color: 'grey',
+  },
+  noDataText1: {
+    fontSize: FontSize.labelText3,
+    fontWeight: 'bold',
+  },
 });
 
 export {styles};

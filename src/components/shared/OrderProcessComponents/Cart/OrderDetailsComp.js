@@ -28,6 +28,7 @@ export default function OrderDetailsComp(props) {
         ...styles.datalistView1,
         backgroundColor: themecolor.BOXBORDERCOLOR,
         borderColor: themecolor.BOXBORDERCOLOR1,
+        
       }}
     >
       <View style={{ ...styles.innerView }}>

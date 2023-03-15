@@ -178,7 +178,7 @@ export default function CartAddress(props) {
                   <Text
                     allowFontScaling={false}
                     style={{ ...styles.txt2, color: themecolor.TXTWHITE }}>
-                    {address}, {city} , {state} , {postalCode}
+                    {address!=null?<>{address} ,</>:<></>} {city!=null?<>{city} ,</>:<></>} {state!=null?<>{state} ,</>:<></>} {postalCode}
                   </Text>
                   <Text
                     allowFontScaling={false}
