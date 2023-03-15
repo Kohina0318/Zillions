@@ -1,7 +1,6 @@
 import { SERVER_URL } from "../SERVER_URL";
 
 const getSearchProducts = async (body) => {
-  console.log(body)
   try {
     const response = await fetch(
       `${await SERVER_URL()}/search-products/click/0`,

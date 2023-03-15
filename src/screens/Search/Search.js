@@ -5,6 +5,7 @@ import {
   BackHandler,
   TouchableOpacity,
   Dimensions,
+  Image
 } from 'react-native';
 import {useSelector} from 'react-redux';
 import {MyThemeClass} from '../../components/Theme/ThemeDarkLightColor';
@@ -134,7 +135,6 @@ export default function Search(props) {
   const handleCategories = async () => {
     try {
       var res = await getCategories();
-      console.log(res.data)
       setDataList(res.data);
     } catch (e) {
       console.log('errrror in..handleCategories page-->', e);
@@ -225,7 +225,21 @@ export default function Search(props) {
         <LoadingFullScreen style={{flex: 1}} />
       ) : 
       dataShown? (
+        productData==''?
         <>
+  <View style={{...styles.noDataView}}>
+  <Image
+                source={require('../../assets/images/search.png')}
+                resizeMode="contain"
+                style={{ width: "100%", height: 200 }}
+            />
+    <Text allowFontScaling={false} style={{...styles.noDataText1,color:themecolor.TXTWHITE}}>Oops! No matching products found.. </Text>
+    <Text allowFontScaling={false} style={{...styles.noDataText}}>Try another Search Term</Text>
+  </View>
+</>
+   
+:
+<>
         <View style={{marginLeft: 10, flexDirection: 'row'}}>
           <SortSlider onClear={()=>handleOnClear()} onChange={value => handleData(value)} />
           {/* <FilterFlatList touch={false} onChange={(value)=>handleData(value)} data={data} index={index}/> */}
@@ -235,9 +249,11 @@ export default function Search(props) {
   <ProductDataList data={productData}/>
 </View>
 <View style={{ marginVertical: 31 }} />
-</>)
+</>
+)
 :
-<></>
+<>
+</>
 }
       </View>
       {loader ? (

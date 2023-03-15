@@ -27,8 +27,8 @@ function BadgeIcon(props) {
           <Icon name={props.icon} size={22} color={themecolor.TXTWHITE} />
         ) : null}
         {props.count && props.count > 0 ? (
-          <View style={{...styles.badge,backgroundColor:themecolor.TXTBLACK}}>
-            <Text allowFontScaling={false} style={{...styles.badgeText,color:themecolor.TXTBLACK=='#252525'?Color.white:Color.black,}}>{props.count}</Text>
+          <View style={{...styles.badge,backgroundColor:themecolor.BACKICON}}>
+            <Text allowFontScaling={false} style={{...styles.badgeText,color:themecolor.TXTWHITE1}}>{props.count}</Text>
           </View>
         ) : null}
       </View>
@@ -44,7 +44,7 @@ const styles = StyleSheet.create({
   badge: {
     position: 'absolute',
     top: -10,
-    right: 3,
+    right: 2,
     alignItems: 'center',
     // backgroundColor: 'white',
     borderRadius: 20,
@@ -56,7 +56,7 @@ const styles = StyleSheet.create({
     // color: Color.black,
   },
   badgeText: {
-    fontSize: 9,
+    fontSize: 10,
   },
 });
 
