@@ -108,11 +108,14 @@ export default function Order(props) {
           <View style={{...styles.marTop}} />
 
           {data.length > 0 ? (
+            <>
             <OrderDataList data={data} />
+          <View style={{...styles.mgT10}} />
+            </>
           ) : (
             <NoDataMsg title="No Order Found! " />
           )}
-          <View style={{marginVertical: 10}} />
+          <View style={{marginVertical: 42}} />
         </View>
       )}
     </View>

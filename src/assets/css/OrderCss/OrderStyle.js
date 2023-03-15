@@ -60,7 +60,7 @@ const styles = StyleSheet.create({
   container: {
     justifyContent: 'center',
     alignSelf: 'center',
-    marginTop: 10,
+    marginTop: 5,
   },
   innerImage: {
     justifyContent: 'center',
