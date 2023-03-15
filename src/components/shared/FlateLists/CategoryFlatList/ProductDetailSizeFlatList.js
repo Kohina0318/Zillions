@@ -3,7 +3,7 @@ import { TouchableOpacity, View, FlatList, Text, Dimensions } from 'react-native
 import { MyThemeClass } from '../../../Theme/ThemeDarkLightColor';
 import { useSelector } from 'react-redux';
 import { useNavigation } from '@react-navigation/native';
-import { styles } from '../../../../assets/css/ProductDetailStyle';
+import { styles } from '../../../../assets/css/CategoryCss/ProductDetailStyle';
 
 const { width, height } = Dimensions.get('screen');
 

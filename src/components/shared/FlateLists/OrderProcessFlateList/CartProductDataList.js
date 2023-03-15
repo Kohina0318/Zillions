@@ -7,7 +7,7 @@ import {
   Image,
   Dimensions,
 } from 'react-native';
-import { styles } from '../../../../assets/css/OrderProcessStyle/CartStyle';
+import { styles } from '../../../../assets/css/CartCss/CartStyle';
 import { MyThemeClass } from '../../../Theme/ThemeDarkLightColor';
 import { useSelector } from 'react-redux';
 import { useNavigation } from '@react-navigation/native';

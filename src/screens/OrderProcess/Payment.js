@@ -10,7 +10,7 @@ import {
 } from 'react-native';
 import {useSelector} from 'react-redux';
 import {MyThemeClass} from '../../components/Theme/ThemeDarkLightColor';
-import {styles} from '../../assets/css/OrderProcessStyle/PaymentStyle';
+import {styles} from '../../assets/css/CartCss/PaymentStyle';
 import LoadingFullScreen from '../../components/shared/Loader/LoadingFullScreen';
 import RegisterLoginHeader from '../../components/shared/header/RegisterLoginHeader';
 import {useToast} from 'react-native-toast-notifications';
@@ -18,7 +18,7 @@ import HalfSizeButton from '../../components/shared/button/halfSizeButton';
 import FAIcon from 'react-native-vector-icons/FontAwesome';
 import {Stepper} from '../Stepper/Stepper';
 import {CheckBox} from '@rneui/themed';
-import OrderDetailsComp from '../../components/shared/OrderProcessComponents/OrderDetailsComp';
+import OrderDetailsComp from '../../components/shared/OrderProcessComponents/Cart/OrderDetailsComp';
 import { getCartOrderDetails } from '../../repository/OrderProcessRepository/CartListRepo';
 import CartViewDetailsButton from '../../components/shared/button/CartViewDetailsButton';
 import { getUserData } from '../../repository/CommonRepository';

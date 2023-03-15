@@ -16,7 +16,7 @@ import { MyThemeClass } from '../../components/Theme/ThemeDarkLightColor';
 // import {ScrollView} from 'react-native-gesture-handler';
 import { useToast } from 'react-native-toast-notifications';
 import Header from '../../components/shared/header/Header';
-import { styles } from '../../assets/css/ProductDetailStyle';
+import { styles } from '../../assets/css/CategoryCss/ProductDetailStyle';
 import Carousel from 'react-native-banner-carousel';
 import { Colors } from '../../assets/config/Colors';
 import StarRating from 'react-native-star-rating';

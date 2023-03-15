@@ -14,7 +14,7 @@ import {MyThemeClass} from '../../components/Theme/ThemeDarkLightColor';
 import {useToast} from 'react-native-toast-notifications';
 import Header from '../../components/shared/header/Header';
 import LoadingFullScreen from '../../components/shared/Loader/LoadingFullScreen';
-import {styles} from '../../assets/css/AddressStyle';
+import {styles} from '../../assets/css/ProfileCss/AddressStyle';
 import {
   getManageAddress,
   postAddAddress,

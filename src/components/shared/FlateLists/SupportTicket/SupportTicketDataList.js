@@ -7,7 +7,7 @@ import {
   Image,
   Dimensions,
 } from 'react-native';
-import {styles} from '../../../../assets/css/SupportTicketStyle';
+import {styles} from '../../../../assets/css/ProfileCss/SupportTicketStyle';
 import {MyThemeClass} from '../../../Theme/ThemeDarkLightColor';
 import {useSelector} from 'react-redux';
 import {useNavigation} from '@react-navigation/native';
@@ -31,7 +31,7 @@ function SupportTicketDataFlateList({item, themecolor}) {
         borderColor: themecolor.BOXBORDERCOLOR1,
       }}>
       <View style={{...styles.innerView}}>
-        <Text allowFontScaling={false} style={{...styles.txt, color: themecolor.BACKICON}}>
+        <Text allowFontScaling={false} style={{...styles.txtbold, color: themecolor.BACKICON}}>
           Ticket No : {item.ticket_id}
         </Text>
         {item.view_status == 'ok' ? (
@@ -58,7 +58,7 @@ function SupportTicketDataFlateList({item, themecolor}) {
 
       <View style={{...styles.dateTimeView}}>
         <View style={{}}>
-          <Text allowFontScaling={false} style={{...styles.txt1, color: themecolor.TXTWHITE}}>
+          <Text allowFontScaling={false} style={{...styles.txtbold, color: themecolor.TXTWHITE}}>
             Date :
             <Text allowFontScaling={false} style={{...styles.txt1, color: themecolor.TXTWHITE}}>
               {' '}
@@ -68,7 +68,7 @@ function SupportTicketDataFlateList({item, themecolor}) {
         </View>
 
         <View style={{}}>
-          <Text allowFontScaling={false} style={{...styles.txt1, color: themecolor.TXTWHITE}}>
+          <Text allowFontScaling={false} style={{...styles.txtbold, color: themecolor.TXTWHITE}}>
             Time :
             <Text allowFontScaling={false} style={{...styles.txt1, color: themecolor.TXTWHITE}}>
               {' '}

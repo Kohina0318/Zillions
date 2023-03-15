@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import {View,TextInput,TouchableOpacity, ActivityIndicator }from 'react-native';
-import { styles } from '../../assets/css/searchStyle';
+import { styles } from '../../assets/css/SearchCss/searchStyle';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { useSelector } from 'react-redux';
 import { MyThemeClass } from '../../components/Theme/ThemeDarkLightColor';

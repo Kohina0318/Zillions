@@ -32,7 +32,7 @@ export default halfSizeButton = props => {
     },
     textButton: {
       fontFamily: FontFamily.PopinsMedium,
-      fontSize: props.fontSize ?props.fontSize : FontSize.labelText3,
+      fontSize: props.fontSize ?props.fontSize : FontSize.labelText4,
       fontWeight: 'bold',
     },
   });

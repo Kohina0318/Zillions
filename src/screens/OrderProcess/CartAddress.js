@@ -9,7 +9,7 @@ import {
 } from 'react-native';
 import { useSelector } from 'react-redux';
 import { MyThemeClass } from '../../components/Theme/ThemeDarkLightColor';
-import { styles } from '../../assets/css/OrderProcessStyle/CartAddressStyle';
+import { styles } from '../../assets/css/CartCss/CartAddressStyle';
 import LoadingFullScreen from '../../components/shared/Loader/LoadingFullScreen';
 import RegisterLoginHeader from '../../components/shared/header/RegisterLoginHeader';
 import { useToast } from 'react-native-toast-notifications';
@@ -20,7 +20,7 @@ import { getManageAddressPost } from '../../repository/AddressRepository/MangeAd
 import { getUserData } from '../../repository/CommonRepository';
 import { getCartOrderDetails } from '../../repository/OrderProcessRepository/CartListRepo';
 import CartViewDetailsButton from '../../components/shared/button/CartViewDetailsButton';
-import OrderDetailsComp from '../../components/shared/OrderProcessComponents/OrderDetailsComp';
+import OrderDetailsComp from '../../components/shared/OrderProcessComponents/Cart/OrderDetailsComp';
 import { useFocusEffect } from '@react-navigation/native';
 
 const { width, height } = Dimensions.get('screen');

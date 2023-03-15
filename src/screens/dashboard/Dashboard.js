@@ -12,7 +12,7 @@ import {
 import {useSelector} from 'react-redux';
 import {MyThemeClass} from '../../components/Theme/ThemeDarkLightColor';
 import Header from '../../components/shared/header/Header';
-import {styles} from '../../assets/css/DashboardStyle';
+import {styles} from '../../assets/css/DashBoardCss/DashboardStyle';
 import {
   getBrands,
   getMainSlider,

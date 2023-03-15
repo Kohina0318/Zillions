@@ -12,7 +12,7 @@ import {useSelector} from 'react-redux';
 import {MyThemeClass} from '../../components/Theme/ThemeDarkLightColor';
 import {useNavigation} from '@react-navigation/native';
 import Header from '../../components/shared/header/Header';
-import {styles} from '../../assets/css/OrderStyle';
+import {styles} from '../../assets/css/OrderCss/OrderStyle';
 import {OrderDataList} from '../../components/shared/FlateLists/OrderFlateList/OrderDataList';
 import Search from '../../components/shared/search/Search';
 import {getOrderlist} from '../../repository/OrderRepository/OrderRepo';
@@ -50,6 +50,7 @@ export default function Order(props) {
   const handleOrderlist = async () => {
     try {
       var res = await getOrderlist();
+      console.log("handleOrderlist....>>",res.data)
       if (res.status === true) {
         setData(res.data);
         setDataFilter(res.data);

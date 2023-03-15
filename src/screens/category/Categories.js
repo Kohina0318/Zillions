@@ -10,7 +10,7 @@ import {
 import {useSelector} from 'react-redux';
 import {MyThemeClass} from '../../components/Theme/ThemeDarkLightColor';
 import {CategoryDataList} from '../../components/shared/FlateLists/CategoryFlatList/CategoryDataList';
-import {CategoryStyle} from '../../assets/css/CategoryStyle';
+import {CategoryStyle} from '../../assets/css/CategoryCss/CategoryStyle'
 import {getCategories} from '../../repository/CategoryRepository/AllProductCategoryRep';
 import {useFocusEffect,} from '@react-navigation/native';
 import {useToast} from 'react-native-toast-notifications';

@@ -8,7 +8,7 @@ import {
   ScrollView,
 } from 'react-native';
 import {useSelector} from 'react-redux';
-import {styles} from '../../assets/css/searchStyle';
+import {styles} from '../../assets/css/SearchCss/searchStyle';
 import {MyThemeClass} from '../../components/Theme/ThemeDarkLightColor';
 import FA from 'react-native-vector-icons/FontAwesome';
 

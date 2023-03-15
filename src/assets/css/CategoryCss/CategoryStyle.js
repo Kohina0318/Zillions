@@ -1,7 +1,7 @@
 import {StyleSheet, Dimensions} from 'react-native';
-import {FontSize} from '../fonts/Fonts';
-import {Colors} from '../config/Colors';
-import {FontFamily} from '../fonts/FontFamily';
+import { fontSize } from '../../fonts/FontSize';
+import { Colors } from '../../config/Colors';
+import { FontFamily } from '../../fonts/FontFamily';
 const {width, height} = Dimensions.get('window');
 
 const CategoryStyle = StyleSheet.create({

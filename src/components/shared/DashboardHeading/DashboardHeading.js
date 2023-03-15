@@ -5,7 +5,7 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import { useSelector } from 'react-redux';
-import { styles } from '../../../assets/css/DashboardStyle';
+import { styles } from '../../../assets/css/DashBoardCss/DashboardStyle';
 import { MyThemeClass } from '../../Theme/ThemeDarkLightColor';
 
 export default function DashboardHeading(props){

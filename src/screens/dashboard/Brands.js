@@ -13,7 +13,7 @@ import {MyThemeClass} from '../../components/Theme/ThemeDarkLightColor';
 import {useToast} from 'react-native-toast-notifications';
 import Header from '../../components/shared/header/Header';
 import {getBrands} from '../../repository/DashboardRepository/AllDashboardRep';
-import {styles} from '../../assets/css/BrandsStyle';
+import {styles} from '../../assets/css/BrandCss/BrandsStyle';
 import {useFocusEffect} from '@react-navigation/native';
 import LoadingFullScreen from '../../components/shared/Loader/LoadingFullScreen';
 import {BrandDataList} from '../../components/shared/FlateLists/DashboardFlatList/BrandFlatList';

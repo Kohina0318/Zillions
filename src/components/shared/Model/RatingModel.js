@@ -3,7 +3,7 @@ import {Modal, View, Text, TouchableOpacity, Image,Dimensions} from 'react-nativ
 import {useNavigation} from '@react-navigation/native';
 import {MyThemeClass} from '../../Theme/ThemeDarkLightColor';
 import {useSelector} from 'react-redux';
-import {styles} from '../../../assets/css/RatingModelStyle';
+import {styles} from '../../../assets/css/ModelsCss/RatingModelStyle';
 import StarRating from 'react-native-star-rating';
 
 const {width, height} = Dimensions.get('screen');

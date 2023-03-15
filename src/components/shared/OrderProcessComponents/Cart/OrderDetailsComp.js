@@ -9,8 +9,8 @@ import {
   BackHandler,
 } from 'react-native';
 import { useSelector } from 'react-redux';
-import { MyThemeClass } from '../../Theme/ThemeDarkLightColor';
-import { styles } from '../../../assets/css/OrderProcessStyle/CartStyle';
+import { MyThemeClass } from '../../../Theme/ThemeDarkLightColor';
+import { styles } from '../../../../assets/css/CartCss/CartStyle';
 import FAIcon from 'react-native-vector-icons/FontAwesome';
 
 const { width, height } = Dimensions.get('screen');
@@ -31,7 +31,7 @@ export default function OrderDetailsComp(props) {
       }}
     >
       <View style={{ ...styles.innerView }}>
-        <Text style={{ ...styles.txt, color: themecolor.TXTWHITE }}>Order Details</Text>
+        <Text style={{ ...styles.txt, color: themecolor.BACKICON }}>Order Details</Text>
       </View>
 
       <View style={{ ...styles.mv5 }} />
@@ -69,7 +69,7 @@ export default function OrderDetailsComp(props) {
         </View>
         <View style={{ ...styles.orderDetialcompWidth1 }}>
           {CartDetailData.ship != " ₹0" ?
-            <Text style={{ ...styles.txt1, color: themecolor.TXTGREYS }}><FAIcon name="rupee" size={12} />99</Text>
+            <Text style={{ ...styles.txt1, color: themecolor.TXTGREYS }}><FAIcon name="rupee" size={12} />{CartDetailData.ship}</Text>
             :
             <Text style={{ ...styles.txt1, color: themecolor.TEXTGREEN }}>FREE</Text>
           }

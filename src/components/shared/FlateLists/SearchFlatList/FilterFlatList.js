@@ -7,7 +7,7 @@ import {
   Image,
   Dimensions,
 } from 'react-native';
-import { styles } from '../../../../assets/css/searchStyle';
+import { styles } from '../../../../assets/css/SearchCss/searchStyle';
 import {MyThemeClass} from '../../../Theme/ThemeDarkLightColor';
 import {useSelector} from 'react-redux';
 import { CheckBox } from '@rneui/themed';

@@ -13,7 +13,7 @@ import {useSelector} from 'react-redux';
 import {MyThemeClass} from '../../components/Theme/ThemeDarkLightColor';
 import {useNavigation} from '@react-navigation/native';
 import RegisterLoginHeader from '../../components/shared/header/RegisterLoginHeader';
-import {RegisterLoginStyles} from '../../assets/css/RegisterLoginStyles';
+import {RegisterLoginStyles} from '../../assets/css/HeaderCss/RegisterLoginStyles';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import FullsizeButton from './FullsizeButton';
 import {useToast} from 'react-native-toast-notifications';

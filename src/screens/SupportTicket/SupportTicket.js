@@ -10,7 +10,7 @@ import {
 import {useSelector} from 'react-redux';
 import {MyThemeClass} from '../../components/Theme/ThemeDarkLightColor';
 import {useToast} from 'react-native-toast-notifications';
-import {styles} from '../../assets/css/SupportTicketStyle';
+import {styles} from '../../assets/css/ProfileCss/SupportTicketStyle';
 import RegisterLoginHeader from '../../components/shared/header/RegisterLoginHeader';
 import LoadingFullScreen from '../../components/shared/Loader/LoadingFullScreen';
 import {ScrollView} from 'react-native-gesture-handler';

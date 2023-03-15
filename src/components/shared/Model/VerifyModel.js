@@ -4,7 +4,7 @@ import Video from 'react-native-video';
 import {useNavigation} from '@react-navigation/native';
 import {MyThemeClass} from '../../Theme/ThemeDarkLightColor';
 import {useSelector} from 'react-redux';
-import {styles} from '../../../assets/css/SucessModelStyle';
+import {styles} from '../../../assets/css/ModelsCss/SucessModelStyle';
 
 export default VerifyModel = props => {
   const mode = useSelector(state => state.mode);

@@ -10,7 +10,7 @@ import {
 import {useSelector} from 'react-redux';
 import {MyThemeClass} from '../../Theme/ThemeDarkLightColor';
 import FIcon from 'react-native-vector-icons/FontAwesome';
-import {styles} from '../../../assets/css/searchStyle';
+import {styles} from '../../../assets/css/SearchCss/searchStyle';
 
 
 export default function Search(props) {

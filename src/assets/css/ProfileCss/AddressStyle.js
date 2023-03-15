@@ -1,7 +1,7 @@
 import {StyleSheet, Dimensions} from 'react-native';
-import {FontSize} from '../fonts/Fonts';
-import {Colors} from '../config/Colors';
-import {FontFamily} from '../fonts/FontFamily';
+import {FontSize} from '../../fonts/Fonts';
+import {Colors} from '../../config/Colors';
+import {FontFamily} from '../../fonts/FontFamily';
 const {width, height} = Dimensions.get('window');
 
 const styles = StyleSheet.create({
@@ -41,16 +41,22 @@ const styles = StyleSheet.create({
     marginBottom: 1,
   },
   txt: {
-    fontSize: FontSize.labelText2,
+    fontSize: FontSize.labelText3,
     fontFamily: FontFamily.Popinssemibold,
   },
   txt1: {
-    fontSize: FontSize.labelText,
+    fontSize: FontSize.labelText2,
     fontFamily: FontFamily.Popinssemibold,
   },
-  headingTxt: {
-    fontSize: FontSize.labelText3,
+  txtbold: {
+    fontSize: FontSize.labelText2,
     fontFamily: FontFamily.Popinssemibold,
+    fontWeight:'bold'
+  },
+  headingTxt: {
+    fontSize: FontSize.labelText4,
+    fontFamily: FontFamily.Popinssemibold,
+    fontWeight:'bold'
   },
   ViewHeading:{
     width: width * 0.92, alignSelf: 'center', marginBottom:8
@@ -116,6 +122,9 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     alignContent: 'center',
     width:"100%",
+    marginTop:5
+  },
+  mgT5:{
     marginTop:5
   }
 });
