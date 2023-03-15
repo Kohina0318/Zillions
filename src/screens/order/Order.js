@@ -103,15 +103,16 @@ export default function Order(props) {
         <LoadingFullScreen style={{flex: 1}} />
       ) : (
         <View style={{...styles.container}}>
-          <Search title={'Search by sale code..'} filtering={filtering} />
+          <Search title={'Search by order Id..'} filtering={filtering} />
 
-          <View style={{marginTop: 5}} />
+          <View style={{...styles.marTop}} />
+
           {data.length > 0 ? (
             <OrderDataList data={data} />
           ) : (
             <NoDataMsg title="No Order Found! " />
           )}
-          <View style={{marginVertical: 45}} />
+          <View style={{marginVertical: 10}} />
         </View>
       )}
     </View>

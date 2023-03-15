@@ -99,7 +99,7 @@ export default function OrderDetails(props) {
     <View style={{ ...styles.bg, backgroundColor: themecolor.THEMECOLOR }}>
 
       <RegisterLoginHeader
-        title={`Order: #${props.route.params.saleCode}`}
+        title={`Order Id : ${props.route.params.saleCode}`}
         backIcon={true}
         onPressBack={() => handleBackButtonClick()}
       />

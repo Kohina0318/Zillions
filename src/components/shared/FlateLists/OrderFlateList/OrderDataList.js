@@ -34,7 +34,7 @@ function OrderDataFlateList({ item, themecolor }) {
       onPress={() => navigation.navigate('OrderDetails', { saleCode: item.sale_code, SaleId: item.sale_id })}
     >
       <View style={{ ...styles.flexDirView }}>
-        <Text allowFontScaling={false} style={{ ...styles.txt, color: themecolor.TXTWHITE }}>
+        <Text allowFontScaling={false} style={{ ...styles.txt, color: themecolor.BACKICON }}>
         Order Id : {item.sale_code}
         </Text>
       </View>
@@ -56,7 +56,7 @@ function OrderDataFlateList({ item, themecolor }) {
 
         <View style={{ ...styles.flexRow }}>
           <Text allowFontScaling={false} style={{ ...styles.txt, color: themecolor.TXTWHITE }} >
-            Confirmed
+             {item.delivery_status == "pending" ? "Confirmed": item.delivery_status}
           </Text>
 
           <Text allowFontScaling={false} style={{ ...styles.txt1, color: themecolor.TXTWHITE }}>
