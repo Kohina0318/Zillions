@@ -48,11 +48,14 @@ export default function Profile(props) {
         var res = await getProfileInfo();
         if (res.status === true) {
           setUserData(res.data);
+          console.log('res data>>>>>>>>>> in profile',res.data)
           setLoader(false);
         } else {
+          setUserData(userData)
           setLoader(false);
         }
       } catch (e) {
+        setUserData(userData)
         setLoader(false);
       }
     }
@@ -152,7 +155,7 @@ export default function Profile(props) {
                           ...ProfileStyle.WellText,
                           color: themecolor.BACKICON,
                         }}>
-                        Welcome {UserData[0].username} {UserData[0].surname}...
+                        Welcome {UserData[0].username.replace(/\s+/g, '')} {UserData[0].surname.replace(/\s+/g, '')}...
                       </Text>
                     </View>
                   </View>
