@@ -19,6 +19,7 @@ import { useToast } from 'react-native-toast-notifications';
 import { getRemoveProduct } from '../../../../repository/OrderProcessRepository/RemoveProductRepo';
 import { CartQtyRSSheet } from '../../RBSheet/CartQtyRSSheet';
 import { getCartProductQuantityUpdate } from '../../../../repository/OrderProcessRepository/CartQuantityUpdateRepo';
+import { store } from '../../../../../App';
 
 const { width } = Dimensions.get('screen');
 
@@ -45,8 +46,10 @@ function CartProductDataFlateList({ item, themecolor, refresh, setRefresh }) {
 
   const handleRemoveProduct = async () => {
     try {
+
       var res = await getRemoveProduct(item.rowid)
       if (res.status == true) {
+        store.dispatch({type:'DEL_CART',payload:[item.id]})
         setRefresh(!refresh)
         toast.show(res.msg, {
           type: 'success',

@@ -22,6 +22,7 @@ import { useFocusEffect, useNavigation } from '@react-navigation/native';
 import EmptyCart from '../../components/shared/NoData/EmptyCart';
 import { getRemoveAllProducts } from '../../repository/OrderProcessRepository/RemoveProductRepo';
 import CartViewDetailsButton from '../../components/shared/button/CartViewDetailsButton';
+import { store } from '../../../App';
 
 const { width, height } = Dimensions.get('screen');
 
@@ -47,6 +48,10 @@ export default function Cart(props) {
 
   const mode = useSelector(state => state.mode);
   const themecolor = new MyThemeClass(mode).getThemeColor();
+
+  
+  var cart=useSelector(state=>state.cart)
+  var cartLen=Object.keys(cart)
 
   const [loader, setLoader] = useState(true);
   const [refresh, setRefresh] = useState(false);
@@ -108,6 +113,9 @@ export default function Cart(props) {
     try {
       var res = await getRemoveAllProducts()
       if (res.status == true) {
+        cartLen.map((item)=>{
+          store.dispatch({type:'DEL_CART',payload:[item]})
+        })
         setRefresh(!refresh)
         toast.show(res.msg, {
           type: 'success',
