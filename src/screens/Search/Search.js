@@ -114,7 +114,6 @@ export default function Search(props) {
   };
 
   const handleGetvalue = value => {
-    // console.log('handle get value>>>>>>>>>>>>>>>>>>>>>>.', value);
     setValue(value);
     setDataShown(false)
   };
@@ -132,54 +131,54 @@ export default function Search(props) {
     setLoading(false)
   }
 
-  const handleCategories = async () => {
-    try {
-      var res = await getCategories();
-      setDataList(res.data);
-    } catch (e) {
-      console.log('errrror in..handleCategories page-->', e);
-      toast.show('Something went wrong!, Try again later.', {
-        type: 'danger',
-        placement: 'bottom',
-        duration: 3000,
-        offset: 30,
-        animationType: 'slide-in',
-      });
-    }
-  };
-  const handleBrands = async () => {
-    try {
-      var res = await getBrands();
-      setDataList(res.data);
-    } catch (e) {
-      console.log('errrror in..handleBrands page-->', e);
-      toast.show('Something went wrong!, Try again later.', {
-        type: 'danger',
-        placement: 'bottom',
-        duration: 3000,
-        offset: 30,
-        animationType: 'slide-in',
-      });
-    }
-  };
+  // const handleCategories = async () => {
+  //   try {
+  //     var res = await getCategories();
+  //     setDataList(res.data);
+  //   } catch (e) {
+  //     console.log('errrror in..handleCategories page-->', e);
+  //     toast.show('Something went wrong!, Try again later.', {
+  //       type: 'danger',
+  //       placement: 'bottom',
+  //       duration: 3000,
+  //       offset: 30,
+  //       animationType: 'slide-in',
+  //     });
+  //   }
+  // };
+  // const handleBrands = async () => {
+  //   try {
+  //     var res = await getBrands();
+  //     setDataList(res.data);
+  //   } catch (e) {
+  //     console.log('errrror in..handleBrands page-->', e);
+  //     toast.show('Something went wrong!, Try again later.', {
+  //       type: 'danger',
+  //       placement: 'bottom',
+  //       duration: 3000,
+  //       offset: 30,
+  //       animationType: 'slide-in',
+  //     });
+  //   }
+  // };
 
   const handleData = item => {
     setItem(item);
     setLoader(true);
 
-    wait(500)
-      .then(async () => {
-        if (item == 'Brand') {
-          await handleBrands();
-        }
-        if (item == 'Category') {
-          await handleCategories();
-        }
-      })
-      .then(() => {
+    // wait(500)
+    //   // .then(async () => {
+    //   //   if (item == 'Brand') {
+    //   //     await handleBrands();
+    //   //   }
+    //   //   if (item == 'Category') {
+    //   //     await handleCategories();
+    //   //   }
+    //   // })
+    //   .then(() => {
         setLoader(false);
         refRBSheet.current.open();
-      });
+      // });
   };
 
   const handleOnClear=()=>{
@@ -291,13 +290,13 @@ export default function Search(props) {
             <View style={{...styles.Borderline,borderColor:themecolor.BOXBORDERCOLOR1}} />
 
             <View style={{alignItems:'center',height:height * 0.55,}}>
-            {
-      item=="Brand"?
+            
+      {/* item=="Brand"?
       <FilterBrandFlatList data={dataList}/>
       :
       item=="Category"?
       <FilterCategoryFlatList data={dataList}/>
-      :
+      : */}{
       item=="SortBy"?
       <OrderFlatList onChange={(value)=>handleChangeSortBy(value)}/>
       :
