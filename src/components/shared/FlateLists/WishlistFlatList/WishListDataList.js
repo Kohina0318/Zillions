@@ -207,6 +207,8 @@ function WishListDataFlateList({ item, themecolor, setRefresh, refresh, }) {
 
         <View style={{ width: "100%" }}>
 
+          <View  style={{marginTop:5}}/>
+
           {item.current_stock > 0 ?
             <HalfSizeButton
               title="Move to Cart"
