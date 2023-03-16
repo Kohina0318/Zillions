@@ -209,6 +209,8 @@ function WishListDataFlateList({ item, themecolor, setRefresh, refresh, }) {
 
         <View style={{ width: "100%" }}>
 
+          <View  style={{marginTop:5}}/>
+
           {item.current_stock > 0 ?
             <HalfSizeButton
               title="Move to Cart"
@@ -261,12 +263,7 @@ export function WishListDataList(props) {
       renderItem={({ item }) => (
         <WishListDataFlateList item={item} themecolor={themecolor} setRefresh={props.setRefresh} refresh={props.refresh} />
       )}
-      // horizontal={true}
-      contentContainerStyle={{
-        flexDirection: 'row',
-        flexWrap: 'wrap',
-        width: width * 0.945,
-      }}
+      numColumns={2}
       showsVerticalScrollIndicator={false}
       scrollEnabled={true}
     />

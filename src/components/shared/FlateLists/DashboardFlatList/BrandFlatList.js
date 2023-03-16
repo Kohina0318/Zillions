@@ -83,8 +83,8 @@ export function BrandDataList(props) {
       renderItem={({item}) => (
         <BrandDataFlatList item={item} themecolor={themecolor} />
       )}
-      horizontal={true}
-      contentContainerStyle={props.contentContainerStyle}
+      horizontal={props.horizontal}
+      numColumns={props.numColumns}
       showsVerticalScrollIndicator={false}
       showsHorizontalScrollIndicator={false}
       scrollEnabled={true}

@@ -64,7 +64,7 @@ function OrderDataFlateList({ item, themecolor }) {
           </Text>
 
           <Text allowFontScaling={false} style={{ ...styles.txt1, color: themecolor.TXTWHITE }}>
-            {item.payment_type == "cash_on_delivery" ? "Cash on delivery" : item.payment_type}
+            Paid by {item.payment_type == "cash_on_delivery" ? "Cash on delivery" : item.payment_type}
           </Text>
         </View>
 

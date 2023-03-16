@@ -434,7 +434,7 @@ export default function ProductDetail(props) {
                     <StarRating
                       disabled={false}
                       maxStars={5}
-                      rating={productDetailData.rating_num}
+                      rating={parseFloat(productDetailData.rating_num)}
                       selectedStar={rating => onStarRatingPress(rating)}
                       starSize={18}
                       fullStarColor={themecolor.STARCOLOR}

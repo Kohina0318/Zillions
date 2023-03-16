@@ -8,7 +8,7 @@ const styles = StyleSheet.create({
   bg: {flex: 1},
   datalistView: {
     width: width * 0.46,
-    height: height * 0.39,
+    height: height * 0.40,
     margin: 2,
     borderRadius: 5,
     alignItems: 'center',

@@ -206,7 +206,7 @@ function CartProductDataFlateList({ item, themecolor, refresh, setRefresh }) {
         </View>
       </View>
 
-      <CartQtyRSSheet refRBSheet={refRBSheet} setQty={setQty} qty={qty} onPress={handleProductQuantityUpdate} />
+      <CartQtyRSSheet refRBSheet={refRBSheet} setQty={setQty} qty={qty} qtyRemove={item.is_update > 0 ? parseInt(item.qty) : qt} onPress={handleProductQuantityUpdate} />
 
     </View>
   );

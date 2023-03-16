@@ -50,7 +50,7 @@ function CustomerReviewList({item, themecolor}) {
               <StarRating
                 disabled={true}
                 maxStars={5}
-                rating={parseInt(item.rating_no)}
+                rating={parseFloat(item.rating_no)}
                 selectedStar={rating => onStarRatingPress(rating)}
                 starSize={16}
                 fullStarColor={themecolor.STARCOLOR}

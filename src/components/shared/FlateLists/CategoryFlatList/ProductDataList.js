@@ -170,7 +170,7 @@ function ProductDataFlateList({ item, themecolor }) {
             <StarRating
               disabled={false}
               maxStars={5}
-              rating={item.rating_num}
+              rating={parseFloat(item.rating_num)}
               selectedStar={rating => onStarRatingPress(rating)}
               starSize={14}
               fullStarColor={themecolor.STARCOLOR}
@@ -218,12 +218,7 @@ export function ProductDataList(props) {
         renderItem={({ item }) => (
           <ProductDataFlateList item={item} themecolor={themecolor} />
         )}
-        // horizontal={true}
-        contentContainerStyle={{
-          flexDirection: 'row',
-          flexWrap: 'wrap',
-          width: width * 0.945,
-        }}
+        numColumns={2}
         showsVerticalScrollIndicator={false}
         scrollEnabled={true}
       />

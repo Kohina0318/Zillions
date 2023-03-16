@@ -72,16 +72,11 @@ export default function Brands(props) {
               ...styles.container,
             }}>
             {brandsData.length > 0 ? (
-              <ScrollView showsVerticalScrollIndicator={false}>
                 <BrandDataList
                   data={brandsData}
-                  contentContainerStyle={{
-                    flexDirection: 'row',
-                    flexWrap: 'wrap',
-                    width: width * 0.94,
-                  }}
+                  numColumns={3}
+                  horizontal={false}
                 />
-              </ScrollView>
             ) : (
                <NoDataMsg  title="No Brands Found! "/>
             )}

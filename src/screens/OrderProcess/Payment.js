@@ -24,6 +24,7 @@ import CartViewDetailsButton from '../../components/shared/button/CartViewDetail
 import { getUserData } from '../../repository/CommonRepository';
 import { store } from '../../../App';
 import RazorpayCheckout from 'react-native-razorpay';
+import { getProfileInfo } from '../../repository/ProfileRepository/ProfileRepo';
 
 const { width, height } = Dimensions.get('screen');
 
@@ -113,10 +114,11 @@ export default function Payment(props) {
       var Amount = ''
 
       try {
-        var userDetails = await getUserData();
-        if (userData != null || userData != '' || userData != undefined) {
-          userData = userDetails[0]
+        var res = await getProfileInfo();
+        if (res.status === true) {
+          userData = res.data[0]
         }
+
         if (detailData.grand_total != null || detailData.grand_total != '' || detailData.grand_total != undefined) {
           Amount = detailData.grand_total
         }

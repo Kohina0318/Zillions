@@ -7,6 +7,7 @@ import { styles } from '../../../assets/css/CategoryCss/ProductDetailStyle';
 import { useSelector } from 'react-redux';
 import { MyThemeClass } from '../../Theme/ThemeDarkLightColor';
 import HalfSizeButton from '../button/halfSizeButton';
+import { store } from '../../../../App';
 
 const { width, height } = Dimensions.get('window');
 
@@ -14,10 +15,11 @@ export const CartQtyRSSheet = props => {
   const mode = useSelector(state => state.mode);
   const themecolor = new MyThemeClass(mode).getThemeColor();
 
-  const handleMin = () => {
+  const handleMin = async() => {
+    await props.setQty(props.qtyRemove)   
     props.refRBSheet.current.close()
-
   }
+
 
   return (
     <>
@@ -85,7 +87,7 @@ export const CartQtyRSSheet = props => {
               valueType="integer"
               rounded={true}
               minValue={1}
-              maxValue={props.maxQty}
+              maxValue={parseInt(props.maxQty)}
               textColor={themecolor.TXTWHITE}
               iconStyle={{ color: themecolor.TXTWHITE }}
               rightButtonBackgroundColor={'transparent'}

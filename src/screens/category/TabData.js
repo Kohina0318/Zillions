@@ -125,7 +125,7 @@ export const TabData = props => {
                     <StarRating
                       disabled={true}
                       maxStars={5}
-                      rating={parseInt(props.totalReview)}
+                      rating={parseFloat(props.totalReview)}
                       selectedStar={rating => onStarRatingPress(rating)}
                       starSize={20}
                       fullStarColor={themecolor.STARCOLOR}

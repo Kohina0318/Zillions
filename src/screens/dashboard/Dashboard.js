@@ -229,7 +229,7 @@ export default function Dashboard(props) {
                   title="Brands"
                   onPress={() => navigation.navigate('Brands')}
                 />
-                <BrandDataList data={brands} />
+                <BrandDataList data={brands} horizontal={true} />
               </View>
             ) : (
               <></>
