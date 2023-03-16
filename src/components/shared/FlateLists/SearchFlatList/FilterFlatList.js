@@ -53,12 +53,7 @@ export function FilterBrandFlatList(props) {
         renderItem={({item,index}) => (
           <FilterBrandList item={item} index={index} selectedIndex={selectedIndex} onChange1={(value)=>onChange1(value)} themecolor={themecolor} />
         )}
-        // horizontal={true}
-        contentContainerStyle={{
-          flexDirection: 'row',
-          flexWrap: 'wrap',
-          width: width * 0.94,
-        }}
+        numColumns={2}
         showsVerticalScrollIndicator={false}
         scrollEnabled={true}
       />
@@ -104,12 +99,7 @@ export function FilterCategoryFlatList(props) {
         renderItem={({item,index}) => (
           <FilterCategoryList item={item} index={index} selectedIndex={selectedIndex} onChange1={(value)=>onChange1(value)} themecolor={themecolor} />
         )}
-        // horizontal={true}
-        contentContainerStyle={{
-          flexDirection: 'row',
-          flexWrap: 'wrap',
-          width: width * 0.94,
-        }}
+        numColumns={2}
         showsVerticalScrollIndicator={false}
         scrollEnabled={true}
       />

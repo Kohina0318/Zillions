@@ -123,11 +123,7 @@ export function OrderFlatList({onChange}) {
         renderItem={({item,index}) => (
           <OrderList item={item} index={index} selectedIndex={selectedIndex} onChange1={(value)=>onChange1(value)} themecolor={themecolor} onChange={onChange} />
         )}
-        contentContainerStyle={{
-          flexDirection: 'row',
-          flexWrap: 'wrap',
-          width: width * 0.94,
-        }}
+        numColumns={1}
         showsVerticalScrollIndicator={false}
         scrollEnabled={true}
       />
@@ -175,12 +171,7 @@ export function PriceFlatList({onChange}) {
         renderItem={({item,index}) => (
           <PriceList item={item} index={index} selectedIndex={selectedIndex} onChange1={(value)=>onChange1(value)} themecolor={themecolor} onChange={onChange} />
         )}
-        // horizontal={true}
-        contentContainerStyle={{
-          flexDirection: 'row',
-          flexWrap: 'wrap',
-          width: width * 0.97,
-        }}
+        numColumns={2}
         showsVerticalScrollIndicator={false}
         scrollEnabled={true}
       />

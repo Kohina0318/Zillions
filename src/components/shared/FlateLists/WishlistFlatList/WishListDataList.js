@@ -21,6 +21,7 @@ import { useToast } from 'react-native-toast-notifications';
 import { RBSheetData } from '../../RBSheet/RBSheetData';
 import { postAddCartProduct } from '../../../../repository/OrderProcessRepository/AddToCartRepo';
 import { set } from 'immer/dist/internal';
+import { store } from '../../../../../App';
 
 const { width, height } = Dimensions.get('screen');
 
@@ -82,6 +83,7 @@ function WishListDataFlateList({ item, themecolor, setRefresh, refresh, }) {
 
       var res = await postAddCartProduct(item.product_id, formdata)
       if (res.status == true) {
+        store.dispatch({type:'ADD_CART',payload:[item.productId,{productId:item.productId,data:formdata}]})
         handleRemove()
         toast.show(res.msg, {
           type: 'success',
