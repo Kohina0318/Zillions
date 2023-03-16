@@ -100,7 +100,7 @@ export const RBSheetData = props => {
               Product Quantity :
             </Text>
             <NumericInput
-              value={props.qty}
+              value={parseInt(props.qty)}
               onChange={value => props.setQty(value)}
               onLimitReached={() => handleMin()}
               totalWidth={100}
@@ -111,7 +111,7 @@ export const RBSheetData = props => {
               valueType="integer"
               rounded={true}
               minValue={1}
-              maxValue={props.maxQty}
+              maxValue={parseInt(props.maxQty)}
               textColor={themecolor.TXTWHITE}
               iconStyle={{ color: themecolor.TXTWHITE }}
               rightButtonBackgroundColor={'transparent'}
