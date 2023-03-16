@@ -43,7 +43,6 @@ function CartProductDataFlateList({ item, themecolor, refresh, setRefresh }) {
   }
   const [qty, setQty] = useState(qt)
 
-
   const handleRemoveProduct = async () => {
     try {
 
