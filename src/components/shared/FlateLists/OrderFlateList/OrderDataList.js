@@ -22,6 +22,9 @@ function OrderDataFlateList({ item, themecolor }) {
   var productDetails = Object.values(item.product_details)
   var image = ''
   image = productDetails[0].image
+  const handleClick=()=>{
+    navigation.navigate('OrderDetails', { saleCode: item.sale_code, SaleId: item.sale_id })
+  }
 
   return (
     <TouchableOpacity
@@ -31,7 +34,7 @@ function OrderDataFlateList({ item, themecolor }) {
         backgroundColor: themecolor.BOXBORDERCOLOR,
         borderColor: themecolor.BOXBORDERCOLOR1,
       }}
-      onPress={() => navigation.navigate('OrderDetails', { saleCode: item.sale_code, SaleId: item.sale_id })}
+      onPress={() =>handleClick()}
     >
       <View style={{ ...styles.flexDirView }}>
         <Text allowFontScaling={false} style={{ ...styles.txt, color: themecolor.BACKICON }}>
