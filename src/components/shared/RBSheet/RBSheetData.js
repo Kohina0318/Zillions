@@ -18,6 +18,7 @@ export const RBSheetData = props => {
   const themecolor = new MyThemeClass(mode).getThemeColor();
 
   const handleMin = () => {
+    props.setQty(1)
     props.refRBSheet.current.close()
   }
 

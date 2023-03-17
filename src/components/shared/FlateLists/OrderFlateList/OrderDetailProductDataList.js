@@ -52,7 +52,7 @@ function OrderDetailProductDataFlateList({ item, themecolor, refresh, setRefresh
 
         <TouchableOpacity activeOpacity={0.5}
           onPress={() =>
-            navigation.navigate('ProductDetail', {
+            navigation.navigate('ProductMoreDetails', {
               productId: item.id,
               title: item.name,
             })}

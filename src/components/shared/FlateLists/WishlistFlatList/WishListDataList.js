@@ -6,6 +6,7 @@ import {
   Text,
   Image,
   Dimensions,
+  ActivityIndicator
 } from 'react-native';
 import { Colors } from '../../../../assets/config/Colors';
 import { styles } from '../../../../assets/css/WishListCss/WishListStyle';
@@ -22,6 +23,7 @@ import { RBSheetData } from '../../RBSheet/RBSheetData';
 import { postAddCartProduct } from '../../../../repository/OrderProcessRepository/AddToCartRepo';
 import { set } from 'immer/dist/internal';
 import { store } from '../../../../../App';
+import LoadingContent from '../../Loader/LoadingContent';
 
 const { width, height } = Dimensions.get('screen');
 
@@ -70,7 +72,7 @@ function WishListDataFlateList({ item, themecolor, setRefresh, refresh, }) {
     }
   };
 
-  
+
   const handleAddCartProduct = async () => {
     try {
       var Size = `${selectedSizePrice}#${selectedSize}#${qty}`
@@ -83,7 +85,7 @@ function WishListDataFlateList({ item, themecolor, setRefresh, refresh, }) {
 
       var res = await postAddCartProduct(item.product_id, formdata)
       if (res.status == true) {
-        store.dispatch({type:'ADD_CART',payload:[item.productId,{productId:item.productId,data:formdata}]})
+        store.dispatch({ type: 'ADD_CART', payload: [item.productId, { productId: item.productId, data: formdata }] })
         handleRemove()
         toast.show(res.msg, {
           type: 'success',
@@ -142,7 +144,7 @@ function WishListDataFlateList({ item, themecolor, setRefresh, refresh, }) {
         <TouchableOpacity
           activeOpacity={0.9}
           onPress={() =>
-            navigation.navigate('ProductDetail', {
+            navigation.navigate('ProductMoreDetails', {
               productId: item.product_id,
               title: item.title,
             })
@@ -209,7 +211,7 @@ function WishListDataFlateList({ item, themecolor, setRefresh, refresh, }) {
 
         <View style={{ width: "100%" }}>
 
-          <View  style={{marginTop:5}}/>
+          <View style={{ marginTop: 5 }} />
 
           {item.current_stock > 0 ?
             <HalfSizeButton
@@ -247,7 +249,7 @@ function WishListDataFlateList({ item, themecolor, setRefresh, refresh, }) {
         name="shopping-cart"
         size={16}
         color="#fff"
-      />} qty={qty} setQty={setQty} maxQty={item.current_stock} setSelectedSize={setSelectedSize} onPress={handleAddCartProduct} setSelectedSizePrice={setSelectedSizePrice} />
+      />} qty={qty} setQty={setQty}  maxQty={item.current_stock} setSelectedSize={setSelectedSize} onPress={handleAddCartProduct} setSelectedSizePrice={setSelectedSizePrice} />
 
     </>
   );
@@ -266,6 +268,18 @@ export function WishListDataList(props) {
       numColumns={2}
       showsVerticalScrollIndicator={false}
       scrollEnabled={true}
+      onEndReached={() => {
+        props.handleWishlist();
+      }}
+      ListFooterComponent={() => {
+        if (props.isLoading) {
+          return (
+            <LoadingContent />
+          );
+        } else {
+          return null;
+        }
+      }}
     />
   );
 }

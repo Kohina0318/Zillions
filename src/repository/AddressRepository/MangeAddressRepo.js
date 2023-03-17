@@ -18,7 +18,10 @@ const getManageAddress = async () => {
     }
   };
 
-  const getManageAddressPost = async (body) => {
+  const postDefaultAddress = async () => {
+    var body = new FormData()
+    body.append("type", "default")
+    
     try {
       const response = await fetch(
           `${await SERVER_URL()}/profiles/manage_address`,
@@ -32,7 +35,7 @@ const getManageAddress = async () => {
       const result = await response.json();
         return result;
     } catch (err) {
-      console.log('error in getManageAddress...in MangeAddressRepo ', err);
+      console.log('error in postDefaultAddress...in MangeAddressRepo ', err);
     }
   };
 
@@ -91,5 +94,5 @@ const getManageAddress = async () => {
   };
   
 
-  export {getManageAddress,postAddAddress,postDeleteAddress,postSetDefaultAddress,getManageAddressPost};
+  export {getManageAddress,postAddAddress,postDeleteAddress,postSetDefaultAddress,postDefaultAddress};
   

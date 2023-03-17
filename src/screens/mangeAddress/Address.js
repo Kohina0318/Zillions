@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   View,
   Text,
@@ -9,25 +9,25 @@ import {
   BackHandler,
   TouchableOpacity,
 } from 'react-native';
-import {useSelector} from 'react-redux';
-import {MyThemeClass} from '../../components/Theme/ThemeDarkLightColor';
-import {useToast} from 'react-native-toast-notifications';
+import { useSelector } from 'react-redux';
+import { MyThemeClass } from '../../components/Theme/ThemeDarkLightColor';
+import { useToast } from 'react-native-toast-notifications';
 import Header from '../../components/shared/header/Header';
 import LoadingFullScreen from '../../components/shared/Loader/LoadingFullScreen';
-import {styles} from '../../assets/css/ProfileCss/AddressStyle';
+import { styles } from '../../assets/css/ProfileCss/AddressStyle';
 import {
   getManageAddress,
   postAddAddress,
-  postDeleteAddress,
+  postDefaultAddress,
 } from '../../repository/AddressRepository/MangeAddressRepo';
 import MIcon from 'react-native-vector-icons/Ionicons';
-import {ManageAddressDataList} from '../../components/shared/FlateLists/ManageAddressFlateList/ManageAddressDataList';
+import { ManageAddressDataList } from '../../components/shared/FlateLists/ManageAddressFlateList/ManageAddressDataList';
 import HalfSizeButton from '../../components/shared/button/halfSizeButton';
 import AddAddressModel from '../../components/shared/Model/AddAddressModel';
 import RegisterLoginHeader from '../../components/shared/header/RegisterLoginHeader';
 import NoDataMsg from '../../components/shared/NoData/NoDataMsg';
 
-const {width, height} = Dimensions.get('screen');
+const { width, height } = Dimensions.get('screen');
 
 export default function Address(props) {
   function handleBackButtonClick() {
@@ -51,6 +51,7 @@ export default function Address(props) {
 
   const [loader, setLoader] = useState(true);
   const [data, setData] = useState([]);
+  const [defaultData, setDefaultData] = useState([]);
   const [addAddressModal, setAddAddressModal] = useState(false);
 
   const [address, setAddress] = useState('');
@@ -60,6 +61,34 @@ export default function Address(props) {
   const [postalCode, setPostalCode] = useState('');
   const [mobileNo, setMobileNo] = useState('');
   const [refresh, setRefresh] = useState(false);
+
+  const handleDefaultAddress = async () => {
+    try {
+      var res = await postDefaultAddress();
+      console.log("handleDefaultAddress>>>>>>>>>", res)
+
+      if (res.status === true) {
+        setDefaultData(res.data);
+      } else {
+        toast.show(res.msg, {
+          type: 'warning',
+          placement: 'bottom',
+          duration: 3000,
+          offset: 30,
+          animationType: 'slide-in',
+        });
+      }
+    } catch (e) {
+      console.log('errrror in..handleDefaultAddress page-->', e);
+      toast.show('Something went wrong!, Try again later.', {
+        type: 'danger',
+        placement: 'bottom',
+        duration: 3000,
+        offset: 30,
+        animationType: 'slide-in',
+      });
+    }
+  };
 
   const handleManageAddress = async () => {
     try {
@@ -192,11 +221,12 @@ export default function Address(props) {
   };
 
   useEffect(() => {
+    handleDefaultAddress()
     handleManageAddress();
   }, [refresh]);
 
   return (
-    <View style={{...styles.bg, backgroundColor: themecolor.THEMECOLOR}}>
+    <View style={{ ...styles.bg, backgroundColor: themecolor.THEMECOLOR }}>
       <RegisterLoginHeader
         title={'Address'}
         onPressBack={() => handleBackButtonClick()}
@@ -206,40 +236,45 @@ export default function Address(props) {
           ...styles.container,
         }}>
         {loader ? (
-          <LoadingFullScreen style={{flex: 1}} />
+          <LoadingFullScreen style={{ flex: 1 }} />
         ) : data.length > 0 ? (
           <ScrollView showsVerticalScrollIndicator={false}>
-            <View style={{...styles.ViewHeading}}>
-              <Text
-                allowFontScaling={false}
-                style={{...styles.headingTxt, color: themecolor.TXTGREYS}}>
-                Default Address{' '}
-              </Text>
-              <ManageAddressDataList
-                data={data}
-                dafault={true}
-                refresh={refresh}
-                setRefresh={setRefresh}
-              />
-            </View>
 
-            <View style={{...styles.ViewHeading}}>
-              <Text
-                allowFontScaling={false}
-                style={{...styles.headingTxt, color: themecolor.TXTGREYS}}>
-                Other Addresses{' '}
-              </Text>
-              <ManageAddressDataList
-                data={data}
-                refresh={refresh}
-                setRefresh={setRefresh}
-              />
-            </View>
+            {defaultData.length > 0 ?
+              <View style={{ ...styles.ViewHeading }}>
+                <Text
+                  allowFontScaling={false}
+                  style={{ ...styles.headingTxt, color: themecolor.TXTGREYS }}>
+                  Default Address{' '}
+                </Text>
+                <ManageAddressDataList
+                  data={defaultData}
+                  dafault={true}
+                  refresh={refresh}
+                  setRefresh={setRefresh}
+                />
+              </View>
+              : <></>}
 
-            <View style={{marginVertical: 10}} />
+            {data.length > 0 ?
+              <View style={{ ...styles.ViewHeading }}>
+                <Text
+                  allowFontScaling={false}
+                  style={{ ...styles.headingTxt, color: themecolor.TXTGREYS }}>
+                  Other Addresses{' '}
+                </Text>
+                <ManageAddressDataList
+                  data={data}
+                  refresh={refresh}
+                  setRefresh={setRefresh}
+                />
+              </View>
+              : <></>}
+
+            <View style={{ marginVertical: 10 }} />
           </ScrollView>
         ) : (
-          <NoDataMsg  title="No Address Found! "/>
+          <NoDataMsg title="No Address Found! " />
         )}
       </View>
 
@@ -247,7 +282,7 @@ export default function Address(props) {
         style={{
           ...styles.touchview,
         }}>
-        <View style={{...styles.mainView}}>
+        <View style={{ ...styles.mainView }}>
           <HalfSizeButton
             title="Add Address"
             icon={<MIcon name="add" size={16} color={'#fff'} />}

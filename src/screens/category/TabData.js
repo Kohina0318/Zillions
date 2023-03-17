@@ -12,8 +12,6 @@ import StarRating from 'react-native-star-rating';
 import RatingModel from '../../components/shared/Model/RatingModel';
 import SegmentedControlTab from 'react-native-segmented-control-tab';
 
-const { width, height } = Dimensions.get('screen');
-
 export const TabData = props => {
   const [index, setIndex] = React.useState(0);
   const [showmodal, setShowmodal] = useState(false);
@@ -21,6 +19,19 @@ export const TabData = props => {
 
   const mode = useSelector(state => state.mode);
   const themecolor = new MyThemeClass(mode).getThemeColor();
+
+  var totalReview = ''
+  var customerReview = []
+  var description = ''
+  var shipment = ''
+
+  var productDetailData = props.productDetail;
+  totalReview = productDetailData.total_reviews_avg
+  customerReview = productDetailData.customer_review
+  description = productDetailData.description
+  shipment = productDetailData.shipment_info
+
+
 
   const tagsStyles = {
     p: {
@@ -71,42 +82,47 @@ export const TabData = props => {
           color: themecolor.BACKICON
         }}
         tabsContainerStyle={{
-          // height: 35,
           backgroundColor: 'transparent',
         }}
         tabTextStyle={{
           ...styles.TabNewStyle,
           color: themecolor.TXTGREYS
         }}
-        activeTabTextStyle={{ ...styles.activeTabs, color: themecolor.BACKICON, borderBottomColor: themecolor.BACKICON, }}
+        activeTabTextStyle={{ ...styles.activeTabs, color: themecolor.BACKICON, }}
         onTabPress={handleSingleIndexSelect}
       />
+
+      <View style={{ ...styles.MGT }} />
+
+      <View style={{ ...styles.tabBorderLine, borderColor: themecolor.BOXBORDERCOLOR1, }} />
+
+      <View style={{ ...styles.MrT5 }} />
 
       <View style={{ marginBottom: 5 }}>
         {index == 0 ?
           <RenderHtml
             contentWidth={contentWidth}
-            source={{ html: props.description }}
+            source={{ html: description }}
             enableExperimentalMarginCollapsing={true}
             enableExperimentalBRCollapsing={true}
             enableExperimentalGhostLinesPrevention={true}
-            defaultViewProps={{ width: width * 0.8 }}
+            defaultViewProps={{ ...styles.tabDescriptionContainer }}
             tagsStyles={tagStyles}
           /> :
           index == 1 ?
             <RenderHtml
               contentWidth={contentWidth}
-              source={{ html: props.shipment }}
+              source={{ html: shipment }}
               enableExperimentalMarginCollapsing={true}
               enableExperimentalBRCollapsing={true}
               enableExperimentalGhostLinesPrevention={true}
               enableCSSInlineProcessing={false}
-              defaultViewProps={{ width: width * 0.9 }}
+              defaultViewProps={{ ...styles.tabDescriptionContainer }}
               tagsStyles={tagsStyles}
             // ignoredStyles={{backgroundColor}}
             />
             :
-            <View style={{ flexDirection: 'column', width: width * 0.9 }}>
+            <View style={{ ...styles.tabReviewContainer }}>
               <View
                 style={{
                   ...styles.mainView1,
@@ -121,11 +137,11 @@ export const TabData = props => {
                     }}>
                     Average User Rating :
                   </Text>
-                  <View style={{ width: width * 0.35, margin: 10 }}>
+                  <View style={{ ...styles.tabStarContainer }}>
                     <StarRating
                       disabled={true}
                       maxStars={5}
-                      rating={parseFloat(props.totalReview)}
+                      rating={parseFloat(totalReview)}
                       selectedStar={rating => onStarRatingPress(rating)}
                       starSize={20}
                       fullStarColor={themecolor.STARCOLOR}
@@ -148,7 +164,7 @@ export const TabData = props => {
               </View>
 
               <View>
-                <CustomerReviewFlatList data={props.customerReview} />
+                <CustomerReviewFlatList data={customerReview} />
               </View>
             </View>
         }

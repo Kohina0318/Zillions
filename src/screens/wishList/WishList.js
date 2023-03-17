@@ -31,19 +31,23 @@ export default function WishList(props) {
 
   const [loader, setLoader] = useState(true);
   const [refresh, setRefresh] = useState(false);
-  const [data, setData] = useState([]);
-  
- 
+  const [wishlistData, setWishlistData] = useState([]);
+  const [isLoading, setIsLoading] = React.useState(false);
+
   const handleWishlist = async () => {
     try {
       var res = await getWishlist();
       if (res.status === true) {
-        setData(res.data);
+        var temp = res.data
+        var temp1 = wishlistData.concat(temp)
+        setWishlistData(res.data);
+        // setWishlistData(temp1); 
         setLoader(false);
+        setIsLoading(true);
       } 
       else if (res.msg == "Invalid Authentication") {
         setLoader(false);
-        setData([]);
+        setWishlistData([]);
         Alert.alert(
           'Login to continue',
           'Do you want to Login?',
@@ -89,8 +93,8 @@ export default function WishList(props) {
       ) : (
         <>
           <View style={{ ...styles.container }}>
-            {data.length > 0 ? (
-              <WishListDataList data={data}  setRefresh={setRefresh} refresh={refresh} />
+            {wishlistData.length > 0 ? (
+              <WishListDataList data={wishlistData}  setRefresh={setRefresh} refresh={refresh} handleWishlist={handleWishlist} isLoading={isLoading}/>
             ) : (
               <NoDataMsg title="No Product Found!" />
             )}

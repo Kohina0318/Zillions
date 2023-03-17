@@ -3,6 +3,7 @@ import { SERVER_URL } from "../SERVER_URL";
 
 
   const postAddCartProduct = async (pId,formdata) => {
+    console.log("formdata...", formdata)
     try {
       const response = await fetch(
         `${await SERVER_URL()}/cart-product/add/${pId}/pp`,

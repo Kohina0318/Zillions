@@ -30,8 +30,11 @@ const ProfileStyle = StyleSheet.create({
     fontSize: FontSize.labelText2,
     fontFamily: FontFamily.Popinssemibold,
   },
+  txtProfileData: {
+    fontSize: FontSize.labelText3,
+    fontFamily: FontFamily.Popinssemibold,
+  },
   iconview: {flexDirection: 'row', alignItems: 'center'},
-
   txt1: {
     fontFamily: FontFamily.PopinsRegular,
     fontSize: 9,
@@ -101,7 +104,8 @@ const ProfileStyle = StyleSheet.create({
   },
   WellText: {
     fontFamily: FontFamily.abhinabolditalic,
-    fontSize: FontSize.labelText4
+    fontSize: FontSize.labelText4,
+    fontWeight:"bold"
   },
   buttonMainView: {display: 'flex', flexDirection: 'row', marginTop: 20},
   buttonView1: {
