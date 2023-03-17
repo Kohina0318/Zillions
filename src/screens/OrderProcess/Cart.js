@@ -24,6 +24,7 @@ import { getRemoveAllProducts } from '../../repository/OrderProcessRepository/Re
 import CartViewDetailsButton from '../../components/shared/button/CartViewDetailsButton';
 import { store } from '../../../App';
 import { getUserData } from '../../repository/CommonRepository';
+import { getProfileInfo } from '../../repository/ProfileRepository/ProfileRepo';
 
 const { width, height } = Dimensions.get('screen');
 
@@ -147,8 +148,9 @@ export default function Cart(props) {
   }
 
   const handleContinue=async()=>{
-    var userData = await getUserData();
-    if(userData==null){
+    var userDat=await getUserData()
+    var userData = await getProfileInfo();
+    if(userDat==null){
       Alert.alert(
         'Login to continue',
         'Do you want to Login?',
@@ -163,7 +165,23 @@ export default function Cart(props) {
       );
     }
     else{
-      props.navigation.navigate('CartAddress')
+      if(userData.msg=="Invalid Authentication")
+      {
+        Alert.alert(
+          'Invalid Authentication',
+          'Please clear your cache first and login again to continue..',
+          [
+            {
+              text: 'No',
+              onPress: () => console.log('Cancel Pressed'),
+              style: 'cancel',
+            },
+            {text: 'Login', onPress: () => navigation.navigate('Login')},
+          ],
+        ); 
+      }
+      else
+    {  props.navigation.navigate('CartAddress')}
     }
   }
 

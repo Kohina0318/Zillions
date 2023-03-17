@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, {useState, useEffect} from 'react';
 import {
   View,
   Text,
@@ -8,25 +8,26 @@ import {
   TouchableOpacity,
   ScrollView,
 } from 'react-native';
-import { useSelector } from 'react-redux';
-import { MyThemeClass } from '../../components/Theme/ThemeDarkLightColor';
-import { styles } from '../../assets/css/CartCss/PaymentStyle';
+import {useSelector} from 'react-redux';
+import {MyThemeClass} from '../../components/Theme/ThemeDarkLightColor';
+import {styles} from '../../assets/css/CartCss/PaymentStyle';
 import LoadingFullScreen from '../../components/shared/Loader/LoadingFullScreen';
 import RegisterLoginHeader from '../../components/shared/header/RegisterLoginHeader';
-import { useToast } from 'react-native-toast-notifications';
+import {useToast} from 'react-native-toast-notifications';
 import HalfSizeButton from '../../components/shared/button/halfSizeButton';
 import FAIcon from 'react-native-vector-icons/FontAwesome';
-import { Stepper } from '../Stepper/Stepper';
-import { CheckBox } from '@rneui/themed';
+import {Stepper} from '../Stepper/Stepper';
+import {CheckBox} from '@rneui/themed';
 import OrderDetailsComp from '../../components/shared/OrderProcessComponents/Cart/OrderDetailsComp';
-import { getCartOrderDetails } from '../../repository/OrderProcessRepository/CartListRepo';
+import {getCartOrderDetails} from '../../repository/OrderProcessRepository/CartListRepo';
 import CartViewDetailsButton from '../../components/shared/button/CartViewDetailsButton';
-import { getUserData } from '../../repository/CommonRepository';
-import { store } from '../../../App';
+import {getUserData} from '../../repository/CommonRepository';
+import {store} from '../../../App';
 import RazorpayCheckout from 'react-native-razorpay';
-import { getProfileInfo } from '../../repository/ProfileRepository/ProfileRepo';
+import {getProfileInfo} from '../../repository/ProfileRepository/ProfileRepo';
+import {postPayment} from '../../repository/OrderProcessRepository/PaymentRepo';
 
-const { width, height } = Dimensions.get('screen');
+const {width, height} = Dimensions.get('screen');
 
 export default function Payment(props) {
   function handleBackButtonClick() {
@@ -52,21 +53,26 @@ export default function Payment(props) {
   const [state, setState] = useState(false);
   const [online, setOnline] = useState(false);
   const [paymentMode, setPaymentMode] = useState('');
-  const [detailData, setDetailData] = useState("");
+  const [detailData, setDetailData] = useState('');
+  const [title, setTitle] = useState('Select Payment Mode');
+ 
+  const access_key='rzp_test_cdnNWMaIkNop2J';
+  
+  var cart=useSelector(state=>state.cart)
+  var cartLen=Object.keys(cart)
 
   const handleCartOrderDetails = async () => {
     try {
-      var res = await getCartOrderDetails()
+      var res = await getCartOrderDetails();
       if (res.status == true) {
-        setDetailData(res.data)
-        setLoader(false)
+        setDetailData(res.data);
+        setLoader(false);
       } else {
-        setLoader(false)
+        setLoader(false);
         console.log('Status False in..handleCartOrderDetails page Payment-->');
-
       }
     } catch (e) {
-      setLoader(false)
+      setLoader(false);
       console.log('errrror in..handleCartOrderDetails page-->', e);
       toast.show('Something went wrong!, Try again later.', {
         type: 'danger',
@@ -76,24 +82,24 @@ export default function Payment(props) {
         animationType: 'slide-in',
       });
     }
-  }
+  };
 
   useEffect(() => {
-    handleCartOrderDetails()
-  }, [])
-
+    handleCartOrderDetails();
+  }, []);
 
   const handleCash = () => {
     setState(!state);
     setPaymentMode('Cash On Delivery');
+    setTitle('Place Order');
     setOnline(false);
   };
   const handleOnline = async () => {
     setOnline(!online);
     setState(false);
+    setTitle('Pay Now');
     setPaymentMode('Online');
   };
-
 
   const handlePayment = async () => {
     if (paymentMode == '') {
@@ -106,243 +112,361 @@ export default function Payment(props) {
       });
     }
     if (paymentMode == 'Cash On Delivery') {
-      alert('Success in Cash On Delivery');
+      try {
+        setLoader(true);
+        var body = new FormData();
+        body.append('payment_type', 'cash_on_delivery');
+        body.append('address2', props.route.params.id);
+        var res = await postPayment(body);
+        if (res.status == true) {
+          cartLen.map((item)=>{
+            store.dispatch({type:'DEL_CART',payload:[item]})
+          })
+          setLoader(false);
+         props.navigation.navigate('PaymentConfirmation',{data:detailData})
+        } else {
+          setLoader(false);
+          toast.show(res.msg, {
+            type: 'warning',
+            placement: 'bottom',
+            duration: 3000,
+            offset: 30,
+            animationType: 'slide-in',
+          });
+        }
+      } catch (e) {
+        console.log('errrror in..getManageAddress page-->', e);
+        setLoader(false);
+        toast.show('Something went wrong!, Try again later.', {
+          type: 'danger',
+          placement: 'bottom',
+          duration: 3000,
+          offset: 30,
+          animationType: 'slide-in',
+        });
+      }
     }
     if (paymentMode == 'Online') {
-
-      var userData = ''
-      var Amount = ''
+      var userData = '';
+      var Amount = '';
 
       try {
         var res = await getProfileInfo();
         if (res.status === true) {
-          userData = res.data[0]
+          userData = res.data[0];
         }
 
-        if (detailData.grand_total != null || detailData.grand_total != '' || detailData.grand_total != undefined) {
-          Amount = detailData.grand_total
+        if (
+          detailData.grand_total != null ||
+          detailData.grand_total != '' ||
+          detailData.grand_total != undefined
+        ) {
+          Amount = detailData.grand_total;
         }
 
-        if (userData != "" && Amount != '') {
-
+        if (userData != '' && Amount != '') {
           var options = {
             description: 'Pay Safely and Securely',
-            image: 'https://www.zillionsbuyer.com/uploads/logo_image/logo_0.png',
+            image:
+              'https://www.zillionsbuyer.com/uploads/logo_image/logo_0.png',
             currency: 'INR',
-            key: "rzp_test_cdnNWMaIkNop2J", // Your api key
-            amount: parseInt(Amount)*100,
+            key:access_key, // Your api key
+            amount: parseInt(Amount) * 100,
             name: 'Zillionbuyer',
+            handler:function (response){
+            console.log(response.razorpay_payment_id);
+      },
             prefill: {
-              'name': `${userData.username} ${userData.surname}`,
-              'contact': userData.phone,
-              'email': userData.email,
+              name: `${userData.username} ${userData.surname}`,
+              contact: userData.phone,
+              email: userData.email,
             },
-            theme: {color: '#281E5D'}
-          }
-          RazorpayCheckout.open(options).then((data) => {
-            // handle success
-            alert(`Success: ${data.razorpay_payment_id}`);
+            theme: {color: '#281E5D'},
+            modal: {
+              ondismiss: () =>console.log("handleDismis")   
+          },
+          };
+          RazorpayCheckout.open(options)
+            .then(async(data) => {
+             setLoader(true)
+              if (data.razorpay_payment_id) {
+                 // handle success
+                // alert(`Success: ${data.razorpay_payment_id}`);
+                console.log(`Success: ${data.razorpay_signature},${data.razorpay_order_id},${data.razorpay_payment_id}`)
 
-            if (data.razorpay_payment_id) {
-
-            } else {
-              toast.show('Something Went wrong!, Please try after sometime.', {
-                type: 'danger',
-                placement: 'bottom',
-                duration: 3000,
-                offset: 30,
-                animationType: 'slide-in',
-              });
-            }
-          }).catch((error) => {
-            // handle failure
-            // alert(`Error: ${error.code} | ${error.description}`);
-            console.log(`....Error in RazorpayCheckout...>>: ${error.code} | ${error.description}`)
-          });
+                var body = new FormData();
+                body.append('payment_type', 'razorpay');
+                body.append('address2', props.route.params.id);
+                body.append('razorToken',access_key);
+                body.append('razorpay_signature',data.razorpay_signature);
+                body.append('razorpay_order_id',data.razorpay_order_id);
+                body.append('razorpay_payment_id',data.razorpay_payment_id);
+                var res = await postPayment(body);
+                if (res.status == true) {
+                  cartLen.map((item)=>{
+                    store.dispatch({type:'DEL_CART',payload:[item]})
+                  })
+                  setLoader(false);
+                 props.navigation.navigate('PaymentConfirmation',{data:detailData})
+                } else {
+                  setLoader(false);
+                  toast.show(res.msg, {
+                    type: 'warning',
+                    placement: 'bottom',
+                    duration: 3000,
+                    offset: 30,
+                    animationType: 'slide-in',
+                  });
+                }
+              } else {
+                setLoader(false)
+                toast.show(
+                  'Something Went wrong!, Please try after sometime.',
+                  {
+                    type: 'danger',
+                    placement: 'bottom',
+                    duration: 3000,
+                    offset: 30,
+                    animationType: 'slide-in',
+                  },
+                );
+              }
+            })
+            .catch(error => {
+              setLoader(false)
+              // handle failure
+              // alert(`Error: ${error.code} | ${error.description}`);
+              console.log(
+                `....Error in RazorpayCheckout...>>: ${error.code} | ${error.description}`,
+              );
+            });
+            RazorpayCheckout.onExternalWalletSelection(data => {
+              console.log(`External Wallet Selected: ${data.external_wallet} `);
+            });
         }
-
       } catch (e) {
-        console.log(".....error in getUserData by async ", e)
+        console.log('.....error in getUserData by async ', e);
       }
     }
-  }
-
+  };
 
   return (
-    <View style={{ ...styles.bg, backgroundColor: themecolor.THEMECOLOR }}>
-      <RegisterLoginHeader
-        title="Payment"
-        backIcon={true}
-        onPressBack={() => handleBackButtonClick()}
-      />
-      {loader ? (
-        <LoadingFullScreen style={{ flex: 1 }} />
-      ) : (
-        <>
-          <ScrollView showsVerticalScrollIndicator={false}>
-            <View style={{ ...styles.container }}>
-              <View>
-                <Stepper item={'Payment'} themecolor={themecolor} props={props} />
-              </View>
-              <View style={styles.marginTop} />
-              <View
-                style={{
-                  ...styles.MethodView,
-                  backgroundColor: themecolor.BOXBORDERCOLOR,
-                }}>
-                <View style={{ width: width * 0.93 }}>
-                  <Text
-                    allowFontScaling={false}
-                    style={{ ...styles.PayModeTXT, color: themecolor.TXTWHITE }}>
-                    Select Payment Method
-                  </Text>
-                </View>
-                <View style={{ ...styles.FLEXR }}>
-                  <Text
-                    allowFontScaling={false}
-                    style={{ ...styles.PayModeTXT1, color: themecolor.TXTGREYS }}>
-                    PAY ONLINE{' '}
-                  </Text>
-                  <View
-                    style={{ ...styles.borderLine, borderColor: themecolor.TXTGREYS }}
+    <>
+      <View style={{...styles.bg, backgroundColor: themecolor.THEMECOLOR}}>
+        <RegisterLoginHeader
+          title="Payment"
+          backIcon={true}
+          onPressBack={() => handleBackButtonClick()}
+        />
+        {loader ? (
+          <LoadingFullScreen style={{flex: 1}} />
+        ) : (
+          <>
+            <ScrollView showsVerticalScrollIndicator={false}>
+              <View style={{...styles.container}}>
+                <View>
+                  <Stepper
+                    item={'Payment'}
+                    themecolor={themecolor}
+                    props={props}
                   />
                 </View>
-
-                <TouchableOpacity
-                  activeOpacity={0.5}
-                  onPress={() => handleOnline()}>
-                  <View style={{ ...styles.FLEXR, justifyContent: 'space-between' }}>
-                    <View style={{ width: width * 0.8, flexDirection: 'row' }}>
-                      <Image
-                        source={require('../../assets/images/PAYU.png')}
-                        resizeMode="contain"
-                        style={{ width: 50, height: 27 }}
-                      />
-                      <Text
-                        allowFontScaling={false}
-                        style={{ ...styles.PayModeTXT2, color: themecolor.TXTWHITE }}>
-                        Pay Online Using Pay U
-                      </Text>
-                    </View>
-                    <View style={{ width: width * 0.1 }}>
-                      <FAIcon
-                        name={online ? 'angle-down' : 'angle-right'}
-                        size={15}
-                        color={themecolor.TXTWHITE}
-                      />
-                    </View>
+                <View style={styles.marginTop} />
+                <View
+                  style={{
+                    ...styles.MethodView,
+                    backgroundColor: themecolor.BOXBORDERCOLOR,
+                  }}>
+                  <View style={{width: width * 0.93}}>
+                    <Text
+                      allowFontScaling={false}
+                      style={{
+                        ...styles.PayModeTXT,
+                        color: themecolor.TXTWHITE,
+                      }}>
+                      Select Payment Method
+                    </Text>
                   </View>
-                </TouchableOpacity>
-
-                {online ? (
-                  <View style={{ ...styles.FLEXR1 }}>
-                    <View style={{ width: width * 0.65, flexDirection: 'row' }}>
-                      <Image
-                        source={require('../../assets/images/Note.png')}
-                        resizeMode="contain"
-                        style={{ width: 50, height: 27 }}
-                      />
-                      <Text
-                        allowFontScaling={false}
-                        style={{ ...styles.PayModeTXT2, color: themecolor.TXTWHITE }}>
-                        PayU
-                      </Text>
-                    </View>
-
-                    <View style={{ width: width * 0.1 }}>
-                      <CheckBox
-                        checked={true}
-                        checkedIcon="dot-circle-o"
-                        uncheckedIcon="circle-o"
-                        containerStyle={{ backgroundColor: 'transparent' }}
-                        checkedColor={themecolor.ADDTOCARTBUTTONCOLOR}
-                      />
-                    </View>
+                  <View style={{...styles.FLEXR}}>
+                    <Text
+                      allowFontScaling={false}
+                      style={{
+                        ...styles.PayModeTXT1,
+                        color: themecolor.TXTGREYS,
+                      }}>
+                      PAY ONLINE{' '}
+                    </Text>
+                    <View
+                      style={{
+                        ...styles.borderLine,
+                        borderColor: themecolor.TXTGREYS,
+                      }}
+                    />
                   </View>
-                ) : (
-                  <></>
-                )}
 
-                <View style={{ ...styles.FLEXR }}>
-                  <Text
-                    allowFontScaling={false}
-                    style={{ ...styles.PayModeTXT1, color: themecolor.TXTGREYS }}>
-                    PAY IN CASH{' '}
-                  </Text>
-                  <View
-                    style={{ ...styles.borderLine, borderColor: themecolor.TXTGREYS }}
-                  />
+                  <TouchableOpacity
+                    activeOpacity={0.5}
+                    onPress={() => handleOnline()}>
+                    <View
+                      style={{
+                        ...styles.FLEXR,
+                        justifyContent: 'space-between',
+                      }}>
+                      <View style={{width: width * 0.8, flexDirection: 'row'}}>
+                        <Image
+                          source={require('../../assets/images/PAYU.png')}
+                          resizeMode="contain"
+                          style={{width: 50, height: 27}}
+                        />
+                        <Text
+                          allowFontScaling={false}
+                          style={{
+                            ...styles.PayModeTXT2,
+                            color: themecolor.TXTWHITE,
+                          }}>
+                          Pay Online Using Pay U
+                        </Text>
+                      </View>
+                      <View style={{width: width * 0.1}}>
+                        <FAIcon
+                          name={online ? 'angle-down' : 'angle-right'}
+                          size={15}
+                          color={themecolor.TXTWHITE}
+                        />
+                      </View>
+                    </View>
+                  </TouchableOpacity>
+
+                  {online ? (
+                    <View style={{...styles.FLEXR1}}>
+                      <View style={{width: width * 0.65, flexDirection: 'row'}}>
+                        <Image
+                          source={require('../../assets/images/Note.png')}
+                          resizeMode="contain"
+                          style={{width: 50, height: 27}}
+                        />
+                        <Text
+                          allowFontScaling={false}
+                          style={{
+                            ...styles.PayModeTXT2,
+                            color: themecolor.TXTWHITE,
+                          }}>
+                          PayU
+                        </Text>
+                      </View>
+
+                      <View style={{width: width * 0.1}}>
+                        <CheckBox
+                          checked={true}
+                          checkedIcon="dot-circle-o"
+                          uncheckedIcon="circle-o"
+                          containerStyle={{backgroundColor: 'transparent'}}
+                          checkedColor={themecolor.ADDTOCARTBUTTONCOLOR}
+                        />
+                      </View>
+                    </View>
+                  ) : (
+                    <></>
+                  )}
+
+                  <View style={{...styles.FLEXR}}>
+                    <Text
+                      allowFontScaling={false}
+                      style={{
+                        ...styles.PayModeTXT1,
+                        color: themecolor.TXTGREYS,
+                      }}>
+                      PAY IN CASH{' '}
+                    </Text>
+                    <View
+                      style={{
+                        ...styles.borderLine,
+                        borderColor: themecolor.TXTGREYS,
+                      }}
+                    />
+                  </View>
+                  <TouchableOpacity
+                    activeOpacity={0.5}
+                    onPress={() => handleCash()}>
+                    <View style={{...styles.FLEXR}}>
+                      <View style={{width: width * 0.8, flexDirection: 'row'}}>
+                        <Text
+                          allowFontScaling={false}
+                          style={{
+                            ...styles.ruppee,
+                          }}>
+                          &#8377;
+                        </Text>
+                        <Text
+                          allowFontScaling={false}
+                          style={{
+                            ...styles.PayModeTXT2,
+                            color: themecolor.TXTWHITE,
+                          }}>
+                          Cash on Delivery
+                        </Text>
+                      </View>
+
+                      <View style={{width: width * 0.1}}>
+                        <FAIcon
+                          name={state ? 'angle-down' : 'angle-right'}
+                          size={15}
+                          color={themecolor.TXTWHITE}
+                        />
+                      </View>
+                    </View>
+                  </TouchableOpacity>
+                  {state ? (
+                    <View style={{...styles.FLEXR1}}>
+                      <View style={{width: width * 0.65, flexDirection: 'row'}}>
+                        <Image
+                          source={require('../../assets/images/Note.png')}
+                          resizeMode="contain"
+                          style={{width: 50, height: 27}}
+                        />
+                        <Text
+                          allowFontScaling={false}
+                          style={{
+                            ...styles.PayModeTXT2,
+                            color: themecolor.TXTWHITE,
+                          }}>
+                          Pay Cash on Delivery
+                        </Text>
+                      </View>
+
+                      <View style={{width: width * 0.1}}>
+                        <CheckBox
+                          checked={true}
+                          checkedIcon="dot-circle-o"
+                          uncheckedIcon="circle-o"
+                          containerStyle={{backgroundColor: 'transparent'}}
+                          checkedColor={themecolor.ADDTOCARTBUTTONCOLOR}
+                        />
+                      </View>
+                    </View>
+                  ) : (
+                    <></>
+                  )}
                 </View>
-                <TouchableOpacity activeOpacity={0.5} onPress={() => handleCash()}>
-                  <View style={{ ...styles.FLEXR }}>
-                    <View style={{ width: width * 0.8, flexDirection: 'row' }}>
-                      <Text
-                        allowFontScaling={false}
-                        style={{
-                          ...styles.ruppee,
-                        }}>
-                        &#8377;
-                      </Text>
-                      <Text
-                        allowFontScaling={false}
-                        style={{ ...styles.PayModeTXT2, color: themecolor.TXTWHITE }}>
-                        Cash on Delivery
-                      </Text>
-                    </View>
 
-                    <View style={{ width: width * 0.1 }}>
-                      <FAIcon
-                        name={state ? 'angle-down' : 'angle-right'}
-                        size={15}
-                        color={themecolor.TXTWHITE}
-                      />
-                    </View>
-                  </View>
-                </TouchableOpacity>
-                {state ? (
-                  <View style={{ ...styles.FLEXR1 }}>
-                    <View style={{ width: width * 0.65, flexDirection: 'row' }}>
-                      <Image
-                        source={require('../../assets/images/Note.png')}
-                        resizeMode="contain"
-                        style={{ width: 50, height: 27 }}
-                      />
-                      <Text
-                        allowFontScaling={false}
-                        style={{ ...styles.PayModeTXT2, color: themecolor.TXTWHITE }}>
-                        Pay Cash on Delivery
-                      </Text>
-                    </View>
+                <View style={styles.marginTop} />
 
-                    <View style={{ width: width * 0.1 }}>
-                      <CheckBox
-                        checked={true}
-                        checkedIcon="dot-circle-o"
-                        uncheckedIcon="circle-o"
-                        containerStyle={{ backgroundColor: 'transparent' }}
-                        checkedColor={themecolor.ADDTOCARTBUTTONCOLOR}
-                      />
-                    </View>
-                  </View>
-                ) : (
-                  <></>
-                )}
+                <OrderDetailsComp detailData={detailData} />
+
+                <View style={styles.marginTop} />
               </View>
+            </ScrollView>
 
-              <View style={styles.marginTop} />
+            <View style={{marginVertical: 31}} />
 
-              <OrderDetailsComp detailData={detailData} />
-
-              <View style={styles.marginTop} />
-
-            </View>
-          </ScrollView>
-
-          <View style={{ marginVertical: 31 }} />
-
-          <CartViewDetailsButton amount={detailData.grand_total} buttonTitle={"Buy Now"} buttonOnPress={() => handlePayment()} />
-        </>
-      )}
-    </View>
+            <CartViewDetailsButton
+              amount={detailData.grand_total}
+              buttonTitle={title}
+              buttonOnPress={() => handlePayment()}
+            />
+          </>
+        )}
+      </View>
+    </>
   );
 }

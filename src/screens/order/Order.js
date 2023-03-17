@@ -19,13 +19,17 @@ import {getOrderlist} from '../../repository/OrderRepository/OrderRepo';
 import LoadingFullScreen from '../../components/shared/Loader/LoadingFullScreen';
 import RegisterLoginHeader from '../../components/shared/header/RegisterLoginHeader';
 import NoDataMsg from '../../components/shared/NoData/NoDataMsg';
-import { useToast } from 'react-native-toast-notifications';
+import {useToast} from 'react-native-toast-notifications';
 
 const {width, height} = Dimensions.get('screen');
 
 export default function Order(props) {
   function handleBackButtonClick() {
-    props.navigation.goBack();
+    if (props.route.params != undefined) {
+      props.navigation.navigate('Dashboard');
+    } else {
+      props.navigation.goBack();
+    }
     return true;
   }
 
@@ -50,7 +54,6 @@ export default function Order(props) {
   const handleOrderlist = async () => {
     try {
       var res = await getOrderlist();
-      console.log("handleOrderlist....>>",res.data)
       if (res.status === true) {
         setData(res.data);
         setDataFilter(res.data);
@@ -109,8 +112,8 @@ export default function Order(props) {
 
           {data.length > 0 ? (
             <>
-            <OrderDataList data={data} />
-          <View style={{...styles.mgT10}} />
+              <OrderDataList data={data} />
+              <View style={{...styles.mgT10}} />
             </>
           ) : (
             <NoDataMsg title="No Order Found! " />

@@ -30,12 +30,10 @@ const RootReducer = createReducer(initialState, (builder) => {
   })
 
   builder.addCase('ADD_CART_QTY_UPDATE', (state, action) => {
-    console.log('ADD_CART_QTY_UPDATE --->', action);
     state.cartQtyUpdate = action.payload;
   })
 
   builder.addCase('REMOVE_CART_QTY_UPDATE', (state, action) => {
-    console.log('REMOVE_CART_QTY_UPDATE--->', action.payload);
     state.cartQtyUpdate = '';
   })
 
