@@ -49,6 +49,7 @@ export default function CartAddress(props) {
 
   const [loader, setLoader] = useState(true);
   const [address, setAddress] = useState('')
+  const [addressId, setAddressId] = useState('')
   const [city, setCity] = useState('')
   const [phone, setPhone] = useState('')
   const [postalCode, setPostalCode] = useState('')
@@ -91,6 +92,7 @@ export default function CartAddress(props) {
         if(res.data.length >0 ){
         setData(true)
         setAddress(res.data[0].address)
+        setAddressId(res.data[0].id)
         setCity(res.data[0].city)
         setPhone(res.data[0].phone)
         setPostalCode(res.data[0].postal_code)
@@ -148,7 +150,7 @@ export default function CartAddress(props) {
       );
     }
     else{
-      props.navigation.navigate('Payment')
+      props.navigation.navigate('Payment',{id:addressId})
     }
   }
 

@@ -34,6 +34,7 @@ import Cart from '../../screens/OrderProcess/Cart';
 import Payment from '../../screens/OrderProcess/Payment';
 import CartAddress from '../../screens/OrderProcess/CartAddress';
 import ProductMoreDetails from '../../screens/category/ProductMoreDetails';
+import { PaymentConfirmation } from '../../screens/OrderProcess/PaymentConfirmation';
 
 function MainNavigationStack(props) {
   const Stack = createStackNavigator();
@@ -175,6 +176,11 @@ function MainNavigationStack(props) {
            <Stack.Screen
           name="CartAddress"
           component={CartAddress}
+          options={{headerShown: false}}
+        />
+           <Stack.Screen
+          name="PaymentConfirmation"
+          component={PaymentConfirmation}
           options={{headerShown: false}}
         />
       </Stack.Navigator>

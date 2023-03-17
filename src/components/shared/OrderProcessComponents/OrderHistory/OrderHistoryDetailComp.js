@@ -26,7 +26,7 @@ export default function OrderHistoryDetailComp(props) {
     <View
       style={{
         ...styles.datalistView,
-        backgroundColor: themecolor.BOXBORDERCOLOR,
+        backgroundColor: props.themecolor?props.themecolor:themecolor.BOXBORDERCOLOR,
         borderColor: themecolor.BOXBORDERCOLOR1,
       }}
     >
@@ -65,7 +65,7 @@ export default function OrderHistoryDetailComp(props) {
           <Text style={{ ...styles.txt1, color: themecolor.TXTWHITE }}>Convenience Fee</Text>
         </View>
         <View style={{ ...styles.orderDetialcompWidth1 }}>
-          {detailData.shipping != "0" ?
+          {(props.ship ? props.ship!="0" : detailData.shipping != "0") ?
             <Text style={{ ...styles.txt1, color: themecolor.TXTWHITE }}><FAIcon name="rupee" size={12} />{parseInt(detailData.shipping)}</Text>
             :
             <Text style={{ ...styles.txt1, color: themecolor.TEXTGREEN }}>FREE</Text>
