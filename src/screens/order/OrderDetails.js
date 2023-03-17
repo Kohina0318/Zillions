@@ -59,7 +59,6 @@ export default function OrderDetails(props) {
     try {
       var res = await getOrderView(props.route.params.SaleId);
       if (res.status === true) {
-        console.log("uguhuyuuiui",res.data)
         setData(res.data);
         setProductDetailData(res.data.product)
         setShippingAddress(res.data.address)
