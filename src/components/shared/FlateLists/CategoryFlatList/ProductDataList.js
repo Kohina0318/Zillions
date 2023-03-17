@@ -98,7 +98,7 @@ function ProductDataFlateList({ item, themecolor }) {
         <TouchableOpacity
           activeOpacity={0.8}
           onPress={() =>
-            navigation.navigate('ProductDetail', {
+            navigation.navigate('ProductMoreDetails', {
               productId: item.product_id,
               title: item.title,
             })
@@ -149,7 +149,7 @@ function ProductDataFlateList({ item, themecolor }) {
         <TouchableOpacity
           activeOpacity={0.8}
           onPress={() =>
-            navigation.navigate('ProductDetail', {
+            navigation.navigate('ProductMoreDetails', {
               productId: item.product_id,
               title: item.title,
             })

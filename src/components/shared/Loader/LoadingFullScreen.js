@@ -2,6 +2,7 @@ import { View, ActivityIndicator } from 'react-native';
 import React from 'react';
 import {useSelector} from 'react-redux';
 import { MyThemeClass } from '../../Theme/ThemeDarkLightColor';
+import { styles } from '../../../assets/css/LoadingCss/LoadingStyle';
 
 
 export default function LoadingFullScreen(props) {
@@ -10,7 +11,7 @@ export default function LoadingFullScreen(props) {
  
     return (
         <>
-          <View style={{ alignItems: 'center', justifyContent: 'center', alignSelf: 'center', flex: 1, backgroundColor:themecolor.THEMECOLOR  , width:'100%'}}>
+          <View style={{...styles.loadingFullView, backgroundColor:themecolor.THEMECOLOR }}>
               <ActivityIndicator size="large" color={themecolor.BACKICON} />
           </View>
         </>

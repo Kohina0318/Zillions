@@ -130,9 +130,10 @@ const styles = StyleSheet.create({
     borderColor: Colors.borderColor,
   },
   centeredView: {
-    flex: 1,
+    // flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
+    backgroundColor: 'rgba(0,0,0,0.2)',
     // marginTop: 22,
   },
   modalView: {
@@ -150,6 +151,8 @@ const styles = StyleSheet.create({
     shadowRadius: 4,
     elevation: 5,
   },
+  modalCloseView:{width: width*0.9, flexDirection: "row", alignItems:"flex-start", justifyContent:"flex-start",  },
+  modalCloseTouch:{ padding: 5, borderRadius: 20, justifyContent: "center" },
   button: {
     borderRadius: 20,
     padding: 10,
@@ -235,8 +238,19 @@ const styles = StyleSheet.create({
     color: Colors.black,
     fontFamily: FontFamily.PopinsMedium,
     fontSize: 15,
+    fontWeight:'800'
   },
-  activeTabs: {color: '#000', fontSize: 14, borderBottomWidth: 3},
+  tabBorderLine: {
+    width: "100%",
+    borderWidth: 0.3,
+  },
+  MrT5:{marginTop:5},
+  activeTabs: {
+  color: Colors.black,
+  fontSize: 15, 
+  fontFamily: FontFamily.PopinsMedium,
+  fontWeight:'800'
+},
   NumericInputViewList: {
     width: width * 0.1,
     justifyContent: 'flex-end',
@@ -289,19 +303,51 @@ const styles = StyleSheet.create({
   },
   DELVIEW:{
     width: width * 0.9,
-    marginLeft: 10,
-    marginRight: 10,
-    marginTop: 10,
-    marginBottom: 5,
+    margin:5,
     flexDirection: 'row',
   },
   Tabsubview:{
     alignItems: 'center',
     marginTop:5
   },
+
+  
+  ///////////////////////////////////////////////////////
+  
+
+
   MGT:{
     marginTop: 10
-  }
+  },
+  tabReviewContainer:{
+    flexDirection: 'column', width: width * 0.88,
+  },
+  tabDescriptionContainer:{
+    width: width * 0.85,
+  },
+  tabStarContainer:{
+    width: width * 0.35, margin: 10 
+  },
+
+  containerMain: {
+    justifyContent: 'center',
+    alignSelf: 'center',
+    marginTop:5
+},
+innerViewMain: { flexDirection: "row", width: "100%" },
+  
+  datalistView: {
+    width: width * 0.94,
+    marginTop: 3,
+    padding: 13,
+    borderRadius: 8,
+    // alignSelf: 'center',
+    // alignItems: 'center',
+    borderWidth: 0.5,
+    marginBottom: 2,
+    backgroundColor:"red"
+  },
+
 });
 
 export {styles};

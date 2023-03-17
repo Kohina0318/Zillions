@@ -41,7 +41,7 @@ function CartProductDataFlateList({ item, themecolor, refresh, setRefresh }) {
       qt = parseInt(data1[1])
     }
   }
-  const [qty, setQty] = useState(qt)
+  const [qty, setQty] = useState(item.is_update > 0 ? parseInt(item.qty) : qt)
 
   const handleRemoveProduct = async () => {
     try {
@@ -111,7 +111,6 @@ function CartProductDataFlateList({ item, themecolor, refresh, setRefresh }) {
     }
   }
 
-
   return (
     <View
       style={{
@@ -124,7 +123,7 @@ function CartProductDataFlateList({ item, themecolor, refresh, setRefresh }) {
 
         <TouchableOpacity activeOpacity={0.5}
           onPress={() =>
-            navigation.navigate('ProductDetail', {
+            navigation.navigate('ProductMoreDetails', {
               productId: item.id,
               title: item.name,
             })

@@ -15,22 +15,24 @@ import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import {useNavigation} from '@react-navigation/native';
 import StarRating from 'react-native-star-rating';
 import FAIcon from 'react-native-vector-icons/FontAwesome';
+import { Alert } from 'react-native/Libraries/Alert/Alert';
 
 
 const {width, height} = Dimensions.get('screen');
 
 function DashboardProductDataFlateList({item, themecolor}) {
   const navigation = useNavigation();
+ 
   return (
     <>
       <TouchableOpacity
-        activeOpacity={0.8}
+        activeOpacity={0.5}
         style={{
           ...ProductStyle.datalistView,
           backgroundColor: themecolor.BOXBORDERCOLOR,
           borderColor: themecolor.BOXBORDERCOLOR1,
         }}
-        onPress={() => navigation.navigate('ProductDetail',{productId:item.product_id,title:item.title})}
+        onPress={() => navigation.navigate('ProductMoreDetails',{productId:item.product_id,title:item.title})}
         >
         <View style={{...ProductStyle.innerImage}}>
           <Image
