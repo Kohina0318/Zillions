@@ -48,7 +48,6 @@ export default function Profile(props) {
         var res = await getProfileInfo();
         if (res.status === true) {
           setUserData(res.data);
-          console.log('res data>>>>>>>>>> in profile',res.data)
           setLoader(false);
         } else {
           setUserData(userData)

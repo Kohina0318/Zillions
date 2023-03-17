@@ -58,7 +58,6 @@ export default function OrderDetails(props) {
   const handleOrderView = async () => {
     try {
       var res = await getOrderView(props.route.params.SaleId);
-      console.log("handleOrderView.....", res.data)
       if (res.status === true) {
         setData(res.data);
         setProductDetailData(Object.values(JSON.parse(res.data.product_details)))

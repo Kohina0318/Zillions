@@ -49,6 +49,7 @@ export default function CartAddress(props) {
 
   const [loader, setLoader] = useState(true);
   const [address, setAddress] = useState('')
+  const [addressId, setAddressId] = useState('')
   const [city, setCity] = useState('')
   const [phone, setPhone] = useState('')
   const [postalCode, setPostalCode] = useState('')
@@ -82,7 +83,6 @@ export default function CartAddress(props) {
   const handleManageAddress = async () => {
     try {
       var userData = await getProfileInfo();
-      console.log('userdata>>>>>>>>>>>>>>>>', userData)
       setName(userData.data[0].username.replace(/\s+/g, ''))
       setSurname(userData.data[0].surname.replace(/\s+/g, ''))
 
@@ -90,12 +90,13 @@ export default function CartAddress(props) {
       body.append("type", "default")
       var res = await getManageAddressPost(body);
       
-      console.log("manage address>>>>>>>>>",res)
+      console.log("manage address>>>>>>>>>",res.data[0])
       if (res.status == true) {
         // setData(res.data);
         if(res.data.length >0 ){
           setData(true)
         setAddress(res.data[0].address)
+        setAddressId(res.data[0].id)
         setCity(res.data[0].city)
         setPhone(res.data[0].phone)
         setPostalCode(res.data[0].postal_code)
@@ -153,7 +154,7 @@ export default function CartAddress(props) {
       );
     }
     else{
-      props.navigation.navigate('Payment')
+      props.navigation.navigate('Payment',{id:addressId})
     }
   }
 

@@ -204,9 +204,8 @@ export default function ProductDetail(props) {
   const handleWishListed = async (any) => {
     try {
       var res = await postAddOrRemoveWishlist(any, productId);
-      console.log(res.msg)
       if (res.status == true) {
-        if (any == 1) {
+        if (any == 'add') {
           setShowWishListed(1);
         }
         else {

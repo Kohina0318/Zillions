@@ -27,6 +27,7 @@ export default function CarouselFile(props) {
         index={largeImage}
         pageSize={(width, height)}
         loop
+        onPageChanged={(index)=>setLargeImage(index)}
         activePageIndicatorStyle={{backgroundColor: themecolor.ICON}}
         pageIndicatorStyle={{backgroundColor: themecolor.TXTGREY}}>
         {props.data.map((item, index) => renderItem(item, index))}
