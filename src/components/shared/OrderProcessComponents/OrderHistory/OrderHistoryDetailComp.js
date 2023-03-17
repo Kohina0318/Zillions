@@ -20,6 +20,8 @@ export default function OrderHistoryDetailComp(props) {
   const mode = useSelector(state => state.mode);
   const themecolor = new MyThemeClass(mode).getThemeColor();
 
+  console.log("details in Order Detail>>>>>>>>",props.detailData)
+
   var detailData = props.detailData
 
   return (

@@ -83,8 +83,8 @@ function WishListDataFlateList({ item, themecolor, setRefresh, refresh, }) {
 
       var res = await postAddCartProduct(item.product_id, formdata)
       if (res.status == true) {
-        store.dispatch({type:'ADD_CART',payload:[item.productId,{productId:item.productId,data:formdata}]})
-        handleRemove()
+        store.dispatch({type:'ADD_CART',payload:[item.product_id,{productId:item.product_id,data:formdata}]})
+       await handleRemove()
         toast.show(res.msg, {
           type: 'success',
           placement: 'bottom',
