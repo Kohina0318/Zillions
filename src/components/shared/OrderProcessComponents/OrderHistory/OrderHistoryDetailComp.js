@@ -20,8 +20,6 @@ export default function OrderHistoryDetailComp(props) {
   const mode = useSelector(state => state.mode);
   const themecolor = new MyThemeClass(mode).getThemeColor();
 
-  console.log("details in Order Detail>>>>>>>>",props.detailData)
-
   var detailData = props.detailData
 
   return (
@@ -43,7 +41,7 @@ export default function OrderHistoryDetailComp(props) {
           <Text style={{ ...styles.txt1, color: themecolor.TXTWHITE }}>Subtotal Amount</Text>
         </View>
         <View style={{ ...styles.orderDetialcompWidth1, }}>
-          <Text style={{ ...styles.txt1, color: themecolor.TXTWHITE }}>{parseInt(detailData.total)}</Text>
+          <Text style={{ ...styles.txt1, color: themecolor.TXTWHITE }}><FAIcon name="rupee" size={12} /> {parseInt(detailData.total)}</Text>
         </View>
       </View>
 
@@ -55,7 +53,7 @@ export default function OrderHistoryDetailComp(props) {
           <Text style={{ ...styles.txt1, color: themecolor.TXTWHITE }}>Tax Amount</Text>
         </View>
         <View style={{ ...styles.orderDetialcompWidth1 }}>
-          <Text style={{ ...styles.txt1, color: themecolor.TXTWHITE }}>{parseInt(detailData.tax)}</Text>
+          <Text style={{ ...styles.txt1, color: themecolor.TXTWHITE }}><FAIcon name="rupee" size={12} /> {parseInt(detailData.taxtotal)}</Text>
         </View>
       </View>
 
@@ -68,7 +66,7 @@ export default function OrderHistoryDetailComp(props) {
         </View>
         <View style={{ ...styles.orderDetialcompWidth1 }}>
           {(props.ship ? props.ship!="0" : detailData.shipping != "0") ?
-            <Text style={{ ...styles.txt1, color: themecolor.TXTWHITE }}><FAIcon name="rupee" size={12} />{parseInt(detailData.shipping)}</Text>
+            <Text style={{ ...styles.txt1, color: themecolor.TXTWHITE }}><FAIcon name="rupee" size={12} /> {parseInt(detailData.shipping)}</Text>
             :
             <Text style={{ ...styles.txt1, color: themecolor.TEXTGREEN }}>FREE</Text>
           }
@@ -95,10 +93,10 @@ export default function OrderHistoryDetailComp(props) {
 
       <View style={{ ...styles.innerView }}>
         <View style={{ ...styles.orderDetialcompWidth, }}>
-          <Text style={{ ...styles.txt, color: themecolor.TXTWHITE }}>Amount to be paid</Text>
+          <Text style={{ ...styles.txt, color: themecolor.BACKICON }}>Amount to be paid</Text>
         </View>
         <View style={{ ...styles.orderDetialcompWidth1, }}>
-          <Text style={{ ...styles.txt, color: themecolor.TXTWHITE }}><FAIcon name="rupee" size={14} /> {parseInt(detailData.grand_total)}</Text>
+          <Text style={{ ...styles.txt, color: themecolor.BACKICON }}><FAIcon name="rupee" size={14} /> {parseInt(detailData.grand_total)}</Text>
         </View>
       </View>
 

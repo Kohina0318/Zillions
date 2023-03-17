@@ -59,10 +59,8 @@ export default function OrderDetails(props) {
     try {
       var res = await getOrderView(props.route.params.SaleId);
       if (res.status === true) {
-        // alert(JSON.stringify(res.data))
-        // var data1= JSON.stringify(res.data)
-        // setData(data1);
-        // setProductDetailData(JSON.parse(res.data.product))
+        setData(res.data);
+        setProductDetailData(res.data.product)
         setShippingAddress(res.data.address)
         setLoader(false);
       }

@@ -23,17 +23,21 @@ function OrderDetailProductDataFlateList({ item, themecolor, refresh, setRefresh
   const toast = useToast();
   const navigation = useNavigation();
 
-  var optionData = JSON.parse(item.option)
+  var optionData = item.option
   var Size = ''
 
-  if (optionData.size != undefined || optionData.size != null) {
-    if (optionData.size.value != undefined || optionData.size.value != null) {
-      var optionSizeValueData = JSON.stringify(optionData.size.value)
+  
+  if (JSON.parse(optionData).size != undefined || JSON.parse(optionData).size != null) {
+    if (JSON.parse(optionData).size.value != undefined ||JSON.parse(optionData).size.value != null) {
+      var optionSizeValueData = JSON.parse(optionData).size.value
       var data = optionSizeValueData.replace(/^["'](.+(?=["']$))["']$/, '$1');
       var data1 = data.split("*");
       Size = data1[0]
     }
   }
+
+
+
 
 
   return (
