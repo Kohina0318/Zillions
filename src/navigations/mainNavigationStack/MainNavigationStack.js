@@ -11,8 +11,6 @@ import Login from '../../screens/auth/Login';
 import ViewPager from '../../screens/intro/ViewPager'
 import Header from '../../components/shared/header/Header';
 import Splash from '../../screens/intro/Splash';
-import Dashboard from '../../screens/dashboard/Dashboard';
-import BottomNavigationStack from '../bottomNavigator/BottomNavigationStack';
 import Categories from '../../screens/category/Categories';
 import WishList from '../../screens/wishList/WishList';
 import Profile from '../../screens/profile/Profile';
@@ -25,7 +23,6 @@ import BestSelling from '../../screens/dashboard/BestSelling';
 import RecentlyViewed from '../../screens/dashboard/RecentlyViewed';
 import MostViewed from '../../screens/dashboard/MostViewed';
 import Brands from '../../screens/dashboard/Brands';
-import ProductDetail from '../../screens/category/ProductDetail';
 import Register from '../../screens/auth/Register';
 import ForgotPassword from '../../screens/auth/ForgotPassword';
 import OrderDetails from '../../screens/order/OrderDetails';
@@ -36,6 +33,7 @@ import Search from '../../screens/Search/Search';
 import Cart from '../../screens/OrderProcess/Cart';
 import Payment from '../../screens/OrderProcess/Payment';
 import CartAddress from '../../screens/OrderProcess/CartAddress';
+import ProductMoreDetails from '../../screens/category/ProductMoreDetails';
 
 function MainNavigationStack(props) {
   const Stack = createStackNavigator();
@@ -101,8 +99,8 @@ function MainNavigationStack(props) {
           options={{headerShown: false}}
         />
         <Stack.Screen
-          name="ProductDetail"
-          component={ProductDetail}
+          name="ProductMoreDetails"
+          component={ProductMoreDetails}
           options={{headerShown: false}}
         />
         <Stack.Screen

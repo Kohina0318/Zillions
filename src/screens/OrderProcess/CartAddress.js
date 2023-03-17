@@ -17,7 +17,7 @@ import { useToast } from 'react-native-toast-notifications';
 import HalfSizeButton from '../../components/shared/button/halfSizeButton';
 import { Stepper } from '../Stepper/Stepper';
 import FAIcon from 'react-native-vector-icons/FontAwesome';
-import { getManageAddressPost } from '../../repository/AddressRepository/MangeAddressRepo';
+import { postDefaultAddress } from '../../repository/AddressRepository/MangeAddressRepo';
 import { getCartOrderDetails } from '../../repository/OrderProcessRepository/CartListRepo';
 import CartViewDetailsButton from '../../components/shared/button/CartViewDetailsButton';
 import OrderDetailsComp from '../../components/shared/OrderProcessComponents/Cart/OrderDetailsComp';
@@ -82,19 +82,14 @@ export default function CartAddress(props) {
   const handleManageAddress = async () => {
     try {
       var userData = await getProfileInfo();
-      console.log('userdata>>>>>>>>>>>>>>>>', userData)
       setName(userData.data[0].username.replace(/\s+/g, ''))
       setSurname(userData.data[0].surname.replace(/\s+/g, ''))
 
-      var body = new FormData()
-      body.append("type", "default")
-      var res = await getManageAddressPost(body);
-      
-      console.log("manage address>>>>>>>>>",res)
+      var res = await postDefaultAddress();
       if (res.status == true) {
         // setData(res.data);
         if(res.data.length >0 ){
-          setData(true)
+        setData(true)
         setAddress(res.data[0].address)
         setCity(res.data[0].city)
         setPhone(res.data[0].phone)

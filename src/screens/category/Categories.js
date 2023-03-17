@@ -58,7 +58,8 @@ export default function Categories(props) {
       {loader ? (
         <LoadingFullScreen style={{flex: 1}} />
       ) : (
-        <><View
+        <>
+        <View
             style={{
               ...CategoryStyle.container,
             }}>

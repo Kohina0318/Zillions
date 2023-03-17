@@ -34,14 +34,14 @@ function ProfileDataFlateList({item, themecolor}) {
           Linking.openURL(item.Link)
         }}
         >
-        <View style={{flexDirection: 'row'}}>
+        <View style={{flexDirection: 'row', }}>
           {item.icon != null || item.icon != undefined ?
-          <View style={{marginRight: 10, alignSelf: 'center'}}>
+          <View style={{marginRight: 10, alignSelf: 'center',}}>
             <Text allowFontScaling={false} style={{color: themecolor.BACKICON}}>{item.icon}</Text>
           </View>
             :<></>}
           <View>
-            <Text allowFontScaling={false} style={{...ProfileStyle.txt, color: themecolor.TXTWHITE}}>
+            <Text allowFontScaling={false} style={{...ProfileStyle.txtProfileData, color: themecolor.TXTWHITE}}>
               {item.name}
             </Text>
           </View>
