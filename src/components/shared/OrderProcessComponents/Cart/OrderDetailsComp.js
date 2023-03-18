@@ -32,17 +32,17 @@ export default function OrderDetailsComp(props) {
       }}
     >
       <View style={{ ...styles.innerView }}>
-        <Text style={{ ...styles.txt, color: themecolor.BACKICON }}>Order Details</Text>
+        <Text allowFontScaling={false} style={{ ...styles.txt, color: themecolor.BACKICON }}>Order Details</Text>
       </View>
 
       <View style={{ ...styles.mv5 }} />
 
       <View style={{ ...styles.innerView }}>
         <View style={{ ...styles.orderDetialcompWidth }}>
-          <Text style={{ ...styles.txt1, color: themecolor.TXTWHITE }}>Subtotal Amount</Text>
+          <Text allowFontScaling={false} style={{ ...styles.txt1, color: themecolor.TXTWHITE }}>Subtotal Amount</Text>
         </View>
         <View style={{ ...styles.orderDetialcompWidth1, }}>
-          <Text style={{ ...styles.txt1, color: themecolor.TXTWHITE }}><FAIcon name="rupee" size={13} /> {parseInt(CartDetailData.total)}</Text>
+          <Text allowFontScaling={false} style={{ ...styles.txt1, color: themecolor.TXTWHITE }}><FAIcon name="rupee" size={13} /> {parseInt(CartDetailData.total)}</Text>
         </View>
       </View>
 
@@ -50,18 +50,18 @@ export default function OrderDetailsComp(props) {
 
       <View style={{ ...styles.innerView }}>
         <View style={{ ...styles.orderDetialcompWidth }}>
-          <Text style={{ ...styles.txt1, color: themecolor.TXTWHITE }}>Tax Amount</Text>
+          <Text allowFontScaling={false} style={{ ...styles.txt1, color: themecolor.TXTWHITE }}>Tax Amount</Text>
         </View>
         <View style={{ ...styles.orderDetialcompWidth1 }}>
-          <Text style={{ ...styles.txt1, color: themecolor.TXTWHITE }}> <FAIcon name="rupee" size={13} /> {parseInt(CartDetailData.tax)}</Text>
+          <Text allowFontScaling={false} style={{ ...styles.txt1, color: themecolor.TXTWHITE }}> <FAIcon name="rupee" size={13} /> {parseInt(CartDetailData.tax)}</Text>
         </View>
       </View>
 
       <View style={{ ...styles.mv5 }} />
 
       <View style={{ ...styles.innerView }}>
-        <Text style={{ ...styles.txt1, color: themecolor.TXTWHITE }}>Convenience Fee</Text>
-        <Text style={{ ...styles.txtConvenienceFee, color: themecolor.ADDTOCARTBUTTONCOLOR }}> What's this?</Text>
+        <Text allowFontScaling={false} style={{ ...styles.txt1, color: themecolor.TXTWHITE }}>Convenience Fee</Text>
+        <Text allowFontScaling={false} style={{ ...styles.txtConvenienceFee, color: themecolor.ADDTOCARTBUTTONCOLOR }}> What's this?</Text>
       </View>
 
       <View style={{ ...styles.innerView }}>
@@ -70,9 +70,9 @@ export default function OrderDetailsComp(props) {
         </View>
         <View style={{ ...styles.orderDetialcompWidth1 }}>
           {CartDetailData.ship != "0" ?
-            <Text style={{ ...styles.txt1, color: themecolor.TXTGREYS }}><FAIcon name="rupee" size={12} /> {parseInt(CartDetailData.ship)}</Text>
+            <Text allowFontScaling={false} style={{ ...styles.txt1, color: themecolor.TXTGREYS }}><FAIcon name="rupee" size={12} /> {parseInt(CartDetailData.ship)}</Text>
             :
-            <Text style={{ ...styles.txt1, color: themecolor.TEXTGREEN }}>FREE</Text>
+            <Text allowFontScaling={false} style={{ ...styles.txt1, color: themecolor.TEXTGREEN }}>FREE</Text>
           }
         </View>
       </View>
@@ -85,10 +85,10 @@ export default function OrderDetailsComp(props) {
 
       <View style={{ ...styles.innerView }}>
         <View style={{ ...styles.orderDetialcompWidth, }}>
-          <Text style={{ ...styles.txt, color: themecolor.TXTWHITE }}>Amount Payable</Text>
+          <Text allowFontScaling={false} style={{ ...styles.txt, color: themecolor.TXTWHITE }}>Amount Payable</Text>
         </View>
         <View style={{ ...styles.orderDetialcompWidth1, }}>
-          <Text style={{ ...styles.txt, color: themecolor.TXTWHITE }}> <FAIcon name="rupee" size={14} /> {parseInt(CartDetailData.grand_total)}</Text>
+          <Text allowFontScaling={false} style={{ ...styles.txt, color: themecolor.TXTWHITE }}> <FAIcon name="rupee" size={14} /> {parseInt(CartDetailData.grand_total)}</Text>
         </View>
       </View>
 

@@ -28,6 +28,7 @@ export default function Search(props) {
         <FIcon name="search" size={12} color={themecolor.AV2} />
       </Text>
       <TextInput
+      allowFontScaling={false}
         onChangeText={text => props.filtering(text)}
         placeholder= {props.title}
         style={{

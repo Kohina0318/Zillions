@@ -168,7 +168,7 @@ function ProductDataFlateList({ item, themecolor }) {
 
           <View style={{ margin: 2, width: width * 0.25 }}>
             <StarRating
-              disabled={false}
+              disabled={true}
               maxStars={5}
               rating={parseFloat(item.rating_num)}
               selectedStar={rating => onStarRatingPress(rating)}

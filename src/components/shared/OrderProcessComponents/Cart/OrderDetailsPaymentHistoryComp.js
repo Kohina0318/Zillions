@@ -31,17 +31,17 @@ export default function OrderDetailsPaymentHistoryComp(props) {
       }}
     >
       <View style={{ ...styles.innerView }}>
-        <Text style={{ ...styles.txt, color: themecolor.BACKICON }}>Order Details</Text>
+        <Text allowFontScaling={false} style={{ ...styles.txt, color: themecolor.BACKICON }}>Order Details</Text>
       </View>
 
       <View style={{ ...styles.mv5 }} />
 
       <View style={{ ...styles.innerView }}>
         <View style={{ ...styles.orderDetialcompWidth }}>
-          <Text style={{ ...styles.txt1, color: themecolor.TXTWHITE }}>Subtotal Amount</Text>
+          <Text allowFontScaling={false} style={{ ...styles.txt1, color: themecolor.TXTWHITE }}>Subtotal Amount</Text>
         </View>
         <View style={{ ...styles.orderDetialcompWidth1, }}>
-          <Text style={{ ...styles.txt1, color: themecolor.TXTWHITE }}><FAIcon name="rupee" size={12} /> {parseInt(detailData.total)}</Text>
+          <Text allowFontScaling={false} style={{ ...styles.txt1, color: themecolor.TXTWHITE }}><FAIcon name="rupee" size={12} /> {parseInt(detailData.total)}</Text>
         </View>
       </View>
 
@@ -50,10 +50,10 @@ export default function OrderDetailsPaymentHistoryComp(props) {
 
       <View style={{ ...styles.innerView }}>
         <View style={{ ...styles.orderDetialcompWidth }}>
-          <Text style={{ ...styles.txt1, color: themecolor.TXTWHITE }}>Tax Amount</Text>
+          <Text allowFontScaling={false} style={{ ...styles.txt1, color: themecolor.TXTWHITE }}>Tax Amount</Text>
         </View>
         <View style={{ ...styles.orderDetialcompWidth1 }}>
-          <Text style={{ ...styles.txt1, color: themecolor.TXTWHITE }}><FAIcon name="rupee" size={12} /> {parseInt(detailData.tax)}</Text>
+          <Text allowFontScaling={false} style={{ ...styles.txt1, color: themecolor.TXTWHITE }}><FAIcon name="rupee" size={12} /> {parseInt(detailData.tax)}</Text>
         </View>
       </View>
 
@@ -62,13 +62,13 @@ export default function OrderDetailsPaymentHistoryComp(props) {
 
       <View style={{ ...styles.innerView }}>
         <View style={{ ...styles.orderDetialcompWidth }}>
-          <Text style={{ ...styles.txt1, color: themecolor.TXTWHITE }}>Convenience Fee</Text>
+          <Text allowFontScaling={false} style={{ ...styles.txt1, color: themecolor.TXTWHITE }}>Convenience Fee</Text>
         </View>
         <View style={{ ...styles.orderDetialcompWidth1 }}>
           {(props.ship ? props.ship!="0" : detailData.shipping != "0") ?
-            <Text style={{ ...styles.txt1, color: themecolor.TXTWHITE }}><FAIcon name="rupee" size={12} /> {parseInt(detailData.ship)}</Text>
+            <Text allowFontScaling={false} style={{ ...styles.txt1, color: themecolor.TXTWHITE }}><FAIcon name="rupee" size={12} /> {parseInt(detailData.ship)}</Text>
             :
-            <Text style={{ ...styles.txt1, color: themecolor.TEXTGREEN }}>FREE</Text>
+            <Text allowFontScaling={false} style={{ ...styles.txt1, color: themecolor.TEXTGREEN }}>FREE</Text>
           }
         </View>
       </View>
@@ -77,10 +77,10 @@ export default function OrderDetailsPaymentHistoryComp(props) {
 
       <View style={{ ...styles.innerView }}>
         <View style={{ ...styles.orderDetialcompWidth }}>
-          <Text style={{ ...styles.txtPrice, color: themecolor.TXTWHITE }}>Total Amount</Text>
+          <Text allowFontScaling={false} style={{ ...styles.txtPrice, color: themecolor.TXTWHITE }}>Total Amount</Text>
         </View>
         <View style={{ ...styles.orderDetialcompWidth1 }}>
-          <Text style={{ ...styles.txtPrice, color: themecolor.TXTWHITE }}><FAIcon name="rupee" size={13} /> {parseInt(detailData.grand_total)}</Text>
+          <Text allowFontScaling={false} style={{ ...styles.txtPrice, color: themecolor.TXTWHITE }}><FAIcon name="rupee" size={13} /> {parseInt(detailData.grand_total)}</Text>
         </View>
       </View>
 
@@ -93,10 +93,10 @@ export default function OrderDetailsPaymentHistoryComp(props) {
 
       <View style={{ ...styles.innerView }}>
         <View style={{ ...styles.orderDetialcompWidth, }}>
-          <Text style={{ ...styles.txt, color: themecolor.BACKICON }}>Amount to be paid</Text>
+          <Text allowFontScaling={false} style={{ ...styles.txt, color: themecolor.BACKICON }}>Amount to be paid</Text>
         </View>
         <View style={{ ...styles.orderDetialcompWidth1, }}>
-          <Text style={{ ...styles.txt, color: themecolor.BACKICON }}><FAIcon name="rupee" size={14} /> {parseInt(detailData.grand_total)}</Text>
+          <Text allowFontScaling={false} style={{ ...styles.txt, color: themecolor.BACKICON }}><FAIcon name="rupee" size={14} /> {parseInt(detailData.grand_total)}</Text>
         </View>
       </View>
 

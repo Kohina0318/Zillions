@@ -200,7 +200,7 @@ function CartProductDataFlateList({ item, themecolor, refresh, setRefresh }) {
       <View style={{ ...styles.innerView, marginTop: 10 }}>
         <View style={{ ...styles.removeView }} >
           <TouchableOpacity activeOpacity={0.5} style={{ ...styles.removeToch }} onPress={() => handleRemoveProduct()}>
-            <Text style={{ ...styles.removeButton, color: themecolor.TEXTRED }}>Remove</Text>
+            <Text allowFontScaling={false} style={{ ...styles.removeButton, color: themecolor.TEXTRED }}>Remove</Text>
           </TouchableOpacity>
         </View>
       </View>

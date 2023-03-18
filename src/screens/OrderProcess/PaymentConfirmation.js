@@ -113,8 +113,8 @@ export const PaymentConfirmation = (props) => {
         style={{...styles.imageStyle}}
      />
      <View style={{...styles.congratsView}}>
-      <Text style={{...styles.congratsText,color:themecolor.TXTWHITE}}>Congratulation! </Text>
-      <Text style={{...styles.txt,color:themecolor.TXTWHITE}}>Your order has been Placed</Text>
+      <Text allowFontScaling={false} style={{...styles.congratsText,color:themecolor.TXTWHITE}}>Congratulation! </Text>
+      <Text allowFontScaling={false} style={{...styles.txt,color:themecolor.TXTWHITE}}>Your order has been Placed</Text>
      </View>
     </View>
     <View style={{ ...styles.mgT10 }} />
