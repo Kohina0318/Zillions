@@ -65,7 +65,6 @@ export default function Address(props) {
   const handleDefaultAddress = async () => {
     try {
       var res = await postDefaultAddress();
-      console.log("handleDefaultAddress>>>>>>>>>", res)
 
       if (res.status === true) {
         setDefaultData(res.data);

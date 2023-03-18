@@ -209,7 +209,7 @@ export default function Cart(props) {
               <View style={{ ...styles.MVT }} />
 
               <TouchableOpacity activeOpacity={0.5} style={{ ...styles.RemoveAllButton }} onPress={() => handleRemoveAllProducts()}>
-                <Text style={{ ...styles.removeButton, color: themecolor.TEXTRED }}>Remove All</Text>
+                <Text allowFontScaling={false} style={{ ...styles.removeButton, color: themecolor.TEXTRED }}>Remove All</Text>
               </TouchableOpacity>
               <CartProductDataList data={cartProduct} refresh={refresh} setRefresh={setRefresh} />
 

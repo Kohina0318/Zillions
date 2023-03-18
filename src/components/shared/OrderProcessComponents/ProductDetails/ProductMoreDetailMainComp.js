@@ -223,7 +223,7 @@ export default function ProductMoreDetailMainComp(props) {
       <View style={{ ...styles.innerViewMain, }}>
         <View style={{ width: width * 0.35 }}>
           <StarRating
-            disabled={false}
+            disabled={true}
             maxStars={5}
             rating={parseFloat(productDetailData.rating_num)}
             selectedStar={rating => onStarRatingPress(rating)}

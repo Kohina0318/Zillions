@@ -82,7 +82,6 @@ function WishListDataFlateList({ item, themecolor, setRefresh, refresh, }) {
       formdata.append('qty[]', qty);
       formdata.append('sizeprice[]', Size);
       formdata.append('totalprice', TotalPrice);
-alert(item.product_id)
       var res = await postAddCartProduct(item.product_id, formdata)
       if (res.status == true) {
         
