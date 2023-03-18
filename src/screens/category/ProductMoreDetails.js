@@ -124,6 +124,7 @@ export default function ProductMoreDetails(props) {
 
 
     const handleAddCartProduct = async () => {
+        setLoader(true)
         try {
             var Size = `${selectedSizePrice}#${selectedSize}#${qty}`
             var TotalPrice = selectedSizePrice * qty
@@ -138,6 +139,7 @@ export default function ProductMoreDetails(props) {
                 if (showRBSheet == 0) {
                     store.dispatch({ type: 'ADD_CART', payload: [productId, { productId: productId, data: formdata }] })
                     setShowGoToButton(true)
+                    setLoader(false)
                     toast.show(res.msg, {
                         type: 'success',
                         placement: 'bottom',
@@ -147,6 +149,7 @@ export default function ProductMoreDetails(props) {
                     });
                     setQty(1)
                 } else {
+                    setLoader(false)
                     navigation.navigate("Cart")
                     toast.show(res.msg, {
                         type: 'success',
@@ -158,6 +161,7 @@ export default function ProductMoreDetails(props) {
                     setQty(1)
                 }
             } else {
+                setLoader(false)
                 toast.show(res.msg, {
                     type: 'warning',
                     placement: 'bottom',
@@ -167,6 +171,7 @@ export default function ProductMoreDetails(props) {
                 });
             }
         } catch (e) {
+            setLoader(false)
             toast.show('Something went wrong!, Try again later.', {
                 type: 'danger',
                 placement: 'bottom',
@@ -376,30 +381,6 @@ export default function ProductMoreDetails(props) {
             }
 
             <ImageZoomerModel image={image} modalVisible={modalVisible} setModalVisible={setModalVisible} />
-
-            {/* <Modal
-                    animationType="slide"
-                    transparent={true}
-                    visible={modalVisible}
-                    onRequestClose={() => {
-                        setModalVisible(!modalVisible);
-                    }}>
-                    <View style={styles.centeredView}>
-                        <View style={{...styles.modalView, backgroundColor: themecolor.TXTWHITE1}}>
-                            <ImageZoom
-                                cropWidth={Dimensions.get('window').width}
-                                cropHeight={Dimensions.get('window').height}
-                                imageWidth={width * 0.9}
-                                imageHeight={height * 0.5}>
-                                <Image
-                                    style={{ width: width * 0.9, height: height * 0.5 }}
-                                    source={{ uri: image }}
-                                    resizeMode="contain"
-                                />
-                            </ImageZoom>
-                        </View>
-                    </View>
-                </Modal> */}
         </View>
     )
 

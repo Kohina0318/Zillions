@@ -43,7 +43,7 @@ export default function WishList(props) {
         setWishlistData(res.data);
         // setWishlistData(temp1); 
         setLoader(false);
-        setIsLoading(true);
+        // setIsLoading(true);
       } 
       else if (res.msg == "Invalid Authentication") {
         setLoader(false);

@@ -28,11 +28,27 @@ export default function Brands(props) {
 
   const [loader, setLoader] = useState(true);
   const [brandsData, setBrandsData] = useState([]);
+  const [isLoading, setIsLoading] = React.useState(false);
 
-  const handleBrands = async () => {
+  const handleBrands = async (value) => {
     try {
-      var res = await getBrands();
-      setBrandsData(res.data);
+      var body=new FormData()
+      body.append('limit',"15")
+      if(value==undefined)
+      {
+        body.append('offset',1) 
+      }
+      else
+     { body.append('offset',value)}
+      var res = await getBrands(body);
+      if(brandsData==[]||brandsData==null)
+     { setBrandsData(res.data);}
+     else{
+      setIsLoading(true)
+      var temp = res.data
+      var temp1 =brandsData.concat(temp)
+      setBrandsData(temp1);
+     }
       setLoader(false);
     } catch (e) {
       console.log('errrror in..handleBrands page-->', e);
@@ -76,6 +92,8 @@ export default function Brands(props) {
                   data={brandsData}
                   numColumns={3}
                   horizontal={false}
+                  handleBrands={(value)=>handleBrands(value)}
+                  isLoading={isLoading}
                 />
             ) : (
                <NoDataMsg  title="No Brands Found! "/>

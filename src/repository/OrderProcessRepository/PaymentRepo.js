@@ -3,6 +3,7 @@ import { SERVER_URL } from "../SERVER_URL";
 
 
   const postPayment = async (formdata) => {
+    console.log("formdata>>>>>>>",formdata)
     try {
       const response = await fetch(
         `${await SERVER_URL()}/cart-finish`,

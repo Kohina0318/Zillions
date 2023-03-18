@@ -57,6 +57,8 @@ export default function Payment(props) {
   const [title, setTitle] = useState('Select Payment Mode');
  
   const access_key='rzp_test_cdnNWMaIkNop2J';
+
+  const random_id=Math.random().toFixed(16).split('.')[1];
   
   var cart=useSelector(state=>state.cart)
   var cartLen=Object.keys(cart)
@@ -116,7 +118,7 @@ export default function Payment(props) {
         setLoader(true);
         var body = new FormData();
         body.append('payment_type', 'cash_on_delivery');
-        body.append('address2', props.route.params.id);
+        body.append('address_id', props.route.params.id);
         var res = await postPayment(body);
         if (res.status == true) {
           cartLen.map((item)=>{
@@ -166,7 +168,7 @@ export default function Payment(props) {
 
         if (userData != '' && Amount != '') {
           var options = {
-            description: 'Pay Safely and Securely',
+            description:random_id,
             image:
               'https://www.zillionsbuyer.com/uploads/logo_image/logo_0.png',
             currency: 'INR',
@@ -196,11 +198,12 @@ export default function Payment(props) {
 
                 var body = new FormData();
                 body.append('payment_type', 'razorpay');
-                body.append('address2', props.route.params.id);
+                body.append('address_id', props.route.params.id);
                 body.append('razorToken',access_key);
                 body.append('razorpay_signature',data.razorpay_signature);
                 body.append('razorpay_order_id',data.razorpay_order_id);
                 body.append('razorpay_payment_id',data.razorpay_payment_id);
+                body.append('zb_order_id',random_id);
                 var res = await postPayment(body);
                 if (res.status == true) {
                   cartLen.map((item)=>{

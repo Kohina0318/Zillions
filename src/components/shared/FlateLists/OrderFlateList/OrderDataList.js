@@ -13,11 +13,13 @@ import { MyThemeClass } from '../../../Theme/ThemeDarkLightColor';
 import { useSelector } from 'react-redux';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import { useNavigation } from '@react-navigation/native';
+import moment from 'moment';
 
 const { width } = Dimensions.get('screen');
 
 function OrderDataFlateList({ item, themecolor }) {
   const navigation = useNavigation();
+  const date=moment(item.order_date * 1000).add(item.delivery_days,'days').format('ll')
 
   var productDetails = Object.values(item.product_details)
   var image = ''
@@ -63,7 +65,7 @@ function OrderDataFlateList({ item, themecolor }) {
           </Text>
 
           <Text allowFontScaling={false} style={{ ...styles.txt1, color: themecolor.TXTWHITE }}>
-            Estimated Delivery {item.order_date}
+            Estimated Delivery {date}
           </Text>
 
           <Text allowFontScaling={false} style={{ ...styles.txt1, color: themecolor.TXTWHITE }}>
