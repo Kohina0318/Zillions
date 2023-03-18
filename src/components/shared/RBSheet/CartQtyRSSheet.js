@@ -87,7 +87,7 @@ export const CartQtyRSSheet = props => {
               valueType="integer"
               rounded={true}
               minValue={1}
-              maxValue={props.maxQty}
+              maxValue={parseInt(props.maxQty)}
               textColor={themecolor.TXTWHITE}
               iconStyle={{ color: themecolor.TXTWHITE }}
               rightButtonBackgroundColor={'transparent'}

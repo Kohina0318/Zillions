@@ -4,15 +4,18 @@ import { useSelector } from 'react-redux';
 import { MyThemeClass } from '../../components/Theme/ThemeDarkLightColor';
 import { styles } from '../../assets/css/CartCss/PaymentConfirmationStyle';
 import RegisterLoginHeader from '../../components/shared/header/RegisterLoginHeader';
-import OrderHistoryDetailComp from '../../components/shared/OrderProcessComponents/OrderHistory/OrderHistoryDetailComp';
 import { getProfileInfo } from '../../repository/ProfileRepository/ProfileRepo';
 import LoadingFullScreen from '../../components/shared/Loader/LoadingFullScreen';
-import { getManageAddressPost } from '../../repository/AddressRepository/MangeAddressRepo';
+import { postDefaultAddress } from '../../repository/AddressRepository/MangeAddressRepo';
 import { useNavigation } from '@react-navigation/native';
+import { useToast } from 'react-native-toast-notifications';
+import OrderDetailsPaymentHistoryComp from '../../components/shared/OrderProcessComponents/Cart/OrderDetailsPaymentHistoryComp';
 
 export const PaymentConfirmation = (props) => {
 
   const navigation=useNavigation();
+
+  const toast=useToast()
 
     function handleBackButtonClick() {
         navigation.navigate('Dashboard')
@@ -48,7 +51,7 @@ export const PaymentConfirmation = (props) => {
     
           var body = new FormData()
           body.append("type", "default")
-          var res = await getManageAddressPost(body);
+          var res = await postDefaultAddress(body);
           if (res.status == true) {
             // setData(res.data);
             if(res.data.length >0 ){
@@ -161,7 +164,7 @@ export const PaymentConfirmation = (props) => {
                     Order Details:-
                   </Text>
     </View>
-    <OrderHistoryDetailComp ship={props.route.params.data.ship} themecolor={themecolor.TXTWHITE1} detailData={props.route.params.data} />
+    <OrderDetailsPaymentHistoryComp themecolor={themecolor.TXTWHITE1} detailData={props.route.params.data} />
     
     <View style={{ ...styles.mgT10 }} />
 

@@ -15,7 +15,7 @@ import FAIcon from 'react-native-vector-icons/FontAwesome';
 
 const { width, height } = Dimensions.get('screen');
 
-export default function OrderHistoryDetailComp(props) {
+export default function OrderDetailsPaymentHistoryComp(props) {
 
   const mode = useSelector(state => state.mode);
   const themecolor = new MyThemeClass(mode).getThemeColor();
@@ -26,7 +26,7 @@ export default function OrderHistoryDetailComp(props) {
     <View
       style={{
         ...styles.datalistView,
-        backgroundColor:themecolor.BOXBORDERCOLOR,
+        backgroundColor:props.themecolor,
         borderColor: themecolor.BOXBORDERCOLOR1,
       }}
     >
@@ -53,7 +53,7 @@ export default function OrderHistoryDetailComp(props) {
           <Text style={{ ...styles.txt1, color: themecolor.TXTWHITE }}>Tax Amount</Text>
         </View>
         <View style={{ ...styles.orderDetialcompWidth1 }}>
-          <Text style={{ ...styles.txt1, color: themecolor.TXTWHITE }}><FAIcon name="rupee" size={12} /> {parseInt(detailData.taxtotal)}</Text>
+          <Text style={{ ...styles.txt1, color: themecolor.TXTWHITE }}><FAIcon name="rupee" size={12} /> {parseInt(detailData.tax)}</Text>
         </View>
       </View>
 
@@ -65,8 +65,8 @@ export default function OrderHistoryDetailComp(props) {
           <Text style={{ ...styles.txt1, color: themecolor.TXTWHITE }}>Convenience Fee</Text>
         </View>
         <View style={{ ...styles.orderDetialcompWidth1 }}>
-          {detailData.shipping != "0" ?
-            <Text style={{ ...styles.txt1, color: themecolor.TXTWHITE }}><FAIcon name="rupee" size={12} /> {parseInt(detailData.shipping)}</Text>
+          {(props.ship ? props.ship!="0" : detailData.shipping != "0") ?
+            <Text style={{ ...styles.txt1, color: themecolor.TXTWHITE }}><FAIcon name="rupee" size={12} /> {parseInt(detailData.ship)}</Text>
             :
             <Text style={{ ...styles.txt1, color: themecolor.TEXTGREEN }}>FREE</Text>
           }

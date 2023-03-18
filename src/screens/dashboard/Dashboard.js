@@ -79,7 +79,10 @@ export default function Dashboard(props) {
 
   const handleBrands = async () => {
     try {
-      var res = await getBrands();
+      var body=new FormData()
+      body.append('limit','10')
+      body.append('offset',1) 
+      var res = await getBrands(body);
       setBrands(res.data);
     } catch (e) {
       console.log('errrror in..handleBrands page-->', e);
@@ -229,7 +232,7 @@ export default function Dashboard(props) {
                   title="Brands"
                   onPress={() => navigation.navigate('Brands')}
                 />
-                <BrandDataList data={brands} horizontal={true} />
+                <BrandDataList handleBrands={handleBrands} isLoading={false} data={brands} horizontal={true} />
               </View>
             ) : (
               <></>

@@ -41,7 +41,7 @@ function WishListDataFlateList({ item, themecolor, setRefresh, refresh, }) {
 
   const handleRemove = async () => {
     try {
-      var res = await postAddOrRemoveWishlist('remove', item.product_id);
+      var res = await postAddOrRemoveWishlist('remove',item.product_id);
       if (res.status == true) {
         setRefresh(!refresh)
         toast.show(res.msg, {
@@ -82,9 +82,10 @@ function WishListDataFlateList({ item, themecolor, setRefresh, refresh, }) {
       formdata.append('qty[]', qty);
       formdata.append('sizeprice[]', Size);
       formdata.append('totalprice', TotalPrice);
-
+alert(item.product_id)
       var res = await postAddCartProduct(item.product_id, formdata)
       if (res.status == true) {
+        
         store.dispatch({type:'ADD_CART',payload:[item.product_id,{productId:item.product_id,data:formdata}]})
         handleRemove()
         toast.show(res.msg, {
@@ -124,6 +125,7 @@ function WishListDataFlateList({ item, themecolor, setRefresh, refresh, }) {
           backgroundColor: themecolor.BOXBORDERCOLOR,
           borderColor: themecolor.BOXBORDERCOLOR1,
         }}
+        key={item.row_id}
       >
         <View
           style={{

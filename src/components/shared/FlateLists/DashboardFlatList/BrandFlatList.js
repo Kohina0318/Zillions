@@ -13,6 +13,7 @@ import {MyThemeClass} from '../../../Theme/ThemeDarkLightColor';
 import {useSelector} from 'react-redux';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import {useNavigation} from '@react-navigation/native';
+import LoadingContent from '../../Loader/LoadingContent';
 
 const {width, height} = Dimensions.get('screen');
 
@@ -76,6 +77,7 @@ function BrandDataFlatList({item, themecolor}) {
 export function BrandDataList(props) {
   const mode = useSelector(state => state.mode);
   const themecolor = new MyThemeClass(mode).getThemeColor();
+   const[index,setIndex]=useState(2)
 
   return (
     <FlatList
@@ -88,6 +90,19 @@ export function BrandDataList(props) {
       showsVerticalScrollIndicator={false}
       showsHorizontalScrollIndicator={false}
       scrollEnabled={true}
+      onEndReached={() => {
+        props.handleBrands(index);
+        setIndex(index+1)
+      }}
+      ListFooterComponent={() => {
+        if (props.isLoading) {
+          return (
+            <LoadingContent/>
+          );
+        } else {
+          return null;
+        }
+      }}
     />
   );
 }

@@ -27,7 +27,7 @@ export default function OrderHistoryAddressComp(props) {
       </View>
 
       <View style={{...styles.marTop}} />
-      {(shippingAddress.firstname == nul) | (shippingAddress.firstname == '') &&
+      {(shippingAddress.firstname == null) | (shippingAddress.firstname == '') &&
       (shippingAddress.lastname == null) | (shippingAddress.lastname == '') ? (
         <></>
       ) : (
