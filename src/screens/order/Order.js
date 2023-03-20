@@ -50,13 +50,39 @@ export default function Order(props) {
   const [loader, setLoader] = useState(true);
   const [data, setData] = useState([]);
   const [dataFilter, setDataFilter] = useState([]);
+  const [isLoading, setIsLoading] = React.useState(false);
 
-  const handleOrderlist = async () => {
+  const handleOrderlist = async (value) => {
     try {
-      var res = await getOrderlist();
-      if (res.status === true) {
-        setData(res.data);
-        setDataFilter(res.data);
+      var body=new FormData()
+      body.append('limit',"10")
+      if(value==undefined)
+      {
+        body.append('offset',0) 
+      }
+      else
+     { body.append('offset',value)}
+     var res = await getOrderlist(body);
+     if (res.status == true) {
+      if(data==[]||data==null)
+     { setData(res.data);
+      setDataFilter(res.data);
+    }
+     else{
+      setIsLoading(true)
+      var temp = res.data;
+      if(temp.length==0)
+      {
+        setIsLoading(false)
+      }
+      else
+     { var temp1 =data.concat(temp)
+      var temp2=dataFilter.concat(temp);
+      setData(temp1);
+      setDataFilter(temp2);
+    }
+     } 
+        
         setLoader(false);
       } else {
         setLoader(false);
@@ -112,7 +138,7 @@ export default function Order(props) {
 
           {data.length > 0 ? (
             <>
-              <OrderDataList data={data} />
+              <OrderDataList data={data}  handleOrderlist={(value)=>handleOrderlist(value)} isLoading={isLoading} />
               <View style={{...styles.mgT10}} />
             </>
           ) : (

@@ -42,11 +42,32 @@ export default function Products(props) {
 
   const [loader, setLoader] = useState(true);
   const [data, setData] = useState([]);
+  const [isLoading, setIsLoading] = React.useState(false);
 
-  const handleByProduct = async () => {
+  const handleByProduct = async (value) => {
     try {
-      var res = await getByProduct(props.route.params.speciality,props.route.params.Id);
-      setData(res.data);
+      var body=new FormData()
+      body.append('limit',"10")
+      if(value==undefined)
+      {
+        body.append('offset',0) 
+      }
+      else
+     { body.append('offset',value)}
+     var res = await getByProduct(props.route.params.speciality,props.route.params.Id,body);
+      if(data==[]||data==null)
+     { setData(res.data);}
+     else{
+      setIsLoading(true)
+      var temp = res.data
+      if(temp.length==0)
+      {
+        setIsLoading(false)
+      }
+      else
+     { var temp1 =data.concat(temp)
+      setData(temp1);}
+     }
       setLoader(false);
     } catch (e) {
       console.log('errrror in..handleByProduct page-->', e);
@@ -80,7 +101,9 @@ export default function Products(props) {
             ...ProductStyle.container,
           }}>
           {data.length > 0 ? (
-              <ProductDataList data={data} />
+              <ProductDataList data={data}
+               handleByProduct={(value)=>handleByProduct(value)}
+                  isLoading={isLoading} />
           ) : (
             <NoDataMsg  title="No Product Found! "/>
           )}

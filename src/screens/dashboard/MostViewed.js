@@ -35,11 +35,32 @@ export default function MostViewed(props) {
   
   const [loader, setLoader] = useState(true);
   const [mostViewedData, setMostViewedData] = useState([]);
+  const [isLoading, setIsLoading] = React.useState(false);
 
-  const handleMostViewed = async () => {
+  const handleMostViewed = async (value) => {
     try {
-      var res = await getProductList('most_viewed','20');
-      setMostViewedData(res.data);
+      var body=new FormData()
+      body.append('limit',"10")
+      if(value==undefined)
+      {
+        body.append('offset',0) 
+      }
+      else
+     { body.append('offset',value)}
+     var res = await getProductList('most_viewed','10',body);
+      if(mostViewedData==[]||mostViewedData==null)
+     { setMostViewedData(res.data);}
+     else{
+      setIsLoading(true)
+      var temp = res.data
+      if(temp.length==0)
+      {
+        setIsLoading(false)
+      }
+      else
+     { var temp1 =mostViewedData.concat(temp)
+      setMostViewedData(temp1);}
+     }
       setLoader(false);
     } catch (e) {
       console.log('errrror in..handleMostViewed page MostViewed-->', e);
@@ -69,7 +90,7 @@ export default function MostViewed(props) {
           ...ProductStyle.container,
         }}>
         {mostViewedData.length > 0 ? (
-            <ProductDataList data={mostViewedData} />
+            <ProductDataList data={mostViewedData} handleByProduct={(value)=>handleMostViewed(value)} isLoading={isLoading}  />
         ) : (
           <NoDataMsg  title="No Product Found! "/>
         )}

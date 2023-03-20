@@ -53,6 +53,7 @@ export default function SupportTicket(props) {
   const [subject, setSubject] = useState('');
   const [message, setMessage] = useState('');
   const [data, setData] = useState([]);
+  const [isLoading, setIsLoading] = React.useState(false);
 
   const handleCreateTicket = async () => {
     if (subject == '') {
@@ -110,11 +111,35 @@ export default function SupportTicket(props) {
     }
   };
 
-  const handleAllMessages = async () => {
+  const handleAllMessages = async (value) => {
     try {
-      const res = await getSupportTicket();
-      if (res.status == true) {
-        setData(res.data);
+      var body=new FormData()
+      body.append('limit',"10")
+      if(value==undefined)
+      {
+        body.append('offset',0) 
+      }
+      else
+     { body.append('offset',value)}
+     const res = await getSupportTicket(body);
+     console.log(res.data)
+     if (res.status == true) {
+      if(data==[]||data==null)
+     { setData(res.data);
+    }
+     else{
+      setIsLoading(true)
+      var temp = res.data;
+      if(temp.length==0)
+      {
+        setIsLoading(false)
+      }
+      else
+     { var temp1 =data.concat(temp)
+      setData(temp1);
+    }
+     } 
+  
         setLoader(false);
       } else {
         setLoader(false);
@@ -158,7 +183,7 @@ export default function SupportTicket(props) {
           <LoadingFullScreen style={{flex: 1}} />
         ) : data.length > 0 ? (
           <>
-            <SupportTicketDataList data={data} />
+            <SupportTicketDataList data={data} handleAllMessages={(value)=>handleAllMessages(value)} isLoading={isLoading}  />
           </>
         ) : (
           <NoDataMsg  title="No Ticket Found! "/>

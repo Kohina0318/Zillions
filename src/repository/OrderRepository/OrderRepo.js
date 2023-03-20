@@ -1,14 +1,16 @@
 import { getAppToken } from "../CommonRepository";
 import { SERVER_URL } from "../SERVER_URL";
 
-const getOrderlist = async () => {
+const getOrderlist = async (body) => {
+  console.log(body)
   try {
     const response = await fetch(`${await SERVER_URL()}/orderlist`, {
-      method: 'GET',
+      method: 'POST',
       headers: {
-        'Content-Type': 'application/json;charset=utf-8',
+        'Content-Type': 'multipart/form-data',
         Authorization: `${await getAppToken()}`
       },
+      body:body,
     });
     const result = await response.json();
     return result;

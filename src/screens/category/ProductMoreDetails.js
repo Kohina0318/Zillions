@@ -69,6 +69,7 @@ export default function ProductMoreDetails(props) {
     const [showRBSheet, setshowRBSheet] = useState('');
     const [image, setImage] = useState('');
     const [modalVisible, setModalVisible] = useState(false);
+    const [isLoading, setIsLoading] = React.useState(false);
 
 
     const handleProductView = async () => {
@@ -96,9 +97,12 @@ export default function ProductMoreDetails(props) {
 
     const handleRelatedProduct = async () => {
         try {
-            var res = await getProductRealedProducts('most_viewed', '20', productId);
-            if (res.status == true) {
-                setRelatedProductData(res.data);
+            var body=new FormData()
+            body.append('limit',"10")
+              body.append('offset',0) 
+           var res = await getProductRealedProducts('most_viewed', '10', productId,body);
+           if (res.status == true) {
+            setRelatedProductData(res.data);
                 setLoader(false);
             } else {
                 setLoader(false);
