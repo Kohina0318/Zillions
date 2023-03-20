@@ -18,6 +18,7 @@ import StarRating from 'react-native-star-rating';
 import FAIcon from 'react-native-vector-icons/FontAwesome';
 import { useToast } from 'react-native-toast-notifications';
 import { postAddOrRemoveWishlist } from '../../../../repository/WishListRepository/WishListRepo';
+import LoadingContent from '../../Loader/LoadingContent';
 
 const { width, height } = Dimensions.get('screen');
 
@@ -210,6 +211,7 @@ function ProductDataFlateList({ item, themecolor }) {
 export function ProductDataList(props) {
   const mode = useSelector(state => state.mode);
   const themecolor = new MyThemeClass(mode).getThemeColor();
+  const[index,setIndex]=useState(10)
 
   return (
     <>
@@ -221,6 +223,19 @@ export function ProductDataList(props) {
         numColumns={2}
         showsVerticalScrollIndicator={false}
         scrollEnabled={true}
+        onEndReached={() => {
+        props.handleByProduct(index);
+        setIndex(index+10)
+      }}
+      ListFooterComponent={() => {
+        if (props.isLoading) {
+          return (
+            <LoadingContent/>
+          );
+        } else {
+          return null;
+        }
+      }}
       />
       <View style={{ marginVertical: 20 }} />
     </>

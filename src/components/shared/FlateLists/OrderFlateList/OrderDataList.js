@@ -14,6 +14,7 @@ import { useSelector } from 'react-redux';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import { useNavigation } from '@react-navigation/native';
 import moment from 'moment';
+import LoadingContent from '../../Loader/LoadingContent';
 
 const { width } = Dimensions.get('screen');
 
@@ -92,6 +93,7 @@ function OrderDataFlateList({ item, themecolor }) {
 export function OrderDataList(props) {
   const mode = useSelector(state => state.mode);
   const themecolor = new MyThemeClass(mode).getThemeColor();
+  const[index,setIndex]=useState(10)
 
   return (
     <FlatList
@@ -101,6 +103,19 @@ export function OrderDataList(props) {
       )}
       showsVerticalScrollIndicator={false}
       scrollEnabled={true}
+      onEndReached={() => {
+        props.handleOrderlist(index);
+        setIndex(index+10)
+      }}
+      ListFooterComponent={() => {
+        if (props.isLoading) {
+          return (
+            <LoadingContent/>
+          );
+        } else {
+          return null;
+        }
+      }}
     />
   );
 }

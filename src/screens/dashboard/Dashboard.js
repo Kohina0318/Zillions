@@ -81,7 +81,7 @@ export default function Dashboard(props) {
     try {
       var body=new FormData()
       body.append('limit','10')
-      body.append('offset',1) 
+      body.append('offset',0) 
       var res = await getBrands(body);
       setBrands(res.data);
     } catch (e) {
@@ -98,7 +98,10 @@ export default function Dashboard(props) {
 
   const handleLatestProducts = async () => {
     try {
-      var res = await getProductList('featured', '5');
+      var body=new FormData()
+      body.append('limit',"5")
+      body.append('offset',0)
+      var res = await getProductList('featured', '5',body);
       setLatestProductsData(res.data);
     } catch (e) {
       console.log('errrror in..handleLatestProducts page-->', e);
@@ -113,8 +116,10 @@ export default function Dashboard(props) {
   };
 
   const handleBestSelling = async () => {
-    try {
-      var res = await getProductList('deal', '5');
+    try {  var body=new FormData()
+      body.append('limit',"5")
+      body.append('offset',0)
+      var res = await getProductList('deal', '5',body);
       setBestSellingData(res.data);
     } catch (e) {
       console.log('errrror in..handleBestSelling page-->', e);
@@ -130,7 +135,10 @@ export default function Dashboard(props) {
 
   const handleRecentlyViewed = async () => {
     try {
-      var res = await getProductList('recently_viewed', '5');
+      var body=new FormData()
+      body.append('limit',"5")
+      body.append('offset',0)
+      var res = await getProductList('recently_viewed', '5',body);
       setRecentlyViewedData(res.data);
     } catch (e) {
       console.log('errrror in..handleRecentlyViewed page-->', e);
@@ -146,7 +154,10 @@ export default function Dashboard(props) {
 
   const handleMostViewed = async () => {
     try {
-      var res = await getProductList('most_viewed', '5');
+      var body=new FormData()
+      body.append('limit',"5")
+      body.append('offset',0)
+      var res = await getProductList('most_viewed', '5',body);
       setMostViewedData(res.data);
       setLoader(false);
     } catch (e) {

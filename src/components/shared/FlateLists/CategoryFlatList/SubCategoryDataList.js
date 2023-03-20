@@ -13,6 +13,7 @@ import {MyThemeClass} from '../../../Theme/ThemeDarkLightColor';
 import {useSelector} from 'react-redux';
 import FontAwesome from 'react-native-vector-icons/FontAwesome'
 import { useNavigation } from '@react-navigation/native';
+import LoadingContent from '../../Loader/LoadingContent';
 
 const {width} = Dimensions.get('screen');
 
@@ -61,6 +62,7 @@ function SubCategoryDataFlateList({item, themecolor}) {
 export function SubCategoryDataList(props) {
   const mode = useSelector(state => state.mode);
   const themecolor = new MyThemeClass(mode).getThemeColor();
+  const[index,setIndex]=useState(10)
 
   return (
     <>
@@ -71,6 +73,19 @@ export function SubCategoryDataList(props) {
       )}
       showsVerticalScrollIndicator={false}
       scrollEnabled={true}
+      onEndReached={() => {
+        props.handleSubCategories(index);
+        setIndex(index+10)
+      }}
+      ListFooterComponent={() => {
+        if (props.isLoading) {
+          return (
+            <LoadingContent/>
+          );
+        } else {
+          return null;
+        }
+      }}
     />
     <View style={{marginVertical: 20}} />
     </>

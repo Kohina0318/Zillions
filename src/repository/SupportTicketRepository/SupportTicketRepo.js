@@ -39,14 +39,16 @@ const postCreateSupportTicket = async formdata => {
   }
 };
 
-const getSupportTicket = async () => {
+const getSupportTicket = async (body) => {
+  console.log(body)
   try {
     const response = await fetch(
         `${await SERVER_URL()}/get-ticket`,
       {
-        method: 'GET',
-        headers: {'Content-Type': 'application/json;charset=utf-8',
+        method: 'POST',
+        headers: {'Content-Type': 'multipart/form-data',
         Authorization: `${await getAppToken()}`},
+        body:body,
       },
     );
     const result = await response.json();

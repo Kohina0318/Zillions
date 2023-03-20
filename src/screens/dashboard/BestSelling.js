@@ -36,11 +36,32 @@ export default function BestSelling(props) {
   
   const [loader, setLoader] = useState(true);
   const [bestSellingData, setBestSellingData] = useState([]);
+  const [isLoading, setIsLoading] = React.useState(false);
  
-  const handleBestSelling = async () => {
+  const handleBestSelling = async (value) => {
     try {
-      var res = await getProductList('deal','20');
-      setBestSellingData(res.data);
+      var body=new FormData()
+      body.append('limit',"10")
+      if(value==undefined)
+      {
+        body.append('offset',0) 
+      }
+      else
+     { body.append('offset',value)}
+     var res = await getProductList('deal','10',body);
+      if(bestSellingData==[]||bestSellingData==null)
+     { setBestSellingData(res.data);}
+     else{
+      setIsLoading(true)
+      var temp = res.data
+      if(temp.length==0)
+      {
+        setIsLoading(false)
+      }
+      else
+     { var temp1 =bestSellingData.concat(temp)
+      setBestSellingData(temp1);}
+     }
       setLoader(false);
     } catch (e) {
       console.log('errrror in..handleBestSelling page BestSelling-->', e);
@@ -70,7 +91,7 @@ export default function BestSelling(props) {
           ...ProductStyle.container,
         }}>
         {bestSellingData.length > 0 ? (
-            <ProductDataList data={bestSellingData} />
+            <ProductDataList data={bestSellingData} handleByProduct={(value)=>handleBestSelling(value)} isLoading={isLoading}  />
         ) : (
           <NoDataMsg  title="No Product Found! "/>
         )}

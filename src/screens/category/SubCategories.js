@@ -43,11 +43,32 @@ export default function SubCategories(props) {
   
   const [loader, setLoader] = useState(true);
   const [data, setData] = useState([]);
+  const [isLoading, setIsLoading] = React.useState(false);
  
-  const handleSubCategories= async() => {
+  const handleSubCategories= async(value) => {
     try {
-      var res = await getSubCategories(props.route.params.categoryId);
-      setData(res.data);
+      var body=new FormData()
+      body.append('limit',"10")
+      if(value==undefined)
+      {
+        body.append('offset',0) 
+      }
+      else
+     { body.append('offset',value)}
+     var res = await getSubCategories(props.route.params.categoryId,body);
+      if(data==[]||data==null)
+     { setData(res.data);}
+     else{
+      setIsLoading(true)
+      var temp = res.data
+      if(temp.length==0)
+      {
+        setIsLoading(false)
+      }
+      else
+     { var temp1 =data.concat(temp)
+      setData(temp1);}
+     } 
       setLoader(false)
     } catch (e) {
       console.log('errrror in..getSubCategories page-->', e);
@@ -78,7 +99,7 @@ export default function SubCategories(props) {
         }}>
         {data.length > 0 ? (
           <>
-          <SubCategoryDataList data={data} />
+          <SubCategoryDataList data={data} handleSubCategories={(value)=>handleSubCategories(value)} isLoading={isLoading} />
           <View style={{marginVertical: 30}} /></>
         ) : (
           <NoDataMsg  title="No Subcategory Found! "/>

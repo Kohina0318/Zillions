@@ -11,6 +11,7 @@ import {styles} from '../../../../assets/css/ProfileCss/SupportTicketStyle';
 import {MyThemeClass} from '../../../Theme/ThemeDarkLightColor';
 import {useSelector} from 'react-redux';
 import {useNavigation} from '@react-navigation/native';
+import LoadingContent from '../../Loader/LoadingContent';
 
 const {width} = Dimensions.get('screen');
 
@@ -84,6 +85,7 @@ function SupportTicketDataFlateList({item, themecolor}) {
 export function SupportTicketDataList(props) {
   const mode = useSelector(state => state.mode);
   const themecolor = new MyThemeClass(mode).getThemeColor();
+  const[index,setIndex]=useState(10)
 
   return (
     <FlatList
@@ -93,6 +95,19 @@ export function SupportTicketDataList(props) {
       )}
       showsVerticalScrollIndicator={false}
       scrollEnabled={true}
+      onEndReached={() => {
+        props.handleAllMessages(index);
+        setIndex(index+10)
+      }}
+      ListFooterComponent={() => {
+        if (props.isLoading) {
+          return (
+            <LoadingContent/>
+          );
+        } else {
+          return null;
+        }
+      }}
     />
   );
 }

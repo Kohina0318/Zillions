@@ -265,6 +265,7 @@ function WishListDataFlateList({ item, themecolor, setRefresh, refresh, }) {
 export function WishListDataList(props) {
   const mode = useSelector(state => state.mode);
   const themecolor = new MyThemeClass(mode).getThemeColor();
+  const[index,setIndex]=useState(10)
 
   return (
     <FlatList
@@ -276,7 +277,8 @@ export function WishListDataList(props) {
       showsVerticalScrollIndicator={false}
       scrollEnabled={true}
       onEndReached={() => {
-        props.handleWishlist();
+        props.handleWishlist(index);
+        setIndex(index+10)
       }}
       ListFooterComponent={() => {
         if (props.isLoading) {

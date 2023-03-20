@@ -4,14 +4,15 @@ import { SERVER_URL } from "../SERVER_URL";
 import { navigateToClearStack } from "../../navigations/NavigationDrw/NavigationService";
 import { removeDatafromAsync } from "../AsyncStorageServices";
 
-const getWishlist = async () => {
+const getWishlist = async (body) => {
   try {
     const response = await fetch(`${await SERVER_URL()}/wishlist`, {
-      method: 'GET',
+      method: 'POST',
       headers: {
-        'Content-Type': 'application/json;charset=utf-8',
+        'Content-Type': 'multipart/form-data',
         Authorization: `${await getAppToken()}`
       },
+      body:body,
     });
     
     const result = await response.json();

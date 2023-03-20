@@ -32,20 +32,27 @@ export default function Brands(props) {
 
   const handleBrands = async (value) => {
     try {
-      var body = new FormData()
-      body.append('limit', "15")
-      if (value == undefined) {
-        body.append('offset', 1)
+      var body=new FormData()
+      body.append('limit',"15")
+      if(value==undefined)
+      {
+        body.append('offset',0) 
       }
       else { body.append('offset', value) }
       var res = await getBrands(body);
-      if (brandsData == [] || brandsData == null) { setBrandsData(res.data); }
-      else {
-        setIsLoading(true)
-        var temp = res.data
-        var temp1 = brandsData.concat(temp)
-        setBrandsData(temp1);
+      if(brandsData==[]||brandsData==null)
+     { setBrandsData(res.data);}
+     else{
+      setIsLoading(true)
+      var temp = res.data
+      if(temp.length==0)
+      {
+        setIsLoading(false)
       }
+      else
+     { var temp1 =brandsData.concat(temp)
+      setBrandsData(temp1);}
+     }
       setLoader(false);
     } catch (e) {
       console.log('errrror in..handleBrands page-->', e);
@@ -59,13 +66,6 @@ export default function Brands(props) {
       });
     }
   };
-
-  // useFocusEffect(
-  //   React.useCallback(() => {
-  //     // setLoader(true);
-  //     handleBrands();
-  //   }, [props]),
-  // );
 
   useEffect(() => {
     handleBrands();

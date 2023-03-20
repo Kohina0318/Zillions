@@ -15,7 +15,6 @@ import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import {useNavigation} from '@react-navigation/native';
 import StarRating from 'react-native-star-rating';
 import FAIcon from 'react-native-vector-icons/FontAwesome';
-import { Alert } from 'react-native/Libraries/Alert/Alert';
 
 
 const {width, height} = Dimensions.get('screen');
@@ -34,7 +33,7 @@ function DashboardProductDataFlateList({item, themecolor}) {
         }}
         onPress={() => navigation.navigate('ProductMoreDetails',{productId:item.product_id,title:item.title})}
         >
-        <View style={{...ProductStyle.innerImage}}>
+        <View style={{...ProductStyle.innerImage}} key={item.product_id}>
           <Image
             source={{uri: item.front_image}}
             style={{
