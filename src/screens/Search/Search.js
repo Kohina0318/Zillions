@@ -49,6 +49,7 @@ export default function Search(props) {
   const [productData,setProductData]=useState([])
   const [sortBy,setsortBy]=useState('')
   const [priceSortBy,setPriceSortBy]=useState('')
+  const [isLoading, setIsLoading] = React.useState(false);
   const toast = useToast();
 
   function handleBackButtonClick() {
@@ -68,7 +69,7 @@ export default function Search(props) {
     };
   }, []);
 
-  const handleSearch = async() => {
+  const handleSearch = async(value) => {
     if (value == null || value == '') {
       setDataShown(false)
       toast.show(
@@ -92,12 +93,38 @@ export default function Search(props) {
      formData.append("sort",sortBy)
      formData.append("range",priceSortBy)
      formData.append("brand",0)
+     formDataappend('limit',"10")
+     if(value==undefined)
+     {
+       formData.append('offset',0) 
+     }
+     else
+    { formData.append('offset',value)}
+    var res = await getSearchProducts(formData);
+    if(res.status === true){
+      setDataShown(true)
+          
+     if(productData==[]||productData==null)
+    { setProductData(res.data.all_products)}
+    else{
+     setIsLoading(true)
+     var temp = res.data
+     if(temp.length==0)
+     {
+       setIsLoading(false)
+     }
+     else
+    { var temp1 =productData.concat(temp)
+      setProductData(temp)}
+    }
 
-        var res = await getSearchProducts(formData);
-        if(res.status === true){
-          setDataShown(true)
-          setProductData(res.data.all_products)
+       
+       
+          
           setLoading(false)
+        }
+        else{
+          setLoader(false)
         }
       }catch(e){
         setLoading(false)
@@ -245,7 +272,7 @@ export default function Search(props) {
         </View>
       
 <View style={{marginBottom:50}}>
-  <ProductDataList data={productData}/>
+  <ProductDataList data={productData} handleByProduct={(value)=>handleSearch(value)} isLoading={isLoading} />
 </View>
 <View style={{ marginVertical: 31 }} />
 </>
