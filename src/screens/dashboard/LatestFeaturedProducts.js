@@ -36,11 +36,32 @@ export default function LatestFeaturedProducts(props) {
   
   const [loader, setLoader] = useState(true);
   const [latestProductsData, setLatestProductsData] = useState([]);
+  const [isLoading, setIsLoading] = React.useState(false);
   
-  const handleLatestProducts = async () => {
+  const handleLatestProducts = async (value) => {
     try {
-      var res = await getProductList('featured','20');
-      setLatestProductsData(res.data);
+      var body=new FormData()
+      body.append('limit',"10")
+      if(value==undefined)
+      {
+        body.append('offset',0) 
+      }
+      else
+     { body.append('offset',value)}
+     var res = await getProductList('featured','10',body);
+      if(latestProductsData==[]||latestProductsData==null)
+     { setLatestProductsData(res.data);}
+     else{
+      setIsLoading(true)
+      var temp = res.data
+      if(temp.length==0)
+      {
+        setIsLoading(false)
+      }
+      else
+     { var temp1 =latestProductsData.concat(temp)
+      setLatestProductsData(temp1);}
+     }
       setLoader(false);
     } catch (e) {
       console.log('errrror in..handleLatestProducts page LatestFeaturedProducts-->', e);
@@ -70,7 +91,7 @@ export default function LatestFeaturedProducts(props) {
           ...ProductStyle.container,
         }}>
         {latestProductsData.length > 0 ? (
-            <ProductDataList data={latestProductsData} />
+            <ProductDataList data={latestProductsData} handleByProduct={(value)=>handleLatestProducts(value)} isLoading={isLoading}  />
         ) : (
           <NoDataMsg  title="No Product Found! "/>
         )}

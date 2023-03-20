@@ -36,7 +36,7 @@ export default function Brands(props) {
       body.append('limit',"15")
       if(value==undefined)
       {
-        body.append('offset',1) 
+        body.append('offset',0) 
       }
       else
      { body.append('offset',value)}
@@ -46,8 +46,13 @@ export default function Brands(props) {
      else{
       setIsLoading(true)
       var temp = res.data
-      var temp1 =brandsData.concat(temp)
-      setBrandsData(temp1);
+      if(temp.length==0)
+      {
+        setIsLoading(false)
+      }
+      else
+     { var temp1 =brandsData.concat(temp)
+      setBrandsData(temp1);}
      }
       setLoader(false);
     } catch (e) {

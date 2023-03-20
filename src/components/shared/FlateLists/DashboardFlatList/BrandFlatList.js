@@ -77,7 +77,7 @@ function BrandDataFlatList({item, themecolor}) {
 export function BrandDataList(props) {
   const mode = useSelector(state => state.mode);
   const themecolor = new MyThemeClass(mode).getThemeColor();
-   const[index,setIndex]=useState(2)
+   const[index,setIndex]=useState(15)
 
   return (
     <FlatList
@@ -92,7 +92,7 @@ export function BrandDataList(props) {
       scrollEnabled={true}
       onEndReached={() => {
         props.handleBrands(index);
-        setIndex(index+1)
+        setIndex(index+15)
       }}
       ListFooterComponent={() => {
         if (props.isLoading) {

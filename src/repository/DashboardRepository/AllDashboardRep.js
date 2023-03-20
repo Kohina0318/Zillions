@@ -28,16 +28,17 @@ const getMainSlider = async () => {
   }
 };
 
-const getProductList = async (spec, limit) => {
+const getProductList = async (spec, limit,body) => {
   try {
     const response = await fetch(
       `${await SERVER_URL()}/product-list?speciality=${spec}&limit=${limit}`,
       {
-        method: 'GET',
+        method: 'POST',
         headers: {
-          'Content-Type': 'application/json;charset=utf-8',
+          'Content-Type': 'multipart/form-data',
           Authorization: `${await getAppToken()}`
         },
+        body:body
       },
     );
     const result = await response.json();

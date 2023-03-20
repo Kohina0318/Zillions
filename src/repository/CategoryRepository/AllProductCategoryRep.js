@@ -14,13 +14,14 @@ const getCategories = async () => {
   }
 };
 
-const getSubCategories = async cId => {
+const getSubCategories = async (cId,body) => {
   try {
     const response = await fetch(
       `${await SERVER_URL()}/sub-categories/${cId}`,
       {
-        method: 'GET',
-        headers: { 'Content-Type': 'application/json;charset=utf-8' },
+        method: 'POST',
+        headers: { 'Content-Type': 'multipart/form-data' },
+        body:body,
       },
     );
     const result = await response.json();
@@ -32,16 +33,17 @@ const getSubCategories = async cId => {
     );
   }
 };
-const getByProduct = async (spec, Id) => {
+const getByProduct = async (spec, Id,body) => {
   try {
     const response = await fetch(
       `${await SERVER_URL()}/product-list?speciality=${spec}&id=${Id}`,
       {
-        method: 'GET',
+        method: 'POST',
         headers: {
-          'Content-Type': 'application/json;charset=utf-8',
+          'Content-Type': 'multipart/form-data',
           Authorization: `${await getAppToken()}`
         },
+        body:body,
       },
     );
     const result = await response.json();
@@ -72,13 +74,14 @@ const getProductView = async pId => {
   }
 };
 
-const getProductRealedProducts = async (spec, limit, pId) => {
+const getProductRealedProducts = async (spec, limit, pId,body) => {
   try {
     const response = await fetch(
       `${await SERVER_URL()}/product-list?speciality=${spec}&limit=${limit}&id=${pId}`,
       {
-        method: 'GET',
-        headers: { 'Content-Type': 'application/json;charset=utf-8' },
+        method: 'POST',
+        headers: { 'Content-Type': 'multipart/form-data' },
+        body:body,
       },
     );
     const result = await response.json();
