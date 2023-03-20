@@ -111,7 +111,8 @@ const styles = StyleSheet.create({
     fontSize: FontSize.labelText2,
     fontFamily: FontFamily.PopinsMedium,
     left: 8,
-    marginRight:10
+    marginRight:10,
+    textAlignVertical: 'top',
   },
   modelViewButton:{
     flexDirection: 'row', width: width * 0.8

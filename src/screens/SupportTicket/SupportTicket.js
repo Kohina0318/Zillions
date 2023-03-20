@@ -54,6 +54,34 @@ export default function SupportTicket(props) {
   const [message, setMessage] = useState('');
   const [data, setData] = useState([]);
 
+ 
+  const handleAllMessages = async () => {
+    try {
+      const res = await getSupportTicket();
+      if (res.status == true) {
+        setData(res.data);
+        setLoader(false);
+      } else {
+        setLoader(false);
+       
+      }
+    } catch (e) {
+      console.log('catch in ....support Ticket table data page', e);
+      setLoader(false);
+      toast.show('Something went wrong!, Try again later.', {
+        type: 'danger',
+        placement: 'bottom',
+        duration: 3000,
+        offset: 30,
+        animationType: 'slide-in',
+      });
+    }
+  };
+
+  useEffect(() => {
+    handleAllMessages();
+  }, [refresh]);
+
   const handleCreateTicket = async () => {
     if (subject == '') {
       toast.show('Subject is required!', {
@@ -89,13 +117,7 @@ export default function SupportTicket(props) {
             animationType: 'slide-in',
           });
         } else {
-          toast.show(res.msg, {
-            type: 'warning',
-            placement: 'bottom',
-            duration: 3000,
-            offset: 30,
-            animationType: 'slide-in',
-          });
+         
         }
       } catch (e) {
         console.log('catch in .... create support Ticket page', e);
@@ -110,38 +132,6 @@ export default function SupportTicket(props) {
     }
   };
 
-  const handleAllMessages = async () => {
-    try {
-      const res = await getSupportTicket();
-      if (res.status == true) {
-        setData(res.data);
-        setLoader(false);
-      } else {
-        setLoader(false);
-        toast.show(res.msg, {
-          type: 'warning',
-          placement: 'bottom',
-          duration: 3000,
-          offset: 30,
-          animationType: 'slide-in',
-        });
-      }
-    } catch (e) {
-      console.log('catch in ....support Ticket table data page', e);
-      setLoader(false);
-      toast.show('Something went wrong!, Try again later.', {
-        type: 'danger',
-        placement: 'bottom',
-        duration: 3000,
-        offset: 30,
-        animationType: 'slide-in',
-      });
-    }
-  };
-
-  useEffect(() => {
-    handleAllMessages();
-  }, [refresh]);
 
   return (
     <View style={{...styles.bg, backgroundColor: themecolor.THEMECOLOR}}>

@@ -18,13 +18,12 @@ const getWishlist = async () => {
    
     if (result.token_status == 'false') {
       await removeDatafromAsync('@UserData');
-      await removeDatafromAsync('@Token');
-        
-      return result;
-      
+      await removeDatafromAsync('@Token');     
+      return result; 
     } else {
       return result;
     }
+
   } catch (err) {
     console.log('error in getwishlist...in WishListRepo ', err);
   }
@@ -40,7 +39,15 @@ const postAddOrRemoveWishlist = async (any, pId) => {
       },
     });
     const result = await response.json();
-    return result;
+    
+    if (result.token_status == 'false') {
+      await removeDatafromAsync('@UserData');
+      await removeDatafromAsync('@Token');    
+      return result; 
+    } else {
+      return result;
+    }
+
   } catch (err) {
     console.log('error in postAddOrRemoveWishlist...in WishListRepo ', err);
   }

@@ -18,7 +18,7 @@ import FAIcon from 'react-native-vector-icons/FontAwesome';
 import OrderDetailsComp from '../../components/shared/OrderProcessComponents/Cart/OrderDetailsComp';
 import { Stepper } from '../Stepper/Stepper';
 import { getCartOrderDetails, getCartProductList } from '../../repository/OrderProcessRepository/CartListRepo';
-import { useFocusEffect, useNavigation } from '@react-navigation/native';
+import { useNavigation } from '@react-navigation/native';
 import EmptyCart from '../../components/shared/NoData/EmptyCart';
 import { getRemoveAllProducts } from '../../repository/OrderProcessRepository/RemoveProductRepo';
 import CartViewDetailsButton from '../../components/shared/button/CartViewDetailsButton';
@@ -51,9 +51,9 @@ export default function Cart(props) {
   const mode = useSelector(state => state.mode);
   const themecolor = new MyThemeClass(mode).getThemeColor();
 
-  
-  var cart=useSelector(state=>state.cart)
-  var cartLen=Object.keys(cart)
+
+  var cart = useSelector(state => state.cart)
+  var cartLen = Object.keys(cart)
 
   const [loader, setLoader] = useState(true);
   const [refresh, setRefresh] = useState(false);
@@ -67,7 +67,7 @@ export default function Cart(props) {
       if (res.status == true) {
         setDetailData(res.data)
       } else {
-        console.log('Status False in..handleCartOrderDetails page Cart-->');     
+        console.log('Status False in..handleCartOrderDetails page Cart-->');
       }
     } catch (e) {
       console.log('errrror in..handleCartOrderDetails page-->', e);
@@ -115,8 +115,8 @@ export default function Cart(props) {
     try {
       var res = await getRemoveAllProducts()
       if (res.status == true) {
-        cartLen.map((item)=>{
-          store.dispatch({type:'DEL_CART',payload:[item]})
+        cartLen.map((item) => {
+          store.dispatch({ type: 'DEL_CART', payload: [item] })
         })
         setRefresh(!refresh)
         toast.show(res.msg, {
@@ -147,10 +147,9 @@ export default function Cart(props) {
     }
   }
 
-  const handleContinue=async()=>{
-    var userDat=await getUserData()
+  const handleContinue = async () => {
     var userData = await getProfileInfo();
-    if(userDat==null){
+    if (userData.msg=="Invalid Authentication") {
       Alert.alert(
         'Login to continue',
         'Do you want to Login?',
@@ -160,28 +159,12 @@ export default function Cart(props) {
             onPress: () => console.log('Cancel Pressed'),
             style: 'cancel',
           },
-          {text: 'Yes', onPress: () => navigation.navigate('Login')},
+          { text: 'Yes', onPress: () => navigation.navigate('Login') },
         ],
       );
     }
-    else{
-      if(userData.msg=="Invalid Authentication")
-      {
-        Alert.alert(
-          'Invalid Authentication',
-          'Please clear your cache first and login again to continue..',
-          [
-            {
-              text: 'No',
-              onPress: () => console.log('Cancel Pressed'),
-              style: 'cancel',
-            },
-            {text: 'Login', onPress: () => navigation.navigate('Login')},
-          ],
-        ); 
-      }
-      else
-    {  props.navigation.navigate('CartAddress')}
+    else {
+      props.navigation.navigate('CartAddress')
     }
   }
 
@@ -222,7 +205,7 @@ export default function Cart(props) {
             </ScrollView>
             <View style={{ marginVertical: 31 }} />
 
-            <CartViewDetailsButton amount={detailData.grand_total} buttonTitle={"Continue"} buttonOnPress={()=>handleContinue()} />
+            <CartViewDetailsButton amount={detailData.grand_total} buttonTitle={"Continue"} buttonOnPress={() => handleContinue()} />
           </>
           :
           <View style={{ ...styles.container, marginTop: 120, }}>

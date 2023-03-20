@@ -1,12 +1,12 @@
-import React, {useState} from 'react';
-import {View, Text, Modal, Dimensions, TextInput} from 'react-native';
-import {MyThemeClass} from '../../Theme/ThemeDarkLightColor';
-import {useSelector} from 'react-redux';
-import {styles} from '../../../assets/css/ProfileCss/AddressStyle';
+import React, { useState } from 'react';
+import { View, Text, Modal, Dimensions, TextInput } from 'react-native';
+import { MyThemeClass } from '../../Theme/ThemeDarkLightColor';
+import { useSelector } from 'react-redux';
+import { styles } from '../../../assets/css/ProfileCss/AddressStyle';
 import HalfSizeButton from '../button/halfSizeButton';
 import Feather from 'react-native-vector-icons/Feather';
 
-const {width} = Dimensions.get('window');
+const { width } = Dimensions.get('window');
 
 export default function CreateTicketModel(props) {
   const mode = useSelector(state => state.mode);
@@ -26,10 +26,10 @@ export default function CreateTicketModel(props) {
               ...styles.modelContainer,
               backgroundColor: themecolor.THEMECOLOR1,
             }}>
-            <View style={{...styles.modelInner}}>
-              <View style={{...styles.modelHeader}}>
+            <View style={{ ...styles.modelInner }}>
+              <View style={{ ...styles.modelHeader }}>
                 <Text
-                 allowFontScaling={false}
+                  allowFontScaling={false}
                   style={{
                     ...styles.modelHeading,
                     color: themecolor.TXTWHITE,
@@ -38,7 +38,7 @@ export default function CreateTicketModel(props) {
                 </Text>
               </View>
 
-              <View style={{...styles.Mv5}} />
+              <View style={{ ...styles.Mv5 }} />
 
               <View
                 style={{
@@ -47,7 +47,7 @@ export default function CreateTicketModel(props) {
                   backgroundColor: themecolor.BOXBORDERCOLOR,
                 }}>
                 <TextInput
-                 allowFontScaling={false}
+                  allowFontScaling={false}
                   placeholder={'Subect*'}
                   placeholderTextColor={themecolor.TXTGREYS}
                   style={{
@@ -58,7 +58,7 @@ export default function CreateTicketModel(props) {
                 />
               </View>
 
-              <View style={{...styles.Mv5}} />
+              <View style={{ ...styles.Mv5 }} />
 
               <View
                 style={{
@@ -67,7 +67,7 @@ export default function CreateTicketModel(props) {
                   backgroundColor: themecolor.BOXBORDERCOLOR,
                 }}>
                 <TextInput
-                 allowFontScaling={false}
+                  allowFontScaling={false}
                   placeholder={'Message*'}
                   placeholderTextColor={themecolor.TXTGREYS}
                   style={{
@@ -78,11 +78,12 @@ export default function CreateTicketModel(props) {
                   numberOfLines={4}
                   onChangeText={txt => props.setMessage(txt)}
                 />
+               
               </View>
             </View>
 
-            <View style={{...styles.modelViewButton}}>
-              <View style={{width: '48%'}}>
+            <View style={{ ...styles.modelViewButton }}>
+              <View style={{ width: '48%' }}>
                 <HalfSizeButton
                   title="Submit"
                   backgroundColor={themecolor.ADDTOCARTBUTTONCOLOR}
@@ -91,8 +92,8 @@ export default function CreateTicketModel(props) {
                   onPress={props.onPress}
                 />
               </View>
-              <View style={{marginHorizontal: 6}} />
-              <View style={{width: '48%'}}>
+              <View style={{ marginHorizontal: 6 }} />
+              <View style={{ width: '48%' }}>
                 <HalfSizeButton
                   title="Cancel"
                   backgroundColor={'transparent'}
@@ -106,7 +107,7 @@ export default function CreateTicketModel(props) {
               </View>
             </View>
 
-            <View style={{marginVertical: 5}} />
+            <View style={{ marginVertical: 5 }} />
           </View>
         </View>
       </Modal>

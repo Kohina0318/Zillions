@@ -24,7 +24,7 @@ const {width} = Dimensions.get('screen');
 function DefaultAddressDataFlateList({item, themecolor}) {
   const navigation = useNavigation();
 
-  return item.set_default == '1' ? (
+  return  (
     <View
       style={{
         ...styles.datalistView,
@@ -87,8 +87,6 @@ function DefaultAddressDataFlateList({item, themecolor}) {
         </Text>
       </View>
     </View>
-  ) : (
-    <></>
   );
 }
 
@@ -112,13 +110,7 @@ function OtherAddressDataFlateList({item, themecolor, refresh, setRefresh}) {
           animationType: 'slide-in',
         });
       } else {
-        toast.show(res.msg, {
-          type: 'warning',
-          placement: 'bottom',
-          duration: 3000,
-          offset: 30,
-          animationType: 'slide-in',
-        });
+        
       }
     } catch (e) {
       console.log('errrror in..handleSetDefaultAddress page-->', e);
@@ -156,13 +148,7 @@ function OtherAddressDataFlateList({item, themecolor, refresh, setRefresh}) {
       if (res.status === true) {
         setRefresh(!refresh);
       } else {
-        toast.show(res.msg, {
-          type: 'warning',
-          placement: 'bottom',
-          duration: 3000,
-          offset: 30,
-          animationType: 'slide-in',
-        });
+        
       }
     } catch (e) {
       console.log('errrror in..handleDeleteAddress page-->', e);
@@ -176,7 +162,7 @@ function OtherAddressDataFlateList({item, themecolor, refresh, setRefresh}) {
     }
   };
 
-  return item.set_default == '0' ? (
+  return (
     <View
       style={{
         ...styles.datalistView,
@@ -268,8 +254,7 @@ function OtherAddressDataFlateList({item, themecolor, refresh, setRefresh}) {
         </View>
       </View>
     </View>
-  ) : (
-    <></>
+  
   );
 }
 

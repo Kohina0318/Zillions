@@ -67,18 +67,11 @@ export default function OrderDetails(props) {
       else {
         setProductDetailData([])
         setLoader(false);
-        toast.show(res.msg, {
-          type: 'warning',
-          placement: 'bottom',
-          duration: 3000,
-          offset: 30,
-          animationType: 'slide-in',
-        });
       }
     } catch (e) {
       setProductDetailData([])
-      console.log('errrror in..handleOrderView page Order Detail-->', e);
       setLoader(false);
+      console.log('errrror in..handleOrderView page Order Detail-->', e);
       toast.show('Something went wrong!, Try again later.', {
         type: 'danger',
         placement: 'bottom',

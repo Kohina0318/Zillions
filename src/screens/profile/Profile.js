@@ -27,10 +27,10 @@ import { useToast } from 'react-native-toast-notifications';
 const { width, height } = Dimensions.get('screen');
 
 export default function Profile(props) {
- 
+
   const toast = useToast();
-  var navigation = useNavigation(); 
- 
+  var navigation = useNavigation();
+
   const mode = useSelector(state => state.mode);
   const themecolor = new MyThemeClass(mode).getThemeColor();
 
@@ -39,25 +39,24 @@ export default function Profile(props) {
   const [UserData, setUserData] = useState([]);
 
   const handleUserData = async () => {
-    var userData = await getUserData();
-    if (userData == null || userData == '' || userData == undefined) {
-      setUserData([]);
-      setLoader(false);
-    } else {
       try {
         var res = await getProfileInfo();
         if (res.status === true) {
           setUserData(res.data);
           setLoader(false);
-        } else {
-          setUserData(userData)
+        }
+        else if (res.msg == "Invalid Authentication") {
+          setUserData([])
+          setLoader(false);
+        }
+        else {
+          setUserData([])
           setLoader(false);
         }
       } catch (e) {
-        setUserData(userData)
+        setUserData([])
         setLoader(false);
       }
-    }
   };
 
   useFocusEffect(
