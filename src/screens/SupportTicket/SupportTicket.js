@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   View,
   Text,
@@ -7,13 +7,13 @@ import {
   TouchableOpacity,
   TextInput,
 } from 'react-native';
-import {useSelector} from 'react-redux';
-import {MyThemeClass} from '../../components/Theme/ThemeDarkLightColor';
-import {useToast} from 'react-native-toast-notifications';
-import {styles} from '../../assets/css/ProfileCss/SupportTicketStyle';
+import { useSelector } from 'react-redux';
+import { MyThemeClass } from '../../components/Theme/ThemeDarkLightColor';
+import { useToast } from 'react-native-toast-notifications';
+import { styles } from '../../assets/css/ProfileCss/SupportTicketStyle';
 import RegisterLoginHeader from '../../components/shared/header/RegisterLoginHeader';
 import LoadingFullScreen from '../../components/shared/Loader/LoadingFullScreen';
-import {ScrollView} from 'react-native-gesture-handler';
+import { ScrollView } from 'react-native-gesture-handler';
 import HalfSizeButton from '../../components/shared/button/halfSizeButton';
 import Feather from 'react-native-vector-icons/Feather';
 import {
@@ -22,9 +22,9 @@ import {
 } from '../../repository/SupportTicketRepository/SupportTicketRepo';
 import VerifyModel from '../../components/shared/Model/VerifyModel';
 import CreateTicketModel from '../../components/shared/Model/CreateTicketModel';
-import {SupportTicketDataList} from '../../components/shared/FlateLists/SupportTicket/SupportTicketDataList';
+import { SupportTicketDataList } from '../../components/shared/FlateLists/SupportTicket/SupportTicketDataList';
 import NoDataMsg from '../../components/shared/NoData/NoDataMsg';
-const {width, height} = Dimensions.get('screen');
+const { width, height } = Dimensions.get('screen');
 
 export default function SupportTicket(props) {
   function handleBackButtonClick() {
@@ -54,6 +54,54 @@ export default function SupportTicket(props) {
   const [message, setMessage] = useState('');
   const [data, setData] = useState([]);
   const [isLoading, setIsLoading] = React.useState(false);
+
+  const handleAllMessages = async (value) => {
+    try {
+      var body = new FormData()
+      body.append('limit', "10")
+      if (value == undefined) {
+        body.append('offset', 0)
+      }
+      else { body.append('offset', value) }
+      const res = await getSupportTicket(body);
+      console.log(res.data)
+      if (res.status == true) {
+        if (data == [] || data == null) {
+          setData(res.data);
+        }
+        else {
+          setIsLoading(true)
+          var temp = res.data;
+          if (temp.length == 0) {
+            setIsLoading(false)
+          }
+          else {
+            var temp1 = data.concat(temp)
+            setData(temp1);
+          }
+        }
+
+        setLoader(false);
+      } else {
+        setLoader(false);
+      }
+    } catch (e) {
+      console.log('catch in ....support Ticket table data page', e);
+      setLoader(false);
+      toast.show('Something went wrong!, Try again later.', {
+        type: 'danger',
+        placement: 'bottom',
+        duration: 3000,
+        offset: 30,
+        animationType: 'slide-in',
+      });
+    }
+  };
+
+
+  useEffect(() => {
+    handleAllMessages();
+  }, [refresh]);
 
   const handleCreateTicket = async () => {
     if (subject == '') {
@@ -90,13 +138,7 @@ export default function SupportTicket(props) {
             animationType: 'slide-in',
           });
         } else {
-          toast.show(res.msg, {
-            type: 'warning',
-            placement: 'bottom',
-            duration: 3000,
-            offset: 30,
-            animationType: 'slide-in',
-          });
+
         }
       } catch (e) {
         console.log('catch in .... create support Ticket page', e);
@@ -111,65 +153,9 @@ export default function SupportTicket(props) {
     }
   };
 
-  const handleAllMessages = async (value) => {
-    try {
-      var body=new FormData()
-      body.append('limit',"10")
-      if(value==undefined)
-      {
-        body.append('offset',0) 
-      }
-      else
-     { body.append('offset',value)}
-     const res = await getSupportTicket(body);
-     console.log(res.data)
-     if (res.status == true) {
-      if(data==[]||data==null)
-     { setData(res.data);
-    }
-     else{
-      setIsLoading(true)
-      var temp = res.data;
-      if(temp.length==0)
-      {
-        setIsLoading(false)
-      }
-      else
-     { var temp1 =data.concat(temp)
-      setData(temp1);
-    }
-     } 
-  
-        setLoader(false);
-      } else {
-        setLoader(false);
-        toast.show(res.msg, {
-          type: 'warning',
-          placement: 'bottom',
-          duration: 3000,
-          offset: 30,
-          animationType: 'slide-in',
-        });
-      }
-    } catch (e) {
-      console.log('catch in ....support Ticket table data page', e);
-      setLoader(false);
-      toast.show('Something went wrong!, Try again later.', {
-        type: 'danger',
-        placement: 'bottom',
-        duration: 3000,
-        offset: 30,
-        animationType: 'slide-in',
-      });
-    }
-  };
-
-  useEffect(() => {
-    handleAllMessages();
-  }, [refresh]);
 
   return (
-    <View style={{...styles.bg, backgroundColor: themecolor.THEMECOLOR}}>
+    <View style={{ ...styles.bg, backgroundColor: themecolor.THEMECOLOR }}>
       <RegisterLoginHeader
         title={'Support Ticket'}
         backIcon={true}
@@ -180,13 +166,13 @@ export default function SupportTicket(props) {
           ...styles.container,
         }}>
         {loader ? (
-          <LoadingFullScreen style={{flex: 1}} />
+          <LoadingFullScreen style={{ flex: 1 }} />
         ) : data.length > 0 ? (
           <>
-            <SupportTicketDataList data={data} handleAllMessages={(value)=>handleAllMessages(value)} isLoading={isLoading}  />
+            <SupportTicketDataList data={data} handleAllMessages={(value) => handleAllMessages(value)} isLoading={isLoading} />
           </>
         ) : (
-          <NoDataMsg  title="No Ticket Found! "/>
+          <NoDataMsg title="No Ticket Found! " />
         )}
       </View>
 
@@ -194,7 +180,7 @@ export default function SupportTicket(props) {
         style={{
           ...styles.touchview,
         }}>
-        <View style={{...styles.mainView}}>
+        <View style={{ ...styles.mainView }}>
           <HalfSizeButton
             title="Create Ticket"
             icon={<Feather name="arrow-right-circle" size={15} />}

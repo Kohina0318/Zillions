@@ -4,9 +4,9 @@ import {
   DarkTheme,
   DefaultTheme,
 } from '@react-navigation/native';
-import {createStackNavigator} from '@react-navigation/stack';
-import {navigationRef} from '../../navigations/NavigationDrw/NavigationService';
-import {isDarkMode} from '../../components/Theme/ThemeDarkLightColor';
+import { createStackNavigator } from '@react-navigation/stack';
+import { navigationRef } from '../../navigations/NavigationDrw/NavigationService';
+import { isDarkMode } from '../../components/Theme/ThemeDarkLightColor';
 import Login from '../../screens/auth/Login';
 import ViewPager from '../../screens/intro/ViewPager'
 import Header from '../../components/shared/header/Header';
@@ -35,6 +35,7 @@ import Payment from '../../screens/OrderProcess/Payment';
 import CartAddress from '../../screens/OrderProcess/CartAddress';
 import ProductMoreDetails from '../../screens/category/ProductMoreDetails';
 import { PaymentConfirmation } from '../../screens/OrderProcess/PaymentConfirmation';
+import TrackingOrder from '../../screens/TrackingOrder/TrackingOrder';
 
 function MainNavigationStack(props) {
   const Stack = createStackNavigator();
@@ -47,141 +48,146 @@ function MainNavigationStack(props) {
         <Stack.Screen
           name="Splash"
           component={Splash}
-          options={{headerShown: false}}
+          options={{ headerShown: false }}
         />
         <Stack.Screen
           name="Login"
           component={Login}
-          options={{headerShown: false}}
+          options={{ headerShown: false }}
         />
         <Stack.Screen
           name="Register"
           component={Register}
-          options={{headerShown: false}}
+          options={{ headerShown: false }}
         />
-         <Stack.Screen
+        <Stack.Screen
           name="ForgotPassword"
           component={ForgotPassword}
-          options={{headerShown: false}}
+          options={{ headerShown: false }}
         />
         <Stack.Screen
           name="ViewPager"
           component={ViewPager}
-          options={{headerShown: false}}
+          options={{ headerShown: false }}
         />
-         <Stack.Screen
+        <Stack.Screen
           name="Header"
           component={Header}
-          options={{headerShown: false}}
+          options={{ headerShown: false }}
         />
         <Stack.Screen
           name="Dashboard"
           component={DrawerNavigation}
-          options={{headerShown: false}}
+          options={{ headerShown: false }}
         />
         <Stack.Screen
           name="Categories"
           component={Categories}
-          options={{headerShown: false}}
+          options={{ headerShown: false }}
         />
-           <Stack.Screen
+        <Stack.Screen
           name="Search"
           component={Search}
-          options={{headerShown: false}}
+          options={{ headerShown: false }}
         />
         <Stack.Screen
           name="SubCategories"
           component={SubCategories}
-          options={{headerShown: false}}
+          options={{ headerShown: false }}
         />
         <Stack.Screen
           name="Products"
           component={Products}
-          options={{headerShown: false}}
+          options={{ headerShown: false }}
         />
         <Stack.Screen
           name="ProductMoreDetails"
           component={ProductMoreDetails}
-          options={{headerShown: false}}
+          options={{ headerShown: false }}
         />
         <Stack.Screen
           name="Brands"
           component={Brands}
-          options={{headerShown: false}}
+          options={{ headerShown: false }}
         /><Stack.Screen
           name="LatestFeaturedProducts"
           component={LatestFeaturedProducts}
-          options={{headerShown: false}}
+          options={{ headerShown: false }}
         />
         <Stack.Screen
           name="BestSelling"
           component={BestSelling}
-          options={{headerShown: false}}
+          options={{ headerShown: false }}
         />
         <Stack.Screen
           name="RecentlyViewed"
           component={RecentlyViewed}
-          options={{headerShown: false}}
+          options={{ headerShown: false }}
         />
         <Stack.Screen
           name="MostViewed"
           component={MostViewed}
-          options={{headerShown: false}}
+          options={{ headerShown: false }}
         />
         <Stack.Screen
           name="WishList"
           component={WishList}
-          options={{headerShown: false}}
+          options={{ headerShown: false }}
         />
         <Stack.Screen
           name="Profile"
           component={Profile}
-          options={{headerShown: false}}
+          options={{ headerShown: false }}
         />
         <Stack.Screen
           name="Order"
           component={Order}
-          options={{headerShown: false}}
+          options={{ headerShown: false }}
         />
         <Stack.Screen
           name="OrderDetails"
           component={OrderDetails}
-          options={{headerShown: false}}
+          options={{ headerShown: false }}
         />
         <Stack.Screen
           name="Address"
           component={Address}
-          options={{headerShown: false}}
+          options={{ headerShown: false }}
         />
         <Stack.Screen
           name="EditProfile"
           component={EditProfile}
-          options={{headerShown: false}}
+          options={{ headerShown: false }}
         />
         <Stack.Screen
           name="SupportTicket"
           component={SupportTicket}
-          options={{headerShown: false}}
+          options={{ headerShown: false }}
         />
         <Stack.Screen
           name="Cart"
           component={Cart}
-          options={{headerShown: false}}
+          options={{ headerShown: false }}
         />
-         <Stack.Screen
+        <Stack.Screen
           name="Payment"
           component={Payment}
-          options={{headerShown: false}}
+          options={{ headerShown: false }}
         />
-           <Stack.Screen
+        <Stack.Screen
           name="CartAddress"
           component={CartAddress}
-          options={{headerShown: false}}
+          options={{ headerShown: false }}
         />
-           <Stack.Screen
+        <Stack.Screen
           name="PaymentConfirmation"
           component={PaymentConfirmation}
-          options={{headerShown: false}}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="TrackingOrder"
+          component={TrackingOrder}
+          options={{ headerShown: false }}
         />
       </Stack.Navigator>
     </NavigationContainer>

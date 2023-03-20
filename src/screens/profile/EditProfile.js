@@ -6,6 +6,8 @@ import {
   BackHandler,
   TouchableOpacity,
   TextInput,
+  Alert,
+  ToastAndroid
 } from 'react-native';
 import {useSelector} from 'react-redux';
 import {MyThemeClass} from '../../components/Theme/ThemeDarkLightColor';
@@ -19,6 +21,9 @@ import {ScrollView, State} from 'react-native-gesture-handler';
 import { postEditProfile } from '../../repository/ProfileRepository/EditProfileRepo';
 import VerifyModel from '../../components/shared/Model/VerifyModel';
 import { getProfileInfo } from '../../repository/ProfileRepository/ProfileRepo';
+import { useNavigation } from '@react-navigation/native';
+import { navigateToClearStack } from '../../navigations/NavigationDrw/NavigationService';
+
 const {width, height} = Dimensions.get('screen');
 
 export default function EditProfile(props) {
@@ -38,6 +43,8 @@ export default function EditProfile(props) {
   }, []);
 
   const toast = useToast();
+  const navigation = useNavigation();
+
   const mode = useSelector(state => state.mode);
   const themecolor = new MyThemeClass(mode).getThemeColor();
   
@@ -73,7 +80,19 @@ export default function EditProfile(props) {
         setFacebook(res.data[0].facebook);
         setGooglePlus(res.data[0].google_plus);
         setLoader(false);
-      } else {
+      }
+      else if (res.msg == "Invalid Authentication") {
+        setLoader(false);
+        ToastAndroid.showWithGravityAndOffset(
+          `${'Token Expired'}`,
+          ToastAndroid.TOP,
+          ToastAndroid.LONG,
+          10,
+          10,
+        );
+        navigateToClearStack('Dashboard');
+      }
+       else {
         setLoader(false); 
         toast.show(res.msg, {
           type: 'warning',
@@ -111,14 +130,9 @@ export default function EditProfile(props) {
         const res = await postEditProfile(formdata);
         if (res.status == true) {
          setShowmodal(!showmodal)   
-        } else {
-          toast.show(res.msg, {
-            type: 'warning',
-            placement: 'bottom',
-            duration: 3000,
-            offset: 30,
-            animationType: 'slide-in',
-          });
+        }   
+        else {
+          setShowmodal(!showmodal)  
         }
       } catch (e) {
         console.log('catch in ....Edit Profile page', e);

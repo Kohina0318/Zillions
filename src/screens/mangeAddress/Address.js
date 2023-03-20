@@ -8,6 +8,8 @@ import {
   ScrollView,
   BackHandler,
   TouchableOpacity,
+  ToastAndroid,
+
 } from 'react-native';
 import { useSelector } from 'react-redux';
 import { MyThemeClass } from '../../components/Theme/ThemeDarkLightColor';
@@ -26,6 +28,7 @@ import HalfSizeButton from '../../components/shared/button/halfSizeButton';
 import AddAddressModel from '../../components/shared/Model/AddAddressModel';
 import RegisterLoginHeader from '../../components/shared/header/RegisterLoginHeader';
 import NoDataMsg from '../../components/shared/NoData/NoDataMsg';
+import { navigateToClearStack } from '../../navigations/NavigationDrw/NavigationService';
 
 const { width, height } = Dimensions.get('screen');
 
@@ -65,17 +68,11 @@ export default function Address(props) {
   const handleDefaultAddress = async () => {
     try {
       var res = await postDefaultAddress();
-
       if (res.status === true) {
         setDefaultData(res.data);
-      } else {
-        toast.show(res.msg, {
-          type: 'warning',
-          placement: 'bottom',
-          duration: 3000,
-          offset: 30,
-          animationType: 'slide-in',
-        });
+      }  
+      else {
+       
       }
     } catch (e) {
       console.log('errrror in..handleDefaultAddress page-->', e);
@@ -95,15 +92,9 @@ export default function Address(props) {
       if (res.status === true) {
         setData(res.data);
         setLoader(false);
-      } else {
+      }
+      else {
         setLoader(false);
-        toast.show(res.msg, {
-          type: 'warning',
-          placement: 'bottom',
-          duration: 3000,
-          offset: 30,
-          animationType: 'slide-in',
-        });
       }
     } catch (e) {
       console.log('errrror in..getManageAddress page-->', e);
@@ -197,13 +188,7 @@ export default function Address(props) {
             animationType: 'slide-in',
           });
         } else {
-          toast.show(res.msg, {
-            type: 'warning',
-            placement: 'bottom',
-            duration: 3000,
-            offset: 30,
-            animationType: 'slide-in',
-          });
+         
         }
       } catch (e) {
         console.log('errrror in..getManageAddress page in address-->', e);
@@ -236,45 +221,46 @@ export default function Address(props) {
         }}>
         {loader ? (
           <LoadingFullScreen style={{ flex: 1 }} />
-        ) : data.length > 0 ? (
-          <ScrollView showsVerticalScrollIndicator={false}>
+        ) :
+          (data.length > 0) || (defaultData.length > 0) ? (
+            <ScrollView showsVerticalScrollIndicator={false}>
 
-            {defaultData.length > 0 ?
-              <View style={{ ...styles.ViewHeading }}>
-                <Text
-                  allowFontScaling={false}
-                  style={{ ...styles.headingTxt, color: themecolor.TXTGREYS }}>
-                  Default Address{' '}
-                </Text>
-                <ManageAddressDataList
-                  data={defaultData}
-                  dafault={true}
-                  refresh={refresh}
-                  setRefresh={setRefresh}
-                />
-              </View>
-              : <></>}
+              {defaultData.length > 0 ?
+                <View style={{ ...styles.ViewHeading }}>
+                  <Text
+                    allowFontScaling={false}
+                    style={{ ...styles.headingTxt, color: themecolor.TXTGREYS }}>
+                    Default Address{' '}
+                  </Text>
+                  <ManageAddressDataList
+                    data={defaultData}
+                    dafault={true}
+                    refresh={refresh}
+                    setRefresh={setRefresh}
+                  />
+                </View>
+                : <></>}
 
-            {data.length > 0 ?
-              <View style={{ ...styles.ViewHeading }}>
-                <Text
-                  allowFontScaling={false}
-                  style={{ ...styles.headingTxt, color: themecolor.TXTGREYS }}>
-                  Other Addresses{' '}
-                </Text>
-                <ManageAddressDataList
-                  data={data}
-                  refresh={refresh}
-                  setRefresh={setRefresh}
-                />
-              </View>
-              : <></>}
+              {data.length > 0 ?
+                <View style={{ ...styles.ViewHeading }}>
+                  <Text
+                    allowFontScaling={false}
+                    style={{ ...styles.headingTxt, color: themecolor.TXTGREYS }}>
+                    Other Addresses{' '}
+                  </Text>
+                  <ManageAddressDataList
+                    data={data}
+                    refresh={refresh}
+                    setRefresh={setRefresh}
+                  />
+                </View>
+                : <></>}
 
-            <View style={{ marginVertical: 10 }} />
-          </ScrollView>
-        ) : (
-          <NoDataMsg title="No Address Found! " />
-        )}
+              <View style={{ marginVertical: 10 }} />
+            </ScrollView>
+          ) : (
+            <NoDataMsg title="No Address Found! " />
+          )}
       </View>
 
       <View

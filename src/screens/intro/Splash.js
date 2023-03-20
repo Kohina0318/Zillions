@@ -17,10 +17,6 @@ export default function Splash(props) {
             // routes: [{name: 'ViewPager'}],
             routes: [{name: 'Dashboard'}],
           });
-          // props.navigation.reset({
-          //   index: 0,
-          //   routes: [{name: 'Login'}],
-          // });
       }, 1000)
    
       return ()=>{

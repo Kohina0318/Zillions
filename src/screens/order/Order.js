@@ -84,15 +84,9 @@ export default function Order(props) {
      } 
         
         setLoader(false);
-      } else {
+      }
+       else {
         setLoader(false);
-        toast.show(res.msg, {
-          type: 'warning',
-          placement: 'bottom',
-          duration: 3000,
-          offset: 30,
-          animationType: 'slide-in',
-        });
       }
     } catch (e) {
       console.log('errrror in..handleOrderlist page wishlist-->', e);

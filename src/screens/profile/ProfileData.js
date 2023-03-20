@@ -24,16 +24,16 @@ export const data = [
     icon: <SLI name="handbag" size={20} />,
     onpress: 'Order'
   },
-  {
-    name: 'Tracking Order',
-    icon: <MCI name="shopping-search" size={22} />,
-    onpress: ""
-  },
-  {
-    name: 'Return Order',
-    icon: <MCI name="cart-arrow-up" size={22} />,
-    onpress: ""
-  },
+  // {
+  //   name: 'Tracking Order',
+  //   icon: <MCI name="shopping-search" size={22} />,
+  //   onpress: "TrackingOrder"
+  // },
+  // {
+  //   name: 'Return Order',
+  //   icon: <MCI name="cart-arrow-up" size={22} />,
+  //   onpress: ""
+  // },
   {
     name: 'Support Ticket',
     icon: <FA name="file-text-o" size={19} />,

@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   View,
   Text,
@@ -8,18 +8,18 @@ import {
   ScrollView,
   BackHandler,
 } from 'react-native';
-import {useSelector} from 'react-redux';
-import {MyThemeClass} from '../../components/Theme/ThemeDarkLightColor';
-import {useToast} from 'react-native-toast-notifications';
+import { useSelector } from 'react-redux';
+import { MyThemeClass } from '../../components/Theme/ThemeDarkLightColor';
+import { useToast } from 'react-native-toast-notifications';
 import Header from '../../components/shared/header/Header';
-import {getBrands} from '../../repository/DashboardRepository/AllDashboardRep';
-import {styles} from '../../assets/css/BrandCss/BrandsStyle';
-import {useFocusEffect} from '@react-navigation/native';
+import { getBrands } from '../../repository/DashboardRepository/AllDashboardRep';
+import { styles } from '../../assets/css/BrandCss/BrandsStyle';
+import { useFocusEffect } from '@react-navigation/native';
 import LoadingFullScreen from '../../components/shared/Loader/LoadingFullScreen';
-import {BrandDataList} from '../../components/shared/FlateLists/DashboardFlatList/BrandFlatList';
+import { BrandDataList } from '../../components/shared/FlateLists/DashboardFlatList/BrandFlatList';
 import NoDataMsg from '../../components/shared/NoData/NoDataMsg';
 
-const {width, height} = Dimensions.get('screen');
+const { width, height } = Dimensions.get('screen');
 
 export default function Brands(props) {
   const toast = useToast();
@@ -38,8 +38,7 @@ export default function Brands(props) {
       {
         body.append('offset',0) 
       }
-      else
-     { body.append('offset',value)}
+      else { body.append('offset', value) }
       var res = await getBrands(body);
       if(brandsData==[]||brandsData==null)
      { setBrandsData(res.data);}
@@ -68,43 +67,36 @@ export default function Brands(props) {
     }
   };
 
-  // useFocusEffect(
-  //   React.useCallback(() => {
-  //     // setLoader(true);
-  //     handleBrands();
-  //   }, [props]),
-  // );
-
-  useEffect(()=>{
+  useEffect(() => {
     handleBrands();
-  },[])
+  }, [])
 
 
   return (
-    <View style={{...styles.bg, backgroundColor: themecolor.THEMECOLOR}}>
-      
+    <View style={{ ...styles.bg, backgroundColor: themecolor.THEMECOLOR }}>
+
       <Header title="Brands" />
-          
+
       {loader ? (
-        <LoadingFullScreen style={{flex: 1}} />
+        <LoadingFullScreen style={{ flex: 1 }} />
       ) : (
         <><View
-            style={{
-              ...styles.container,
-            }}>
-            {brandsData.length > 0 ? (
-                <BrandDataList
-                  data={brandsData}
-                  numColumns={3}
-                  horizontal={false}
-                  handleBrands={(value)=>handleBrands(value)}
-                  isLoading={isLoading}
-                />
-            ) : (
-               <NoDataMsg  title="No Brands Found! "/>
-            )}
-            <View style={{marginVertical: 45}} />
-          </View>
+          style={{
+            ...styles.container,
+          }}>
+          {brandsData.length > 0 ? (
+            <BrandDataList
+              data={brandsData}
+              numColumns={3}
+              horizontal={false}
+              handleBrands={(value) => handleBrands(value)}
+              isLoading={isLoading}
+            />
+          ) : (
+            <NoDataMsg title="No Brands Found! " />
+          )}
+          <View style={{ marginVertical: 45 }} />
+        </View>
         </>
       )}
     </View>

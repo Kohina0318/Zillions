@@ -6,7 +6,8 @@ import {
   Text,
   Image,
   Dimensions,
-  ActivityIndicator
+  ActivityIndicator,
+  ToastAndroid
 } from 'react-native';
 import { Colors } from '../../../../assets/config/Colors';
 import { styles } from '../../../../assets/css/WishListCss/WishListStyle';
@@ -24,6 +25,7 @@ import { postAddCartProduct } from '../../../../repository/OrderProcessRepositor
 import { set } from 'immer/dist/internal';
 import { store } from '../../../../../App';
 import LoadingContent from '../../Loader/LoadingContent';
+import { navigateToClearStack } from '../../../../navigations/NavigationDrw/NavigationService';
 
 const { width, height } = Dimensions.get('screen');
 
@@ -51,14 +53,18 @@ function WishListDataFlateList({ item, themecolor, setRefresh, refresh, }) {
           offset: 30,
           animationType: 'slide-in',
         });
-      } else {
-        toast.show(res.msg, {
-          type: 'warning',
-          placement: 'bottom',
-          duration: 3000,
-          offset: 30,
-          animationType: 'slide-in',
-        });
+      }else if (res.msg == "Invalid Authentication") {
+        ToastAndroid.showWithGravityAndOffset(
+          `${'Token Expired'}`,
+          ToastAndroid.TOP,
+          ToastAndroid.LONG,
+          10,
+          10,
+        );
+        navigateToClearStack('Dashboard');
+      }
+       else {
+       
       }
     } catch (e) {
       console.log('errrror in..handleRemove page wishlist-->', e);

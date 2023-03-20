@@ -1,3 +1,4 @@
+import { removeDatafromAsync } from "../AsyncStorageServices";
 import { getAppToken } from "../CommonRepository";
 import { SERVER_URL } from "../SERVER_URL";
 
@@ -20,6 +21,7 @@ import { SERVER_URL } from "../SERVER_URL";
   };
 
   const getCartOrderDetails = async () => {
+   
     try {
       const response = await fetch(
         `${await SERVER_URL()}/cart-product/calcs/full/pp`,
@@ -30,7 +32,8 @@ import { SERVER_URL } from "../SERVER_URL";
       },
     ); 
       const result = await response.json();
-      return result;
+      
+        return result;
     } catch (err) {
       console.log('error in getCartOrderDetails...in CartListRepo ', err);
     }

@@ -6,7 +6,8 @@ import {
   BackHandler,
   TouchableOpacity,
   ScrollView,
-  Alert
+  Alert,
+  ToastAndroid
 } from 'react-native';
 import { useSelector } from 'react-redux';
 import { MyThemeClass } from '../../components/Theme/ThemeDarkLightColor';
@@ -24,6 +25,8 @@ import OrderDetailsComp from '../../components/shared/OrderProcessComponents/Car
 import { useFocusEffect } from '@react-navigation/native';
 import Register from '../auth/Register';
 import { getProfileInfo } from '../../repository/ProfileRepository/ProfileRepo';
+import { navigateToClearStack } from '../../navigations/NavigationDrw/NavigationService';
+import { useNavigation } from '@react-navigation/native';
 
 const { width, height } = Dimensions.get('screen');
 
@@ -44,6 +47,7 @@ export default function CartAddress(props) {
   }, []);
 
   const toast = useToast();
+  const navigation = useNavigation();
   const mode = useSelector(state => state.mode);
   const themecolor = new MyThemeClass(mode).getThemeColor();
 
@@ -65,7 +69,9 @@ export default function CartAddress(props) {
       var res = await getCartOrderDetails()
       if (res.status == true) {
         setDetailData(res.data)
-      } else {
+      }
+      
+       else {
         console.log('Status False in..handleCartOrderDetails page CartAddress-->');
       }
     } catch (e) {
@@ -83,12 +89,12 @@ export default function CartAddress(props) {
   const handleManageAddress = async () => {
     try {
       var userData = await getProfileInfo();
-      setName(userData.data[0].username.replace(/\s+/g, ''))
-      setSurname(userData.data[0].surname.replace(/\s+/g, ''))
-
+      if (userData.status === true) {
+        setName(userData.data[0].username.replace(/\s+/g, ''))
+        setSurname(userData.data[0].surname.replace(/\s+/g, ''))
+      }
       var res = await postDefaultAddress();
       if (res.status == true) {
-        // setData(res.data);
         if(res.data.length >0 ){
         setData(true)
         setAddress(res.data[0].address)
@@ -105,13 +111,7 @@ export default function CartAddress(props) {
         
       } else {
         setLoader(false);
-        toast.show(res.msg, {
-          type: 'warning',
-          placement: 'bottom',
-          duration: 3000,
-          offset: 30,
-          animationType: 'slide-in',
-        });
+       
       }
     } catch (e) {
       console.log('errrror in..getManageAddress page-->', e);
