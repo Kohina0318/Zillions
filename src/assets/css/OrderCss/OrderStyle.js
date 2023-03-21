@@ -5,7 +5,9 @@ import { FontFamily } from '../../fonts/FontFamily';
 const { width, height } = Dimensions.get('window');
 
 const styles = StyleSheet.create({
-  bg: { flex: 1 },
+  bg: { 
+    flex: 1,
+  },
   datalistView: {
     width: width * 0.94,
     height: "auto",

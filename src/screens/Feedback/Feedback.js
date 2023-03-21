@@ -13,7 +13,6 @@ import RegisterLoginHeader from '../../components/shared/header/RegisterLoginHea
 import LoadingFullScreen from '../../components/shared/Loader/LoadingFullScreen';
 import { useNavigation } from '@react-navigation/native';
 
-
 const { width, height } = Dimensions.get('screen');
 
 export default function FeedBack(props) {

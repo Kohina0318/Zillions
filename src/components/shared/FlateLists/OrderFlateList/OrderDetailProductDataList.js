@@ -13,11 +13,8 @@ import {MyThemeClass} from '../../../Theme/ThemeDarkLightColor';
 import {useSelector} from 'react-redux';
 import {useNavigation} from '@react-navigation/native';
 import FAIcon from 'react-native-vector-icons/FontAwesome';
-import AN from 'react-native-vector-icons/AntDesign';
-import Feather from 'react-native-vector-icons/Feather';
 import {useToast} from 'react-native-toast-notifications';
-import HalfSizeButton from '../../button/halfSizeButton';
-import {postReturnOrder} from '../../../../repository/OrderRepository/OrderRepo';
+
 
 const {width} = Dimensions.get('screen');
 
@@ -26,61 +23,10 @@ function OrderDetailProductDataFlateList({
   themecolor,
   refresh,
   setRefresh,
-  status,
-  saleId,
-  onChange
 }) {
-  const [title, setTitle] = useState('Return Order');
-  const [disabled, setDisabled] = useState(false);
 
   const toast = useToast();
   const navigation = useNavigation();
-
-  const handleReturnOrder = async () => {
-    Alert.alert(
-      'Return Order',
-      'Are you sure, you wants to return the order?',
-      [
-        {
-          text: 'No',
-          onPress: () => console.log('Cancel Pressed'),
-          style: 'cancel',
-        },
-        {
-          text: 'Yes',
-          onPress: async () => {
-            try{
-            var res = await postReturnOrder(saleId, item.id);
-            if (res.status === true) {
-              onChange(true)
-              setTitle('Request Sent');
-              setDisabled(true)
-            }
-            else{
-              toast.show("Sorry!,Your Request can't be processed", {
-                type: 'danger',
-                placement: 'bottom',
-                duration: 3000,
-                offset: 30,
-                animationType: 'slide-in',
-              });
-            }
-          }
-          catch(e) {
-            console.log('errrror in..handleOrderView page Order Detail-->', e);
-            toast.show('Something went wrong!, Try again later.', {
-              type: 'danger',
-              placement: 'bottom',
-              duration: 3000,
-              offset: 30,
-              animationType: 'slide-in',
-            });
-          }
-          },
-        },
-      ],
-    );
-  };
 
   var optionData = item.option;
   var Size = '';
@@ -171,25 +117,6 @@ function OrderDetailProductDataFlateList({
       </View>
 
       <View style={{...styles.marTop}} />
-{status=='delivered'?
-      <View style={{...styles.mainView1}}>
-        <View style={{width: '95%', alignSelf: 'center', margin: 5, left: 3}}>
-          <HalfSizeButton
-            title={title}
-            disabled={disabled}
-            icon={' '}
-            onPress={() => handleReturnOrder()}
-            backgroundColor={'transparent'}
-            color={themecolor.TEXTRED}
-            borderColor={themecolor.TEXTRED}
-            fontSize={14}
-            height={width * 0.09}
-          />
-        </View>
-      </View>
-      :
-      <></>
-}
     </View>
   );
 }
