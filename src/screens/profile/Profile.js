@@ -23,6 +23,9 @@ import { getUserData } from '../../repository/CommonRepository';
 import { removeDatafromAsync } from '../../repository/AsyncStorageServices';
 import { postLogout } from '../../repository/AuthRepository/LogoutRepository';
 import { useToast } from 'react-native-toast-notifications';
+import HalfSizeButton from '../../components/shared/button/halfSizeButton';
+import AD from 'react-native-vector-icons/AntDesign';
+
 
 const { width, height } = Dimensions.get('screen');
 
@@ -39,24 +42,24 @@ export default function Profile(props) {
   const [UserData, setUserData] = useState([]);
 
   const handleUserData = async () => {
-      try {
-        var res = await getProfileInfo();
-        if (res.status === true) {
-          setUserData(res.data);
-          setLoader(false);
-        }
-        else if (res.msg == "Invalid Authentication") {
-          setUserData([])
-          setLoader(false);
-        }
-        else {
-          setUserData([])
-          setLoader(false);
-        }
-      } catch (e) {
+    try {
+      var res = await getProfileInfo();
+      if (res.status === true) {
+        setUserData(res.data);
+        setLoader(false);
+      }
+      else if (res.msg == "Invalid Authentication") {
         setUserData([])
         setLoader(false);
       }
+      else {
+        setUserData([])
+        setLoader(false);
+      }
+    } catch (e) {
+      setUserData([])
+      setLoader(false);
+    }
   };
 
   useFocusEffect(
@@ -245,22 +248,16 @@ export default function Profile(props) {
                 ...ProfileStyle.datalistView2,
               }}>
               {UserData.length > 0 ? (
-                <TouchableOpacity
-                  onPress={() => handleConfirmLogout()}
-                  style={{
-                    ...ProfileStyle.buttonView3,
-                    backgroundColor: themecolor.ADDTOCARTBUTTONCOLOR,
-                    borderColor: themecolor.BOXBORDERCOLOR1,
-                  }}>
-                  <Text
-                    allowFontScaling={false}
-                    style={{
-                      ...ProfileStyle.buttonText1,
-                      color: '#FFF',
-                    }}>
-                    Logout
-                  </Text>
-                </TouchableOpacity>
+                <View style={{ width: "100%" }}>
+                  <HalfSizeButton
+                    title="Logout"
+                    icon={<AD name="logout" size={18} color="#fff" />}
+                    backgroundColor={themecolor.ADDTOCARTBUTTONCOLOR}
+                    color={'#fff'}
+                    borderColor={themecolor.BOXBORDERCOLOR1}
+                    onPress={() => handleConfirmLogout()}
+                  />
+                </View>
               ) : (
                 <></>
               )}

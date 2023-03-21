@@ -33,7 +33,7 @@ const CategoryStyle = StyleSheet.create({
   txt: {
     fontSize: 15,
     fontFamily: FontFamily.Popinssemibold,
-    color: '#121327',
+    color: '#fff',
   },
   iconview: {flexDirection: 'row', alignItems: 'center'},
 
@@ -45,6 +45,8 @@ const CategoryStyle = StyleSheet.create({
     color:Colors.white,
     right:3
   },
+  innerViewMain: { flexDirection: "row", width:width, marginTop:4 , backgroundColor:"#fff", marginBottom:-7},
+  
 });
 
 export {CategoryStyle};

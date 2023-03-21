@@ -57,7 +57,7 @@ const postDefaultAddress = async () => {
       },
     );
     const result = await response.json();
-
+   
     if (result.token_status == 'false') {
       await removeDatafromAsync('@UserData');
       await removeDatafromAsync('@Token');
@@ -167,7 +167,7 @@ const postSetDefaultAddress = async formdata => {
       },
     );
     const result = await response.json();
-    
+
     if (result.token_status == 'false') {
       await removeDatafromAsync('@UserData');
       await removeDatafromAsync('@Token');

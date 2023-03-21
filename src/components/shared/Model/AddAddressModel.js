@@ -2,9 +2,6 @@ import React, {useState} from 'react';
 import {View, Text, Modal, Dimensions, TextInput} from 'react-native';
 import {MyThemeClass} from '../../Theme/ThemeDarkLightColor';
 import {useSelector} from 'react-redux';
-import {FontSize} from '../../../assets/fonts/Fonts';
-import {FontFamily} from '../../../assets/fonts/FontFamily';
-import {Colors} from '../../../assets/config/Colors';
 import {styles} from '../../../assets/css/ProfileCss/AddressStyle';
 import HalfSizeButton from '../button/halfSizeButton';
 

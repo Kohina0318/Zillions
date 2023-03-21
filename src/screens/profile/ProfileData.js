@@ -6,8 +6,13 @@ import MCI from 'react-native-vector-icons/MaterialCommunityIcons';
 export const data = [
   {
     name: 'Edit Profile',
-    icon: <FA name="edit" size={21} />,
+    icon: <MCI name="account-edit-outline" size={23} />,
     onpress: "EditProfile"
+  },
+  {
+    name: 'Change Password',
+    icon: <FA name="edit" size={21} />,
+    onpress: "ChangePassword"
   },
   {
     name: 'Manage Address',
@@ -24,11 +29,6 @@ export const data = [
     icon: <SLI name="handbag" size={20} />,
     onpress: 'Order'
   },
-  // {
-  //   name: 'Tracking Order',
-  //   icon: <MCI name="shopping-search" size={22} />,
-  //   onpress: "TrackingOrder"
-  // },
   // {
   //   name: 'Return Order',
   //   icon: <MCI name="cart-arrow-up" size={22} />,
