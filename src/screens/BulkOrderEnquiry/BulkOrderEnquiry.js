@@ -7,7 +7,7 @@ import {
 } from 'react-native';
 import { useSelector } from 'react-redux';
 import { MyThemeClass } from '../../components/Theme/ThemeDarkLightColor';
-import { styles } from '../../assets/css/BulkOrderEnquiryCss/BulkOrderEnquiry';
+import { styles } from '../../assets/css/BulkOrderEnquiryCss/BulkOrderStyle';
 import { useToast } from 'react-native-toast-notifications';
 import RegisterLoginHeader from '../../components/shared/header/RegisterLoginHeader';
 import LoadingFullScreen from '../../components/shared/Loader/LoadingFullScreen';

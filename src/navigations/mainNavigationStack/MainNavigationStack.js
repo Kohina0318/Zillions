@@ -35,7 +35,7 @@ import Payment from '../../screens/OrderProcess/Payment';
 import CartAddress from '../../screens/OrderProcess/CartAddress';
 import ProductMoreDetails from '../../screens/category/ProductMoreDetails';
 import { PaymentConfirmation } from '../../screens/OrderProcess/PaymentConfirmation';
-import TrackingOrder from '../../screens/TrackingOrder/TrackingOrder';
+import ChangePassword from '../../screens/profile/ChangePassword';
 import RFQUpload from '../../screens/RFQUpload/RFQUpload';
 import FeedBack from '../../screens/Feedback/Feedback';
 import BulkOrderEnquiry from '../../screens/BulkOrderEnquiry/BulkOrderEnquiry';
@@ -188,8 +188,8 @@ function MainNavigationStack(props) {
           options={{ headerShown: false }}
         />
         <Stack.Screen
-          name="TrackingOrder"
-          component={TrackingOrder}
+          name="ChangePassword"
+          component={ChangePassword}
           options={{ headerShown: false }}
         />
       <Stack.Screen

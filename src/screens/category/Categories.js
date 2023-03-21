@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   View,
   Text,
@@ -6,19 +6,23 @@ import {
   Appearance,
   Dimensions,
   ScrollView,
+  TouchableOpacity
 } from 'react-native';
-import {useSelector} from 'react-redux';
-import {MyThemeClass} from '../../components/Theme/ThemeDarkLightColor';
-import {CategoryDataList} from '../../components/shared/FlateLists/CategoryFlatList/CategoryDataList';
-import {CategoryStyle} from '../../assets/css/CategoryCss/CategoryStyle'
-import {getCategories} from '../../repository/CategoryRepository/AllProductCategoryRep';
-import {useFocusEffect,} from '@react-navigation/native';
-import {useToast} from 'react-native-toast-notifications';
+import { useSelector } from 'react-redux';
+import { MyThemeClass } from '../../components/Theme/ThemeDarkLightColor';
+import { CategoryDataList } from '../../components/shared/FlateLists/CategoryFlatList/CategoryDataList';
+import { CategoryStyle } from '../../assets/css/CategoryCss/CategoryStyle'
+import { getCategories } from '../../repository/CategoryRepository/AllProductCategoryRep';
+import { useToast } from 'react-native-toast-notifications';
 import Header from '../../components/shared/header/Header';
 import LoadingFullScreen from '../../components/shared/Loader/LoadingFullScreen';
 import NoDataMsg from '../../components/shared/NoData/NoDataMsg';
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+import RequestForNewCategoryModel from '../../components/shared/Model/RequestForNewCategoryModel';
+import HalfSizeButton from '../../components/shared/button/halfSizeButton';
 
-const {width, height} = Dimensions.get('screen');
+
+const { width, height } = Dimensions.get('screen');
 
 export default function Categories(props) {
   const toast = useToast();
@@ -27,6 +31,8 @@ export default function Categories(props) {
 
   const [loader, setLoader] = useState(true);
   const [data, setData] = useState([]);
+
+  const [showModal, setShowModal] = useState(false);
 
   const handleCategories = async () => {
     try {
@@ -44,32 +50,61 @@ export default function Categories(props) {
         animationType: 'slide-in',
       });
     }
-  };
- 
-  useEffect(()=>{
-    handleCategories();
-  },[])
+  }; 
+  
+useEffect(() => {
+  handleCategories();
+}, [])
+
+
 
   return (
-    <View style={{...CategoryStyle.bg, backgroundColor: themecolor.THEMECOLOR}}>
-      
+    <View style={{ ...CategoryStyle.bg, backgroundColor: themecolor.THEMECOLOR }}>
+
       <Header title="Categories" />
-          
+
       {loader ? (
-        <LoadingFullScreen style={{flex: 1}} />
+        <LoadingFullScreen style={{ flex: 1 }} />
       ) : (
         <>
-        <View
+          <View
             style={{
               ...CategoryStyle.container,
             }}>
+
             {data.length > 0 ? (
               <CategoryDataList data={data} />
             ) : (
-              <NoDataMsg  title="No Category Found! "/>
+              <NoDataMsg title="No Category Found! " />
             )}
-            <View style={{marginVertical: 50}} />
+
+            {/* <TouchableOpacity activeOpacity={0.5} onPress={()=>setShowModal(true)} style={{ borderRadius:25 , alignItems:'flex-end', marginTop:-60, zIndex:99999, alignSelf:"flex-end", backgroundColor:themecolor.BOXBORDERCOLOR,right:5}}>
+            <MaterialIcons name="add-circle"  size={45} style={{color:themecolor.ADDTOCARTBUTTONCOLOR, }}/>
+            </TouchableOpacity> */}
+
+            <View style={{ ...CategoryStyle.innerViewMain, backgroundColor: themecolor.ADDTOCARTBUTTONCOLOR }} >
+              <View style={{ width: '100%' }}>
+                <HalfSizeButton
+                  title="Request for New Category"
+                  icon=""
+                  backgroundColor={'transparent'}
+                  color="#fff"
+                  borderColor={'transparent'}
+                  fontSize={13}
+                  height={width * 0.08}
+                  onPress={() => setShowModal(true)}
+                />
+              </View>
+            </View>
+
+            <View style={{ marginVertical: 50 }} />
           </View>
+
+          {showModal && (
+            <RequestForNewCategoryModel
+              setShowModal={setShowModal}
+            />
+          )}
         </>
       )}
     </View>

@@ -14,14 +14,14 @@ const getCategories = async () => {
   }
 };
 
-const getSubCategories = async (cId,body) => {
+const getSubCategories = async (cId, body) => {
   try {
     const response = await fetch(
       `${await SERVER_URL()}/sub-categories/${cId}`,
       {
         method: 'POST',
         headers: { 'Content-Type': 'multipart/form-data' },
-        body:body,
+        body: body,
       },
     );
     const result = await response.json();
@@ -33,7 +33,7 @@ const getSubCategories = async (cId,body) => {
     );
   }
 };
-const getByProduct = async (spec, Id,body) => {
+const getByProduct = async (spec, Id, body) => {
   try {
     const response = await fetch(
       `${await SERVER_URL()}/product-list?speciality=${spec}&id=${Id}`,
@@ -43,7 +43,7 @@ const getByProduct = async (spec, Id,body) => {
           'Content-Type': 'multipart/form-data',
           Authorization: `${await getAppToken()}`
         },
-        body:body,
+        body: body,
       },
     );
     const result = await response.json();
@@ -74,14 +74,14 @@ const getProductView = async pId => {
   }
 };
 
-const getProductRealedProducts = async (spec, limit, pId,body) => {
+const getProductRealedProducts = async (spec, limit, pId, body) => {
   try {
     const response = await fetch(
       `${await SERVER_URL()}/product-list?speciality=${spec}&limit=${limit}&id=${pId}`,
       {
         method: 'POST',
         headers: { 'Content-Type': 'multipart/form-data' },
-        body:body,
+        body: body,
       },
     );
     const result = await response.json();
@@ -94,10 +94,57 @@ const getProductRealedProducts = async (spec, limit, pId,body) => {
   }
 };
 
+const postRequestACallBack = async formdata => {
+  try {
+    const response = await fetch(
+      `${await SERVER_URL()}/save-address`,
+      {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'multipart/form-data',
+          Authorization: `${await getAppToken()}`
+        },
+        body: formdata,
+      },
+    );
+
+    const result = await response.json();
+    return result;
+
+  } catch (err) {
+    console.log('error in postRequestACallBack...in AllProductCategoryRep ', err);
+  }
+};
+
+const postRequestForNewCategory = async formdata => {
+  try {
+    const response = await fetch(
+      `${await SERVER_URL()}/save-address`,
+      {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'multipart/form-data',
+          Authorization: `${await getAppToken()}`
+        },
+        body: formdata,
+      },
+    );
+
+    const result = await response.json();
+    return result;
+
+  } catch (err) {
+    console.log('error in postRequestForNewCategory...in AllProductCategoryRep ', err);
+  }
+};
+
+
 export {
   getCategories,
   getByProduct,
   getSubCategories,
   getProductView,
   getProductRealedProducts,
+  postRequestACallBack,
+  postRequestForNewCategory
 };

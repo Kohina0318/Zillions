@@ -31,6 +31,7 @@ import HalfSizeButton from '../../components/shared/button/halfSizeButton';
 import { store } from '../../../App';
 import { postAddCartProduct } from '../../repository/OrderProcessRepository/AddToCartRepo';
 import ImageZoomerModel from '../../components/shared/Model/ImageZoomerModel';
+import ProductMoreDetailCustomerSupport from '../../components/shared/OrderProcessComponents/ProductDetails/ProductMoreDetailCustomerSupport';
 
 const { width, height } = Dimensions.get('window');
 
@@ -252,6 +253,10 @@ export default function ProductMoreDetails(props) {
                                         productDetail={productDetailData}
                                     />
                                 </View>
+
+                                <View style={{ ...styles.MGT }} />
+
+                                <ProductMoreDetailCustomerSupport />
 
                                 <View style={{ ...styles.MGT }} />
 

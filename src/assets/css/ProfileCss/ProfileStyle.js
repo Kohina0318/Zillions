@@ -62,7 +62,7 @@ const ProfileStyle = StyleSheet.create({
     justifyContent: 'center',
   },
   datalistView2: {
-    width: width * 0.94,
+    width: width,
     padding: 13,
     borderRadius: 7,
     alignSelf: 'center',
@@ -174,6 +174,7 @@ const ProfileStyle = StyleSheet.create({
   headingTxt: {
     fontSize: FontSize.labelText3,
     fontFamily: FontFamily.Popinssemibold,
+    fontWeight:"bold"
   },
   ViewHeading:{
     width: width * 0.93, alignSelf: 'center', marginBottom:8
@@ -191,19 +192,19 @@ const ProfileStyle = StyleSheet.create({
       width:"100%",
       padding: 15,
       alignItems: 'center', 
-      borderRadius: 5,
+      borderRadius: 7,
       borderWidth: 0.4,  
       marginTop:10 
   },
   TextView: {
-    height: 38,
+    height: 43,
     borderRadius: 8,
     borderWidth: 0.8,
     overflow: 'hidden',
     width: width * 0.83,
   },
   TextViewHalf: {
-    height: 38,
+    height: 43,
     borderRadius: 8,
     borderWidth: 0.8,
     overflow: 'hidden',
@@ -230,7 +231,18 @@ const ProfileStyle = StyleSheet.create({
   inputBoxHalf:{
     flexDirection: 'row',
     justifyContent: 'space-between',
-  }
+  },
+  forgot: {
+    width: width *0.85,
+    height: height * 0.03,
+    justifyContent: 'flex-end',
+    alignItems: 'flex-end',
+
+  },
+  forgotTxt: {
+    fontSize: 11,
+    fontWeight: 'bold',
+  },
   
   
   
