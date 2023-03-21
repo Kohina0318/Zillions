@@ -75,16 +75,6 @@ export default function OrderDetailsPaymentHistoryComp(props) {
 
       <View style={{ ...styles.mv5 }} />
 
-      <View style={{ ...styles.innerView }}>
-        <View style={{ ...styles.orderDetialcompWidth }}>
-          <Text allowFontScaling={false} style={{ ...styles.txtPrice, color: themecolor.TXTWHITE }}>Total Amount</Text>
-        </View>
-        <View style={{ ...styles.orderDetialcompWidth1 }}>
-          <Text allowFontScaling={false} style={{ ...styles.txtPrice, color: themecolor.TXTWHITE }}><FAIcon name="rupee" size={13} /> {parseInt(detailData.grand_total)}</Text>
-        </View>
-      </View>
-
-
       <View style={{ ...styles.MVT }} />
 
       <View style={{ ...styles.borderLine, borderColor: themecolor.BOXBORDERCOLOR1, }} />
@@ -93,7 +83,7 @@ export default function OrderDetailsPaymentHistoryComp(props) {
 
       <View style={{ ...styles.innerView }}>
         <View style={{ ...styles.orderDetialcompWidth, }}>
-          <Text allowFontScaling={false} style={{ ...styles.txt, color: themecolor.BACKICON }}>Amount to be paid</Text>
+          <Text allowFontScaling={false} style={{ ...styles.txt, color: themecolor.BACKICON }}>Total Amount</Text>
         </View>
         <View style={{ ...styles.orderDetialcompWidth1, }}>
           <Text allowFontScaling={false} style={{ ...styles.txt, color: themecolor.BACKICON }}><FAIcon name="rupee" size={14} /> {parseInt(detailData.grand_total)}</Text>

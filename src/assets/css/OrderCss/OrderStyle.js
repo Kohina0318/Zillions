@@ -146,6 +146,12 @@ const styles = StyleSheet.create({
     alignContent: 'center',
     width: width * 0.94,
   },
+  mainView1: {
+    flexDirection: 'row',
+    alignSelf: 'center',
+    alignContent: 'center',
+    width: width*0.93,
+  },
 });
 
 export { styles };
