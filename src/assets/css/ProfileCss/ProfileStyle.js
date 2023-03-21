@@ -197,14 +197,14 @@ const ProfileStyle = StyleSheet.create({
       marginTop:10 
   },
   TextView: {
-    height: 40,
+    height: 43,
     borderRadius: 8,
     borderWidth: 0.8,
     overflow: 'hidden',
     width: width * 0.83,
   },
   TextViewHalf: {
-    height: 40,
+    height: 43,
     borderRadius: 8,
     borderWidth: 0.8,
     overflow: 'hidden',

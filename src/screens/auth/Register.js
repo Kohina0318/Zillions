@@ -184,8 +184,8 @@ export default function Register(props) {
               style={{...RegisterLoginStyles.textTwoInputView}}>
               <View
                 style={{
-                  backgroundColor: themecolor.OTPBOXCOLOR,
-                  borderColor: themecolor.OTPBOXCOLOR,
+                  // backgroundColor: themecolor.OTPBOXCOLOR,
+                  borderColor: themecolor.BOXBORDERCOLOR1,
                   ...RegisterLoginStyles.textTwoInputView1,
                 }}>
                 <Icon
@@ -212,8 +212,8 @@ export default function Register(props) {
 
               <View
                 style={{
-                  backgroundColor: themecolor.OTPBOXCOLOR,
-                  borderColor: themecolor.OTPBOXCOLOR,
+                  // backgroundColor: themecolor.OTPBOXCOLOR,
+                  borderColor: themecolor.BOXBORDERCOLOR1,
                   ...RegisterLoginStyles.textTwoInputView1,
                 }}>
                 <Icon
@@ -243,8 +243,8 @@ export default function Register(props) {
 
             <View
               style={{
-                backgroundColor: themecolor.OTPBOXCOLOR,
-                borderColor: themecolor.OTPBOXCOLOR,
+                // backgroundColor: themecolor.OTPBOXCOLOR,
+                borderColor: themecolor.BOXBORDERCOLOR1,
                 ...RegisterLoginStyles.textInputView,
               }}>
               <FA
@@ -273,8 +273,8 @@ export default function Register(props) {
             <View style={{...RegisterLoginStyles.MGv5}} />
             <View
               style={{
-                backgroundColor: themecolor.OTPBOXCOLOR,
-                borderColor: themecolor.OTPBOXCOLOR,
+                // backgroundColor: themecolor.OTPBOXCOLOR,
+                borderColor: themecolor.BOXBORDERCOLOR1,
                 ...RegisterLoginStyles.textInputView,
               }}>
               <Icon
@@ -305,8 +305,8 @@ export default function Register(props) {
             <View
               style={{
                 ...RegisterLoginStyles.textInputView,
-                backgroundColor: themecolor.OTPBOXCOLOR,
-                borderColor: themecolor.OTPBOXCOLOR,
+                // backgroundColor: themecolor.OTPBOXCOLOR,
+                borderColor: themecolor.BOXBORDERCOLOR1,
               }}>
               <Icon
                 name="vpn-key"
@@ -351,8 +351,8 @@ export default function Register(props) {
             <View
               style={{
                 ...RegisterLoginStyles.textInputView,
-                backgroundColor: themecolor.OTPBOXCOLOR,
-                borderColor: themecolor.OTPBOXCOLOR,
+                // backgroundColor: themecolor.OTPBOXCOLOR,
+                borderColor: themecolor.BOXBORDERCOLOR1,
               }}>
               <Icon
                 name="vpn-key"

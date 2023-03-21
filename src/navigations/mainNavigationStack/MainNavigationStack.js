@@ -36,6 +36,9 @@ import CartAddress from '../../screens/OrderProcess/CartAddress';
 import ProductMoreDetails from '../../screens/category/ProductMoreDetails';
 import { PaymentConfirmation } from '../../screens/OrderProcess/PaymentConfirmation';
 import ChangePassword from '../../screens/profile/ChangePassword';
+import RFQUpload from '../../screens/RFQUpload/RFQUpload';
+import FeedBack from '../../screens/Feedback/Feedback';
+import BulkOrderEnquiry from '../../screens/BulkOrderEnquiry/BulkOrderEnquiry';
 
 function MainNavigationStack(props) {
   const Stack = createStackNavigator();
@@ -189,7 +192,21 @@ function MainNavigationStack(props) {
           component={ChangePassword}
           options={{ headerShown: false }}
         />
-      
+      <Stack.Screen
+          name="RFQUpload"
+          component={RFQUpload}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="Feedback"
+          component={FeedBack}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="BulkOrderEnquiry"
+          component={BulkOrderEnquiry}
+          options={{ headerShown: false }}
+        />
       </Stack.Navigator>
     </NavigationContainer>
   );

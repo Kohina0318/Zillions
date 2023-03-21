@@ -142,8 +142,8 @@ export default function ForgotPassword(props) {
 
             <View
               style={{
-                backgroundColor: themecolor.OTPBOXCOLOR,
-                borderColor: themecolor.OTPBOXCOLOR,
+                // backgroundColor: themecolor.OTPBOXCOLOR,
+                borderColor: themecolor.BOXBORDERCOLOR1,
                 ...RegisterLoginStyles.textInputView,
               }}>
               <Icon

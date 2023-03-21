@@ -131,8 +131,8 @@ export default function Login(props) {
             }}>
             <View
               style={{
-                backgroundColor: themecolor.OTPBOXCOLOR,
-                borderColor: themecolor.OTPBOXCOLOR,
+                // backgroundColor: themecolor.THEMECOLOR1,
+                borderColor: themecolor.BOXBORDERCOLOR1,
                 ...RegisterLoginStyles.textInputView,
               }}>
               {/* <View> */}
@@ -159,8 +159,8 @@ export default function Login(props) {
             <View
               style={{
                 ...RegisterLoginStyles.textInputView,
-                backgroundColor: themecolor.OTPBOXCOLOR,
-                borderColor: themecolor.OTPBOXCOLOR,
+                // backgroundColor: themecolor.OTPBOXCOLOR,
+                borderColor: themecolor.BOXBORDERCOLOR1,
               }}>
               {/* <View> */}
               <Icon name="vpn-key" style={{marginLeft:15}} size={18} color={themecolor.BACKICON} />

@@ -66,7 +66,7 @@ function OrderDataFlateList({ item, themecolor }) {
           </Text>
 
           <Text allowFontScaling={false} style={{ ...styles.txt1, color: themecolor.TXTWHITE }}>
-            Estimated Delivery {date}
+          {item.delivery_status == "delivered" ? "Delivered On": "Estimated Delivery"} {date}
           </Text>
 
           <Text allowFontScaling={false} style={{ ...styles.txt1, color: themecolor.TXTWHITE }}>
