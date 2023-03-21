@@ -23,6 +23,7 @@ import { useNavigation } from '@react-navigation/native';
 import OrderHistoryDetailComp from '../../components/shared/OrderProcessComponents/OrderHistory/OrderHistoryDetailComp';
 import OrderHistoryTotalAmountComp from '../../components/shared/OrderProcessComponents/OrderHistory/OrderHistoryTotalAmountComp';
 import OrderHistoryAddressComp from '../../components/shared/OrderProcessComponents/OrderHistory/OrderHistoryAddressComp';
+import VerifyModel from '../../components/shared/Model/VerifyModel';
 
 
 const { width, height } = Dimensions.get('screen');
@@ -54,11 +55,19 @@ export default function OrderDetails(props) {
   const [data, setData] = useState({})
   const [productDetailData, setProductDetailData] = useState([])
   const [shippingAddress, setShippingAddress] = useState({})
+  const [deliveryStatus, setDeliveryStatus] = useState('delivered')
+  const [showmodal,setShowmodal]=useState(false)
 
   const handleOrderView = async () => {
     try {
       var res = await getOrderView(props.route.params.SaleId);
       if (res.status === true) {
+        console.log(res.data.product)
+        if(res.data.delivery_status != undefined || res.data.delivery_status != null ||res.data.delivery_status != ''){
+        var status=JSON.parse(res.data.delivery_status)
+        var Dstatus=status[0].status
+        // setDeliveryStatus(Dstatus);
+        }
         setData(res.data);
         setProductDetailData(res.data.product)
         setShippingAddress(res.data.address)
@@ -81,6 +90,10 @@ export default function OrderDetails(props) {
       });
     }
   };
+
+  const handleOnChange=(value)=>{
+setShowmodal(value)
+  }
 
   useEffect(() => {
     handleOrderView();
@@ -111,7 +124,7 @@ export default function OrderDetails(props) {
             {productDetailData.length > 0 ?
               <>
                 <View style={{ ...styles.mgT10 }} />
-                <OrderDetailProductDataList data={productDetailData} />
+                <OrderDetailProductDataList data={productDetailData} status={deliveryStatus} saleId={props.route.params.SaleId} onChange={(value)=>handleOnChange(value)}/>
               </>
               : <></>}
 
@@ -144,7 +157,7 @@ export default function OrderDetails(props) {
                 <HalfSizeButton
                   title="Continue Shopping"
                   icon={" "}
-                  onPress={() => navigation.navigate("Dashboard")}
+                  onPress={() =>navigation.navigate("Dashboard") }
                   backgroundColor={'transparent'}
                   color={themecolor.BACKICON}
                   borderColor={themecolor.BACKICON}
@@ -155,6 +168,14 @@ export default function OrderDetails(props) {
 
         </>
 
+      )}
+
+      {showmodal && (
+        <VerifyModel
+          setShowmodal={setShowmodal}
+          title={'Request Sent Successfully.'}
+          navigateTo=''
+        />
       )}
 
     </View>

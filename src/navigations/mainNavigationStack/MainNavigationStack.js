@@ -36,6 +36,9 @@ import CartAddress from '../../screens/OrderProcess/CartAddress';
 import ProductMoreDetails from '../../screens/category/ProductMoreDetails';
 import { PaymentConfirmation } from '../../screens/OrderProcess/PaymentConfirmation';
 import TrackingOrder from '../../screens/TrackingOrder/TrackingOrder';
+import RFQUpload from '../../screens/RFQUpload/RFQUpload';
+import FeedBack from '../../screens/Feedback/Feedback';
+import BulkOrderEnquiry from '../../screens/BulkOrderEnquiry/BulkOrderEnquiry';
 
 function MainNavigationStack(props) {
   const Stack = createStackNavigator();
@@ -187,6 +190,21 @@ function MainNavigationStack(props) {
         <Stack.Screen
           name="TrackingOrder"
           component={TrackingOrder}
+          options={{ headerShown: false }}
+        />
+      <Stack.Screen
+          name="RFQUpload"
+          component={RFQUpload}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="Feedback"
+          component={FeedBack}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="BulkOrderEnquiry"
+          component={BulkOrderEnquiry}
           options={{ headerShown: false }}
         />
       </Stack.Navigator>

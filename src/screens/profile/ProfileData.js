@@ -1,6 +1,8 @@
 import FA from 'react-native-vector-icons/FontAwesome';
 import EP from 'react-native-vector-icons/Entypo';
 import SLI from 'react-native-vector-icons/SimpleLineIcons';
+import FE from 'react-native-vector-icons/Feather';
+import MI from 'react-native-vector-icons/MaterialIcons';
 import MCI from 'react-native-vector-icons/MaterialCommunityIcons';
 
 export const data = [
@@ -38,6 +40,21 @@ export const data = [
     name: 'Support Ticket',
     icon: <FA name="file-text-o" size={19} />,
     onpress: "SupportTicket"
+  },
+  {
+    name: 'RFQ Upload',
+    icon: <FE name="upload" size={20} />,
+    onpress: 'RFQUpload'
+  },
+  {
+    name: 'FeedBack',
+    icon: <MI name="info-outline" size={20} />,
+    onpress: 'Feedback'
+  },
+  {
+    name: 'Bulk Order Enquiry',
+    icon: <MCI name="message-question-outline" size={20} />,
+    onpress: 'BulkOrderEnquiry'
   },
 ];
 

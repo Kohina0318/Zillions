@@ -39,7 +39,7 @@ export default halfSizeButton = props => {
 
   return (
     <View>
-      <TouchableOpacity onPress={props.onPress}>
+      <TouchableOpacity disabled={props.disabled} onPress={props.onPress}>
         <View style={{...styles.bigButton   }}>
           <Text
            allowFontScaling={false}
@@ -53,4 +53,8 @@ export default halfSizeButton = props => {
       </TouchableOpacity>
     </View>
   );
+};
+
+halfSizeButton.defaultProps = {
+ disabled:false,
 };
