@@ -62,6 +62,8 @@ export default function Profile(props) {
     }
   };
 
+
+
   useFocusEffect(
     React.useCallback(() => {
       setLoader(true);
@@ -155,8 +157,8 @@ export default function Profile(props) {
                         style={{
                           ...ProfileStyle.WellText,
                           color: themecolor.BACKICON,
-                        }}>
-                        Welcome {UserData[0].username.replace(/\s+/g, '')} {UserData[0].surname.replace(/\s+/g, '')}...
+                        }} numberOfLines={1}>
+                        Welcome {UserData[0].username.replace(/\s+/g, '')} {UserData[0].surname.replace(/\s+/g, '')}
                       </Text>
                     </View>
                   </View>
