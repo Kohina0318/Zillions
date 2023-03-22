@@ -60,6 +60,10 @@ export const data = [
 
 export const data1 = [
   {
+    name: 'FeedBack',
+    onpress: 'Feedback',
+  },
+  {
     name: 'Blog',
     Link: 'https://www.zillionsbuyer.com/blog/',
   },

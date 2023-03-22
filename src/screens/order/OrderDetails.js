@@ -7,6 +7,7 @@ import {
   BackHandler,
   ScrollView,
   Touchable,
+  Alert,
   TouchableOpacity
 } from 'react-native';
 import { useSelector } from 'react-redux';
@@ -24,7 +25,7 @@ import OrderHistoryDetailComp from '../../components/shared/OrderProcessComponen
 import OrderHistoryTotalAmountComp from '../../components/shared/OrderProcessComponents/OrderHistory/OrderHistoryTotalAmountComp';
 import OrderHistoryAddressComp from '../../components/shared/OrderProcessComponents/OrderHistory/OrderHistoryAddressComp';
 import VerifyModel from '../../components/shared/Model/VerifyModel';
-
+import { postReturnOrder } from '../../repository/OrderRepository/OrderRepo';
 
 const { width, height } = Dimensions.get('screen');
 
@@ -56,7 +57,56 @@ export default function OrderDetails(props) {
   const [productDetailData, setProductDetailData] = useState([])
   const [shippingAddress, setShippingAddress] = useState({})
   const [deliveryStatus, setDeliveryStatus] = useState('delivered')
-  const [showmodal,setShowmodal]=useState(false)
+  const [showmodal,setShowmodal]=useState(false);
+  const [title, setTitle] = useState('Return Order');
+  const [disabled, setDisabled] = useState(false);
+
+  const handleReturnOrder = async () => {
+    Alert.alert(
+      'Return Order',
+      'Are you sure, you wants to return the order?',
+      [
+        {
+          text: 'No',
+          onPress: () => console.log('Cancel Pressed'),
+          style: 'cancel',
+        },
+        {
+          text: 'Yes',
+          onPress: async () => {
+            try{
+            var res = await postReturnOrder(props.route.params.SaleId);
+            console.log(res)
+            if (res.status === true) {
+              setShowmodal(true)
+              setTitle('Request Sent');
+              setDisabled(true)
+            }
+            else{
+              toast.show("Sorry!,Your Request can't be processed", {
+                type: 'danger',
+                placement: 'bottom',
+                duration: 3000,
+                offset: 30,
+                animationType: 'slide-in',
+              });
+            }
+          }
+          catch(e) {
+            console.log('errrror in..handleOrderView page Order Detail-->', e);
+            toast.show('Something went wrong!, Try again later.', {
+              type: 'danger',
+              placement: 'bottom',
+              duration: 3000,
+              offset: 30,
+              animationType: 'slide-in',
+            });
+          }
+          },
+        },
+      ],
+    );
+  };
 
   const handleOrderView = async () => {
     try {
@@ -68,6 +118,12 @@ export default function OrderDetails(props) {
         var Dstatus=status[0].status
         // setDeliveryStatus(Dstatus);
         }
+        if(res.data.return_status=="1"||res.data.return_status==1)
+        {
+          setTitle("Request Sent")
+          setDisabled(true)
+        }
+        console.log(res.data)
         setData(res.data);
         setProductDetailData(res.data.product)
         setShippingAddress(res.data.address)
@@ -90,10 +146,6 @@ export default function OrderDetails(props) {
       });
     }
   };
-
-  const handleOnChange=(value)=>{
-setShowmodal(value)
-  }
 
   useEffect(() => {
     handleOrderView();
@@ -124,7 +176,7 @@ setShowmodal(value)
             {productDetailData.length > 0 ?
               <>
                 <View style={{ ...styles.mgT10 }} />
-                <OrderDetailProductDataList data={productDetailData} status={deliveryStatus} saleId={props.route.params.SaleId} onChange={(value)=>handleOnChange(value)}/>
+                <OrderDetailProductDataList data={productDetailData}/>
               </>
               : <></>}
 
@@ -155,12 +207,13 @@ setShowmodal(value)
             <View style={{ ...styles.mainView }}>
               <View style={{ width: '100%' }}>
                 <HalfSizeButton
-                  title="Continue Shopping"
+                  title={deliveryStatus=="delivered"?title:"Continue Shopping"}
                   icon={" "}
-                  onPress={() =>navigation.navigate("Dashboard") }
+                  onPress={deliveryStatus=="delivered"?(()=>handleReturnOrder()):(() =>navigation.navigate("Dashboard") )}
                   backgroundColor={'transparent'}
                   color={themecolor.BACKICON}
                   borderColor={themecolor.BACKICON}
+                  disabled={disabled}
                 />
               </View>
             </View>

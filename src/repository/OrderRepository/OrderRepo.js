@@ -73,15 +73,16 @@ const getOrderView = async (orId) => {
   }
 }
 
-const postReturnOrder = async (orId,saleId) => {
+const postReturnOrder = async (saleId) => {
   try {
-    const response = await fetch(`${await SERVER_URL()}/return-order/${saleId}/${orId}`, {
+    const response = await fetch(`${await SERVER_URL()}/return-order/${saleId}/0`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json;charset=utf-8',
         Authorization: `${await getAppToken()}`
       },
     });
+    console.log(response)
     
     const result = await response.json();
 
