@@ -97,7 +97,7 @@ const getProductRealedProducts = async (spec, limit, pId, body) => {
 const postRequestACallBack = async formdata => {
   try {
     const response = await fetch(
-      `${await SERVER_URL()}/save-address`,
+      `${await SERVER_URL()}/sent-call-back`,
       {
         method: 'POST',
         headers: {

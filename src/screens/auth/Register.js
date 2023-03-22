@@ -52,6 +52,7 @@ export default function Register(props) {
   const [password, setPassword] = useState('');
   const [conPassword, setConPassword] = useState('');
   const [isPasswordSecure, setIsPasswordSecure] = useState(true);
+  const [isPasswordSecure1, setIsPasswordSecure1] = useState(true);
 
   var toast = useToast();
 
@@ -369,7 +370,7 @@ export default function Register(props) {
                   autoCapitalize="none"
                   autoCorrect={false}
                   textContentType="newPassword"
-                  secureTextEntry={isPasswordSecure}
+                  secureTextEntry={isPasswordSecure1}
                   enablesReturnKeyAutomatically
                   onChangeText={text => setConPassword(text)}
                   style={{
@@ -381,11 +382,11 @@ export default function Register(props) {
               <View style={{...RegisterLoginStyles.eyeButton}}>
                 <MaterialCommunityIcons
                   onPress={() => {
-                    isPasswordSecure
-                      ? setIsPasswordSecure(false)
-                      : setIsPasswordSecure(true);
+                    isPasswordSecure1
+                      ? setIsPasswordSecure1(false)
+                      : setIsPasswordSecure1(true);
                   }}
-                  name={isPasswordSecure ? 'eye-off' : 'eye'}
+                  name={isPasswordSecure1 ? 'eye-off' : 'eye'}
                   size={16}
                   color={themecolor.ADDTOCARTBUTTONCOLOR}
                 />
