@@ -142,7 +142,7 @@ export default function RFQUpload(props) {
     let isCameraPermitted = await requestCameraPermission();
     let isStoragePermitted = await requestExternalWritePermission();
     if (isCameraPermitted && isStoragePermitted) {
-      
+    
       launchCamera(options, response => {
         console.log('Response = ', response);
 
