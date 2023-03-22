@@ -55,8 +55,8 @@ export default function ProductMoreDetailCustomerSupport(props) {
         } else {
             try {
             let formdata = new FormData();
-                formdata.append('', mobileNo);
-                formdata.append('', msg);
+                formdata.append('mobile', mobileNo);
+                formdata.append('message', msg);
 
                 var res = await postRequestACallBack(formdata);
                 if (res.status === true) {
@@ -71,7 +71,7 @@ export default function ProductMoreDetailCustomerSupport(props) {
                 }
       
             } catch (e) {
-                console.log('errrror in..getManageAddress page in address-->', e);
+                console.log('errrror in..postRequestACallBack page in Product DEtail-->', e);
                 toast.show('Something went wrong!, Try again later.', {
                     type: 'danger',
                     placement: 'bottom',

@@ -211,8 +211,8 @@ export default function OrderDetails(props) {
                   icon={" "}
                   onPress={deliveryStatus=="delivered"?(()=>handleReturnOrder()):(() =>navigation.navigate("Dashboard") )}
                   backgroundColor={'transparent'}
-                  color={themecolor.BACKICON}
-                  borderColor={themecolor.BACKICON}
+                  color={deliveryStatus=="delivered"?themecolor.TEXTRED:themecolor.BACKICON}
+                  borderColor={deliveryStatus=="delivered"?themecolor.TEXTRED:themecolor.BACKICON}
                   disabled={disabled}
                 />
               </View>

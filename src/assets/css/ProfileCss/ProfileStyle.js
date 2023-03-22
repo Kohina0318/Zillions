@@ -243,6 +243,16 @@ const ProfileStyle = StyleSheet.create({
     fontSize: 11,
     fontWeight: 'bold',
   },
+  TextViewPswd: {
+    height: 43,
+    borderRadius: 8,
+    borderWidth: 0.8,
+    overflow: 'hidden',
+    width: width * 0.83,
+    flexDirection:"row",
+    alignItems:"center",
+    alignSelf:"center",
+  },
   
   
   

@@ -19,6 +19,7 @@ import LoadingFullScreen from '../../components/shared/Loader/LoadingFullScreen'
 import HalfSizeButton from '../../components/shared/button/halfSizeButton';
 import { useNavigation } from '@react-navigation/native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import { postChangePswd } from '../../repository/ProfileRepository/ChangePswdRepo';
 
 const { width, height } = Dimensions.get('screen');
 
@@ -49,6 +50,76 @@ export default function ChangePassword(props) {
     const [newPswd, setNewPswd] = useState('');
     const [confirmNewPswd, setConfirmNewPswd] = useState('');
     const [isPasswordSecure, setIsPasswordSecure] = useState(true);
+    const [isPasswordSecure1, setIsPasswordSecure1] = useState(true);
+    const [isPasswordSecure2, setIsPasswordSecure2] = useState(true);
+
+    const handleSubmit = async () => {
+        if (oldPswd == '') {
+            toast.show('old Password is required!', {
+                type: 'warning',
+                placement: 'bottom',
+                duration: 3000,
+                offset: 30,
+                animationType: 'slide-in',
+            });
+        } else if (newPswd == '') {
+            toast.show('New Password is required!', {
+                type: 'warning',
+                placement: 'bottom',
+                duration: 3000,
+                offset: 30,
+                animationType: 'slide-in',
+            });
+        } else if (confirmNewPswd == '') {
+            toast.show('Confirm New Password is required!', {
+                type: 'warning',
+                placement: 'bottom',
+                duration: 3000,
+                offset: 30,
+                animationType: 'slide-in',
+            });
+        } else {
+            try {
+                let formdata = new FormData();
+                formdata.append('', oldPswd);
+                formdata.append('', newPswd);
+                formdata.append('', confirmNewPswd);
+
+                var res = await postChangePswd(formdata);
+                if (res.status === true) {
+                    toast.show(res.msg, {
+                        type: 'success',
+                        placement: 'bottom',
+                        duration: 3000,
+                        offset: 30,
+                        animationType: 'slide-in',
+                    });
+                }
+                else if (res.msg == "Invalid Authentication") {
+
+                }
+                else {
+                    toast.show(res.msg, {
+                        type: 'warning',
+                        placement: 'bottom',
+                        duration: 3000,
+                        offset: 30,
+                        animationType: 'slide-in',
+                    });
+                }
+
+            } catch (e) {
+                console.log('errrror in..getManageAddress page in address-->', e);
+                toast.show('Something went wrong!, Try again later.', {
+                    type: 'danger',
+                    placement: 'bottom',
+                    duration: 3000,
+                    offset: 30,
+                    animationType: 'slide-in',
+                });
+            }
+        }
+    };
 
 
     return (
@@ -86,39 +157,42 @@ export default function ChangePassword(props) {
 
                                 <View>
                                     <Text allowFontScaling={false} style={{ ...ProfileStyle.TextinputH, color: themecolor.TXTWHITE }}>Old Password</Text>
-
                                     <View
                                         style={{
-                                            ...ProfileStyle.TextView,
+                                            ...ProfileStyle.TextViewPswd,
                                             borderColor: themecolor.BOXBORDERCOLOR1,
                                             backgroundColor: themecolor.BOXBORDERCOLOR,
                                         }}>
-                                            <View style={{width:width*0.72,backgroundColor:"red"}}>
-                                        <TextInput
-                                            allowFontScaling={false}
-                                            value={oldPswd}
-                                            placeholder={'Old Password*'}
-                                            placeholderTextColor={themecolor.TXTGREYS}
-                                            style={{
-                                                ...ProfileStyle.TextInput,
-                                                color: themecolor.TXTWHITE,
-                                            }}
-                                            onChangeText={txt => setOldPswd(txt)}
-                                        />
+                                        <View style={{ width: width * 0.75, }}>
+                                            <TextInput
+                                                allowFontScaling={false}
+                                                value={oldPswd}
+                                                placeholder={'Old Password*'}
+                                                autoCapitalize="none"
+                                                autoCorrect={false}
+                                                textContentType="newPassword"
+                                                secureTextEntry={isPasswordSecure}
+                                                enablesReturnKeyAutomatically
+                                                placeholderTextColor={themecolor.TXTGREYS}
+                                                style={{
+                                                    ...ProfileStyle.TextInput,
+                                                    color: themecolor.TXTWHITE,
+                                                }}
+                                                onChangeText={txt => setOldPswd(txt)}
+                                            />
                                         </View>
-                                        <View  style={{backgroundColor:"red"}}>
-                <MaterialCommunityIcons
-                //   onPress={() => {
-                //     isPasswordSecure
-                //       ? setIsPasswordSecure(false)
-                //       : setIsPasswordSecure(true);
-                //   }}
-                //   name={isPasswordSecure ? 'eye-off' : 'eye'}
-                  name={'eye'}
-                  size={16}
-                  color={themecolor.ADDTOCARTBUTTONCOLOR}
-                />
-              </View>
+                                        <TouchableOpacity activeOpacity={0.5} style={{ padding: 2 }}
+                                            onPress={() => {
+                                                isPasswordSecure
+                                                    ? setIsPasswordSecure(false)
+                                                    : setIsPasswordSecure(true);
+                                            }}>
+                                            <MaterialCommunityIcons
+                                                name={isPasswordSecure ? 'eye-off' : 'eye'}
+                                                size={16}
+                                                color={themecolor.ADDTOCARTBUTTONCOLOR}
+                                            />
+                                        </TouchableOpacity>
                                     </View>
                                 </View>
 
@@ -129,21 +203,40 @@ export default function ChangePassword(props) {
                                     <Text allowFontScaling={false} style={{ ...ProfileStyle.TextinputH, color: themecolor.TXTWHITE }}>New Password</Text>
                                     <View
                                         style={{
-                                            ...ProfileStyle.TextView,
+                                            ...ProfileStyle.TextViewPswd,
                                             borderColor: themecolor.BOXBORDERCOLOR1,
                                             backgroundColor: themecolor.BOXBORDERCOLOR,
                                         }}>
-                                        <TextInput
-                                            allowFontScaling={false}
-                                            value={newPswd}
-                                            placeholder={'New Password*'}
-                                            placeholderTextColor={themecolor.TXTGREYS}
-                                            style={{
-                                                ...ProfileStyle.TextInput,
-                                                color: themecolor.TXTWHITE,
-                                            }}
-                                            onChangeText={txt => setNewPswd(txt)}
-                                        />
+                                        <View style={{ width: width * 0.75, }}>
+                                            <TextInput
+                                                allowFontScaling={false}
+                                                value={newPswd}
+                                                placeholder={'New Password*'}
+                                                autoCapitalize="none"
+                                                autoCorrect={false}
+                                                textContentType="newPassword"
+                                                secureTextEntry={isPasswordSecure1}
+                                                enablesReturnKeyAutomatically
+                                                placeholderTextColor={themecolor.TXTGREYS}
+                                                style={{
+                                                    ...ProfileStyle.TextInput,
+                                                    color: themecolor.TXTWHITE,
+                                                }}
+                                                onChangeText={txt => setNewPswd(txt)}
+                                            />
+                                        </View>
+                                        <TouchableOpacity activeOpacity={0.5} style={{ padding: 2 }} onPress={() => {
+                                            isPasswordSecure1
+                                                ? setIsPasswordSecure1(false)
+                                                : setIsPasswordSecure1(true);
+                                        }}
+                                        >
+                                            <MaterialCommunityIcons
+                                                name={isPasswordSecure1 ? 'eye-off' : 'eye'}
+                                                size={16}
+                                                color={themecolor.ADDTOCARTBUTTONCOLOR}
+                                            />
+                                        </TouchableOpacity>
                                     </View>
                                 </View>
 
@@ -154,21 +247,40 @@ export default function ChangePassword(props) {
                                     <Text allowFontScaling={false} style={{ ...ProfileStyle.TextinputH, color: themecolor.TXTWHITE }}>Confirm New Password</Text>
                                     <View
                                         style={{
-                                            ...ProfileStyle.TextView,
+                                            ...ProfileStyle.TextViewPswd,
                                             borderColor: themecolor.BOXBORDERCOLOR1,
                                             backgroundColor: themecolor.BOXBORDERCOLOR,
                                         }}>
-                                        <TextInput
-                                            allowFontScaling={false}
-                                            value={confirmNewPswd}
-                                            placeholder={'Confirm New Password*'}
-                                            placeholderTextColor={themecolor.TXTGREYS}
-                                            style={{
-                                                ...ProfileStyle.TextInput,
-                                                color: themecolor.TXTWHITE,
-                                            }}
-                                            onChangeText={txt => setConfirmNewPswd(txt)}
-                                        />
+                                        <View style={{ width: width * 0.75, }}>
+                                            <TextInput
+                                                allowFontScaling={false}
+                                                value={confirmNewPswd}
+                                                placeholder={'Confirm New Password*'}
+                                                autoCapitalize="none"
+                                                autoCorrect={false}
+                                                textContentType="newPassword"
+                                                secureTextEntry={isPasswordSecure2}
+                                                enablesReturnKeyAutomatically
+                                                placeholderTextColor={themecolor.TXTGREYS}
+                                                style={{
+                                                    ...ProfileStyle.TextInput,
+                                                    color: themecolor.TXTWHITE,
+                                                }}
+                                                onChangeText={txt => setConfirmNewPswd(txt)}
+                                            />
+                                        </View>
+                                        <TouchableOpacity activeOpacity={0.5} style={{ padding: 2 }} onPress={() => {
+                                            isPasswordSecure2
+                                                ? setIsPasswordSecure2(false)
+                                                : setIsPasswordSecure2(true);
+                                        }}
+                                        >
+                                            <MaterialCommunityIcons
+                                                name={isPasswordSecure2 ? 'eye-off' : 'eye'}
+                                                size={16}
+                                                color={themecolor.ADDTOCARTBUTTONCOLOR}
+                                            />
+                                        </TouchableOpacity>
                                     </View>
                                 </View>
 
