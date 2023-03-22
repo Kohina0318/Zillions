@@ -7,6 +7,7 @@ import {
   Dimensions,
   TouchableOpacity,
   ScrollView,
+  Linking,
   Alert
 } from 'react-native';
 import { useSelector } from 'react-redux';
@@ -367,18 +368,43 @@ export default function Profile(props) {
 
                 <View style={{ ...ProfileStyle.Mv5 }} />
 
-<View style={{flexDirection:"row"}}>
-                <Text
-                  allowFontScaling={false}
-                  style={{
-                    ...ProfileStyle.appverText,
-                    color: themecolor.ADDTOCARTBUTTONCOLOR,
-                  }}>
-                  query@zillionbuyer.com<Text style={{
+                <View style={{ flexDirection: "row" }}>
+                  <TouchableOpacity
+                    activeOpacity={0.5}
+                    onPress={() =>
+                      Linking.openURL("mailto: query@zillionbuyer.com") }
+                    >
+                      <Text
+                      allowFontScaling={false}
+                      style={{
+                        ...ProfileStyle.appverText,
+                        color: themecolor.ADDTOCARTBUTTONCOLOR,
+                      }}>
+                      query@zillionbuyer.com {" "}
+                      </Text>
+                  </TouchableOpacity>
+
+                  <Text style={{
                     ...ProfileStyle.appverText,
                     color: themecolor.TXTWHITE,
-                  }}> || </Text> +91-9168103909  
-                </Text>
+                  }}> || </Text>
+
+                  <TouchableOpacity
+                    activeOpacity={0.5}
+                    onPress={() =>
+                      Linking.openURL("tel: 9168103909")
+                    }
+                  >
+                    <Text
+                    allowFontScaling={false}
+                    style={{
+                      ...ProfileStyle.appverText,
+                      color: themecolor.ADDTOCARTBUTTONCOLOR,
+                    }}>
+                     {" "} +91-9168103909
+                      </Text> 
+                    </TouchableOpacity>
+
                 </View>
               </View>
             </View>
