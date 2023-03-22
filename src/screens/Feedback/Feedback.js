@@ -43,7 +43,7 @@ export default function FeedBack(props) {
   const mode = useSelector(state => state.mode);
   const themecolor = new MyThemeClass(mode).getThemeColor();
 
-  const [loader, setLoader] = useState(false);
+  const [loader, setLoader] = useState(true);
   const [userName,setUserName]=useState("")
   const [userMobileno,setUserMobileno]=useState("")
   const [userEmail,setUserEmail]=useState("")
@@ -56,8 +56,7 @@ export default function FeedBack(props) {
             console.log(userData)
             if (userData == null || userData == '' || userData == undefined) {
                 setLoader(false)
-           } else {
-                
+           } else {    
                 var nameUser = `${userData[0].username.replace(/\s+/g, '')} ${userData[0].surname.replace(/\s+/g, '')}`
                 setUserName(nameUser)
                 setUserEmail(userData[0].email)
