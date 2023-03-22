@@ -19,6 +19,7 @@ import LoadingFullScreen from '../../components/shared/Loader/LoadingFullScreen'
 import HalfSizeButton from '../../components/shared/button/halfSizeButton';
 import { useNavigation } from '@react-navigation/native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import { postChangePswd } from '../../repository/ProfileRepository/ChangePswdRepo';
 
 const { width, height } = Dimensions.get('screen');
 
@@ -79,14 +80,13 @@ export default function ChangePassword(props) {
             });
         } else {
             try {
-            let formdata = new FormData();
+                let formdata = new FormData();
                 formdata.append('', oldPswd);
                 formdata.append('', newPswd);
                 formdata.append('', confirmNewPswd);
 
-                var res = await postRequestACallBack(formdata);
+                var res = await postChangePswd(formdata);
                 if (res.status === true) {
-                    setShowModal(false);
                     toast.show(res.msg, {
                         type: 'success',
                         placement: 'bottom',
@@ -95,7 +95,19 @@ export default function ChangePassword(props) {
                         animationType: 'slide-in',
                     });
                 }
-      
+                else if (res.msg == "Invalid Authentication") {
+
+                }
+                else {
+                    toast.show(res.msg, {
+                        type: 'warning',
+                        placement: 'bottom',
+                        duration: 3000,
+                        offset: 30,
+                        animationType: 'slide-in',
+                    });
+                }
+
             } catch (e) {
                 console.log('errrror in..getManageAddress page in address-->', e);
                 toast.show('Something went wrong!, Try again later.', {
@@ -160,7 +172,7 @@ export default function ChangePassword(props) {
                                                 autoCorrect={false}
                                                 textContentType="newPassword"
                                                 secureTextEntry={isPasswordSecure}
-                                                enablesReturnKeyAutomatically                              
+                                                enablesReturnKeyAutomatically
                                                 placeholderTextColor={themecolor.TXTGREYS}
                                                 style={{
                                                     ...ProfileStyle.TextInput,
@@ -204,7 +216,7 @@ export default function ChangePassword(props) {
                                                 autoCorrect={false}
                                                 textContentType="newPassword"
                                                 secureTextEntry={isPasswordSecure1}
-                                                enablesReturnKeyAutomatically  
+                                                enablesReturnKeyAutomatically
                                                 placeholderTextColor={themecolor.TXTGREYS}
                                                 style={{
                                                     ...ProfileStyle.TextInput,
@@ -248,7 +260,7 @@ export default function ChangePassword(props) {
                                                 autoCorrect={false}
                                                 textContentType="newPassword"
                                                 secureTextEntry={isPasswordSecure2}
-                                                enablesReturnKeyAutomatically                              
+                                                enablesReturnKeyAutomatically
                                                 placeholderTextColor={themecolor.TXTGREYS}
                                                 style={{
                                                     ...ProfileStyle.TextInput,
