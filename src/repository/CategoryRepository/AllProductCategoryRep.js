@@ -119,7 +119,7 @@ const postRequestACallBack = async formdata => {
 const postRequestForNewCategory = async formdata => {
   try {
     const response = await fetch(
-      `${await SERVER_URL()}/save-address`,
+      `${await SERVER_URL()}/new-category-request`,
       {
         method: 'POST',
         headers: {

@@ -8,7 +8,7 @@ import { SERVER_URL } from "../SERVER_URL";
 const postChangePswd = async formdata => {
     try {
       const response = await fetch(
-        `${await SERVER_URL()}/save-address`,
+        `${await SERVER_URL()}/registration/update_password`,
         {
           method: 'POST',
           headers: {

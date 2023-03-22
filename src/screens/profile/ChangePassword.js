@@ -81,12 +81,14 @@ export default function ChangePassword(props) {
         } else {
             try {
                 let formdata = new FormData();
-                formdata.append('', oldPswd);
-                formdata.append('', newPswd);
-                formdata.append('', confirmNewPswd);
+                formdata.append('password', oldPswd);
+                formdata.append('password1', newPswd);
+                formdata.append('password2', confirmNewPswd);
 
                 var res = await postChangePswd(formdata);
+
                 if (res.status === true) {
+                    navigation.navigate("Dashboard")
                     toast.show(res.msg, {
                         type: 'success',
                         placement: 'bottom',
@@ -317,7 +319,7 @@ export default function ChangePassword(props) {
                                     backgroundColor={themecolor.ADDTOCARTBUTTONCOLOR}
                                     color={'#fff'}
                                     borderColor={themecolor.BOXBORDERCOLOR1}
-                                //   onPress={() => handleEditProfile()}
+                                  onPress={() => handleSubmit()}
                                 />
                             </View>
                         </View>

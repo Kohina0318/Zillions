@@ -94,12 +94,10 @@ export default function RequestForNewCategoryModel(props) {
         else {
             try {
                 let formdata = new FormData();
-                formdata.append('', name);
-                formdata.append('', mobileNo);
-                formdata.append('', categoryName);
-                formdata.append('', discription);
-
-                console.log("formdata...", formdata)
+                formdata.append('name', name);
+                formdata.append('mobileno', mobileNo);
+                formdata.append('categoryName', categoryName);
+                formdata.append('description', discription);
 
                 var res = await postRequestForNewCategory(formdata);
                 if (res.status === true) {
