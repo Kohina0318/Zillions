@@ -17,6 +17,7 @@ import { useNavigation } from '@react-navigation/native';
 import HalfSizeButton from '../../components/shared/button/halfSizeButton';
 import { getProfileInfo } from '../../repository/ProfileRepository/ProfileRepo';
 import { getUserData } from '../../repository/CommonRepository';
+import { postBulkOrderEnquiry } from '../../repository/ProfileRepository/BulkOrderEnquiryRepo';
 
 const { width, height } = Dimensions.get('screen');
 
@@ -48,6 +49,90 @@ export default function BulkOrderEnquiry(props) {
   const [userMobileno,setUserMobileno]=useState("")
   const [userEmail,setUserEmail]=useState("")
   const [companyName,setCompanyName]=useState("")
+
+
+  const handleSubmit = async () => {
+
+    if (userName == '') {
+      toast.show('Name is required!', {
+        type: 'warning',
+        placement: 'bottom',
+        duration: 3000,
+        offset: 30,
+        animationType: 'slide-in',
+      });
+    } else if (userMobileno == '') {
+      toast.show('Mobile No. is required!', {
+        type: 'warning',
+        placement: 'bottom',
+        duration: 3000,
+        offset: 30,
+        animationType: 'slide-in',
+      });
+    } else if (userMobileno.length < 10) {
+      toast.show('Please enter valid mobile number!', {
+        type: 'warning',
+        placement: 'bottom',
+        duration: 3000,
+        offset: 30,
+        animationType: 'slide-in',
+      });
+    } else if (userEmail == '') {
+      toast.show('Email is required!', {
+        type: 'warning',
+        placement: 'bottom',
+        duration: 3000,
+        offset: 30,
+        animationType: 'slide-in',
+      });
+    }
+    else if (companyName == '') {
+      toast.show('Company name is required!', {
+        type: 'warning',
+        placement: 'bottom',
+        duration: 3000,
+        offset: 30,
+        animationType: 'slide-in',
+      });
+    }
+    else {
+      try {
+        let formdata = new FormData();
+        formdata.append('', userName);
+        formdata.append('', userMobileno);
+        formdata.append('', userEmail);
+        formdata.append('', companyName);
+
+        console.log("formdata...", formdata)
+
+        var res = await postBulkOrderEnquiry(formdata);
+        if (res.status === true) {
+          toast.show(res.msg, {
+            type: 'success',
+            placement: 'bottom',
+            duration: 3000,
+            offset: 30,
+            animationType: 'slide-in',
+          });
+        }
+        else {
+
+        }
+
+      } catch (e) {
+        console.log('errrror in..getManageAddress page in address-->', e);
+        toast.show('Something went wrong!, Try again later.', {
+          type: 'danger',
+          placement: 'bottom',
+          duration: 3000,
+          offset: 30,
+          animationType: 'slide-in',
+        });
+      }
+    }
+  };
+
+
 
   
   useEffect(() => {
@@ -231,7 +316,7 @@ export default function BulkOrderEnquiry(props) {
                       backgroundColor={themecolor.ADDTOCARTBUTTONCOLOR}
                       color={'#fff'}
                       borderColor={themecolor.BOXBORDERCOLOR1}
-                      onPress={() => handleEditProfile()}
+                      onPress={() => handleSubmit()}
                     />
                   </View>
                 </View>

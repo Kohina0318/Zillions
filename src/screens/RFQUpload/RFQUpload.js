@@ -22,6 +22,7 @@ import FIcon from 'react-native-vector-icons/FontAwesome';
 import EIcon from 'react-native-vector-icons/Entypo';
 import { launchCamera } from 'react-native-image-picker';
 import ImgToBase64 from 'react-native-image-base64';
+import { postRFQUploadRepo } from '../../repository/ProfileRepository/RFQUploadRepo';
 
 
 const { width, height } = Dimensions.get('screen');
@@ -57,6 +58,34 @@ export default function RFQUpload(props) {
   });
 
   const [image, setImage] = useState(false);
+  const [companyName,setCompanyName]=useState("")
+  const [CommentText,setCommentText]=useState("")
+  const [userName,setUserName]=useState("")
+  const [mobileno,setMobileno]=useState("")
+  const [email,setEmail]=useState("")
+
+
+  useEffect(() => {
+    async function temp() {
+        try {
+            var userData = await getUserData();
+            console.log(userData)
+            if (userData == null || userData == '' || userData == undefined) {
+                setLoader(false)
+           } else {    
+                var nameUser = `${userData[0].username.replace(/\s+/g, '')} ${userData[0].surname.replace(/\s+/g, '')}`
+                setUserName(nameUser)
+                setEmail(userData[0].email)
+                setMobileno(userData[0].phone)
+                setLoader(false)
+            }
+        } catch (e) {
+          setLoader(false)
+        }
+    }
+    temp()
+}, [props]);
+
 
 
 
@@ -113,7 +142,7 @@ export default function RFQUpload(props) {
     let isCameraPermitted = await requestCameraPermission();
     let isStoragePermitted = await requestExternalWritePermission();
     if (isCameraPermitted && isStoragePermitted) {
-
+      
       launchCamera(options, response => {
         console.log('Response = ', response);
 
@@ -153,6 +182,99 @@ export default function RFQUpload(props) {
       });
     }
   };
+
+  const handleSubmit = async () => {
+
+    if (userName == '') {
+      toast.show('Name is required!', {
+        type: 'warning',
+        placement: 'bottom',
+        duration: 3000,
+        offset: 30,
+        animationType: 'slide-in',
+      });
+    } else if (mobileno == '') {
+      toast.show('Mobile No. is required!', {
+        type: 'warning',
+        placement: 'bottom',
+        duration: 3000,
+        offset: 30,
+        animationType: 'slide-in',
+      });
+    } else if (mobileno.length < 10) {
+      toast.show('Please enter valid mobile number!', {
+        type: 'warning',
+        placement: 'bottom',
+        duration: 3000,
+        offset: 30,
+        animationType: 'slide-in',
+      });
+    } else if (email == '') {
+      toast.show('Email is required!', {
+        type: 'warning',
+        placement: 'bottom',
+        duration: 3000,
+        offset: 30,
+        animationType: 'slide-in',
+      });
+    }
+    else if (companyName == '') {
+      toast.show('Company name is required!', {
+        type: 'warning',
+        placement: 'bottom',
+        duration: 3000,
+        offset: 30,
+        animationType: 'slide-in',
+      });
+      
+    }
+    else if (companyText == '') {
+      toast.show('Company text is required!', {
+        type: 'warning',
+        placement: 'bottom',
+        duration: 3000,
+        offset: 30,
+        animationType: 'slide-in',
+      });
+    }
+    else {
+      try {
+        let formdata = new FormData();
+        formdata.append('', userName);
+        formdata.append('', mobileno);
+        formdata.append('', email);
+        formdata.append('', companyName);
+        formdata.append('', companyText);
+
+        console.log("formdata...", formdata)
+
+        var res = await postRFQUploadRepo(formdata);
+        if (res.status === true) {
+          toast.show(res.msg, {
+            type: 'success',
+            placement: 'bottom',
+            duration: 3000,
+            offset: 30,
+            animationType: 'slide-in',
+          });
+        }
+        else {
+
+        }
+
+      } catch (e) {
+        console.log('errrror in..getManageAddress page in address-->', e);
+        toast.show('Something went wrong!, Try again later.', {
+          type: 'danger',
+          placement: 'bottom',
+          duration: 3000,
+          offset: 30,
+          animationType: 'slide-in',
+        });
+      }
+    }
+  };
+
 
 
   return (
@@ -197,14 +319,14 @@ export default function RFQUpload(props) {
                     }}>
                     <TextInput
                       allowFontScaling={false}
-                      // value={email}
+                      value={userName}
                       placeholder={'Contact Name*'}
                       placeholderTextColor={themecolor.TXTGREYS}
                       style={{
                         ...styles.TextInput,
                         color: themecolor.TXTWHITE,
                       }}
-                    // onChangeText={txt => setEmail(txt)}
+                    // onChangeText={txt => setUserName(txt)}
                     />
                   </View>
                 </View>
@@ -221,14 +343,14 @@ export default function RFQUpload(props) {
                     }}>
                     <TextInput
                       allowFontScaling={false}
-                      // value={email}
+                      value={companyName}
                       placeholder={'Company Name*'}
                       placeholderTextColor={themecolor.TXTGREYS}
                       style={{
                         ...styles.TextInput,
                         color: themecolor.TXTWHITE,
                       }}
-                    // onChangeText={txt => setEmail(txt)}
+                    onChangeText={txt => setCompanyName(txt)}
                     />
                   </View>
                 </View>
@@ -245,7 +367,7 @@ export default function RFQUpload(props) {
                     }}>
                     <TextInput
                       allowFontScaling={false}
-                      // value={email}
+                      value={email}
                       placeholder={'Email*'}
                       placeholderTextColor={themecolor.TXTGREYS}
                       style={{
@@ -269,7 +391,7 @@ export default function RFQUpload(props) {
                     }}>
                     <TextInput
                       allowFontScaling={false}
-                      // value={email}
+                      value={mobileno}
                       placeholder={'Mobile Number*'}
                       keyboardType="numeric"
                       maxLength={10}
@@ -278,7 +400,7 @@ export default function RFQUpload(props) {
                         ...styles.TextInput,
                         color: themecolor.TXTWHITE,
                       }}
-                    // onChangeText={txt => setEmail(txt)}
+                    onChangeText={txt => setMobileno(txt)}
                     />
                   </View>
                 </View>
@@ -295,7 +417,7 @@ export default function RFQUpload(props) {
                     }}>
                     <TextInput
                       allowFontScaling={false}
-                      // value={email}
+                      value={CommentText}
                       placeholder={'Comment*'}
                       multiline
                       numberOfLines={4}
@@ -304,7 +426,7 @@ export default function RFQUpload(props) {
                         ...styles.modelTextInput,
                         color: themecolor.TXTWHITE,
                       }}
-                    // onChangeText={txt => setEmail(txt)}
+                    onChangeText={txt => setCommentText(txt)}
                     />
                   </View>
                 </View>
@@ -354,7 +476,7 @@ export default function RFQUpload(props) {
                     backgroundColor={themecolor.ADDTOCARTBUTTONCOLOR}
                     color={'#fff'}
                     borderColor={themecolor.BOXBORDERCOLOR1}
-                  //   onPress={() => handleEditProfile()}
+                    onPress={() => handleSubmit()}
                   />
                 </View>
               </View>

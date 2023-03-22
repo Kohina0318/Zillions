@@ -25,6 +25,7 @@ import { postLogout } from '../../repository/AuthRepository/LogoutRepository';
 import { useToast } from 'react-native-toast-notifications';
 import HalfSizeButton from '../../components/shared/button/halfSizeButton';
 import AD from 'react-native-vector-icons/AntDesign';
+import { Image } from '@rneui/base';
 
 
 const { width, height } = Dimensions.get('screen');
@@ -35,6 +36,7 @@ export default function Profile(props) {
   var navigation = useNavigation();
 
   const mode = useSelector(state => state.mode);
+
   const themecolor = new MyThemeClass(mode).getThemeColor();
 
   const [loader, setLoader] = useState(true);
@@ -172,6 +174,50 @@ export default function Profile(props) {
                   }}>
                   <ProfileDataList data={data} />
                 </View>
+
+                <View
+                  style={{
+                    ...ProfileStyle.datalistView1,
+                    backgroundColor: themecolor.BOXBORDERCOLOR,
+                    borderColor: themecolor.BOXBORDERCOLOR1,
+                  }}>
+
+                  <View style={{
+                    ...ProfileStyle.shippingHeading
+                  }}>
+                    <Text allowFontScaling={false} style={{ ...ProfileStyle.headingTxt, color: themecolor.TXTWHITE }}>
+                      Shipping Services
+                    </Text>
+                  </View>
+
+                  <View style={{ ...ProfileStyle.shippingSer }}>
+                    <Image
+                      source={require('../../assets/images/Blue_Dart.png')}
+                      resizeMode="contain"
+                      style={{ width: 90, height: 50, margin: 2 }}
+                    />
+                    <Image
+                      source={require('../../assets/images/smart_ship.png')}
+                      resizeMode="cover"
+                      style={{ width: 70, height: 40, margin: 2 }}
+                    />
+                    {mode === "dark" ?
+                      <Image
+                        source={require('../../assets/images/shiprocket_white.png')}
+                        resizeMode="contain"
+                        style={{ width: 70, height: 40, margin: 2 }}
+                      />
+                      :
+                      <Image
+                        source={require('../../assets/images/shiprocket.jpg')}
+                        resizeMode="contain"
+                        style={{ width: 70, height: 40, margin: 2 }}
+                      />
+                    }
+                  </View>
+
+                </View>
+
               </>
             ) : (
               <>
@@ -242,6 +288,50 @@ export default function Profile(props) {
                   }}>
                   <ProfileDataList data={data1} />
                 </View>
+
+                <View
+                  style={{
+                    ...ProfileStyle.datalistView1,
+                    backgroundColor: themecolor.BOXBORDERCOLOR,
+                    borderColor: themecolor.BOXBORDERCOLOR1,
+                  }}>
+
+                  <View style={{
+                    ...ProfileStyle.shippingHeading
+                  }}>
+                    <Text allowFontScaling={false} style={{ ...ProfileStyle.headingTxt, color: themecolor.TXTWHITE }}>
+                      Shipping Services
+                    </Text>
+                  </View>
+
+                  <View style={{ ...ProfileStyle.shippingSer }}>
+                    <Image
+                      source={require('../../assets/images/Blue_Dart.png')}
+                      resizeMode="contain"
+                      style={{ width: 90, height: 50, margin: 2 }}
+                    />
+                    <Image
+                      source={require('../../assets/images/smart_ship.png')}
+                      resizeMode="cover"
+                      style={{ width: 70, height: 40, margin: 2 }}
+                    />
+                    {mode === "dark" ?
+                      <Image
+                        source={require('../../assets/images/shiprocket_white.png')}
+                        resizeMode="contain"
+                        style={{ width: 70, height: 40, margin: 2 }}
+                      />
+                      :
+                      <Image
+                        source={require('../../assets/images/shiprocket.jpg')}
+                        resizeMode="contain"
+                        style={{ width: 70, height: 40, margin: 2 }}
+                      />
+                    }
+                  </View>
+
+                </View>
+
               </>
             )}
 
@@ -274,6 +364,22 @@ export default function Profile(props) {
                   {' '}
                   App Version 1.0{' '}
                 </Text>
+
+                <View style={{ ...ProfileStyle.Mv5 }} />
+
+<View style={{flexDirection:"row"}}>
+                <Text
+                  allowFontScaling={false}
+                  style={{
+                    ...ProfileStyle.appverText,
+                    color: themecolor.ADDTOCARTBUTTONCOLOR,
+                  }}>
+                  query@zillionbuyer.com<Text style={{
+                    ...ProfileStyle.appverText,
+                    color: themecolor.TXTWHITE,
+                  }}> || </Text> +91-9168103909  
+                </Text>
+                </View>
               </View>
             </View>
           </ScrollView>
