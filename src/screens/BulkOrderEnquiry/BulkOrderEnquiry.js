@@ -6,7 +6,8 @@ import {
   BackHandler,
   TextInput,
   TouchableOpacity,
-  Image
+  Image,
+  ScrollView
 } from 'react-native';
 import { useSelector } from 'react-redux';
 import { MyThemeClass } from '../../components/Theme/ThemeDarkLightColor';
@@ -224,7 +225,7 @@ export default function BulkOrderEnquiry(props) {
       {loader ? (
         <LoadingFullScreen style={{ flex: 1 }} />
       ) : (
-        <>
+        <ScrollView showsVerticalScrollIndicator={false}>
           <View>
             <View style={{ ...styles.container, }} >
               <View style={{ ...styles.ViewHeading }}>
@@ -389,7 +390,7 @@ export default function BulkOrderEnquiry(props) {
 
         </View>
 
-        </>
+        </ScrollView>
 
   )
 }

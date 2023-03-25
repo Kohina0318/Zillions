@@ -118,7 +118,7 @@ export default function Order(props) {
   return (
     <View style={{...styles.bg, backgroundColor: themecolor.THEMECOLOR}}>
       <RegisterLoginHeader
-        title="Order"
+        title="My Order"
         backIcon={true}
         onPressBack={() => handleBackButtonClick()}
       />

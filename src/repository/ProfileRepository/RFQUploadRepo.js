@@ -6,45 +6,28 @@ import { SERVER_URL } from "../SERVER_URL";
 
 
 const postRFQUploadRepo = async formdata => {
-    try {
-      const response = await fetch(
-        `${await SERVER_URL()}/save-address`,
-        {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'multipart/form-data',
-            Authorization: `${await getAppToken()}`
-          },
-          body: formdata,
+  try {
+    const response = await fetch(
+      `${await SERVER_URL()}/save-address`,
+      {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'multipart/form-data',
+          Authorization: `${await getAppToken()}`
         },
-      );
-  
-      const result = await response.json();
+        body: formdata,
+      },
+    );
 
-      if (result.token_status == 'false') {
-        await removeDatafromAsync('@UserData');
-        await removeDatafromAsync('@Token');
-  
-        ToastAndroid.showWithGravityAndOffset(
-          `${'Token Expired'}`,
-          ToastAndroid.TOP,
-          ToastAndroid.LONG,
-          10,
-          10,
-        )
-        navigateToClearStack('Dashboard');
-        return result;
-        
-      } else {
-        return result;
-      }
-  
-    } catch (err) {
-      console.log('error in postRFQUpload...in RFQUploadRepo ', err);
-    }
-  };
+    const result = await response.json();
 
-  export {
-    postRFQUploadRepo
-  };
-  
+    return result;
+
+  } catch (err) {
+    console.log('error in postRFQUpload...in RFQUploadRepo ', err);
+  }
+};
+
+export {
+  postRFQUploadRepo
+};

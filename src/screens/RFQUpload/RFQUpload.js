@@ -8,6 +8,7 @@ import {
   TouchableOpacity,
   PermissionsAndroid,
   Image,
+  ScrollView,
   Platform,
 } from 'react-native';
 import { useSelector } from 'react-redux';
@@ -28,6 +29,7 @@ import { getUserData } from '../../repository/CommonRepository';
 
 
 const { width, height } = Dimensions.get('screen');
+
 
 export default function RFQUpload(props) {
 
@@ -230,6 +232,7 @@ export default function RFQUpload(props) {
 
 
 
+
   return (
     <View style={{ ...styles.bg, backgroundColor: themecolor.THEMECOLOR }}>
 
@@ -247,8 +250,8 @@ export default function RFQUpload(props) {
         {loader ? (
           <LoadingFullScreen style={{ flex: 1 }} />
         ) : (
-          <>
-
+          <ScrollView showsVerticalScrollIndicator={false}>
+          
             <View style={{ ...styles.ViewHeading }}>
               <Text allowFontScaling={false} style={{ ...styles.headingTxt, color: themecolor.TXTWHITE }}>
                 Upload Multiple Part Numbers for Quotation
@@ -393,7 +396,6 @@ export default function RFQUpload(props) {
                   </Text>
 
                   {image === '' ? (
-
                     <View style={{ padding: 10,}}>
                       <TouchableOpacity onPress={() => openGallery()}>
                         <FIcon name="camera" size={50} color={themecolor.BORDER} />
@@ -442,7 +444,7 @@ export default function RFQUpload(props) {
 
           </View>
 
-          </>
+          </ScrollView>
         )}
     </View>
 

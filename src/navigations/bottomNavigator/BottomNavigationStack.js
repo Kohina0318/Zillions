@@ -38,7 +38,7 @@ export default function BottomNavigationStack() {
       screenOptions={{
         tabBarStyle: {
           height: 51,
-          backgroundColor: themecolor.THEMECOLOR1,
+          backgroundColor: themecolor.LOGINTHEMECOLOR1,
           borderColor: themecolor.BOXBORDERCOLOR,
           keyboardHidesTabBar: true,
           labelStyle: MainNavigatorstyle.tab1,
