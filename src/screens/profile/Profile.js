@@ -161,7 +161,7 @@ export default function Profile(props) {
                         }}
                         source={require('../../assets/images/profile.jpg')}
                       /> */}
-                      <View style={{...ProfileStyle.avater, backgroundColor:generateColor(),borderColor:themecolor.TXTWHITE}}>
+                      <View style={{...ProfileStyle.avater, backgroundColor:generateColor(),borderColor:'#fff'}}>
                         <Text style={{...ProfileStyle.profileImgText, color:'#fff'}}>{imageName}</Text>
                         <View></View>
                       </View>

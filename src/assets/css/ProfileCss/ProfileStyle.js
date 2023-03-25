@@ -170,8 +170,9 @@ const ProfileStyle = StyleSheet.create({
   },
   avater: {
     padding:15, 
-    borderRadius:50,
-    width:width*0.18,
+    borderRadius:100,
+    width:width*0.2,
+    height:width*0.2,
     borderWidth:3
   },
   profileImgText:{alignSelf:'center',justifyContent:'center',fontSize: FontSize.labelTextbigger,
