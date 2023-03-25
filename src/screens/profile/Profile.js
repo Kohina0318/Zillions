@@ -43,13 +43,18 @@ export default function Profile(props) {
   const [loader, setLoader] = useState(true);
   const [refresh, setRefresh] = useState(false);
   const [UserData, setUserData] = useState([]);
+  const [imageName, setImageName] = useState('');
+
+
 
   const handleUserData = async () => {
     try {
       var res = await getProfileInfo();
       if (res.status === true) {
-        setUserData(res.data);
+          setUserData(res.data);
         setLoader(false);
+      var firstName = res.data[0].username
+      setImageName(firstName[0]) 
       }
       else if (res.msg == "Invalid Authentication") {
         setUserData([])
@@ -64,7 +69,6 @@ export default function Profile(props) {
       setLoader(false);
     }
   };
-
 
 
   useFocusEffect(
@@ -118,6 +122,13 @@ export default function Profile(props) {
     }
   };
 
+  const generateColor = () => {
+    const randomColor = Math.floor(Math.random() * 16777215)
+      .toString(16)
+      .padStart(6, '0');
+    return `#${randomColor}`;
+  };
+
   return (
     <View style={{ backgroundColor: themecolor.THEMECOLOR, flex: 1 }}>
       <Header title="Profile" />
@@ -142,14 +153,18 @@ export default function Profile(props) {
                       ...ProfileStyle.profileDataView,
                     }}>
                     <View>
-                      <Avatar
+                      {/* <Avatar
                         size={90}
                         rounded
                         avatarStyle={{
                           ...ProfileStyle.avater,
                         }}
                         source={require('../../assets/images/profile.jpg')}
-                      />
+                      /> */}
+                      <View style={{...ProfileStyle.avater, backgroundColor:generateColor(),borderColor:themecolor.TXTWHITE}}>
+                        <Text style={{...ProfileStyle.profileImgText, color:'#fff'}}>{imageName}</Text>
+                        <View></View>
+                      </View>
                     </View>
                     <View
                       style={{
