@@ -102,17 +102,17 @@ export default function OrderHistoryTotalAmountComp(props) {
             <View style={{ ...styles.mgT10 }} />
 
             <View style={{ ...styles.flexDirView1, }}>
-                <TouchableOpacity activeOpacity={0.5} style={{ ...styles.width35p, }}>
+                <View  style={{ ...styles.width35p, }}>
                     <Text allowFontScaling={false} style={{ ...styles.txt, color: themecolor.BACKICON }}>
                         Delivery Address
                     </Text>
-                </TouchableOpacity>
+                </View>
 
-                <TouchableOpacity activeOpacity={0.5} style={{ ...styles.width65p, }}>
+                <View style={{ ...styles.width65p, }}>
                     <Text allowFontScaling={false} style={{ ...styles.txt, color: themecolor.BACKICON }}>
                         Order Details
-                    </Text>
-                </TouchableOpacity>
+                    </Text> 
+                </View>
 
             </View>
 

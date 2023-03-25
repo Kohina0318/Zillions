@@ -8,6 +8,7 @@ import {
   TouchableOpacity,
   PermissionsAndroid,
   Image,
+  ScrollView,
   Platform,
 } from 'react-native';
 import { useSelector } from 'react-redux';
@@ -249,8 +250,8 @@ export default function RFQUpload(props) {
         {loader ? (
           <LoadingFullScreen style={{ flex: 1 }} />
         ) : (
-          <>
-
+          <ScrollView showsVerticalScrollIndicator={false}>
+          
             <View style={{ ...styles.ViewHeading }}>
               <Text allowFontScaling={false} style={{ ...styles.headingTxt, color: themecolor.TXTWHITE }}>
                 Upload Multiple Part Numbers for Quotation
@@ -443,7 +444,7 @@ export default function RFQUpload(props) {
 
           </View>
 
-          </>
+          </ScrollView>
         )}
     </View>
 

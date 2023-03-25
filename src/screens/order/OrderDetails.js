@@ -57,73 +57,24 @@ export default function OrderDetails(props) {
   const [productDetailData, setProductDetailData] = useState([])
   const [shippingAddress, setShippingAddress] = useState({})
   const [deliveryStatus, setDeliveryStatus] = useState('delivered')
-  const [showmodal,setShowmodal]=useState(false);
+  const [showmodal, setShowmodal] = useState(false);
   const [title, setTitle] = useState('Return Order');
   const [disabled, setDisabled] = useState(false);
-
-  const handleReturnOrder = async () => {
-    Alert.alert(
-      'Return Order',
-      'Are you sure, you wants to return the order?',
-      [
-        {
-          text: 'No',
-          onPress: () => console.log('Cancel Pressed'),
-          style: 'cancel',
-        },
-        {
-          text: 'Yes',
-          onPress: async () => {
-            try{
-            var res = await postReturnOrder(props.route.params.SaleId);
-            console.log(res)
-            if (res.status === true) {
-              setShowmodal(true)
-              setTitle('Request Sent');
-              setDisabled(true)
-            }
-            else{
-              toast.show("Sorry!,Your Request can't be processed", {
-                type: 'danger',
-                placement: 'bottom',
-                duration: 3000,
-                offset: 30,
-                animationType: 'slide-in',
-              });
-            }
-          }
-          catch(e) {
-            console.log('errrror in..handleOrderView page Order Detail-->', e);
-            toast.show('Something went wrong!, Try again later.', {
-              type: 'danger',
-              placement: 'bottom',
-              duration: 3000,
-              offset: 30,
-              animationType: 'slide-in',
-            });
-          }
-          },
-        },
-      ],
-    );
-  };
 
   const handleOrderView = async () => {
     try {
       var res = await getOrderView(props.route.params.SaleId);
       if (res.status === true) {
-        console.log(res.data.product)
-        if(res.data.delivery_status != undefined || res.data.delivery_status != null ||res.data.delivery_status != ''){
-        var status=JSON.parse(res.data.delivery_status)
-        var Dstatus=status[0].status
-        // setDeliveryStatus(Dstatus);
+        console.log("Order View in order Detail page", res.data)
+        if (res.data.delivery_status != undefined || res.data.delivery_status != null || res.data.delivery_status != '') {
+          var status = JSON.parse(res.data.delivery_status)
+          var Dstatus = status[0].status
+          // setDeliveryStatus(Dstatus);
         }
-        if(res.data.return_status=="1"||res.data.return_status==1)
-        {
+        if (res.data.return_status == "1" || res.data.return_status == 1) {
           setTitle("Request Sent")
           setDisabled(true)
         }
-        console.log(res.data)
         setData(res.data);
         setProductDetailData(res.data.product)
         setShippingAddress(res.data.address)
@@ -149,7 +100,55 @@ export default function OrderDetails(props) {
 
   useEffect(() => {
     handleOrderView();
-  }, []);
+  }, [title]);
+
+
+  const handleReturnOrder = async () => {
+    try {
+      var res = await postReturnOrder(props.route.params.SaleId);
+      console.log("postReturnOrder....>",res)
+      if (res.status === true) {
+        setShowmodal(true)
+        setTitle('Request Sent');
+        setDisabled(true)
+      }
+      else {
+        toast.show("Sorry!,Your Request can't be processed", {
+          type: 'danger',
+          placement: 'bottom',
+          duration: 3000,
+          offset: 30,
+          animationType: 'slide-in',
+        });
+      }
+    }
+    catch (e) {
+      console.log('errrror in..handleOrderView page Order Detail-->', e);
+      toast.show('Something went wrong!, Try again later.', {
+        type: 'danger',
+        placement: 'bottom',
+        duration: 3000,
+        offset: 30,
+        animationType: 'slide-in',
+      });
+    }
+
+  }
+
+  const handleConfirmRetrun = () => {
+    Alert.alert(
+      'Return Order',
+      'Are you sure, you wants to return the order?',
+      [
+        {
+          text: 'No',
+          onPress: () => console.log('Cancel Pressed'),
+          style: 'cancel',
+        },
+        { text: 'Yes', onPress: () => handleReturnOrder() },
+      ],
+    )
+  }
 
 
   return (
@@ -176,7 +175,7 @@ export default function OrderDetails(props) {
             {productDetailData.length > 0 ?
               <>
                 <View style={{ ...styles.mgT10 }} />
-                <OrderDetailProductDataList data={productDetailData}/>
+                <OrderDetailProductDataList data={productDetailData} />
               </>
               : <></>}
 
@@ -207,12 +206,12 @@ export default function OrderDetails(props) {
             <View style={{ ...styles.mainView }}>
               <View style={{ width: '100%' }}>
                 <HalfSizeButton
-                  title={deliveryStatus=="delivered"?title:"Continue Shopping"}
+                  title={deliveryStatus == "delivered" ? title : "Continue Shopping"}
                   icon={" "}
-                  onPress={deliveryStatus=="delivered"?(()=>handleReturnOrder()):(() =>navigation.navigate("Dashboard") )}
+                  onPress={deliveryStatus == "delivered" ? (() => handleConfirmRetrun()) : (() => navigation.navigate("Dashboard"))}
                   backgroundColor={'transparent'}
-                  color={deliveryStatus=="delivered"?themecolor.TEXTRED:themecolor.BACKICON}
-                  borderColor={deliveryStatus=="delivered"?themecolor.TEXTRED:themecolor.BACKICON}
+                  color={deliveryStatus == "delivered" ? themecolor.TEXTRED : themecolor.BACKICON}
+                  borderColor={deliveryStatus == "delivered" ? themecolor.TEXTRED : themecolor.BACKICON}
                   disabled={disabled}
                 />
               </View>

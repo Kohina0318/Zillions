@@ -6,6 +6,7 @@ import {
   BackHandler,
   TextInput,
   TouchableOpacity,
+  ScrollView
 } from 'react-native';
 import { useSelector } from 'react-redux';
 import { MyThemeClass } from '../../components/Theme/ThemeDarkLightColor';
@@ -166,7 +167,7 @@ export default function FeedBack(props) {
       {loader ? (
         <LoadingFullScreen style={{ flex: 1 }} />
       ) : (
-        <>
+        <ScrollView showsVerticalScrollIndicator={false}>
         
           <View style={{ ...styles.container, }} >
             <View style={{ ...styles.ViewHeading }}>
@@ -296,7 +297,7 @@ export default function FeedBack(props) {
 
             </View>
           </View>
-        </>
+          </ScrollView>
       )}
 
     </View>
