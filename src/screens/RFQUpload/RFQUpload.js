@@ -88,7 +88,6 @@ export default function RFQUpload(props) {
     temp()
   }, [props]);
 
-
   const openGallery = () => {
     let options = {
       storageOption: {
@@ -97,7 +96,6 @@ export default function RFQUpload(props) {
       },
       includeBase64: true,
     };
-
     launchImageLibrary(options, response => {
       if (response.didCancel) {
         console.log('User cancelled image picker');
@@ -156,6 +154,15 @@ export default function RFQUpload(props) {
         animationType: 'slide-in',
       });
     }
+    else if ( !email.includes('@')|| !email.includes('gmail.com')) {
+      toast.show('Please enter valid email address!', {
+        type: 'warning',
+        placement: 'bottom',
+        duration: 3000,
+        offset: 30,
+        animationType: 'slide-in',
+      });
+    }
     else if (companyName == '') {
       toast.show('Company name is required!', {
         type: 'warning',
@@ -163,8 +170,16 @@ export default function RFQUpload(props) {
         duration: 3000,
         offset: 30,
         animationType: 'slide-in',
+      })
+    } 
+    else if (image == '') {
+      toast.show('Image is required!', {
+        type: 'warning',
+        placement: 'bottom',
+        duration: 3000,
+        offset: 30,
+        animationType: 'slide-in',
       });
-
     }
     else if (companyText == '') {
       toast.show('Company text is required!', {
@@ -183,7 +198,7 @@ export default function RFQUpload(props) {
         formdata.append('email', email);
         formdata.append('cname', companyName);
         formdata.append('commentText', commentText);
-
+        formdata.append('image',image)
         console.log("formdata...", formdata)
 
         var res = await postRFQUploadRepo(formdata);
