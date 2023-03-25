@@ -88,7 +88,6 @@ export default function RFQUpload(props) {
     temp()
   }, [props]);
 
-
   const openGallery = () => {
     let options = {
       storageOption: {
@@ -97,7 +96,6 @@ export default function RFQUpload(props) {
       },
       includeBase64: true,
     };
-
     launchImageLibrary(options, response => {
       if (response.didCancel) {
         console.log('User cancelled image picker');
