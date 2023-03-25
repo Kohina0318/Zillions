@@ -20,7 +20,9 @@ import { useNavigation } from '@react-navigation/native';
 import HalfSizeButton from '../../components/shared/button/halfSizeButton';
 import FIcon from 'react-native-vector-icons/FontAwesome';
 import EIcon from 'react-native-vector-icons/Entypo';
-import ImagePicker from 'react-native-image-picker';
+import ImagePicker, { launchImageLibrary } from 'react-native-image-picker';
+import { postRFQUploadRepo } from '../../repository/ProfileRepository/RFQUploadRepo';
+
 
 const { width, height } = Dimensions.get('screen');
 
@@ -51,47 +53,160 @@ export default function RFQUpload(props) {
   const [loader, setLoader] = useState(false);
   const [refresh, setRefresh] = useState(false);
 
-  const [filePath, setFilePath] = useState({});
+  const [companyName, setCompanyName] = useState("")
+  const [CommentText, setCommentText] = useState("")
+  const [userName, setUserName] = useState("")
+  const [mobileno, setMobileno] = useState("")
+  const [email, setEmail] = useState("")
+  const [image, setImage] = useState([]);
 
-  const [image, setImage] = useState("");
-
-  const captureImage = async () => {
-    
-    try {
-      
-    var options = {
-      title: 'Select Image',
-      customButtons: [
-        {
-          name: 'customOptionKey',
-          title: 'Choose file from Custom Option'
-        },
-      ],
-      storageOptions: {
-        skipBackup: true,
-        path: 'images',
-      },
-    };
-
-      ImagePicker.showImagePicker(options, res => {
-        console.log('Response = ', res);
-        if (res.didCancel) {
-          console.log('User cancelled image picker');
-        } else if (res.error) {
-          console.log('ImagePicker Error: ', res.error);
-        } else if (res.customButton) {
-          console.log('User tapped custom button: ', res.customButton);
-          alert(res.customButton);
+  useEffect(() => {
+    async function temp() {
+      try {
+        var userData = await getUserData();
+        console.log(userData)
+        if (userData == null || userData == '' || userData == undefined) {
+          setLoader(false)
         } else {
-          let source = res;
-          setImage(source)
+          var nameUser = `${userData[0].username.replace(/\s+/g, '')} ${userData[0].surname.replace(/\s+/g, '')}`
+          setUserName(nameUser)
+          setEmail(userData[0].email)
+          setMobileno(userData[0].phone)
+          setLoader(false)
+        }
+      } catch (e) {
+        setLoader(false)
+      }
+    }
+    temp()
+  }, [props]);
+
+
+  const openImages = () => {
+    let options = {
+      storageOption: {
+        path: 'images',
+        mediaType: 'photo'
+      },
+      includeBase64: true
+    }
+
+
+    launchImageLibrary(options, response => {
+      console.log("responce--->", response)
+      if (response.didCancel) {
+        console.log("user Cancelled")
+      }
+      else if (response.errorCode) {
+        console.log("Image picker error")
+      }
+      else if (response.customButton) {
+        console.log("custom Button")
+      }
+      else {
+        const source = {
+          base64: 'data:iamges/jpeg;base64,' + response.assets[0].base64,
+          name: response.assets[0].fileName,
+          type: response.assets[0].type,
+          uri: response.assets[0].uri
+        }
+        setImage([...image, source])
+        console.log("iamge--->", image)
+      }
+    })
+  }
+  const handleSubmit = async () => {
+
+    if (userName == '') {
+      toast.show('Name is required!', {
+        type: 'warning',
+        placement: 'bottom',
+        duration: 3000,
+        offset: 30,
+        animationType: 'slide-in',
+      });
+    } else if (mobileno == '') {
+      toast.show('Mobile No. is required!', {
+        type: 'warning',
+        placement: 'bottom',
+        duration: 3000,
+        offset: 30,
+        animationType: 'slide-in',
+      });
+    } else if (mobileno.length < 10) {
+      toast.show('Please enter valid mobile number!', {
+        type: 'warning',
+        placement: 'bottom',
+        duration: 3000,
+        offset: 30,
+        animationType: 'slide-in',
+      });
+    } else if (email == '') {
+      toast.show('Email is required!', {
+        type: 'warning',
+        placement: 'bottom',
+        duration: 3000,
+        offset: 30,
+        animationType: 'slide-in',
+      });
+    }
+    else if (companyName == '') {
+      toast.show('Company name is required!', {
+        type: 'warning',
+        placement: 'bottom',
+        duration: 3000,
+        offset: 30,
+        animationType: 'slide-in',
+      });
+
+    }
+    else if (companyText == '') {
+      toast.show('Company text is required!', {
+        type: 'warning',
+        placement: 'bottom',
+        duration: 3000,
+        offset: 30,
+        animationType: 'slide-in',
+      });
+    }
+    else {
+      try {
+        let formdata = new FormData();
+        formdata.append('', userName);
+        formdata.append('', mobileno);
+        formdata.append('', email);
+        formdata.append('', companyName);
+        formdata.append('', companyText);
+
+        console.log("formdata...", formdata)
+
+        var res = await postRFQUploadRepo(formdata);
+        if (res.status === true) {
+          toast.show(res.msg, {
+            type: 'success',
+            placement: 'bottom',
+            duration: 3000,
+            offset: 30,
+            animationType: 'slide-in',
+          });
+        }
+        else {
 
         }
-      })
-    } catch (e) {
-      console.log("error in inage picker", e)
+
+      } catch (e) {
+        console.log('errrror in..getManageAddress page in address-->', e);
+        toast.show('Something went wrong!, Try again later.', {
+          type: 'danger',
+          placement: 'bottom',
+          duration: 3000,
+          offset: 30,
+          animationType: 'slide-in',
+        });
+      }
     }
   };
+
 
 
 
@@ -137,14 +252,14 @@ export default function RFQUpload(props) {
                     }}>
                     <TextInput
                       allowFontScaling={false}
-                      // value={email}
+                      value={userName}
                       placeholder={'Contact Name*'}
                       placeholderTextColor={themecolor.TXTGREYS}
                       style={{
                         ...styles.TextInput,
                         color: themecolor.TXTWHITE,
                       }}
-                    // onChangeText={txt => setEmail(txt)}
+                      onChangeText={txt => setUserName(txt)}
                     />
                   </View>
                 </View>
@@ -161,14 +276,14 @@ export default function RFQUpload(props) {
                     }}>
                     <TextInput
                       allowFontScaling={false}
-                      // value={email}
+                      value={companyName}
                       placeholder={'Company Name*'}
                       placeholderTextColor={themecolor.TXTGREYS}
                       style={{
                         ...styles.TextInput,
                         color: themecolor.TXTWHITE,
                       }}
-                    // onChangeText={txt => setEmail(txt)}
+                      onChangeText={txt => setCompanyName(txt)}
                     />
                   </View>
                 </View>
@@ -185,14 +300,14 @@ export default function RFQUpload(props) {
                     }}>
                     <TextInput
                       allowFontScaling={false}
-                      // value={email}
+                      value={email}
                       placeholder={'Email*'}
                       placeholderTextColor={themecolor.TXTGREYS}
                       style={{
                         ...styles.TextInput,
                         color: themecolor.TXTWHITE,
                       }}
-                    // onChangeText={txt => setEmail(txt)}
+                      onChangeText={txt => setEmail(txt)}
                     />
                   </View>
                 </View>
@@ -209,7 +324,7 @@ export default function RFQUpload(props) {
                     }}>
                     <TextInput
                       allowFontScaling={false}
-                      // value={email}
+                      value={mobileno}
                       placeholder={'Mobile Number*'}
                       keyboardType="numeric"
                       maxLength={10}
@@ -218,7 +333,7 @@ export default function RFQUpload(props) {
                         ...styles.TextInput,
                         color: themecolor.TXTWHITE,
                       }}
-                    // onChangeText={txt => setEmail(txt)}
+                      onChangeText={txt => setMobileno(txt)}
                     />
                   </View>
                 </View>
@@ -235,7 +350,7 @@ export default function RFQUpload(props) {
                     }}>
                     <TextInput
                       allowFontScaling={false}
-                      // value={email}
+                      value={CommentText}
                       placeholder={'Comment*'}
                       multiline
                       numberOfLines={4}
@@ -244,7 +359,7 @@ export default function RFQUpload(props) {
                         ...styles.modelTextInput,
                         color: themecolor.TXTWHITE,
                       }}
-                    // onChangeText={txt => setEmail(txt)}
+                      onChangeText={txt => setCommentText(txt)}
                     />
                   </View>
                 </View>
@@ -256,9 +371,17 @@ export default function RFQUpload(props) {
                   <Text allowFontScaling={false} style={{ ...styles.TextinputH, color: themecolor.TXTWHITE }}>Upload Image</Text>
 
                   <View style={{ padding: 5, left: 10 }}>
-                    <TouchableOpacity onPress={() => captureImage()}>
+                    <TouchableOpacity onPress={() => openImages()}>
                       <FIcon name="camera" size={50} color={themecolor.BORDER} />
                     </TouchableOpacity>
+                    <View>
+                      {image.map((item) => {
+                        return (
+                          <Image source={{ uri: item.base64 }} />
+                        )
+                      })}
+                    </View>
+                    
 
                   </View>
                 </View>
@@ -280,7 +403,7 @@ export default function RFQUpload(props) {
                     backgroundColor={themecolor.ADDTOCARTBUTTONCOLOR}
                     color={'#fff'}
                     borderColor={themecolor.BOXBORDERCOLOR1}
-                  //   onPress={() => handleEditProfile()}
+                    onPress={() => handleSubmit()}
                   />
                 </View>
               </View>

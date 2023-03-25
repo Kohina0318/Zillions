@@ -16,6 +16,12 @@ const ProfileStyle = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'space-between',
   },
+  shippingSer:{
+    flexDirection: 'row', justifyContent: 'space-around',width:width *0.8 
+  },
+  shippingHeading:{
+    alignItems:"flex-start", justifyContent:"flex-start", marginBottom:5, width:width *0.82
+  },
   innerImage: {
     borderRadius: 50,
     justifyContent: 'center',
@@ -143,6 +149,7 @@ const ProfileStyle = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     borderRadius: 5,
+    marginTop:10
   },
   appverText: {
     fontSize: FontSize.labelText3,

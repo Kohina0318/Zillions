@@ -59,9 +59,18 @@ export const data = [
 ];
 
 export const data1 = [
+
+  {
+    name: 'RFQ Upload',
+    onpress: 'RFQUpload'
+  },
   {
     name: 'FeedBack',
     onpress: 'Feedback',
+  },
+  {
+    name: 'Bulk Order Enquiry',
+    onpress: 'BulkOrderEnquiry'
   },
   {
     name: 'Blog',

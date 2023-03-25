@@ -78,9 +78,7 @@ useEffect(() => {
               <NoDataMsg title="No Category Found! " />
             )}
 
-            {/* <TouchableOpacity activeOpacity={0.5} onPress={()=>setShowModal(true)} style={{ borderRadius:25 , alignItems:'flex-end', marginTop:-60, zIndex:99999, alignSelf:"flex-end", backgroundColor:themecolor.BOXBORDERCOLOR,right:5}}>
-            <MaterialIcons name="add-circle"  size={45} style={{color:themecolor.ADDTOCARTBUTTONCOLOR, }}/>
-            </TouchableOpacity> */}
+           
 
             <View style={{ ...CategoryStyle.innerViewMain, backgroundColor: themecolor.ADDTOCARTBUTTONCOLOR }} >
               <View style={{ width: '100%' }}>
