@@ -63,7 +63,7 @@ class MyThemeClass {
       TXTGREYS: this.mode === 'dark' ? 'grey' : '#84817a',
       GREY: this.mode === 'dark' ? '#808080' : '#f5f5f5',
       FOOTER: this.mode === 'dark' ? '#3c3e44' : '#f5f5f5',
-      BORDER: this.mode === 'dark' ? '#000' : '#e2e2e2',
+      BORDER: this.mode === 'dark' ? 'grey' : '#e2e2e2',
       TRIP: this.mode === 'dark' ? '#0f3479' : '#FFF',
       TRIP1: this.mode === 'dark' ? '#6495ED' : '#FFF',
       TRIP2: this.mode === 'dark' ? '#f5f5f5' : "#000",
