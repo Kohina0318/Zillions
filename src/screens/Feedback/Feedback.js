@@ -98,15 +98,15 @@ export default function FeedBack(props) {
     else {
       try {
         let formdata = new FormData();
-        formdata.append('', userName);
-        formdata.append('', userMobileno);
-        formdata.append('', userEmail);
-        formdata.append('', discription);
-
-        console.log("formdata...", formdata)
+        formdata.append('name', userName);
+        formdata.append('mobileno', userMobileno);
+        formdata.append('email', userEmail);
+        formdata.append('description', discription);
 
         var res = await postFeedBack(formdata);
+       
         if (res.status === true) {
+          navigation.navigate("Dashboard")
           toast.show(res.msg, {
             type: 'success',
             placement: 'bottom',
@@ -167,6 +167,7 @@ export default function FeedBack(props) {
         <LoadingFullScreen style={{ flex: 1 }} />
       ) : (
         <>
+        
           <View style={{ ...styles.container, }} >
             <View style={{ ...styles.ViewHeading }}>
               <Text allowFontScaling={false} style={{ ...styles.headingTxt, color: themecolor.TXTWHITE }}>
@@ -295,10 +296,7 @@ export default function FeedBack(props) {
 
             </View>
           </View>
-
-
         </>
-
       )}
 
     </View>

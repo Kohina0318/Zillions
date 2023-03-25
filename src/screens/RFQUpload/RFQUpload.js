@@ -20,8 +20,11 @@ import { useNavigation } from '@react-navigation/native';
 import HalfSizeButton from '../../components/shared/button/halfSizeButton';
 import FIcon from 'react-native-vector-icons/FontAwesome';
 import EIcon from 'react-native-vector-icons/Entypo';
-import ImagePicker, { launchImageLibrary } from 'react-native-image-picker';
+import { launchCamera, launchImageLibrary } from 'react-native-image-picker';
+import ImgToBase64 from 'react-native-image-base64';
 import { postRFQUploadRepo } from '../../repository/ProfileRepository/RFQUploadRepo';
+import { getUserData } from '../../repository/CommonRepository';
+
 
 
 const { width, height } = Dimensions.get('screen');
@@ -53,12 +56,17 @@ export default function RFQUpload(props) {
   const [loader, setLoader] = useState(false);
   const [refresh, setRefresh] = useState(false);
 
+  const [filePath, setFilePath] = useState({
+    uri: 'https://picsum.photos/200/300?random=1',
+  });
+
+  const [image, setImage] = useState('');
   const [companyName, setCompanyName] = useState("")
-  const [CommentText, setCommentText] = useState("")
+  const [commentText, setCommentText] = useState("")
   const [userName, setUserName] = useState("")
   const [mobileno, setMobileno] = useState("")
   const [email, setEmail] = useState("")
-  const [image, setImage] = useState([]);
+
 
   useEffect(() => {
     async function temp() {
@@ -82,39 +90,38 @@ export default function RFQUpload(props) {
   }, [props]);
 
 
-  const openImages = () => {
+  const openGallery = () => {
     let options = {
       storageOption: {
         path: 'images',
-        mediaType: 'photo'
+        mediaType: 'photo',
       },
-      includeBase64: true
-    }
-
+      includeBase64: true,
+    };
 
     launchImageLibrary(options, response => {
-      console.log("responce--->", response)
       if (response.didCancel) {
-        console.log("user Cancelled")
-      }
-      else if (response.errorCode) {
-        console.log("Image picker error")
-      }
-      else if (response.customButton) {
-        console.log("custom Button")
-      }
-      else {
+        console.log('User cancelled image picker');
+      } else if (response.error) {
+        console.log('ImagePicker Error', response.error);
+      } else if (response.customButtom) {
+        console.log('User tapped custom Button', response.customButtom);
+      } else {
         const source = {
-          base64: 'data:iamges/jpeg;base64,' + response.assets[0].base64,
+          base64: 'data:image/jpeg;base64,' + response.assets[0].base64,
           name: response.assets[0].fileName,
           type: response.assets[0].type,
-          uri: response.assets[0].uri
-        }
-        setImage([...image, source])
-        console.log("iamge--->", image)
+          uri: response.assets[0].uri,
+        };
+        setImage(response.assets[0].base64);
       }
-    })
+    });
+  };
+
+  const removeImage =() =>{
+    setImage('')
   }
+
   const handleSubmit = async () => {
 
     if (userName == '') {
@@ -172,11 +179,11 @@ export default function RFQUpload(props) {
     else {
       try {
         let formdata = new FormData();
-        formdata.append('', userName);
-        formdata.append('', mobileno);
-        formdata.append('', email);
-        formdata.append('', companyName);
-        formdata.append('', companyText);
+        formdata.append('name', userName);
+        formdata.append('mobileno', mobileno);
+        formdata.append('email', email);
+        formdata.append('cname', companyName);
+        formdata.append('commentText', commentText);
 
         console.log("formdata...", formdata)
 
@@ -228,6 +235,7 @@ export default function RFQUpload(props) {
           <LoadingFullScreen style={{ flex: 1 }} />
         ) : (
           <>
+
             <View style={{ ...styles.ViewHeading }}>
               <Text allowFontScaling={false} style={{ ...styles.headingTxt, color: themecolor.TXTWHITE }}>
                 Upload Multiple Part Numbers for Quotation
@@ -350,7 +358,7 @@ export default function RFQUpload(props) {
                     }}>
                     <TextInput
                       allowFontScaling={false}
-                      value={CommentText}
+                      value={commentText}
                       placeholder={'Comment*'}
                       multiline
                       numberOfLines={4}
@@ -367,55 +375,63 @@ export default function RFQUpload(props) {
                 <View style={{ ...styles.Mv5 }} />
 
                 <View style={{ alignItems: "flex-start", alignSelf: "flex-start", width: "100%", }}>
+                  <Text allowFontScaling={false} style={{ ...styles.TextinputH, color: themecolor.TXTWHITE }}>
+                    Upload Image
+                  </Text>
 
-                  <Text allowFontScaling={false} style={{ ...styles.TextinputH, color: themecolor.TXTWHITE }}>Upload Image</Text>
-
-                  <View style={{ padding: 5, left: 10 }}>
-                    <TouchableOpacity onPress={() => openImages()}>
-                      <FIcon name="camera" size={50} color={themecolor.BORDER} />
-                    </TouchableOpacity>
-                    <View>
-                      {image.map((item) => {
-                        return (
-                          <Image source={{ uri: item.base64 }} />
-                        )
-                      })}
+                  {image === '' ? (
+                    <View style={{ padding: 10,}}>
+                      <TouchableOpacity onPress={() => openGallery()}>
+                        <FIcon name="camera" size={50} color={themecolor.BORDER} />
+                      </TouchableOpacity>
                     </View>
-                    
-
-                  </View>
-                </View>
-
-                <View style={{ ...styles.Mv5 }} />
-
+                  ) : (
+                    <View style={{padding:10,}}>
+                      <Image
+                        // source={{ uri: `data:image/jpeg;base64,${image}` }}
+                        source={{ uri: `data:image/jpeg;base64,${image}` }}
+                        style={{width:60, height:60,borderRadius:4}}
+                      />
+                      <TouchableOpacity
+                        style={{ position:'absolute', zIndex:99999,right:0, marginTop:0,marginRight:0, marginTop:5 }}
+                        onPress={() => removeImage()}
+                      >
+                        <EIcon name="circle-with-cross" size={20} color={'tomato'} />
+                      </TouchableOpacity>
+                    </View>
+                  )}
               </View>
 
               <View style={{ ...styles.Mv5 }} />
 
-              <View
-                style={{
-                  ...styles.touchview,
-                }}>
-                <View style={{ ...styles.mainView }}>
-                  <HalfSizeButton
-                    title="Update RFQ"
-                    icon=" "
-                    backgroundColor={themecolor.ADDTOCARTBUTTONCOLOR}
-                    color={'#fff'}
-                    borderColor={themecolor.BOXBORDERCOLOR1}
-                    onPress={() => handleSubmit()}
-                  />
-                </View>
-              </View>
-
-              <View style={{ marginVertical: 60 }} />
-
             </View>
+
+            <View style={{ ...styles.Mv5 }} />
+
+            <View
+              style={{
+                ...styles.touchview,
+              }}>
+              <View style={{ ...styles.mainView }}>
+                <HalfSizeButton
+                  title="Update RFQ"
+                  icon=" "
+                  backgroundColor={themecolor.ADDTOCARTBUTTONCOLOR}
+                  color={'#fff'}
+                  borderColor={themecolor.BOXBORDERCOLOR1}
+                  onPress={() => handleSubmit()}
+                />
+              </View>
+            </View>
+
+            <View style={{ marginVertical: 60 }} />
+
+          </View>
 
           </>
         )}
-      </View>
-
     </View>
+
+    </View >
   );
 }
