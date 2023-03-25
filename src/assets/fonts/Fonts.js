@@ -31,6 +31,7 @@ const FontSize = {
   labelText5: 18,
   labelText50: 50,
   labelTextbig: 22,
+  labelTextbigger: 25,
   textInput: 15,
   buttonText: 16,
   newButtonText: 18,

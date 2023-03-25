@@ -169,10 +169,14 @@ const ProfileStyle = StyleSheet.create({
     left: 10,
   },
   avater: {
-    borderWidth: 5,
-    borderColor: 'white',
-    // borderStyle: 'solid',
+    padding:15, 
+    borderRadius:50,
+    width:width*0.18,
+    borderWidth:3
   },
+  profileImgText:{alignSelf:'center',justifyContent:'center',fontSize: FontSize.labelTextbigger,
+  fontFamily: FontFamily.PopinsRegular,
+  fontWeight:"bold"},
   profileDataView: {
     flexDirection: 'row',
     justifyContent: 'center',
