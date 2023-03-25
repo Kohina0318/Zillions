@@ -167,6 +167,7 @@ export default function FeedBack(props) {
         <LoadingFullScreen style={{ flex: 1 }} />
       ) : (
         <>
+        
           <View style={{ ...styles.container, }} >
             <View style={{ ...styles.ViewHeading }}>
               <Text allowFontScaling={false} style={{ ...styles.headingTxt, color: themecolor.TXTWHITE }}>
@@ -295,10 +296,7 @@ export default function FeedBack(props) {
 
             </View>
           </View>
-
-
         </>
-
       )}
 
     </View>

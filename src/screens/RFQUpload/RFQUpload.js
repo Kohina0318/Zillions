@@ -20,9 +20,11 @@ import { useNavigation } from '@react-navigation/native';
 import HalfSizeButton from '../../components/shared/button/halfSizeButton';
 import FIcon from 'react-native-vector-icons/FontAwesome';
 import EIcon from 'react-native-vector-icons/Entypo';
-import { launchCamera } from 'react-native-image-picker';
+import { launchCamera, launchImageLibrary } from 'react-native-image-picker';
 import ImgToBase64 from 'react-native-image-base64';
 import { postRFQUploadRepo } from '../../repository/ProfileRepository/RFQUploadRepo';
+import { getUserData } from '../../repository/CommonRepository';
+
 
 
 const { width, height } = Dimensions.get('screen');
@@ -57,131 +59,67 @@ export default function RFQUpload(props) {
     uri: 'https://picsum.photos/200/300?random=1',
   });
 
-  const [image, setImage] = useState(false);
-  const [companyName,setCompanyName]=useState("")
-  const [CommentText,setCommentText]=useState("")
-  const [userName,setUserName]=useState("")
-  const [mobileno,setMobileno]=useState("")
-  const [email,setEmail]=useState("")
+  const [image, setImage] = useState('');
+  const [companyName, setCompanyName] = useState("")
+  const [commentText, setCommentText] = useState("")
+  const [userName, setUserName] = useState("")
+  const [mobileno, setMobileno] = useState("")
+  const [email, setEmail] = useState("")
 
 
   useEffect(() => {
     async function temp() {
-        try {
-            var userData = await getUserData();
-            console.log(userData)
-            if (userData == null || userData == '' || userData == undefined) {
-                setLoader(false)
-           } else {    
-                var nameUser = `${userData[0].username.replace(/\s+/g, '')} ${userData[0].surname.replace(/\s+/g, '')}`
-                setUserName(nameUser)
-                setEmail(userData[0].email)
-                setMobileno(userData[0].phone)
-                setLoader(false)
-            }
-        } catch (e) {
+      try {
+        var userData = await getUserData();
+        console.log(userData)
+        if (userData == null || userData == '' || userData == undefined) {
+          setLoader(false)
+        } else {
+          var nameUser = `${userData[0].username.replace(/\s+/g, '')} ${userData[0].surname.replace(/\s+/g, '')}`
+          setUserName(nameUser)
+          setEmail(userData[0].email)
+          setMobileno(userData[0].phone)
           setLoader(false)
         }
+      } catch (e) {
+        setLoader(false)
+      }
     }
     temp()
-}, [props]);
+  }, [props]);
 
 
-
-
-  const requestCameraPermission = async () => {
-    if (Platform.OS === 'android') {
-      try {
-        const granted = await PermissionsAndroid.request(
-          PermissionsAndroid.PERMISSIONS.CAMERA,
-          {
-            title: 'Camera Permission',
-            message: 'App needs camera permission',
-          },
-        );
-        // If CAMERA Permission is granted
-        return granted === PermissionsAndroid.RESULTS.GRANTED;
-      } catch (err) {
-        console.warn(err);
-        return false;
-      }
-    } else return true;
-  };
-
-  const requestExternalWritePermission = async () => {
-    if (Platform.OS === 'android') {
-      try {
-        const granted = await PermissionsAndroid.request(
-          PermissionsAndroid.PERMISSIONS.WRITE_EXTERNAL_STORAGE,
-          {
-            title: 'External Storage Write Permission',
-            message: 'App needs write permission',
-          },
-        );
-        // If WRITE_EXTERNAL_STORAGE Permission is granted
-        return granted === PermissionsAndroid.RESULTS.GRANTED;
-      } catch (err) {
-        console.warn(err);
-        alert('Write permission err', err);
-      }
-      return false;
-    } else return true;
-  };
-
-
-  const captureImage = async type => {
+  const openGallery = () => {
     let options = {
-      mediaType: type,
-      maxWidth: 300,
-      maxHeight: 550,
-      quality: 1,
-      videoQuality: 'low',
-      durationLimit: 30, //Video max duration in seconds
-      saveToPhotos: true,
+      storageOption: {
+        path: 'images',
+        mediaType: 'photo',
+      },
+      includeBase64: true,
     };
-    let isCameraPermitted = await requestCameraPermission();
-    let isStoragePermitted = await requestExternalWritePermission();
-    if (isCameraPermitted && isStoragePermitted) {
-    
-      launchCamera(options, response => {
-        console.log('Response = ', response);
 
-        if (response.didCancel) {
-          alert('User cancelled camera picker');
-          return;
-        } else if (response.errorCode == 'camera_unavailable') {
-          alert('Camera not available on device');
-          return;
-        } else if (response.errorCode == 'permission') {
-          alert('Permission not satisfied');
-          return;
-        } else if (response.errorCode == 'others') {
-          alert(response.errorMessage);
-          return;
-        }
-        // console.log('base64 -> ', response.assets[0].base64);
-        console.log('uri -> ', response.assets[0].uri);
-        console.log('width -> ', response.assets[0].width);
-        console.log('height -> ', response.assets[0].height);
-        console.log('fileSize -> ', response.assets[0].fileSize);
-        console.log('type -> ', response.assets[0].type);
-        console.log('fileName -> ', response.assets[0].fileName);
-        setFilePath(response);
-
-        ImgToBase64.getBase64String(`${response.assets[0].uri}`).then(
-          base64String => {
-            // console.log('Base 64 String ....', base64String);
-            let body = {
-              imgurl: base64String,
-              id: response.assets[0].fileName,
-            };
-            setImage(base64String)
-            setRefresh(!refresh);
-          },
-        );
-      });
-    }
+    launchImageLibrary(options, response => {
+      if (response.didCancel) {
+        console.log('User cancelled image picker');
+      } else if (response.error) {
+        console.log('ImagePicker Error', response.error);
+      } else if (response.customButtom) {
+        console.log('User tapped custom Button', response.customButtom);
+      } else {
+        const source = {
+          base64: 'data:image/jpeg;base64,' + response.assets[0].base64,
+          name: response.assets[0].fileName,
+          type: response.assets[0].type,
+          uri: response.assets[0].uri,
+        };
+        setImage(response.assets[0].base64);
+      }
+    });
   };
+
+  const removeImage =() =>{
+    setImage('')
+  }
 
   const handleSubmit = async () => {
 
@@ -226,7 +164,7 @@ export default function RFQUpload(props) {
         offset: 30,
         animationType: 'slide-in',
       });
-      
+
     }
     else if (companyText == '') {
       toast.show('Company text is required!', {
@@ -240,11 +178,11 @@ export default function RFQUpload(props) {
     else {
       try {
         let formdata = new FormData();
-        formdata.append('', userName);
-        formdata.append('', mobileno);
-        formdata.append('', email);
-        formdata.append('', companyName);
-        formdata.append('', companyText);
+        formdata.append('name', userName);
+        formdata.append('mobileno', mobileno);
+        formdata.append('email', email);
+        formdata.append('cname', companyName);
+        formdata.append('commentText', commentText);
 
         console.log("formdata...", formdata)
 
@@ -295,6 +233,7 @@ export default function RFQUpload(props) {
           <LoadingFullScreen style={{ flex: 1 }} />
         ) : (
           <>
+
             <View style={{ ...styles.ViewHeading }}>
               <Text allowFontScaling={false} style={{ ...styles.headingTxt, color: themecolor.TXTWHITE }}>
                 Upload Multiple Part Numbers for Quotation
@@ -326,7 +265,7 @@ export default function RFQUpload(props) {
                         ...styles.TextInput,
                         color: themecolor.TXTWHITE,
                       }}
-                    // onChangeText={txt => setUserName(txt)}
+                      onChangeText={txt => setUserName(txt)}
                     />
                   </View>
                 </View>
@@ -350,7 +289,7 @@ export default function RFQUpload(props) {
                         ...styles.TextInput,
                         color: themecolor.TXTWHITE,
                       }}
-                    onChangeText={txt => setCompanyName(txt)}
+                      onChangeText={txt => setCompanyName(txt)}
                     />
                   </View>
                 </View>
@@ -374,7 +313,7 @@ export default function RFQUpload(props) {
                         ...styles.TextInput,
                         color: themecolor.TXTWHITE,
                       }}
-                    // onChangeText={txt => setEmail(txt)}
+                      onChangeText={txt => setEmail(txt)}
                     />
                   </View>
                 </View>
@@ -400,7 +339,7 @@ export default function RFQUpload(props) {
                         ...styles.TextInput,
                         color: themecolor.TXTWHITE,
                       }}
-                    onChangeText={txt => setMobileno(txt)}
+                      onChangeText={txt => setMobileno(txt)}
                     />
                   </View>
                 </View>
@@ -417,7 +356,7 @@ export default function RFQUpload(props) {
                     }}>
                     <TextInput
                       allowFontScaling={false}
-                      value={CommentText}
+                      value={commentText}
                       placeholder={'Comment*'}
                       multiline
                       numberOfLines={4}
@@ -426,7 +365,7 @@ export default function RFQUpload(props) {
                         ...styles.modelTextInput,
                         color: themecolor.TXTWHITE,
                       }}
-                    onChangeText={txt => setCommentText(txt)}
+                      onChangeText={txt => setCommentText(txt)}
                     />
                   </View>
                 </View>
@@ -434,61 +373,64 @@ export default function RFQUpload(props) {
                 <View style={{ ...styles.Mv5 }} />
 
                 <View style={{ alignItems: "flex-start", alignSelf: "flex-start", width: "100%", }}>
-                  {/* {image === '' ? ( */}
+                  <Text allowFontScaling={false} style={{ ...styles.TextinputH, color: themecolor.TXTWHITE }}>
+                    Upload Image
+                  </Text>
 
-                  <Text allowFontScaling={false} style={{ ...styles.TextinputH, color: themecolor.TXTWHITE }}>Upload Image</Text>
+                  {image === '' ? (
 
-                  <View style={{ padding: 5, left: 10 }}>
-                    <TouchableOpacity onPress={() => captureImage('photo')}>
-                      <FIcon name="camera" size={50} color={themecolor.BORDER} />
-                    </TouchableOpacity>
-                    {/* ) : (
-                    <View>
+                    <View style={{ padding: 10,}}>
+                      <TouchableOpacity onPress={() => openGallery()}>
+                        <FIcon name="camera" size={50} color={themecolor.BORDER} />
+                      </TouchableOpacity>
+                    </View>
+                  ) : (
+                    <View style={{padding:10,}}>
                       <Image
+                        // source={{ uri: `data:image/jpeg;base64,${image}` }}
                         source={{ uri: `data:image/jpeg;base64,${image}` }}
-                        style={styles.viewImage}
+                        style={{width:60, height:60,borderRadius:4}}
                       />
                       <TouchableOpacity
-                        style={styles.iconTouchableOpacity}
-                        // onPress={() => deleteTickets()}
-                        >
+                        style={{ position:'absolute', zIndex:99999,right:0, marginTop:0,marginRight:0, marginTop:5 }}
+                        onPress={() => removeImage()}
+                      >
                         <EIcon name="circle-with-cross" size={20} color={'tomato'} />
                       </TouchableOpacity>
                     </View>
-                  )} */}
-                  </View>
-                </View>
-
-                <View style={{ ...styles.Mv5 }} />
-
+                  )}
               </View>
 
               <View style={{ ...styles.Mv5 }} />
 
-              <View
-                style={{
-                  ...styles.touchview,
-                }}>
-                <View style={{ ...styles.mainView }}>
-                  <HalfSizeButton
-                    title="Update RFQ"
-                    icon=" "
-                    backgroundColor={themecolor.ADDTOCARTBUTTONCOLOR}
-                    color={'#fff'}
-                    borderColor={themecolor.BOXBORDERCOLOR1}
-                    onPress={() => handleSubmit()}
-                  />
-                </View>
-              </View>
-
-              <View style={{ marginVertical: 60 }} />
-
             </View>
+
+            <View style={{ ...styles.Mv5 }} />
+
+            <View
+              style={{
+                ...styles.touchview,
+              }}>
+              <View style={{ ...styles.mainView }}>
+                <HalfSizeButton
+                  title="Update RFQ"
+                  icon=" "
+                  backgroundColor={themecolor.ADDTOCARTBUTTONCOLOR}
+                  color={'#fff'}
+                  borderColor={themecolor.BOXBORDERCOLOR1}
+                  onPress={() => handleSubmit()}
+                />
+              </View>
+            </View>
+
+            <View style={{ marginVertical: 60 }} />
+
+          </View>
 
           </>
         )}
-      </View>
-
     </View>
+
+    </View >
   );
 }
