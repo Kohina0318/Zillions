@@ -11,6 +11,7 @@ import RatingModel from '../../components/shared/Model/RatingModel';
 import SegmentedControlTab from 'react-native-segmented-control-tab';
 
 export const TabData = props => {
+  
   const [index, setIndex] = React.useState(0);
   const [showmodal, setShowmodal] = useState(false);
   const { width: contentWidth } = useWindowDimensions();

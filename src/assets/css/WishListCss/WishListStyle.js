@@ -82,6 +82,9 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     justifyContent: "flex-end",
     alignSelf: "flex-end"
+  },
+  contentContainerStyle:{
+    width:width*0.944, justifyContent:"flex-start", 
   }
 });
 

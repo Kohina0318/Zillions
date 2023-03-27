@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   View,
   BackHandler,
@@ -37,31 +37,29 @@ export default function Products(props) {
   const [data, setData] = useState([]);
   const [isLoading, setIsLoading] = React.useState(false);
 
-  const handleByProduct = async (value) => {
+  const [getOffset, setOffset] = React.useState(0);
+
+  const handleByProduct = async () => {
     try {
-      var body=new FormData()
-      body.append('limit',"10")
-      if(value==undefined)
-      {
-        body.append('offset',0) 
+      var body = new FormData()
+      body.append('limit', "10")
+      body.append('offset', getOffset)
+
+      var res = await getByProduct(props.route.params.speciality, props.route.params.Id, body);
+      if (res.status === true) {
+        if (res.data.length > 0) {
+          setIsLoading(true)
+          setOffset(getOffset + 10)
+          var temp1 = data.concat(res.data)
+          setData(temp1);
+        } else {
+          setIsLoading(false)
+        }
+        setLoader(false);
       }
-      else
-     { body.append('offset',value)}
-     var res = await getByProduct(props.route.params.speciality,props.route.params.Id,body);
-      if(data==[]||data==null)
-     { setData(res.data);}
-     else{
-      setIsLoading(true)
-      var temp = res.data
-      if(temp.length==0)
-      {
-        setIsLoading(false)
+      else{
+        setLoader(false)
       }
-      else
-     { var temp1 =data.concat(temp)
-      setData(temp1);}
-     }
-      setLoader(false);
     } catch (e) {
       console.log('errrror in..handleByProduct page-->', e);
       setLoader(false);
@@ -80,27 +78,27 @@ export default function Products(props) {
   }, []);
 
   return (
-    <View style={{...ProductStyle.bg, backgroundColor: themecolor.THEMECOLOR}}>
+    <View style={{ ...ProductStyle.bg, backgroundColor: themecolor.THEMECOLOR }}>
       <Header
         title={props.route.params.Name}
         backIcon={true}
         onPressBack={() => handleBackButtonClick()}
       />
       {loader ? (
-        <LoadingFullScreen style={{flex: 1}} />
+        <LoadingFullScreen style={{ flex: 1 }} />
       ) : (
         <View
           style={{
             ...ProductStyle.container,
           }}>
           {data.length > 0 ? (
-              <ProductDataList data={data}
-               handleByProduct={(value)=>handleByProduct(value)}
-                  isLoading={isLoading} />
+            <ProductDataList data={data}
+              handleByProduct={handleByProduct}
+              isLoading={isLoading} />
           ) : (
-            <NoDataMsg  title="No Product Found! "/>
+            <NoDataMsg title="No Product Found! " />
           )}
-          <View style={{marginVertical: 30}} />
+          <View style={{ marginVertical: 30 }} />
         </View>
       )}
     </View>

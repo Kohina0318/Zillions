@@ -27,7 +27,7 @@ import { navigateToClearStack } from '../../../../navigations/NavigationDrw/Navi
 const { width } = Dimensions.get('screen');
 
 
-function WishListDataFlateList({ item, themecolor, setRefresh, refresh, }) {
+function WishListDataFlateList({ item, themecolor, setRefresh, refresh,setOffset, setWishlistData }) {
 
   const toast = useToast();
   const refRBSheet = useRef();
@@ -40,9 +40,10 @@ function WishListDataFlateList({ item, themecolor, setRefresh, refresh, }) {
 
   const handleRemove = async () => {
     try {
-      var res = await postAddOrRemoveWishlist('remove',item.product_id)
-      
+      var res = await postAddOrRemoveWishlist('remove', item.product_id);
       if (res.status == true) {
+        setOffset(0)
+        setWishlistData([])
         setRefresh(!refresh)
         toast.show(res.msg, {
           type: 'success',
@@ -51,7 +52,7 @@ function WishListDataFlateList({ item, themecolor, setRefresh, refresh, }) {
           offset: 30,
           animationType: 'slide-in',
         });
-      }else if (res.msg == "Invalid Authentication") {
+      } else if (res.msg == "Invalid Authentication") {
         ToastAndroid.showWithGravityAndOffset(
           `${'Token Expired'}`,
           ToastAndroid.TOP,
@@ -61,8 +62,8 @@ function WishListDataFlateList({ item, themecolor, setRefresh, refresh, }) {
         );
         navigateToClearStack('Dashboard');
       }
-       else {
-       
+      else {
+
       }
     } catch (e) {
       console.log('errrror in..handleRemove page wishlist-->', e);
@@ -88,8 +89,8 @@ function WishListDataFlateList({ item, themecolor, setRefresh, refresh, }) {
       formdata.append('totalprice', TotalPrice);
       var res = await postAddCartProduct(item.product_id, formdata)
       if (res.status == true) {
-        
-        store.dispatch({type:'ADD_CART',payload:[item.product_id,{productId:item.product_id,data:formdata}]})
+
+        store.dispatch({ type: 'ADD_CART', payload: [item.product_id, { productId: item.product_id, data: formdata }] })
         handleRemove()
         toast.show(res.msg, {
           type: 'success',
@@ -246,6 +247,7 @@ function WishListDataFlateList({ item, themecolor, setRefresh, refresh, }) {
               borderColor={'transparent'}
               fontSize={16}
               height={width * 0.08}
+              disabled={true}
             />
           }
         </View>
@@ -254,7 +256,7 @@ function WishListDataFlateList({ item, themecolor, setRefresh, refresh, }) {
         name="shopping-cart"
         size={16}
         color="#fff"
-      />} qty={qty} setQty={setQty}  maxQty={item.current_stock} setSelectedSize={setSelectedSize} onPress={handleAddCartProduct} setSelectedSizePrice={setSelectedSizePrice} />
+      />} qty={qty} setQty={setQty} maxQty={item.current_stock} setSelectedSize={setSelectedSize} onPress={handleAddCartProduct} setSelectedSizePrice={setSelectedSizePrice} />
 
     </>
   );
@@ -263,20 +265,21 @@ function WishListDataFlateList({ item, themecolor, setRefresh, refresh, }) {
 export function WishListDataList(props) {
   const mode = useSelector(state => state.mode);
   const themecolor = new MyThemeClass(mode).getThemeColor();
-  const[index,setIndex]=useState(10)
 
   return (
     <FlatList
       data={props.data}
       renderItem={({ item }) => (
-        <WishListDataFlateList item={item} themecolor={themecolor} setRefresh={props.setRefresh} refresh={props.refresh} />
+        <WishListDataFlateList item={item} themecolor={themecolor} setRefresh={props.setRefresh} refresh={props.refresh} setOffset={props.setOffset} setWishlistData={props.setWishlistData} />
       )}
       numColumns={2}
       showsVerticalScrollIndicator={false}
       scrollEnabled={true}
+      contentContainerStyle={{
+        ...styles.contentContainerStyle
+      }}
       onEndReached={() => {
-        props.handleWishlist(index);
-        setIndex(index+10)
+          props.handleWishlist();
       }}
       ListFooterComponent={() => {
         if (props.isLoading) {

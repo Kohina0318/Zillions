@@ -83,6 +83,11 @@ const styles = StyleSheet.create({
     color: Colors.black,
     marginBottom: 5,
   },
+  otherProductView:{
+    alignSelf: 'center',
+    justifyContent: 'flex-start',
+    width: width * 0.94,
+  },
   ViewAllButton: {
     backgroundColor: Colors.bluetheme,
     borderRadius: 30,

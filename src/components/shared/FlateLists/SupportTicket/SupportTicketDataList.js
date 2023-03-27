@@ -82,19 +82,17 @@ function SupportTicketDataFlateList({item, themecolor}) {
 export function SupportTicketDataList(props) {
   const mode = useSelector(state => state.mode);
   const themecolor = new MyThemeClass(mode).getThemeColor();
-  const[index,setIndex]=useState(10)
-
+ 
   return (
     <FlatList
       data={props.data}
       renderItem={({item}) => (
-        <SupportTicketDataFlateList item={item} themecolor={themecolor} />
+        <SupportTicketDataFlateList item={item} themecolor={themecolor}  />
       )}
       showsVerticalScrollIndicator={false}
       scrollEnabled={true}
       onEndReached={() => {
-        props.handleAllMessages(index);
-        setIndex(index+10)
+        props.handleAllMessages();
       }}
       ListFooterComponent={() => {
         if (props.isLoading) {

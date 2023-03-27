@@ -62,8 +62,7 @@ function SubCategoryDataFlateList({ item, themecolor }) {
 export function SubCategoryDataList(props) {
   const mode = useSelector(state => state.mode);
   const themecolor = new MyThemeClass(mode).getThemeColor();
-  const [index, setIndex] = useState(10)
-
+  
   return (
     <>
       <FlatList
@@ -74,8 +73,7 @@ export function SubCategoryDataList(props) {
         showsVerticalScrollIndicator={false}
         scrollEnabled={true}
         onEndReached={() => {
-          props.handleSubCategories(index);
-          setIndex(index + 10)
+          props.handleSubCategories();
         }}
         ListFooterComponent={() => {
           if (props.isLoading) {

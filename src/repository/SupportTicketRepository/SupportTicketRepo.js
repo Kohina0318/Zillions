@@ -40,7 +40,6 @@ const postCreateSupportTicket = async formdata => {
 };
 
 const getSupportTicket = async (body) => {
-  console.log(body)
   try {
     const response = await fetch(
         `${await SERVER_URL()}/get-ticket`,

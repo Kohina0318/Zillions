@@ -180,9 +180,9 @@ const ProfileStyle = StyleSheet.create({
   fontWeight:"bold"},
   profileDataView: {
     flexDirection: 'row',
-    justifyContent: 'center',
+    justifyContent: 'flex-start',
     alignItems: 'center',
-    // backgroundColor:"red"
+    width:width *0.85
   },
   headingTxt: {
     fontSize: FontSize.labelText3,

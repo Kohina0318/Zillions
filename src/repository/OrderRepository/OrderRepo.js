@@ -82,7 +82,6 @@ const postReturnOrder = async (saleId) => {
         Authorization: `${await getAppToken()}`
       },
     });
-    console.log(response)
     
     const result = await response.json();
 
