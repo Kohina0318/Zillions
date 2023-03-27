@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useState, useRef } from 'react';
 import {
   TouchableOpacity,
   View,
@@ -6,10 +6,8 @@ import {
   Text,
   Image,
   Dimensions,
-  ActivityIndicator,
   ToastAndroid
 } from 'react-native';
-import { Colors } from '../../../../assets/config/Colors';
 import { styles } from '../../../../assets/css/WishListCss/WishListStyle';
 import { MyThemeClass } from '../../../Theme/ThemeDarkLightColor';
 import { useSelector } from 'react-redux';
@@ -22,12 +20,11 @@ import { postAddOrRemoveWishlist } from '../../../../repository/WishListReposito
 import { useToast } from 'react-native-toast-notifications';
 import { RBSheetData } from '../../RBSheet/RBSheetData';
 import { postAddCartProduct } from '../../../../repository/OrderProcessRepository/AddToCartRepo';
-import { set } from 'immer/dist/internal';
 import { store } from '../../../../../App';
 import LoadingContent from '../../Loader/LoadingContent';
 import { navigateToClearStack } from '../../../../navigations/NavigationDrw/NavigationService';
 
-const { width, height } = Dimensions.get('screen');
+const { width } = Dimensions.get('screen');
 
 
 function WishListDataFlateList({ item, themecolor, setRefresh, refresh, }) {
@@ -43,7 +40,8 @@ function WishListDataFlateList({ item, themecolor, setRefresh, refresh, }) {
 
   const handleRemove = async () => {
     try {
-      var res = await postAddOrRemoveWishlist('remove',item.product_id);
+      var res = await postAddOrRemoveWishlist('remove',item.product_id)
+      
       if (res.status == true) {
         setRefresh(!refresh)
         toast.show(res.msg, {

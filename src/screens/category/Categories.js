@@ -1,12 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import {
   View,
-  Text,
-  StatusBar,
-  Appearance,
   Dimensions,
-  ScrollView,
-  TouchableOpacity
 } from 'react-native';
 import { useSelector } from 'react-redux';
 import { MyThemeClass } from '../../components/Theme/ThemeDarkLightColor';
@@ -17,12 +12,11 @@ import { useToast } from 'react-native-toast-notifications';
 import Header from '../../components/shared/header/Header';
 import LoadingFullScreen from '../../components/shared/Loader/LoadingFullScreen';
 import NoDataMsg from '../../components/shared/NoData/NoDataMsg';
-import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import RequestForNewCategoryModel from '../../components/shared/Model/RequestForNewCategoryModel';
 import HalfSizeButton from '../../components/shared/button/halfSizeButton';
 
 
-const { width, height } = Dimensions.get('screen');
+const { width } = Dimensions.get('screen');
 
 export default function Categories(props) {
   const toast = useToast();

@@ -1,16 +1,15 @@
 import React, {useEffect, useState} from 'react';
-import {View, Text, StatusBar, Appearance, Dimensions,BackHandler} from 'react-native';
+import {View, Dimensions,BackHandler} from 'react-native';
 import {useSelector} from 'react-redux';
 import {MyThemeClass} from '../../components/Theme/ThemeDarkLightColor';
 import {ProductStyle} from '../../assets/css/CategoryCss/ProductStyle'
 import {ProductDataList} from '../../components/shared/FlateLists/CategoryFlatList/ProductDataList';
-import {ScrollView} from 'react-native-gesture-handler';
 import {useToast} from 'react-native-toast-notifications';
 import Header from '../../components/shared/header/Header';
 import { getProductList } from '../../repository/DashboardRepository/AllDashboardRep';
 import LoadingFullScreen from '../../components/shared/Loader/LoadingFullScreen';
 import NoDataMsg from '../../components/shared/NoData/NoDataMsg';
-const {width, height} = Dimensions.get('screen');
+
 
 export default function MostViewed(props) {
 

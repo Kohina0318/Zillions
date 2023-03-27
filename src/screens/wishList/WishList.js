@@ -1,11 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState} from 'react';
 import {
   View,
-  Text,
-  StatusBar,
-  Appearance,
-  Dimensions,
-  ScrollView,
   Alert,
 } from 'react-native';
 import { useSelector } from 'react-redux';
@@ -19,7 +14,6 @@ import LoadingFullScreen from '../../components/shared/Loader/LoadingFullScreen'
 import NoDataMsg from '../../components/shared/NoData/NoDataMsg';
 import { useNavigation } from '@react-navigation/native';
 import { useToast } from 'react-native-toast-notifications';
-const { width, height } = Dimensions.get('screen');
 
 export default function WishList(props) {
 
@@ -36,31 +30,28 @@ export default function WishList(props) {
 
   const handleWishlist = async (value) => {
     try {
-      var body=new FormData()
-      body.append('limit',"10")
-      if(value==undefined)
-      {
-        body.append('offset',0) 
+      var body = new FormData()
+      body.append('limit', "10")
+      if (value == undefined) {
+        body.append('offset', 0)
       }
-      else
-     { body.append('offset',value)}
-     var res = await getWishlist(body);
-     if (res.status === true) {
-      if(wishlistData==[]||wishlistData==null)
-     { setWishlistData(res.data);}
-     else{
-      setIsLoading(true)
-      var temp = res.data
-      if(temp.length==0)
-      {
-        setIsLoading(false)
-      }
-      else
-     { var temp1 =wishlistData.concat(temp)
-      setWishlistData(temp1);}
-     } 
+      else { body.append('offset', value) }
+      var res = await getWishlist(body);
+      if (res.status === true) {
+        if (wishlistData == [] || wishlistData == null) { setWishlistData(res.data); }
+        else {
+          setIsLoading(true)
+          var temp = res.data
+          if (temp.length == 0) {
+            setIsLoading(false)
+          }
+          else {
+            var temp1 = wishlistData.concat(temp)
+            setWishlistData(temp1);
+          }
+        }
         setLoader(false);
-      } 
+      }
       else if (res.msg == "Invalid Authentication") {
         setLoader(false);
         setWishlistData([]);
@@ -73,7 +64,7 @@ export default function WishList(props) {
               onPress: () => console.log('Cancel Pressed'),
               style: 'cancel',
             },
-            {text: 'Yes', onPress: () => navigation.navigate('Login')},
+            { text: 'Yes', onPress: () => navigation.navigate('Login') },
           ],
         );
       }
@@ -110,7 +101,7 @@ export default function WishList(props) {
         <>
           <View style={{ ...styles.container }}>
             {wishlistData.length > 0 ? (
-              <WishListDataList data={wishlistData}  setRefresh={setRefresh} refresh={refresh} handleWishlist={(value)=>handleWishlist(value)} isLoading={isLoading}/>
+              <WishListDataList data={wishlistData} setRefresh={setRefresh} refresh={refresh} handleWishlist={(value) => handleWishlist(value)} isLoading={isLoading} />
             ) : (
               <NoDataMsg title="No Product Found!" />
             )}

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { View, Text, Image, TouchableOpacity, BackHandler } from 'react-native'
+import { View, Text, Image, BackHandler } from 'react-native'
 import { useSelector } from 'react-redux';
 import { MyThemeClass } from '../../components/Theme/ThemeDarkLightColor';
 import { styles } from '../../assets/css/CartCss/PaymentConfirmationStyle';
@@ -174,10 +174,10 @@ export const PaymentConfirmation = (props) => {
           {/* <View style={{marginVertical:33}}/> */}
           
           
-          <View style={{justifyContent:"center", alignItems:"center", alignSelf:"center",alignContent:"center", width:"100%"}}>
-            <View style={{ width:"97%", }} >
+          <View style={{justifyContent:"center", alignItems:"center", alignSelf:"center",alignContent:"center", width:"95%"}}>
+            <View style={{ width:"97%",marginBottom:20 }} >
             <HalfSizeButton
-              title="Move to Order Detail"
+              title="Move to My Order"
               icon=""
               backgroundColor={themecolor.ADDTOCARTBUTTONCOLOR}
               color={'#fff'}

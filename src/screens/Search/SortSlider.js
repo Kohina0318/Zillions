@@ -2,9 +2,7 @@ import React, {useState} from 'react';
 import {
   TouchableOpacity,
   View,
-  FlatList,
   Text,
-  Dimensions,
   ScrollView,
 } from 'react-native';
 import {useSelector} from 'react-redux';

@@ -1,6 +1,5 @@
-import React, { useState } from 'react';
-import { Modal, View, Text, TouchableOpacity, Image, Dimensions } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
+import React, { } from 'react';
+import { Modal, View, TouchableOpacity, Image, Dimensions } from 'react-native';
 import { MyThemeClass } from '../../Theme/ThemeDarkLightColor';
 import { useSelector } from 'react-redux';
 import { styles } from '../../../assets/css/CategoryCss/ProductDetailStyle';
@@ -13,7 +12,7 @@ const { width, height } = Dimensions.get('window');
 export default ImageZoomerModel = props => {
     const mode = useSelector(state => state.mode);
     const themecolor = new MyThemeClass(mode).getThemeColor();
-    
+
     return (
         <Modal
             animationType="slide"
@@ -25,7 +24,7 @@ export default ImageZoomerModel = props => {
             <View style={styles.centeredView}>
                 <View style={{ ...styles.modalView, backgroundColor: themecolor.TXTWHITE1 }}>
                     <View style={{ ...styles.modalCloseView }}>
-                        <TouchableOpacity activeOpacity={0.5} style={{...styles.modalCloseTouch}}
+                        <TouchableOpacity activeOpacity={0.5} style={{ ...styles.modalCloseTouch }}
                             onPress={() => props.setModalVisible(!props.modalVisible)}>
                             <CIcon
                                 name="keyboard-backspace"

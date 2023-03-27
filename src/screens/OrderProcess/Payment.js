@@ -7,7 +7,6 @@ import {
   Image,
   TouchableOpacity,
   ScrollView,
-  ToastAndroid,
   Alert
 } from 'react-native';
 import { useSelector } from 'react-redux';
@@ -16,21 +15,19 @@ import { styles } from '../../assets/css/CartCss/PaymentStyle';
 import LoadingFullScreen from '../../components/shared/Loader/LoadingFullScreen';
 import RegisterLoginHeader from '../../components/shared/header/RegisterLoginHeader';
 import { useToast } from 'react-native-toast-notifications';
-import HalfSizeButton from '../../components/shared/button/halfSizeButton';
 import FAIcon from 'react-native-vector-icons/FontAwesome';
 import { Stepper } from '../Stepper/Stepper';
 import { CheckBox } from '@rneui/themed';
 import OrderDetailsComp from '../../components/shared/OrderProcessComponents/Cart/OrderDetailsComp';
 import { getCartOrderDetails } from '../../repository/OrderProcessRepository/CartListRepo';
 import CartViewDetailsButton from '../../components/shared/button/CartViewDetailsButton';
-import { getUserData } from '../../repository/CommonRepository';
 import { store } from '../../../App';
 import RazorpayCheckout from 'react-native-razorpay';
 import { getProfileInfo } from '../../repository/ProfileRepository/ProfileRepo';
 import { postPayment } from '../../repository/OrderProcessRepository/PaymentRepo';
 import { useNavigation } from '@react-navigation/native';
 
-const { width, height } = Dimensions.get('screen');
+const { width } = Dimensions.get('screen');
 
 export default function Payment(props) {
   function handleBackButtonClick() {

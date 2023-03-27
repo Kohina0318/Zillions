@@ -1,4 +1,4 @@
-import { ToastAndroid, BackHandler, Alert } from "react-native";
+import { ToastAndroid } from "react-native";
 import { navigateToClearStack } from "../../navigations/NavigationDrw/NavigationService";
 import { removeDatafromAsync } from "../AsyncStorageServices";
 import { getAppToken } from "../CommonRepository";

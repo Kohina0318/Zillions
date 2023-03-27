@@ -3,7 +3,6 @@ import {
     View,
     Text,
     Dimensions,
-    Image,
     BackHandler,
     ScrollView,
 } from 'react-native';
@@ -24,8 +23,6 @@ import { TabData } from './TabData';
 import MCIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import Feather from 'react-native-vector-icons/Feather';
 import EN from 'react-native-vector-icons/AntDesign';
-import ImageZoom from 'react-native-image-pan-zoom';
-import { Modal } from 'react-native';
 import ProductMoreDetailMainComp from '../../components/shared/OrderProcessComponents/ProductDetails/ProductMoreDetailMainComp';
 import HalfSizeButton from '../../components/shared/button/halfSizeButton';
 import { store } from '../../../App';
@@ -33,7 +30,7 @@ import { postAddCartProduct } from '../../repository/OrderProcessRepository/AddT
 import ImageZoomerModel from '../../components/shared/Model/ImageZoomerModel';
 import ProductMoreDetailCustomerSupport from '../../components/shared/OrderProcessComponents/ProductDetails/ProductMoreDetailCustomerSupport';
 
-const { width, height } = Dimensions.get('window');
+const { width} = Dimensions.get('window');
 
 export default function ProductMoreDetails(props) {
     function handleBackButtonClick() {

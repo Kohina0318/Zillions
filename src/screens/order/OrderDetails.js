@@ -1,14 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import {
   View,
-  Text,
-  Dimensions,
-  TextInput,
   BackHandler,
   ScrollView,
-  Touchable,
   Alert,
-  TouchableOpacity
 } from 'react-native';
 import { useSelector } from 'react-redux';
 import { MyThemeClass } from '../../components/Theme/ThemeDarkLightColor';
@@ -17,7 +12,6 @@ import { getOrderView } from '../../repository/OrderRepository/OrderRepo';
 import { useToast } from 'react-native-toast-notifications';
 import RegisterLoginHeader from '../../components/shared/header/RegisterLoginHeader';
 import LoadingFullScreen from '../../components/shared/Loader/LoadingFullScreen';
-import FAIcon from 'react-native-vector-icons/FontAwesome';
 import { OrderDetailProductDataList } from '../../components/shared/FlateLists/OrderFlateList/OrderDetailProductDataList';
 import HalfSizeButton from '../../components/shared/button/halfSizeButton';
 import { useNavigation } from '@react-navigation/native';
@@ -26,8 +20,6 @@ import OrderHistoryTotalAmountComp from '../../components/shared/OrderProcessCom
 import OrderHistoryAddressComp from '../../components/shared/OrderProcessComponents/OrderHistory/OrderHistoryAddressComp';
 import VerifyModel from '../../components/shared/Model/VerifyModel';
 import { postReturnOrder } from '../../repository/OrderRepository/OrderRepo';
-
-const { width, height } = Dimensions.get('screen');
 
 export default function OrderDetails(props) {
 

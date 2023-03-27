@@ -1,11 +1,9 @@
 import React, { useState } from 'react';
-import { Tab, TabView } from '@rneui/themed';
 import RenderHtml from 'react-native-render-html';
 import { useSelector } from 'react-redux';
 import { MyThemeClass } from '../../components/Theme/ThemeDarkLightColor';
-import { Dimensions, Text, View, TouchableOpacity } from 'react-native';
+import { Text, View, TouchableOpacity } from 'react-native';
 import { useWindowDimensions } from 'react-native';
-import { ScrollView } from 'react-native-gesture-handler';
 import { CustomerReviewFlatList } from '../../components/shared/FlateLists/CategoryFlatList/CustomerReviewFlatList';
 import { styles } from '../../assets/css/CategoryCss/ProductDetailStyle';
 import StarRating from 'react-native-star-rating';

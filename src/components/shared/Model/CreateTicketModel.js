@@ -1,12 +1,10 @@
 import React, { useState } from 'react';
-import { View, Text, Modal, Dimensions, TextInput } from 'react-native';
+import { View, Text, Modal, TextInput } from 'react-native';
 import { MyThemeClass } from '../../Theme/ThemeDarkLightColor';
 import { useSelector } from 'react-redux';
 import { styles } from '../../../assets/css/ProfileCss/AddressStyle';
 import HalfSizeButton from '../button/halfSizeButton';
-import Feather from 'react-native-vector-icons/Feather';
 
-const { width } = Dimensions.get('window');
 
 export default function CreateTicketModel(props) {
   const mode = useSelector(state => state.mode);
@@ -78,7 +76,7 @@ export default function CreateTicketModel(props) {
                   numberOfLines={4}
                   onChangeText={txt => props.setMessage(txt)}
                 />
-               
+
               </View>
             </View>
 
