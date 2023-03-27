@@ -163,7 +163,6 @@ export default function Profile(props) {
                       /> */}
                       <View style={{...ProfileStyle.avater, backgroundColor:generateColor(),borderColor:'#fff'}}>
                         <Text style={{...ProfileStyle.profileImgText, color:'#fff'}}>{imageName}</Text>
-                        <View></View>
                       </View>
                     </View>
                     <View

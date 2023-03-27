@@ -1,11 +1,8 @@
 import React from 'react';
-
 import {withTranslation} from 'react-i18next';
-
 import Video from 'react-native-video';
 import {StyleSheet, View, Dimensions, Image, Platform,Text,Button} from 'react-native';
 import OpacityView from 'src/containers/OpacityView';
-import { useNavigation } from '@react-navigation/native';
 
 const {width, height} = Dimensions.get('window');
 

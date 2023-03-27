@@ -73,7 +73,7 @@ const styles = StyleSheet.create({
   flexRow: { marginLeft: 10, width: width * 0.6,},
   flexRow1: { width: "50%" },
   txt: {
-    fontSize: FontSize.labelText4,
+    fontSize: FontSize.labelText2,
     fontFamily: FontFamily.Popinssemibold,
     fontWeight: "bold"
   },

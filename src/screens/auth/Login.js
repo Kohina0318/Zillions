@@ -136,7 +136,7 @@ export default function Login(props) {
                 ...RegisterLoginStyles.textInputView,
               }}>
               {/* <View> */}
-              <Icon name="email" style={{marginLeft:15}} size={16} color={themecolor.BACKICON} />
+              <Icon name="email" style={{marginLeft:15}} size={16} color={themecolor.ICONINPUT} />
               <View style={{width:width*0.75}}>
                 <TextInput
                  allowFontScaling={false}
@@ -163,7 +163,7 @@ export default function Login(props) {
                 borderColor: themecolor.BOXBORDERCOLOR1,
               }}>
               {/* <View> */}
-              <Icon name="vpn-key" style={{marginLeft:15}} size={18} color={themecolor.BACKICON} />
+              <Icon name="vpn-key" style={{marginLeft:15}} size={18} color={themecolor.ICONINPUT} />
               <View style={{width:width*0.72,}}>
                 <TextInput
                  allowFontScaling={false}
@@ -191,7 +191,7 @@ export default function Login(props) {
                   }}
                   name={isPasswordSecure ? 'eye-off' : 'eye'}
                   size={16}
-                  color={themecolor.ADDTOCARTBUTTONCOLOR}
+                  color={themecolor.TXTGREYS}
                 />
               </View>
             </View>

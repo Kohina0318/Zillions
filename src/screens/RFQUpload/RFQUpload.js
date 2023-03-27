@@ -6,10 +6,8 @@ import {
   BackHandler,
   TextInput,
   TouchableOpacity,
-  PermissionsAndroid,
   Image,
-  ScrollView,
-  Platform,
+  ScrollView
 } from 'react-native';
 import { useSelector } from 'react-redux';
 import { MyThemeClass } from '../../components/Theme/ThemeDarkLightColor';
@@ -21,14 +19,10 @@ import { useNavigation } from '@react-navigation/native';
 import HalfSizeButton from '../../components/shared/button/halfSizeButton';
 import FIcon from 'react-native-vector-icons/FontAwesome';
 import EIcon from 'react-native-vector-icons/Entypo';
-import { launchCamera, launchImageLibrary } from 'react-native-image-picker';
-import ImgToBase64 from 'react-native-image-base64';
+import {launchImageLibrary } from 'react-native-image-picker';
 import { postRFQUploadRepo } from '../../repository/ProfileRepository/RFQUploadRepo';
 import { getUserData } from '../../repository/CommonRepository';
 
-
-
-const { width, height } = Dimensions.get('screen');
 
 
 export default function RFQUpload(props) {
