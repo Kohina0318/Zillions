@@ -193,7 +193,7 @@ export default function Register(props) {
                   name="account-circle"
                   style={{marginLeft: 15}}
                   size={18}
-                  color={themecolor.BACKICON}
+                  color={themecolor.ICONINPUT}
                 />
                 <View style={{width: width * 0.31}}>
                   <TextInput
@@ -221,7 +221,7 @@ export default function Register(props) {
                   name="account-circle"
                   style={{marginLeft: 15}}
                   size={18}
-                  color={themecolor.BACKICON}
+                  color={themecolor.ICONINPUT}
                 />
                 <View style={{width: width * 0.31}}>
                   <TextInput
@@ -252,7 +252,7 @@ export default function Register(props) {
                 name="mobile"
                 style={{marginLeft: 15, marginRight: 5}}
                 size={22}
-                color={themecolor.BACKICON}
+                color={themecolor.ICONINPUT}
               />
               <View style={{width: width * 0.75}}>
                 <TextInput
@@ -282,7 +282,7 @@ export default function Register(props) {
                 name="email"
                 style={{marginLeft: 15}}
                 size={16}
-                color={themecolor.BACKICON}
+                color={themecolor.ICONINPUT}
               />
               <View style={{width: width * 0.75}}>
                 <TextInput
@@ -313,7 +313,7 @@ export default function Register(props) {
                 name="vpn-key"
                 style={{marginLeft: 15}}
                 size={18}
-                color={themecolor.BACKICON}
+                color={themecolor.ICONINPUT}
               />
               <View style={{width: width * 0.72}}>
                 <TextInput
@@ -342,7 +342,7 @@ export default function Register(props) {
                   }}
                   name={isPasswordSecure ? 'eye-off' : 'eye'}
                   size={16}
-                  color={themecolor.ADDTOCARTBUTTONCOLOR}
+                  color={themecolor.TXTGREYS}
                 />
               </View>
             </View>
@@ -359,7 +359,7 @@ export default function Register(props) {
                 name="vpn-key"
                 style={{marginLeft: 15}}
                 size={18}
-                color={themecolor.BACKICON}
+                color={themecolor.ICONINPUT}
               />
               <View style={{width: width * 0.72}}>
                 <TextInput
@@ -388,7 +388,7 @@ export default function Register(props) {
                   }}
                   name={isPasswordSecure1 ? 'eye-off' : 'eye'}
                   size={16}
-                  color={themecolor.ADDTOCARTBUTTONCOLOR}
+                  color={themecolor.TXTGREYS}
                 />
               </View>
             </View>
@@ -417,7 +417,7 @@ export default function Register(props) {
               <Text
                 allowFontScaling={false}
                 style={{
-                  color: themecolor.BACKICON,
+                  color: themecolor.ICONINPUT,
                   fontSize: 12,
                   fontWeight: 'bold',
                 }}>

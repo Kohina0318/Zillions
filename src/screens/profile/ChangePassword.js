@@ -151,7 +151,7 @@ export default function ChangePassword(props) {
                             <View
                                 style={{
                                     ...ProfileStyle.editInnerView,
-                                    backgroundColor: themecolor.BOXBORDERCOLOR,
+                                    backgroundColor: themecolor.BOXBORDERCOLOR1,
                                     borderColor: themecolor.BOXBORDERCOLOR1,
                                 }}>
 
@@ -192,7 +192,7 @@ export default function ChangePassword(props) {
                                             <MaterialCommunityIcons
                                                 name={isPasswordSecure ? 'eye-off' : 'eye'}
                                                 size={16}
-                                                color={themecolor.ADDTOCARTBUTTONCOLOR}
+                                                color={themecolor.ICONINPUT}
                                             />
                                         </TouchableOpacity>
                                     </View>
@@ -236,7 +236,7 @@ export default function ChangePassword(props) {
                                             <MaterialCommunityIcons
                                                 name={isPasswordSecure1 ? 'eye-off' : 'eye'}
                                                 size={16}
-                                                color={themecolor.ADDTOCARTBUTTONCOLOR}
+                                                color={themecolor.ICONINPUT}
                                             />
                                         </TouchableOpacity>
                                     </View>
@@ -280,7 +280,7 @@ export default function ChangePassword(props) {
                                             <MaterialCommunityIcons
                                                 name={isPasswordSecure2 ? 'eye-off' : 'eye'}
                                                 size={16}
-                                                color={themecolor.ADDTOCARTBUTTONCOLOR}
+                                                color={themecolor.ICONINPUT}
                                             />
                                         </TouchableOpacity>
                                     </View>

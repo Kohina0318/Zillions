@@ -150,7 +150,7 @@ export default function ForgotPassword(props) {
                 name="email"
                 style={{marginLeft: 15}}
                 size={16}
-                color={themecolor.BACKICON}
+                color={themecolor.ICONINPUT}
               />
               <View style={{width: width * 0.75}}>
                 <TextInput
