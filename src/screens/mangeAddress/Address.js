@@ -2,19 +2,13 @@ import React, { useEffect, useState } from 'react';
 import {
   View,
   Text,
-  StatusBar,
-  Appearance,
-  Dimensions,
   ScrollView,
   BackHandler,
-  TouchableOpacity,
-  ToastAndroid,
 
 } from 'react-native';
 import { useSelector } from 'react-redux';
 import { MyThemeClass } from '../../components/Theme/ThemeDarkLightColor';
 import { useToast } from 'react-native-toast-notifications';
-import Header from '../../components/shared/header/Header';
 import LoadingFullScreen from '../../components/shared/Loader/LoadingFullScreen';
 import { styles } from '../../assets/css/ProfileCss/AddressStyle';
 import {
@@ -28,9 +22,6 @@ import HalfSizeButton from '../../components/shared/button/halfSizeButton';
 import AddAddressModel from '../../components/shared/Model/AddAddressModel';
 import RegisterLoginHeader from '../../components/shared/header/RegisterLoginHeader';
 import NoDataMsg from '../../components/shared/NoData/NoDataMsg';
-import { navigateToClearStack } from '../../navigations/NavigationDrw/NavigationService';
-
-const { width, height } = Dimensions.get('screen');
 
 export default function Address(props) {
   function handleBackButtonClick() {

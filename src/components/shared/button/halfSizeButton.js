@@ -6,7 +6,6 @@ import {
   StyleSheet,
 } from 'react-native';
 import React from 'react';
-import {Colors} from '../../../assets/config/Colors';
 import {FontFamily} from '../../../assets/fonts/FontFamily';
 import {useSelector} from 'react-redux';
 import {MyThemeClass} from '../../Theme/ThemeDarkLightColor';

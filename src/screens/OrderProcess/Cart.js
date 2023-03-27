@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import {
   View,
   Text,
-  Dimensions,
   BackHandler, ScrollView,
   TouchableOpacity, Alert
 } from 'react-native';
@@ -13,8 +12,6 @@ import LoadingFullScreen from '../../components/shared/Loader/LoadingFullScreen'
 import RegisterLoginHeader from '../../components/shared/header/RegisterLoginHeader';
 import { useToast } from 'react-native-toast-notifications';
 import { CartProductDataList } from '../../components/shared/FlateLists/OrderProcessFlateList/CartProductDataList';
-import HalfSizeButton from '../../components/shared/button/halfSizeButton';
-import FAIcon from 'react-native-vector-icons/FontAwesome';
 import OrderDetailsComp from '../../components/shared/OrderProcessComponents/Cart/OrderDetailsComp';
 import { Stepper } from '../Stepper/Stepper';
 import { getCartOrderDetails, getCartProductList } from '../../repository/OrderProcessRepository/CartListRepo';
@@ -23,10 +20,7 @@ import EmptyCart from '../../components/shared/NoData/EmptyCart';
 import { getRemoveAllProducts } from '../../repository/OrderProcessRepository/RemoveProductRepo';
 import CartViewDetailsButton from '../../components/shared/button/CartViewDetailsButton';
 import { store } from '../../../App';
-import { getUserData } from '../../repository/CommonRepository';
 import { getProfileInfo } from '../../repository/ProfileRepository/ProfileRepo';
-
-const { width, height } = Dimensions.get('screen');
 
 
 export default function Cart(props) {

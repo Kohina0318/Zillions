@@ -1,13 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import {
   View,
   Text,
-  Dimensions,
   BackHandler,
   TouchableOpacity,
   ScrollView,
   Alert,
-  ToastAndroid
 } from 'react-native';
 import { useSelector } from 'react-redux';
 import { MyThemeClass } from '../../components/Theme/ThemeDarkLightColor';
@@ -15,20 +13,14 @@ import { styles } from '../../assets/css/CartCss/CartAddressStyle';
 import LoadingFullScreen from '../../components/shared/Loader/LoadingFullScreen';
 import RegisterLoginHeader from '../../components/shared/header/RegisterLoginHeader';
 import { useToast } from 'react-native-toast-notifications';
-import HalfSizeButton from '../../components/shared/button/halfSizeButton';
 import { Stepper } from '../Stepper/Stepper';
-import FAIcon from 'react-native-vector-icons/FontAwesome';
 import { postDefaultAddress } from '../../repository/AddressRepository/MangeAddressRepo';
 import { getCartOrderDetails } from '../../repository/OrderProcessRepository/CartListRepo';
 import CartViewDetailsButton from '../../components/shared/button/CartViewDetailsButton';
 import OrderDetailsComp from '../../components/shared/OrderProcessComponents/Cart/OrderDetailsComp';
 import { useFocusEffect } from '@react-navigation/native';
-import Register from '../auth/Register';
 import { getProfileInfo } from '../../repository/ProfileRepository/ProfileRepo';
-import { navigateToClearStack } from '../../navigations/NavigationDrw/NavigationService';
 import { useNavigation } from '@react-navigation/native';
-
-const { width, height } = Dimensions.get('screen');
 
 export default function CartAddress(props) {
   function handleBackButtonClick() {

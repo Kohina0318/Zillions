@@ -1,16 +1,13 @@
-import React, {useEffect, useState} from 'react';
+import React, {} from 'react';
 import {
   TouchableOpacity,
   View,
   FlatList,
   Text,
-  Image,
   Dimensions,
 } from 'react-native';
-import {Colors} from '../../../../assets/config/Colors';
 import {MyThemeClass} from '../../../Theme/ThemeDarkLightColor';
 import {useSelector} from 'react-redux';
-import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import {useNavigation} from '@react-navigation/native';
 import {Avatar} from '@rneui/themed';
 

@@ -1,13 +1,10 @@
 import React,{useState} from 'react'
-import { Text, View,TouchableOpacity,Dimensions } from 'react-native'
+import { View } from 'react-native'
 import StepIndicator from 'react-native-step-indicator';
 import { FontFamily } from '../../assets/fonts/FontFamily';
-import { Colors } from '../../assets/config/Colors';
 import StepperStyle from '../../assets/css/SearchCss/StepperStyle';
 
-const { width, height } = Dimensions.get('screen');
-
-export const Stepper = ({ item, props, themecolor }) => {
+export const Stepper = ({ item, themecolor }) => {
 
     const labels=["Cart","Address","Payment"]
 

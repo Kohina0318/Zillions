@@ -1,8 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import {
     View,
     Text,
-    Dimensions,
     Image,
     Linking, TouchableOpacity
 } from 'react-native';
@@ -13,8 +12,6 @@ import HalfSizeButton from '../../button/halfSizeButton';
 import RequestACallBackModel from '../../Model/RequestACallBackModel';
 import { useToast } from 'react-native-toast-notifications';
 import { postRequestACallBack } from '../../../../repository/CategoryRepository/AllProductCategoryRep';
-
-const { width, height } = Dimensions.get('screen');
 
 export default function ProductMoreDetailCustomerSupport(props) {
 

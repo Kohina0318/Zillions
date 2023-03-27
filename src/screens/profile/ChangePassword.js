@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import {
     View,
     Text,
@@ -6,9 +6,6 @@ import {
     BackHandler,
     TouchableOpacity,
     TextInput,
-    Alert,
-    ToastAndroid,
-    ScrollView
 } from 'react-native';
 import { useSelector } from 'react-redux';
 import { MyThemeClass } from '../../components/Theme/ThemeDarkLightColor';
@@ -21,7 +18,7 @@ import { useNavigation } from '@react-navigation/native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import { postChangePswd } from '../../repository/ProfileRepository/ChangePswdRepo';
 
-const { width, height } = Dimensions.get('screen');
+const { width} = Dimensions.get('screen');
 
 export default function ChangePassword(props) {
     function handleBackButtonClick() {

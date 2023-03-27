@@ -1,11 +1,9 @@
 import React, { useState } from 'react';
-import { View, Text, Modal, Dimensions, TextInput } from 'react-native';
+import { View, Text, Modal, TextInput } from 'react-native';
 import { MyThemeClass } from '../../Theme/ThemeDarkLightColor';
 import { useSelector } from 'react-redux';
 import { styles } from '../../../assets/css/CategoryCss/ProductDetailStyle';
 import HalfSizeButton from '../button/halfSizeButton';
-
-const { width } = Dimensions.get('window');
 
 export default function RequestACallBackModel(props) {
     const mode = useSelector(state => state.mode);
@@ -34,7 +32,7 @@ export default function RequestACallBackModel(props) {
                                         ...styles.modelHeading,
                                         color: themecolor.TXTWHITE,
                                     }}>
-                                    Request a Call Back 
+                                    Request a Call Back
                                 </Text>
                             </View>
 
@@ -50,7 +48,7 @@ export default function RequestACallBackModel(props) {
                                     allowFontScaling={false}
                                     placeholder="Mobile Number*"
                                     keyboardType="numeric"
-                                    maxLength={10}                  
+                                    maxLength={10}
                                     placeholderTextColor={themecolor.TXTGREYS}
                                     style={{
                                         ...styles.modelTextInput,
@@ -80,7 +78,7 @@ export default function RequestACallBackModel(props) {
                                     numberOfLines={4}
                                     onChangeText={txt => props.setMsg(txt)}
                                 />
-                            </View>            
+                            </View>
                         </View>
 
                         <View style={{ ...styles.modelViewButton }}>

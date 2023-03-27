@@ -1,19 +1,12 @@
-import React, { useState, useEffect } from 'react';
+import React, { } from 'react';
 import {
   View,
   Text,
-  StatusBar,
-  Appearance,
-  Dimensions,
-  TextInput,
-  BackHandler,
 } from 'react-native';
 import { useSelector } from 'react-redux';
 import { MyThemeClass } from '../../../Theme/ThemeDarkLightColor';
 import { styles } from '../../../../assets/css/CartCss/CartStyle';
 import FAIcon from 'react-native-vector-icons/FontAwesome';
-
-const { width, height } = Dimensions.get('screen');
 
 export default function OrderHistoryDetailComp(props) {
 

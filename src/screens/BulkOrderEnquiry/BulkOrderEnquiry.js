@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import {
   View,
   Text,
-  Dimensions,
   BackHandler,
   TextInput,
   TouchableOpacity,
@@ -17,16 +16,12 @@ import RegisterLoginHeader from '../../components/shared/header/RegisterLoginHea
 import LoadingFullScreen from '../../components/shared/Loader/LoadingFullScreen';
 import { useNavigation } from '@react-navigation/native';
 import HalfSizeButton from '../../components/shared/button/halfSizeButton';
-import { getProfileInfo } from '../../repository/ProfileRepository/ProfileRepo';
 import { getUserData } from '../../repository/CommonRepository';
-import { postBulkOrderEnquiry } from '../../repository/ProfileRepository/BulkOrderEnquiryRepo';
 import FIcon from 'react-native-vector-icons/FontAwesome';
 import EIcon from 'react-native-vector-icons/Entypo';
-import { launchCamera, launchImageLibrary } from 'react-native-image-picker';
+import { launchImageLibrary } from 'react-native-image-picker';
 import { postRFQUploadRepo } from '../../repository/ProfileRepository/RFQUploadRepo';
 
-
-const { width, height } = Dimensions.get('screen');
 
 export default function BulkOrderEnquiry(props) {
 

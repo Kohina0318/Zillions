@@ -1,7 +1,6 @@
-import React, { Component, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   Image,
-  StatusBar,
   Text,
   View,
   Dimensions,
@@ -14,10 +13,9 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import CIcon from 'react-native-vector-icons/MaterialIcons';
 import BadgeIcon from './BadgeIcon';
 import { styles } from '../../../assets/css/HeaderCss/HeaderStyle'
-import { getCartData } from '../../../repository/CommonRepository';
 import { getCartProductList } from '../../../repository/OrderProcessRepository/CartListRepo';
 import { store } from '../../../../App';
-const { width, height } = Dimensions.get('screen');
+const { width } = Dimensions.get('screen');
 
 export default function Header(props) {
   const navigation = useNavigation();

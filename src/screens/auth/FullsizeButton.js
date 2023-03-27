@@ -6,10 +6,7 @@ import {
   StyleSheet,
 } from 'react-native';
 import React from 'react';
-import {Colors} from '../../assets/config/Colors';
 import {FontFamily} from '../../assets/fonts/FontFamily';
-import MCIcon from 'react-native-vector-icons/MaterialIcons';
-import MCI from 'react-native-vector-icons/MaterialCommunityIcons';
 import {useSelector} from 'react-redux';
 import {MyThemeClass} from '../../components/Theme/ThemeDarkLightColor';
 

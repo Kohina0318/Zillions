@@ -1,9 +1,8 @@
-import React, {Component} from 'react';
+import React, {} from 'react';
 import {View, Text, StyleSheet} from 'react-native';
 import Icon from 'react-native-vector-icons/Feather';
 import { MyThemeClass } from '../../Theme/ThemeDarkLightColor';
 import {useSelector} from 'react-redux';
-import { Colors as Color } from '../../../assets/config/Colors';
 
 import {TouchableOpacity} from 'react-native-gesture-handler';
 

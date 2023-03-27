@@ -1,19 +1,16 @@
-import React, {useEffect, useState} from 'react';
+import React, { useState} from 'react';
 import {
-  TouchableOpacity,
+
   View,
   FlatList,
-  Text,
-  Image,
   Dimensions,
 } from 'react-native';
 import {styles} from '../../../../assets/css/SearchCss/searchStyle';
 import {MyThemeClass} from '../../../Theme/ThemeDarkLightColor';
 import {useSelector} from 'react-redux';
 import {CheckBox} from '@rneui/themed';
-import { onChange } from 'react-native-reanimated';
 
-const {width, height} = Dimensions.get('screen');
+const {width} = Dimensions.get('screen');
 
 const data = [
   {

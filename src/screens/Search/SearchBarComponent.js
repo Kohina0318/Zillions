@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import {View,TextInput,TouchableOpacity, ActivityIndicator }from 'react-native';
 import { styles } from '../../assets/css/SearchCss/searchStyle';
 import Icon from 'react-native-vector-icons/Ionicons';

@@ -1,10 +1,8 @@
-import React, {useState, useEffect} from 'react';
-import {View, Text, Dimensions, TouchableOpacity} from 'react-native';
+import React, {} from 'react';
+import {View, Text} from 'react-native';
 import {useSelector} from 'react-redux';
 import {MyThemeClass} from '../../../Theme/ThemeDarkLightColor';
 import {styles} from '../../../../assets/css/OrderCss/OrderStyle';
-
-const {width, height} = Dimensions.get('screen');
 
 export default function OrderHistoryAddressComp(props) {
   const mode = useSelector(state => state.mode);

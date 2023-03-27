@@ -1,10 +1,10 @@
-import React, {useState} from 'react';
-import {Modal, View, Text, TouchableOpacity, Image} from 'react-native';
+import React, { useState } from 'react';
+import { Modal, View, Text, TouchableOpacity, Image } from 'react-native';
 import Video from 'react-native-video';
-import {useNavigation} from '@react-navigation/native';
-import {MyThemeClass} from '../../Theme/ThemeDarkLightColor';
-import {useSelector} from 'react-redux';
-import {styles} from '../../../assets/css/ModelsCss/SucessModelStyle';
+import { useNavigation } from '@react-navigation/native';
+import { MyThemeClass } from '../../Theme/ThemeDarkLightColor';
+import { useSelector } from 'react-redux';
+import { styles } from '../../../assets/css/ModelsCss/SucessModelStyle';
 
 export default VerifyModel = props => {
   const mode = useSelector(state => state.mode);
@@ -20,25 +20,25 @@ export default VerifyModel = props => {
   return (
     <Modal animationType="slide" transparent={true} visible={modalVisible}>
       <View style={styles.centeredView}>
-        <View style={{...styles.modalView, backgroundColor: themecolor.TXTWHITE1}}>
+        <View style={{ ...styles.modalView, backgroundColor: themecolor.TXTWHITE1 }}>
           <View style={styles.ModalViewWidth}>
             <View style={styles.ModelVideoCenter}>
-            { mode=='dark'?
-            <Image
-              source={require('../../../assets/images/green-tick.gif')}
-              style={styles.backgroundVideo}
-              resizeMode={'contain'}
-            />:
-              <Video
-                source={require('../../../assets/images/Videos/confirmation.mp4')}
-                style={styles.backgroundVideo}
-                muted={true}
-                resizeMode={'contain'}
-                repeat={true}
-                rate={2.0}
-                ignoreSilentSwitch={'obey'}
-              />}
-              <Text allowFontScaling={false} style={{...styles.submittext, color: themecolor.TXTWHITE}}>
+              {mode == 'dark' ?
+                <Image
+                  source={require('../../../assets/images/green-tick.gif')}
+                  style={styles.backgroundVideo}
+                  resizeMode={'contain'}
+                /> :
+                <Video
+                  source={require('../../../assets/images/Videos/confirmation.mp4')}
+                  style={styles.backgroundVideo}
+                  muted={true}
+                  resizeMode={'contain'}
+                  repeat={true}
+                  rate={2.0}
+                  ignoreSilentSwitch={'obey'}
+                />}
+              <Text allowFontScaling={false} style={{ ...styles.submittext, color: themecolor.TXTWHITE }}>
                 {props.title}
               </Text>
             </View>
@@ -53,7 +53,7 @@ export default VerifyModel = props => {
                     ...styles.ModelDoneButton,
                     backgroundColor: themecolor.BACKICON,
                   }}>
-                  <Text allowFontScaling={false} style={{...styles.textStyleDone,color:themecolor.TXTWHITE1}}>Done</Text>
+                  <Text allowFontScaling={false} style={{ ...styles.textStyleDone, color: themecolor.TXTWHITE1 }}>Done</Text>
                 </View>
               </TouchableOpacity>
             </View>

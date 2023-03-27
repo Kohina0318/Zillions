@@ -1,11 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {
   View,
-  Text,
-  StatusBar,
-  Appearance,
-  Dimensions,
-  ScrollView,
   BackHandler
 } from 'react-native';
 import {useSelector} from 'react-redux';
@@ -17,8 +12,6 @@ import Header from '../../components/shared/header/Header';
 import {SubCategoryDataList} from '../../components/shared/FlateLists/CategoryFlatList/SubCategoryDataList';
 import LoadingFullScreen from '../../components/shared/Loader/LoadingFullScreen';
 import NoDataMsg from '../../components/shared/NoData/NoDataMsg';
-
-const {width, height} = Dimensions.get('screen');
 
 export default function SubCategories(props) {
 

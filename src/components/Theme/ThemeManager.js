@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { StatusBar,Appearance,AppearanceProvider } from "react-native";
-// import {  AppearanceProvider } from "react-native-appearance";
 import { ThemeContext, ThemeProvider } from "styled-components/native";
 import darkTheme from './Dark';
 import lightTheme from './Light';

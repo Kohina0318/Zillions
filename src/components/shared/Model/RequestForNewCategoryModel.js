@@ -1,15 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, Modal, Dimensions, TextInput } from 'react-native';
+import { View, Text, Modal, TextInput } from 'react-native';
 import { MyThemeClass } from '../../Theme/ThemeDarkLightColor';
 import { useSelector } from 'react-redux';
 import { styles } from '../../../assets/css/CategoryCss/ProductDetailStyle';
 import HalfSizeButton from '../button/halfSizeButton';
 import { useToast } from 'react-native-toast-notifications';
 import { postRequestForNewCategory } from '../../../repository/CategoryRepository/AllProductCategoryRep';
-import { getProfileInfo } from '../../../repository/ProfileRepository/ProfileRepo';
 import { getUserData } from '../../../repository/CommonRepository';
-
-const { width } = Dimensions.get('window');
 
 export default function RequestForNewCategoryModel(props) {
 
@@ -33,7 +30,7 @@ export default function RequestForNewCategoryModel(props) {
                 if (userData == null || userData == '' || userData == undefined) {
                     alert(userData)
                     setUserData([])
-               } else {
+                } else {
                     setUserData(userData);
                     var nameUser = `${userData[0].username.replace(/\s+/g, '')} ${userData[0].surname.replace(/\s+/g, '')}`
                     setName(nameUser);

@@ -1,14 +1,11 @@
-import React, { useEffect, useState } from 'react';
-import { TouchableOpacity, View, FlatList, Text, Dimensions } from 'react-native';
+import React, { } from 'react';
+import { TouchableOpacity, View, FlatList, Text} from 'react-native';
 import { MyThemeClass } from '../../../Theme/ThemeDarkLightColor';
 import { useSelector } from 'react-redux';
-import { useNavigation } from '@react-navigation/native';
 import { styles } from '../../../../assets/css/CategoryCss/ProductDetailStyle';
 
-const { width, height } = Dimensions.get('screen');
-
 function ProductDetailSizeList({ index, touch, selected, onChange, item, themecolor, setSelectedSize,setSelectedSizePrice }) {
-  const navigation = useNavigation();
+
 
   const handleClick = (index, size , amount) => {
     onChange(index)
