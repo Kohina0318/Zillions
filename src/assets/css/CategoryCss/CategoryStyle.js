@@ -29,7 +29,7 @@ const CategoryStyle = StyleSheet.create({
     alignSelf: 'center',
     alignItems: 'center',
   },
-  margleft15: {marginLeft: 15, width: width * 0.58,  },
+  margleft15: {marginLeft: 15, width: width * 0.56, },
   txt: {
     fontSize: 15,
     fontFamily: FontFamily.Popinssemibold,
