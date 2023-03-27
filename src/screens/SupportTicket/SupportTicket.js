@@ -1,11 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import {
   View,
-  Text,
-  Dimensions,
   BackHandler,
-  TouchableOpacity,
-  TextInput,
 } from 'react-native';
 import { useSelector } from 'react-redux';
 import { MyThemeClass } from '../../components/Theme/ThemeDarkLightColor';
@@ -13,18 +9,15 @@ import { useToast } from 'react-native-toast-notifications';
 import { styles } from '../../assets/css/ProfileCss/SupportTicketStyle';
 import RegisterLoginHeader from '../../components/shared/header/RegisterLoginHeader';
 import LoadingFullScreen from '../../components/shared/Loader/LoadingFullScreen';
-import { ScrollView } from 'react-native-gesture-handler';
 import HalfSizeButton from '../../components/shared/button/halfSizeButton';
 import Feather from 'react-native-vector-icons/Feather';
 import {
   getSupportTicket,
   postCreateSupportTicket,
 } from '../../repository/SupportTicketRepository/SupportTicketRepo';
-import VerifyModel from '../../components/shared/Model/VerifyModel';
 import CreateTicketModel from '../../components/shared/Model/CreateTicketModel';
 import { SupportTicketDataList } from '../../components/shared/FlateLists/SupportTicket/SupportTicketDataList';
 import NoDataMsg from '../../components/shared/NoData/NoDataMsg';
-const { width, height } = Dimensions.get('screen');
 
 export default function SupportTicket(props) {
   function handleBackButtonClick() {

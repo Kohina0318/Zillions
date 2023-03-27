@@ -1,4 +1,4 @@
-import React, {useRef, useState, useEffect} from 'react';
+import React, {useRef, useState} from 'react';
 import {
   View,
   Text,
@@ -13,22 +13,17 @@ import {useNavigation} from '@react-navigation/native';
 import {styles} from '../../assets/css/SearchCss/searchStyle';
 import SearchInput from './SearchBarComponent';
 import {useToast} from 'react-native-toast-notifications';
-import {FilterFlatList} from '../../components/shared/FlateLists/SearchFlatList/FilterFlatList';
-import {data} from './SearchData';
 import Header from '../../components/shared/header/Header';
 import LoadingFullScreen from '../../components/shared/Loader/LoadingFullScreen';
 import {SortSlider} from './SortSlider';
 import EN from 'react-native-vector-icons/MaterialCommunityIcons';
 import RBSheet from 'react-native-raw-bottom-sheet';
-import {getBrands} from '../../repository/DashboardRepository/AllDashboardRep';
-import {getCategories} from '../../repository/CategoryRepository/AllProductCategoryRep';
 import HalfSizeButton from '../../components/shared/button/halfSizeButton';
 import { getSearchProducts } from '../../repository/SearchRepository/SearchRepo';
 import { ProductDataList } from '../../components/shared/FlateLists/CategoryFlatList/ProductDataList';
-import { FilterBrandFlatList,FilterCategoryFlatList } from '../../components/shared/FlateLists/SearchFlatList/FilterFlatList';
 import { OrderFlatList,PriceFlatList } from '../../components/shared/FlateLists/SearchFlatList/OrderAndPriceFlatList';
 
-const {width, height} = Dimensions.get('window');
+const { height} = Dimensions.get('window');
 
 export default function Search(props) {
   const wait = timeout => {

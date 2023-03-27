@@ -1,11 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState} from 'react';
 import {
   View,
-  Text,
-  StatusBar,
-  Appearance,
-  Dimensions,
-  ScrollView,
   Alert,
 } from 'react-native';
 import { useSelector } from 'react-redux';
@@ -19,7 +14,6 @@ import LoadingFullScreen from '../../components/shared/Loader/LoadingFullScreen'
 import NoDataMsg from '../../components/shared/NoData/NoDataMsg';
 import { useNavigation } from '@react-navigation/native';
 import { useToast } from 'react-native-toast-notifications';
-const { width, height } = Dimensions.get('screen');
 
 export default function WishList(props) {
 

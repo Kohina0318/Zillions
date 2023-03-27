@@ -1,11 +1,9 @@
-import React, {useState} from 'react';
-import {View, Text, Modal, Dimensions, TextInput} from 'react-native';
-import {MyThemeClass} from '../../Theme/ThemeDarkLightColor';
-import {useSelector} from 'react-redux';
-import {styles} from '../../../assets/css/ProfileCss/AddressStyle';
+import React, { useState } from 'react';
+import { View, Text, Modal, TextInput } from 'react-native';
+import { MyThemeClass } from '../../Theme/ThemeDarkLightColor';
+import { useSelector } from 'react-redux';
+import { styles } from '../../../assets/css/ProfileCss/AddressStyle';
 import HalfSizeButton from '../button/halfSizeButton';
-
-const {width} = Dimensions.get('window');
 
 export default function AddAddressModel(props) {
   const mode = useSelector(state => state.mode);
@@ -25,10 +23,10 @@ export default function AddAddressModel(props) {
               ...styles.modelContainer,
               backgroundColor: themecolor.THEMECOLOR1,
             }}>
-            <View style={{...styles.modelInner}}>
-              <View style={{...styles.modelHeader}}>
+            <View style={{ ...styles.modelInner }}>
+              <View style={{ ...styles.modelHeader }}>
                 <Text
-                 allowFontScaling={false}
+                  allowFontScaling={false}
                   style={{
                     ...styles.modelHeading,
                     color: themecolor.TXTWHITE,
@@ -37,7 +35,7 @@ export default function AddAddressModel(props) {
                 </Text>
               </View>
 
-              <View style={{...styles.Mv5}} />
+              <View style={{ ...styles.Mv5 }} />
 
               <View
                 style={{
@@ -46,7 +44,7 @@ export default function AddAddressModel(props) {
                   backgroundColor: themecolor.BOXBORDERCOLOR,
                 }}>
                 <TextInput
-                 allowFontScaling={false}
+                  allowFontScaling={false}
                   placeholder={'Address*'}
                   placeholderTextColor={themecolor.TXTGREYS}
                   style={{
@@ -57,7 +55,7 @@ export default function AddAddressModel(props) {
                 />
               </View>
 
-              <View style={{...styles.Mv5}} />
+              <View style={{ ...styles.Mv5 }} />
 
               <View
                 style={{
@@ -66,7 +64,7 @@ export default function AddAddressModel(props) {
                   backgroundColor: themecolor.BOXBORDERCOLOR,
                 }}>
                 <TextInput
-                 allowFontScaling={false}
+                  allowFontScaling={false}
                   placeholder={'City*'}
                   placeholderTextColor={themecolor.TXTGREYS}
                   style={{
@@ -77,7 +75,7 @@ export default function AddAddressModel(props) {
                 />
               </View>
 
-              <View style={{...styles.Mv5}} />
+              <View style={{ ...styles.Mv5 }} />
 
               <View
                 style={{
@@ -86,7 +84,7 @@ export default function AddAddressModel(props) {
                   backgroundColor: themecolor.BOXBORDERCOLOR,
                 }}>
                 <TextInput
-                 allowFontScaling={false}
+                  allowFontScaling={false}
                   placeholder={'Postal Code*'}
                   placeholderTextColor={themecolor.TXTGREYS}
                   style={{
@@ -99,7 +97,7 @@ export default function AddAddressModel(props) {
                 />
               </View>
 
-              <View style={{marginVertical: 5}} />
+              <View style={{ marginVertical: 5 }} />
 
               <View
                 style={{
@@ -108,7 +106,7 @@ export default function AddAddressModel(props) {
                   backgroundColor: themecolor.BOXBORDERCOLOR,
                 }}>
                 <TextInput
-                 allowFontScaling={false}
+                  allowFontScaling={false}
                   placeholder={'State*'}
                   placeholderTextColor={themecolor.TXTGREYS}
                   style={{
@@ -119,7 +117,7 @@ export default function AddAddressModel(props) {
                 />
               </View>
 
-              <View style={{...styles.Mv5}} />
+              <View style={{ ...styles.Mv5 }} />
 
               <View
                 style={{
@@ -128,7 +126,7 @@ export default function AddAddressModel(props) {
                   backgroundColor: themecolor.BOXBORDERCOLOR,
                 }}>
                 <TextInput
-                 allowFontScaling={false}
+                  allowFontScaling={false}
                   placeholder={'Country*'}
                   placeholderTextColor={themecolor.TXTGREYS}
                   style={{
@@ -139,7 +137,7 @@ export default function AddAddressModel(props) {
                 />
               </View>
 
-              <View style={{...styles.Mv5}} />
+              <View style={{ ...styles.Mv5 }} />
 
               <View
                 style={{
@@ -148,7 +146,7 @@ export default function AddAddressModel(props) {
                   backgroundColor: themecolor.BOXBORDERCOLOR,
                 }}>
                 <TextInput
-                 allowFontScaling={false}
+                  allowFontScaling={false}
                   placeholder={'Mobile No.*'}
                   keyboardType="numeric"
                   maxLength={10}
@@ -162,8 +160,8 @@ export default function AddAddressModel(props) {
               </View>
             </View>
 
-            <View style={{...styles.modelViewButton}}>
-              <View style={{width: '48%'}}>
+            <View style={{ ...styles.modelViewButton }}>
+              <View style={{ width: '48%' }}>
                 <HalfSizeButton
                   title="Submit"
                   backgroundColor={themecolor.ADDTOCARTBUTTONCOLOR}
@@ -172,8 +170,8 @@ export default function AddAddressModel(props) {
                   onPress={props.onPress}
                 />
               </View>
-              <View style={{marginHorizontal: 6}} />
-              <View style={{width: '48%'}}>
+              <View style={{ marginHorizontal: 6 }} />
+              <View style={{ width: '48%' }}>
                 <HalfSizeButton
                   title="Cancel"
                   backgroundColor={'transparent'}
@@ -187,7 +185,7 @@ export default function AddAddressModel(props) {
               </View>
             </View>
 
-            <View style={{marginVertical: 5}} />
+            <View style={{ marginVertical: 5 }} />
           </View>
         </View>
       </Modal>

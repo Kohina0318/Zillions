@@ -1,16 +1,12 @@
-import React, { useState, useEffect } from 'react';
+import React, {  } from 'react';
 import {
     View,
     Text,
-    Dimensions,
     Image
 } from 'react-native';
 import { useSelector } from 'react-redux';
 import { MyThemeClass } from '../../../Theme/ThemeDarkLightColor';
-import FAIcon from 'react-native-vector-icons/FontAwesome';
 import { styles } from '../../../../assets/css/CategoryCss/ProductDetailStyle';
-
-const { width, height } = Dimensions.get('screen');
 
 export default function ProductMoreDetailDeliveryDuComp(props) {
 

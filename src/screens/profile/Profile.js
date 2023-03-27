@@ -1,10 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import {
   View,
   Text,
-  StatusBar,
-  Appearance,
-  Dimensions,
   TouchableOpacity,
   ScrollView,
   Linking,
@@ -15,21 +12,16 @@ import { MyThemeClass } from '../../components/Theme/ThemeDarkLightColor';
 import { ProfileDataList } from '../../components/shared/FlateLists/Profile/ProfileDataFlatList';
 import Header from '../../components/shared/header/Header';
 import { data, data1 } from './ProfileData';
-import { Avatar } from '@rneui/themed';
 import { ProfileStyle } from '../../assets/css/ProfileCss/ProfileStyle';
 import { useFocusEffect, useNavigation } from '@react-navigation/native';
 import LoadingFullScreen from '../../components/shared/Loader/LoadingFullScreen';
 import { getProfileInfo } from '../../repository/ProfileRepository/ProfileRepo';
-import { getUserData } from '../../repository/CommonRepository';
 import { removeDatafromAsync } from '../../repository/AsyncStorageServices';
 import { postLogout } from '../../repository/AuthRepository/LogoutRepository';
 import { useToast } from 'react-native-toast-notifications';
 import HalfSizeButton from '../../components/shared/button/halfSizeButton';
 import AD from 'react-native-vector-icons/AntDesign';
 import { Image } from '@rneui/base';
-
-
-const { width, height } = Dimensions.get('screen');
 
 export default function Profile(props) {
 

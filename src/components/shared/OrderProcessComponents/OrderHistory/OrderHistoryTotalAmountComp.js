@@ -1,18 +1,13 @@
-import React, { useState, useEffect } from 'react';
+import React, { } from 'react';
 import {
     View,
     Text,
-    Dimensions,
-    TouchableOpacity
 } from 'react-native';
 import { useSelector } from 'react-redux';
 import { MyThemeClass } from '../../../Theme/ThemeDarkLightColor';
 import { styles } from '../../../../assets/css/OrderCss/OrderStyle';
 import FAIcon from 'react-native-vector-icons/FontAwesome';
 import moment from 'moment';
-
-
-const { width, height } = Dimensions.get('screen');
 
 export default function OrderHistoryTotalAmountComp(props) {
 
@@ -28,9 +23,9 @@ export default function OrderHistoryTotalAmountComp(props) {
         }
     }
 
-    var paymentStatus=[]
-    if(data.payment_status != undefined || data.payment_status != null ||data.payment_status != ''){
-    paymentStatus= JSON.parse(data.payment_status)
+    var paymentStatus = []
+    if (data.payment_status != undefined || data.payment_status != null || data.payment_status != '') {
+        paymentStatus = JSON.parse(data.payment_status)
     }
 
 
@@ -60,31 +55,31 @@ export default function OrderHistoryTotalAmountComp(props) {
 
             {paymentStatus.length > 0 ?
                 <View style={{ ...styles.flexDirView1, }}>
-                    <View style={{ ...styles.width35p,}}>
+                    <View style={{ ...styles.width35p, }}>
                         <Text allowFontScaling={false} style={{ ...styles.txt1, color: themecolor.TXTWHITE }}>
                             Payment Status
                         </Text>
                     </View>
 
-                    <View style={{ ...styles.width65p,}}>
+                    <View style={{ ...styles.width65p, }}>
                         <Text allowFontScaling={false} style={{ ...styles.txt1, color: themecolor.TXTWHITE }}>
                             {paymentStatus[0].status}
                         </Text>
                     </View>
                 </View>
-         : <></>} 
+                : <></>}
 
 
             <View style={{ ...styles.marTop }} />
 
             <View style={{ ...styles.flexDirView1, }}>
-                <View style={{ ...styles.width35p,}}>
+                <View style={{ ...styles.width35p, }}>
                     <Text allowFontScaling={false} style={{ ...styles.txt1, color: themecolor.TXTWHITE }}>
                         Payment Method
                     </Text>
                 </View>
 
-                <View style={{ ...styles.width65p,}}>
+                <View style={{ ...styles.width65p, }}>
                     <Text allowFontScaling={false} style={{ ...styles.txt1, color: themecolor.TXTWHITE }}>
                         {data.payment_type == "cash_on_delivery" ? "Cash on delivery" : data.payment_type}
                     </Text>
@@ -102,7 +97,7 @@ export default function OrderHistoryTotalAmountComp(props) {
             <View style={{ ...styles.mgT10 }} />
 
             <View style={{ ...styles.flexDirView1, }}>
-                <View  style={{ ...styles.width35p, }}>
+                <View style={{ ...styles.width35p, }}>
                     <Text allowFontScaling={false} style={{ ...styles.txt, color: themecolor.BACKICON }}>
                         Delivery Address
                     </Text>
@@ -111,7 +106,7 @@ export default function OrderHistoryTotalAmountComp(props) {
                 <View style={{ ...styles.width65p, }}>
                     <Text allowFontScaling={false} style={{ ...styles.txt, color: themecolor.BACKICON }}>
                         Order Details
-                    </Text> 
+                    </Text>
                 </View>
 
             </View>

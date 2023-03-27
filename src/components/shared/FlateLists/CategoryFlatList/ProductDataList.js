@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import {
   TouchableOpacity,
   View,
@@ -8,7 +8,6 @@ import {
   Dimensions,
   Alert
 } from 'react-native';
-import { Colors } from '../../../assets/config/Colors';
 import { ProductStyle } from '../../../../assets/css/CategoryCss/ProductStyle';
 import { MyThemeClass } from '../../../Theme/ThemeDarkLightColor';
 import { useSelector } from 'react-redux';
@@ -20,7 +19,7 @@ import { useToast } from 'react-native-toast-notifications';
 import { postAddOrRemoveWishlist } from '../../../../repository/WishListRepository/WishListRepo';
 import LoadingContent from '../../Loader/LoadingContent';
 
-const { width, height } = Dimensions.get('screen');
+const { width} = Dimensions.get('screen');
 
 function ProductDataFlateList({ item, themecolor }) {
   const navigation = useNavigation();

@@ -6,12 +6,10 @@ import {
   Appearance,
   Dimensions,
   TextInput,
-  TouchableOpacity,
   BackHandler
 } from 'react-native';
 import {useSelector} from 'react-redux';
 import {MyThemeClass} from '../../components/Theme/ThemeDarkLightColor';
-import {useNavigation} from '@react-navigation/native';
 import RegisterLoginHeader from '../../components/shared/header/RegisterLoginHeader';
 import {RegisterLoginStyles} from '../../assets/css/HeaderCss/RegisterLoginStyles';
 import Icon from 'react-native-vector-icons/MaterialIcons';
@@ -27,7 +25,6 @@ export default function ForgotPassword(props) {
   const mode = useSelector(state => state.mode);
   const themecolor = new MyThemeClass(mode).getThemeColor();
   const [showmodal, setShowmodal] = useState(false);
-  const navigation = useNavigation();
   const [email, setEmail] = useState('');
  
   const isDarkMode = Appearance.getColorScheme() === 'dark';

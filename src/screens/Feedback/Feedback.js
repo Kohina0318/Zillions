@@ -2,10 +2,8 @@ import React, { useState, useEffect } from 'react';
 import {
   View,
   Text,
-  Dimensions,
   BackHandler,
   TextInput,
-  TouchableOpacity,
   ScrollView
 } from 'react-native';
 import { useSelector } from 'react-redux';
@@ -16,11 +14,8 @@ import RegisterLoginHeader from '../../components/shared/header/RegisterLoginHea
 import LoadingFullScreen from '../../components/shared/Loader/LoadingFullScreen';
 import { useNavigation } from '@react-navigation/native';
 import HalfSizeButton from '../../components/shared/button/halfSizeButton';
-import { getProfileInfo } from '../../repository/ProfileRepository/ProfileRepo';
 import { getUserData } from '../../repository/CommonRepository';
 import { postFeedBack } from '../../repository/ProfileRepository/FeedBackRepo';
-
-const { width, height } = Dimensions.get('screen');
 
 export default function FeedBack(props) {
 

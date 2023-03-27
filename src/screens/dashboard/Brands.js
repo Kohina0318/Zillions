@@ -1,12 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import {
   View,
-  Text,
-  StatusBar,
-  Appearance,
-  Dimensions,
-  ScrollView,
-  BackHandler,
 } from 'react-native';
 import { useSelector } from 'react-redux';
 import { MyThemeClass } from '../../components/Theme/ThemeDarkLightColor';
@@ -14,12 +8,10 @@ import { useToast } from 'react-native-toast-notifications';
 import Header from '../../components/shared/header/Header';
 import { getBrands } from '../../repository/DashboardRepository/AllDashboardRep';
 import { styles } from '../../assets/css/BrandCss/BrandsStyle';
-import { useFocusEffect } from '@react-navigation/native';
 import LoadingFullScreen from '../../components/shared/Loader/LoadingFullScreen';
 import { BrandDataList } from '../../components/shared/FlateLists/DashboardFlatList/BrandFlatList';
 import NoDataMsg from '../../components/shared/NoData/NoDataMsg';
 
-const { width, height } = Dimensions.get('screen');
 
 export default function Brands(props) {
   const toast = useToast();

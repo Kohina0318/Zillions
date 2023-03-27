@@ -1,9 +1,9 @@
-import React, {useState} from 'react';
-import {Modal, View, Text, TouchableOpacity, Image} from 'react-native';
-import {useNavigation} from '@react-navigation/native';
-import {MyThemeClass} from '../../Theme/ThemeDarkLightColor';
-import {useSelector} from 'react-redux';
-import {styles} from '../../../assets/css/ModelsCss/SucessModelStyle';
+import React, { useState } from 'react';
+import { Modal, View, Text, TouchableOpacity, Image } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
+import { MyThemeClass } from '../../Theme/ThemeDarkLightColor';
+import { useSelector } from 'react-redux';
+import { styles } from '../../../assets/css/ModelsCss/SucessModelStyle';
 
 export default SuccessModel = props => {
   const mode = useSelector(state => state.mode);
@@ -19,18 +19,18 @@ export default SuccessModel = props => {
   return (
     <Modal animationType="slide" transparent={true} visible={modalVisible}>
       <View style={styles.centeredView}>
-        <View style={{...styles.modalView, backgroundColor: themecolor.RB2}}>
+        <View style={{ ...styles.modalView, backgroundColor: themecolor.RB2 }}>
           <View style={styles.ModalViewWidth}>
             <View style={styles.ModelVideoCenter}>
               <Image
                 style={{
                   resizeMode: 'contain',
-                    height: 250,
-                    width:300
+                  height: 250,
+                  width: 300
                 }}
                 source={require('../../../assets/images/successEmailSend.gif')}
               />
-              <Text allowFontScaling={false} style={{...styles.submittext, color: themecolor.TXTWHITE}}>
+              <Text allowFontScaling={false} style={{ ...styles.submittext, color: themecolor.TXTWHITE }}>
                 {props.title}
               </Text>
             </View>
@@ -45,7 +45,7 @@ export default SuccessModel = props => {
                     ...styles.ModelDoneButton,
                     backgroundColor: themecolor.ADDTOCARTBUTTONCOLOR,
                   }}>
-                  <Text allowFontScaling={false} style={{...styles.textStyleDone}}>Done</Text>
+                  <Text allowFontScaling={false} style={{ ...styles.textStyleDone }}>Done</Text>
                 </View>
               </TouchableOpacity>
             </View>

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import {
   TouchableOpacity,
   View,
@@ -7,15 +7,12 @@ import {
   Image,
   Dimensions,
 } from 'react-native';
-import { Colors } from '../../../assets/config/Colors';
 import { CategoryStyle } from '../../../../assets/css/CategoryCss/CategoryStyle';
 import { MyThemeClass } from '../../../Theme/ThemeDarkLightColor';
 import { useSelector } from 'react-redux';
 import FontAwesome from 'react-native-vector-icons/FontAwesome'
 import { useNavigation } from '@react-navigation/native';
 import LoadingContent from '../../Loader/LoadingContent';
-
-const { width } = Dimensions.get('screen');
 
 function SubCategoryDataFlateList({ item, themecolor }) {
 

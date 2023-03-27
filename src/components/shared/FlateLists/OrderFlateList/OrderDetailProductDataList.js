@@ -5,27 +5,18 @@ import {
   FlatList,
   Text,
   Image,
-  Dimensions,
-  Alert,
 } from 'react-native';
 import {styles} from '../../../../assets/css/OrderCss/OrderStyle';
 import {MyThemeClass} from '../../../Theme/ThemeDarkLightColor';
 import {useSelector} from 'react-redux';
 import {useNavigation} from '@react-navigation/native';
 import FAIcon from 'react-native-vector-icons/FontAwesome';
-import {useToast} from 'react-native-toast-notifications';
-
-
-const {width} = Dimensions.get('screen');
 
 function OrderDetailProductDataFlateList({
   item,
   themecolor,
-  refresh,
-  setRefresh,
 }) {
 
-  const toast = useToast();
   const navigation = useNavigation();
 
   var optionData = item.option;

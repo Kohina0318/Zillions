@@ -1,27 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import {
   View,
-  Text,
-  StatusBar,
-  Appearance,
-  Dimensions,
-  TextInput,
   BackHandler,
 } from 'react-native';
-import { useSelector } from 'react-redux';
-import { MyThemeClass } from '../../components/Theme/ThemeDarkLightColor';
-import { useNavigation } from '@react-navigation/native';
-import Header from '../../components/shared/header/Header';
-import { styles } from '../../assets/css/OrderCss/OrderStyle';
-import { OrderDataList } from '../../components/shared/FlateLists/OrderFlateList/OrderDataList';
+import {useSelector} from 'react-redux';
+import {MyThemeClass} from '../../components/Theme/ThemeDarkLightColor';
+import {styles} from '../../assets/css/OrderCss/OrderStyle';
+import {OrderDataList} from '../../components/shared/FlateLists/OrderFlateList/OrderDataList';
 import Search from '../../components/shared/search/Search';
 import { getOrderlist } from '../../repository/OrderRepository/OrderRepo';
 import LoadingFullScreen from '../../components/shared/Loader/LoadingFullScreen';
 import RegisterLoginHeader from '../../components/shared/header/RegisterLoginHeader';
 import NoDataMsg from '../../components/shared/NoData/NoDataMsg';
 import { useToast } from 'react-native-toast-notifications';
-
-const { width, height } = Dimensions.get('screen');
 
 export default function Order(props) {
   function handleBackButtonClick() {

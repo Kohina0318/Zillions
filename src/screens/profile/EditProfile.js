@@ -2,11 +2,8 @@ import React, { useEffect, useState } from 'react';
 import {
   View,
   Text,
-  Dimensions,
   BackHandler,
-  TouchableOpacity,
   TextInput,
-  Alert,
   ToastAndroid,
   ScrollView
 } from 'react-native';
@@ -22,8 +19,6 @@ import VerifyModel from '../../components/shared/Model/VerifyModel';
 import { getProfileInfo } from '../../repository/ProfileRepository/ProfileRepo';
 import { useNavigation } from '@react-navigation/native';
 import { navigateToClearStack } from '../../navigations/NavigationDrw/NavigationService';
-
-const { width, height } = Dimensions.get('screen');
 
 export default function EditProfile(props) {
   function handleBackButtonClick() {

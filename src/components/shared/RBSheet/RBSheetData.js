@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { } from 'react';
 import RBSheet from 'react-native-raw-bottom-sheet';
 import { View, Text, TouchableOpacity, Dimensions } from 'react-native';
 import NumericInput from 'react-native-numeric-input';
@@ -7,11 +7,9 @@ import { ProductDetailSizeFlatList } from '../FlateLists/CategoryFlatList/Produc
 import { styles } from '../../../assets/css/CategoryCss/ProductDetailStyle';
 import { useSelector } from 'react-redux';
 import { MyThemeClass } from '../../Theme/ThemeDarkLightColor';
-import FullsizeButton from '../../../screens/auth/FullsizeButton';
-import { useNavigation } from '@react-navigation/native';
 import HalfSizeButton from '../button/halfSizeButton';
 
-const { width, height } = Dimensions.get('window');
+const { width } = Dimensions.get('window');
 
 export const RBSheetData = props => {
   const mode = useSelector(state => state.mode);

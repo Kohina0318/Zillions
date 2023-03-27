@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {} from 'react';
 import {
   TouchableOpacity,
   View,
@@ -7,17 +7,15 @@ import {
   Image,
   Dimensions,
 } from 'react-native';
-import {Colors} from '../../../assets/config/Colors';
 import { ProductStyle } from '../../../../assets/css/CategoryCss/ProductStyle';
 import {MyThemeClass} from '../../../Theme/ThemeDarkLightColor';
 import {useSelector} from 'react-redux';
-import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import {useNavigation} from '@react-navigation/native';
 import StarRating from 'react-native-star-rating';
 import FAIcon from 'react-native-vector-icons/FontAwesome';
 
 
-const {width, height} = Dimensions.get('screen');
+const {width} = Dimensions.get('screen');
 
 function DashboardProductDataFlateList({item, themecolor}) {
   const navigation = useNavigation();

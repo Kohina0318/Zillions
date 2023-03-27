@@ -1,25 +1,18 @@
-import React, { useState } from 'react';
+import React, {  } from 'react';
 import {
   View,
   Text,
-  StatusBar,
-  Appearance,
-  Dimensions,
   TouchableOpacity
 } from 'react-native';
 import { useSelector } from 'react-redux';
 import { MyThemeClass } from '../../Theme/ThemeDarkLightColor';
-import { useNavigation } from '@react-navigation/native';
 import CIcon from 'react-native-vector-icons/MaterialIcons';
 import {styles} from '../../../assets/css/HeaderCss/HeaderStyle';
-const { width, height } = Dimensions.get('screen');
 
 export default function RegisterLoginHeader(props) {
   const mode = useSelector(state => state.mode);
   const themecolor = new MyThemeClass(mode).getThemeColor()
-  const navigation = useNavigation()
 
-  const isDarkMode = Appearance.getColorScheme() === 'dark';
 
   return (
     <>

@@ -1,23 +1,20 @@
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import {
   TouchableOpacity,
   View,
   FlatList,
   Text,
-  Image,
   Dimensions,
 } from 'react-native';
 import {styles} from '../../../../assets/css/ProfileCss/SupportTicketStyle';
 import {MyThemeClass} from '../../../Theme/ThemeDarkLightColor';
 import {useSelector} from 'react-redux';
-import {useNavigation} from '@react-navigation/native';
 import LoadingContent from '../../Loader/LoadingContent';
 
 const {width} = Dimensions.get('screen');
 
 function SupportTicketDataFlateList({item, themecolor}) {
-  const navigation = useNavigation();
-
+ 
   const d = new Date(item.time * 1000);
   const day = d.toLocaleString(d.getDate());
   var dateTime = [];

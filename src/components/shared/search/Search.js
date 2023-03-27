@@ -2,9 +2,6 @@ import React from 'react';
 import {
   View,
   Text,
-  StatusBar,
-  Appearance,
-  Dimensions,
   TextInput,
 } from 'react-native';
 import {useSelector} from 'react-redux';

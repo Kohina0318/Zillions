@@ -1,12 +1,8 @@
 import React from 'react';
 import Svg, {
-    SvgProps,
-    Path,
     Polygon,
     G,
-    Rect,
     Text,
-    Line,
   } from 'react-native-svg';
 import { Colors } from '../../../assets/config/Colors';
   

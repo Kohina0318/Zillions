@@ -1,13 +1,8 @@
 import React, {useState, useEffect} from 'react';
 import {
   View,
-  Text,
   StatusBar,
-  Appearance,
-  Dimensions,
   ScrollView,
-  TouchableOpacity,
-  Image,
 } from 'react-native';
 import {useSelector} from 'react-redux';
 import {MyThemeClass} from '../../components/Theme/ThemeDarkLightColor';
@@ -21,14 +16,12 @@ import {
 import {useToast} from 'react-native-toast-notifications';
 import {getCategories} from '../../repository/CategoryRepository/AllProductCategoryRep';
 import CarouselFile from '../../components/shared/Carousel/CarouselFile';
-import {Avatar} from '@rneui/themed';
-import {useFocusEffect, useNavigation} from '@react-navigation/native';
+import {useNavigation} from '@react-navigation/native';
 import {DashboardCategoryDataList} from '../../components/shared/FlateLists/DashboardFlatList/DashboardCategoryFlatList';
 import DashboardHeading from '../../components/shared/DashboardHeading/DashboardHeading';
 import {BrandDataList} from '../../components/shared/FlateLists/DashboardFlatList/BrandFlatList';
 import {DashboardProductDataList} from '../../components/shared/FlateLists/DashboardFlatList/DashboardProductDataList';
 import LoadingFullScreen from '../../components/shared/Loader/LoadingFullScreen';
-const {width, height} = Dimensions.get('screen');
 
 export default function Dashboard(props) {
   const toast = useToast();
