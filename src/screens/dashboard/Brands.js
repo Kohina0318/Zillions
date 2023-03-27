@@ -30,30 +30,31 @@ export default function Brands(props) {
   const [brandsData, setBrandsData] = useState([]);
   const [isLoading, setIsLoading] = React.useState(false);
 
-  const handleBrands = async (value) => {
+  const [getOffset, setOffset] = React.useState(0);
+
+
+  const handleBrands = async () => {
     try {
-      var body=new FormData()
-      body.append('limit',"15")
-      if(value==undefined)
-      {
-        body.append('offset',0) 
-      }
-      else { body.append('offset', value) }
+      var body = new FormData()
+      body.append('limit', "15")
+      body.append('offset', getOffset)
+
       var res = await getBrands(body);
-      if(brandsData==[]||brandsData==null)
-     { setBrandsData(res.data);}
-     else{
-      setIsLoading(true)
-      var temp = res.data
-      if(temp.length==0)
-      {
-        setIsLoading(false)
+
+      if (res.status === true) {
+        if (res.data.length > 0) {
+          setIsLoading(true)
+          setOffset(getOffset + 15)
+          var temp1 = brandsData.concat(res.data)
+          setBrandsData(temp1);
+        } else {
+          setIsLoading(false)
+        }
+        setLoader(false);
       }
-      else
-     { var temp1 =brandsData.concat(temp)
-      setBrandsData(temp1);}
-     }
-      setLoader(false);
+      else{
+        setLoader(false)
+      }
     } catch (e) {
       console.log('errrror in..handleBrands page-->', e);
       setLoader(false);
@@ -89,7 +90,7 @@ export default function Brands(props) {
               data={brandsData}
               numColumns={3}
               horizontal={false}
-              handleBrands={(value) => handleBrands(value)}
+              handleBrands={handleBrands}
               isLoading={isLoading}
             />
           ) : (

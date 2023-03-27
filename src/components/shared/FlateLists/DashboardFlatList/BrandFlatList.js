@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   TouchableOpacity,
   View,
@@ -7,22 +7,22 @@ import {
   Image,
   Dimensions,
 } from 'react-native';
-import {Colors} from '../../../../assets/config/Colors';
-import {styles} from '../../../../assets/css/BrandCss/BrandsStyle';
-import {MyThemeClass} from '../../../Theme/ThemeDarkLightColor';
-import {useSelector} from 'react-redux';
+import { Colors } from '../../../../assets/config/Colors';
+import { styles } from '../../../../assets/css/BrandCss/BrandsStyle';
+import { MyThemeClass } from '../../../Theme/ThemeDarkLightColor';
+import { useSelector } from 'react-redux';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
-import {useNavigation} from '@react-navigation/native';
+import { useNavigation } from '@react-navigation/native';
 import LoadingContent from '../../Loader/LoadingContent';
 
-const {width, height} = Dimensions.get('screen');
+const { width, height } = Dimensions.get('screen');
 
-function BrandDataFlatList({item, themecolor}) {
+function BrandDataFlatList({ item, themecolor }) {
   const navigation = useNavigation();
 
   return (
     <TouchableOpacity activeOpacity={0.8}
-    onPress={() => navigation.navigate('Products',{Id:item.brand_id,Name:item.brand_name,speciality:"brand"})}
+      onPress={() => navigation.navigate('Products', { Id: item.brand_id, Name: item.brand_name, speciality: "brand" })}
     >
       <View
         style={{
@@ -41,14 +41,14 @@ function BrandDataFlatList({item, themecolor}) {
             margin: 3,
             borderWidth: 4,
             borderColor: '#E9E9E9',
-            borderWidth:0.5,
+            borderWidth: 0.5,
             borderRadius: 5,
             backgroundColor: '#FFF',
           }}>
           <Image
-            source={{uri: item.banner}}
+            source={{ uri: item.banner }}
             resizeMode="contain"
-            style={{width: 150, height: '60%'}}
+            style={{ width: 150, height: '60%' }}
           />
         </View>
         <View
@@ -59,7 +59,7 @@ function BrandDataFlatList({item, themecolor}) {
             alignItems: 'center',
           }}>
           <Text
-           allowFontScaling={false}
+            allowFontScaling={false}
             numberOfLines={1}
             style={{
               color: themecolor.TXTWHITE,
@@ -77,12 +77,11 @@ function BrandDataFlatList({item, themecolor}) {
 export function BrandDataList(props) {
   const mode = useSelector(state => state.mode);
   const themecolor = new MyThemeClass(mode).getThemeColor();
-   const[index,setIndex]=useState(15)
 
   return (
     <FlatList
       data={props.data}
-      renderItem={({item}) => (
+      renderItem={({ item }) => (
         <BrandDataFlatList item={item} themecolor={themecolor} />
       )}
       horizontal={props.horizontal}
@@ -91,13 +90,12 @@ export function BrandDataList(props) {
       showsHorizontalScrollIndicator={false}
       scrollEnabled={true}
       onEndReached={() => {
-        props.handleBrands(index);
-        setIndex(index+15)
+        props.handleBrands();
       }}
       ListFooterComponent={() => {
         if (props.isLoading) {
           return (
-            <LoadingContent/>
+            <LoadingContent />
           );
         } else {
           return null;

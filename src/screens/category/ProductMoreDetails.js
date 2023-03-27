@@ -33,7 +33,6 @@ import { postAddCartProduct } from '../../repository/OrderProcessRepository/AddT
 import ImageZoomerModel from '../../components/shared/Model/ImageZoomerModel';
 import ProductMoreDetailCustomerSupport from '../../components/shared/OrderProcessComponents/ProductDetails/ProductMoreDetailCustomerSupport';
 
-const { width, height } = Dimensions.get('window');
 
 export default function ProductMoreDetails(props) {
     function handleBackButtonClick() {
@@ -70,8 +69,7 @@ export default function ProductMoreDetails(props) {
     const [showRBSheet, setshowRBSheet] = useState('');
     const [image, setImage] = useState('');
     const [modalVisible, setModalVisible] = useState(false);
-    const [isLoading, setIsLoading] = React.useState(false);
-
+    
 
     const handleProductView = async () => {
         try {
@@ -263,11 +261,7 @@ export default function ProductMoreDetails(props) {
 
                                 {relatedProductData.length > 0 ? (
                                     <View
-                                        style={{
-                                            alignSelf: 'center',
-                                            justifyContent: 'flex-start',
-                                            width: width * 0.94,
-                                        }}>
+                                        style={{...styles.otherProductView}}>
                                         <Text
                                             allowFontScaling={false}
                                             style={{
@@ -361,10 +355,11 @@ export default function ProductMoreDetails(props) {
                                     <View style={{ width: '100%' }}>
                                         <HalfSizeButton
                                             title="Out of Stock"
-                                            icon={<MCIcon name="cart-off" size={16} color={'#fff'} />}
-                                            backgroundColor={themecolor.TEXTRED}
-                                            color={'#fff'}
+                                            icon={<MCIcon name="cart-off" size={16} color={themecolor.TEXTRED} />}
+                                            backgroundColor={'transparent'}
+                                            color={themecolor.TEXTRED}
                                             borderColor={themecolor.TEXTRED}
+                                            disabled={true}
                                         />
                                     </View>
                                 )}

@@ -57,27 +57,17 @@ export default function OrderDetails(props) {
   const [productDetailData, setProductDetailData] = useState([])
   const [shippingAddress, setShippingAddress] = useState({})
   const [deliveryStatus, setDeliveryStatus] = useState('delivered')
+  const [returnStatus, setReturnStatus] = useState('')
   const [showmodal, setShowmodal] = useState(false);
-  const [title, setTitle] = useState('Return Order');
-  const [disabled, setDisabled] = useState(false);
-
+ 
   const handleOrderView = async () => {
     try {
       var res = await getOrderView(props.route.params.SaleId);
       if (res.status === true) {
-        console.log("Order View in order Detail page", res.data)
-        if (res.data.delivery_status != undefined || res.data.delivery_status != null || res.data.delivery_status != '') {
-          var status = JSON.parse(res.data.delivery_status)
-          var Dstatus = status[0].status
-          // setDeliveryStatus(Dstatus);
-        }
-        if (res.data.return_status == "1" || res.data.return_status == 1) {
-          setTitle("Request Sent")
-          setDisabled(true)
-        }
         setData(res.data);
         setProductDetailData(res.data.product)
         setShippingAddress(res.data.address)
+        setReturnStatus(res.data.return_status)
         setLoader(false);
       }
       else {
@@ -100,26 +90,17 @@ export default function OrderDetails(props) {
 
   useEffect(() => {
     handleOrderView();
-  }, [title]);
+  }, [showmodal]);
 
 
   const handleReturnOrder = async () => {
     try {
       var res = await postReturnOrder(props.route.params.SaleId);
-      console.log("postReturnOrder....>",res)
       if (res.status === true) {
         setShowmodal(true)
-        setTitle('Request Sent');
-        setDisabled(true)
       }
       else {
-        toast.show("Sorry!,Your Request can't be processed", {
-          type: 'danger',
-          placement: 'bottom',
-          duration: 3000,
-          offset: 30,
-          animationType: 'slide-in',
-        });
+
       }
     }
     catch (e) {
@@ -205,15 +186,26 @@ export default function OrderDetails(props) {
             }}>
             <View style={{ ...styles.mainView }}>
               <View style={{ width: '100%' }}>
-                <HalfSizeButton
-                  title={deliveryStatus == "delivered" ? title : "Continue Shopping"}
-                  icon={" "}
-                  onPress={deliveryStatus == "delivered" ? (() => handleConfirmRetrun()) : (() => navigation.navigate("Dashboard"))}
-                  backgroundColor={'transparent'}
-                  color={deliveryStatus == "delivered" ? themecolor.TEXTRED : themecolor.BACKICON}
-                  borderColor={deliveryStatus == "delivered" ? themecolor.TEXTRED : themecolor.BACKICON}
-                  disabled={disabled}
-                />
+
+                {(returnStatus == '0') || (returnStatus == 0) ?
+                  <HalfSizeButton
+                    title={deliveryStatus == "delivered" ? "Return Order" : "Continue Shopping"}
+                    icon={" "}
+                    onPress={deliveryStatus == "delivered" ? (() => handleConfirmRetrun()) : (() => navigation.navigate("Dashboard"))}
+                    backgroundColor={'transparent'}
+                    color={deliveryStatus == "delivered" ? themecolor.TEXTRED : themecolor.BACKICON}
+                    borderColor={deliveryStatus == "delivered" ? themecolor.TEXTRED : themecolor.BACKICON}
+                  />
+                  :
+                  <HalfSizeButton
+                    title={'Request Sent Successfully'}
+                    icon={" "}
+                    backgroundColor={'transparent'}
+                    color={themecolor.BACKICON}
+                    borderColor={themecolor.BACKICON}
+                    disabled={true}
+                  />
+                }
               </View>
             </View>
           </View>
@@ -226,7 +218,8 @@ export default function OrderDetails(props) {
         <VerifyModel
           setShowmodal={setShowmodal}
           title={'Request Sent Successfully.'}
-          navigateTo=''
+          navigateTo='Order'
+          navigateFrom="OrderDetails"
         />
       )}
 

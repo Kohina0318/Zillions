@@ -55,35 +55,31 @@ export default function SupportTicket(props) {
   const [data, setData] = useState([]);
   const [isLoading, setIsLoading] = React.useState(false);
 
-  const handleAllMessages = async (value) => {
+  const [getOffset, setOffset] = React.useState(0);
+
+
+  const handleAllMessages = async () => {
     try {
       var body = new FormData()
       body.append('limit', "10")
-      if (value == undefined) {
-        body.append('offset', 0)
-      }
-      else { body.append('offset', value) }
-      const res = await getSupportTicket(body);
-      console.log(res.data)
-      if (res.status == true) {
-        if (data == [] || data == null) {
-          setData(res.data);
-        }
-        else {
-          setIsLoading(true)
-          var temp = res.data;
-          if (temp.length == 0) {
-            setIsLoading(false)
-          }
-          else {
-            var temp1 = data.concat(temp)
-            setData(temp1);
-          }
-        }
+      body.append('offset', getOffset)
 
+      const res = await getSupportTicket(body);
+      console.log("data.......>>>", res.data)
+
+      if (res.status === true) {
+        if (res.data.length > 0) {
+          setIsLoading(true)
+          setOffset(getOffset + 10)
+          var temp1 = data.concat(res.data)
+          setData(temp1);
+        } else {
+          setIsLoading(false)
+        }
         setLoader(false);
-      } else {
-        setLoader(false);
+      }
+      else {
+        setLoader(false)
       }
     } catch (e) {
       console.log('catch in ....support Ticket table data page', e);
@@ -100,6 +96,7 @@ export default function SupportTicket(props) {
 
 
   useEffect(() => {
+    setLoader(true);
     handleAllMessages();
   }, [refresh]);
 
@@ -127,7 +124,11 @@ export default function SupportTicket(props) {
         formdata.append('reply', message);
 
         const res = await postCreateSupportTicket(formdata);
+        console.log("handleCreateTicket.......>>>", res)
+
         if (res.status == true) {
+          setOffset(0);
+          setData([]);
           setRefresh(!refresh);
           setCreateTicketModal(false);
           toast.show('Create Ticket Successfully.', {
@@ -169,7 +170,7 @@ export default function SupportTicket(props) {
           <LoadingFullScreen style={{ flex: 1 }} />
         ) : data.length > 0 ? (
           <>
-            <SupportTicketDataList data={data} handleAllMessages={(value) => handleAllMessages(value)} isLoading={isLoading} />
+            <SupportTicketDataList data={data} handleAllMessages={handleAllMessages} isLoading={isLoading} />
           </>
         ) : (
           <NoDataMsg title="No Ticket Found! " />

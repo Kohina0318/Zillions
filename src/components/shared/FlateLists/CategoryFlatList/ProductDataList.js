@@ -31,16 +31,16 @@ function ProductDataFlateList({ item, themecolor }) {
     try {
       var res = await postAddOrRemoveWishlist(any, item.product_id);
       if (res.status == true) {
-        if(any=='add'){
-        setShowWishListed(1);
-        toast.show(res.msg, {
-          type: 'success',
-          placement: 'bottom',
-          duration: 3000,
-          offset: 30,
-          animationType: 'slide-in',
-        });
-        }else{
+        if (any == 'add') {
+          setShowWishListed(1);
+          toast.show(res.msg, {
+            type: 'success',
+            placement: 'bottom',
+            duration: 3000,
+            offset: 30,
+            animationType: 'slide-in',
+          });
+        } else {
           setShowWishListed(0);
           toast.show(res.msg, {
             type: 'success',
@@ -61,11 +61,11 @@ function ProductDataFlateList({ item, themecolor }) {
               onPress: () => console.log('Cancel Pressed'),
               style: 'cancel',
             },
-            {text: 'Yes', onPress: () => navigation.navigate('Login')},
+            { text: 'Yes', onPress: () => navigation.navigate('Login') },
           ],
         );
       }
-       else {
+      else {
         toast.show(res.msg, {
           type: 'warning',
           placement: 'bottom',
@@ -211,7 +211,6 @@ function ProductDataFlateList({ item, themecolor }) {
 export function ProductDataList(props) {
   const mode = useSelector(state => state.mode);
   const themecolor = new MyThemeClass(mode).getThemeColor();
-  const[index,setIndex]=useState(10)
 
   return (
     <>
@@ -224,18 +223,17 @@ export function ProductDataList(props) {
         showsVerticalScrollIndicator={false}
         scrollEnabled={true}
         onEndReached={() => {
-        props.handleByProduct(index);
-        setIndex(index+10)
-      }}
-      ListFooterComponent={() => {
-        if (props.isLoading) {
-          return (
-            <LoadingContent/>
-          );
-        } else {
-          return null;
-        }
-      }}
+          props.handleByProduct();
+        }}
+        ListFooterComponent={() => {
+          if (props.isLoading) {
+            return (
+              <LoadingContent />
+            );
+          } else {
+            return null;
+          }
+        }}
       />
       <View style={{ marginVertical: 20 }} />
     </>

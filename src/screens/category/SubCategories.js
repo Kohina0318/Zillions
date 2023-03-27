@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   View,
   Text,
@@ -8,17 +8,17 @@ import {
   ScrollView,
   BackHandler
 } from 'react-native';
-import {useSelector} from 'react-redux';
-import {MyThemeClass} from '../../components/Theme/ThemeDarkLightColor';
-import {CategoryStyle} from '../../assets/css/CategoryCss/CategoryStyle'
-import {getSubCategories} from '../../repository/CategoryRepository/AllProductCategoryRep';
-import {useToast} from 'react-native-toast-notifications';
+import { useSelector } from 'react-redux';
+import { MyThemeClass } from '../../components/Theme/ThemeDarkLightColor';
+import { CategoryStyle } from '../../assets/css/CategoryCss/CategoryStyle'
+import { getSubCategories } from '../../repository/CategoryRepository/AllProductCategoryRep';
+import { useToast } from 'react-native-toast-notifications';
 import Header from '../../components/shared/header/Header';
-import {SubCategoryDataList} from '../../components/shared/FlateLists/CategoryFlatList/SubCategoryDataList';
+import { SubCategoryDataList } from '../../components/shared/FlateLists/CategoryFlatList/SubCategoryDataList';
 import LoadingFullScreen from '../../components/shared/Loader/LoadingFullScreen';
 import NoDataMsg from '../../components/shared/NoData/NoDataMsg';
 
-const {width, height} = Dimensions.get('screen');
+const { width, height } = Dimensions.get('screen');
 
 export default function SubCategories(props) {
 
@@ -40,36 +40,35 @@ export default function SubCategories(props) {
   const toast = useToast();
   const mode = useSelector(state => state.mode);
   const themecolor = new MyThemeClass(mode).getThemeColor();
-  
+
   const [loader, setLoader] = useState(true);
   const [data, setData] = useState([]);
   const [isLoading, setIsLoading] = React.useState(false);
- 
-  const handleSubCategories= async(value) => {
+
+  const [getOffset, setOffset] = React.useState(0);
+
+  const handleSubCategories = async () => {
     try {
-      var body=new FormData()
-      body.append('limit',"10")
-      if(value==undefined)
-      {
-        body.append('offset',0) 
+      var body = new FormData()
+      body.append('limit', "10")
+      body.append('offset', getOffset)
+
+      var res = await getSubCategories(props.route.params.categoryId, body);
+      
+      if (res.status === true) {
+        if (res.data.length > 0) {
+          setIsLoading(true)
+          setOffset(getOffset + 10)
+          var temp1 = data.concat(res.data)
+          setData(temp1);
+        } else {
+          setIsLoading(false)
+        }
+        setLoader(false);
       }
-      else
-     { body.append('offset',value)}
-     var res = await getSubCategories(props.route.params.categoryId,body);
-      if(data==[]||data==null)
-     { setData(res.data);}
-     else{
-      setIsLoading(true)
-      var temp = res.data
-      if(temp.length==0)
-      {
-        setIsLoading(false)
+      else{
+        setLoader(false)
       }
-      else
-     { var temp1 =data.concat(temp)
-      setData(temp1);}
-     } 
-      setLoader(false)
     } catch (e) {
       console.log('errrror in..getSubCategories page-->', e);
       setLoader(false)
@@ -88,23 +87,23 @@ export default function SubCategories(props) {
   }, []);
 
   return (
-    <View style={{...CategoryStyle.bg, backgroundColor: themecolor.THEMECOLOR}}>
-      <Header title={props.route.params.categoryName} backIcon={true}  onPressBack={() => handleBackButtonClick()}/>
+    <View style={{ ...CategoryStyle.bg, backgroundColor: themecolor.THEMECOLOR }}>
+      <Header title={props.route.params.categoryName} backIcon={true} onPressBack={() => handleBackButtonClick()} />
       {loader ? (
-        <LoadingFullScreen style={{flex: 1}} />
+        <LoadingFullScreen style={{ flex: 1 }} />
       ) : (
-      <View
-        style={{
-          ...CategoryStyle.container,
-        }}>
-        {data.length > 0 ? (
-          <>
-          <SubCategoryDataList data={data} handleSubCategories={(value)=>handleSubCategories(value)} isLoading={isLoading} />
-          <View style={{marginVertical: 30}} /></>
-        ) : (
-          <NoDataMsg  title="No Subcategory Found! "/>
-        )}
-      </View>
+        <View
+          style={{
+            ...CategoryStyle.container,
+          }}>
+          {data.length > 0 ? (
+            <>
+              <SubCategoryDataList data={data} handleSubCategories={handleSubCategories} isLoading={isLoading} />
+              <View style={{ marginVertical: 30 }} /></>
+          ) : (
+            <NoDataMsg title="No Subcategory Found! " />
+          )}
+        </View>
       )}
     </View>
   );

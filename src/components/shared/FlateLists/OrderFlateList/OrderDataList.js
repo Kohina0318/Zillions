@@ -55,7 +55,7 @@ function OrderDataFlateList({ item, themecolor }) {
               width: 70,
               height: 70,
               borderRadius: 4,
-              resizeMode: 'contain'
+              resizeMode: 'center'
             }}
           />
         </View>
@@ -93,8 +93,7 @@ function OrderDataFlateList({ item, themecolor }) {
 export function OrderDataList(props) {
   const mode = useSelector(state => state.mode);
   const themecolor = new MyThemeClass(mode).getThemeColor();
-  const[index,setIndex]=useState(10)
-
+  
   return (
     <FlatList
       data={props.data}
@@ -104,8 +103,7 @@ export function OrderDataList(props) {
       showsVerticalScrollIndicator={false}
       scrollEnabled={true}
       onEndReached={() => {
-        props.handleOrderlist(index);
-        setIndex(index+10)
+        props.handleOrderlist();
       }}
       ListFooterComponent={() => {
         if (props.isLoading) {

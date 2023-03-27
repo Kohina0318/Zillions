@@ -34,33 +34,27 @@ export default function WishList(props) {
   const [wishlistData, setWishlistData] = useState([]);
   const [isLoading, setIsLoading] = React.useState(false);
 
-  const handleWishlist = async (value) => {
+  const [getOffset, setOffset] = React.useState(0);
+
+
+  const handleWishlist = async () => {
     try {
-      var body=new FormData()
-      body.append('limit',"10")
-      if(value==undefined)
-      {
-        body.append('offset',0) 
-      }
-      else
-     { body.append('offset',value)}
-     var res = await getWishlist(body);
-     if (res.status === true) {
-      if(wishlistData==[]||wishlistData==null)
-     { setWishlistData(res.data);}
-     else{
-      setIsLoading(true)
-      var temp = res.data
-      if(temp.length==0)
-      {
-        setIsLoading(false)
-      }
-      else
-     { var temp1 =wishlistData.concat(temp)
-      setWishlistData(temp1);}
-     } 
+      var body = new FormData()
+      body.append('limit', "10")
+      body.append('offset', getOffset)
+      
+      var res = await getWishlist(body);
+      if (res.status === true) {
+        if (res.data.length > 0) {
+          setIsLoading(true)
+          setOffset(getOffset + 10)
+          var temp1 = wishlistData.concat(res.data)
+          setWishlistData(temp1);
+        } else {
+          setIsLoading(false)
+        }
         setLoader(false);
-      } 
+      }
       else if (res.msg == "Invalid Authentication") {
         setLoader(false);
         setWishlistData([]);
@@ -73,7 +67,7 @@ export default function WishList(props) {
               onPress: () => console.log('Cancel Pressed'),
               style: 'cancel',
             },
-            {text: 'Yes', onPress: () => navigation.navigate('Login')},
+            { text: 'Yes', onPress: () => navigation.navigate('Login') },
           ],
         );
       }
@@ -110,7 +104,7 @@ export default function WishList(props) {
         <>
           <View style={{ ...styles.container }}>
             {wishlistData.length > 0 ? (
-              <WishListDataList data={wishlistData}  setRefresh={setRefresh} refresh={refresh} handleWishlist={(value)=>handleWishlist(value)} isLoading={isLoading}/>
+              <WishListDataList data={wishlistData} setRefresh={setRefresh} refresh={refresh} handleWishlist={handleWishlist} isLoading={isLoading} setOffset={setOffset} setWishlistData={setWishlistData} />
             ) : (
               <NoDataMsg title="No Product Found!" />
             )}

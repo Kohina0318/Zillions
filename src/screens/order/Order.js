@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   View,
   Text,
@@ -8,20 +8,20 @@ import {
   TextInput,
   BackHandler,
 } from 'react-native';
-import {useSelector} from 'react-redux';
-import {MyThemeClass} from '../../components/Theme/ThemeDarkLightColor';
-import {useNavigation} from '@react-navigation/native';
+import { useSelector } from 'react-redux';
+import { MyThemeClass } from '../../components/Theme/ThemeDarkLightColor';
+import { useNavigation } from '@react-navigation/native';
 import Header from '../../components/shared/header/Header';
-import {styles} from '../../assets/css/OrderCss/OrderStyle';
-import {OrderDataList} from '../../components/shared/FlateLists/OrderFlateList/OrderDataList';
+import { styles } from '../../assets/css/OrderCss/OrderStyle';
+import { OrderDataList } from '../../components/shared/FlateLists/OrderFlateList/OrderDataList';
 import Search from '../../components/shared/search/Search';
-import {getOrderlist} from '../../repository/OrderRepository/OrderRepo';
+import { getOrderlist } from '../../repository/OrderRepository/OrderRepo';
 import LoadingFullScreen from '../../components/shared/Loader/LoadingFullScreen';
 import RegisterLoginHeader from '../../components/shared/header/RegisterLoginHeader';
 import NoDataMsg from '../../components/shared/NoData/NoDataMsg';
-import {useToast} from 'react-native-toast-notifications';
+import { useToast } from 'react-native-toast-notifications';
 
-const {width, height} = Dimensions.get('screen');
+const { width, height } = Dimensions.get('screen');
 
 export default function Order(props) {
   function handleBackButtonClick() {
@@ -52,42 +52,33 @@ export default function Order(props) {
   const [dataFilter, setDataFilter] = useState([]);
   const [isLoading, setIsLoading] = React.useState(false);
 
-  const handleOrderlist = async (value) => {
+  const [getOffset, setOffset] = React.useState(0);
+
+
+  const handleOrderlist = async () => {
     try {
-      var body=new FormData()
-      body.append('limit',"10")
-      if(value==undefined)
-      {
-        body.append('offset',0) 
-      }
-      else
-     { body.append('offset',value)}
-     var res = await getOrderlist(body);
-     if (res.status == true) {
-      if(data==[]||data==null)
-     { setData(res.data);
-      setDataFilter(res.data);
-    }
-     else{
-      setIsLoading(true)
-      var temp = res.data;
-      if(temp.length==0)
-      {
-        setIsLoading(false)
-      }
-      else
-     { var temp1 =data.concat(temp)
-      var temp2=dataFilter.concat(temp);
-      setData(temp1);
-      setDataFilter(temp2);
-    }
-     } 
-        
+      var body = new FormData()
+      body.append('limit', "10")
+      body.append('offset', getOffset)
+
+      var res = await getOrderlist(body);
+
+      if (res.status === true) {
+        if (res.data.length > 0) {
+          setIsLoading(true)
+          setOffset(getOffset + 10)
+          var temp1 = data.concat(res.data)
+          setData(temp1);
+          setDataFilter(temp1);
+        } else {
+          setIsLoading(false)
+        }
         setLoader(false);
       }
-       else {
-        setLoader(false);
+      else{
+        setLoader(false)
       }
+
     } catch (e) {
       console.log('errrror in..handleOrderlist page wishlist-->', e);
       setLoader(false);
@@ -116,29 +107,29 @@ export default function Order(props) {
   };
 
   return (
-    <View style={{...styles.bg, backgroundColor: themecolor.THEMECOLOR}}>
+    <View style={{ ...styles.bg, backgroundColor: themecolor.THEMECOLOR }}>
       <RegisterLoginHeader
         title="My Order"
         backIcon={true}
         onPressBack={() => handleBackButtonClick()}
       />
       {loader ? (
-        <LoadingFullScreen style={{flex: 1}} />
+        <LoadingFullScreen style={{ flex: 1 }} />
       ) : (
-        <View style={{...styles.container}}>
+        <View style={{ ...styles.container }}>
           <Search title={'Search by order Id..'} filtering={filtering} />
 
-          <View style={{...styles.marTop}} />
+          <View style={{ ...styles.marTop }} />
 
           {data.length > 0 ? (
             <>
-              <OrderDataList data={data}  handleOrderlist={(value)=>handleOrderlist(value)} isLoading={isLoading} />
-              <View style={{...styles.mgT10}} />
+              <OrderDataList data={data} handleOrderlist={(value) => handleOrderlist(value)} isLoading={isLoading} />
+              <View style={{ ...styles.mgT10 }} />
             </>
           ) : (
             <NoDataMsg title="No Order Found! " />
           )}
-          <View style={{marginVertical: 42}} />
+          <View style={{ marginVertical: 42 }} />
         </View>
       )}
     </View>
