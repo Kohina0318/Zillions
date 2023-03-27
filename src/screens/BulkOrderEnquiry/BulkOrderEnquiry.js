@@ -23,6 +23,7 @@ import { postBulkOrderEnquiry } from '../../repository/ProfileRepository/BulkOrd
 import FIcon from 'react-native-vector-icons/FontAwesome';
 import EIcon from 'react-native-vector-icons/Entypo';
 import { launchCamera, launchImageLibrary } from 'react-native-image-picker';
+import { postRFQUploadRepo } from '../../repository/ProfileRepository/RFQUploadRepo';
 
 
 const { width, height } = Dimensions.get('screen');
@@ -57,7 +58,28 @@ export default function BulkOrderEnquiry(props) {
   const [companyName, setCompanyName] = useState("")
   const [image, setImage] = useState('');
 
-  
+
+  useEffect(() => {
+    async function temp() {
+      try {
+        var userData = await getUserData();
+        if (userData == null || userData == '' || userData == undefined) {
+          setLoader(false)
+        } else {
+          var nameUser = `${userData[0].username.replace(/\s+/g, '')} ${userData[0].surname.replace(/\s+/g, '')}`
+          setUserName(nameUser)
+          setUserEmail(userData[0].email)
+          setUserMobileno(userData[0].phone)
+          setLoader(false)
+        }
+      } catch (e) {
+        setLoader(false)
+      }
+    }
+    temp()
+  }, [props]);
+
+
   const openGallery = () => {
     let options = {
       storageOption: {
@@ -86,7 +108,7 @@ export default function BulkOrderEnquiry(props) {
     });
   };
 
-  const removeImage =() =>{
+  const removeImage = () => {
     setImage('')
   }
 
@@ -125,7 +147,7 @@ export default function BulkOrderEnquiry(props) {
         animationType: 'slide-in',
       });
     }
-    else if ( !userEmail.includes('@')|| !userEmail.includes('gmail.com')) {
+    else if (!userEmail.includes('@') || !userEmail.includes('gmail.com')) {
       toast.show('Please enter valid email address!', {
         type: 'warning',
         placement: 'bottom',
@@ -155,15 +177,19 @@ export default function BulkOrderEnquiry(props) {
     else {
       try {
         let formdata = new FormData();
-        formdata.append('', userName);
-        formdata.append('', userMobileno);
-        formdata.append('', userEmail);
-        formdata.append('', companyName);
-        formdata.append('image',image)
+        formdata.append('name', userName);
+        formdata.append('mobileno', userMobileno);
+        formdata.append('email', userEmail);
+        formdata.append('company_name', companyName);
+        formdata.append('image', image)
+
         console.log("formdata...", formdata)
 
-        var res = await postBulkOrderEnquiry(formdata);
+        var res = await postRFQUploadRepo(formdata);
+        console.log("postRFQUploadRepo...>>>", res)
+
         if (res.status === true) {
+          navigation.navigate("Dashboard")
           toast.show(res.msg, {
             type: 'success',
             placement: 'bottom',
@@ -173,7 +199,13 @@ export default function BulkOrderEnquiry(props) {
           });
         }
         else {
-
+          toast.show(res.msg, {
+            type: 'warning',
+            placement: 'bottom',
+            duration: 3000,
+            offset: 30,
+            animationType: 'slide-in',
+          });
         }
 
       } catch (e) {
@@ -188,29 +220,6 @@ export default function BulkOrderEnquiry(props) {
       }
     }
   };
-
-
-
-
-  useEffect(() => {
-    async function temp() {
-      try {
-        var userData = await getUserData();
-        if (userData == null || userData == '' || userData == undefined) {
-          setLoader(false)
-        } else {
-          var nameUser = `${userData[0].username.replace(/\s+/g, '')} ${userData[0].surname.replace(/\s+/g, '')}`
-          setUserName(nameUser)
-          setUserEmail(userData[0].email)
-          setUserMobileno(userData[0].phone)
-          setLoader(false)
-        }
-      } catch (e) {
-        setLoader(false)
-      }
-    }
-    temp()
-  }, [props]);
 
 
   return (
@@ -333,67 +342,67 @@ export default function BulkOrderEnquiry(props) {
                       </View>
                     )}
                   </View>
-                
 
+
+                  <View style={{ ...styles.Mv5 }} />
+
+
+
+
+                  <View>
+                    <Text allowFontScaling={false} style={{ ...styles.TextinputH, color: themecolor.TXTWHITE }}>Company name</Text>
+                    <View
+                      style={{
+                        ...styles.TextView,
+                        borderColor: themecolor.BOXBORDERCOLOR1,
+                        backgroundColor: themecolor.BOXBORDERCOLOR,
+                      }}>
+                      <TextInput
+                        allowFontScaling={false}
+                        value={companyName}
+                        placeholder={'Company name*'}
+                        placeholderTextColor={themecolor.TXTGREYS}
+                        style={{
+                          ...styles.TextInput,
+                          color: themecolor.TXTWHITE,
+                        }}
+                        onChangeText={txt => setCompanyName(txt)}
+                      />
+                    </View>
+                  </View>
+
+
+
+                </View>
                 <View style={{ ...styles.Mv5 }} />
 
-
-
-
-                <View>
-                  <Text allowFontScaling={false} style={{ ...styles.TextinputH, color: themecolor.TXTWHITE }}>Company name</Text>
-                  <View
-                    style={{
-                      ...styles.TextView,
-                      borderColor: themecolor.BOXBORDERCOLOR1,
-                      backgroundColor: themecolor.BOXBORDERCOLOR,
-                    }}>
-                    <TextInput
-                      allowFontScaling={false}
-                      value={companyName}
-                      placeholder={'Company name*'}
-                      placeholderTextColor={themecolor.TXTGREYS}
-                      style={{
-                        ...styles.TextInput,
-                        color: themecolor.TXTWHITE,
-                      }}
-                      onChangeText={txt => setCompanyName(txt)}
+                <View
+                  style={{
+                    ...styles.touchview,
+                  }}>
+                  <View style={{ ...styles.mainView }}>
+                    <HalfSizeButton
+                      title="Send"
+                      icon=" "
+                      backgroundColor={themecolor.ADDTOCARTBUTTONCOLOR}
+                      color={'#fff'}
+                      borderColor={themecolor.BOXBORDERCOLOR1}
+                      onPress={() => handleSubmit()}
                     />
                   </View>
                 </View>
 
-
+                <View style={{ marginVertical: 48 }} />
 
               </View>
-              <View style={{ ...styles.Mv5 }} />
-
-              <View
-                style={{
-                  ...styles.touchview,
-                }}>
-                <View style={{ ...styles.mainView }}>
-                  <HalfSizeButton
-                    title="Send"
-                    icon=" "
-                    backgroundColor={themecolor.ADDTOCARTBUTTONCOLOR}
-                    color={'#fff'}
-                    borderColor={themecolor.BOXBORDERCOLOR1}
-                    onPress={() => handleSubmit()}
-                  />
-                </View>
-              </View>
-
-              <View style={{ marginVertical: 48 }} />
-
             </View>
-          </View>
 
-        </View>
+          </View>
 
         </ScrollView>
 
-  )
-}
+      )
+      }
 
     </View >
   );

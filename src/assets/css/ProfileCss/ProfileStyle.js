@@ -182,6 +182,7 @@ const ProfileStyle = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
+    // backgroundColor:"red"
   },
   headingTxt: {
     fontSize: FontSize.labelText3,

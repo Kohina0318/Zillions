@@ -63,7 +63,6 @@ export default function RFQUpload(props) {
 
   const [image, setImage] = useState('');
   const [companyName, setCompanyName] = useState("")
-  const [commentText, setCommentText] = useState("")
   const [userName, setUserName] = useState("")
   const [mobileno, setMobileno] = useState("")
   const [email, setEmail] = useState("")
@@ -122,7 +121,7 @@ export default function RFQUpload(props) {
   }
 
   const handleSubmit = async () => {
-
+   
     if (userName == '') {
       toast.show('Name is required!', {
         type: 'warning',
@@ -183,28 +182,19 @@ export default function RFQUpload(props) {
         animationType: 'slide-in',
       });
     }
-    else if (companyText == '') {
-      toast.show('Company text is required!', {
-        type: 'warning',
-        placement: 'bottom',
-        duration: 3000,
-        offset: 30,
-        animationType: 'slide-in',
-      });
-    }
     else {
       try {
         let formdata = new FormData();
         formdata.append('name', userName);
         formdata.append('mobileno', mobileno);
         formdata.append('email', email);
-        formdata.append('cname', companyName);
-        formdata.append('commentText', commentText);
+        formdata.append('company_name', companyName);
         formdata.append('image',image)
-        console.log("formdata...", formdata)
 
         var res = await postRFQUploadRepo(formdata);
+
         if (res.status === true) {
+          navigation.navigate("Dashboard")
           toast.show(res.msg, {
             type: 'success',
             placement: 'bottom',
@@ -214,7 +204,13 @@ export default function RFQUpload(props) {
           });
         }
         else {
-
+          toast.show(res.msg, {
+            type: 'warning',
+            placement: 'bottom',
+            duration: 3000,
+            offset: 30,
+            animationType: 'slide-in',
+          });
         }
 
       } catch (e) {
@@ -362,7 +358,7 @@ export default function RFQUpload(props) {
                   </View>
                 </View>
 
-                <View style={{ ...styles.Mv5 }} />
+                {/* <View style={{ ...styles.Mv5 }} />
 
                 <View>
                   <Text allowFontScaling={false} style={{ ...styles.TextinputH, color: themecolor.TXTWHITE }}>Comment</Text>
@@ -386,7 +382,7 @@ export default function RFQUpload(props) {
                       onChangeText={txt => setCommentText(txt)}
                     />
                   </View>
-                </View>
+                </View> */}
 
                 <View style={{ ...styles.Mv5 }} />
 

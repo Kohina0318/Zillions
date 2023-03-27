@@ -8,7 +8,7 @@ import { SERVER_URL } from "../SERVER_URL";
 const postRFQUploadRepo = async formdata => {
   try {
     const response = await fetch(
-      `${await SERVER_URL()}/save-address`,
+      `${await SERVER_URL()}/rfq-upload`,
       {
         method: 'POST',
         headers: {
