@@ -45,7 +45,7 @@ function BrandDataFlatList({ item, themecolor }) {
           <Image
             source={{ uri: item.banner }}
             resizeMode="contain"
-            style={{ width: 150, height: '60%' }}
+            style={{ width: '50%', height: '50%' }}
           />
         </View>
         <View

@@ -96,7 +96,9 @@ export default function Dashboard(props) {
       body.append('offset',0)
       var res = await getProductList('featured', '5',body);
       setLatestProductsData(res.data);
+      setLoader(false);
     } catch (e) {
+      setLoader(false);
       console.log('errrror in..handleLatestProducts page-->', e);
       toast.show('Something went wrong!, Try again later.', {
         type: 'danger',
@@ -152,10 +154,10 @@ export default function Dashboard(props) {
       body.append('offset',0)
       var res = await getProductList('most_viewed', '5',body);
       setMostViewedData(res.data);
-      setLoader(false);
+      // setLoader(false);
     } catch (e) {
       console.log('errrror in..handleMostViewed page-->', e);
-      setLoader(false);
+      // setLoader(false);
       toast.show('Something went wrong!, Try again later.', {
         type: 'danger',
         placement: 'bottom',

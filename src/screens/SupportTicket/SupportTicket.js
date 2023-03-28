@@ -58,8 +58,7 @@ export default function SupportTicket(props) {
       body.append('offset', getOffset)
 
       const res = await getSupportTicket(body);
-      console.log("data.......>>>", res.data)
-
+      
       if (res.status === true) {
         if (res.data.length > 0) {
           setIsLoading(true)
@@ -117,8 +116,7 @@ export default function SupportTicket(props) {
         formdata.append('reply', message);
 
         const res = await postCreateSupportTicket(formdata);
-        console.log("handleCreateTicket.......>>>", res)
-
+       
         if (res.status == true) {
           setOffset(0);
           setData([]);

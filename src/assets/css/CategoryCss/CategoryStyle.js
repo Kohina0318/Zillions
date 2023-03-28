@@ -23,6 +23,8 @@ const CategoryStyle = StyleSheet.create({
       marginTop:5
   },
   innerImage: {
+    width: 50,
+    height: 50,
     borderRadius: 50,
     justifyContent: 'center',
     alignSelf: 'center',

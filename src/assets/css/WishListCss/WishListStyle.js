@@ -32,7 +32,8 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-end',
     alignSelf: 'flex-end',
   },
-  innerImage: {
+  innerImage: { 
+    width:  width * 0.38,
     height: height * 0.2,
     overflow: 'hidden',
     justifyContent: 'center',

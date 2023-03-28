@@ -69,6 +69,7 @@ export default function Profile(props) {
       handleUserData();
     }, [refresh]),
   );
+  
 
   const handleConfirmLogout = () => {
     Alert.alert(
@@ -77,7 +78,6 @@ export default function Profile(props) {
       [
         {
           text: 'No',
-          onPress: () => console.log('Cancel Pressed'),
           style: 'cancel',
         },
         { text: 'Yes', onPress: () => handleLogout() },
@@ -145,14 +145,6 @@ export default function Profile(props) {
                       ...ProfileStyle.profileDataView,
                     }}>
                     <View>
-                      {/* <Avatar
-                        size={90}
-                        rounded
-                        avatarStyle={{
-                          ...ProfileStyle.avater,
-                        }}
-                        source={require('../../assets/images/profile.jpg')}
-                      /> */}
                       <View style={{...ProfileStyle.avater, backgroundColor:generateColor(),borderColor:'#fff'}}>
                         <Text style={{...ProfileStyle.profileImgText, color:'#fff'}}>{imageName}</Text>
                       </View>

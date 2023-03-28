@@ -57,7 +57,6 @@ function ProductDataFlateList({ item, themecolor }) {
           [
             {
               text: 'No',
-              onPress: () => console.log('Cancel Pressed'),
               style: 'cancel',
             },
             { text: 'Yes', onPress: () => navigation.navigate('Login') },
@@ -74,7 +73,7 @@ function ProductDataFlateList({ item, themecolor }) {
         });
       }
     } catch (e) {
-      console.log('errrror in..handleRemove page wishlist-->', e);
+      console.log('errrror in..handleRemove page wishlist-->', e)
       toast.show('Something went wrong!, Try again later.', {
         type: 'danger',
         placement: 'bottom',
@@ -107,10 +106,10 @@ function ProductDataFlateList({ item, themecolor }) {
           <Image
             source={{ uri: item.front_image }}
             style={{
-              width: width * 0.36,
+              width: "100%",
               height: '100%',
             }}
-            resizeMode="stretch"
+            resizeMode="center"
           />
         </TouchableOpacity>
 

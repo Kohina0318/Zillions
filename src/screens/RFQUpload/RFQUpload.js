@@ -65,7 +65,6 @@ export default function RFQUpload(props) {
     async function temp() {
       try {
         var userData = await getUserData();
-        console.log(userData)
         if (userData == null || userData == '' || userData == undefined) {
           setLoader(false)
         } else {
@@ -92,18 +91,18 @@ export default function RFQUpload(props) {
     };
     launchImageLibrary(options, response => {
       if (response.didCancel) {
-        console.log('User cancelled image picker');
+        // console.log('User cancelled image picker');
       } else if (response.error) {
-        console.log('ImagePicker Error', response.error);
+        // console.log('ImagePicker Error', response.error);
       } else if (response.customButtom) {
-        console.log('User tapped custom Button', response.customButtom);
+        // console.log('User tapped custom Button', response.customButtom);
       } else {
-        const source = {
-          base64: 'data:image/jpeg;base64,' + response.assets[0].base64,
-          name: response.assets[0].fileName,
-          type: response.assets[0].type,
-          uri: response.assets[0].uri,
-        };
+        // const source = {
+        //   base64: 'data:image/jpeg;base64,' + response.assets[0].base64,
+        //   name: response.assets[0].fileName,
+        //   type: response.assets[0].type,
+        //   uri: response.assets[0].uri,
+        // };
         setImage(response.assets[0].base64);
       }
     });

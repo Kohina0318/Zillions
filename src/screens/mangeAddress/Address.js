@@ -179,7 +179,6 @@ export default function Address(props) {
         formdata.append('country', country);
 
         var res = await postAddAddress(formdata);
-        console.log("gyghhjkj...postAddAddress...>>",res.data)
         if (res.status === true) {
           setAddAddressModal(false);
           setRefresh(!refresh);

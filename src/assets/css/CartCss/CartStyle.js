@@ -31,9 +31,8 @@ const styles = StyleSheet.create({
     borderWidth: 0.5,
     marginBottom: 1,
   },
-  innerView: { flexDirection: "row", width: "100%" },
+  innerView: { flexDirection: "row", width: "100%", },
   innerImage: {
-    borderRadius: 4,
     justifyContent: 'center',
     alignSelf: 'center',
   },

@@ -51,8 +51,8 @@ function OrderDataFlateList({ item, themecolor }) {
               width: 70,
               height: 70,
               borderRadius: 4,
-              resizeMode: 'center'
             }}
+            resizeMode= 'center'
           />
         </View>
 

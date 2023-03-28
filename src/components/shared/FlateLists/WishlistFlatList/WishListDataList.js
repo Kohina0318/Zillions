@@ -164,10 +164,10 @@ function WishListDataFlateList({ item, themecolor, setRefresh, refresh,setOffset
             <Image
               source={{ uri: item.front_image }}
               style={{
-                width: width * 0.36,
+                width: "100%",
                 height: '100%',
               }}
-              resizeMode="stretch"
+              resizeMode="center"
             />
           </View>
 

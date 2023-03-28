@@ -31,10 +31,11 @@ function SubCategoryDataFlateList({ item, themecolor }) {
         <Image
           source={{ uri: item.banner }}
           style={{
-            width: 50,
-            height: 50,
+            width: "100%",
+            height: "100%",
             borderRadius: 50,
           }}
+          resizeMode="center"
         />
       </View>
       <View style={{ ...CategoryStyle.margleft15 }}>

@@ -115,7 +115,6 @@ export default function OrderDetails(props) {
       [
         {
           text: 'No',
-          onPress: () => console.log('Cancel Pressed'),
           style: 'cancel',
         },
         { text: 'Yes', onPress: () => handleReturnOrder() },

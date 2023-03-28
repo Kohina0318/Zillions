@@ -86,18 +86,13 @@ export default function BulkOrderEnquiry(props) {
 
     launchImageLibrary(options, response => {
       if (response.didCancel) {
-        console.log('User cancelled image picker');
+        // console.log('User cancelled image picker');
       } else if (response.error) {
-        console.log('ImagePicker Error', response.error);
+        // console.log('ImagePicker Error', response.error);
       } else if (response.customButtom) {
-        console.log('User tapped custom Button', response.customButtom);
+        // console.log('User tapped custom Button', response.customButtom);
       } else {
-        const source = {
-          base64: 'data:image/jpeg;base64,' + response.assets[0].base64,
-          name: response.assets[0].fileName,
-          type: response.assets[0].type,
-          uri: response.assets[0].uri,
-        };
+       
         setImage(response.assets[0].base64);
       }
     });
@@ -178,11 +173,9 @@ export default function BulkOrderEnquiry(props) {
         formdata.append('company_name', companyName);
         formdata.append('image', image)
 
-        console.log("formdata...", formdata)
 
         var res = await postRFQUploadRepo(formdata);
-        console.log("postRFQUploadRepo...>>>", res)
-
+       
         if (res.status === true) {
           navigation.navigate("Dashboard")
           toast.show(res.msg, {

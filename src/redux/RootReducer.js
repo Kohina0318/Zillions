@@ -9,8 +9,7 @@ const initialState = {
 
 const RootReducer = createReducer(initialState, (builder) => {
   builder.addCase('THEME_CHANGE', (state, action) => {
-    // console.log('THEME_CHANGE in redux...', action);
-    state.mode = action.payload;
+   state.mode = action.payload;
   })
 
   builder.addCase('ADD_DATA', (state, action) => {
