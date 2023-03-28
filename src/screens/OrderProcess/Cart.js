@@ -62,9 +62,7 @@ export default function Cart(props) {
       var res = await getCartOrderDetails()
       if (res.status == true) {
         setDetailData(res.data)
-      } else {
-        console.log('Status False in..handleCartOrderDetails page Cart-->');
-      }
+      } 
     } catch (e) {
       console.log('errrror in..handleCartOrderDetails page-->', e);
       toast.show('Something went wrong!, Try again later.', {
@@ -152,7 +150,6 @@ export default function Cart(props) {
         [
           {
             text: 'No',
-            onPress: () => console.log('Cancel Pressed'),
             style: 'cancel',
           },
           { text: 'Yes', onPress: () => navigation.navigate('Login', {comeIn: "comeInCart"}) },

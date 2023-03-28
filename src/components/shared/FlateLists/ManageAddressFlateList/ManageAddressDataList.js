@@ -133,7 +133,6 @@ function OtherAddressDataFlateList({item, themecolor, refresh, setRefresh,comeIn
       [
         {
           text: 'No',
-          onPress: () => console.log('Cancel Pressed'),
           style: 'cancel',
         },
         {text: 'Yes', onPress: () => handleDeleteAddress(id)},

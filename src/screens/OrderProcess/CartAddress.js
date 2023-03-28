@@ -64,9 +64,6 @@ export default function CartAddress(props) {
         setDetailData(res.data)
       }
       
-       else {
-        console.log('Status False in..handleCartOrderDetails page CartAddress-->');
-      }
     } catch (e) {
       console.log('errrror in..handleCartOrderDetails page-->', e);
       toast.show('Something went wrong!, Try again later.', {
@@ -135,7 +132,6 @@ export default function CartAddress(props) {
         [
           {
             text: 'No',
-            onPress: () => console.log('No pressed'),
             style: 'cancel',
           },
           {text: 'Yes', onPress: () => props.navigation.navigate('Address', {comeIn: "comeInCartAddress"})},

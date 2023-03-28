@@ -58,7 +58,6 @@ export default function WishList(props) {
           [
             {
               text: 'No',
-              onPress: () => console.log('Cancel Pressed'),
               style: 'cancel',
             },
             { text: 'Yes', onPress: () => navigation.navigate('Login') },

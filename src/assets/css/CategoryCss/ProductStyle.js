@@ -24,6 +24,7 @@ const ProductStyle = StyleSheet.create({
     marginTop:5
   },
   innerImage: {
+    width:  width * 0.38,
     height: height * 0.2,
     overflow: 'hidden',
     justifyContent: 'center',

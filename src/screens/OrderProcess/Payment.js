@@ -149,10 +149,6 @@ export default function Payment(props) {
               .then(async (data) => {
                 setLoader(true)
                 if (data.razorpay_payment_id) {
-                  // handle success
-                  // alert(`Success: ${data.razorpay_payment_id}`);
-                  console.log(`Success: ${data.razorpay_signature},${data.razorpay_order_id},${data.razorpay_payment_id}`)
-
                   var body = new FormData();
                   body.append('payment_type', 'razorpay');
                   body.append('address_id', props.route.params.id);
@@ -194,8 +190,6 @@ export default function Payment(props) {
               })
               .catch(error => {
                 setLoader(false)
-                // handle failure
-                // alert(`Error: ${error.code} | ${error.description}`);
                 console.log(
                   `....Error in RazorpayCheckout...>>: ${error.code} | ${error.description}`,
                 );
@@ -260,7 +254,6 @@ export default function Payment(props) {
           [
             {
               text: 'No',
-              onPress: () => console.log('Cancel Pressed'),
               style: 'cancel',
             },
             { text: 'Yes', onPress: () => navigation.navigate('Login') },

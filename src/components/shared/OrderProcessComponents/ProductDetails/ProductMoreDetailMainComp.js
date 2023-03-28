@@ -45,9 +45,9 @@ export default function ProductMoreDetailMainComp(props) {
           props.setImage(image), props.setModalVisible(true);
         }}
       >
-        <View key={index}>
+        <View key={index} style={{width: width * 0.864, height: height * 0.3, }}>
           <Image
-            style={{ width: width * 0.88, height: height * 0.3 }}
+            style={{ width:"100%", height:"100%" }}
             source={{ uri: image }}
             resizeMode={'contain'}
           />
@@ -83,7 +83,6 @@ export default function ProductMoreDetailMainComp(props) {
           [
             {
               text: 'No',
-              onPress: () => console.log('Cancel Pressed'),
               style: 'cancel',
             },
             { text: 'Yes', onPress: () => navigation.navigate('Login') },

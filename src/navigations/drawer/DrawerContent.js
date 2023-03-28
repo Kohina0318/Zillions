@@ -60,7 +60,6 @@ export default function DrawerContent(props) {
       [
         {
           text: 'No',
-          onPress: () => console.log('Cancel Pressed'),
           style: 'cancel',
         },
         { text: 'Yes', onPress: () => handleLogout() },
