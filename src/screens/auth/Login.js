@@ -55,11 +55,12 @@ export default function Login(props) {
 
   var comeIn
   try {
-    comeIn = props.route.params.comeIn
+     comeIn = props.route.params.comeIn
   }
   catch (e) {
     comeIn = ''
   }
+   
 
   const handleLogin = async () => {
     if (email == '') {
@@ -308,7 +309,7 @@ export default function Login(props) {
           setShowmodal={setShowmodal}
           title={'Sign In Successfully.'}
           navigateTo='Dashboard'
-          comeInCart={comeIn}
+          comeIn={comeIn}
         />
       )}
     </>
