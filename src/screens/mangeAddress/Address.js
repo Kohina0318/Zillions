@@ -22,6 +22,8 @@ import HalfSizeButton from '../../components/shared/button/halfSizeButton';
 import AddAddressModel from '../../components/shared/Model/AddAddressModel';
 import RegisterLoginHeader from '../../components/shared/header/RegisterLoginHeader';
 import NoDataMsg from '../../components/shared/NoData/NoDataMsg';
+import { useNavigation } from '@react-navigation/native';
+import { Alert } from 'react-native/Libraries/Alert/Alert';
 
 export default function Address(props) {
   function handleBackButtonClick() {
@@ -40,9 +42,10 @@ export default function Address(props) {
   }, []);
 
   const toast = useToast();
+  const navigation = useNavigation();
   const mode = useSelector(state => state.mode);
   const themecolor = new MyThemeClass(mode).getThemeColor();
-
+ 
   const [loader, setLoader] = useState(true);
   const [data, setData] = useState([]);
   const [defaultData, setDefaultData] = useState([]);
@@ -56,6 +59,14 @@ export default function Address(props) {
   const [mobileNo, setMobileNo] = useState('');
   const [refresh, setRefresh] = useState(false);
 
+  var comeIn  
+  try{
+    comeIn= props.route.params.comeIn 
+  }
+  catch(e){
+    comeIn =''
+  }
+  
   const handleDefaultAddress = async () => {
     try {
       var res = await postDefaultAddress();
@@ -168,9 +179,11 @@ export default function Address(props) {
         formdata.append('country', country);
 
         var res = await postAddAddress(formdata);
+        console.log("gyghhjkj...postAddAddress...>>",res.data)
         if (res.status === true) {
           setAddAddressModal(false);
           setRefresh(!refresh);
+
           toast.show(res.msg, {
             type: 'success',
             placement: 'bottom',
@@ -243,6 +256,7 @@ export default function Address(props) {
                     data={data}
                     refresh={refresh}
                     setRefresh={setRefresh}
+                    comeIn={comeIn}
                   />
                 </View>
                 : <></>}

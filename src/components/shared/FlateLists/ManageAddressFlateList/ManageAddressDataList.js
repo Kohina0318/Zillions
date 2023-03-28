@@ -88,7 +88,7 @@ function DefaultAddressDataFlateList({item, themecolor}) {
   );
 }
 
-function OtherAddressDataFlateList({item, themecolor, refresh, setRefresh}) {
+function OtherAddressDataFlateList({item, themecolor, refresh, setRefresh,comeIn}) {
   const toast = useToast();
   const navigation = useNavigation();
 
@@ -107,8 +107,12 @@ function OtherAddressDataFlateList({item, themecolor, refresh, setRefresh}) {
           offset: 30,
           animationType: 'slide-in',
         });
+
+        if(comeIn == "comeInCartAddress"){
+          navigation.navigate("CartAddress")
+        }
       } else {
-        
+      
       }
     } catch (e) {
       console.log('errrror in..handleSetDefaultAddress page-->', e);
@@ -277,6 +281,7 @@ export function ManageAddressDataList(props) {
             themecolor={themecolor}
             refresh={props.refresh}
             setRefresh={props.setRefresh}
+            comeIn={props.comeIn}
           />
         )
       }

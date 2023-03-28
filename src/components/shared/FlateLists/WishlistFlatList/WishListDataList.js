@@ -38,13 +38,14 @@ function WishListDataFlateList({ item, themecolor, setRefresh, refresh,setOffset
   const [selectedSize, setSelectedSize] = useState(sizeData[0].size)
   const [selectedSizePrice, setSelectedSizePrice] = useState(sizeData[0].amount)
 
-  const handleRemove = async () => {
+  const handleRemove = async (comeAddCart) => {
     try {
       var res = await postAddOrRemoveWishlist('remove', item.product_id);
       if (res.status == true) {
         setOffset(0)
         setWishlistData([])
         setRefresh(!refresh)
+        if(comeAddCart != 'comeAddCart'){
         toast.show(res.msg, {
           type: 'success',
           placement: 'bottom',
@@ -52,6 +53,7 @@ function WishListDataFlateList({ item, themecolor, setRefresh, refresh,setOffset
           offset: 30,
           animationType: 'slide-in',
         });
+      }
       } else if (res.msg == "Invalid Authentication") {
         ToastAndroid.showWithGravityAndOffset(
           `${'Token Expired'}`,
@@ -91,7 +93,7 @@ function WishListDataFlateList({ item, themecolor, setRefresh, refresh,setOffset
       if (res.status == true) {
 
         store.dispatch({ type: 'ADD_CART', payload: [item.product_id, { productId: item.product_id, data: formdata }] })
-        handleRemove()
+        handleRemove('comeAddCart')
         toast.show(res.msg, {
           type: 'success',
           placement: 'bottom',

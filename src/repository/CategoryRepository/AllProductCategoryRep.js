@@ -69,6 +69,7 @@ const getProductView = async pId => {
     );
     const result = await response.json();
     return result;
+    
   } catch (err) {
     console.log('error in getProductView...in AllproductCategoryRep ', err);
   }

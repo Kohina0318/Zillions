@@ -28,6 +28,7 @@ import { store } from '../../../App';
 import { postAddCartProduct } from '../../repository/OrderProcessRepository/AddToCartRepo';
 import ImageZoomerModel from '../../components/shared/Model/ImageZoomerModel';
 import ProductMoreDetailCustomerSupport from '../../components/shared/OrderProcessComponents/ProductDetails/ProductMoreDetailCustomerSupport';
+import NoDataMsg from '../../components/shared/NoData/NoDataMsg';
 
 
 export default function ProductMoreDetails(props) {
@@ -65,7 +66,7 @@ export default function ProductMoreDetails(props) {
     const [showRBSheet, setshowRBSheet] = useState('');
     const [image, setImage] = useState('');
     const [modalVisible, setModalVisible] = useState(false);
-    
+
 
     const handleProductView = async () => {
         try {
@@ -76,10 +77,15 @@ export default function ProductMoreDetails(props) {
                 setSoldBy(res.data.sold_by);
                 setSizes(res.data.size);
                 setSelectedSize(res.data.size[0].size)
-                setSelectedSizePrice(res.data.size[0].amount)          
+                setSelectedSizePrice(res.data.size[0].amount)
+                setLoader(false);
+            }
+            else {
+                setLoader(false);
             }
         } catch (e) {
             console.log('errrror in..handleProductView page-->', e);
+            setLoader(false);
             toast.show('Something went wrong!, Try again later.', {
                 type: 'danger',
                 placement: 'bottom',
@@ -92,19 +98,19 @@ export default function ProductMoreDetails(props) {
 
     const handleRelatedProduct = async () => {
         try {
-            var body=new FormData()
-            body.append('limit',"10")
-              body.append('offset',0) 
-           var res = await getProductRealedProducts('most_viewed', '10', productId,body);
-           if (res.status == true) {
-            setRelatedProductData(res.data);
-                setLoader(false);
+            var body = new FormData()
+            body.append('limit', "10")
+            body.append('offset', 0)
+            var res = await getProductRealedProducts('most_viewed', '10', productId, body);
+            if (res.status == true) {
+                setRelatedProductData(res.data);
+                // setLoader(false);
             } else {
-                setLoader(false);
+                // setLoader(false);
             }
         } catch (e) {
             console.log('errrror in..handleRelatedProduct page-->', e);
-            setLoader(false);
+            // setLoader(false);
             toast.show('Something went wrong!, Try again later.', {
                 type: 'danger',
                 placement: 'bottom',
@@ -257,7 +263,7 @@ export default function ProductMoreDetails(props) {
 
                                 {relatedProductData.length > 0 ? (
                                     <View
-                                        style={{...styles.otherProductView}}>
+                                        style={{ ...styles.otherProductView }}>
                                         <Text
                                             allowFontScaling={false}
                                             style={{
@@ -362,8 +368,7 @@ export default function ProductMoreDetails(props) {
                             </View>
                         </View>
                     </>
-                    :
-                    <LoadingFullScreen style={{ flex: 1 }} />
+                    : <NoDataMsg title="No Product Found! " />
             )}
 
             {showRBSheet == 0 ?
@@ -371,13 +376,13 @@ export default function ProductMoreDetails(props) {
                     name="shopping-cart"
                     size={16}
                     color="#fff"
-                />} touch={false} qty={qty} setQty={setQty}  maxQty={productDetailData.current_stock} setSelectedSize={setSelectedSize} setSelectedSizePrice={setSelectedSizePrice} onPress={handleAddCartProduct}  />
+                />} touch={false} qty={qty} setQty={setQty} maxQty={productDetailData.current_stock} setSelectedSize={setSelectedSize} setSelectedSizePrice={setSelectedSizePrice} onPress={handleAddCartProduct} />
                 :
                 <RBSheetData refRBSheet={refRBSheet} title={'Buy Now'} icon={<EN
                     name="doubleright"
                     size={17}
                     color={'#fff'}
-                />} sizes={sizes} touch={false} qty={qty}  setQty={setQty} maxQty={productDetailData.current_stock} setSelectedSize={setSelectedSize} setSelectedSizePrice={setSelectedSizePrice} onPress={handleAddCartProduct} />
+                />} sizes={sizes} touch={false} qty={qty} setQty={setQty} maxQty={productDetailData.current_stock} setSelectedSize={setSelectedSize} setSelectedSizePrice={setSelectedSizePrice} onPress={handleAddCartProduct} />
             }
 
             <ImageZoomerModel image={image} modalVisible={modalVisible} setModalVisible={setModalVisible} />

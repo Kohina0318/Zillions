@@ -12,12 +12,12 @@ const styles = StyleSheet.create({
     flex:1
   },
   modalView: {
-    height: height * 0.15,
-    width: width * 0.98,
+    height: height * 0.17,
+    width: width * 0.94,
     margin: 10,
-    borderRadius: 10,
+    borderRadius: 8,
     flexDirection: 'row',
-    borderWidth: 1,
+    borderWidth: 0.5,
   },
   ModelDoneButton: {
     height: 50,
@@ -44,7 +44,8 @@ const styles = StyleSheet.create({
   congratsView: {
     justifyContent: 'center',
     alignItems: 'center',
-    width: width * 0.65,
+    width: width * 0.55,
+
   },
   congratsText:{
     textAlign:'center',
@@ -60,19 +61,20 @@ const styles = StyleSheet.create({
     marginTop: 10
   },
   datalistView: {
-    width: width * 0.98,
+    width: width * 0.94,
     height: 'auto',
     padding: 15,
     alignSelf:'center',
-    borderRadius: 10,
-    borderWidth: 1,
+    borderRadius: 8,
+    borderWidth: 0.5,
   },
   innerView:{
-    width: width * 0.96,
+    width: width * 0.85,
   },
   txtHeading: {
-    fontSize: FontSize.labelText3,
+    fontSize: FontSize.labelText4,
     fontFamily: FontFamily.Popinssemibold,
+    fontWeight:'700',
     marginBottom:7
   },
   txtHead: {

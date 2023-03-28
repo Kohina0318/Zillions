@@ -178,8 +178,7 @@ export default function ForgotPassword(props) {
           setShowmodal={setShowmodal}
           title={'Email send Successfully. Please check link in your email.'}
           navigateTo={'Login'}
-          navigateFrom="ForgotPassword"
-        />
+         />
       )}
     </>
   );

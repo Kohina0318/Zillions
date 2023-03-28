@@ -48,9 +48,10 @@ const styles = StyleSheet.create({
     width:width * 0.9,
   },
     CardText: {
-      fontSize: FontSize.labelText2,
+      fontSize: FontSize.labelText4,
       fontFamily: FontFamily.PopinsMedium,
       color: Colors.black,
+      fontWeight:'600',
       alignSelf: 'center',
     },
     ViewAllButton: {

@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import {
   View,
   Text,
@@ -9,37 +9,25 @@ import {
   TouchableOpacity,
   BackHandler
 } from 'react-native';
-import {useSelector} from 'react-redux';
-import {MyThemeClass} from '../../components/Theme/ThemeDarkLightColor';
-import {useNavigation} from '@react-navigation/native';
+import { useSelector } from 'react-redux';
+import { MyThemeClass } from '../../components/Theme/ThemeDarkLightColor';
+import { useNavigation } from '@react-navigation/native';
 import RegisterLoginHeader from '../../components/shared/header/RegisterLoginHeader';
-import {RegisterLoginStyles} from '../../assets/css/HeaderCss/RegisterLoginStyles'
+import { RegisterLoginStyles } from '../../assets/css/HeaderCss/RegisterLoginStyles'
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import FullsizeButton from './FullsizeButton';
-import {useToast} from 'react-native-toast-notifications';
+import { useToast } from 'react-native-toast-notifications';
 import { postLogin } from '../../repository/AuthRepository/LoginRepository';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import VerifyModel from '../../components/shared/Model/VerifyModel';
 import { StoreDatatoAsync } from '../../repository/AsyncStorageServices';
 
-const {width, height} = Dimensions.get('screen');
+const { width, height } = Dimensions.get('screen');
 
 export default function Login(props) {
-  var toast=useToast();
-  const mode = useSelector(state => state.mode);
-  const themecolor = new MyThemeClass(mode).getThemeColor();
-  const navigation = useNavigation();
-  const [showmodal, setShowmodal] = useState(false);
-
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [isPasswordSecure, setIsPasswordSecure] = useState(true);
-
-  const isDarkMode = Appearance.getColorScheme() === 'dark';
-
   function handleBackButtonClick() {
-      props.navigation.goBack();
-      return true;
+    props.navigation.goBack();
+    return true;
   }
 
   React.useEffect(() => {
@@ -52,6 +40,28 @@ export default function Login(props) {
     };
   }, []);
 
+  var toast = useToast();
+  const mode = useSelector(state => state.mode);
+  const themecolor = new MyThemeClass(mode).getThemeColor();
+  const navigation = useNavigation();
+  const [showmodal, setShowmodal] = useState(false);
+
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [isPasswordSecure, setIsPasswordSecure] = useState(true);
+
+  const isDarkMode = Appearance.getColorScheme() === 'dark';
+
+
+  var comeIn
+  try {
+     comeIn = props.route.params.comeIn
+  }
+  catch (e) {
+    comeIn = ''
+  }
+   
+
   const handleLogin = async () => {
     if (email == '') {
       toast.show('Email is required!', {
@@ -61,7 +71,7 @@ export default function Login(props) {
         offset: 30,
         animationType: 'slide-in',
       });
-    }else if ( !email.includes('@')|| !email.includes('gmail.com')) {
+    } else if (!email.includes('@') || !email.includes('gmail.com')) {
       toast.show('Please enter valid email address!', {
         type: 'warning',
         placement: 'bottom',
@@ -79,17 +89,17 @@ export default function Login(props) {
       });
     } else {
       try {
-        let formdata=new FormData()
-        formdata.append('email',email)
-        formdata.append('password',password)
+        let formdata = new FormData()
+        formdata.append('email', email)
+        formdata.append('password', password)
 
         const res = await postLogin(formdata);
-      
+
         if (res.status == true) {
           await StoreDatatoAsync('@UserData', JSON.stringify(res.data));
           await StoreDatatoAsync('@Token', JSON.stringify(res.data[0].token));
           setShowmodal(!showmodal)
-        } 
+        }
         else {
           toast.show(res.msg, {
             type: 'danger',
@@ -119,12 +129,12 @@ export default function Login(props) {
         backgroundColor="transparent"
         barStyle={isDarkMode ? 'light-content' : 'dark-content'}
       />
-      <View style={{backgroundColor: themecolor.LOGINTHEMECOLOR, flex: 1}}>
-        <View style={{height: height * 0.1}}>
-          <RegisterLoginHeader title="Sign In"  onPressBack={() => handleBackButtonClick()}/>
+      <View style={{ backgroundColor: themecolor.LOGINTHEMECOLOR, flex: 1 }}>
+        <View style={{ height: height * 0.1 }}>
+          <RegisterLoginHeader title="Sign In" onPressBack={() => handleBackButtonClick()} />
         </View>
-        <View style={{...RegisterLoginStyles.MGv5}} />
-        <View style={{width: width, height: height * 0.68}}>
+        <View style={{ ...RegisterLoginStyles.MGv5 }} />
+        <View style={{ width: width, height: height * 0.68 }}>
           <View
             style={{
               ...RegisterLoginStyles.container,
@@ -136,10 +146,10 @@ export default function Login(props) {
                 ...RegisterLoginStyles.textInputView,
               }}>
               {/* <View> */}
-              <Icon name="email" style={{marginLeft:15}} size={16} color={themecolor.ICONINPUT} />
-              <View style={{width:width*0.75}}>
+              <Icon name="email" style={{ marginLeft: 15 }} size={16} color={themecolor.ICONINPUT} />
+              <View style={{ width: width * 0.75 }}>
                 <TextInput
-                 allowFontScaling={false}
+                  allowFontScaling={false}
                   value={email}
                   placeholderTextColor={themecolor.TXTGREYS}
                   placeholder="Email Address*"
@@ -154,7 +164,7 @@ export default function Login(props) {
               </View>
             </View>
 
-            <View style={{...RegisterLoginStyles.MGv5}} />
+            <View style={{ ...RegisterLoginStyles.MGv5 }} />
 
             <View
               style={{
@@ -163,10 +173,10 @@ export default function Login(props) {
                 borderColor: themecolor.BOXBORDERCOLOR1,
               }}>
               {/* <View> */}
-              <Icon name="vpn-key" style={{marginLeft:15}} size={18} color={themecolor.ICONINPUT} />
-              <View style={{width:width*0.72,}}>
+              <Icon name="vpn-key" style={{ marginLeft: 15 }} size={18} color={themecolor.ICONINPUT} />
+              <View style={{ width: width * 0.72, }}>
                 <TextInput
-                 allowFontScaling={false}
+                  allowFontScaling={false}
                   value={password}
                   placeholderTextColor={themecolor.TXTGREYS}
                   placeholder="Password*"
@@ -182,7 +192,7 @@ export default function Login(props) {
                   }}
                 />
               </View>
-              <View style={{...RegisterLoginStyles.eyeButton}}>
+              <View style={{ ...RegisterLoginStyles.eyeButton }}>
                 <MaterialCommunityIcons
                   onPress={() => {
                     isPasswordSecure
@@ -196,13 +206,13 @@ export default function Login(props) {
               </View>
             </View>
 
-            <View style={{...RegisterLoginStyles.MGv15}}>
-              <FullsizeButton title="Sign In" onPress={()=>handleLogin()}/>
+            <View style={{ ...RegisterLoginStyles.MGv15 }}>
+              <FullsizeButton title="Sign In" onPress={() => handleLogin()} />
             </View>
-            <TouchableOpacity activeOpacity={0.5} onPress={()=>navigation.navigate('ForgotPassword')}>
+            <TouchableOpacity activeOpacity={0.5} onPress={() => navigation.navigate('ForgotPassword')}>
               <View style={RegisterLoginStyles.forgot}>
                 <Text
-                 allowFontScaling={false}
+                  allowFontScaling={false}
                   style={{
                     ...RegisterLoginStyles.forgotTxt,
                     color: themecolor.BACKICON,
@@ -233,7 +243,7 @@ export default function Login(props) {
                 justifyContent: 'center',
                 alignItems: 'center',
               }}>
-              <Text allowFontScaling={false} style={{color: themecolor.TXTGREY, fontSize: 11}}>
+              <Text allowFontScaling={false} style={{ color: themecolor.TXTGREY, fontSize: 11 }}>
                 {' '}
                 OR{' '}
               </Text>
@@ -262,7 +272,7 @@ export default function Login(props) {
               justifyContent: 'center',
             }}>
             <Text
-             allowFontScaling={false}
+              allowFontScaling={false}
               style={{
                 color: themecolor.BACKICON,
                 fontSize: 12,
@@ -281,7 +291,7 @@ export default function Login(props) {
                 borderColor: themecolor.BOXBORDERCOLOR2,
               }}>
               <Text
-               allowFontScaling={false}
+                allowFontScaling={false}
                 style={{
                   fontSize: 13,
                   fontWeight: 'bold',
@@ -299,7 +309,7 @@ export default function Login(props) {
           setShowmodal={setShowmodal}
           title={'Sign In Successfully.'}
           navigateTo='Dashboard'
-          navigateFrom="Login"
+          comeIn={comeIn}
         />
       )}
     </>

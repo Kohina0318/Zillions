@@ -21,6 +21,8 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 import FA from 'react-native-vector-icons/FontAwesome';
 import {postRegistration} from '../../repository/AuthRepository/RegistrationRepository';
 import VerifyModel from '../../components/shared/Model/VerifyModel';
+import { postLogin } from '../../repository/AuthRepository/LoginRepository';
+import { StoreDatatoAsync } from '../../repository/AsyncStorageServices';
 
 const {width, height} = Dimensions.get('screen');
 
@@ -138,7 +140,27 @@ export default function Register(props) {
         const res = await postRegistration(formdata);
 
         if (res.status == true) {
-          setShowmodal(!showmodal);
+          // setShowmodal(!showmodal);
+          let formdata1 = new FormData()
+          formdata1.append('email', email)
+          formdata1.append('password', password)
+  
+          const res1 = await postLogin(formdata1);
+  
+          if (res1.status == true) {
+            await StoreDatatoAsync('@UserData', JSON.stringify(res1.data));
+            await StoreDatatoAsync('@Token', JSON.stringify(res1.data[0].token));
+            setShowmodal(!showmodal)
+          }
+          else {
+            toast.show(res.res1, {
+              type: 'danger',
+              placement: 'bottom',
+              duration: 3000,
+              offset: 30,
+              animationType: 'slide-in',
+            });
+          }
         } else {
           toast.show(res.msg, {
             type: 'danger',
@@ -431,9 +453,8 @@ export default function Register(props) {
       {showmodal && (
         <VerifyModel
           setShowmodal={setShowmodal}
-          title={'Registration Successfully.'}
-          navigateTo={'Login'}
-          navigateFrom="Register"
+          title={'Registration  Successfully.'}
+          navigateTo={'Dashboard'}
         />
       )}
     </>
