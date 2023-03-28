@@ -78,10 +78,11 @@ const styles = StyleSheet.create({
     width: width * 0.6,
   },
   otherProductHeading: {
-    fontSize: FontSize.labelText2,
+    fontSize: FontSize.labelText4,
     fontFamily: FontFamily.PopinsMedium,
     color: Colors.black,
     marginBottom: 5,
+    fontWeight:'600'
   },
   otherProductView:{
     alignSelf: 'center',

@@ -211,7 +211,6 @@ export default function OrderDetails(props) {
           setShowmodal={setShowmodal}
           title={'Request Sent Successfully.'}
           navigateTo='Order'
-          navigateFrom="OrderDetails"
         />
       )}
 

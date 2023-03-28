@@ -14,7 +14,7 @@ export default function DashboardHeading(props){
     const themecolor = new MyThemeClass(mode).getThemeColor();
    
     return(
-        <View style={{...styles.ViewInnerHeading}}>
+        <View style={{...styles.ViewInnerHeading,}}>
         <View>
           <Text allowFontScaling={false} style={{...styles.CardText, color: themecolor.TXTWHITE}}>
             {props.title}

@@ -24,7 +24,8 @@ import { useNavigation } from '@react-navigation/native';
 
 export default function CartAddress(props) {
   function handleBackButtonClick() {
-    props.navigation.goBack();
+    // props.navigation.goBack();   
+    navigation.navigate("Cart")
     return true;
   }
 
@@ -137,7 +138,7 @@ export default function CartAddress(props) {
             onPress: () => console.log('No pressed'),
             style: 'cancel',
           },
-          {text: 'Yes', onPress: () => props.navigation.navigate('Address')},
+          {text: 'Yes', onPress: () => props.navigation.navigate('Address', {comeIn: "comeInCartAddress"})},
         ],
       );
     }
@@ -166,7 +167,7 @@ export default function CartAddress(props) {
               </View>
 
               <View style={styles.marginTop} />
-              <TouchableOpacity activeOpacity={0.5} onPress={() => props.navigation.navigate('Address')}>
+              <TouchableOpacity activeOpacity={0.5} onPress={() => props.navigation.navigate('Address', {comeIn: "comeInCartAddress"})}>
                 <View style={{ ...styles.innerView }}>
                   <Text
                     allowFontScaling={false}

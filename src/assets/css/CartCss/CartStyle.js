@@ -12,7 +12,7 @@ const styles = StyleSheet.create({
     marginTop: 10,
   },
   datalistView: {
-    width: width * 0.93,
+    width: width * 0.94,
     marginTop: 3,
     padding: 13,
     borderRadius: 8,

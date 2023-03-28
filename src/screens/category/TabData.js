@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import RenderHtml from 'react-native-render-html';
 import { useSelector } from 'react-redux';
 import { MyThemeClass } from '../../components/Theme/ThemeDarkLightColor';
-import { Text, View, TouchableOpacity } from 'react-native';
+import { Text, View, TouchableOpacity, } from 'react-native';
 import { useWindowDimensions } from 'react-native';
 import { CustomerReviewFlatList } from '../../components/shared/FlateLists/CategoryFlatList/CustomerReviewFlatList';
 import { styles } from '../../assets/css/CategoryCss/ProductDetailStyle';
@@ -10,11 +10,12 @@ import StarRating from 'react-native-star-rating';
 import RatingModel from '../../components/shared/Model/RatingModel';
 import SegmentedControlTab from 'react-native-segmented-control-tab';
 
+
 export const TabData = props => {
   
   const [index, setIndex] = React.useState(0);
   const [showmodal, setShowmodal] = useState(false);
-  const { width: contentWidth } = useWindowDimensions();
+  const { contentWidth } = useWindowDimensions();
 
   const mode = useSelector(state => state.mode);
   const themecolor = new MyThemeClass(mode).getThemeColor();
@@ -31,36 +32,38 @@ export const TabData = props => {
   shipment = productDetailData.shipment_info
 
 
-
   const tagsStyles = {
     p: {
-      // backgroundColor:'grey',
       color: themecolor.TXTWHITE,
     },
   };
 
   const tagStyles = {
     p: {
-      // backgroundColor:'grey',
       color: themecolor.TXTWHITE,
       textAlign: 'left',
       height: 'auto',
+      width:"100%",
     },
     ul: {
       color: themecolor.TXTWHITE,
       height: 'auto',
-      // textAlign:'left'
+      width:"100%",
     },
     li: {
       color: themecolor.TXTWHITE,
       textAlign: 'left',
       height: 'auto',
+      width:"100%",
     },
     span: {
       height: 'auto',
+      width:"100%", 
     },
     body: {
       height: 'auto',
+      width:"100%",
+      
     },
   };
 
@@ -107,6 +110,7 @@ export const TabData = props => {
             enableExperimentalGhostLinesPrevention={true}
             defaultViewProps={{ ...styles.tabDescriptionContainer }}
             tagsStyles={tagStyles}
+            
           /> :
           index == 1 ?
             <RenderHtml

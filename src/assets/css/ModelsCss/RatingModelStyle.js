@@ -31,7 +31,7 @@ const styles = StyleSheet.create({
         alignSelf: 'center',
       },
       submittext: {
-        fontSize: FontSize.h4,
+        fontSize: FontSize.labelText4,
         color: Colors.black,
         textAlign: 'center',
         width: width * 0.82,

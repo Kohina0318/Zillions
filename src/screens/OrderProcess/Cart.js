@@ -25,7 +25,9 @@ import { getProfileInfo } from '../../repository/ProfileRepository/ProfileRepo';
 
 export default function Cart(props) {
   function handleBackButtonClick() {
-    props.navigation.goBack();
+    // props.navigation.goBack();
+    navigation.navigate("Dashboard")
+    
     return true;
   }
 
@@ -153,7 +155,7 @@ export default function Cart(props) {
             onPress: () => console.log('Cancel Pressed'),
             style: 'cancel',
           },
-          { text: 'Yes', onPress: () => navigation.navigate('Login') },
+          { text: 'Yes', onPress: () => navigation.navigate('Login', {comeIn: "comeInCart"}) },
         ],
       );
     }

@@ -513,7 +513,6 @@ export default function EditProfile(props) {
           setShowmodal={setShowmodal}
           title={'Profile Update Successfully.'}
           navigateTo={'Dashboard'}
-          navigateFrom="EditProfile"
         />
       )}
     </View>

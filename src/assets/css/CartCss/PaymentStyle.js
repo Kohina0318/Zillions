@@ -91,6 +91,14 @@ const styles = StyleSheet.create({
     padding:5,
     alignItems:'center'
   },
+  FLEXR2: {
+    justifyContent:'center',width:width*0.75,marginLeft:20,
+    flexDirection: 'row',
+    margin:5,
+    padding:5,
+    alignItems:'center'
+  },
+  payModeViewFLEXR2:{width: width * 0.62, flexDirection: 'row' ,},
   PayModeTXT1: {
     fontSize: FontSize.labelText2,
     fontFamily: FontFamily.Popinssemibold,

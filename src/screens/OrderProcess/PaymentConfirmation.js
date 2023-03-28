@@ -107,18 +107,21 @@ export const PaymentConfirmation = (props) => {
       ) : (
         <>
           <View style={{ ...styles.centeredView }}>
+
             <View style={{ ...styles.modalView, backgroundColor: themecolor.TXTWHITE1, borderColor: themecolor.BOXBORDERCOLOR1, }}>
               <Image
                 source={require('../../assets/images/confetti.gif')}
                 resizeMode='contain'
                 style={{ ...styles.imageStyle }}
               />
-              <View style={{ ...styles.congratsView }}>
+              <View style={{ ...styles.congratsView,}}>
                 <Text allowFontScaling={false} style={{ ...styles.congratsText, color: themecolor.TXTWHITE }}>Congratulation! </Text>
                 <Text allowFontScaling={false} style={{ ...styles.txt, color: themecolor.TXTWHITE }}>Your order has been Placed</Text>
               </View>
             </View>
+
             <View style={{ ...styles.mgT10 }} />
+
             <View style={{ ...styles.lef }}>
               <Text
                 allowFontScaling={false}
@@ -126,13 +129,14 @@ export const PaymentConfirmation = (props) => {
                 Product Delivered to this address:-
               </Text>
             </View>
+
             <View
               style={{
                 ...styles.datalistView,
                 backgroundColor: themecolor.TXTWHITE1,
                 borderColor: themecolor.BOXBORDERCOLOR1,
               }}>
-              <View style={{ ...styles.innerView }}>
+              <View style={{ ...styles.innerView ,}}>
                 <Text
                   allowFontScaling={false}
                   style={{ ...styles.txtHead, color: themecolor.TXTWHITE }}>
@@ -141,15 +145,15 @@ export const PaymentConfirmation = (props) => {
                 <Text
                   allowFontScaling={false}
                   style={{ ...styles.txt2, color: themecolor.TXTWHITE }}>
-                  {address == null || address == '' ? <></> : <>{address} ,</>} {city == null || city == '' ? <></> : <>{city} ,</>} {state == null || state == '' ? <></> : <>{state} ,</>} {postalCode}
+                  {address == null || address == '' ? <></> : <>{address} ,</>} {city == null || city == '' ? <></> : <>{city} ,</>} {state == null || state == '' ? <></> : <>{state} ,</>} {postalCode} 
                 </Text>
                 <Text
                   allowFontScaling={false}
                   style={{ ...styles.txtMobile, color: themecolor.TXTWHITE }}>
-                  Mobile No :
+                  Mobile No : 
                   <Text
                     allowFontScaling={false}
-                    style={{ ...styles.txt1, color: themecolor.TXTWHITE }}>
+                    style={{ ...styles.txt2, color: themecolor.TXTWHITE }}>
                     {' '}
                     +91-{phone}
                   </Text>

@@ -52,10 +52,10 @@ export default function Payment(props) {
 
   const [loader, setLoader] = useState(true);
   const [state, setState] = useState(false);
-  const [online, setOnline] = useState(false);
-  const [paymentMode, setPaymentMode] = useState('');
+  const [online, setOnline] = useState(true);
+  const [paymentMode, setPaymentMode] = useState('Online');
   const [detailData, setDetailData] = useState('');
-  const [title, setTitle] = useState('Select Payment Mode');
+  const [title, setTitle] = useState('Pay Now');
 
   const access_key = 'rzp_test_cdnNWMaIkNop2J';
 
@@ -319,59 +319,61 @@ export default function Payment(props) {
                       Select Payment Method
                     </Text>
                   </View>
-                  <View style={{ ...styles.FLEXR }}>
-                    <Text
-                      allowFontScaling={false}
-                      style={{
-                        ...styles.PayModeTXT1,
-                        color: themecolor.TXTGREYS,
-                      }}>
-                      PAY ONLINE{' '}
-                    </Text>
-                    <View
-                      style={{
-                        ...styles.borderLine,
-                        borderColor: themecolor.TXTGREYS,
-                      }}
-                    />
-                  </View>
 
-                  <TouchableOpacity
-                    activeOpacity={0.5}
-                    onPress={() => handleOnline()}>
-                    <View
-                      style={{
-                        ...styles.FLEXR,
-                        justifyContent: 'space-between',
-                      }}>
-                      <View style={{ width: width * 0.8, flexDirection: 'row' }}>
-                        <Image
-                          source={require('../../assets/images/PAYU.png')}
-                          resizeMode="contain"
-                          style={{ width: 50, height: 27 }}
-                        />
-                        <Text
-                          allowFontScaling={false}
-                          style={{
-                            ...styles.PayModeTXT2,
-                            color: themecolor.TXTWHITE,
-                          }}>
-                          Pay Online Using Pay U
-                        </Text>
-                      </View>
-                      <View style={{ width: width * 0.1 }}>
-                        <FAIcon
-                          name={online ? 'angle-down' : 'angle-right'}
-                          size={15}
-                          color={themecolor.TXTWHITE}
-                        />
-                      </View>
+                  <View>
+                    <View style={{ ...styles.FLEXR }}>
+                      <Text
+                        allowFontScaling={false}
+                        style={{
+                          ...styles.PayModeTXT1,
+                          color: themecolor.TXTGREYS,
+                        }}>
+                        PAY ONLINE{' '}
+                      </Text>
+                      <View
+                        style={{
+                          ...styles.borderLine,
+                          borderColor: themecolor.TXTGREYS,
+                        }}
+                      />
                     </View>
-                  </TouchableOpacity>
 
-                  {online ? (
-                    <View style={{ ...styles.FLEXR1 }}>
-                      <View style={{ width: width * 0.65, flexDirection: 'row' }}>
+                    <TouchableOpacity
+                      activeOpacity={0.5}
+                      onPress={() => handleOnline()}>
+                      <View
+                        style={{
+                          ...styles.FLEXR,
+                          justifyContent: 'space-between',
+                        }}>
+                        <View style={{ width: width * 0.8, flexDirection: 'row' }}>
+                          <Image
+                            source={require('../../assets/images/PAYU.png')}
+                            resizeMode="contain"
+                            style={{ width: 50, height: 27 }}
+                          />
+                          <Text
+                            allowFontScaling={false}
+                            style={{
+                              ...styles.PayModeTXT2,
+                              color: themecolor.TXTWHITE,
+                            }}>
+                            Pay Online Using Pay U
+                          </Text>
+                        </View>
+                        <View style={{ width: width * 0.1 }}>
+                          <FAIcon
+                            name={online ? 'angle-down' : 'angle-right'}
+                            size={18}
+                            color={themecolor.TXTWHITE}
+                          />
+                        </View>
+                      </View>
+                    </TouchableOpacity>
+
+                    {online ? (
+                    <View style={{ ...styles.FLEXR2, }}>
+                      <View style={{ ...styles.payModeViewFLEXR2 }}>
                         <Image
                           source={require('../../assets/images/Note.png')}
                           resizeMode="contain"
@@ -397,60 +399,64 @@ export default function Payment(props) {
                         />
                       </View>
                     </View>
-                  ) : (
+                    ) : (
                     <></>
                   )}
-
-                  <View style={{ ...styles.FLEXR }}>
-                    <Text
-                      allowFontScaling={false}
-                      style={{
-                        ...styles.PayModeTXT1,
-                        color: themecolor.TXTGREYS,
-                      }}>
-                      PAY IN CASH{' '}
-                    </Text>
-                    <View
-                      style={{
-                        ...styles.borderLine,
-                        borderColor: themecolor.TXTGREYS,
-                      }}
-                    />
                   </View>
-                  <TouchableOpacity
-                    activeOpacity={0.5}
-                    onPress={() => handleCash()}>
-                    <View style={{ ...styles.FLEXR }}>
-                      <View style={{ width: width * 0.8, flexDirection: 'row' }}>
-                        <Text
-                          allowFontScaling={false}
-                          style={{
-                            ...styles.ruppee,
-                          }}>
-                          &#8377;
-                        </Text>
-                        <Text
-                          allowFontScaling={false}
-                          style={{
-                            ...styles.PayModeTXT2,
-                            color: themecolor.TXTWHITE,
-                          }}>
-                          Cash on Delivery
-                        </Text>
-                      </View>
 
-                      <View style={{ width: width * 0.1 }}>
-                        <FAIcon
-                          name={state ? 'angle-down' : 'angle-right'}
-                          size={15}
-                          color={themecolor.TXTWHITE}
-                        />
-                      </View>
+                  <View>
+                    <View style={{ ...styles.FLEXR }}>
+                      <Text
+                        allowFontScaling={false}
+                        style={{
+                          ...styles.PayModeTXT1,
+                          color: themecolor.TXTGREYS,
+                        }}>
+                        PAY IN CASH{' '}
+                      </Text>
+                      <View
+                        style={{
+                          ...styles.borderLine,
+                          borderColor: themecolor.TXTGREYS,
+                        }}
+                      />
                     </View>
-                  </TouchableOpacity>
-                  {state ? (
-                    <View style={{ ...styles.FLEXR1 }}>
-                      <View style={{ width: width * 0.65, flexDirection: 'row' }}>
+
+                    <TouchableOpacity
+                      activeOpacity={0.5}
+                      onPress={() => handleCash()}>
+                      <View style={{ ...styles.FLEXR }}>
+                        <View style={{ width: width * 0.8, flexDirection: 'row' }}>
+                          <Text
+                            allowFontScaling={false}
+                            style={{
+                              ...styles.ruppee,
+                            }}>
+                            &#8377;
+                          </Text>
+                          <Text
+                            allowFontScaling={false}
+                            style={{
+                              ...styles.PayModeTXT2,
+                              color: themecolor.TXTWHITE,
+                            }}>
+                            Cash on Delivery
+                          </Text>
+                        </View>
+
+                        <View style={{ width: width * 0.1 }}>
+                          <FAIcon
+                            name={state ? 'angle-down' : 'angle-right'}
+                            size={18}
+                            color={themecolor.TXTWHITE}
+                          />
+                        </View>
+                      </View>
+                    </TouchableOpacity>
+                    
+                    {state ? (
+                    <View style={{ ...styles.FLEXR2 }}>
+                      <View style={{ ...styles.payModeViewFLEXR2 }}>
                         <Image
                           source={require('../../assets/images/Note.png')}
                           resizeMode="contain"
@@ -476,9 +482,10 @@ export default function Payment(props) {
                         />
                       </View>
                     </View>
-                  ) : (
+                    ) : (
                     <></>
                   )}
+                  </View>
                 </View>
 
                 <View style={styles.marginTop} />
@@ -497,8 +504,9 @@ export default function Payment(props) {
               buttonOnPress={() => handlePayment()}
             />
           </>
-        )}
-      </View>
+        )
+        }
+      </View >
     </>
   );
 }
