@@ -284,7 +284,7 @@ export function WishListDataList(props) {
           props.handleWishlist();
       }}
       ListFooterComponent={() => {
-        if (props.isLoading) {
+        if (props.isLoading && props.data.length > 9) {
           return (
             <LoadingContent />
           );

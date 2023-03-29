@@ -85,7 +85,7 @@ export default function ProductMoreDetailMainComp(props) {
               text: 'No',
               style: 'cancel',
             },
-            { text: 'Yes', onPress: () => navigation.navigate('Login') },
+            { text: 'Yes', onPress: () => navigation.navigate('Login', {comeIn:"ComeInProduct"}) },
           ],
         );
       }

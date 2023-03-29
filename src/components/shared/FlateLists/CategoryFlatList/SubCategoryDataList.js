@@ -77,7 +77,7 @@ export function SubCategoryDataList(props) {
           props.handleSubCategories();
         }}
         ListFooterComponent={() => {
-          if (props.isLoading) {
+          if (props.isLoading && props.data.length > 9) {
             return (
               <LoadingContent />
             );

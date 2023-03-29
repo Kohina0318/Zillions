@@ -48,7 +48,9 @@ const styles = StyleSheet.create({
   },
   iconview: {flexDirection: 'row', alignItems: 'center'},
   margleft15: {marginLeft: 15, width: width * 0.55, },
-  
+  contentContainerStyle:{
+    width:width*0.944, justifyContent:"flex-start", 
+  }
 });
 
 export {styles};

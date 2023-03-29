@@ -42,9 +42,13 @@ export default function Register(props) {
     };
   }, []);
 
+  
+  var toast = useToast(); 
+  const navigation = useNavigation();
   const mode = useSelector(state => state.mode);
   const themecolor = new MyThemeClass(mode).getThemeColor();
-  const navigation = useNavigation();
+  const isDarkMode = Appearance.getColorScheme() === 'dark';
+  
   const [showmodal, setShowmodal] = useState(false);
 
   const [firstName, setFirstName] = useState('');
@@ -56,9 +60,19 @@ export default function Register(props) {
   const [isPasswordSecure, setIsPasswordSecure] = useState(true);
   const [isPasswordSecure1, setIsPasswordSecure1] = useState(true);
 
-  var toast = useToast();
-
-  const isDarkMode = Appearance.getColorScheme() === 'dark';
+ 
+  var comeIn
+  var comeInLogin
+  try {
+     comeIn = props.route.params.comeIn  
+     if(comeIn == "ComeInProduct"){
+      comeInLogin="comeInLogin"
+    }
+  }
+  catch (e) {
+    comeIn = ''
+    comeInLogin=""
+  }
 
   const handleRegister = async () => {
     if (firstName == '') {
@@ -428,7 +442,7 @@ export default function Register(props) {
           </View>
           <TouchableOpacity
             activeOpacity={0.5}
-            onPress={() => navigation.navigate('Login')}>
+            onPress={() => navigation.navigate('Login', {comeIn:comeIn})}>
             <View
               style={{
                 width: width,
@@ -455,6 +469,8 @@ export default function Register(props) {
           setShowmodal={setShowmodal}
           title={'Registration  Successfully.'}
           navigateTo={'Dashboard'}
+          comeIn={comeIn}
+          comeInLogin={comeInLogin}
         />
       )}
     </>

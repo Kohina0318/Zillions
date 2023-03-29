@@ -21,14 +21,6 @@ import SuccessModel from '../../components/shared/Model/SuccessModel';
 const {width, height} = Dimensions.get('screen');
 
 export default function ForgotPassword(props) {
-  var toast=useToast();
-  const mode = useSelector(state => state.mode);
-  const themecolor = new MyThemeClass(mode).getThemeColor();
-  const [showmodal, setShowmodal] = useState(false);
-  const [email, setEmail] = useState('');
- 
-  const isDarkMode = Appearance.getColorScheme() === 'dark';
-
   function handleBackButtonClick() {
     props.navigation.goBack();
     return true;
@@ -43,6 +35,24 @@ export default function ForgotPassword(props) {
       );
     };
   }, []);
+
+  var toast=useToast();
+  const mode = useSelector(state => state.mode);
+  const themecolor = new MyThemeClass(mode).getThemeColor();
+  const isDarkMode = Appearance.getColorScheme() === 'dark';
+  const [showmodal, setShowmodal] = useState(false);
+  const [email, setEmail] = useState('');
+ 
+
+  var comeIn
+ 
+  try {
+     comeIn = props.route.params.comeIn
+  }
+  catch (e) {
+    comeIn = ''
+  }
+  
 
   const handleForgotPassword = async () => {
     if (email == '') {
@@ -74,7 +84,7 @@ export default function ForgotPassword(props) {
         } 
         else {
           toast.show(res.msg, {
-            type: 'danger',
+            type: 'warning',
             placement: 'bottom',
             duration: 3000,
             offset: 30,
@@ -178,6 +188,7 @@ export default function ForgotPassword(props) {
           setShowmodal={setShowmodal}
           title={'Email send Successfully. Please check link in your email.'}
           navigateTo={'Login'}
+          comeIn={comeIn}
          />
       )}
     </>
