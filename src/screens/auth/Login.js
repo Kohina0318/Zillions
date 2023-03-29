@@ -54,6 +54,7 @@ export default function Login(props) {
 
 
   var comeIn
+ 
   try {
      comeIn = props.route.params.comeIn
   }
@@ -209,7 +210,7 @@ export default function Login(props) {
             <View style={{ ...RegisterLoginStyles.MGv15 }}>
               <FullsizeButton title="Sign In" onPress={() => handleLogin()} />
             </View>
-            <TouchableOpacity activeOpacity={0.5} onPress={() => navigation.navigate('ForgotPassword')}>
+            <TouchableOpacity activeOpacity={0.5} onPress={() => navigation.navigate('ForgotPassword' , {comeIn:comeIn})}>
               <View style={RegisterLoginStyles.forgot}>
                 <Text
                   allowFontScaling={false}
@@ -283,7 +284,7 @@ export default function Login(props) {
           </View>
           <TouchableOpacity
             activeOpacity={0.5}
-            onPress={() => navigation.navigate('Register')}>
+            onPress={() => navigation.navigate('Register', {comeIn:comeIn})}>
             <View
               style={{
                 ...RegisterLoginStyles.btn,

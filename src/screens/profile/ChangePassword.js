@@ -148,7 +148,7 @@ export default function ChangePassword(props) {
                             <View
                                 style={{
                                     ...ProfileStyle.editInnerView,
-                                    backgroundColor: themecolor.BOXBORDERCOLOR1,
+                                    backgroundColor: themecolor.BOXBORDERCOLOR,
                                     borderColor: themecolor.BOXBORDERCOLOR1,
                                 }}>
 

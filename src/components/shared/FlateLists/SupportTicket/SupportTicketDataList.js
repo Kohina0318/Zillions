@@ -95,7 +95,7 @@ export function SupportTicketDataList(props) {
         props.handleAllMessages();
       }}
       ListFooterComponent={() => {
-        if (props.isLoading) {
+        if (props.isLoading && props.data.length > 9) {
           return (
             <LoadingContent/>
           );

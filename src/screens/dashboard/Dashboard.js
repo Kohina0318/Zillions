@@ -133,6 +133,7 @@ export default function Dashboard(props) {
       var body=new FormData()
       body.append('limit',"5")
       body.append('offset',0)
+      
       var res = await getProductList('recently_viewed', '5',body);
       setRecentlyViewedData(res.data);
     } catch (e) {

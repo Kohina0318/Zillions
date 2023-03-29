@@ -14,6 +14,7 @@ import LoadingFullScreen from '../../components/shared/Loader/LoadingFullScreen'
 import NoDataMsg from '../../components/shared/NoData/NoDataMsg';
 
 export default function Products(props) {
+  
   function handleBackButtonClick() {
     props.navigation.goBack();
     return true;

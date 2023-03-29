@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState ,} from 'react';
 import {
   TouchableOpacity,
   View,
@@ -23,7 +23,8 @@ const { width} = Dimensions.get('screen');
 
 function ProductDataFlateList({ item, themecolor }) {
   const navigation = useNavigation();
-  const toast = useToast();
+  const toast = useToast(); 
+ 
   const [showWishListed, setShowWishListed] = useState(item.wishlist);
 
   const handleWishListed = async (any) => {
@@ -59,7 +60,7 @@ function ProductDataFlateList({ item, themecolor }) {
               text: 'No',
               style: 'cancel',
             },
-            { text: 'Yes', onPress: () => navigation.navigate('Login') },
+            { text: 'Yes', onPress: () => navigation.navigate("Login", {comeIn:"ComeInProduct"}) },
           ],
         );
       }
@@ -220,11 +221,14 @@ export function ProductDataList(props) {
         numColumns={2}
         showsVerticalScrollIndicator={false}
         scrollEnabled={true}
+        contentContainerStyle={{
+          ...ProductStyle.contentContainerStyle
+        }}
         onEndReached={() => {
           props.handleByProduct();
         }}
         ListFooterComponent={() => {
-          if (props.isLoading) {
+          if (props.isLoading && props.data.length > 9) {
             return (
               <LoadingContent />
             );

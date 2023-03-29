@@ -187,7 +187,7 @@ const ProfileStyle = StyleSheet.create({
   headingTxt: {
     fontSize: FontSize.labelText3,
     fontFamily: FontFamily.Popinssemibold,
-    fontWeight:"bold"
+    fontWeight:"600"
   },
   ViewHeading:{
     width: width * 0.93, alignSelf: 'center', marginBottom:8

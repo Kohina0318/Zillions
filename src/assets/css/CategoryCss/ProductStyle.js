@@ -66,6 +66,9 @@ const ProductStyle = StyleSheet.create({
     alignSelf: 'flex-end',
     padding: 5,
     borderRadius:25,
+  },
+  contentContainerStyle:{
+    width:width*0.944, justifyContent:"flex-start", 
   }
 });
 

@@ -102,7 +102,7 @@ export function OrderDataList(props) {
         props.handleOrderlist();
       }}
       ListFooterComponent={() => {
-        if (props.isLoading) {
+        if (props.isLoading && props.data.length > 9) {
           return (
             <LoadingContent/>
           );

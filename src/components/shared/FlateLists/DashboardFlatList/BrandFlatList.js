@@ -85,12 +85,13 @@ export function BrandDataList(props) {
       numColumns={props.numColumns}
       showsVerticalScrollIndicator={false}
       showsHorizontalScrollIndicator={false}
+      contentContainerStyle={props.contentContainerStyle}
       scrollEnabled={true}
       onEndReached={() => {
         props.handleBrands();
       }}
       ListFooterComponent={() => {
-        if (props.isLoading) {
+        if (props.isLoading && props.data.length > 17) {
           return (
             <LoadingContent />
           );

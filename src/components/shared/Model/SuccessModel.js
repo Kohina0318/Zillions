@@ -13,7 +13,11 @@ export default SuccessModel = props => {
 
   const handleClickOnDone = () => {
     setModalVisible(!modalVisible);
+    if (props.comeIn == "ComeInProduct" || props.comeIn == "comeInCart") {
+      navigation.navigate("Login", {comeIn:props.comeIn})
+    }else{ 
     navigation.navigate(props.navigateTo)
+    }
   };
 
   return (
