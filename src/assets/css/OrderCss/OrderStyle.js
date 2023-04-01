@@ -2,7 +2,7 @@ import { StyleSheet, Dimensions } from 'react-native';
 import { FontSize } from '../../fonts/Fonts';
 import { Colors } from '../../config/Colors';
 import { FontFamily } from '../../fonts/FontFamily';
-const { width} = Dimensions.get('window');
+const { width, height} = Dimensions.get('window');
 
 const styles = StyleSheet.create({
   bg: { 
@@ -82,6 +82,11 @@ const styles = StyleSheet.create({
     fontFamily: FontFamily.Popinssemibold,
     fontWeight: "bold"
   },
+  txtSmallBig: {
+    fontSize: FontSize.textInput,
+    fontFamily: FontFamily.Popinssemibold,
+    fontWeight: "bold"
+  },
   iconview: {
     flexDirection: 'row',
     alignItems: 'center',
@@ -154,6 +159,17 @@ const styles = StyleSheet.create({
     alignContent: 'center',
     width: width*0.93,
   },
+  MRT10:{
+    marginTop:10
+  },
+  Review: {
+    width: width * 0.33,
+    height: height * 0.029,
+    borderRadius: 25,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+ 
 });
 
 export { styles };

@@ -79,7 +79,7 @@ export default function Register(props) {
       toast.show('First Name is required!', {
         type: 'warning',
         placement: 'bottom',
-        duration: 3000,
+        duration: 1000,
         offset: 30,
         animationType: 'slide-in',
       });
@@ -88,7 +88,7 @@ export default function Register(props) {
       toast.show('Last Name is required!', {
         type: 'warning',
         placement: 'bottom',
-        duration: 3000,
+        duration: 1000,
         offset: 30,
         animationType: 'slide-in',
       });
@@ -97,7 +97,7 @@ export default function Register(props) {
       toast.show('Mobile number is required!', {
         type: 'warning',
         placement: 'bottom',
-        duration: 3000,
+        duration: 1000,
         offset: 30,
         animationType: 'slide-in',
       });
@@ -105,7 +105,7 @@ export default function Register(props) {
       toast.show('Please enter valid mobile number!', {
         type: 'warning',
         placement: 'bottom',
-        duration: 3000,
+        duration: 1000,
         offset: 30,
         animationType: 'slide-in',
       });
@@ -113,7 +113,7 @@ export default function Register(props) {
       toast.show('Email is required!', {
         type: 'warning',
         placement: 'bottom',
-        duration: 3000,
+        duration: 1000,
         offset: 30,
         animationType: 'slide-in',
       });
@@ -121,7 +121,7 @@ export default function Register(props) {
       toast.show('Please enter valid email address!', {
         type: 'warning',
         placement: 'bottom',
-        duration: 3000,
+        duration: 1000,
         offset: 30,
         animationType: 'slide-in',
       });
@@ -129,7 +129,7 @@ export default function Register(props) {
       toast.show('Password is required!', {
         type: 'warning',
         placement: 'bottom',
-        duration: 3000,
+        duration: 1000,
         offset: 30,
         animationType: 'slide-in',
       });
@@ -137,7 +137,7 @@ export default function Register(props) {
       toast.show('Confirm Password is required!', {
         type: 'warning',
         placement: 'bottom',
-        duration: 3000,
+        duration: 1000,
         offset: 30,
         animationType: 'slide-in',
       });
@@ -170,7 +170,7 @@ export default function Register(props) {
             toast.show(res.res1, {
               type: 'danger',
               placement: 'bottom',
-              duration: 3000,
+              duration: 1000,
               offset: 30,
               animationType: 'slide-in',
             });
@@ -179,7 +179,7 @@ export default function Register(props) {
           toast.show(res.msg, {
             type: 'danger',
             placement: 'bottom',
-            duration: 3000,
+            duration: 1000,
             offset: 30,
             animationType: 'slide-in',
           });
@@ -189,7 +189,7 @@ export default function Register(props) {
         toast.show('Something went wrong!, Try again later.', {
           type: 'danger',
           placement: 'bottom',
-          duration: 3000,
+          duration: 1000,
           offset: 30,
           animationType: 'slide-in',
         });

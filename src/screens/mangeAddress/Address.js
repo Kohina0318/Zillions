@@ -81,7 +81,7 @@ export default function Address(props) {
       toast.show('Something went wrong!, Try again later.', {
         type: 'danger',
         placement: 'bottom',
-        duration: 3000,
+        duration: 1000,
         offset: 30,
         animationType: 'slide-in',
       });
@@ -104,7 +104,7 @@ export default function Address(props) {
       toast.show('Something went wrong!, Try again later.', {
         type: 'danger',
         placement: 'bottom',
-        duration: 3000,
+        duration: 1000,
         offset: 30,
         animationType: 'slide-in',
       });
@@ -116,7 +116,7 @@ export default function Address(props) {
       toast.show('Address is required!', {
         type: 'warning',
         placement: 'bottom',
-        duration: 3000,
+        duration: 1000,
         offset: 30,
         animationType: 'slide-in',
       });
@@ -124,7 +124,7 @@ export default function Address(props) {
       toast.show('State is required!', {
         type: 'warning',
         placement: 'bottom',
-        duration: 3000,
+        duration: 1000,
         offset: 30,
         animationType: 'slide-in',
       });
@@ -132,7 +132,7 @@ export default function Address(props) {
       toast.show('City is required!', {
         type: 'warning',
         placement: 'bottom',
-        duration: 3000,
+        duration: 1000,
         offset: 30,
         animationType: 'slide-in',
       });
@@ -140,7 +140,7 @@ export default function Address(props) {
       toast.show('Postal Code is required!', {
         type: 'warning',
         placement: 'bottom',
-        duration: 3000,
+        duration: 1000,
         offset: 30,
         animationType: 'slide-in',
       });
@@ -148,7 +148,7 @@ export default function Address(props) {
       toast.show('Please enter valid Postal Code!', {
         type: 'warning',
         placement: 'bottom',
-        duration: 3000,
+        duration: 1000,
         offset: 30,
         animationType: 'slide-in',
       });
@@ -156,7 +156,7 @@ export default function Address(props) {
       toast.show('Mobile No. is required!', {
         type: 'warning',
         placement: 'bottom',
-        duration: 3000,
+        duration: 1000,
         offset: 30,
         animationType: 'slide-in',
       });
@@ -164,7 +164,7 @@ export default function Address(props) {
       toast.show('Please enter valid mobile number!', {
         type: 'warning',
         placement: 'bottom',
-        duration: 3000,
+        duration: 1000,
         offset: 30,
         animationType: 'slide-in',
       });
@@ -186,7 +186,7 @@ export default function Address(props) {
           toast.show(res.msg, {
             type: 'success',
             placement: 'bottom',
-            duration: 3000,
+            duration: 1000,
             offset: 30,
             animationType: 'slide-in',
           });
@@ -199,7 +199,7 @@ export default function Address(props) {
         toast.show('Something went wrong!, Try again later.', {
           type: 'danger',
           placement: 'bottom',
-          duration: 3000,
+          duration: 1000,
           offset: 30,
           animationType: 'slide-in',
         });

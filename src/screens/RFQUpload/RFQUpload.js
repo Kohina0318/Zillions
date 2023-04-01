@@ -118,7 +118,7 @@ export default function RFQUpload(props) {
       toast.show('Name is required!', {
         type: 'warning',
         placement: 'bottom',
-        duration: 3000,
+        duration: 1000,
         offset: 30,
         animationType: 'slide-in',
       });
@@ -126,7 +126,7 @@ export default function RFQUpload(props) {
       toast.show('Mobile No. is required!', {
         type: 'warning',
         placement: 'bottom',
-        duration: 3000,
+        duration: 1000,
         offset: 30,
         animationType: 'slide-in',
       });
@@ -134,7 +134,7 @@ export default function RFQUpload(props) {
       toast.show('Please enter valid mobile number!', {
         type: 'warning',
         placement: 'bottom',
-        duration: 3000,
+        duration: 1000,
         offset: 30,
         animationType: 'slide-in',
       });
@@ -142,7 +142,7 @@ export default function RFQUpload(props) {
       toast.show('Email is required!', {
         type: 'warning',
         placement: 'bottom',
-        duration: 3000,
+        duration: 1000,
         offset: 30,
         animationType: 'slide-in',
       });
@@ -151,7 +151,7 @@ export default function RFQUpload(props) {
       toast.show('Please enter valid email address!', {
         type: 'warning',
         placement: 'bottom',
-        duration: 3000,
+        duration: 1000,
         offset: 30,
         animationType: 'slide-in',
       });
@@ -160,7 +160,7 @@ export default function RFQUpload(props) {
       toast.show('Company name is required!', {
         type: 'warning',
         placement: 'bottom',
-        duration: 3000,
+        duration: 1000,
         offset: 30,
         animationType: 'slide-in',
       })
@@ -169,7 +169,7 @@ export default function RFQUpload(props) {
       toast.show('Image is required!', {
         type: 'warning',
         placement: 'bottom',
-        duration: 3000,
+        duration: 1000,
         offset: 30,
         animationType: 'slide-in',
       });
@@ -190,7 +190,7 @@ export default function RFQUpload(props) {
           toast.show(res.msg, {
             type: 'success',
             placement: 'bottom',
-            duration: 3000,
+            duration: 1000,
             offset: 30,
             animationType: 'slide-in',
           });
@@ -199,7 +199,7 @@ export default function RFQUpload(props) {
           toast.show(res.msg, {
             type: 'warning',
             placement: 'bottom',
-            duration: 3000,
+            duration: 1000,
             offset: 30,
             animationType: 'slide-in',
           });
@@ -210,7 +210,7 @@ export default function RFQUpload(props) {
         toast.show('Something went wrong!, Try again later.', {
           type: 'danger',
           placement: 'bottom',
-          duration: 3000,
+          duration: 1000,
           offset: 30,
           animationType: 'slide-in',
         });

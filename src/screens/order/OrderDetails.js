@@ -48,7 +48,7 @@ export default function OrderDetails(props) {
   const [data, setData] = useState({})
   const [productDetailData, setProductDetailData] = useState([])
   const [shippingAddress, setShippingAddress] = useState({})
-  const [deliveryStatus, setDeliveryStatus] = useState('delivered')
+  const [deliveryStatus, setDeliveryStatus] = useState('')
   const [returnStatus, setReturnStatus] = useState('')
   const [showmodal, setShowmodal] = useState(false);
  
@@ -60,6 +60,7 @@ export default function OrderDetails(props) {
         setProductDetailData(res.data.product)
         setShippingAddress(res.data.address)
         setReturnStatus(res.data.return_status)
+        setDeliveryStatus(JSON.parse(res.data.delivery_status)[0].status)
         setLoader(false);
       }
       else {
@@ -73,7 +74,7 @@ export default function OrderDetails(props) {
       toast.show('Something went wrong!, Try again later.', {
         type: 'danger',
         placement: 'bottom',
-        duration: 3000,
+        duration: 1000,
         offset: 30,
         animationType: 'slide-in',
       });
@@ -100,7 +101,7 @@ export default function OrderDetails(props) {
       toast.show('Something went wrong!, Try again later.', {
         type: 'danger',
         placement: 'bottom',
-        duration: 3000,
+        duration: 1000,
         offset: 30,
         animationType: 'slide-in',
       });
@@ -147,7 +148,7 @@ export default function OrderDetails(props) {
             {productDetailData.length > 0 ?
               <>
                 <View style={{ ...styles.mgT10 }} />
-                <OrderDetailProductDataList data={productDetailData} />
+                <OrderDetailProductDataList data={productDetailData}  deliveryStatus={deliveryStatus}/>
               </>
               : <></>}
 

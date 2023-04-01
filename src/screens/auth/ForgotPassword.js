@@ -59,7 +59,7 @@ export default function ForgotPassword(props) {
       toast.show('Mobile number is required!', {
         type: 'warning',
         placement: 'bottom',
-        duration: 3000,
+        duration: 1000,
         offset: 30,
         animationType: 'slide-in',
       });
@@ -67,7 +67,7 @@ export default function ForgotPassword(props) {
       toast.show('Please enter valid email address!', {
         type: 'warning',
         placement: 'bottom',
-        duration: 3000,
+        duration: 1000,
         offset: 30,
         animationType: 'slide-in',
       });
@@ -86,7 +86,7 @@ export default function ForgotPassword(props) {
           toast.show(res.msg, {
             type: 'warning',
             placement: 'bottom',
-            duration: 3000,
+            duration: 1000,
             offset: 30,
             animationType: 'slide-in',
           });
@@ -96,7 +96,7 @@ export default function ForgotPassword(props) {
         toast.show('Something went wrong!, Try again later.', {
           type: 'danger',
           placement: 'bottom',
-          duration: 3000,
+          duration: 1000,
           offset: 30,
           animationType: 'slide-in',
         });

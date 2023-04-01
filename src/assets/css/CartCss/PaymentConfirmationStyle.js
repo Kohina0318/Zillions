@@ -1,7 +1,7 @@
-import {StyleSheet, Dimensions} from 'react-native';
-import {FontSize} from '../../fonts/Fonts';
-import {FontFamily} from '../../fonts/FontFamily';
-const {width, height} = Dimensions.get('window');
+import { StyleSheet, Dimensions } from 'react-native';
+import { FontSize } from '../../fonts/Fonts';
+import { FontFamily } from '../../fonts/FontFamily';
+const { width, height } = Dimensions.get('window');
 
 const styles = StyleSheet.create({
   bg: {
@@ -9,7 +9,7 @@ const styles = StyleSheet.create({
   },
   centeredView: {
     alignSelf: 'center',
-    flex:1
+    flex: 1
   },
   modalView: {
     height: height * 0.17,
@@ -24,9 +24,9 @@ const styles = StyleSheet.create({
     width: width * 0.98,
     borderRadius: 10,
     justifyContent: 'center',
-    alignSelf:'center',
-    bottom:3,
-    position:'absolute'
+    alignSelf: 'center',
+    bottom: 3,
+    position: 'absolute'
   },
   textStyleDone: {
     textAlign: 'center',
@@ -47,15 +47,15 @@ const styles = StyleSheet.create({
     width: width * 0.55,
 
   },
-  congratsText:{
-    textAlign:'center',
-    fontSize:20,
-    fontWeight:'bold',
-    fontFamily:FontFamily.TTCommonsBlack
+  congratsText: {
+    textAlign: 'center',
+    fontSize: 20,
+    fontWeight: 'bold',
+    fontFamily: FontFamily.TTCommonsBlack
   },
-  txt:{
-    textAlign:'center',
-    fontSize:FontSize.labelText4
+  txt: {
+    textAlign: 'center',
+    fontSize: FontSize.labelText4
   },
   mgT10: {
     marginTop: 10
@@ -64,46 +64,46 @@ const styles = StyleSheet.create({
     width: width * 0.94,
     height: 'auto',
     padding: 15,
-    alignSelf:'center',
+    alignSelf: 'center',
     borderRadius: 8,
     borderWidth: 0.5,
   },
-  innerView:{
+  innerView: {
     width: width * 0.85,
   },
   txtHeading: {
     fontSize: FontSize.labelText4,
     fontFamily: FontFamily.Popinssemibold,
-    fontWeight:'700',
-    marginBottom:7
+    fontWeight: '700',
+    marginBottom: 7
   },
   txtHead: {
     fontSize: FontSize.labelTextbig,
     fontFamily: FontFamily.Popinssemibold,
-     left:6,
-    marginBottom:7
+    left: 6,
+    marginBottom: 7
   },
   txt2: {
     fontSize: FontSize.labelText2,
     fontFamily: FontFamily.Popinssemibold,
-    left:7,
-    paddingRight:25,
-    marginBottom:3
+    left: 7,
+    paddingRight: 25,
+    marginBottom: 3
   },
   txtMobile: {
     fontSize: FontSize.labelText3,
     fontFamily: FontFamily.Popinssemibold,
-    fontWeight:'600',
-    left:7,
-    paddingRight:25
+    fontWeight: '600',
+    left: 7,
+    paddingRight: 25
   },
   txt1: {
     fontSize: FontSize.labelText,
     fontFamily: FontFamily.Popinssemibold,
   },
-  lef:{
-    left:15,
+  lef: {
+    left: 15,
   }
 });
 
-export {styles};
+export { styles };

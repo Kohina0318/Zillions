@@ -80,7 +80,7 @@ export default function Payment(props) {
       toast.show('Something went wrong!, Try again later.', {
         type: 'danger',
         placement: 'bottom',
-        duration: 3000,
+        duration: 1000,
         offset: 30,
         animationType: 'slide-in',
       });
@@ -169,7 +169,7 @@ export default function Payment(props) {
                     toast.show(res.msg, {
                       type: 'warning',
                       placement: 'bottom',
-                      duration: 3000,
+                      duration: 1000,
                       offset: 30,
                       animationType: 'slide-in',
                     });
@@ -181,7 +181,7 @@ export default function Payment(props) {
                     {
                       type: 'danger',
                       placement: 'bottom',
-                      duration: 3000,
+                      duration: 1000,
                       offset: 30,
                       animationType: 'slide-in',
                     },
@@ -218,7 +218,7 @@ export default function Payment(props) {
               toast.show(res.msg, {
                 type: 'warning',
                 placement: 'bottom',
-                duration: 3000,
+                duration: 1000,
                 offset: 30,
                 animationType: 'slide-in',
               });
@@ -229,7 +229,7 @@ export default function Payment(props) {
             toast.show('Something went wrong!, Try again later.', {
               type: 'danger',
               placement: 'bottom',
-              duration: 3000,
+              duration: 1000,
               offset: 30,
               animationType: 'slide-in',
             });
@@ -240,7 +240,7 @@ export default function Payment(props) {
           toast.show('Please select payment mode!', {
             type: 'warning',
             placement: 'bottom',
-            duration: 3000,
+            duration: 1000,
             offset: 30,
             animationType: 'slide-in',
           });
@@ -268,7 +268,7 @@ export default function Payment(props) {
       toast.show('Something went wrong!, Try again later.', {
         type: 'danger',
         placement: 'bottom',
-        duration: 3000,
+        duration: 1000,
         offset: 30,
         animationType: 'slide-in',
       })

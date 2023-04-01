@@ -2,24 +2,22 @@ import React, { useState } from 'react';
 import RenderHtml from 'react-native-render-html';
 import { useSelector } from 'react-redux';
 import { MyThemeClass } from '../../components/Theme/ThemeDarkLightColor';
-import { Text, View, TouchableOpacity, } from 'react-native';
+import { Text, View,  } from 'react-native';
 import { useWindowDimensions } from 'react-native';
 import { CustomerReviewFlatList } from '../../components/shared/FlateLists/CategoryFlatList/CustomerReviewFlatList';
 import { styles } from '../../assets/css/CategoryCss/ProductDetailStyle';
 import StarRating from 'react-native-star-rating';
-import RatingModel from '../../components/shared/Model/RatingModel';
 import SegmentedControlTab from 'react-native-segmented-control-tab';
 
 
 export const TabData = props => {
   
-  const [index, setIndex] = React.useState(0);
-  const [showmodal, setShowmodal] = useState(false);
-  const { contentWidth } = useWindowDimensions();
-
   const mode = useSelector(state => state.mode);
   const themecolor = new MyThemeClass(mode).getThemeColor();
 
+  const [index, setIndex] = React.useState(0);
+  const { contentWidth } = useWindowDimensions();
+ 
   var totalReview = ''
   var customerReview = []
   var description = ''
@@ -140,7 +138,8 @@ export const TabData = props => {
                     }}>
                     Average User Rating :
                   </Text>
-                  <View style={{ ...styles.tabStarContainer }}>
+                   </View>
+                   <View style={{ ...styles.tabStarContainer ,}}>
                     <StarRating
                       disabled={true}
                       maxStars={5}
@@ -150,20 +149,8 @@ export const TabData = props => {
                       fullStarColor={themecolor.STARCOLOR}
                     />
                   </View>
-                </View>
-                <View style={{ margin: 10 }}>
-                  <TouchableOpacity activeOpacity={0.5} onPress={() => setShowmodal(!showmodal)}>
-                    <View
-                      style={{
-                        backgroundColor: themecolor.ADDTOCARTBUTTONCOLOR,
-                        ...styles.Review,
-                      }}>
-                      <Text allowFontScaling={false} style={{ color: '#FFF', textAlign: 'center', fontSize: 12, }}>
-                        Give Your Review
-                      </Text>
-                    </View>
-                  </TouchableOpacity>
-                </View>
+               
+                
               </View>
 
               <View>
@@ -174,12 +161,7 @@ export const TabData = props => {
 
       </View>
 
-      {showmodal && (
-        <RatingModel
-          setShowmodal={setShowmodal}
-          title={'Enter Your Review'}
-        />
-      )}
+     
     </>
   );
 };

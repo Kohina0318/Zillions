@@ -79,7 +79,7 @@ export default function SupportTicket(props) {
       toast.show('Something went wrong!, Try again later.', {
         type: 'danger',
         placement: 'bottom',
-        duration: 3000,
+        duration: 1000,
         offset: 30,
         animationType: 'slide-in',
       });
@@ -97,7 +97,7 @@ export default function SupportTicket(props) {
       toast.show('Subject is required!', {
         type: 'warning',
         placement: 'bottom',
-        duration: 3000,
+        duration: 1000,
         offset: 30,
         animationType: 'slide-in',
       });
@@ -105,7 +105,7 @@ export default function SupportTicket(props) {
       toast.show('Message is required!', {
         type: 'warning',
         placement: 'bottom',
-        duration: 3000,
+        duration: 1000,
         offset: 30,
         animationType: 'slide-in',
       });
@@ -125,7 +125,7 @@ export default function SupportTicket(props) {
           toast.show('Create Ticket Successfully.', {
             type: 'success',
             placement: 'bottom',
-            duration: 3000,
+            duration: 1000,
             offset: 30,
             animationType: 'slide-in',
           });
@@ -137,7 +137,7 @@ export default function SupportTicket(props) {
         toast.show('Something went wrong!, Try again later.', {
           type: 'danger',
           placement: 'bottom',
-          duration: 3000,
+          duration: 1000,
           offset: 30,
           animationType: 'slide-in',
         });

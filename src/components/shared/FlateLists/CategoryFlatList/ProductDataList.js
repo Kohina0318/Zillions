@@ -1,4 +1,4 @@
-import React, { useState ,} from 'react';
+import React, { useState, } from 'react';
 import {
   TouchableOpacity,
   View,
@@ -19,12 +19,12 @@ import { useToast } from 'react-native-toast-notifications';
 import { postAddOrRemoveWishlist } from '../../../../repository/WishListRepository/WishListRepo';
 import LoadingContent from '../../Loader/LoadingContent';
 
-const { width} = Dimensions.get('screen');
+const { width } = Dimensions.get('screen');
 
 function ProductDataFlateList({ item, themecolor }) {
   const navigation = useNavigation();
-  const toast = useToast(); 
- 
+  const toast = useToast();
+
   const [showWishListed, setShowWishListed] = useState(item.wishlist);
 
   const handleWishListed = async (any) => {
@@ -36,7 +36,7 @@ function ProductDataFlateList({ item, themecolor }) {
           toast.show(res.msg, {
             type: 'success',
             placement: 'bottom',
-            duration: 3000,
+            duration: 1000,
             offset: 30,
             animationType: 'slide-in',
           });
@@ -45,7 +45,7 @@ function ProductDataFlateList({ item, themecolor }) {
           toast.show(res.msg, {
             type: 'success',
             placement: 'bottom',
-            duration: 3000,
+            duration: 1000,
             offset: 30,
             animationType: 'slide-in',
           });
@@ -60,7 +60,7 @@ function ProductDataFlateList({ item, themecolor }) {
               text: 'No',
               style: 'cancel',
             },
-            { text: 'Yes', onPress: () => navigation.navigate("Login", {comeIn:"ComeInProduct"}) },
+            { text: 'Yes', onPress: () => navigation.navigate("Login", { comeIn: "ComeInProduct" }) },
           ],
         );
       }
@@ -68,7 +68,7 @@ function ProductDataFlateList({ item, themecolor }) {
         toast.show(res.msg, {
           type: 'warning',
           placement: 'bottom',
-          duration: 3000,
+          duration: 1000,
           offset: 30,
           animationType: 'slide-in',
         });
@@ -78,7 +78,7 @@ function ProductDataFlateList({ item, themecolor }) {
       toast.show('Something went wrong!, Try again later.', {
         type: 'danger',
         placement: 'bottom',
-        duration: 3000,
+        duration: 1000,
         offset: 30,
         animationType: 'slide-in',
       });
@@ -178,28 +178,34 @@ function ProductDataFlateList({ item, themecolor }) {
           </View>
 
           <View style={{ flexDirection: 'row', width: '100%' }}>
-            <Text
-              allowFontScaling={false}
-              style={{ ...ProductStyle.txt1, color: themecolor.TEXTGREEN }}>
-              <FAIcon name="rupee" size={12} />
-              {item.purchase_price}
-              {'  '}
+            {item.purchase_price != "" ?
               <Text
                 allowFontScaling={false}
-                style={{
-                  ...ProductStyle.txtLine,
-                  color: themecolor.TXTGREY,
-                }}>
+                style={{ ...ProductStyle.txt1, color: themecolor.TEXTGREEN }}>
                 <FAIcon name="rupee" size={12} />
-                {item.sale_price}
+                {item.purchase_price}
+                {'  '}
+                {(item.purchase_price != item.sale_price) && (item.sale_price != "") ?
+                  <Text
+                    allowFontScaling={false}
+                    style={{
+                      ...ProductStyle.txtLine,
+                      color: themecolor.TXTGREY,
+                    }}>
+                    <FAIcon name="rupee" size={12} />
+                    {item.sale_price}
+                  </Text>
+                  : ""}
+                {item.discount != '' ?
+                  <Text
+                    allowFontScaling={false}
+                    style={{ ...ProductStyle.txt1, color: themecolor.TEXTRED }}>
+                    {'  ('}
+                    {item.discount}%{')'}
+                  </Text>
+                  : ""}
               </Text>
-              <Text
-                allowFontScaling={false}
-                style={{ ...ProductStyle.txt1, color: themecolor.TEXTRED }}>
-                {'  ('}
-                {item.discount}%{')'}
-              </Text>
-            </Text>
+              : <></>}
           </View>
         </TouchableOpacity>
       </View>

@@ -12,10 +12,10 @@ const getOrderlist = async (body) => {
         'Content-Type': 'multipart/form-data',
         Authorization: `${await getAppToken()}`
       },
-      body:body,
+      body: body,
     });
     const result = await response.json();
-    
+
     if (result.token_status == 'false') {
       await removeDatafromAsync('@UserData');
       await removeDatafromAsync('@Token');
@@ -48,7 +48,7 @@ const getOrderView = async (orId) => {
         Authorization: `${await getAppToken()}`
       },
     });
-    
+
     const result = await response.json();
 
     if (result.token_status == 'false') {
@@ -82,7 +82,7 @@ const postReturnOrder = async (saleId) => {
         Authorization: `${await getAppToken()}`
       },
     });
-    
+
     const result = await response.json();
 
     if (result.token_status == 'false') {
@@ -107,5 +107,41 @@ const postReturnOrder = async (saleId) => {
   }
 }
 
+const postAddProductRating = async (formdata) => {
+  try {
+    const response = await fetch(`${await SERVER_URL()}/react-rating`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'multipart/form-data',
+        Authorization: `${await getAppToken()}`
+      },
+      body: formdata,
+    });
 
-export { getOrderlist, getOrderView,postReturnOrder };
+    const result = await response.json();
+
+    if (result.token_status == 'false') {
+      await removeDatafromAsync('@UserData');
+      await removeDatafromAsync('@Token');
+
+      ToastAndroid.showWithGravityAndOffset(
+        `${'Token Expired'}`,
+        ToastAndroid.TOP,
+        ToastAndroid.LONG,
+        10,
+        10,
+      )
+      navigateToClearStack('Dashboard');
+      return result;
+    } else {
+      return result;
+    }
+
+  } catch (err) {
+    console.log('error in postGiveYourReview...in OrderRepo ', err);
+  }
+}
+
+
+
+export { getOrderlist, getOrderView, postReturnOrder, postAddProductRating };

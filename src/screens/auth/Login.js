@@ -68,7 +68,7 @@ export default function Login(props) {
       toast.show('Email is required!', {
         type: 'warning',
         placement: 'bottom',
-        duration: 3000,
+        duration: 1000,
         offset: 30,
         animationType: 'slide-in',
       });
@@ -76,7 +76,7 @@ export default function Login(props) {
       toast.show('Please enter valid email address!', {
         type: 'warning',
         placement: 'bottom',
-        duration: 3000,
+        duration: 1000,
         offset: 30,
         animationType: 'slide-in',
       });
@@ -84,7 +84,7 @@ export default function Login(props) {
       toast.show('Password is required!', {
         type: 'warning',
         placement: 'bottom',
-        duration: 3000,
+        duration: 1000,
         offset: 30,
         animationType: 'slide-in',
       });
@@ -105,7 +105,7 @@ export default function Login(props) {
           toast.show(res.msg, {
             type: 'danger',
             placement: 'bottom',
-            duration: 3000,
+            duration: 1000,
             offset: 30,
             animationType: 'slide-in',
           });
@@ -115,7 +115,7 @@ export default function Login(props) {
         toast.show('Something went wrong!, Try again later.', {
           type: 'danger',
           placement: 'bottom',
-          duration: 3000,
+          duration: 1000,
           offset: 30,
           animationType: 'slide-in',
         });
@@ -131,11 +131,11 @@ export default function Login(props) {
         barStyle={isDarkMode ? 'light-content' : 'dark-content'}
       />
       <View style={{ backgroundColor: themecolor.LOGINTHEMECOLOR, flex: 1 }}>
-        <View style={{ height: height * 0.1 }}>
           <RegisterLoginHeader title="Sign In" onPressBack={() => handleBackButtonClick()} />
-        </View>
+
         <View style={{ ...RegisterLoginStyles.MGv5 }} />
-        <View style={{ width: width, height: height * 0.68 }}>
+        
+        <View style={{ width: width, height:"60%"}}>
           <View
             style={{
               ...RegisterLoginStyles.container,
@@ -258,12 +258,14 @@ export default function Login(props) {
             />
           </View>
         </View>
+
         <View
           style={{
             width: width,
-            height: height * 0.18,
-            justifyContent: 'center',
+            height: "25%",
+            justifyContent: 'flex-end',
             alignItems: 'center',
+            bottom:15
           }}>
           <View
             style={{
@@ -302,8 +304,11 @@ export default function Login(props) {
               </Text>
             </View>
           </TouchableOpacity>
+          
         </View>
+
       </View>
+
 
       {showmodal && (
         <VerifyModel
