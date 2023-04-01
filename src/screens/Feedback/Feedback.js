@@ -53,7 +53,7 @@ export default function FeedBack(props) {
       toast.show('Name is required!', {
         type: 'warning',
         placement: 'bottom',
-        duration: 3000,
+        duration: 1000,
         offset: 30,
         animationType: 'slide-in',
       });
@@ -61,7 +61,7 @@ export default function FeedBack(props) {
       toast.show('Mobile No. is required!', {
         type: 'warning',
         placement: 'bottom',
-        duration: 3000,
+        duration: 1000,
         offset: 30,
         animationType: 'slide-in',
       });
@@ -69,7 +69,7 @@ export default function FeedBack(props) {
       toast.show('Please enter valid mobile number!', {
         type: 'warning',
         placement: 'bottom',
-        duration: 3000,
+        duration: 1000,
         offset: 30,
         animationType: 'slide-in',
       });
@@ -77,7 +77,7 @@ export default function FeedBack(props) {
       toast.show('Email is required!', {
         type: 'warning',
         placement: 'bottom',
-        duration: 3000,
+        duration: 1000,
         offset: 30,
         animationType: 'slide-in',
       });
@@ -86,7 +86,7 @@ export default function FeedBack(props) {
       toast.show('Discription is required!', {
         type: 'warning',
         placement: 'bottom',
-        duration: 3000,
+        duration: 1000,
         offset: 30,
         animationType: 'slide-in',
       });
@@ -106,7 +106,7 @@ export default function FeedBack(props) {
           toast.show(res.msg, {
             type: 'success',
             placement: 'bottom',
-            duration: 3000,
+            duration: 1000,
             offset: 30,
             animationType: 'slide-in',
           });
@@ -120,7 +120,7 @@ export default function FeedBack(props) {
         toast.show('Something went wrong!, Try again later.', {
           type: 'danger',
           placement: 'bottom',
-          duration: 3000,
+          duration: 1000,
           offset: 30,
           animationType: 'slide-in',
         });

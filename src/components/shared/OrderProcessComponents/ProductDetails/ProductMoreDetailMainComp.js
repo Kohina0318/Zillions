@@ -1,5 +1,5 @@
 
-import React, { useState} from 'react';
+import React, { useState } from 'react';
 import {
   View,
   Text,
@@ -45,9 +45,9 @@ export default function ProductMoreDetailMainComp(props) {
           props.setImage(image), props.setModalVisible(true);
         }}
       >
-        <View key={index} style={{width: width * 0.864, height: height * 0.3, }}>
+        <View key={index} style={{ width: width * 0.864, height: height * 0.3, }}>
           <Image
-            style={{ width:"100%", height:"100%" }}
+            style={{ width: "100%", height: "100%" }}
             source={{ uri: image }}
             resizeMode={'contain'}
           />
@@ -71,7 +71,7 @@ export default function ProductMoreDetailMainComp(props) {
         toast.show(res.msg, {
           type: 'success',
           placement: 'bottom',
-          duration: 3000,
+          duration: 1000,
           offset: 30,
           animationType: 'slide-in',
         });
@@ -85,7 +85,7 @@ export default function ProductMoreDetailMainComp(props) {
               text: 'No',
               style: 'cancel',
             },
-            { text: 'Yes', onPress: () => navigation.navigate('Login', {comeIn:"ComeInProduct"}) },
+            { text: 'Yes', onPress: () => navigation.navigate('Login', { comeIn: "ComeInProduct" }) },
           ],
         );
       }
@@ -93,7 +93,7 @@ export default function ProductMoreDetailMainComp(props) {
         toast.show(res.msg, {
           type: 'warning',
           placement: 'bottom',
-          duration: 3000,
+          duration: 1000,
           offset: 30,
           animationType: 'slide-in',
         });
@@ -103,7 +103,7 @@ export default function ProductMoreDetailMainComp(props) {
       toast.show('Something went wrong!, Try again later.', {
         type: 'danger',
         placement: 'bottom',
-        duration: 3000,
+        duration: 1000,
         offset: 30,
         animationType: 'slide-in',
       });
@@ -235,37 +235,43 @@ export default function ProductMoreDetailMainComp(props) {
       <View style={{ ...styles.MrT5 }} />
 
       <View style={{ ...styles.innerViewMain, }}>
-        <Text
-          allowFontScaling={false}
-          style={{ ...styles.RateText, color: themecolor.TXTWHITE }}>
-          MRP :{' '}
+        {productDetailData.purchase_price != "" ?
           <Text
             allowFontScaling={false}
-            style={{ ...styles.RateTextBig1, color: themecolor.TEXTGREEN }}>
-            {'  '}
-            <FAIcon name="rupee" size={15} />
-            {productDetailData.purchase_price}/{productDetailData.unit}{' '}
+            style={{ ...styles.RateText, color: themecolor.TXTWHITE }}>
+            MRP :{' '}
+            <Text
+              allowFontScaling={false}
+              style={{ ...styles.RateTextBig1, color: themecolor.TEXTGREEN }}>
+              {'  '}
+              <FAIcon name="rupee" size={15} />
+              {productDetailData.purchase_price}/{productDetailData.unit}{' '}
+            </Text>
+            {(productDetailData.purchase_price != productDetailData.sale_price) && (productDetailData.purchase_price != "") ?
+              <Text
+                allowFontScaling={false}
+                style={{
+                  ...styles.RateTextBig,
+                  color: themecolor.TXTGREYS,
+                  textDecorationLine: 'line-through',
+                }}>
+                <FAIcon name="rupee" size={12} />{' '}
+                {productDetailData.sale_price}
+              </Text>
+              : ""}
+            {productDetailData.discount != "" ?
+              <Text
+                allowFontScaling={false}
+                style={{
+                  ...styles.RateTextBig,
+                  color: themecolor.TEXTRED,
+                }}>
+                {'  ('}
+                {productDetailData.discount}%{')'}
+              </Text>
+              : ""}
           </Text>
-          <Text
-            allowFontScaling={false}
-            style={{
-              ...styles.RateTextBig,
-              color: themecolor.TXTGREYS,
-              textDecorationLine: 'line-through',
-            }}>
-            <FAIcon name="rupee" size={12} />{' '}
-            {productDetailData.sale_price}
-          </Text>
-          <Text
-            allowFontScaling={false}
-            style={{
-              ...styles.RateTextBig,
-              color: themecolor.TEXTRED,
-            }}>
-            {'  ('}
-            {productDetailData.discount}%{')'}
-          </Text>
-        </Text>
+          : <></>}
       </View>
 
       <View style={{ ...styles.MrT5 }} />

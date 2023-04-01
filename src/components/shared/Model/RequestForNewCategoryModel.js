@@ -50,7 +50,7 @@ export default function RequestForNewCategoryModel(props) {
             toast.show('Name is required!', {
                 type: 'warning',
                 placement: 'bottom',
-                duration: 3000,
+                duration: 1000,
                 offset: 30,
                 animationType: 'slide-in',
             });
@@ -58,7 +58,7 @@ export default function RequestForNewCategoryModel(props) {
             toast.show('Mobile No. is required!', {
                 type: 'warning',
                 placement: 'bottom',
-                duration: 3000,
+                duration: 1000,
                 offset: 30,
                 animationType: 'slide-in',
             });
@@ -66,7 +66,7 @@ export default function RequestForNewCategoryModel(props) {
             toast.show('Please enter valid mobile number!', {
                 type: 'warning',
                 placement: 'bottom',
-                duration: 3000,
+                duration: 1000,
                 offset: 30,
                 animationType: 'slide-in',
             });
@@ -74,7 +74,7 @@ export default function RequestForNewCategoryModel(props) {
             toast.show('Category Name is required!', {
                 type: 'warning',
                 placement: 'bottom',
-                duration: 3000,
+                duration: 1000,
                 offset: 30,
                 animationType: 'slide-in',
             });
@@ -83,7 +83,7 @@ export default function RequestForNewCategoryModel(props) {
             toast.show('Discription is required!', {
                 type: 'warning',
                 placement: 'bottom',
-                duration: 3000,
+                duration: 1000,
                 offset: 30,
                 animationType: 'slide-in',
             });
@@ -103,7 +103,7 @@ export default function RequestForNewCategoryModel(props) {
                     toast.show(res.msg, {
                         type: 'success',
                         placement: 'bottom',
-                        duration: 3000,
+                        duration: 1000,
                         offset: 30,
                         animationType: 'slide-in',
                     });
@@ -114,7 +114,7 @@ export default function RequestForNewCategoryModel(props) {
                 toast.show('Something went wrong!, Try again later.', {
                     type: 'danger',
                     placement: 'bottom',
-                    duration: 3000,
+                    duration: 1000,
                     offset: 30,
                     animationType: 'slide-in',
                 });

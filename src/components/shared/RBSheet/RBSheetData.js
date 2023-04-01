@@ -101,7 +101,7 @@ export const RBSheetData = props => {
             <NumericInput
               value={parseInt(props.qty)}
               onChange={value => props.setQty(value)}
-              onLimitReached={() => handleMin()}
+              // onLimitReached={() => handleMin()}
               totalWidth={100}
               totalHeight={30}
               iconSize={25}

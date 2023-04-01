@@ -55,6 +55,7 @@ export default function ProductMoreDetails(props) {
     const refRBSheet = useRef();
     const [loader, setLoader] = useState(true);
     const [productDetailData, setProductDetailData] = useState({})
+    const [productDiscount, setProductDiscount] = useState(0)
     const [productId, setProductId] = React.useState('');
     const [soldBy, setSoldBy] = useState('');
     const [sizes, setSizes] = useState([]);
@@ -73,6 +74,7 @@ export default function ProductMoreDetails(props) {
             var res = await getProductView(props.route.params.productId);
             if (res.status == true) {
                 setProductDetailData(res.data)
+                setProductDiscount(res.data.discount)
                 setProductId(res.data.product_id);
                 setSoldBy(res.data.sold_by);
                 setSizes(res.data.size);
@@ -89,7 +91,7 @@ export default function ProductMoreDetails(props) {
             toast.show('Something went wrong!, Try again later.', {
                 type: 'danger',
                 placement: 'bottom',
-                duration: 3000,
+                duration: 1000,
                 offset: 30,
                 animationType: 'slide-in',
             });
@@ -114,7 +116,7 @@ export default function ProductMoreDetails(props) {
             toast.show('Something went wrong!, Try again later.', {
                 type: 'danger',
                 placement: 'bottom',
-                duration: 3000,
+                duration: 1000,
                 offset: 30,
                 animationType: 'slide-in',
             });
@@ -131,8 +133,15 @@ export default function ProductMoreDetails(props) {
     const handleAddCartProduct = async () => {
         setLoader(true)
         try {
-            var Size = `${selectedSizePrice}#${selectedSize}#${qty}`
-            var TotalPrice = selectedSizePrice * qty
+            
+            var Price = selectedSizePrice
+
+            if (productDiscount != '' && productDiscount > 0) {
+                var discountPrice = (productDiscount * Price) / 100
+                Price = parseFloat(Price) - parseFloat(discountPrice)
+            }
+            var Size = `${Price}#${selectedSize}#${qty}`
+            var TotalPrice = Price * qty
 
             let formdata = new FormData();
             formdata.append('qty[]', qty);
@@ -148,7 +157,7 @@ export default function ProductMoreDetails(props) {
                     toast.show(res.msg, {
                         type: 'success',
                         placement: 'bottom',
-                        duration: 3000,
+                        duration: 1000,
                         offset: 30,
                         animationType: 'slide-in',
                     });
@@ -159,7 +168,7 @@ export default function ProductMoreDetails(props) {
                     toast.show(res.msg, {
                         type: 'success',
                         placement: 'bottom',
-                        duration: 3000,
+                        duration: 1000,
                         offset: 30,
                         animationType: 'slide-in',
                     });
@@ -170,7 +179,7 @@ export default function ProductMoreDetails(props) {
                 toast.show(res.msg, {
                     type: 'warning',
                     placement: 'bottom',
-                    duration: 3000,
+                    duration: 1000,
                     offset: 30,
                     animationType: 'slide-in',
                 });
@@ -180,7 +189,7 @@ export default function ProductMoreDetails(props) {
             toast.show('Something went wrong!, Try again later.', {
                 type: 'danger',
                 placement: 'bottom',
-                duration: 3000,
+                duration: 1000,
                 offset: 30,
                 animationType: 'slide-in',
             });

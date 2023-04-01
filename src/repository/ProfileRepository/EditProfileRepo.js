@@ -10,8 +10,10 @@ const postEditProfile = async formdata => {
       `${await SERVER_URL()}/registration/update_info`,
       {
         method: 'POST',
-        headers: {'Content-Type': 'multipart/form-data',
-        Authorization: `${await getAppToken()}`},
+        headers: {
+          'Content-Type': 'multipart/form-data',
+          Authorization: `${await getAppToken()}`
+        },
         body: formdata,
       },
     );
@@ -30,7 +32,7 @@ const postEditProfile = async formdata => {
       )
       navigateToClearStack('Dashboard');
       return result;
-      
+
     } else {
       return result;
     }
@@ -39,4 +41,4 @@ const postEditProfile = async formdata => {
   }
 };
 
-export {postEditProfile};
+export { postEditProfile };

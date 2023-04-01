@@ -30,18 +30,16 @@ function CartProductDataFlateList({ item, themecolor, refresh, setRefresh }) {
 
   var optionData = JSON.parse(item.option)
   var Size = ''
-  var qt = ''
-
+  
   if (optionData.size != undefined || optionData.size != null) {
     if (optionData.size.value != undefined || optionData.size.value != null) {
       var optionSizeValueData = JSON.stringify(optionData.size.value)
       var data = optionSizeValueData.replace(/^["'](.+(?=["']$))["']$/, '$1');
       var data1 = data.split("*");
       Size = data1[0]
-      qt = parseInt(data1[1])
     }
   }
-  const [qty, setQty] = useState(item.is_update > 0 ? parseInt(item.qty) : qt)
+  const [qty, setQty] = useState(parseInt(item.qty))
 
   const handleRemoveProduct = async () => {
     try {
@@ -53,7 +51,7 @@ function CartProductDataFlateList({ item, themecolor, refresh, setRefresh }) {
         toast.show(res.msg, {
           type: 'success',
           placement: 'bottom',
-          duration: 3000,
+          duration: 1000,
           offset: 30,
           animationType: 'slide-in',
         });
@@ -61,7 +59,7 @@ function CartProductDataFlateList({ item, themecolor, refresh, setRefresh }) {
         toast.show(res.msg, {
           type: 'warning',
           placement: 'bottom',
-          duration: 3000,
+          duration: 1000,
           offset: 30,
           animationType: 'slide-in',
         });
@@ -71,7 +69,7 @@ function CartProductDataFlateList({ item, themecolor, refresh, setRefresh }) {
       toast.show('Something went wrong!, Try again later.', {
         type: 'danger',
         placement: 'bottom',
-        duration: 3000,
+        duration: 1000,
         offset: 30,
         animationType: 'slide-in',
       });
@@ -86,7 +84,7 @@ function CartProductDataFlateList({ item, themecolor, refresh, setRefresh }) {
         toast.show(res.msg, {
           type: 'success',
           placement: 'bottom',
-          duration: 3000,
+          duration: 1000,
           offset: 30,
           animationType: 'slide-in',
         });
@@ -94,7 +92,7 @@ function CartProductDataFlateList({ item, themecolor, refresh, setRefresh }) {
         toast.show(res.msg, {
           type: 'warning',
           placement: 'bottom',
-          duration: 3000,
+          duration: 1000,
           offset: 30,
           animationType: 'slide-in',
         });
@@ -104,7 +102,7 @@ function CartProductDataFlateList({ item, themecolor, refresh, setRefresh }) {
       toast.show('Something went wrong!, Try again later.', {
         type: 'danger',
         placement: 'bottom',
-        duration: 3000,
+        duration: 1000,
         offset: 30,
         animationType: 'slide-in',
       });
@@ -158,7 +156,7 @@ function CartProductDataFlateList({ item, themecolor, refresh, setRefresh }) {
               </View>
               : <></>}
 
-            {qt != '' ?
+            {item.qty != '' ?
               <TouchableOpacity activeOpacity={0.5}
                 style={{ ...styles.QtyView, borderColor: themecolor.TXTGREY, maxWidth: "32%", left: 5 }}
                 onPress={() => refRBSheet.current.open()}
@@ -169,7 +167,7 @@ function CartProductDataFlateList({ item, themecolor, refresh, setRefresh }) {
                 <Text
                   allowFontScaling={false} numberOfLines={1}
                   style={{ ...styles.txtPrice, color: themecolor.TXTWHITE, maxWidth: "85%", }}>
-                  {item.is_update > 0 ? item.qty : qt}
+                  {item.qty}
                   {" "}<AN name="down" /></Text>
 
               </TouchableOpacity>
@@ -205,7 +203,7 @@ function CartProductDataFlateList({ item, themecolor, refresh, setRefresh }) {
         </View>
       </View>
 
-      <CartQtyRSSheet refRBSheet={refRBSheet} setQty={setQty} maxQty={item.current_stock} qty={qty} qtyRemove={item.is_update > 0 ? parseInt(item.qty) : qt} onPress={handleProductQuantityUpdate} />
+      <CartQtyRSSheet refRBSheet={refRBSheet} setQty={setQty} maxQty={item.current_stock} qty={qty} qtyRemove={parseInt(item.qty)} onPress={handleProductQuantityUpdate} />
 
     </View>
   );

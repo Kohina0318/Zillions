@@ -12,19 +12,14 @@ export default RatingModel = props => {
   const mode = useSelector(state => state.mode);
   const themecolor = new MyThemeClass(mode).getThemeColor();
   const [modalVisible, setModalVisible] = useState(true);
-  const [starRating, setStarRating] = useState(0)
-  const handleClickClose = () => {
-    setModalVisible(!modalVisible);
-  };
 
-  const onStarRatingPress = (rating) => {
-    setStarRating(rating)
-    setTimeout(() => setModalVisible(!modalVisible), 1000)
-
-  }
 
   return (
-    <Modal animationType="slide" transparent={true} visible={modalVisible}>
+    <Modal animationType="slide" transparent={true} visible={modalVisible}
+      onRequestClose={() => {
+        props.setStarRating(0)
+        setModalVisible(!modalVisible);
+      }}>
       <View style={styles.centeredView}>
         <View style={{ ...styles.modalView, backgroundColor: themecolor.RB2 }}>
           <View style={styles.ModalViewWidth}>
@@ -39,8 +34,8 @@ export default RatingModel = props => {
                   activeOpacity={0.5}
                   disabled={false}
                   maxStars={5}
-                  rating={starRating}
-                  selectedStar={rating => onStarRatingPress(rating)}
+                  rating={props.starRating}
+                  selectedStar={rating => props.setStarRating(rating)}
                   starSize={30}
                   fullStarColor={themecolor.STARCOLOR}
                 />
@@ -51,13 +46,13 @@ export default RatingModel = props => {
             <View style={styles.FLexCenter}>
               <TouchableOpacity
                 activeOpacity={0.5}
-                onPress={() => handleClickClose()}>
+                onPress={() => props.onPress()}>
                 <View
                   style={{
                     ...styles.ModelDoneButton,
                     backgroundColor: themecolor.ADDTOCARTBUTTONCOLOR,
                   }}>
-                  <Text allowFontScaling={false} style={{ ...styles.textStyleDone }}>Close</Text>
+                  <Text allowFontScaling={false} style={{ ...styles.textStyleDone }}>Done</Text>
                 </View>
               </TouchableOpacity>
             </View>

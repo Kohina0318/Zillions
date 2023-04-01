@@ -29,7 +29,7 @@ export default function ProductMoreDetailCustomerSupport(props) {
             toast.show('Mobile No. is required!', {
                 type: 'warning',
                 placement: 'bottom',
-                duration: 3000,
+                duration: 1000,
                 offset: 30,
                 animationType: 'slide-in',
             });
@@ -37,7 +37,7 @@ export default function ProductMoreDetailCustomerSupport(props) {
             toast.show('Please enter valid mobile number!', {
                 type: 'warning',
                 placement: 'bottom',
-                duration: 3000,
+                duration: 1000,
                 offset: 30,
                 animationType: 'slide-in',
             });
@@ -45,7 +45,7 @@ export default function ProductMoreDetailCustomerSupport(props) {
             toast.show('Message is required!', {
                 type: 'warning',
                 placement: 'bottom',
-                duration: 3000,
+                duration: 1000,
                 offset: 30,
                 animationType: 'slide-in',
             });
@@ -61,7 +61,7 @@ export default function ProductMoreDetailCustomerSupport(props) {
                     toast.show(res.msg, {
                         type: 'success',
                         placement: 'bottom',
-                        duration: 3000,
+                        duration: 1000,
                         offset: 30,
                         animationType: 'slide-in',
                     });
@@ -72,7 +72,7 @@ export default function ProductMoreDetailCustomerSupport(props) {
                 toast.show('Something went wrong!, Try again later.', {
                     type: 'danger',
                     placement: 'bottom',
-                    duration: 3000,
+                    duration: 1000,
                     offset: 30,
                     animationType: 'slide-in',
                 });

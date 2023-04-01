@@ -98,7 +98,7 @@ export default function Profile(props) {
         toast.show(res.msg, {
           type: 'warning',
           placement: 'bottom',
-          duration: 3000,
+          duration: 1000,
           offset: 30,
           animationType: 'slide-in',
         });
@@ -107,7 +107,7 @@ export default function Profile(props) {
       toast.show('Something went wrong!, Try again later.', {
         type: 'danger',
         placement: 'bottom',
-        duration: 3000,
+        duration: 1000,
         offset: 30,
         animationType: 'slide-in',
       });

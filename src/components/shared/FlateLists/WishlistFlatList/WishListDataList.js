@@ -27,7 +27,7 @@ import { navigateToClearStack } from '../../../../navigations/NavigationDrw/Navi
 const { width } = Dimensions.get('screen');
 
 
-function WishListDataFlateList({ item, themecolor, setRefresh, refresh,setOffset, setWishlistData }) {
+function WishListDataFlateList({ item, themecolor, setRefresh, refresh, setOffset, setWishlistData }) {
 
   const toast = useToast();
   const refRBSheet = useRef();
@@ -45,15 +45,15 @@ function WishListDataFlateList({ item, themecolor, setRefresh, refresh,setOffset
         setOffset(0)
         setWishlistData([])
         setRefresh(!refresh)
-        if(comeAddCart != 'comeAddCart'){
-        toast.show(res.msg, {
-          type: 'success',
-          placement: 'bottom',
-          duration: 3000,
-          offset: 30,
-          animationType: 'slide-in',
-        });
-      }
+        if (comeAddCart != 'comeAddCart') {
+          toast.show(res.msg, {
+            type: 'success',
+            placement: 'bottom',
+            duration: 1000,
+            offset: 30,
+            animationType: 'slide-in',
+          });
+        }
       } else if (res.msg == "Invalid Authentication") {
         ToastAndroid.showWithGravityAndOffset(
           `${'Token Expired'}`,
@@ -72,7 +72,7 @@ function WishListDataFlateList({ item, themecolor, setRefresh, refresh,setOffset
       toast.show('Something went wrong!, Try again later.', {
         type: 'danger',
         placement: 'bottom',
-        duration: 3000,
+        duration: 1000,
         offset: 30,
         animationType: 'slide-in',
       });
@@ -82,14 +82,22 @@ function WishListDataFlateList({ item, themecolor, setRefresh, refresh,setOffset
 
   const handleAddCartProduct = async () => {
     try {
-      var Size = `${selectedSizePrice}#${selectedSize}#${qty}`
-      var TotalPrice = selectedSizePrice * qty
+      var Price = selectedSizePrice
+
+      if(item.discount != '' && item.discount > 0){ 
+        var discountPrice = (item.discount * Price)/100
+        Price =  parseFloat(Price) - parseFloat(discountPrice)
+      }
+      var Size = `${Price}#${selectedSize}#${qty}`
+      var TotalPrice = Price * qty
 
       let formdata = new FormData();
       formdata.append('qty[]', qty);
       formdata.append('sizeprice[]', Size);
       formdata.append('totalprice', TotalPrice);
       var res = await postAddCartProduct(item.product_id, formdata)
+
+     
       if (res.status == true) {
 
         store.dispatch({ type: 'ADD_CART', payload: [item.product_id, { productId: item.product_id, data: formdata }] })
@@ -97,7 +105,7 @@ function WishListDataFlateList({ item, themecolor, setRefresh, refresh,setOffset
         toast.show(res.msg, {
           type: 'success',
           placement: 'bottom',
-          duration: 3000,
+          duration: 1000,
           offset: 30,
           animationType: 'slide-in',
         });
@@ -105,7 +113,7 @@ function WishListDataFlateList({ item, themecolor, setRefresh, refresh,setOffset
         toast.show(res.msg, {
           type: 'warning',
           placement: 'bottom',
-          duration: 3000,
+          duration: 1000,
           offset: 30,
           animationType: 'slide-in',
         });
@@ -114,7 +122,7 @@ function WishListDataFlateList({ item, themecolor, setRefresh, refresh,setOffset
       toast.show('Something went wrong!, Try again later.', {
         type: 'danger',
         placement: 'bottom',
-        duration: 3000,
+        duration: 1000,
         offset: 30,
         animationType: 'slide-in',
       });
@@ -185,28 +193,34 @@ function WishListDataFlateList({ item, themecolor, setRefresh, refresh,setOffset
             </View>
 
             <View style={{ flexDirection: 'row', width: '100%' }}>
-              <Text
-                allowFontScaling={false}
-                style={{ ...styles.txt1, color: themecolor.TEXTGREEN }}>
-                <FAIcon name="rupee" size={12} />
-                {item.purchase_price}
-                {'  '}
+              {item.purchase_price != "" ?
                 <Text
                   allowFontScaling={false}
-                  style={{
-                    ...styles.txtLine,
-                    color: themecolor.TXTGREY,
-                  }}>
+                  style={{ ...styles.txt1, color: themecolor.TEXTGREEN }}>
                   <FAIcon name="rupee" size={12} />
-                  {item.sale_price}
+                  {item.purchase_price}
+                  {'  '}
+                  {(item.purchase_price != item.sale_price) && (item.sale_price != "") ?
+                    <Text
+                      allowFontScaling={false}
+                      style={{
+                        ...styles.txtLine,
+                        color: themecolor.TXTGREY,
+                      }}>
+                      <FAIcon name="rupee" size={12} />
+                      {item.sale_price}
+                    </Text>
+                    : ""}
+                  {item.discount != '' ?
+                    <Text
+                      allowFontScaling={false}
+                      style={{ ...styles.txt1, color: themecolor.TEXTRED }}>
+                      {'  ('}
+                      {item.discount}%{')'}
+                    </Text>
+                    : <></>}
                 </Text>
-                <Text
-                  allowFontScaling={false}
-                  style={{ ...styles.txt1, color: themecolor.TEXTRED }}>
-                  {'  ('}
-                  {item.discount}%{')'}
-                </Text>
-              </Text>
+                : <></>}
             </View>
           </View>
         </TouchableOpacity>
@@ -281,7 +295,7 @@ export function WishListDataList(props) {
         ...styles.contentContainerStyle
       }}
       onEndReached={() => {
-          props.handleWishlist();
+        props.handleWishlist();
       }}
       ListFooterComponent={() => {
         if (props.isLoading && props.data.length > 9) {
