@@ -21,33 +21,21 @@ import RBSheet from 'react-native-raw-bottom-sheet';
 import HalfSizeButton from '../../components/shared/button/halfSizeButton';
 import { getSearchProducts } from '../../repository/SearchRepository/SearchRepo';
 import { ProductDataList } from '../../components/shared/FlateLists/CategoryFlatList/ProductDataList';
-import { OrderFlatList, PriceFlatList } from '../../components/shared/FlateLists/SearchFlatList/OrderAndPriceFlatList';
+import { PriceFlatList, SortByFlatList } from '../../components/shared/FlateLists/SearchFlatList/OrderAndPriceFlatList';
+import { store } from '../../../App';
 
 const { height } = Dimensions.get('window');
 
 export default function Search(props) {
-  const wait = timeout => {
-    return new Promise(resolve => setTimeout(resolve, timeout));
-  };
-  var navigation = useNavigation();
-  const refRBSheet = useRef();
 
-  const mode = useSelector(state => state.mode);
-  const themecolor = new MyThemeClass(mode).getThemeColor();
-  const [value, setValue] = useState('');
-  const [item, setItem] = useState('');
-  const [index, setIndex] = useState(true);
-  const [dataList, setDataList] = useState([]);
-  const [loader, setLoader] = useState(false);
-  const [loading, setLoading] = useState(false);
-  const [dataShown, setDataShown] = useState(false);
-  const [productData, setProductData] = useState([])
-  const [sortBy, setsortBy] = useState('')
-  const [priceSortBy, setPriceSortBy] = useState('')
-  const [isLoading, setIsLoading] = React.useState(false);
-  const toast = useToast();
 
   function handleBackButtonClick() {
+    store.dispatch({ type: 'REMOVE_SEARCH_FILTER_SORT_BY_TEMPORARY' })
+    store.dispatch({ type: 'REMOVE_SEARCH_FILTER_SORT_BY' })
+
+    store.dispatch({ type: 'REMOVE_SEARCH_FILTER_PRICE_BY_TEMPORARY' })
+    store.dispatch({ type: 'REMOVE_SEARCH_FILTER_PRICE_BY' })
+
     props.navigation.goBack();
     return true;
   }
@@ -64,7 +52,31 @@ export default function Search(props) {
     };
   }, []);
 
-  const handleSearch = async (value) => {
+  const refRBSheet = useRef();
+  const toast = useToast();
+
+  const mode = useSelector(state => state.mode);
+  const themecolor = new MyThemeClass(mode).getThemeColor();
+  const [value, setValue] = useState('');
+  const [item, setItem] = useState('');
+  const [index, setIndex] = useState(true);
+  const [loader, setLoader] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [dataShown, setDataShown] = useState(false);
+  const [productData, setProductData] = useState([])
+  const [isLoading, setIsLoading] = React.useState(false);
+  const [disabledClearAll, setDisabledClearAll] = React.useState(false);
+  const [sortBy, setSortBy] = useState('');
+  const [price, setPrice] = useState('');
+
+  const [getOffset, setOffset] = React.useState(0);
+
+  const selectedSort = useSelector(state => state.searchFilterSortByTemporary);
+  const selectedPrice = useSelector(state => state.searchFilterPriceByTemporary);
+
+
+  const handleSearch = async (clearall) => {
+
     if (value == null || value == '') {
       setDataShown(false)
       toast.show(
@@ -79,93 +91,116 @@ export default function Search(props) {
       );
     } else {
       try {
-        if (!refRBSheet.current.close()) {
-          refRBSheet.current.close()
-        }
-        setLoading(true)
-        var formData = new FormData()
-        formData.append("text", value)
-        formData.append("sort", sortBy)
-        formData.append("range", priceSortBy)
-        formData.append("brand", 0)
-        formDataappend('limit', "10")
-        if (value == undefined) {
-          formData.append('offset', 0)
-        }
-        else { formData.append('offset', value) }
-        var res = await getSearchProducts(formData);
-        if (res.status === true) {
-          setDataShown(true)
+        var sortIndex = ""
+        var sortItem = ""
+        var priceIndex = ""
+        var priceItem = ""
 
-          if (productData == [] || productData == null) { setProductData(res.data.all_products) }
-          else {
-            setIsLoading(true)
-            var temp = res.data
-            if (temp.length == 0) {
-              setIsLoading(false)
-            }
-            else {
-              var temp1 = productData.concat(temp)
-              setProductData(temp)
-            }
-          }
-
-
-
-
-          setLoading(false)
+        if (clearall == 'clear') {
+          store.dispatch({ type: 'REMOVE_SEARCH_FILTER_SORT_BY_TEMPORARY' })
+          store.dispatch({ type: 'REMOVE_SEARCH_FILTER_SORT_BY' })
+          store.dispatch({ type: 'REMOVE_SEARCH_FILTER_PRICE_BY_TEMPORARY' })
+          store.dispatch({ type: 'REMOVE_SEARCH_FILTER_PRICE_BY' })
         }
         else {
-          setLoader(false)
+          if (Object.values(selectedSort).length > 0) {
+            var sortIndex = Object.values(selectedSort)[0].index
+            var sortItem = Object.values(selectedSort)[0].item
+
+            store.dispatch({ type: 'ADD_SEARCH_FILTER_SORT_BY', payload: [sortIndex, { index: sortIndex, item: sortItem }] })
+          }
+
+          if (Object.values(selectedPrice).length > 0) {
+            var priceIndex = Object.values(selectedPrice)[0].index
+            var priceItem = Object.values(selectedPrice)[0].item
+
+            store.dispatch({ type: 'ADD_SEARCH_FILTER_PRICE_BY', payload: [priceIndex, { index: priceIndex, item: priceItem }] })
+          }
+        }
+
+        // alert(`value ==> ${value} , sortBy ==> ${sortItem} , priceSortBy ==> ${priceItem} getOffset ==> ${getOffset},  productData==> ${productData} `)
+
+        var formData = new FormData()
+        formData.append("text", value)
+        formData.append("sort", sortItem)
+        formData.append("range", priceItem)
+        formData.append("brand", 0)
+        formData.append('limit', "6")
+        formData.append('offset', getOffset)
+
+
+        var res = await getSearchProducts(formData);
+
+
+        if (res.status === true) {
+          setDataShown(true)
+          if (res.data.all_products.length > 0) {
+            setIsLoading(true)
+            setOffset(getOffset + 6)
+            var temp1 = productData.concat(res.data.all_products)
+            setProductData(temp1);
+          } else {
+            setIsLoading(false)
+          }
+          setLoading(false)
+
+        }
+        else {
+          setLoading(false)
+          setProductData("No Data")
         }
       } catch (e) {
         setLoading(false)
+        setProductData("No Data")
         console.log('errrror in..handleSearchProduct page-->', e);
-        toast.show('Something went wrong!, Try again later.', {
-          type: 'danger',
-          placement: 'bottom',
-          duration: 1000,
-          offset: 30,
-          animationType: 'slide-in',
-        });
+
       }
     }
   };
 
-  const handleGetvalue = value => {
-    setValue(value);
-    setDataShown(false)
+
+  const handleGetvalue = txt => {
+    setValue(txt);
+    setDataShown(false);
   };
 
-  const handleChangeSortBy = (value) => {
-    setsortBy(value)
-  }
-
-  const handleChangePriceSortBy = (value) => {
-    setPriceSortBy(value)
-  }
 
   const handleClear = () => {
-    setDataShown(false)
-    setLoading(false)
+    setValue("");
+    setDataShown(false);
+    setOffset(0);
+    setProductData([]);
+    setPrice('');
+    setSortBy('');
+    setDisabledClearAll(false);
+    setLoading(false);
+    store.dispatch({ type: 'REMOVE_SEARCH_FILTER_SORT_BY_TEMPORARY' })
+    store.dispatch({ type: 'REMOVE_SEARCH_FILTER_SORT_BY' })
+
+    store.dispatch({ type: 'REMOVE_SEARCH_FILTER_PRICE_BY_TEMPORARY' })
+    store.dispatch({ type: 'REMOVE_SEARCH_FILTER_PRICE_BY' })
+
   }
 
-
-  const handleData = item => {
-    setItem(item);
-    setLoader(true);
-
-    setLoader(false);
-    refRBSheet.current.open();
-  };
-
-  const handleOnClear = () => {
-    setsortBy('')
-    setPriceSortBy('')
+  const handleOnClear = async () => {
+    setLoading(true)
+    setPrice('');
+    setSortBy('');
+    setOffset(0);
+    setProductData([]);
+    setDisabledClearAll(false);
+    handleSearch('clear');
   }
-
 
   const handleMin = () => {
+    if (item == "SortBy") {
+      setSortBy('');
+      store.dispatch({ type: 'REMOVE_SEARCH_FILTER_SORT_BY_TEMPORARY' })
+    }
+    else {
+      setPrice('');
+      store.dispatch({ type: 'REMOVE_SEARCH_FILTER_PRICE_BY_TEMPORARY' })
+    }
     refRBSheet.current.close();
   };
 
@@ -180,54 +215,64 @@ export default function Search(props) {
         onPressBack={() => handleBackButtonClick()}
       />
 
-      {/* <View style={{marginTop: 10}} /> */}
       <View style={styles.SearchMainView}>
         <View style={styles.SearchSecondView}>
           <SearchInput
             // onKeyPress={()=>handleKeyPress()}
-            onChange={value => handleGetvalue(value)}
-            onPress={() => handleSearch()}
-            onSubmitEditing={() => handleSearch()}
+            onChange={txt => handleGetvalue(txt)}
+            onPress={() => {
+              setLoading(true);
+              setOffset(0);
+              setProductData([]);
+              handleSearch()
+            }}
+            onSubmitEditing={() => {
+              setLoading(true);
+              setOffset(0);
+              setProductData([]);
+              handleSearch()
+            }}
             onPress1={() => handleClear()}
-            RightCloseIcon="close"
+            RightCloseIcon={value != "" ? "close" : ""}
             LeftIcon="search"
-            placeholder="Search"
+            placeholder="Search.."
           />
         </View>
+
+        {dataShown ?
+          (
+            <View style={{ marginLeft: 10, flexDirection: 'row' }}>
+              <SortSlider onClear={handleOnClear} setItem={setItem} refRBSheet={refRBSheet} disabledClearAll={disabledClearAll}
+                sortBy={sortBy} setSortBy={setSortBy} setPrice={setPrice} price={price} />
+            </View>
+          ) :
+          <></>
+
+        }
+
         {loading ? (
           <LoadingFullScreen style={{ flex: 1 }} />
-        ) :
-          dataShown ? (
-            productData == '' ?
-              <>
-                <View style={{ ...styles.noDataView }}>
-                  <Image
-                    source={require('../../assets/images/search.png')}
-                    resizeMode="contain"
-                    style={{ width: "100%", height: 200 }}
-                  />
-                  <Text allowFontScaling={false} style={{ ...styles.noDataText1, color: themecolor.TXTWHITE }}>Oops! No matching products found.. </Text>
-                  <Text allowFontScaling={false} style={{ ...styles.noDataText }}>Try another Search Term</Text>
-                </View>
-              </>
-
-              :
-              <>
-                <View style={{ marginLeft: 10, flexDirection: 'row' }}>
-                  <SortSlider onClear={() => handleOnClear()} onChange={value => handleData(value)} />
-                  {/* <FilterFlatList touch={false} onChange={(value)=>handleData(value)} data={data} index={index}/> */}
-                </View>
-
-                <View style={{ marginBottom: 50 }}>
-                  <ProductDataList data={productData} handleByProduct={(value) => handleSearch(value)} isLoading={isLoading} />
-                </View>
-                <View style={{ marginVertical: 31 }} />
-              </>
-          )
+        ) : (
+          productData == 'No Data' ?
+            <View style={{ ...styles.noDataView }}>
+              <Image
+                source={require('../../assets/images/search.png')}
+                resizeMode="contain"
+                style={{ width: "100%", height: 200 }}
+              />
+              <Text allowFontScaling={false} style={{ ...styles.noDataText1, color: themecolor.TXTWHITE }}>Oops! No matching products found.. </Text>
+              <Text allowFontScaling={false} style={{ ...styles.noDataText }}>Try another Search Term</Text>
+            </View>
             :
             <>
+              <View style={{ marginBottom: 50, alignSelf: "center", }}>
+                <ProductDataList data={productData} handleByProduct={handleSearch} isLoading={isLoading} />
+              </View>
+              <View style={{ marginVertical: 31 }} />
             </>
+        )
         }
+
       </View>
       {loader ? (
         <LoadingFullScreen style={{ flex: 1 }} />
@@ -238,7 +283,8 @@ export default function Search(props) {
             animationType={'slide'}
             closeOnDragDown={true}
             closeOnPressMask={true}
-            height={height * 0.7}
+            closeOnPressBack={false}
+            height={height * 0.6}
             customStyles={{
               container: {
                 backgroundColor: themecolor.THEMECOLOR,
@@ -263,27 +309,31 @@ export default function Search(props) {
             </View>
             <View style={{ ...styles.Borderline, borderColor: themecolor.BOXBORDERCOLOR1 }} />
 
-            <View style={{ alignItems: 'center', height: height * 0.55, }}>
+            <View style={{ alignItems: 'center', height: height * 0.45, }}>
 
-           {
+              {
                 item == "SortBy" ?
-                  <OrderFlatList onChange={(value) => handleChangeSortBy(value)} />
+                  <SortByFlatList />
                   :
-                  item == "Price" ?
-                    <PriceFlatList onChange={(value) => handleChangePriceSortBy(value)} />
-                    :
-                    <></>
-
+                  <PriceFlatList />
               }
             </View>
 
-            <View style={{ width: '100%', bottom: 0 }}>
+            <View style={{ width: '94%', bottom: 0, alignSelf: "center" }}>
               <HalfSizeButton
                 title="Apply"
                 backgroundColor={themecolor.ADDTOCARTBUTTONCOLOR}
                 color={'#fff'}
                 borderColor={themecolor.BOXBORDERCOLOR1}
-                onPress={() => handleSearch()}
+                onPress={() => {
+                  setLoading(true);
+                  setDisabledClearAll(true);
+                  setOffset(0);
+                  setProductData([]);
+                  refRBSheet.current.close();
+                  handleSearch()
+                }
+                }
               />
             </View>
           </RBSheet>

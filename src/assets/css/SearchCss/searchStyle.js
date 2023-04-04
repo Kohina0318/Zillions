@@ -152,6 +152,19 @@ const styles = StyleSheet.create({
     fontSize: FontSize.labelText3,
     fontWeight: 'bold',
   },
+  RadioView: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignSelf: 'flex-start',
+  },
+  RadioText: {
+    top:8,
+    fontFamily: FontFamily.PopinsRegular,
+    color: Colors.black,
+    fontSize: FontSize.labelText3,
+    left:7
+  },
+
 });
 
 export {styles};

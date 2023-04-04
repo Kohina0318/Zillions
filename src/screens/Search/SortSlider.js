@@ -13,48 +13,20 @@ import FA from 'react-native-vector-icons/FontAwesome';
 export const SortSlider = props => {
   const mode = useSelector(state => state.mode);
   const themecolor = new MyThemeClass(mode).getThemeColor();
-  const [sortBy, setSortBy] = useState('');
-  const [category, setCategory] = useState('');
-  const [brand, setBrand] = useState('');
-  const [size, setSize] = useState('');
-  const [price, setPrice] = useState('');
-  const [vendor, setVendor] = useState('');
-
-  const handleClear = () => {
-    setBrand('');
-    setCategory('');
-    setPrice('');
-    setSize('');
-    setSortBy('');
-    setVendor('');
-    props.onClear('')
-  };
-
+  
+  
   const handleClick = item => {
     if (item == 1) {
-      setSortBy('SortBy');
-      props.onChange('SortBy');
+      props. setSortBy('SortBy');
+      props.setItem("SortBy")
+      props.refRBSheet.current.open();
     }
-    if (item == 2) {
-      setBrand('Brand');
-      props.onChange('Brand');
+    else{
+      props.setPrice('Price');
+      props.setItem("Price")
+      props.refRBSheet.current.open();
     }
-    if (item == 3) {
-      setCategory('Category');
-      props.onChange('Category');
-    }
-    if (item == 4) {
-      setPrice('Price');
-      props.onChange('Price');
-    }
-    if (item == 5) {
-      setSize('Size');
-      props.onChange('Size');
-    }
-    if (item == 6) {
-      setVendor('Vendor');
-      props.onChange('Vendor');
-    }
+   
   };
 
   return (
@@ -67,7 +39,7 @@ export const SortSlider = props => {
           style={{
             ...styles.SizeView,
             borderColor:
-              sortBy == 'SortBy' ? themecolor.BLUEWHITE : themecolor.TXTGREYS,
+            props.sortBy == 'SortBy' ? themecolor.BLUEWHITE : themecolor.TXTGREYS,
             backgroundColor: 'transparent',
           }}>
           <View style={{...styles.flexDR}}>
@@ -76,7 +48,7 @@ export const SortSlider = props => {
               style={{
                 ...styles.HeadText2,
                 color:
-                  sortBy == 'SortBy'
+                props.sortBy == 'SortBy'
                     ? themecolor.BLUEWHITE
                     : themecolor.TXTWHITE,
               }}>
@@ -87,18 +59,19 @@ export const SortSlider = props => {
               style={{alignSelf: 'center', marginLeft: 5}}
               size={16}
               color={
-                sortBy == 'SortBy' ? themecolor.BLUEWHITE : themecolor.TXTWHITE
+                props.sortBy == 'SortBy' ? themecolor.BLUEWHITE : themecolor.TXTWHITE
               }
             />
           </View>
         </View>
       </TouchableOpacity>
-      {/* <TouchableOpacity activeOpacity={0.8} onPress={() => handleClick(2)}>
+
+      <TouchableOpacity activeOpacity={0.8} onPress={() => handleClick(2)}>
         <View
           style={{
             ...styles.SizeView,
             borderColor:
-              brand == 'Brand' ? themecolor.BLUEWHITE : themecolor.TXTGREYS,
+              props.price == 'Price' ? themecolor.BLUEWHITE : themecolor.TXTGREYS,
             backgroundColor: 'transparent',
           }}>
           <View style={{...styles.flexDR}}>
@@ -107,71 +80,7 @@ export const SortSlider = props => {
               style={{
                 ...styles.HeadText2,
                 color:
-                  brand == 'Brand' ? themecolor.BLUEWHITE : themecolor.TXTWHITE,
-              }}>
-              Brands
-            </Text>
-            <FA
-              name="angle-down"
-              style={{alignSelf: 'center', marginLeft: 5}}
-              size={16}
-              color={
-                brand == 'Brand' ? themecolor.BLUEWHITE : themecolor.TXTWHITE
-              }
-            />
-          </View>
-        </View>
-      </TouchableOpacity>
-      <TouchableOpacity activeOpacity={0.8} onPress={() => handleClick(3)}>
-        <View
-          style={{
-            ...styles.SizeView,
-            borderColor:
-              category == 'Category'
-                ? themecolor.BLUEWHITE
-                : themecolor.TXTGREYS,
-            backgroundColor: 'transparent',
-          }}>
-          <View style={{...styles.flexDR}}>
-            <Text
-              allowFontScaling={false}
-              style={{
-                ...styles.HeadText2,
-                color:
-                  category == 'Category'
-                    ? themecolor.BLUEWHITE
-                    : themecolor.TXTWHITE,
-              }}>
-              Category
-            </Text>
-            <FA
-              name="angle-down"
-              style={{alignSelf: 'center', marginLeft: 5}}
-              size={16}
-              color={
-                category == 'Category'
-                  ? themecolor.BLUEWHITE
-                  : themecolor.TXTWHITE
-              }
-            />
-          </View>
-        </View>
-      </TouchableOpacity> */}
-      <TouchableOpacity activeOpacity={0.8} onPress={() => handleClick(4)}>
-        <View
-          style={{
-            ...styles.SizeView,
-            borderColor:
-              price == 'Price' ? themecolor.BLUEWHITE : themecolor.TXTGREYS,
-            backgroundColor: 'transparent',
-          }}>
-          <View style={{...styles.flexDR}}>
-            <Text
-              allowFontScaling={false}
-              style={{
-                ...styles.HeadText2,
-                color:
-                  price == 'Price' ? themecolor.BLUEWHITE : themecolor.TXTWHITE,
+                props.price == 'Price' ? themecolor.BLUEWHITE : themecolor.TXTWHITE,
               }}>
               Price
             </Text>
@@ -180,79 +89,15 @@ export const SortSlider = props => {
               style={{alignSelf: 'center', marginLeft: 5}}
               size={16}
               color={
-                price == 'Price' ? themecolor.BLUEWHITE : themecolor.TXTWHITE
+                props.price == 'Price' ? themecolor.BLUEWHITE : themecolor.TXTWHITE
               }
             />
           </View>
         </View>
       </TouchableOpacity>
-      {/* <TouchableOpacity activeOpacity={0.8} onPress={() => handleClick(5)}>
-        <View
-          style={{
-            ...styles.SizeView,
-            borderColor:
-              size == 'Size' ? themecolor.BLUEWHITE : themecolor.TXTGREYS,
-            backgroundColor: 'transparent',
-          }}>
-          <View style={{...styles.flexDR}}>
-            <Text
-              allowFontScaling={false}
-              style={{
-                ...styles.HeadText2,
-                color:
-                  size == 'Size' ? themecolor.BLUEWHITE : themecolor.TXTWHITE,
-              }}>
-              Size
-            </Text>
-            <FA
-              name="angle-down"
-              style={{alignSelf: 'center', marginLeft: 5}}
-              size={16}
-              color={
-                size == 'Size' ? themecolor.BLUEWHITE : themecolor.TXTWHITE
-              }
-            />
-          </View>
-        </View>
-      </TouchableOpacity>
-      <TouchableOpacity activeOpacity={0.8} onPress={() => handleClick(6)}>
-        <View
-          style={{
-            ...styles.SizeView,
-            borderColor:
-              vendor == 'Vendor' ? themecolor.BLUEWHITE : themecolor.TXTGREYS,
-            backgroundColor: 'transparent',
-          }}>
-          <View style={{...styles.flexDR}}>
-            <Text
-              allowFontScaling={false}
-              style={{
-                ...styles.HeadText2,
-                color:
-                  vendor == 'Vendor'
-                    ? themecolor.BLUEWHITE
-                    : themecolor.TXTWHITE,
-              }}>
-              Vendor List
-            </Text>
-            <FA
-              name="angle-down"
-              style={{alignSelf: 'center', marginLeft: 5}}
-              size={16}
-              color={
-                vendor == 'Vendor' ? themecolor.BLUEWHITE : themecolor.TXTWHITE
-              }
-            />
-          </View>
-        </View>
-      </TouchableOpacity> */}
-      {sortBy == 'SortBy' ||
-      brand == 'Brand' ||
-      category == 'Category' ||
-      price == 'Price' ||
-      size == 'Size' ||
-      vendor == 'Vendor' ? (
-        <TouchableOpacity activeOpacity={0.8} onPress={() => handleClear()}>
+
+      {props.disabledClearAll ? (
+        <TouchableOpacity activeOpacity={0.8} onPress={() => props.onClear()}>
           <View
             style={{
               ...styles.SizeView1,

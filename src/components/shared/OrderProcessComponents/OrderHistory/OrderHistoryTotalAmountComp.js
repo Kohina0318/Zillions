@@ -63,7 +63,7 @@ export default function OrderHistoryTotalAmountComp(props) {
 
                     <View style={{ ...styles.width65p, }}>
                         <Text allowFontScaling={false} style={{ ...styles.txt1, color: themecolor.TXTWHITE }}>
-                            {paymentStatus[0].status}
+                            {paymentStatus[0].status == 'due' ? "Due" : "Paid"}
                         </Text>
                     </View>
                 </View>

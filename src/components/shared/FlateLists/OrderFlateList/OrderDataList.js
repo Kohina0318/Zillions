@@ -58,7 +58,7 @@ function OrderDataFlateList({ item, themecolor }) {
 
         <View style={{ ...styles.flexRow }}>
           <Text allowFontScaling={false} style={{ ...styles.txt, color: themecolor.TXTWHITE }} >
-             {item.delivery_status == "pending" ? "Confirmed": item.delivery_status}
+             {item.delivery_status == "pending" ? "Confirmed": item.delivery_status == "delivered" ? "Delivered"  : "On delivery"}
           </Text>
 
           <Text allowFontScaling={false} style={{ ...styles.txt1, color: themecolor.TXTWHITE }}>
