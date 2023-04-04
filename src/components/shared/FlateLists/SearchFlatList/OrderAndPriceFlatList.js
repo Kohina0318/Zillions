@@ -9,6 +9,7 @@ import {styles} from '../../../../assets/css/SearchCss/searchStyle';
 import {MyThemeClass} from '../../../Theme/ThemeDarkLightColor';
 import {useSelector} from 'react-redux';
 import {CheckBox} from '@rneui/themed';
+import { store } from '../../../../../App';
 
 const {width} = Dimensions.get('screen');
 
@@ -79,16 +80,16 @@ const dataPrice = [
 ];
 
 
-function OrderList({item,index,selectedIndex,onChange1, themecolor,onChange}) {
+function OrderList({item,index,selectedIndex,onChange1, themecolor,}) {
 
   const handleChange=(item,index)=>{
-    onChange(item)
     onChange1(index)
+    store.dispatch({type:'ADD_SEARCH_FILTER_SORT_BY_TEMPORARY', payload: [index ,{index:index,item: item}] })
   }
 
   return (
     <>
-      <View key={item.id} style={{...styles.checkboxContainer,width:width*0.8}}>
+      <View key={item.id} style={{...styles.checkboxContainer,width:width*0.9}}>
         <CheckBox
           center
           title={item.order}
@@ -103,11 +104,13 @@ function OrderList({item,index,selectedIndex,onChange1, themecolor,onChange}) {
   );
 }
 
-export function OrderFlatList({onChange}) {
+export function SortByFlatList(props) {
   const mode = useSelector(state => state.mode);
   const themecolor = new MyThemeClass(mode).getThemeColor();
 
-  const [selectedIndex, setIndex] = React.useState(-1);
+  const selected = useSelector(state => state.searchFilterSortBy);
+  const [selectedIndex, setIndex] = React.useState(Object.keys(selected)[0]);
+ 
 
   const onChange1=(value)=>{
     setIndex(value)
@@ -118,7 +121,7 @@ export function OrderFlatList({onChange}) {
       <FlatList
         data={data}
         renderItem={({item,index}) => (
-          <OrderList item={item} index={index} selectedIndex={selectedIndex} onChange1={(value)=>onChange1(value)} themecolor={themecolor} onChange={onChange} />
+          <OrderList item={item} index={index} selectedIndex={selectedIndex} onChange1={(value)=>onChange1(value)} themecolor={themecolor}  />
         )}
         numColumns={1}
         showsVerticalScrollIndicator={false}
@@ -128,12 +131,14 @@ export function OrderFlatList({onChange}) {
   );
 }
 
-function PriceList({item,index,selectedIndex,onChange1, themecolor,onChange}) {
-  const [checked, setChecked] = useState(false);
+function PriceList({item,index,selectedIndex,onChange1, themecolor,}) {
+   
   const handleChange=(item,index)=>{
-    onChange(item)
     onChange1(index)
+    store.dispatch({type:'ADD_SEARCH_FILTER_PRICE_BY_TEMPORARY', payload: [index ,{index:index,item: item}] })
+  
   }
+
   return (
     <>
       <View key={item.id} style={{...styles.checkboxContainer,width: width *0.45}}>
@@ -151,11 +156,12 @@ function PriceList({item,index,selectedIndex,onChange1, themecolor,onChange}) {
   );
 }
 
-export function PriceFlatList({onChange}) {
+export function PriceFlatList(props) {
   const mode = useSelector(state => state.mode);
   const themecolor = new MyThemeClass(mode).getThemeColor();
 
-  const [selectedIndex, setIndex] = React.useState(-1);
+  const selected = useSelector(state => state.searchFilterPriceBy);
+  const [selectedIndex, setIndex] = React.useState(Object.keys(selected)[0]);
 
   const onChange1=(value)=>{
     setIndex(value)
@@ -166,7 +172,7 @@ export function PriceFlatList({onChange}) {
       <FlatList
         data={dataPrice}
         renderItem={({item,index}) => (
-          <PriceList item={item} index={index} selectedIndex={selectedIndex} onChange1={(value)=>onChange1(value)} themecolor={themecolor} onChange={onChange} />
+          <PriceList item={item} index={index} selectedIndex={selectedIndex} onChange1={(value)=>onChange1(value)} themecolor={themecolor} />
         )}
         numColumns={2}
         showsVerticalScrollIndicator={false}

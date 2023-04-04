@@ -53,7 +53,7 @@ export default function Order(props) {
       body.append('offset', getOffset)
 
       var res = await getOrderlist(body);
-
+    
       if (res.status === true) {
         if (res.data.length > 0) {
           setIsLoading(true)
