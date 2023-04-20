@@ -28,7 +28,7 @@ export default function Brands(props) {
   const handleBrands = async () => {
     try {
       var body = new FormData()
-      body.append('limit', "18")
+      body.append('limit', "10")
       body.append('offset', getOffset)
 
       var res = await getBrands(body);
@@ -36,7 +36,7 @@ export default function Brands(props) {
       if (res.status === true) {
         if (res.data.length > 0) {
           setIsLoading(true)
-          setOffset(getOffset + 18)
+          setOffset(getOffset + 10)
           var temp1 = brandsData.concat(res.data)
           setBrandsData(temp1);
         } else {
@@ -80,12 +80,13 @@ export default function Brands(props) {
           {brandsData.length > 0 ? (
             <BrandDataList
               data={brandsData}
-              numColumns={3}
+              numColumns={2}
               horizontal={false}
               handleBrands={handleBrands}
               contentContainerStyle={{
                 ...styles.contentContainerStyle
               }}
+              boxSize={"big"}
               isLoading={isLoading}
             />
           ) : (

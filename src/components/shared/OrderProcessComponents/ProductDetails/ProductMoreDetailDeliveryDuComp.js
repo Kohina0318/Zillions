@@ -21,7 +21,7 @@ export default function ProductMoreDetailDeliveryDuComp(props) {
                 backgroundColor: themecolor.BOXBORDERCOLOR,
                 borderColor: themecolor.BOXBORDERCOLOR1,
             }} >
-            <View
+            {/* <View
                 style={{
                     ...styles.DELVIEW,
                 }}>
@@ -41,7 +41,7 @@ export default function ProductMoreDetailDeliveryDuComp(props) {
                     }}>
                     * 8 to 10 Days
                 </Text>
-            </View>
+            </View> */}
             <View
                 style={{
                     ...styles.DELVIEW,

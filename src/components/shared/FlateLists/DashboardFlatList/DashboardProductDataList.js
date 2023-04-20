@@ -55,7 +55,7 @@ function DashboardProductDataFlateList({ item, themecolor }) {
             </Text>
           </View>
 
-          <View style={{ margin: 2, width: width * 0.25 }}>
+          {/* <View style={{ margin: 2, width: width * 0.25 }}>
             <StarRating
               disabled={true}
               maxStars={5}
@@ -64,11 +64,11 @@ function DashboardProductDataFlateList({ item, themecolor }) {
               starSize={14}
               fullStarColor={themecolor.STARCOLOR}
             />
-          </View>
+          </View> */}
 
           <View style={{ flexDirection: 'row', width: '100%' }}>
             {item.purchase_price != "" ?
-              <Text allowFontScaling={false} style={{ ...ProductStyle.txt1, color: themecolor.TEXTGREEN }}>
+              <Text allowFontScaling={false} style={{ ...ProductStyle.txt1, color: themecolor.TEXTGREEN }} numberOfLines={3}>
                 <FAIcon name="rupee" size={12} />{item.purchase_price}
                 {'  '}
                 {(item.purchase_price != item.sale_price) && (item.sale_price != "") ?
