@@ -14,7 +14,7 @@ import LoadingContent from '../../Loader/LoadingContent';
 
 const { width, height } = Dimensions.get('screen');
 
-function BrandDataFlatList({ item, themecolor }) {
+function BrandDataFlatList({ item, themecolor,boxSize }) {
   const navigation = useNavigation();
 
   return (
@@ -23,15 +23,16 @@ function BrandDataFlatList({ item, themecolor }) {
     >
       <View
         style={{
-          width: width * 0.284,
-          height: height * 0.13,
-          margin: 5,
+          width: boxSize =="big"? '100%' :width * 0.284,
+          height: boxSize =="big"?height * 0.15:height * 0.13,
+          margin:5,
           flexDirection: 'column',
+          alignItems:'center',
         }}>
         <View
           style={{
-            width: width * 0.26,
-            height: '65%',
+            width: boxSize =="big"?width * 0.42:width * 0.26,
+            height: boxSize =="big"?'75%':'65%',
             justifyContent: 'center',
             alignItems: 'center',
             alignSelf: 'center',
@@ -50,17 +51,14 @@ function BrandDataFlatList({ item, themecolor }) {
         </View>
         <View
           style={{
-            width: width * 0.27,
-            height: height * 0.03,
-            justifyContent: 'center',
-            alignItems: 'center',
+            marginTop:5
           }}>
           <Text
             allowFontScaling={false}
             numberOfLines={1}
             style={{
               color: themecolor.TXTWHITE,
-              fontSize: 11,
+              fontSize: boxSize =="big"?12:11,
               fontWeight: 'bold',
             }}>
             {item.brand_name}
@@ -79,7 +77,7 @@ export function BrandDataList(props) {
     <FlatList
       data={props.data}
       renderItem={({ item }) => (
-        <BrandDataFlatList item={item} themecolor={themecolor} />
+        <BrandDataFlatList item={item} themecolor={themecolor} boxSize={props.boxSize} />
       )}
       horizontal={props.horizontal}
       numColumns={props.numColumns}
@@ -91,7 +89,7 @@ export function BrandDataList(props) {
         props.handleBrands();
       }}
       ListFooterComponent={() => {
-        if (props.isLoading && props.data.length > 17) {
+        if (props.isLoading && props.data.length > 9) {
           return (
             <LoadingContent />
           );

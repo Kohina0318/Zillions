@@ -136,8 +136,8 @@ const styles = StyleSheet.create({
   },
   checkboxContainer: {
     flexDirection: 'row',
-    margin: 5,
-    width: width * 0.44,
+    margin: 8,
+    width: width * 0.4,
   },
   noDataView: {
     justifyContent: 'center',

@@ -166,7 +166,7 @@ function ProductDataFlateList({ item, themecolor }) {
             </Text>
           </View>
 
-          <View style={{ margin: 2, width: width * 0.25 }}>
+          {/* <View style={{ margin: 2, width: width * 0.25 }}>
             <StarRating
               disabled={true}
               maxStars={5}
@@ -175,14 +175,14 @@ function ProductDataFlateList({ item, themecolor }) {
               starSize={14}
               fullStarColor={themecolor.STARCOLOR}
             />
-          </View>
+          </View> */}
 
           <View style={{ flexDirection: 'row', width: '100%' }}>
             {item.purchase_price != "" ?
               <Text
                 allowFontScaling={false}
-                style={{ ...ProductStyle.txt1, color: themecolor.TEXTGREEN }}>
-                <FAIcon name="rupee" size={12} />
+                style={{ ...ProductStyle.txt1, color: themecolor.TEXTGREEN }} numberOfLines={3}>
+                <FAIcon name="rupee" size={12}  />
                 {item.purchase_price}
                 {'  '}
                 {(item.purchase_price != item.sale_price) && (item.sale_price != "") ?
@@ -234,7 +234,11 @@ export function ProductDataList(props) {
           props.handleByProduct();
         }}
         ListFooterComponent={() => {
-          if (props.isLoading && props.data.length > 9) {
+          if (props.isLoading && props.data.length > 5 && props.comeIn=='search') {
+            return (
+              <LoadingContent />
+            );
+          }else if (props.isLoading && props.data.length > 9) {
             return (
               <LoadingContent />
             );

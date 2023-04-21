@@ -9,6 +9,8 @@ const initialState = {
   searchFilterSortByTemporary: {},
   searchFilterPriceBy: {},
   searchFilterPriceByTemporary: {},
+  searchOffset:0,
+  searchProductList:[],
 };
 
 const RootReducer = createReducer(initialState, (builder) => {
@@ -75,6 +77,18 @@ const RootReducer = createReducer(initialState, (builder) => {
     state.searchFilterPriceByTemporary = new Object();
   })
 
+
+  builder.addCase('SEARCH_OFFSET', (state, action) => {
+    state.searchOffset = action.payload;
+  })
+  
+  builder.addCase('ADD_SEARCH_PRODUCT_LIST', (state, action) => {
+    state.searchProductList =[];
+    state.searchProductList = action.payload;
+  })
+  builder.addCase('REMOVE_SEARCH_PRODUCT_LIST', (state, action) => {
+    state.searchProductList = '';
+  })
 
 
 });

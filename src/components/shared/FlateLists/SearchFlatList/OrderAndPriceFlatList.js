@@ -89,7 +89,7 @@ function OrderList({item,index,selectedIndex,onChange1, themecolor,}) {
 
   return (
     <>
-      <View key={item.id} style={{...styles.checkboxContainer,width:width*0.9}}>
+      <View key={item.id} style={{...styles.checkboxContainer,width:width*0.9, }}>
         <CheckBox
           center
           title={item.order}
@@ -110,10 +110,12 @@ export function SortByFlatList(props) {
 
   const selected = useSelector(state => state.searchFilterSortBy);
   const [selectedIndex, setIndex] = React.useState(Object.keys(selected)[0]);
- 
+  
 
   const onChange1=(value)=>{
     setIndex(value)
+    props.setOffset(0)
+    props.setProductData([])
   }
 
   return (
@@ -165,6 +167,8 @@ export function PriceFlatList(props) {
 
   const onChange1=(value)=>{
     setIndex(value)
+    props.setOffset(0)
+    props.setProductData([])
   }
 
   return (

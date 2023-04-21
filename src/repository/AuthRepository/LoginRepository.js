@@ -11,6 +11,7 @@ const postLogin = async formdata => {
       },
     );
     const result = await response.json();
+   
     return result;
   } catch (err) {
     console.log('error in postLogin...in LoginRepository ', err);

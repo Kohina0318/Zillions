@@ -219,7 +219,7 @@ export default function ProductMoreDetailMainComp(props) {
       <View style={{ ...styles.MrT5 }} />
 
 
-      <View style={{ ...styles.innerViewMain, }}>
+      {/* <View style={{ ...styles.innerViewMain, }}>
         <View style={{ width: width * 0.35 }}>
           <StarRating
             disabled={true}
@@ -230,9 +230,9 @@ export default function ProductMoreDetailMainComp(props) {
             fullStarColor={themecolor.STARCOLOR}
           />
         </View>
-      </View>
+      </View> 
 
-      <View style={{ ...styles.MrT5 }} />
+      <View style={{ ...styles.MrT5 }} /> */}
 
       <View style={{ ...styles.innerViewMain, }}>
         {productDetailData.purchase_price != "" ?

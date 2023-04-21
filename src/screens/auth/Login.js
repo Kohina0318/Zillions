@@ -95,7 +95,6 @@ export default function Login(props) {
         formdata.append('password', password)
 
         const res = await postLogin(formdata);
-
         if (res.status == true) {
           await StoreDatatoAsync('@UserData', JSON.stringify(res.data));
           await StoreDatatoAsync('@Token', JSON.stringify(res.data[0].token));

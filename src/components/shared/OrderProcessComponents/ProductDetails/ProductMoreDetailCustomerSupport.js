@@ -56,6 +56,7 @@ export default function ProductMoreDetailCustomerSupport(props) {
                 formdata.append('message', msg);
 
                 var res = await postRequestACallBack(formdata);
+                console.log("Customer...data...>>>",res)
                 if (res.status === true) {
                     setShowModal(false);
                     toast.show(res.msg, {

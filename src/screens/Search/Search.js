@@ -64,21 +64,25 @@ export default function Search(props) {
   const [loading, setLoading] = useState(false);
   const [dataShown, setDataShown] = useState(false);
   const [productData, setProductData] = useState([])
+  const [productDataNew, setProductDataNew] = useState([])
+  const [noProduct, setNoProduct] = useState('')
   const [isLoading, setIsLoading] = React.useState(false);
   const [disabledClearAll, setDisabledClearAll] = React.useState(false);
   const [sortBy, setSortBy] = useState('');
   const [price, setPrice] = useState('');
 
   const [getOffset, setOffset] = React.useState(0);
+  const [getOffsetNew, setOffsetNew] = React.useState(0);
 
   const selectedSort = useSelector(state => state.searchFilterSortByTemporary);
   const selectedPrice = useSelector(state => state.searchFilterPriceByTemporary);
 
-
   const handleSearch = async (clearall) => {
+    setNoProduct('')
 
     if (value == null || value == '') {
       setDataShown(false)
+      setLoading(false)
       toast.show(
         'I am here to help you, Please give me some recognition text!',
         {
@@ -131,27 +135,30 @@ export default function Search(props) {
 
         var res = await getSearchProducts(formData);
 
-
         if (res.status === true) {
-          setDataShown(true)
           if (res.data.all_products.length > 0) {
+            setDataShown(true)
             setIsLoading(true)
             setOffset(getOffset + 6)
+            setOffsetNew(getOffset + 6)
             var temp1 = productData.concat(res.data.all_products)
             setProductData(temp1);
-          } else {
+            setProductDataNew(temp1);
+          } else { 
             setIsLoading(false)
+            if (getOffset == 0) {
+              setNoProduct("No Data")
+            }
           }
           setLoading(false)
-
         }
         else {
           setLoading(false)
-          setProductData("No Data")
+          setNoProduct("No Data")
         }
       } catch (e) {
         setLoading(false)
-        setProductData("No Data")
+        setNoProduct("No Data")
         console.log('errrror in..handleSearchProduct page-->', e);
 
       }
@@ -160,18 +167,23 @@ export default function Search(props) {
 
 
   const handleGetvalue = txt => {
+    setOffset(0);
+    setProductData([]);
+    setNoProduct('')
     setValue(txt);
     setDataShown(false);
+    setProductDataNew([]);
   };
 
 
   const handleClear = () => {
-    setValue("");
-    setDataShown(false);
     setOffset(0);
     setProductData([]);
+    setValue("");
+    setDataShown(false);
     setPrice('');
     setSortBy('');
+    setNoProduct('')
     setDisabledClearAll(false);
     setLoading(false);
     store.dispatch({ type: 'REMOVE_SEARCH_FILTER_SORT_BY_TEMPORARY' })
@@ -179,17 +191,26 @@ export default function Search(props) {
 
     store.dispatch({ type: 'REMOVE_SEARCH_FILTER_PRICE_BY_TEMPORARY' })
     store.dispatch({ type: 'REMOVE_SEARCH_FILTER_PRICE_BY' })
-
+    setProductDataNew([]);
   }
 
-  const handleOnClear = async () => {
+  const handleOnClear = () => {
+    setOffset(0);
+    setProductData([]);
     setLoading(true)
     setPrice('');
     setSortBy('');
-    setOffset(0);
-    setProductData([]);
+    setNoProduct('')
     setDisabledClearAll(false);
+    store.dispatch({ type: 'REMOVE_SEARCH_FILTER_SORT_BY_TEMPORARY' })
+    store.dispatch({ type: 'REMOVE_SEARCH_FILTER_SORT_BY' })
+
+    store.dispatch({ type: 'REMOVE_SEARCH_FILTER_PRICE_BY_TEMPORARY' })
+    store.dispatch({ type: 'REMOVE_SEARCH_FILTER_PRICE_BY' })
+    setProductDataNew([]);
     handleSearch('clear');
+    
+
   }
 
   const handleMin = () => {
@@ -201,6 +222,8 @@ export default function Search(props) {
       setPrice('');
       store.dispatch({ type: 'REMOVE_SEARCH_FILTER_PRICE_BY_TEMPORARY' })
     }
+    setOffset(getOffsetNew);
+    setProductData(productDataNew);
     refRBSheet.current.close();
   };
 
@@ -218,21 +241,19 @@ export default function Search(props) {
       <View style={styles.SearchMainView}>
         <View style={styles.SearchSecondView}>
           <SearchInput
-            // onKeyPress={()=>handleKeyPress()}
             onChange={txt => handleGetvalue(txt)}
-            onPress={() => {
+            onpress={() => {
               setLoading(true);
-              setOffset(0);
-              setProductData([]);
               handleSearch()
             }}
             onSubmitEditing={() => {
               setLoading(true);
-              setOffset(0);
-              setProductData([]);
               handleSearch()
             }}
-            onPress1={() => handleClear()}
+            onpress1={() => handleClear()}
+            setProductData={setProductData}
+            setNoProduct={setNoProduct}
+            setOffset={setOffset}
             RightCloseIcon={value != "" ? "close" : ""}
             LeftIcon="search"
             placeholder="Search.."
@@ -253,7 +274,7 @@ export default function Search(props) {
         {loading ? (
           <LoadingFullScreen style={{ flex: 1 }} />
         ) : (
-          productData == 'No Data' ?
+          noProduct == 'No Data' ?
             <View style={{ ...styles.noDataView }}>
               <Image
                 source={require('../../assets/images/search.png')}
@@ -266,7 +287,7 @@ export default function Search(props) {
             :
             <>
               <View style={{ marginBottom: 50, alignSelf: "center", }}>
-                <ProductDataList data={productData} handleByProduct={handleSearch} isLoading={isLoading} />
+                <ProductDataList data={productData} handleByProduct={handleSearch} isLoading={isLoading} comeIn={'search'} />
               </View>
               <View style={{ marginVertical: 31 }} />
             </>
@@ -282,14 +303,14 @@ export default function Search(props) {
             ref={refRBSheet}
             animationType={'slide'}
             closeOnDragDown={true}
-            closeOnPressMask={true}
+            closeOnPressMask={false}
             closeOnPressBack={false}
-            height={height * 0.6}
+            height={height * 0.75}
             customStyles={{
               container: {
                 backgroundColor: themecolor.THEMECOLOR,
-                borderTopLeftRadius: 25,
-                borderTopRightRadius: 25
+                borderTopLeftRadius: 15,
+                borderTopRightRadius: 15
               },
               draggableIcon: {
                 display: 'none',
@@ -307,31 +328,31 @@ export default function Search(props) {
                 </Text>
               </View>
             </View>
-            <View style={{ ...styles.Borderline, borderColor: themecolor.BOXBORDERCOLOR1 }} />
+            <View style={{ ...styles.Borderline, borderColor: themecolor.BOXBORDERCOLOR1, margin:10 }} />
 
-            <View style={{ alignItems: 'center', height: height * 0.45, }}>
+            <View style={{ alignItems: 'center', height:"70%",justifyContent:"center", margin:10}}>
 
               {
                 item == "SortBy" ?
-                  <SortByFlatList />
+                  <SortByFlatList setProductData={setProductData} setOffset={setOffset} />
                   :
-                  <PriceFlatList />
+                  <PriceFlatList setProductData={setProductData} setOffset={setOffset} />
               }
             </View>
 
-            <View style={{ width: '94%', bottom: 0, alignSelf: "center" }}>
+            <View style={{ width: '94%',height:"20%", bottom: 0, alignSelf: "center", justifyContent:"center",flex:1 ,}}>
               <HalfSizeButton
                 title="Apply"
                 backgroundColor={themecolor.ADDTOCARTBUTTONCOLOR}
                 color={'#fff'}
                 borderColor={themecolor.BOXBORDERCOLOR1}
                 onPress={() => {
-                  setLoading(true);
-                  setDisabledClearAll(true);
                   setOffset(0);
                   setProductData([]);
+                  setLoading(true);
+                  setDisabledClearAll(true);
                   refRBSheet.current.close();
-                  handleSearch()
+                  handleSearch(0);
                 }
                 }
               />

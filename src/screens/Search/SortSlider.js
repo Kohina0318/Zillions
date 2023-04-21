@@ -97,7 +97,7 @@ export const SortSlider = props => {
       </TouchableOpacity>
 
       {props.disabledClearAll ? (
-        <TouchableOpacity activeOpacity={0.8} onPress={() => props.onClear()}>
+        <TouchableOpacity activeOpacity={0.8} onPress={() =>  props.onClear()}>
           <View
             style={{
               ...styles.SizeView1,

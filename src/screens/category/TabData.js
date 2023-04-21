@@ -72,7 +72,8 @@ export const TabData = props => {
   return (
     <>
       <SegmentedControlTab
-        values={['Description', 'Shipping Info', 'Review']}
+        values={['Description', 'Shipping Info']}
+        // values={['Description', 'Shipping Info', 'Review']}
         selectedIndex={index}
         tabStyle={{
           ...styles.tabStyle,
@@ -123,40 +124,41 @@ export const TabData = props => {
             // ignoredStyles={{backgroundColor}}
             />
             :
-            <View style={{ ...styles.tabReviewContainer }}>
-              <View
-                style={{
-                  ...styles.mainView1,
-                }}>
-                <View>
-                  <Text
-                    allowFontScaling={false}
-                    style={{
-                      color: themecolor.TXTWHITE,
-                      fontSize: 16,
-                      margin: 10,
-                    }}>
-                    Average User Rating :
-                  </Text>
-                   </View>
-                   <View style={{ ...styles.tabStarContainer ,}}>
-                    <StarRating
-                      disabled={true}
-                      maxStars={5}
-                      rating={parseFloat(totalReview)}
-                      selectedStar={rating => onStarRatingPress(rating)}
-                      starSize={20}
-                      fullStarColor={themecolor.STARCOLOR}
-                    />
-                  </View>
+            <></>
+            // <View style={{ ...styles.tabReviewContainer }}>
+            //   <View
+            //     style={{
+            //       ...styles.mainView1,
+            //     }}>
+            //     <View>
+            //       <Text
+            //         allowFontScaling={false}
+            //         style={{
+            //           color: themecolor.TXTWHITE,
+            //           fontSize: 16,
+            //           margin: 10,
+            //         }}>
+            //         Average User Rating :
+            //       </Text>
+            //        </View>
+            //        <View style={{ ...styles.tabStarContainer ,}}>
+            //         <StarRating
+            //           disabled={true}
+            //           maxStars={5}
+            //           rating={parseFloat(totalReview)}
+            //           selectedStar={rating => onStarRatingPress(rating)}
+            //           starSize={20}
+            //           fullStarColor={themecolor.STARCOLOR}
+            //         />
+            //       </View>
                
                 
-              </View>
+            //   </View>
 
-              <View>
-                <CustomerReviewFlatList data={customerReview} />
-              </View>
-            </View>
+            //   <View>
+            //     <CustomerReviewFlatList data={customerReview} />
+            //   </View>
+            // </View>
         }
 
       </View>
