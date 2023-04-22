@@ -13,7 +13,7 @@ export default function RequestACallBackModel(props) {
 
     return (
         <>
-            <Modal animationType="slide" transparent={true} visible={modalCart}>
+            <Modal animationType="slide" transparent={true} visible={modalCart} >
                 <View
                     style={{
                         ...styles.model,

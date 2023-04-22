@@ -152,28 +152,11 @@ export default function Register(props) {
         formdata.append('password2', conPassword);
 
         const res = await postRegistration(formdata);
-
+       
         if (res.status == true) {
-          // setShowmodal(!showmodal);
-          let formdata1 = new FormData()
-          formdata1.append('email', email)
-          formdata1.append('password', password)
-  
-          const res1 = await postLogin(formdata1);
-          if (res1.status == true) {
-            await StoreDatatoAsync('@UserData', JSON.stringify(res1.data));
-            await StoreDatatoAsync('@Token', JSON.stringify(res1.data[0].token));
-            setShowmodal(!showmodal)
-          }
-          else {
-            toast.show(res1.msg, {
-              type: 'danger',
-              placement: 'bottom',
-              duration: 1000,
-              offset: 30,
-              animationType: 'slide-in',
-            });
-          }
+          setShowmodal(!showmodal);
+          await StoreDatatoAsync('@UserData', JSON.stringify(res.data));
+          await StoreDatatoAsync('@Token', JSON.stringify(res.data[0].token));
         } else {
           toast.show(res.msg, {
             type: 'danger',

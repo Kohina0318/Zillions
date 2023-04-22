@@ -1,27 +1,28 @@
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   View,
   StatusBar,
   ScrollView,
 } from 'react-native';
-import {useSelector} from 'react-redux';
-import {MyThemeClass} from '../../components/Theme/ThemeDarkLightColor';
+import { useSelector } from 'react-redux';
+import { MyThemeClass } from '../../components/Theme/ThemeDarkLightColor';
 import Header from '../../components/shared/header/Header';
-import {styles} from '../../assets/css/DashBoardCss/DashboardStyle';
+import { styles } from '../../assets/css/DashBoardCss/DashboardStyle';
 import {
   getBrands,
   getMainSlider,
   getProductList,
 } from '../../repository/DashboardRepository/AllDashboardRep';
-import {useToast} from 'react-native-toast-notifications';
-import {getCategories} from '../../repository/CategoryRepository/AllProductCategoryRep';
+import { useToast } from 'react-native-toast-notifications';
+import { getCategories } from '../../repository/CategoryRepository/AllProductCategoryRep';
 import CarouselFile from '../../components/shared/Carousel/CarouselFile';
-import {useNavigation} from '@react-navigation/native';
-import {DashboardCategoryDataList} from '../../components/shared/FlateLists/DashboardFlatList/DashboardCategoryFlatList';
+import { useNavigation } from '@react-navigation/native';
+import { DashboardCategoryDataList } from '../../components/shared/FlateLists/DashboardFlatList/DashboardCategoryFlatList';
 import DashboardHeading from '../../components/shared/DashboardHeading/DashboardHeading';
-import {BrandDataList} from '../../components/shared/FlateLists/DashboardFlatList/BrandFlatList';
-import {DashboardProductDataList} from '../../components/shared/FlateLists/DashboardFlatList/DashboardProductDataList';
+import { BrandDataList } from '../../components/shared/FlateLists/DashboardFlatList/BrandFlatList';
+import { DashboardProductDataList } from '../../components/shared/FlateLists/DashboardFlatList/DashboardProductDataList';
 import LoadingFullScreen from '../../components/shared/Loader/LoadingFullScreen';
+import DashboardShimmer from '../../components/shared/Shimmer/DashboardShimmer';
 
 export default function Dashboard(props) {
   const toast = useToast();
@@ -54,27 +55,27 @@ export default function Dashboard(props) {
     }
   };
 
-  const handleCarousel = async () => {
-    try {
-      var res = await getMainSlider();
-      setCarouselData(res.data);
-    } catch (e) {
-      console.log('errrror in..handleCarousel page-->', e);
-      toast.show('Something went wrong!, Try again later.', {
-        type: 'danger',
-        placement: 'bottom',
-        duration: 1000,
-        offset: 30,
-        animationType: 'slide-in',
-      });
-    }
-  };
+  // const handleCarousel = async () => {
+  //   try {
+  //     var res = await getMainSlider();
+  //     setCarouselData(res.data);
+  //   } catch (e) {
+  //     console.log('errrror in..handleCarousel page-->', e);
+  //     toast.show('Something went wrong!, Try again later.', {
+  //       type: 'danger',
+  //       placement: 'bottom',
+  //       duration: 1000,
+  //       offset: 30,
+  //       animationType: 'slide-in',
+  //     });
+  //   }
+  // };
 
   const handleBrands = async () => {
     try {
-      var body=new FormData()
-      body.append('limit','10')
-      body.append('offset',0) 
+      var body = new FormData()
+      body.append('limit', '10')
+      body.append('offset', 0)
       var res = await getBrands(body);
       setBrands(res.data);
     } catch (e) {
@@ -91,14 +92,14 @@ export default function Dashboard(props) {
 
   const handleLatestProducts = async () => {
     try {
-      var body=new FormData()
-      body.append('limit',"5")
-      body.append('offset',0)
-      var res = await getProductList('featured', '5',body);
+      var body = new FormData()
+      body.append('limit', "5")
+      body.append('offset', 0)
+      var res = await getProductList('featured', '5', body);
       setLatestProductsData(res.data);
-      setLoader(false);
+      // setLoader(false);
     } catch (e) {
-      setLoader(false);
+      // setLoader(false);
       console.log('errrror in..handleLatestProducts page-->', e);
       toast.show('Something went wrong!, Try again later.', {
         type: 'danger',
@@ -111,10 +112,11 @@ export default function Dashboard(props) {
   };
 
   const handleBestSelling = async () => {
-    try {  var body=new FormData()
-      body.append('limit',"5")
-      body.append('offset',0)
-      var res = await getProductList('deal', '5',body);
+    try {
+      var body = new FormData()
+      body.append('limit', "5")
+      body.append('offset', 0)
+      var res = await getProductList('deal', '5', body);
       setBestSellingData(res.data);
     } catch (e) {
       console.log('errrror in..handleBestSelling page-->', e);
@@ -130,13 +132,14 @@ export default function Dashboard(props) {
 
   const handleRecentlyViewed = async () => {
     try {
-      var body=new FormData()
-      body.append('limit',"5")
-      body.append('offset',0)
-      
-      var res = await getProductList('recently_viewed', '5',body);
+      var body = new FormData()
+      body.append('limit', "5")
+      body.append('offset', 0)
+      var res = await getProductList('recently_viewed', '5', body);
       setRecentlyViewedData(res.data);
+      setLoader(false);
     } catch (e) {
+      setLoader(false);
       console.log('errrror in..handleRecentlyViewed page-->', e);
       toast.show('Something went wrong!, Try again later.', {
         type: 'danger',
@@ -150,15 +153,13 @@ export default function Dashboard(props) {
 
   const handleMostViewed = async () => {
     try {
-      var body=new FormData()
-      body.append('limit',"5")
-      body.append('offset',0)
-      var res = await getProductList('most_viewed', '5',body);
+      var body = new FormData()
+      body.append('limit', "5")
+      body.append('offset', 0)
+      var res = await getProductList('most_viewed', '5', body);
       setMostViewedData(res.data);
-      // setLoader(false);
     } catch (e) {
       console.log('errrror in..handleMostViewed page-->', e);
-      // setLoader(false);
       toast.show('Something went wrong!, Try again later.', {
         type: 'danger',
         placement: 'bottom',
@@ -169,20 +170,20 @@ export default function Dashboard(props) {
     }
   };
 
-  
-  useEffect(()=>{
+
+  useEffect(() => {
     handleCategories();
-    handleCarousel();
+    // handleCarousel();
     handleBrands();
     handleLatestProducts();
     handleBestSelling();
     handleRecentlyViewed();
     handleMostViewed();
-  },[])
+  }, [])
 
 
   return (
-    <View style={{...styles.bg, backgroundColor: themecolor.THEMECOLOR}}>
+    <View style={{ ...styles.bg, backgroundColor: themecolor.THEMECOLOR }}>
       <StatusBar
         translucent
         backgroundColor="transparent"
@@ -192,14 +193,14 @@ export default function Dashboard(props) {
       <Header title="Home" />
 
       {loader ? (
-        <LoadingFullScreen style={{flex: 1}} />
+        <DashboardShimmer />
       ) : (
         <>
           <ScrollView showsVerticalScrollIndicator={false}>
-            <View style={{marginVertical: 5}} />
+            <View style={{ marginVertical: 5 }} />
 
             {categories.length > 0 ? (
-              <View style={{...styles.ViewHeading}}>
+              <View style={{ ...styles.ViewHeading }}>
                 <DashboardHeading
                   title="Categories"
                   onPress={() => navigation.navigate('Categories')}
@@ -210,7 +211,7 @@ export default function Dashboard(props) {
               <></>
             )}
 
-            {carouselData.length > 0 ? (
+            {/* {carouselData.length > 0 ? (
               <View
                 style={{
                   ...styles.container,
@@ -220,10 +221,10 @@ export default function Dashboard(props) {
               </View>
             ) : (
               <></>
-            )}
+            )} */}
 
             {brands.length > 0 ? (
-              <View style={{...styles.ViewHeading}}>
+              <View style={{ ...styles.ViewHeading }}>
                 <DashboardHeading
                   title="Brands"
                   onPress={() => navigation.navigate('Brands')}
@@ -235,7 +236,7 @@ export default function Dashboard(props) {
             )}
 
             {latestProductsData.length > 0 ? (
-              <View style={{...styles.ViewHeading}}>
+              <View style={{ ...styles.ViewHeading }}>
                 <DashboardHeading
                   title="Latest Featured Products"
                   onPress={() => navigation.navigate('LatestFeaturedProducts')}
@@ -247,7 +248,7 @@ export default function Dashboard(props) {
             )}
 
             {bestSellingData.length > 0 ? (
-              <View style={{...styles.ViewHeading}}>
+              <View style={{ ...styles.ViewHeading }}>
                 <DashboardHeading
                   title="Best Selling"
                   onPress={() => navigation.navigate('BestSelling')}
@@ -259,7 +260,7 @@ export default function Dashboard(props) {
             )}
 
             {recentlyViewedData.length > 0 ? (
-              <View style={{...styles.ViewHeading}}>
+              <View style={{ ...styles.ViewHeading }}>
                 <DashboardHeading
                   title="Recently Viewed"
                   onPress={() => navigation.navigate('RecentlyViewed')}
@@ -271,7 +272,7 @@ export default function Dashboard(props) {
             )}
 
             {mostViewedData.length > 0 ? (
-              <View style={{...styles.ViewHeading}}>
+              <View style={{ ...styles.ViewHeading }}>
                 <DashboardHeading
                   title="Most Viewed"
                   onPress={() => navigation.navigate('MostViewed')}

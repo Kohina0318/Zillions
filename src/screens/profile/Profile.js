@@ -37,8 +37,13 @@ export default function Profile(props) {
   const [UserData, setUserData] = useState([]);
   const [imageName, setImageName] = useState('');
 
-
-
+  useFocusEffect(
+    React.useCallback(() => {
+      // setLoader(true);
+      handleUserData();
+    }, [refresh]),
+  );
+  
   const handleUserData = async () => {
     try {
       var res = await getProfileInfo();
@@ -62,14 +67,6 @@ export default function Profile(props) {
     }
   };
 
-
-  useFocusEffect(
-    React.useCallback(() => {
-      setLoader(true);
-      handleUserData();
-    }, [refresh]),
-  );
-  
 
   const handleConfirmLogout = () => {
     Alert.alert(

@@ -133,7 +133,7 @@ export default function ProductMoreDetails(props) {
     const handleAddCartProduct = async () => {
         setLoader(true)
         try {
-            
+
             var Price = selectedSizePrice
 
             if (productDiscount != '' && productDiscount > 0) {
@@ -152,7 +152,7 @@ export default function ProductMoreDetails(props) {
             if (res.status == true) {
                 if (showRBSheet == 0) {
                     store.dispatch({ type: 'ADD_CART', payload: [productId, { productId: productId, data: formdata }] })
-                    setShowGoToButton(true)
+                    // setShowGoToButton(true)
                     setLoader(false)
                     toast.show(res.msg, {
                         type: 'success',
@@ -240,7 +240,7 @@ export default function ProductMoreDetails(props) {
                                                 ...styles.HeadText,
                                                 color: themecolor.TXTWHITE,
                                             }}>
-                                            Sizes Available :-{' '}
+                                            Sizes Available  :-{' '}
                                         </Text>
                                         <ProductDetailSizeFlatList sizes={sizes} touch={true} />
                                     </View>
@@ -306,7 +306,7 @@ export default function ProductMoreDetails(props) {
                                 {productDetailData.current_stock > 0 ? (
                                     <>
                                         <View style={{ width: '49%' }}>
-                                            {showGoToButton ?
+                                            {/* {showGoToButton ?
                                                 <HalfSizeButton
                                                     title="Go to cart"
                                                     icon={
@@ -321,7 +321,7 @@ export default function ProductMoreDetails(props) {
                                                     color={themecolor.BACKICON}
                                                     borderColor={themecolor.BACKICON}
                                                 />
-                                                :
+                                                : */}
                                                 <HalfSizeButton
                                                     title="Add to cart"
                                                     icon={
@@ -339,7 +339,7 @@ export default function ProductMoreDetails(props) {
                                                     color={themecolor.BACKICON}
                                                     borderColor={themecolor.BACKICON}
                                                 />
-                                            }
+                                            {/* } */}
                                         </View>
 
                                         <View style={{ width: '49%' }}>

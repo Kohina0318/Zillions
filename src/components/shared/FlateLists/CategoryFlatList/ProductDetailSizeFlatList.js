@@ -21,7 +21,7 @@ function ProductDetailSizeList({ index, touch, selected, onChange, item, themeco
           style={{
             ...styles.SizeView,
             borderColor: themecolor.LIGHTGREY,
-            backgroundColor: index == selected ? themecolor.GREY : 'transparent'
+            backgroundColor: touch == true ? 'transparent':index == selected ? themecolor.GREY : 'transparent'
           }}>
           <View style={{ ...styles.flexDR }}>
             <Text

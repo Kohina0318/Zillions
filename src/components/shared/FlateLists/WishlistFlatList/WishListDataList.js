@@ -35,8 +35,8 @@ function WishListDataFlateList({ item, themecolor, setRefresh, refresh, setOffse
 
   const [sizeData, setSizesData] = useState(JSON.parse(item.size));
   const [qty, setQty] = useState(1)
-  const [selectedSize, setSelectedSize] = useState(sizeData[0].size)
-  const [selectedSizePrice, setSelectedSizePrice] = useState(sizeData[0].amount)
+  const [selectedSize, setSelectedSize] = useState(sizeData.length >0 ?sizeData[0].size: "")
+  const [selectedSizePrice, setSelectedSizePrice] = useState(sizeData.length >0 ?sizeData[0].amount:0)
 
   const handleRemove = async (comeAddCart) => {
     try {
