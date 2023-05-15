@@ -51,6 +51,7 @@ const styles = StyleSheet.create({
   innerView: { flexDirection: "row", width: "100%" },
   TxtViewinner: { marginLeft: 7, width: "74%", justifyContent: 'center' },
   PriceTxtViewinner: { flexDirection: 'row', width: '100%', marginTop:5 ,alignItems:'flex-start',},
+  borderSizeandQty:{borderWidth: 0.5, borderRadius: 5, padding:2 , justifyContent:"center",paddingRight:5, paddingLeft:5 , flexDirection:"row",},
   innerImage: {
     borderRadius: 4,
     justifyContent: 'center',

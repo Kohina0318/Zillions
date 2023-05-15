@@ -15,18 +15,19 @@ import { CartProductDataList } from '../../components/shared/FlateLists/OrderPro
 import OrderDetailsComp from '../../components/shared/OrderProcessComponents/Cart/OrderDetailsComp';
 import { Stepper } from '../Stepper/Stepper';
 import { getCartOrderDetails, getCartProductList } from '../../repository/OrderProcessRepository/CartListRepo';
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation, useFocusEffect } from '@react-navigation/native';
 import EmptyCart from '../../components/shared/NoData/EmptyCart';
 import { getRemoveAllProducts } from '../../repository/OrderProcessRepository/RemoveProductRepo';
 import CartViewDetailsButton from '../../components/shared/button/CartViewDetailsButton';
 import { store } from '../../../App';
 import { getProfileInfo } from '../../repository/ProfileRepository/ProfileRepo';
+import NoDataMsg from '../../components/shared/NoData/NoDataMsg';
 
 
 export default function Cart(props) {
   function handleBackButtonClick() {
     // props.navigation.goBack();
-    navigation.navigate("Dashboard")
+    props.navigation.navigate("Dashboard")
     
     return true;
   }
@@ -47,9 +48,8 @@ export default function Cart(props) {
   const mode = useSelector(state => state.mode);
   const themecolor = new MyThemeClass(mode).getThemeColor();
 
-
-  var cart = useSelector(state => state.cart)
-  var cartLen = Object.keys(cart)
+  // var cart = useSelector(state => state.cart)
+  // var cartLen = Object.keys(cart)
 
   const [loader, setLoader] = useState(true);
   const [refresh, setRefresh] = useState(false);
@@ -79,8 +79,23 @@ export default function Cart(props) {
     try {
       var res = await getCartProductList()
       if (res.status == true) {
-        setCartProduct(Object.values(res.data.carted))
+        setCartProduct(res.data)
         setLoader(false)
+      }
+      else if (res.msg == "Invalid Authentication") {
+        setLoader(false);
+        setCartProduct([]);
+        Alert.alert(
+          'Login to continue',
+          'Do you want to Login?',
+          [
+            {
+              text: 'No',
+              style: 'cancel',
+            },
+            { text: 'Yes', onPress: () => navigation.navigate('Login', {comeIn: "comeInCartpage"})},
+          ],
+        );
       } else {
         setLoader(false)
         setCartProduct([])
@@ -99,19 +114,25 @@ export default function Cart(props) {
     }
   }
 
-  useEffect(() => {
-    handleCartOrderDetails()
-    handleCartProductList()
-  }, [refresh])
+  // useEffect(() => {
+  //   handleCartOrderDetails()
+  //   handleCartProductList()
+  // }, [refresh])
 
+  useFocusEffect(
+    React.useCallback(() => {
+      setLoader(true);
+      handleCartOrderDetails()
+      handleCartProductList()
+    }, [refresh,props]),
+  );
+  
 
   const handleRemoveAllProducts = async () => {
     try {
       var res = await getRemoveAllProducts()
       if (res.status == true) {
-        cartLen.map((item) => {
-          store.dispatch({ type: 'DEL_CART', payload: [item] })
-        })
+        store.dispatch({ type: 'ALL_DEL_CART'})
         setRefresh(!refresh)
         toast.show(res.msg, {
           type: 'success',
@@ -204,7 +225,6 @@ export default function Cart(props) {
           <View style={{ ...styles.container, marginTop: 120, }}>
             <EmptyCart />
           </View>
-
       )}
 
     </View>

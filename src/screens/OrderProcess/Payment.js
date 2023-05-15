@@ -159,9 +159,7 @@ export default function Payment(props) {
                   body.append('zb_order_id', random_id);
                   var res = await postPayment(body);
                   if (res.status == true) {
-                    cartLen.map((item) => {
-                      store.dispatch({ type: 'DEL_CART', payload: [item] })
-                    })
+                    store.dispatch({ type: 'ALL_DEL_CART'});
                     setLoader(false);
                     props.navigation.navigate('PaymentConfirmation', { data: detailData })
                   } else {
@@ -206,11 +204,10 @@ export default function Payment(props) {
             var body = new FormData();
             body.append('payment_type', 'cash_on_delivery');
             body.append('address_id', props.route.params.id);
+           
             var res = await postPayment(body);
             if (res.status == true) {
-              cartLen.map((item) => {
-                store.dispatch({ type: 'DEL_CART', payload: [item] })
-              })
+              store.dispatch({ type: 'ALL_DEL_CART'});
               setLoader(false);
               props.navigation.navigate('PaymentConfirmation', { data: detailData })
             } else {

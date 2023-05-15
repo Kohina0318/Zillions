@@ -66,7 +66,7 @@ export default function OrderHistoryAddressComp(props) {
           shippingAddress.postal_code == '' ? (
             <></>
           ) : (
-            <>{shippingAddress.postal_code} ,</>
+            <>{shippingAddress.postal_code} </>
           )}
         </Text>
       </View>

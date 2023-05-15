@@ -50,17 +50,28 @@ export default function OrderDetails(props) {
   const [shippingAddress, setShippingAddress] = useState({})
   const [deliveryStatus, setDeliveryStatus] = useState('')
   const [returnStatus, setReturnStatus] = useState('')
+  const [type, setType] = useState('')
   const [showmodal, setShowmodal] = useState(false);
- 
+
   const handleOrderView = async () => {
     try {
       var res = await getOrderView(props.route.params.SaleId);
-      if (res.status === true) {
+      if (res.status == true) {
         setData(res.data);
-        setProductDetailData(res.data.product)
+        setType(res.data.type != null ?res.data.type: '');
+        if(res.data.type === "application"){
+         setProductDetailData(JSON.parse(res.data.product))
+        }else{
+          setProductDetailData(Object.values(JSON.parse(res.data.product)))
+        }
         setShippingAddress(res.data.address)
         setReturnStatus(res.data.return_status)
-        setDeliveryStatus(JSON.parse(res.data.delivery_status)[0].status)
+        var deliveryStatus= JSON.parse(res.data.delivery_status)
+        var NewdeliveryStatus ="pending"
+        if(deliveryStatus.length >0){
+          NewdeliveryStatus= deliveryStatus[0].status
+        }
+        setDeliveryStatus(NewdeliveryStatus)
         setLoader(false);
       }
       else {
@@ -148,7 +159,7 @@ export default function OrderDetails(props) {
             {productDetailData.length > 0 ?
               <>
                 <View style={{ ...styles.mgT10 }} />
-                <OrderDetailProductDataList data={productDetailData}  deliveryStatus={deliveryStatus}/>
+                <OrderDetailProductDataList data={productDetailData}  deliveryStatus={deliveryStatus} type={type}/>
               </>
               : <></>}
 

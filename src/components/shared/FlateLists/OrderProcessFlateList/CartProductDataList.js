@@ -28,25 +28,15 @@ function CartProductDataFlateList({ item, themecolor, refresh, setRefresh }) {
   const refRBSheet = useRef();
   const navigation = useNavigation();
 
-  var optionData = JSON.parse(item.option)
-  var Size = ''
-  
-  if (optionData.size != undefined || optionData.size != null) {
-    if (optionData.size.value != undefined || optionData.size.value != null) {
-      var optionSizeValueData = JSON.stringify(optionData.size.value)
-      var data = optionSizeValueData.replace(/^["'](.+(?=["']$))["']$/, '$1');
-      var data1 = data.split("*");
-      Size = data1[0]
-    }
-  }
   const [qty, setQty] = useState(parseInt(item.qty))
 
   const handleRemoveProduct = async () => {
     try {
 
-      var res = await getRemoveProduct(item.rowid)
+      var res = await getRemoveProduct(item.id)
       if (res.status == true) {
-        store.dispatch({ type: 'DEL_CART', payload: [item.id] })
+        var pi = item.product_id+' '+item.size;
+        store.dispatch({ type: 'DEL_CART', payload: [pi] })
         setRefresh(!refresh)
         toast.show(res.msg, {
           type: 'success',
@@ -78,7 +68,7 @@ function CartProductDataFlateList({ item, themecolor, refresh, setRefresh }) {
 
   const handleProductQuantityUpdate = async () => {
     try {
-      var res = await getCartProductQuantityUpdate(item.rowid, qty)
+      var res = await getCartProductQuantityUpdate(item.id, qty)
       if (res.status == true) {
         setRefresh(!refresh)
         toast.show(res.msg, {
@@ -122,7 +112,7 @@ function CartProductDataFlateList({ item, themecolor, refresh, setRefresh }) {
         <TouchableOpacity activeOpacity={0.5}
           onPress={() =>
             navigation.navigate('ProductMoreDetails', {
-              productId: item.id,
+              productId: item.product_id,
               title: item.name,
             })
           } style={{ ...styles.innerImage, }}>
@@ -144,14 +134,14 @@ function CartProductDataFlateList({ item, themecolor, refresh, setRefresh }) {
           </Text>
 
           <View style={{ ...styles.PriceTxtViewinner, alignItems: 'flex-start', }}>
-            {Size != '' ?
+            {item.size != '' ?
               <View style={{ ...styles.QtyView, borderColor: themecolor.TXTGREY, maxWidth: "67%" }} >
                 <Text
                   allowFontScaling={false} style={{ ...styles.txt1, color: themecolor.TXTWHITE, }}>Size:
                 </Text>
                 <Text
                   allowFontScaling={false} numberOfLines={1}
-                  style={{ ...styles.txtPrice, color: themecolor.TXTWHITE, maxWidth: "85%", }}>{Size}
+                  style={{ ...styles.txtPrice, color: themecolor.TXTWHITE, maxWidth: "85%", }}>{item.size}
                 </Text>
               </View>
               : <></>}
@@ -167,7 +157,7 @@ function CartProductDataFlateList({ item, themecolor, refresh, setRefresh }) {
                 <Text
                   allowFontScaling={false} numberOfLines={1}
                   style={{ ...styles.txtPrice, color: themecolor.TXTWHITE, maxWidth: "85%", }}>
-                  {item.qty}
+                  {parseInt(item.qty)}
                   {" "}<AN name="down" /></Text>
 
               </TouchableOpacity>
@@ -183,7 +173,7 @@ function CartProductDataFlateList({ item, themecolor, refresh, setRefresh }) {
                 allowFontScaling={false}
                 style={{ ...styles.txtPrice, color: themecolor.TXTWHITE }}>
                 <FAIcon name="rupee" size={13} />
-                {" "}{parseInt(item.subtotal)}
+                {" "}{parseInt(item.total_price)}
               </Text>
             </Text>
           </View>

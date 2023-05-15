@@ -14,20 +14,24 @@ export default function OrderHistoryTotalAmountComp(props) {
     const mode = useSelector(state => state.mode);
     const themecolor = new MyThemeClass(mode).getThemeColor();
 
-    var data = props.data;
-
+    var data =''
     var dateSet = ''
-    if (Object.values(data).length > 0) {
-        if (data.sale_datetime != undefined || data.sale_datetime != null) {
-            dateSet = moment(data.sale_datetime * 1000).format('ll')
+    var paymentStatus = ""
+    
+    if(props.data != undefined){
+        data =  props.data;
+
+        if (Object.values(data).length > 0) {
+            if (data.sale_datetime != undefined || data.sale_datetime != null) {
+                dateSet = moment(data.sale_datetime * 1000).format('ll')
+            }
+            if (data.payment_status.length >0) {
+                paymentStatus = JSON.parse(data.payment_status)[0].status
+            }
         }
     }
 
-    var paymentStatus = []
-    if (data.payment_status != undefined || data.payment_status != null || data.payment_status != '') {
-        paymentStatus = JSON.parse(data.payment_status)
-    }
-
+   
 
     return (
         <View
@@ -53,7 +57,7 @@ export default function OrderHistoryTotalAmountComp(props) {
 
             <View style={{ ...styles.mgT10 }} />
 
-            {paymentStatus.length > 0 ?
+            {paymentStatus != ""?
                 <View style={{ ...styles.flexDirView1, }}>
                     <View style={{ ...styles.width35p, }}>
                         <Text allowFontScaling={false} style={{ ...styles.txt1, color: themecolor.TXTWHITE }}>
@@ -63,7 +67,7 @@ export default function OrderHistoryTotalAmountComp(props) {
 
                     <View style={{ ...styles.width65p, }}>
                         <Text allowFontScaling={false} style={{ ...styles.txt1, color: themecolor.TXTWHITE }}>
-                            {paymentStatus[0].status == 'due' ? "Due" : "Paid"}
+                            {paymentStatus == 'due' ? "Due" : "Paid"}
                         </Text>
                     </View>
                 </View>

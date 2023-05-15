@@ -22,6 +22,7 @@ import { useToast } from 'react-native-toast-notifications';
 import HalfSizeButton from '../../components/shared/button/halfSizeButton';
 import AD from 'react-native-vector-icons/AntDesign';
 import { Image } from '@rneui/base';
+import { store } from '../../../App';
 
 export default function Profile(props) {
 
@@ -37,6 +38,10 @@ export default function Profile(props) {
   const [UserData, setUserData] = useState([]);
   const [imageName, setImageName] = useState('');
 
+  // var cart = useSelector(state => state.cart)
+  // var cartLen = Object.keys(cart)
+
+
   useFocusEffect(
     React.useCallback(() => {
       // setLoader(true);
@@ -48,7 +53,7 @@ export default function Profile(props) {
     try {
       var res = await getProfileInfo();
       if (res.status === true) {
-          setUserData(res.data);
+        setUserData(res.data);
         setLoader(false);
       var firstName = res.data[0].username
       setImageName(firstName[0]) 
@@ -90,6 +95,7 @@ export default function Profile(props) {
         await removeDatafromAsync('@UserData');
         await removeDatafromAsync('@Token');
         setRefresh(!refresh);
+        store.dispatch({ type: 'ALL_DEL_CART'})
       }
       else {
         toast.show(res.msg, {
@@ -126,7 +132,7 @@ export default function Profile(props) {
         <LoadingFullScreen style={{ flex: 1 }} />
       ) : (
         <>
-          <View style={{ marginTop: 10 }} />
+          <View style={{ marginTop: 5 }} />
 
           <ScrollView showsVerticalScrollIndicator={false}>
             {UserData.length > 0 ? (

@@ -38,6 +38,8 @@ function WishListDataFlateList({ item, themecolor, setRefresh, refresh, setOffse
   const [selectedSize, setSelectedSize] = useState(sizeData.length >0 ?sizeData[0].size: "")
   const [selectedSizePrice, setSelectedSizePrice] = useState(sizeData.length >0 ?sizeData[0].amount:0)
 
+  const [productDiscount, setProductDiscount] = useState(item.discount != '' && item.discount > 0 ?item.discount:0 )
+ 
   const handleRemove = async (comeAddCart) => {
     try {
       var res = await postAddOrRemoveWishlist('remove', item.product_id);
@@ -88,19 +90,19 @@ function WishListDataFlateList({ item, themecolor, setRefresh, refresh, setOffse
         var discountPrice = (item.discount * Price)/100
         Price =  parseFloat(Price) - parseFloat(discountPrice)
       }
-      var Size = `${Price}#${selectedSize}#${qty}`
-      var TotalPrice = Price * qty
-
+      var Size = selectedSize
+     
       let formdata = new FormData();
-      formdata.append('qty[]', qty);
-      formdata.append('sizeprice[]', Size);
-      formdata.append('totalprice', TotalPrice);
+      formdata.append('qty', qty);
+      formdata.append('size', Size);
+      formdata.append('price', Price);
+      
       var res = await postAddCartProduct(item.product_id, formdata)
 
-     
       if (res.status == true) {
-
-        store.dispatch({ type: 'ADD_CART', payload: [item.product_id, { productId: item.product_id, data: formdata }] })
+        var pi = item.product_id+' '+Size;
+        var newData= res.data
+        store.dispatch({ type: 'ADD_CART', payload: [pi, newData] })
         handleRemove('comeAddCart')
         toast.show(res.msg, {
           type: 'success',
@@ -272,7 +274,7 @@ function WishListDataFlateList({ item, themecolor, setRefresh, refresh, setOffse
         name="shopping-cart"
         size={16}
         color="#fff"
-      />} qty={qty} setQty={setQty} maxQty={item.current_stock} setSelectedSize={setSelectedSize} onPress={handleAddCartProduct} setSelectedSizePrice={setSelectedSizePrice} />
+      />} qty={qty} productDiscount={productDiscount} setQty={setQty} maxQty={item.current_stock} setSelectedSize={setSelectedSize} onPress={handleAddCartProduct} setSelectedSizePrice={setSelectedSizePrice} />
 
     </>
   );
