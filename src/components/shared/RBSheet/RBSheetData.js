@@ -77,6 +77,7 @@ export const RBSheetData = props => {
               touch={props.touch}
               setSelectedSize={props.setSelectedSize}
               setSelectedSizePrice={props.setSelectedSizePrice}
+              productDiscount={props.productDiscount}
             />
           </View>
         </View>

@@ -53,7 +53,6 @@ export default function Order(props) {
       body.append('offset', getOffset)
 
       var res = await getOrderlist(body);
-    
       if (res.status === true) {
         if (res.data.length > 0) {
           setIsLoading(true)
@@ -108,9 +107,9 @@ export default function Order(props) {
         <LoadingFullScreen style={{ flex: 1 }} />
       ) : (
         <View style={{ ...styles.container }}>
-          <Search title={'Search by order Id..'} filtering={filtering} />
+          {/* <Search title={'Search by order Id..'} filtering={filtering} /> */}
 
-          <View style={{ ...styles.marTop }} />
+          {/* <View style={{ ...styles.marTop }} /> */}
 
           {data.length > 0 ? (
             <>

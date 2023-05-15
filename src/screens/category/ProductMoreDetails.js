@@ -4,6 +4,7 @@ import {
     Text,
     BackHandler,
     ScrollView,
+    Alert
 } from 'react-native';
 import { useSelector } from 'react-redux';
 import { MyThemeClass } from '../../components/Theme/ThemeDarkLightColor';
@@ -11,7 +12,7 @@ import { useToast } from 'react-native-toast-notifications';
 import Header from '../../components/shared/header/Header';
 import { styles } from '../../assets/css/CategoryCss/ProductDetailStyle';
 import LoadingFullScreen from '../../components/shared/Loader/LoadingFullScreen';
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation ,useFocusEffect } from '@react-navigation/native';
 import { ProductDetailSizeFlatList } from '../../components/shared/FlateLists/CategoryFlatList/ProductDetailSizeFlatList';
 import { getProductRealedProducts, getProductView } from '../../repository/CategoryRepository/AllProductCategoryRep';
 import { DashboardProductDataList } from '../../components/shared/FlateLists/DashboardFlatList/DashboardProductDataList';
@@ -29,6 +30,7 @@ import { postAddCartProduct } from '../../repository/OrderProcessRepository/AddT
 import ImageZoomerModel from '../../components/shared/Model/ImageZoomerModel';
 import ProductMoreDetailCustomerSupport from '../../components/shared/OrderProcessComponents/ProductDetails/ProductMoreDetailCustomerSupport';
 import NoDataMsg from '../../components/shared/NoData/NoDataMsg';
+import { getUserData } from '../../repository/CommonRepository';
 
 
 export default function ProductMoreDetails(props) {
@@ -67,8 +69,17 @@ export default function ProductMoreDetails(props) {
     const [showRBSheet, setshowRBSheet] = useState('');
     const [image, setImage] = useState('');
     const [modalVisible, setModalVisible] = useState(false);
+    const [acynUserData, setAcynUserData] = useState('');
 
-
+   
+    useFocusEffect(
+        React.useCallback(async() => {
+            var userData= await getUserData()
+             setAcynUserData(userData)
+         }, [props]),
+      );
+     
+    
     const handleProductView = async () => {
         try {
             var res = await getProductView(props.route.params.productId);
@@ -133,26 +144,27 @@ export default function ProductMoreDetails(props) {
     const handleAddCartProduct = async () => {
         setLoader(true)
         try {
-            
             var Price = selectedSizePrice
 
             if (productDiscount != '' && productDiscount > 0) {
                 var discountPrice = (productDiscount * Price) / 100
                 Price = parseFloat(Price) - parseFloat(discountPrice)
             }
-            var Size = `${Price}#${selectedSize}#${qty}`
-            var TotalPrice = Price * qty
-
+            
+            var Size = selectedSize
+        
             let formdata = new FormData();
-            formdata.append('qty[]', qty);
-            formdata.append('sizeprice[]', Size);
-            formdata.append('totalprice', TotalPrice);
-
+            formdata.append('qty', qty);
+            formdata.append('size', Size);
+            formdata.append('price', Price);
+            
             var res = await postAddCartProduct(productId, formdata)
             if (res.status == true) {
+                var pi = productId+' '+Size;
+                var newData= res.data
+                store.dispatch({ type: 'ADD_CART', payload: [pi, newData] })
                 if (showRBSheet == 0) {
-                    store.dispatch({ type: 'ADD_CART', payload: [productId, { productId: productId, data: formdata }] })
-                    setShowGoToButton(true)
+                    // setShowGoToButton(true)
                     setLoader(false)
                     toast.show(res.msg, {
                         type: 'success',
@@ -163,6 +175,7 @@ export default function ProductMoreDetails(props) {
                     });
                     setQty(1)
                 } else {
+                    
                     setLoader(false)
                     navigation.navigate("Cart")
                     toast.show(res.msg, {
@@ -174,7 +187,8 @@ export default function ProductMoreDetails(props) {
                     });
                     setQty(1)
                 }
-            } else {
+            }
+             else {
                 setLoader(false)
                 toast.show(res.msg, {
                     type: 'warning',
@@ -193,6 +207,25 @@ export default function ProductMoreDetails(props) {
                 offset: 30,
                 animationType: 'slide-in',
             });
+        }
+    }
+
+    const confirmLogIn = async(num)=>{
+        if(acynUserData != null){   
+            setshowRBSheet(num);
+            refRBSheet.current.open()
+        }else{
+            Alert.alert(
+                'Login to continue',
+                'Do you want to Login?',
+                [
+                  {
+                    text: 'No',
+                    style: 'cancel',
+                  },
+                  { text: 'Yes', onPress: () => navigation.navigate('Login', { comeIn: "ComeInProduct" }) },
+                ],
+              );
         }
     }
 
@@ -240,9 +273,9 @@ export default function ProductMoreDetails(props) {
                                                 ...styles.HeadText,
                                                 color: themecolor.TXTWHITE,
                                             }}>
-                                            Sizes Available :-{' '}
+                                            Sizes Available  :-{' '}
                                         </Text>
-                                        <ProductDetailSizeFlatList sizes={sizes} touch={true} />
+                                        <ProductDetailSizeFlatList sizes={sizes} touch={true} productDiscount={productDiscount} />
                                     </View>
 
                                     <View style={{ ...styles.MrT5 }} />
@@ -306,7 +339,7 @@ export default function ProductMoreDetails(props) {
                                 {productDetailData.current_stock > 0 ? (
                                     <>
                                         <View style={{ width: '49%' }}>
-                                            {showGoToButton ?
+                                            {/* {showGoToButton ?
                                                 <HalfSizeButton
                                                     title="Go to cart"
                                                     icon={
@@ -321,7 +354,7 @@ export default function ProductMoreDetails(props) {
                                                     color={themecolor.BACKICON}
                                                     borderColor={themecolor.BACKICON}
                                                 />
-                                                :
+                                                : */}
                                                 <HalfSizeButton
                                                     title="Add to cart"
                                                     icon={
@@ -331,15 +364,12 @@ export default function ProductMoreDetails(props) {
                                                             color={themecolor.BACKICON}
                                                         />
                                                     }
-                                                    onPress={() => {
-                                                        setshowRBSheet(0);
-                                                        refRBSheet.current.open()
-                                                    }}
+                                                    onPress={() => confirmLogIn(0)}
                                                     backgroundColor={'transparent'}
                                                     color={themecolor.BACKICON}
                                                     borderColor={themecolor.BACKICON}
                                                 />
-                                            }
+                                            {/* } */}
                                         </View>
 
                                         <View style={{ width: '49%' }}>
@@ -352,10 +382,7 @@ export default function ProductMoreDetails(props) {
                                                         color={'#fff'}
                                                     />
                                                 }
-                                                onPress={() => {
-                                                    setshowRBSheet(1);
-                                                    refRBSheet.current.open()
-                                                }}
+                                                onPress={() => confirmLogIn(1)}
                                                 backgroundColor={themecolor.ADDTOCARTBUTTONCOLOR}
                                                 color={'#fff'}
                                                 borderColor={themecolor.ADDTOCARTBUTTONCOLOR}
@@ -385,13 +412,13 @@ export default function ProductMoreDetails(props) {
                     name="shopping-cart"
                     size={16}
                     color="#fff"
-                />} touch={false} qty={qty} setQty={setQty} maxQty={productDetailData.current_stock} setSelectedSize={setSelectedSize} setSelectedSizePrice={setSelectedSizePrice} onPress={handleAddCartProduct} />
+                />} touch={false} qty={qty} productDiscount={productDiscount}  setQty={setQty} maxQty={productDetailData.current_stock} setSelectedSize={setSelectedSize} setSelectedSizePrice={setSelectedSizePrice} onPress={handleAddCartProduct} />
                 :
                 <RBSheetData refRBSheet={refRBSheet} title={'Buy Now'} icon={<EN
                     name="doubleright"
                     size={17}
                     color={'#fff'}
-                />} sizes={sizes} touch={false} qty={qty} setQty={setQty} maxQty={productDetailData.current_stock} setSelectedSize={setSelectedSize} setSelectedSizePrice={setSelectedSizePrice} onPress={handleAddCartProduct} />
+                />} sizes={sizes} productDiscount={productDiscount} touch={false} qty={qty} setQty={setQty} maxQty={productDetailData.current_stock} setSelectedSize={setSelectedSize} setSelectedSizePrice={setSelectedSizePrice} onPress={handleAddCartProduct} />
             }
 
             <ImageZoomerModel image={image} modalVisible={modalVisible} setModalVisible={setModalVisible} />

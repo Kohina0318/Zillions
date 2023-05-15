@@ -11,6 +11,7 @@ const initialState = {
   searchFilterPriceByTemporary: {},
   searchOffset:0,
   searchProductList:[],
+  NoOfCartItem: ""
 };
 
 const RootReducer = createReducer(initialState, (builder) => {
@@ -32,6 +33,9 @@ const RootReducer = createReducer(initialState, (builder) => {
 
   builder.addCase('DEL_CART', (state, action) => {
     delete state.cart[action.payload[0]]
+  })
+  builder.addCase('ALL_DEL_CART', (state, action) => {
+    state.cart =new Object();
   })
 
   builder.addCase('ADD_CART_QTY_UPDATE', (state, action) => {
@@ -88,6 +92,14 @@ const RootReducer = createReducer(initialState, (builder) => {
   })
   builder.addCase('REMOVE_SEARCH_PRODUCT_LIST', (state, action) => {
     state.searchProductList = '';
+  })
+
+  builder.addCase('ADD_NO_OF_CART_ITEM', (state, action) => {
+    state.NoOfCartItem = action.payload;
+  })
+
+  builder.addCase('REMOVE_ADD_NO_OF_CART_ITEM', (state, action) => {
+    state.NoOfCartItem = '';
   })
 
 

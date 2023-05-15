@@ -21,7 +21,7 @@ function SupportTicketDataFlateList({item, themecolor}) {
   dateTime = day.split(',');
 
   return (
-    <TouchableOpacity
+    <View
       activeOpacity={0.5}
       style={{
         ...styles.datalistView,
@@ -75,7 +75,7 @@ function SupportTicketDataFlateList({item, themecolor}) {
           </Text>
         </View>
       </View>
-    </TouchableOpacity>
+    </View>
   );
 }
 

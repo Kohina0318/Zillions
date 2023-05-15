@@ -6,7 +6,7 @@ import {
   Dimensions,
   TouchableOpacity,
 } from 'react-native';
-import { DrawerActions, useNavigation } from '@react-navigation/native';
+import { DrawerActions, useNavigation  } from '@react-navigation/native';
 import { MyThemeClass } from '../../Theme/ThemeDarkLightColor';
 import { useSelector } from 'react-redux';
 import Icon from 'react-native-vector-icons/Ionicons';
@@ -15,6 +15,7 @@ import BadgeIcon from './BadgeIcon';
 import { styles } from '../../../assets/css/HeaderCss/HeaderStyle'
 import { getCartProductList } from '../../../repository/OrderProcessRepository/CartListRepo';
 import { store } from '../../../../App';
+import { useFocusEffect} from '@react-navigation/native';
 const { width } = Dimensions.get('screen');
 
 export default function Header(props) {
@@ -25,22 +26,42 @@ export default function Header(props) {
 
   var cart = useSelector(state => state.cart)
   var cartLength = Object.keys(cart).length
+  
+  // useEffect(() => {
+  //   var cartLen = Object.keys(cart).length
+  //   setLen(cartLen)
+    
+  //   if (cartLen === 0) {
+  //     fetchData(cartLen)
+  //   }
+  // }, [cart])
 
-  useEffect(() => {
-    var cartLen = Object.keys(cart).length
-    setLen(cartLen)
-    if (cartLen == 0) {
-      fetchData(cartLen)
+
+  useFocusEffect(
+    React.useCallback(() => {
+    if (cartLength === 0) {
+      fetchData()
+    }else{
+       setLen(cartLength)
     }
-  }, [cart])
+    }, [cart,props]),
+  );
+  
 
-  const fetchData = async (cartLen) => {
+          
+
+  const fetchData = async () => {
+    try{
     var res = await getCartProductList()
-    var data = Object.values(res.data.carted)
-    setLen(data.length)
-    data.map((item) => {
-      store.dispatch({ type: 'ADD_CART', payload: [item.id, item] })
+    var data1 = res.data
+    setLen(data1.length)
+    data1.map((item) => {
+      var pi = item.product_id+' '+item.size;
+      store.dispatch({ type: 'ADD_CART', payload: [pi, item] })
     })
+  }catch(e){
+    console.log("Inheader.....getCartProductList " ,e)
+  }
   }
 
 
@@ -118,7 +139,7 @@ export default function Header(props) {
               }}>
                 <BadgeIcon
                   icon="shopping-cart"
-                  count={len == '' ? len : cartLength}
+                  count={len}
                   onPress={() => {
                     navigation.navigate('Cart');
                   }}

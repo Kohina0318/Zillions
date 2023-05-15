@@ -15,8 +15,11 @@ export default VerifyModel = props => {
   const handleClickOnDone = () => {
     setModalVisible(!modalVisible);
 
-    if (props.comeIn == "comeInCart") {
+    if (props.comeIn === "comeInCart") {
       navigation.navigate("CartAddress")
+    }
+    else if (props.comeIn === "comeInCartpage") {
+      navigation.navigate("Cart")
     }
     else if (props.comeIn == "ComeInProduct") {
       if (props.comeInLogin == "comeInLogin") {

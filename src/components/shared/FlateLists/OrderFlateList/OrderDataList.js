@@ -16,12 +16,19 @@ import LoadingContent from '../../Loader/LoadingContent';
 
 function OrderDataFlateList({ item, themecolor }) {
   const navigation = useNavigation();
-  const date=moment(item.order_date * 1000).add(item.delivery_days,'days').format('ll')
+  const date = moment(item.order_date * 1000).add(item.delivery_days, 'days').format('ll')
 
-  var productDetails = Object.values(item.product_details)
-  var image = ''
-  image = productDetails[0].image
-  const handleClick=()=>{
+  var productDetails = item.product_details
+  var image = (Object.values(productDetails)[0].image)
+
+  if (productDetails.length > 0) {
+    if (item.type != "application") {
+      if (productDetails[0].image != undefined) {
+        image = productDetails[0].image
+      }
+    }
+  }
+  const handleClick = () => {
     navigation.navigate('OrderDetails', { saleCode: item.sale_code, SaleId: item.sale_id })
   }
 
@@ -33,11 +40,11 @@ function OrderDataFlateList({ item, themecolor }) {
         backgroundColor: themecolor.BOXBORDERCOLOR,
         borderColor: themecolor.BOXBORDERCOLOR1,
       }}
-      onPress={() =>handleClick()}
+      onPress={() => handleClick()}
     >
       <View style={{ ...styles.flexDirView }}>
         <Text allowFontScaling={false} style={{ ...styles.txt, color: themecolor.BACKICON }}>
-        Order Id : {item.sale_code}
+          Order Id : {item.sale_code}
         </Text>
       </View>
 
@@ -52,17 +59,17 @@ function OrderDataFlateList({ item, themecolor }) {
               height: 70,
               borderRadius: 4,
             }}
-            resizeMode= 'center'
+            resizeMode='center'
           />
         </View>
 
         <View style={{ ...styles.flexRow }}>
           <Text allowFontScaling={false} style={{ ...styles.txt, color: themecolor.TXTWHITE }} >
-             {item.delivery_status == "pending" ? "Confirmed": item.delivery_status == "delivered" ? "Delivered"  : "On delivery"}
+            {item.delivery_status == "pending" ? "Confirmed" : item.delivery_status == "delivered" ? "Delivered" : "On delivery"}
           </Text>
 
           <Text allowFontScaling={false} style={{ ...styles.txt1, color: themecolor.TXTWHITE }}>
-          {item.delivery_status == "delivered" ? "Delivered On": "Estimated Delivery"} {date}
+            {item.delivery_status == "delivered" ? "Delivered On" : "Estimated Delivery"} {date}
           </Text>
 
           <Text allowFontScaling={false} style={{ ...styles.txt1, color: themecolor.TXTWHITE }}>
@@ -79,7 +86,7 @@ function OrderDataFlateList({ item, themecolor }) {
         </View>
       </View>
 
-      
+
       <View style={{ ...styles.marTop }} />
 
     </TouchableOpacity>
@@ -89,7 +96,7 @@ function OrderDataFlateList({ item, themecolor }) {
 export function OrderDataList(props) {
   const mode = useSelector(state => state.mode);
   const themecolor = new MyThemeClass(mode).getThemeColor();
-  
+
   return (
     <FlatList
       data={props.data}
@@ -104,7 +111,7 @@ export function OrderDataList(props) {
       ListFooterComponent={() => {
         if (props.isLoading && props.data.length > 9) {
           return (
-            <LoadingContent/>
+            <LoadingContent />
           );
         } else {
           return null;

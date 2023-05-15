@@ -20,18 +20,25 @@ import { useToast } from 'react-native-toast-notifications';
 function OrderDetailProductDataFlateList({
   item,
   themecolor,
-  deliveryStatus
+  deliveryStatus, type
 }) {
 
   const toast = useToast();
   const navigation = useNavigation();
   const [showmodal, setShowmodal] = useState(false);
-  const [starRating, setStarRating] = useState(item.your_rating);
+  // const [starRating, setStarRating] = useState(item.your_rating);
 
-
-  var optionData = item.option;
+  var totalAmount= ""
   var Size = '';
 
+  if(type === "application" ){
+    Size=item.size
+  totalAmount=parseInt(item.total_price)
+  }
+  else{
+    totalAmount=parseInt(item.subtotal)
+    var optionData = item.option;
+    
   if (
     JSON.parse(optionData).size != undefined ||
     JSON.parse(optionData).size != null
@@ -47,6 +54,8 @@ function OrderDetailProductDataFlateList({
     }
   }
 
+  }
+  
 
   const handleAddProductRating = async () => {
     if (starRating == 0) {
@@ -117,7 +126,7 @@ function OrderDetailProductDataFlateList({
           activeOpacity={0.5}
           onPress={() =>
             navigation.navigate('ProductMoreDetails', {
-              productId: item.id,
+              productId: item.product_id,
               title: item.name,
             })
           }
@@ -141,23 +150,39 @@ function OrderDetailProductDataFlateList({
             {item.name}
           </Text>
 
+          <View style={{ ...styles.PriceTxtViewinner }}>
           {Size != '' ? (
-            <View style={{ ...styles.PriceTxtViewinner }}>
+          
+            <View style={{...styles.borderSizeandQty,  borderColor: themecolor.TXTGREY,maxWidth: "83%"}}>
               <Text
-                allowFontScaling={false}
+                allowFontScaling={false} numberOfLines={1}
                 style={{ ...styles.txt1, color: themecolor.TXTWHITE }}>
                 Size :{' '}
                 <Text
                   allowFontScaling={false}
-                  style={{ ...styles.txtBold, color: themecolor.TXTWHITE }}>
+                  style={{ ...styles.txtBold, color: themecolor.TXTWHITE ,maxWidth: "85%", }}>
                   {Size}
                 </Text>
               </Text>
             </View>
-          ) : (
+             ) : (
             <></>
-          )}
+          )} 
 
+            <View style={{...styles.borderSizeandQty,  borderColor: themecolor.TXTGREY,marginLeft:7}}>
+              <Text
+                allowFontScaling={false}
+                style={{ ...styles.txt1, color: themecolor.TXTWHITE }}>
+                Qty :{' '}
+                <Text
+                  allowFontScaling={false}
+                  style={{ ...styles.txtBold, color: themecolor.TXTWHITE }}>
+                  {item.qty}
+                </Text>
+              </Text>
+            </View>
+          </View>
+          
           <View style={{ ...styles.PriceTxtViewinner }}>
             <Text
               allowFontScaling={false}
@@ -166,7 +191,7 @@ function OrderDetailProductDataFlateList({
               <Text
                 allowFontScaling={false}
                 style={{ ...styles.txtBold, color: themecolor.TXTWHITE }}>
-                <FAIcon name="rupee" size={13} /> {parseInt(item.subtotal)}
+                <FAIcon name="rupee" size={13} /> {totalAmount}
               </Text>
             </Text>
           </View>
@@ -183,7 +208,7 @@ function OrderDetailProductDataFlateList({
 
           <View style={{ ...styles.MRT10 }} />
 
-          {starRating > 0 ?
+          {/* {starRating > 0 ?
             <View style={{ flexDirection: "row", }}>
               <View style={{ width: "60%" }}>
                 <Text allowFontScaling={false} style={{ ...styles.txtSmallBig, color: themecolor.BACKICON }}>
@@ -229,11 +254,11 @@ function OrderDetailProductDataFlateList({
                 </TouchableOpacity>
               </View>
             </View>
-          }
+          } */}
         </>
         : <></>}
 
-      {showmodal && (
+      {/* {showmodal && (
         <RatingModel
           setShowmodal={setShowmodal}
           title={'Enter Your Review'}
@@ -241,7 +266,7 @@ function OrderDetailProductDataFlateList({
           starRating={starRating}
           onPress={handleAddProductRating}
         />
-      )}
+      )} */}
 
 
     </View>
@@ -259,7 +284,8 @@ export function OrderDetailProductDataList(props) {
         <OrderDetailProductDataFlateList
           item={item}
           themecolor={themecolor}
-          deliveryStatus={props.deliveryStatus}
+          type={props.type}
+        // deliveryStatus={props.deliveryStatus}
         />
       )}
       showsVerticalScrollIndicator={false}

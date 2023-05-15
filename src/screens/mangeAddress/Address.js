@@ -190,6 +190,11 @@ export default function Address(props) {
             offset: 30,
             animationType: 'slide-in',
           });
+          
+        if(defaultData.length <=0 && comeIn == "comeInCartAddress"){
+          navigation.navigate("CartAddress")
+        }
+
         } else {
          
         }
