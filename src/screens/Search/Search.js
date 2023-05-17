@@ -132,7 +132,6 @@ export default function Search(props) {
         formData.append('limit', "6")
         formData.append('offset', getOffset)
 
-
         var res = await getSearchProducts(formData);
 
         if (res.status === true) {

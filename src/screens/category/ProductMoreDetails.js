@@ -157,7 +157,7 @@ export default function ProductMoreDetails(props) {
             formdata.append('qty', qty);
             formdata.append('size', Size);
             formdata.append('price', Price);
-            
+
             var res = await postAddCartProduct(productId, formdata)
             if (res.status == true) {
                 var pi = productId+' '+Size;
