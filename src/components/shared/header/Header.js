@@ -60,7 +60,7 @@ export default function Header(props) {
       store.dispatch({ type: 'ADD_CART', payload: [pi, item] })
     })
   }catch(e){
-    console.log("Inheader.....getCartProductList " ,e)
+    // console.log("Inheader.....getCartProductList " ,e)
   }
   }
 
