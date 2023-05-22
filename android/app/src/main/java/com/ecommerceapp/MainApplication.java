@@ -1,4 +1,4 @@
-package com.ecommerceapp;
+package com.ecommerceapp.zillionsbuyer;
 
 import android.app.Application;
 import com.facebook.react.PackageList;

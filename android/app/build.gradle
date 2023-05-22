@@ -100,13 +100,13 @@ android {
 
     compileSdkVersion rootProject.ext.compileSdkVersion
 
-    namespace "com.ecommerceapp"
+    namespace "com.ecommerceapp.zillionsbuyer"
     defaultConfig {
-        applicationId "com.ecommerceapp"
+        applicationId "com.ecommerceapp.zillionsbuyer"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
-        versionName "0.0.1"
+        versionName "1.0"
         multiDexEnabled true
     }
   
