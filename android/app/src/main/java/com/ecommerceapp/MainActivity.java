@@ -1,4 +1,4 @@
-package com.ecommerceapp;
+package com.ecommerceapp.zillionsbuyer;
 
 import com.facebook.react.ReactActivity;
 import com.facebook.react.ReactActivityDelegate;

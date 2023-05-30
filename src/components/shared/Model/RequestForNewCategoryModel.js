@@ -28,7 +28,7 @@ export default function RequestForNewCategoryModel(props) {
                 var userData = await getUserData();
 
                 if (userData == null || userData == '' || userData == undefined) {
-                    alert(userData)
+                    // alert(userData)
                     setUserData([])
                 } else {
                     setUserData(userData);

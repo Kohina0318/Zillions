@@ -15,19 +15,22 @@ const slides = [
     key: 1,
     title: 'Title 1',
     text: 'Description.\nSay something cool',
-    image: require('../../assets/images/slide1.png'),
+    // image: require('../../assets/images/slide1.png'),
+    image: "",
   },
   {
     key: 2,
     title: 'Title 2',
     text: 'Other cool stuff',
-    image: require('../../assets/images/slide2.png'),
+    // image: require('../../assets/images/slide2.png'),
+    image: "",
   },
   {
     key: 3,
     title: 'Rocket guy',
     text: "I'm already out of descriptions\n\nLorem ipsum bla bla bla",
-    image: require('../../assets/images/slide3.png'),
+    image: "",
+    // image: require('../../assets/images/slide3.png'),
   },
 ];
 
