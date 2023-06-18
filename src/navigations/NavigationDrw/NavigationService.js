@@ -24,6 +24,8 @@ export const closeDrawer = (navigation) => {
   navigation.dispatch(DrawerActions.closeDrawer());
 };
 
+
+
 export function navigateToClearStack(routeName, params) {
   navigationRef.current?.dispatch(
     CommonActions.reset({
